@@ -1,0 +1,184 @@
+<!--#4DIF (string(formInput_o.lib)="token")-->
+<input type="hidden" name="<!--#4DTEXT formInput_o.lib-->"  id="<!--#4DTEXT formInput_o.lib-->" value="$valueInput" />
+
+<!--#4DELSEIF ((formInput_o.type="text")|(formInput_o.type="email")|(formInput_o.type="password"))-->
+<div class="form-group row">
+	<!--#4DIF (string(formInput_o.label)#"")-->
+		<label class="col-sm-<!--#4DTEXT formInput_o.colLabel--> col-form-label" for="<!--#4DTEXT formInput_o.lib-->">
+			<!--#4DHTML formInput_o.label-->
+			<!--#4DIF (formInput_o.required)--><span class="required">*</span><!--#4DENDIF-->
+		</label>
+	<!--#4DENDIF-->
+	<div class="col-sm-<!--#4DTEXT formInput_o.colInput-->">
+		<!--#4DIF (string(formInput_o.append)#"")--><div class="input-group g-brd-primary--focus"><!--#4DENDIF-->
+		<input type="<!--#4DTEXT formInput_o.type-->" id="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->"
+			class="form-control rounded-0 <!--#4DTEXT formInput_o.class--><!--#4DIF (string(formInput_o.append)#"")--> border-right-0<!--#4DENDIF-->"
+			placeholder="<!--#4DTEXT formInput_o.placeholder-->"
+			value="$valueInput" disabled />
+			<!--#4DIF (string(formInput_o.append)#"")-->
+				<div class="input-group-append">
+					<span class="input-group-text rounded-0 g-bg-white g-color-gray-light-v1"><!--#4DTEXT formInput_o.append--></span>
+				</div>
+			</div>
+			<!--#4DENDIF-->
+		<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+	</div>
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="checkbox")-->
+<div class="form-group row">
+	<div class="col-sm-<!--#4DTEXT formInput_o.colLabel-->"></div>
+	<div class="col-sm-<!--#4DTEXT formInput_o.colInput-->">
+		<label class="form-check-inline u-check g-pl-25">
+			<!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="on"-->
+
+				<i class="fas fa-check g-absolute-centered--y g-left-0"></i>
+			<!--# 4 DELSE-->
+			<div class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+				<i class="fa" data-check-icon="&#xf00c"></i>
+			</div>
+			<!--# 4 DENDIF-->
+			<!--#4DIF (formInput_o.required)--><span class="required">*</span><!--#4DENDIF-->
+			<span class="<!--#4DTEXT formInput_o.class--> text-left"><!--#4DTEXT string(formInput_o.label)--></span>
+		</label>
+	</div>
+	<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block g-pl-15"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+</div>
+
+
+
+<!--#4DELSEIF (formInput_o.type="textarea")-->
+<div class="form-group row">
+  <label class="col-sm-<!--#4DTEXT formInput_o.colLabel-->  g-mb-10" for="<!--#4DTEXT formInput_o.lib-->"><!--#4DHTML formInput_o.label--><!--#4DIF (formInput_o.required)--><span class="required"> *</span><!--#4DENDIF--></label>
+  <div class="col-sm-<!--#4DTEXT formInput_o.colInput-->">
+    <textarea id="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->"
+			class="form-control <!--#4DTEXT formInput_o.class-->" rows="6" placeholder="<!--#4DTEXT formInput_o.placeholder-->"
+			<!--#4DIF (formInput_o.required)--> required<!--#4DENDIF--> disabled >$valueInput</textarea>
+		<!--#4DIF (string(formInput_o.helpBlock)#"")--><small class="form-text text-muted g-font-size-default g-mt-10"><!--#4DHTML formInput_o.helpBlock--></small><!--#4DENDIF-->
+  </div>
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="file")-->
+<div class="form-group row">
+	<!--#4DIF (string(formInput_o.label)#"")-->
+	<label class="col-sm-<!--#4DTEXT formInput_o.colLabel--> control-label" for="<!--#4DTEXT formInput_o.lib-->"><!--#4DHTML formInput_o.label--> <!--#4DIF (formInput_o.required)--><span class="required">*</span><!--#4DENDIF--></label>
+	<!--#4DENDIF-->
+	<div class="col-sm-<!--#4DTEXT formInput_o.colInput-->">
+		<input type="file" id="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->"
+			class="<!--#4DTEXT formInput_o.class-->" accept="<!--#4DTEXT formInput_o.accept-->"
+			<!--#4DIF (formInput_o.required)--> required<!--#4DENDIF-->
+			disabled
+		/>
+		<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+  </div>
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="select")-->
+<div class="form-group row">
+	<!--#4DIF (string(formInput_o.label)#"")-->
+	<label class="col-sm-<!--#4DTEXT formInput_o.colLabel--> col-form-label" for="<!--#4DTEXT formInput_o.lib-->">
+		<!--#4DHTML formInput_o.label-->
+		<!--#4DIF (formInput_o.required)-->
+			<span class="required">*</span>
+		<!--#4DENDIF-->
+	</label>
+	<!--#4DENDIF-->
+	<div class="col-sm-<!--#4DTEXT formInput_o.colInput--> col-form-label">
+		<select id="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->"
+			class="form-control <!--#4DTEXT formInput_o.class-->"  placeholder="<!--#4DTEXT formInput_o.placeholder-->"
+			<!--#4DIF (formInput_o.required)--> required<!--#4DENDIF--> disabled>
+			$valueInput
+		</select>
+		<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+  </div>
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="radio")-->
+<div class="form-group row">
+	<!--#4DIF (string(formInput_o.label)#"")-->
+	<span class="col-sm-<!--#4DTEXT formInput_o.colLabel--> col-form-label" for="<!--#4DTEXT formInput_o.lib-->">
+		<!--#4DHTML formInput_o.label-->
+		<!--#4DIF (formInput_o.required)-->
+			<span class="required">*</span>
+		<!--#4DENDIF-->
+	</span>
+	<!--#4DENDIF-->
+	<div class="col-sm-<!--#4DTEXT formInput_o.colInput-->">
+		<div class="row">		
+				<!--#4DIF (formInput_o.class="@groupe@")-->
+					<div class="btn-group justified-content">
+						<!--#4DLOOP selection_ao-->
+						  <label class="u-check">
+					      <input type="radio" name="<!--#4DTEXT formInput_o.lib-->" value="<!--#4DTEXT selection_ao{selection_ao}.value-->"
+								 <!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT selection_ao{selection_ao}.value-->"-->
+								 	checked=""
+									<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(selection_ao{selection_ao}.selected);"True";"False")-->&(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
+									checked=""
+								 <!--# 4 DENDIF-->
+								 class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" disabled>
+								 	<span class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0"><!--#4DTEXT selection_ao{selection_ao}.lib--></span>
+					    </label>
+						<!--#4DENDLOOP-->
+					</div>
+				<!--#4DELSE-->
+					<!--#4DLOOP selection_ao-->
+					<div class="col-<!--#4DIF (string(formInput_o.colRadio)#"")--><!--#4DTEXT formInput_o.colRadio --><!--#4DELSE-->12<!--#4DENDIF-->">
+					  <label class="u-check">
+				      <input type="radio" class="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->" value="<!--#4DTEXT selection_ao{selection_ao}.value-->"
+							 <!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT selection_ao{selection_ao}.value-->"-->
+							 	checked=""
+								<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(selection_ao{selection_ao}.selected);"True";"False")-->&(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
+								checked=""
+							 <!--# 4 DENDIF-->
+							 class="" <!--#4DIF (formInput_o.required) & (selection_ao=1)--> required<!--#4DENDIF--> disabled>
+				      <!--#4DTEXT selection_ao{selection_ao}.lib-->
+				    </label>
+					</div>
+					<!--#4DENDLOOP-->
+				<!--#4DENDIF-->
+		</div>
+		<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+  </div>
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="toggle")-->
+<div class="form-group">
+	<label class="d-flex align-items-center justify-content-between">
+		<span><!--#4DTEXT formInput_o.label--> <!--#4DIF (formInput_o.required)--><span class="required">*</span><!--#4DENDIF--></span>
+			<div class="u-check">
+			<input class="g-hidden-xs-up g-pos-abs g-top-0 g-right-0 <!--#4DTEXT formInput_o.class-->" name="<!--#4DTEXT formInput_o.lib-->" checked="" type="checkbox" <!--#4DIF (formInput_o.required)--> required<!--#4DENDIF-->>
+			<div class="u-check-icon-radio-v8">
+				<i class="fa" data-check-icon=""></i>
+			</div>
+		</div>
+	</label>
+	<!--#4DIF (string(formInput_o.helpBlock)#"")--><p class="help-block text-right"><!--#4DHTML formInput_o.helpBlock--></p><!--#4DENDIF-->
+</div>
+
+
+<!--#4DELSEIF (formInput_o.type="submit")-->
+<div class="form-group">
+<!--#4DIF (string(formInput_o.divClassSubmit)#"")--><div class="<!--#4DTEXT formInput_o.divClassSubmit-->"><!--#4DENDIF-->
+	<button type="submit" id="<!--#4DTEXT formInput_o.lib-->"
+		name="<!--#4DTEXT formInput_o.lib-->"
+		class="<!--#4DTEXT formInput_o.class-->"
+		<!--#4DIF (string(formInput_o.style)#"")-->style="<!--#4DTEXT formInput_o.style-->"<!--#4DENDIF-->
+		disabled>
+		<!--#4DTEXT formInput_o.value-->
+	</button>
+<!--#4DIF (string(formInput_o.divClassSubmit)#"")--></div><!--#4DENDIF-->
+</div>
+
+<!--#4DELSEIF (formInput_o.type="hidden")-->
+<input type="hidden" name="<!--#4DTEXT formInput_o.lib-->"  id="<!--#4DTEXT formInput_o.lib-->" value="$valueInput" />
+
+<!--#4DELSE-->
+<div class="form-group">
+    <p>input.html : Aucun type d'input est pris en charge (<!--#4DTEXT formInput_o.type-->)</p>
+</div>
+<!--#4DENDIF-->

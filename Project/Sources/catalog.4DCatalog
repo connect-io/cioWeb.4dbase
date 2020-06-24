@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="cioWeb" uuid="66073BD7511C8C4F939F73B8B9AD9D42" collation_locale="fr">
+	<schema name="DEFAULT_SCHEMA"/>
+	<base_extra __stringCompHash="icu:63.1.0" __keywordBuildingHash="icu:63.1.0" data_file_path=":cioWeb.4DD" package_name="cioWeb" structure_file_name="cioWeb">
+		<journal_file journal_file_enabled="true"/>
+	</base_extra>
+</base>

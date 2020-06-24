@@ -1,0 +1,11 @@
+﻿{
+	"helloWord": {
+		"route": {
+			"path": "/hello-word.html"
+		},
+		"titre": "Hello word",
+		"fichier": [
+			"helloWord.html"
+		]
+	}
+}

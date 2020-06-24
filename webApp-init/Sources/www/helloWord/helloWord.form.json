@@ -1,0 +1,28 @@
+﻿{
+	"lib": "formHelloWordContact",
+	"class": "m-t g-pa-10",
+	"action": "contactDetail",
+	"method": "POST",
+	"input": [
+
+
+		{
+			"lib": "hwcNom",
+			"type": "text",
+			"label": "Qui es-tu ?",
+			"colLabel": 4,
+			"required": true
+		},
+
+
+		{
+			"lib": "token"
+		},
+
+		{
+			"lib": "hwcSubmit",
+			"type": "submit",
+			"value": "Enregistrer"
+		}
+	]
+}

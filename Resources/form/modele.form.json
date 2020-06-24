@@ -1,0 +1,41 @@
+﻿{
+	"lib" : "formId",
+	"class (optionnel)" : "classHtml",
+	"method (optionnel)" : "GET POST PUT DELETE",
+	"enctype (optionnel)" : "multipart/form-data",
+	"action" : "identification",
+	"input" : {
+		"NomDeLaVariable" : {
+			"type" : "text - password - textarea - file - select - submit",
+			"label (optionnel)" : "Domaine",
+			"class (optionnel)" : "input-block-level text span6",
+			"divClassSubmit (optionel)" : "form-actions",
+			"required (optionnel)" : true,
+			"format (optionnel)" : "email, url",
+			"placeholder (optionnel)" : "ex : connect-io.fr",
+			"style (optionnel)" : "ex : margin-bottom:15px;",
+			"clientDisabled (optionnel)" : true,
+			"help-block (optionnel)" : "Nom de domaine de votre site internet.",
+			"selection (optionnel, choix initiale des selects)" : {
+				"lib1" : "value1",
+				"lib2" : "value2"
+			},
+			"blobSize (optionnel, input file)" : 5000000,
+			"contentType (optionnel, input file)" : [
+				"image/*"
+			]
+		},
+		"NomDeLaVariable" : {
+			"type" : "text",
+			"label (optionnel)" : "Domaine",
+			"class (optionnel)" : "input-block-level text span6",
+			"divClassSubmit (optionel)" : "form-actions",
+			"required (optionnel)" : true,
+			"format (optionnel)" : "email, url",
+			"placeholder (optionnel)" : "ex : connect-io.fr",
+			"style (optionnel)" : "ex : margin-bottom:15px;",
+			"clientDisabled (optionnel)" : true,
+			"help-block (optionnel)" : "Nom de domaine de votre site internet."
+		}
+	}
+}

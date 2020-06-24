@@ -1,0 +1,20 @@
+{
+	"model": {
+		"htmlBaliseAll": {
+			"regex": "<[^>]*>",
+			"Comment": "Selectionne toute les balises html"
+		},
+		"htmlBaliseA": {
+			"regex": "(<a[^>]*>)|(</a>)",
+			"source": "demo.html"
+		},
+		"htmlBaliseSpan": {
+			"regex": "(<span[^>]*>)|(</span>)",
+			"source": "demo.html"
+		},
+		"htmlBaliseCommentaire": {
+			"regex": "<!-- (.*?)-->",
+			"source": "demo.html"
+		}
+	}
+}
