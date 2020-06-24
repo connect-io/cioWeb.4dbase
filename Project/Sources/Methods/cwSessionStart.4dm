@@ -27,10 +27,13 @@ If (True:C214)  // Déclarations
 	C_TEXT:C284($2)
 	C_OBJECT:C1216($0;<>sessionWeb;$option_o)
 	C_LONGINT:C283($valideMinute_l;$refProcess_l)
+	C_TEXT:C284(sessionWebFolder_t)
 End if 
 
 $configs_o:=$2
 <>sessionWeb:=New object:C1471
+
+sessionWebFolder_t:=Get 4D folder:C485(Database folder:K5:14;*)"WebApp"+Folder separator:K24:12++"Cache"+Folder separator:K24:12+"Session"+Folder separator:K24:12
 
   // On applique quelques valeurs par defaut, pour que cela fonctionne même sans param.
 $options_c:=New collection:C1472
@@ -59,10 +62,10 @@ End for each
   //Dossier de gestion des sessions
 Case of 
 	: (Count parameters:C259#2)
-		<>sessionWeb.folder:=Get 4D folder:C485(Data folder:K5:33;*)+"sessionWeb"+Folder separator:K24:12
+		<>sessionWeb.folder:=sessionWebFolder_t
 		
 	: (String:C10($2)="")
-		<>sessionWeb.folder:=Get 4D folder:C485(Data folder:K5:33;*)+"sessionWeb"+Folder separator:K24:12
+		<>sessionWeb.folder:=sessionWebFolder_t
 		
 	Else 
 		<>sessionWeb.folder:=String:C10($2)
@@ -73,7 +76,7 @@ If (Test path name:C476(<>sessionWeb.folder)#Is a folder:K24:2)
 	CREATE FOLDER:C475(<>sessionWeb.folder;*)
 	If (ok=0)
 		ALERT:C41("Impossible de créer le dossier des sessions Web : "+<>sessionWeb.folder)
-		<>sessionWeb.folder:=Get 4D folder:C485(Database folder:K5:14;*)
+		<>sessionWeb.folder:=sessionWebFolder_t
 	End if 
 End if 
 
