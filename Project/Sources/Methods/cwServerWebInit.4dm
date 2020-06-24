@@ -24,7 +24,7 @@ If (True:C214)  // Déclarations
 	ARRAY TEXT:C222($subDomain_at;0)
 End if 
 
-<>webApp_o:=$1->
+<>webApp_o:=New object:C1471()
 
 $cwConfig_o:=New object:C1471()
   // Nom de la variable visiteur dans l'application hôte.
@@ -193,4 +193,4 @@ End if
 
 
   // On remonte les informations à la base hôte.
-$1->:=<>webApp_o
+$0:=<>webApp_o
