@@ -49,7 +49,7 @@ varVisiteurName_t:=<>webApp_o.config.varVisitorName_t
   // Il faut vérifier si la gestion des forms est déjà faite... Et il faut en garder une copie.
   // Il seront réintégrés en fin de boucle.
 $copyForm_o:=New object:C1471
-For each ($subDomain_t;<>webApp_o.config.subDomain)
+For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	If (<>webApp_o.sites[$subDomain_t].form#Null:C1517)
 		$copyForm_o[$subDomain_t]:=<>webApp_o.sites[$subDomain_t].form
 	Else 
@@ -61,7 +61,7 @@ End for each
   // On (re-)initialise toutes les informations que l'on a sur les pages de l'application.
 <>webApp_o.sites:=New object:C1471
 
-For each ($subDomain_t;<>webApp_o.config.subDomain)
+For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  //Récupération du plan des pages web des sites.
 	$configPage:=New object:C1471
 	ARRAY TEXT:C222($routeFile_at;0)
@@ -195,11 +195,11 @@ For each ($subDomain_t;<>webApp_o.config.subDomain)
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];":";Folder separator:K24:12)  // Séparateur mac
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
-				$page.fichier[$i_l]:=<>webApp_o.config.page.folder_f($subDomain_t)+$page.fichier[$i_l]
+				$page.fichier[$i_l]:=<>webApp_o.config.viewCache.folder_f($subDomain_t)+$page.fichier[$i_l]
 				
 				  // On vérifie que le fichier existe bien
 				If (Test path name:C476($page.fichier[$i_l])#Is a document:K24:1)
-					ALERT:C41("Il manque le fichier suivant : "+$page.fichier[$i_l])
+					  //ALERT("Il manque le fichier suivant : "+$page.fichier[$i_l])
 				End if 
 				
 			End for 

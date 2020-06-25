@@ -20,11 +20,11 @@ C_TEXT:C284($texteIn;$dirIn;$dirOut)
 C_BOOLEAN:C305($compression)
 
 ARRAY TEXT:C222($sites;0)
-FOLDER LIST:C473(<>webApp_o.config.webApp.folder_f();$sites)
+FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 
 For ($j;1;Size of array:C274($sites))
 	  //Le dossier avec le js non minifié.
-	$dirIn:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator:K24:12+"js"+Folder separator:K24:12
+	$dirIn:=<>webApp_o.config.webAppOld.folder_f()+$sites{$j}+Folder separator:K24:12+"js"+Folder separator:K24:12
 	
 	  //Le dossier avec les javascripts minimifié.
 	$dirOut:=Get 4D folder:C485(HTML Root folder:K5:20;*)+$sites{$j}+Folder separator:K24:12+"js"+Folder separator:K24:12

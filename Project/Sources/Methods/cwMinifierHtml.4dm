@@ -17,15 +17,14 @@ C_TEXT:C284($texteIn;$texteOut;$dirIn;$dirOut)
 C_BOOLEAN:C305($compression)
 
 ARRAY TEXT:C222($sites;0)
-FOLDER LIST:C473(<>webApp_o.config.webApp.folder_f();$sites)
+FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 
 For ($j;1;Size of array:C274($sites))
 	  //Le dossier avec le html non minifié.
-	$dirIn:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator:K24:12+"pages-dev"+Folder separator:K24:12
+	$dirIn:=<>webApp_o.config.viewDev.folder_f($sites{$j})
 	
 	  //Le dossier avec le html minifié.
-	  //$dirOut:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator+"pages"+Folder separator
-	$dirOut:=<>webApp_o.config.page.folder_f($sites{$j})
+	$dirOut:=<>webApp_o.config.viewCache.folder_f($sites{$j})
 	
 	
 	  //On recupere la liste des documents dans le répertoire.

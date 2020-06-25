@@ -14,7 +14,7 @@ C_OBJECT:C1216($oFullI18n;$oFichierI18n)
 C_TEXT:C284($T_langue)
 
 ARRAY TEXT:C222($sites;0)
-FOLDER LIST:C473(<>webApp_o.config.webApp.folder_f();$sites)
+FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 
 <>webApp_o.i18n:=New object:C1471()
 
@@ -22,7 +22,7 @@ For ($i;1;Size of array:C274($sites))
 	
 	
 	ARRAY TEXT:C222($fichiersI18n;0)
-	$dossierI18n:=<>webApp_o.config.webApp.folder_f()+$sites{$i}+Folder separator:K24:12+"i18n"+Folder separator:K24:12
+	$dossierI18n:=<>webApp_o.config.webAppOld.folder_f()+$sites{$i}+Folder separator:K24:12+"i18n"+Folder separator:K24:12
 	
 	If (Test path name:C476($dossierI18n)#Is a folder:K24:2)
 		CREATE FOLDER:C475($dossierI18n;*)

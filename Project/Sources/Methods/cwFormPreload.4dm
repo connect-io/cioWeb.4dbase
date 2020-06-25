@@ -22,15 +22,15 @@ C_COLLECTION:C1488($formCharge_c;$indicesQuery_c)
 C_OBJECT:C1216(formInput_o)  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
 
 
-FOLDER LIST:C473(<>webApp_o.config.webApp.folder_f();$sites)
+FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 
   // Récupération des formulaires
 For ($i;1;Size of array:C274($sites))
 	
 	  // On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.pageDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.pageDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
 	  // On récupére la collection de form du sousDomaine
