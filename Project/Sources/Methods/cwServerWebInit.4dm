@@ -180,12 +180,5 @@ End for each
 
 
 
-  // ----- Gestion des traductions -----
-<>webApp_o.config.i18n:=New object:C1471()
-<>webApp_o.config.i18n.folderName_t:="i18n"
-<>webApp_o.config.i18n.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.i18n.folderName_t+Folder separator:K24:12)
-  // Utilisation : $dossierForm_t:=<>webApp_o.config.i18n.folder_f("www")
-
-
   // On remonte les informations à la base hôte.
 $0:=<>webApp_o

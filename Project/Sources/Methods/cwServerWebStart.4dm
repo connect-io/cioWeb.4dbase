@@ -262,7 +262,7 @@ End for each
 cwFormPreload 
 
   // On charge tout les fichiers de langue.
-cwI18nLoad 
+  //cwI18nLoad 
 
   //Renvoit des valeurs pour la base hôte.
 $1->:=<>webApp_o

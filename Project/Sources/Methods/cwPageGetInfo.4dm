@@ -183,7 +183,7 @@ If (String:C10(pageWeb.description)="")
 End if 
 
 
-pageWeb.i18n:=cwi18nDataPage 
+  //pageWeb.i18n:=cwi18nDataPage 
 
 If (OB Is defined:C1231($O_logErreur;"detailErreur"))
 	$O_logErreur.methode:=Current method name:C684
