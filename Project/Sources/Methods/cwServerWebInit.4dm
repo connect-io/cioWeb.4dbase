@@ -16,7 +16,7 @@ If (True:C214)  // Déclarations
 	
 	C_OBJECT:C1216(<>webApp_o)  // Configuration global de l'application web
 	C_OBJECT:C1216($source_o)  // dossier sources
-	C_TEXT:C284($subDomaine_t)  // Nom du sous domaine
+	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
 	C_OBJECT:C1216($folderSubDomaine_o)  // Dossier du sous domaine.
 	
 	C_TEXT:C284($subDomain_t)
@@ -49,7 +49,7 @@ End if
 <>webApp_o.config.source:=New object:C1471()
 <>webApp_o.config.source.folderName_t:="Sources"
 <>webApp_o.config.source.folder_t:=<>webApp_o.config.webApp.folder_f()+<>webApp_o.config.source.folderName_t+Folder separator:K24:12
-<>webApp_o.config.source.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12)
+<>webApp_o.config.source.folder_f:=Formula:C1597(<>webApp_o.config.source.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12)
   // Utilisation : <>webApp_o.config.webApp.folder_f()
 
   // On vérifie que le dossier existe.
@@ -113,7 +113,7 @@ End if
   // Controle sur les sous domaine
 For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  // On récupére des infos sur le dossier web du sous domaine.
-	$folderSubDomaine_o:=Folder:C1567(<>webApp_o.config.webFolder.folder_f($subDomaine_t);fk platform path:K87:2)
+	$folderSubDomaine_o:=Folder:C1567(<>webApp_o.config.webFolder.folder_f($subDomain_t);fk platform path:K87:2)
 	
 	  // Si il existe pas, on lui crée une petite arborescense.
 	If (Not:C34($folderSubDomaine_o.exists))
@@ -153,9 +153,9 @@ If (Test path name:C476(<>webApp_o.config.viewCache.folder_t)#Is a folder:K24:2)
 End if 
 
   // Controle sur les sous domaine
-For each ($subDomaine_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  // On récupére des infos sur le dossier web du sous domaine.
-	$folderSubDomaine_o:=Folder:C1567(<>webApp_o.config.viewCache.folder_f($subDomaine_t);fk platform path:K87:2)
+	$folderSubDomaine_o:=Folder:C1567(<>webApp_o.config.viewCache.folder_f($subDomain_t);fk platform path:K87:2)
 	
 	  // Si il existe pas, on lui crée une petite arborescense.
 	If (Not:C34($folderSubDomaine_o.exists))

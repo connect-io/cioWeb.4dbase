@@ -19,6 +19,7 @@ If (False:C215)  // Historique
 	  // 19/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
 	  // 31/03/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des héritages
+	  // 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des routes.
 End if 
 
 If (True:C214)  // Déclarations
@@ -65,12 +66,12 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  //Récupération du plan des pages web des sites.
 	$configPage:=New object:C1471
 	ARRAY TEXT:C222($routeFile_at;0)
-	DOCUMENT LIST:C474(<>webApp_o.config.route.folder_f($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(<>webApp_o.config.source.folder_f($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
 	
 	  // Chargement de tout les fichiers de routing.
 	For ($routeNum;1;Size of array:C274($routeFile_at))
 		  // On charge toutes les routes, mais pas le modele
-		If ($routeFile_at{$routeNum}="@.route.json") & ($routeFile_at{$routeNum}#"@_model.route.json")
+		If ($routeFile_at{$routeNum}="@route.json")
 			$configPage:=cwToolObjectMerge ($configPage;JSON Parse:C1218(Document to text:C1236($routeFile_at{$routeNum};"UTF-8")))
 		End if 
 	End for 
