@@ -24,7 +24,8 @@ For ($j;1;Size of array:C274($sites))
 	$dirIn:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator:K24:12+"pages-dev"+Folder separator:K24:12
 	
 	  //Le dossier avec le html minifié.
-	$dirOut:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator:K24:12+"pages"+Folder separator:K24:12
+	  //$dirOut:=<>webApp_o.config.webApp.folder_f()+$sites{$j}+Folder separator+"pages"+Folder separator
+	$dirOut:=<>webApp_o.config.page.folder_f($sites{$j})
 	
 	
 	  //On recupere la liste des documents dans le répertoire.

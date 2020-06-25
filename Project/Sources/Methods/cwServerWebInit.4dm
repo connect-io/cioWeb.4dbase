@@ -25,61 +25,63 @@ If (True:C214)  // Déclarations
 End if 
 
 <>webApp_o:=New object:C1471()
+<>webApp_o.config:=New object:C1471()
 
-$cwConfig_o:=New object:C1471()
   // Nom de la variable visiteur dans l'application hôte.
-$cwConfig_o.varVisitorName_t:="visiteur_o"
+<>webApp_o.config.varVisitorName_t:="visiteur_o"
+
+If (Count parameters:C259=0)
+	WEB SET ROOT FOLDER:C634(Get 4D folder:C485(Database folder:K5:14;*)+"WebApp"+Folder separator:K24:12+"WebFolder")
+Else 
+	WEB SET ROOT FOLDER:C634($1)
+End if 
+
 
   // Dossier principale du composant dans l'application hôte.
-  //$cwConfig_o.pathWebApp_t:=cwToolPathFolderOrAlias (Get 4D folder(Current resources folder;*))+"sites"
-$cwConfig_o.webApp:=New object:C1471()
-$cwConfig_o.webApp.folderName_t:="sites"
-$cwConfig_o.webApp.folder_t:=cwToolPathFolderOrAlias (Get 4D folder:C485(Current resources folder:K5:16;*))+$cwConfig_o.webApp.folderName_t+Folder separator:K24:12
-$cwConfig_o.webApp.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t)  // Utile simplement pour l'uniformisation...
+<>webApp_o.config.webApp:=New object:C1471()
+<>webApp_o.config.webApp.folderName_t:="sites"
+<>webApp_o.config.webApp.folder_t:=cwToolPathFolderOrAlias (Get 4D folder:C485(Current resources folder:K5:16;*))+<>webApp_o.config.webApp.folderName_t+Folder separator:K24:12
+<>webApp_o.config.webApp.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t)  // Utile simplement pour l'uniformisation...
   // Utilisation : $dossierWebApp_t:=<>webApp_o.config.webApp.folder_f()
 
-$cwConfig_o.page:=New object:C1471()
-$cwConfig_o.page.folderName_t:="pages"
-$cwConfig_o.page.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.page.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.webAppV2:=New object:C1471()
+<>webApp_o.config.webAppV2.folderName_t:="WebApp"
+<>webApp_o.config.webAppV2.folder_t:=cwToolPathFolderOrAlias (Get 4D folder:C485(Database folder:K5:14;*))+<>webApp_o.config.webAppV2.folderName_t+Folder separator:K24:12
+<>webApp_o.config.webAppV2.folder_f:=Formula:C1597(<>webApp_o.config.webAppV2.folder_t)  // Utile simplement pour l'uniformisation...
+  // Utilisation : $dossierWebApp_t:=<>webApp_o.config.webAppV2.folder_f()
+
+<>webApp_o.config.page:=New object:C1471()
+<>webApp_o.config.page.folderName_t:="Pages"
+<>webApp_o.config.page.folder_f:=Formula:C1597(<>webApp_o.config.webAppV2.folder_t+"Cache"+Folder separator:K24:12+<>webApp_o.config.page.folderName_t+Folder separator:K24:12+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12)
   // Utilisation
   // Dans le cas d'une utilisation dans le process web actif, il n'est pas obligé de mettre de paramêtre.
   // Si l'on souhaite forcer le dossier page d'un sous domaine précis, il faut le passer en paramêtre.
   //$dossierPage_t:=<>webApp_o.config.page.folder_f("clients")
 
-$cwConfig_o.pageDev:=New object:C1471()
-$cwConfig_o.pageDev.folderName_t:="pages-dev"
-$cwConfig_o.pageDev.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.pageDev.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.pageDev:=New object:C1471()
+<>webApp_o.config.pageDev.folderName_t:="pages-dev"
+<>webApp_o.config.pageDev.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.pageDev.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.pageDev.folder_f("www")
 
-$cwConfig_o.form:=New object:C1471()
-$cwConfig_o.form.folderName_t:="form"
-$cwConfig_o.form.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.form.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.form:=New object:C1471()
+<>webApp_o.config.form.folderName_t:="form"
+<>webApp_o.config.form.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.form.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.form.folder_f("www")
 
-$cwConfig_o.js:=New object:C1471()
-$cwConfig_o.js.folderName_t:="js"
-$cwConfig_o.js.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.js.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.js:=New object:C1471()
+<>webApp_o.config.js.folderName_t:="js"
+<>webApp_o.config.js.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.js.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.js.folder_f("www")
 
-$cwConfig_o.i18n:=New object:C1471()
-$cwConfig_o.i18n.folderName_t:="i18n"
-$cwConfig_o.i18n.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.i18n.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.i18n:=New object:C1471()
+<>webApp_o.config.i18n.folderName_t:="i18n"
+<>webApp_o.config.i18n.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.i18n.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.i18n.folder_f("www")
 
-$cwConfig_o.route:=New object:C1471()
-$cwConfig_o.route.folderName_t:="route"
-$cwConfig_o.route.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.route.folderName_t+Folder separator:K24:12)
+<>webApp_o.config.route:=New object:C1471()
+<>webApp_o.config.route.folderName_t:="route"
+<>webApp_o.config.route.folder_f:=Formula:C1597(<>webApp_o.config.webApp.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.route.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.route.folder_f("www")
-
-
-If (<>webApp_o.config=Null:C1517)
-	  // On applique la config de base à notre composant.
-	<>webApp_o.config:=$cwConfig_o
-	
-Else 
-	  // On fusionne la config de base avec les param.
-	<>webApp_o.config:=cwToolObjectMerge ($cwConfig_o;<>webApp_o.config)
-End if 
 
 
   // On vérifie que le repertoire webApp existe dans le dossier ressources de l'application hôte.

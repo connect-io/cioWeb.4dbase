@@ -19,7 +19,8 @@ $T_nomFichier:=Choose:C955($1="/@";Substring:C12($1;2);$1)
 $T_nomFichier:=$T_nomFichier+Choose:C955($1#"@.html";".html";"")
 $T_nomFichier:=Replace string:C233($T_nomFichier;"/";Folder separator:K24:12)
 
-$T_chFichier:=<>webApp_o.config.webApp.folder_f()+OB Get:C1224(visiteur;"sousDomaine")+Folder separator:K24:12+"pages"+Folder separator:K24:12
+  //$T_chFichier:=<>webApp_o.config.webApp.folder_f()+OB Get(visiteur;"sousDomaine")+Folder separator+"pages"+Folder separator
+$T_chFichier:=<>webApp_o.config.page.folder_f()
 
 
   //DOCUMENT VERS BLOB($chFichier;$b_fichier)

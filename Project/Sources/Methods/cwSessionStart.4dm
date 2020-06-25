@@ -33,7 +33,7 @@ End if
 $configs_o:=$2
 <>sessionWeb:=New object:C1471
 
-sessionWebFolder_t:=Get 4D folder:C485(Database folder:K5:14;*)"WebApp"+Folder separator:K24:12++"Cache"+Folder separator:K24:12+"Session"+Folder separator:K24:12
+sessionWebFolder_t:=Get 4D folder:C485(Database folder:K5:14;*)+"WebApp"+Folder separator:K24:12+"Cache"+Folder separator:K24:12+"Session"+Folder separator:K24:12
 
   // On applique quelques valeurs par defaut, pour que cela fonctionne même sans param.
 $options_c:=New collection:C1472
