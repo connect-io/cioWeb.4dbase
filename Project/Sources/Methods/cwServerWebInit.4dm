@@ -170,11 +170,7 @@ End for each
 <>webApp_o.config.viewDev.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.viewDev.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.viewDev.folder_f("www")
 
-  // ----- Gestion des form -----
-<>webApp_o.config.form:=New object:C1471()
-<>webApp_o.config.form.folderName_t:="form"
-<>webApp_o.config.form.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.form.folderName_t+Folder separator:K24:12)
-  // Utilisation : $dossierForm_t:=<>webApp_o.config.form.folder_f("www")
+
 
   // ----- Gestion des js -----
 <>webApp_o.config.js:=New object:C1471()
@@ -182,17 +178,13 @@ End for each
 <>webApp_o.config.js.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.js.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.js.folder_f("www")
 
+
+
   // ----- Gestion des traductions -----
 <>webApp_o.config.i18n:=New object:C1471()
 <>webApp_o.config.i18n.folderName_t:="i18n"
 <>webApp_o.config.i18n.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.i18n.folderName_t+Folder separator:K24:12)
   // Utilisation : $dossierForm_t:=<>webApp_o.config.i18n.folder_f("www")
-
-  // ----- Gestion des routes -----
-<>webApp_o.config.route:=New object:C1471()
-<>webApp_o.config.route.folderName_t:="route"
-<>webApp_o.config.route.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.route.folderName_t+Folder separator:K24:12)
-  // Utilisation : $dossierForm_t:=<>webApp_o.config.route.folder_f("www")
 
 
   // On remonte les informations à la base hôte.

@@ -15,43 +15,46 @@ If (False:C215)  // Historique
 	  // 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 End if 
 
-C_LONGINT:C283($numForm;$i)
-ARRAY TEXT:C222($sites;0)
-C_BOOLEAN:C305($analyseForm_b)
-C_COLLECTION:C1488($formCharge_c;$indicesQuery_c)
-C_OBJECT:C1216(formInput_o)  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
+
+If (True:C214)  // Déclarations
+	C_LONGINT:C283($numForm;$i)
+	C_BOOLEAN:C305($analyseForm_b)
+	C_COLLECTION:C1488($formCharge_c;$indicesQuery_c)
+	C_OBJECT:C1216(formInput_o)  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
+	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
+End if 
 
 
-FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 
   // Récupération des formulaires
-For ($i;1;Size of array:C274($sites))
+For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+	  //For ($i;1;Size of array($sites))
 	
 	  // On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($subDomain_t)+"cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($sites{$i})+"cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($subDomain_t)+"cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
 	  // On récupére la collection de form du sousDomaine
-	If (<>webApp_o.sites[$sites{$i}].form=Null:C1517)
-		<>webApp_o.sites[$sites{$i}].form:=New collection:C1472()
+	If (<>webApp_o.sites[$subDomain_t].form=Null:C1517)
+		<>webApp_o.sites[$subDomain_t].form:=New collection:C1472()
 	End if 
 	
 	
 	ARRAY TEXT:C222($fichiersForm;0)
-	DOCUMENT LIST:C474(<>webApp_o.config.form.folder_f($sites{$i});$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(<>webApp_o.config.source.folder_f($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
 	For ($numForm;1;Size of array:C274($fichiersForm))
 		$analyseForm_b:=True:C214
 		C_OBJECT:C1216($form)
 		
-		If ($fichiersForm{$numForm}#"@.form.json")
+		If ($fichiersForm{$numForm}#"@form.json")
 			$analyseForm_b:=False:C215
 		End if 
 		
 		If ($analyseForm_b)
 			  // On regarde si le formulaire est déjà chargé en mémoire...
-			$formCharge_c:=<>webApp_o.sites[$sites{$i}].form.query("source IS :1";$fichiersForm{$numForm})
+			$formCharge_c:=<>webApp_o.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
 			If ($formCharge_c.length=0)
 				  // Il n'est pas chargé, on doit donc faire le job...
 				
@@ -282,14 +285,14 @@ For ($i;1;Size of array:C274($sites))
 			If ($formCharge_c.length=0)
 				
 				  // Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				<>webApp_o.sites[$sites{$i}].form.push($form)
+				<>webApp_o.sites[$subDomain_t].form.push($form)
 			Else 
 				
 				  // Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=<>webApp_o.sites[$sites{$i}].form.indices("source IS :1";$fichiersForm{$numForm})
-				<>webApp_o.sites[$sites{$i}].form[$indicesQuery_c[0]]:=$form
+				$indicesQuery_c:=<>webApp_o.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
+				<>webApp_o.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
 			End if 
 		End if 
 	End for 
 	
-End for 
+End for each 
