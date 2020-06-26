@@ -31,9 +31,10 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  //For ($i;1;Size of array($sites))
 	
 	  // On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($subDomain_t)+"cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.source.folder_f($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.viewDev.folder_f($subDomain_t)+"cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	
+	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.source.folder_f($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
 	  // On récupére la collection de form du sousDomaine

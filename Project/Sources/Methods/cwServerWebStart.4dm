@@ -20,6 +20,7 @@ If (False:C215)  // Historique
 	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
 	  // 31/03/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des héritages
 	  // 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des routes.
+	  // 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
 End if 
 
 If (True:C214)  // Déclarations
@@ -200,7 +201,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 				
 				  // On vérifie que le fichier existe bien
 				If (Test path name:C476($page.fichier[$i_l])#Is a document:K24:1)
-					  //ALERT("Il manque le fichier suivant : "+$page.fichier[$i_l])
+					ALERT:C41("Il manque le fichier suivant : "+$page.fichier[$i_l])
 				End if 
 				
 			End for 
