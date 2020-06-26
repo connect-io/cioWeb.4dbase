@@ -128,4 +128,20 @@ C_POINTER:C301(cwServerWebStart ;$1)
 C_POINTER:C301(cwServerWebStart ;$2)
 
   //cwServerWebInit
-C_POINTER:C301(cwServerWebInit ;$1)
+C_TEXT:C284(cwServerWebInit ;$1)
+
+  //cwServerWebInit
+C_OBJECT:C1216(cwServerWebInit ;$0)
+
+  //cwVisiteurLoginIs
+C_BOOLEAN:C305(cwVisiteurLoginIs ;$0)
+C_BOOLEAN:C305(cwVisiteurLoginIs ;$1)
+
+  //cwFormGetData
+C_OBJECT:C1216(cwFormGetData ;$0)
+C_POINTER:C301(cwFormGetData ;$1)
+C_TEXT:C284(cwFormGetData ;$2)
+
+  //cwDateClean
+C_TEXT:C284(cwDateClean ;$0)
+C_TEXT:C284(cwDateClean ;$1)
