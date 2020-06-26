@@ -16,9 +16,6 @@ End if
 If (True:C214)  // Déclarations
 	C_TEXT:C284($texteIn;$texteOut;$dirIn;$dirOut)
 	C_BOOLEAN:C305($compression)
-	
-	ARRAY TEXT:C222($sites;0)
-	FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)
 	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
 End if 
 
@@ -29,7 +26,6 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	
 	  //Le dossier avec le html minifié.
 	$dirOut:=<>webApp_o.config.viewCache.folder_f($subDomain_t)
-	
 	
 	  //On recupere la liste des documents dans le répertoire.
 	DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
