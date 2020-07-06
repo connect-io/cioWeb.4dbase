@@ -262,6 +262,8 @@ End for each
 
 cwFormPreload 
 
+cwDataTablePreload 
+
   // On charge tout les fichiers de langue.
   //cwI18nLoad 
 
