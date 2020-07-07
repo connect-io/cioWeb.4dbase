@@ -40,7 +40,6 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 		
 		$analyseDataTable_b:=True:C214
 		C_OBJECT:C1216($dataTable_o)
-		TRACE:C157
 		  // On regarde si le formulaire est déjà chargé en mémoire...
 		$dataTableCharge_c:=<>webApp_o.sites[$subDomain_t].dataTable.query("source IS :1";$file_o.platformPath)
 		If ($dataTableCharge_c.length=0)

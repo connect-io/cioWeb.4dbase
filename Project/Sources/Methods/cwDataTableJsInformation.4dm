@@ -12,19 +12,20 @@ End if
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // Nom du dataTable HTML
-	C_COLLECTION:C1488($2)  // Code html du formulaire
+	C_OBJECT:C1216($2)  // Entité selection
 	
 	C_COLLECTION:C1488($resultForm_c)
 	C_OBJECT:C1216(dataTable_o)
 	C_TEXT:C284($dataTableNom_t)
-	C_OBJECT:C1216($information_o)
+	C_OBJECT:C1216($information_o;$column_o;dataInBase_o;dataColumn_o)
 End if 
-TRACE:C157
+
+
   // Nettoyage du param
-$dataTableNom_t:=Substring:C12($1;2)
+$dataTableNom_t:=$1
 $dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
 
-  // On retrouve le formulaire
+  // On retrouve la dataTable
 $resultForm_c:=<>webApp_o.sites[visiteur.sousDomaine].dataTable.query("lib IS :1";$dataTableNom_t)
 
 If ($resultForm_c.length=1)
@@ -33,6 +34,7 @@ If ($resultForm_c.length=1)
 	
 Else 
 	dataTable_o:=New object:C1471()
+	ALERT:C41("Impossible de retrouver la dataTable : "+$dataTableNom_t)
 End if 
 
 
@@ -44,24 +46,24 @@ $information_o.column_c:=New collection:C1472()
 
 For each ($column_o;dataTable_o.column)
 	
-	$information_o.column_c.push(New object:C1471("title";$column_o.title;"data";$column_o.title))
+	$information_o.column_c.push(New object:C1471("title";$column_o.title;"data";$column_o.data))
 	
 End for each 
 
 $information_o.data_c:=New collection:C1472()
 
   // On boucle sur chaque élément de la source...
-For each ($dataInBase_o;$2)
+  // Attention de bien conserver les varaibles dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
+For each (dataInBase_o;$2)
 	
 	dataligne_o:=New object:C1471()
 	
 	  // On boucle sur chaque colonne des données.
-	For each ($dataColumn_o;dataTable_o.data)
-		$dataColumn_o.formule:=Formula from string:C1601(Replace string:C233($dataInBase_o.value;"this.";"$dataInBase_o.")
-		dataligne_o[$dataColumn_o.name]:=$dataColumn_o.formule()
+	For each (dataColumn_o;dataTable_o.data)
+		dataligne_o[dataColumn_o.name]:=Formula from string:C1601(Replace string:C233(dataColumn_o.value;"this.";"dataInBase_o.")).call()
 	End for each 
 	
-	pageWeb_o.data_c.push(dataligne_o)
+	$information_o.data_c.push(dataligne_o)
 	
 End for each 
 
