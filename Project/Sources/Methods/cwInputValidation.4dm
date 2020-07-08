@@ -1,12 +1,8 @@
 //%attributes = {"shared":true}
-$toto:=Date:C102("dad")
-
-
   // ----------------------------------------------------
   // Méthode : cwInputValidation
-  // Description
-  // Valide la valeur d'une variable web via son fichier de configuration
   //
+  // Valide la valeur d'une variable web via son fichier de configuration
   // ----------------------------------------------------
 
 If (False:C215)  // Historique
@@ -143,8 +139,6 @@ If (($retour="ok") & ($configInput.type="file"))
 				
 		End case 
 	End if 
-	
-	
 	
 End if 
 
