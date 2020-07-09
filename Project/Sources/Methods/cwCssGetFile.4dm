@@ -1,15 +1,14 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Méthode : cwCssGetfile
-  //
-  // Description
-  // Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwCssGetfile
 
-If (False:C215)  // Historique
-	  // 19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
-End if 
+Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
+
+Historique
+19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
+10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // Domaine du CDN
