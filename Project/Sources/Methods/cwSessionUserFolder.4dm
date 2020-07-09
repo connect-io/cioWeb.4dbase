@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwSessionUserFolder
 
-Si possible l'on renvoi, le dossier de session du visiteur.
+Si possible l'on renvoie, le dossier de session du visiteur.
 
 Historique
 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -54,6 +54,6 @@ If (String:C10($logErreur_o.detailErreur)#"")
 	
 	ALERT:C41($logErreur_o.detailErreur)
 	
-	  // On renvoit ce que l'on peut faire de mieux...
+	  // On renvoie ce que l'on peut faire de mieux...
 	$0:=Get 4D folder:C485(Database folder:K5:14;*)
 End if 

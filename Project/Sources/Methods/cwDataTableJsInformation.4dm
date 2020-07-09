@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwDataTableJsInformation
 
-Renvoi les informations sur la dataTable
+Renvoie au navigateur les informations sur la dataTable.
 
 Historique
 06/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création

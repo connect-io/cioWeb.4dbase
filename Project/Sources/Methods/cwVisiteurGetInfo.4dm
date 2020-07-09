@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwWebVisiteurGetInfo
 
-Renvoi un objet avec les informations du visiteur :
+Renvoie un objet avec les informations du visiteur :
 entête, formulaire, cookies
 
 Historique

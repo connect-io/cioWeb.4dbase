@@ -19,7 +19,7 @@ Else
 	$O_ressource:=OB Get:C1224(pageWeb;"i18n")
 End if 
 
-  // Si la ressource existe on l'utilise sinon on renvoit la cle.
+  // Si la ressource existe on l'utilise sinon on renvoie la cle.
 If (OB Is defined:C1231($O_ressource;$1))
 	$0:=OB Get:C1224($O_ressource;$1)
 Else 

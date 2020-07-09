@@ -142,7 +142,7 @@ If ($page#"")
 	pageWeb.route.data:=$routeData
 	
 Else 
-	  //Renvoit page 404
+	  //Renvoie page 404
 	If (visiteur.url#"@.php")
 		$O_logErreur.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
 	End if 

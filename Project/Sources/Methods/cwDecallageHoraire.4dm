@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : ogDecallageHoraire
 
-Renvoi le decallage horaire depuis lheure local de la machine.
+Renvoie le decallage horaire depuis lheure local de la machine.
 
 Historique
 

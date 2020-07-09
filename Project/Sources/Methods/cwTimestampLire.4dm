@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwTimestampLire
 
-Renvoi la date ou l'heure du timestamp en $1
+Renvoie la date ou l'heure du timestamp en $1
 
 Historique
 

@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwVisiteurLogout
 
-Déconnexion de l'utilisateur, et renvoit vers la page d'identification.
+Déconnexion de l'utilisateur, et renvoie vers la page d'identification.
 
 Historique
 

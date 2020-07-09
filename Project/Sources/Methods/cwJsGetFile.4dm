@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwJsGetfile
 
-Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
+Renvoie le contenu des fichiers déclaré dans le fichier pageWeb.json
 
   //C_TEXT($jsContenu;jsHtmlModele)
   //If (OB Is defined(pageWeb;"jsFile"))

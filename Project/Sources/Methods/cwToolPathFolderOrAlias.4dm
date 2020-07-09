@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwToolPathFolderOrAlias
 
-Renvoi le chemin d'un dossier ou son chemin depuis un alias.
+Renvoie le chemin d'un dossier ou son chemin depuis un alias.
 
 Historique
 26/09/19 gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique

@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwIncludeHtml
 
-Renvoit le code html contenue dans le dossier Resources/sites/$site/pages
+Renvoie le code html contenue dans le dossier Resources/sites/$site/pages
 
 Historique
 

@@ -2,7 +2,7 @@
 /* ----------------------------------------------------
 Méthode : cwCssGetfile
 
-Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
+Renvoie le contenu des fichiers déclaré dans le fichier pageWeb.json
 
 Historique
 19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création

@@ -10,7 +10,7 @@ Historique
 ----------------------------------------------------*/
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$1;$lieux)  // $1 [text] IP que l'on cherche à localiser, $0 [text] renvoit l'emplacement géographique de l'IP.
+	C_TEXT:C284($0;$1;$lieux)  // $1 [text] IP que l'on cherche à localiser, $0 [text] renvoie l'emplacement géographique de l'IP.
 	
 	C_TEXT:C284($url;$tInfoGeoIp;$tPostalCode;$tVilleNameFr;$tVilleConfiance;$tPostalConfiance)
 	C_BLOB:C604($retour)
