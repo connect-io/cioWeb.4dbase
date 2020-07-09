@@ -1,9 +1,9 @@
 //%attributes = {"shared":true,"publishedWeb":true}
   // ----------------------------------------------------
   // Méthode : cwCssGetfile
+  //
   // Description
   // Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
-  //
   // ----------------------------------------------------
 
 If (False:C215)  // Historique
@@ -16,29 +16,17 @@ If (True:C214)  // Déclarations
 	C_TEXT:C284($0)  // Contenu des fichiers html
 	
 	C_TEXT:C284($cssContenu_t;$cssHtmlModele_t;$domaineCDN_t;$cssFile_t)
-	  //C_LONGINT($i_l)
 End if 
 
   // Attention de ne pas utiliser "choose" ici, cela génére une erreur en compilé.
-$T_domaineCDN:=""
+$domaineCDN_t:=""
 If (Count parameters:C259=1)
-	$T_domaineCDN:=$1
+	$domaineCDN_t:=$1
 End if 
-
 
 $cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssFile\">"
 $cssContenu_t:=""
 
-  //If (OB Is defined(pageWeb;"cssFile"))
-
-  //ARRAY TEXT($cssFile_at;0)
-  //OB GET ARRAY(pageWeb;"cssFile";$cssFile_at)
-
-  //For ($i_l;1;Size of array($cssFile_at))
-  //$cssFile_at{$i_l}:=Replace string($cssFile_at{$i_l};"domaineCDN";$domaineCDN_t)
-  //$cssContenu_t:=$cssContenu_t+Replace string($cssHtmlModele_t;"$cssFile";$cssFile_at{$i_l})+Char(Line feed)
-  //End for 
-  //End if 
 
 If (pageWeb.cssFile#Null:C1517)
 	
