@@ -7,13 +7,13 @@ Renvoi les informations sur la dataTable
 Historique
 06/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/07/20 - Grégory Fromain <gregory@connect-io.fr> - Renvoi de toutes les informations sur la dataTable.
- ---------------------------------------------------- */
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)
+	C_POINTER:C301($1)  //Variable pageWeb de l'application
 	C_TEXT:C284($2)  // Nom du dataTable HTML
 	C_OBJECT:C1216($3)  // Entité selection
-	
 	
 	C_OBJECT:C1216($pageWeb_o)
 	C_COLLECTION:C1488($resultForm_c)
