@@ -1,15 +1,15 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwServerWebInit
-  // 
-  // Initialisation du serveur web.
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwServerWebInit
 
-If (False:C215)  // Historique
-	  // 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
-	  // 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
-End if 
+Initialisation du serveur web.
+
+Historique
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // (Optionel) chemin alternatif pour le webFolder

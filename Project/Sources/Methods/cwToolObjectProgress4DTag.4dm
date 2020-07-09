@@ -1,19 +1,18 @@
 //%attributes = {"invisible":true,"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 12/05/19, 01:45:48
-  // ----------------------------------------------------
-  // Méthode : cwToolObjectProgress4DTag
-  // Description
-  // Traiter les balises 4D qu'il peut y avoir dans un objet.
-  //
-  // Paramètres
-  // $1 : [objet]
-  // $0 : [objet]
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolObjectProgress4DTag
 
-C_OBJECT:C1216($0;$1;$ressource_o)
-C_TEXT:C284($cle_t;$tampon_t)
+Traiter les balises 4D qu'il peut y avoir dans un objet.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_OBJECT:C1216($0;$1;$ressource_o)
+	C_TEXT:C284($cle_t;$tampon_t)
+End if 
 
 $ressource_o:=$1
 

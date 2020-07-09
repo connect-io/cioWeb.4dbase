@@ -1,18 +1,19 @@
 //%attributes = {"invisible":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 10/02/15, 20:21:11
-  // ----------------------------------------------------
-  // Méthode : ogMaxMindGetVilleTest
-  // Description
-  // Test de la methode ogMaxMindGetVille
-  //
-  // Paramètres
-  // $0  = [bool] VRAI, si le test bon !
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogMaxMindGetVilleTest
 
-C_BOOLEAN:C305($0)
-C_TEXT:C284($resultat)
+Test de la methode ogMaxMindGetVille
+
+Historique
+
+----------------------------------------------------*/
+
+If (True:C214)  // Déclarations
+	C_BOOLEAN:C305($0)  // $0  = [bool] VRAI, si le test bon !
+	
+	C_TEXT:C284($resultat)
+End if 
+
 MESSAGE:C88("Test en cours : "+Current method name:C684)
 
   //On test avec l'ip du bureau !

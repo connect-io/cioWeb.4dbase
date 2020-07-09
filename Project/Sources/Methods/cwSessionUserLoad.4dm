@@ -1,24 +1,21 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwSessionUserLoad
-  // Si possible l'on vient charger la $session web de l'utilisateur.
-  // 
-  //
-  // Paramètres
-  // $1 : [objet] visiteur 
-  // $0 : [bool] Vrai si l'on recharge une config
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwSessionUserLoad
 
-If (False:C215)  // Historique
-	  // 20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Ré-écriture de la méthode
-	  // 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dans la mise à jour des dossiers temporaires.
-End if 
+Si possible l'on vient charger la $session web de l'utilisateur.
+
+Historique
+20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Ré-écriture de la méthode
+13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dans la mise à jour des dossiers temporaires.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
+	C_POINTER:C301($1)  // $1 : [objet] visiteur
+	
 	C_TEXT:C284($chFichierSession_t;$chAncienDossier_t;$chNouveauDossier_t)
 	C_OBJECT:C1216($session_o;$visiteur_o)
-	C_POINTER:C301($1)
 	C_LONGINT:C283($i_l)
 End if 
 

@@ -1,15 +1,14 @@
 //%attributes = {}
-  // ----------------------------------------------------
-  // Méthode : cwVisiteurLoginIS
-  // Description
-  // à utiliser après la vérification des utilisateurs.
-  // permet de garder l'information durant la  session.
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwVisiteurLoginIS
 
-If (False:C215)  // Historique
-	  // 29/09/15 Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+à utiliser après la vérification des utilisateurs.
+permet de garder l'information durant la  session.
+
+Historique
+29/09/15 Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_BOOLEAN:C305($1)  // objet "visiteur"

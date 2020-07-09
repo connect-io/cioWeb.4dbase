@@ -1,21 +1,21 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 16/04/12, 16:48:13
-  // ----------------------------------------------------
-  // Méthode : ogWebMinifier
-  // Description
-  // Permet de minimifier les fichiers javascript.
-  //
-  // Paramètres
-  // $1 = [texte] action (Utile seulement pour la methode.)
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogWebMinifier
+
+Permet de minimifier les fichiers javascript.
+
+Historique
+
+----------------------------------------------------*/
 
 
-C_TEXT:C284($0;$1;texteIn;texteOut)
-C_TEXT:C284(car;$car1;$car2)
-C_LONGINT:C283($p;$l;posTexte)
-C_BOOLEAN:C305($fin;$tjrsCommentaire)
+If (True:C214)  // Déclarations
+	C_TEXT:C284($0;$1;texteIn;texteOut)  // $1 = [texte] action (Utile seulement pour la methode.)
+	
+	C_TEXT:C284(car;$car1;$car2)
+	C_LONGINT:C283($p;$l;posTexte)
+	C_BOOLEAN:C305($fin;$tjrsCommentaire)
+End if 
 
 If (Count parameters:C259=1)
 	

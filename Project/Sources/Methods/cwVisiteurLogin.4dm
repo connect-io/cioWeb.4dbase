@@ -1,22 +1,19 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwVisiteurLogin
-  // Description
-  // à utiliser après la vérification des utilisateurs.
-  // permet de garder l'information durant la  session.
-  //
-  // Paramètres
-  // $1 = [pointeur] objet "visiteur"
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwVisiteurLogin
 
-If (False:C215)  // Historique
-	  // 29/09/15 Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 14/08/19  Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur.action
-End if 
+à utiliser après la vérification des utilisateurs.
+permet de garder l'information durant la  session.
+
+Historique
+29/09/15 Grégory Fromain <gregory@connect-io.fr> - Création
+14/08/19  Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur.action
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_OBJECT:C1216($visiteur_o)
-	C_POINTER:C301($1)
+	C_POINTER:C301($1)  // $1 = [pointeur] objet "visiteur"
 End if 
 
 $visiteur_o:=$1->

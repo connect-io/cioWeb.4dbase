@@ -1,23 +1,20 @@
 //%attributes = {"invisible":true}
-  // ----------------------------------------------------
-  // Méthode : cwToolDeletePrefixKey
-  // Description
-  // Supprime un suffixe à chaque clé d'un objet.
-  //
-  // Paramètres
-  // $1 [pointeur] objet
-  // $2 [text] le suffixe à supprimer
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolDeletePrefixKey
 
-If (False:C215)  // Historique
-	  // 15/08/17 gregory@connect-io.fr - Création
-	  // 26/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
-End if 
+Supprime un suffixe à chaque clé d'un objet.
+
+Historique
+15/08/17 gregory@connect-io.fr - Création
+26/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($1;$source_o)
+	C_OBJECT:C1216($1;$source_o)  // $1 [pointeur] objet
+	C_TEXT:C284($2)  // $2 [text] le suffixe à supprimer
+	
 	C_LONGINT:C283($i_l;$nbCar_l)
-	C_TEXT:C284($2)
 	ARRAY TEXT:C222($nomLib_at;0)
 End if 
 

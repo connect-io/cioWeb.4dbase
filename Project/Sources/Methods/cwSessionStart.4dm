@@ -1,30 +1,22 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwSessionStart
-  // Description
-  // 
-  //
-  // Paramètres
-  // $1 : [objet] option, option du serveur web
-  //     Format : "key";Web session cookie name;"value";"CIOSID"
-  //
-  // $2 : [text] Dossier racine des sessions
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwSessionStart
 
-  // Exemple d'activation :
-  //$optionsSession_c:=New collection
-  //$optionsSession_c.push(New object("key";Web session cookie name;"value";"LYOSID"))
 
-  //cwSessionStart($optionsSession_c;<>T_Racine_Site_Local+Folder separator+"sessionWeb"+Folder separator)
 
-If (False:C215)  // Historique
-	  // 30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+Historique
+30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+
+Exemple d'activation :
+$optionsSession_c:=New collection
+$optionsSession_c.push(New object("key";Web session cookie name;"value";"LYOSID"))
+cwSessionStart($optionsSession_c;<>T_Racine_Site_Local+Folder separator+"sessionWeb"+Folder separator)
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_COLLECTION:C1488($1;$options_c)
-	C_TEXT:C284($2)
+	C_COLLECTION:C1488($1;$options_c)  // $1 : [objet] option, option du serveur web
+	C_TEXT:C284($2)  // $2 : [text] Dossier racine des sessions
 	C_OBJECT:C1216($0;<>sessionWeb;$option_o)
 	C_LONGINT:C283($valideMinute_l;$refProcess_l)
 	C_TEXT:C284(sessionWebFolder_t)

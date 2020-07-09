@@ -1,25 +1,19 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Méthode : cwLibToUrl
-  // Description
-  // Permet de renvoyer l'url d'une page.
-  //
-  // Paramètres
-  // $1 : [objet] lib de page
-  // $2 : [objet] objet de personnalisation de l'URL
-  // configSite : variable est initialisé dans la méthode cwPageGetInfo
-  // $0 = url de la page.
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwLibToUrl
 
-If (False:C215)  // Historique
-	  // 21/03/15 gregory@connect-io.fr - Création
-	  // 26/10/19 gregory@connect-io.fr - notation objet
-	  // 30/10/19 gregory@connect-io.fr - ajout possibilité de forcer une variable de l'url depuis le routing.
-End if 
+Permet de renvoyer l'url d'une page.
+
+Historique
+21/03/15 gregory@connect-io.fr - Création
+26/10/19 gregory@connect-io.fr - notation objet
+30/10/19 gregory@connect-io.fr - ajout possibilité de forcer une variable de l'url depuis le routing.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$url_t;$1;$libPage_t;$nomVar_t;$formatInput_t)
-	C_OBJECT:C1216(routeVar;$2;$configPage_o)
+	C_TEXT:C284($0;$url_t;$1;$libPage_t;$nomVar_t;$formatInput_t)  // $0 = url de la page, $1 : [objet] lib de page
+	C_OBJECT:C1216(routeVar;$2;$configPage_o)  // $2 : [objet] objet de personnalisation de l'URL
 End if 
 
 $libPage_t:=Choose:C955($1="/@";Substring:C12($1;2);$1)

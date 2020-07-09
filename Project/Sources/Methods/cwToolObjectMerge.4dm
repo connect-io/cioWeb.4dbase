@@ -1,24 +1,19 @@
 //%attributes = {"invisible":true}
-  // ----------------------------------------------------
-  // Méthode : cwToolObjectMerge (composant CioWeb)
-  // Description
-  // Fusionne 2 objets
-  //
-  // Paramètres
-  // $1 = [objet] Parent
-  // $2 = [objet] Fils
-  // $0 = [objet] Fusionné
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolObjectMerge (composant CioWeb)
 
-If (False:C215)  // Historique
-	  // 27/10/15 gregory@connect-io.fr - Création
-	  // 27/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
-End if 
+Fusionne 2 objets
+
+Historique
+27/10/15 gregory@connect-io.fr - Création
+27/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($0;$1;$2;$oParent;$oFils;$oFusion)
-	ARRAY TEXT:C222($cles;0)
+	C_OBJECT:C1216($0;$1;$2;$oParent;$oFils;$oFusion)  // $1 = [objet] Parent, $2 = [objet] Fils, $0 = [objet] Fusionné
 	
+	ARRAY TEXT:C222($cles;0)
 End if 
 
 $oParent:=$1

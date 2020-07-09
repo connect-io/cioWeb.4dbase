@@ -1,14 +1,14 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwPageGetInfo
-  // 
-  // Charge les éléments d'une page
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwPageGetInfo
 
-If (False:C215)  // Historique
-	  // 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
-End if 
+Charge les éléments d'une page
+
+Historique
+13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_OBJECT:C1216($1)

@@ -1,25 +1,20 @@
 //%attributes = {"invisible":true}
-  // ----------------------------------------------------
-  // Méthode : cwToolTextReplaceByRegex
-  // Description
-  // Remplace une chaine de caractère depuis une regex par un contenu fixe.
-  //
-  // Paramètres
-  // $1 = Source [texte]
-  // $2 = Expression recherché [regex]
-  // $3 = texte à remplacer. [texte]
-  // $0 : [texte] le texte corrigé
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolTextReplaceByRegex
 
-If (False:C215)  // Historique
-	  // 19/09/16 gregory@connect-io.fr - Création
-	  // 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioRegex et ré-écriture
-End if 
+Remplace une chaine de caractère depuis une regex par un contenu fixe.
+
+Historique
+19/09/16 gregory@connect-io.fr - Création
+26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioRegex et ré-écriture
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
+	C_TEXT:C284($source_t;$1;$2;$3;$0;$obsolete_t)  // $1 = Source [texte], $2 = Expression recherché [regex], $3 = texte à remplacer. [texte], $0 : [texte] le texte corrigé
+	
 	C_LONGINT:C283($position_l;$pos_trouvee_l;$long_trouvée_l)
 	C_BOOLEAN:C305($regexValid_b)
-	C_TEXT:C284($source_t;$1;$2;$3;$0;$obsolete_t)
 End if 
 
 $source_t:=$1

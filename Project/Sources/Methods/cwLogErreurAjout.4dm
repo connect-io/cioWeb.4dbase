@@ -1,18 +1,19 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 11/02/15, 16:55:09
-  // ----------------------------------------------------
-  // Méthode : cwLogErreurAjout
-  // Description
-  // Ajoute une erreur dans le fichier de log.
-  //
-  // Paramètres
-  // S1 = [text] type erreur
-  // $2 = [objet] Message erreur
-  // ----------------------------------------------------
-C_TEXT:C284($chErreur;$1)
-C_OBJECT:C1216($nouveauLog;$2)
+/* ----------------------------------------------------
+Méthode : cwLogErreurAjout
+
+Ajoute une erreur dans le fichier de log.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($chErreur;$1)  // S1 = [text] type erreur
+	C_OBJECT:C1216($nouveauLog;$2)  // $2 = [objet] Message erreur
+End if 
+
 ARRAY OBJECT:C1221($logJson;0)
 
 ASSERT:C1129(Length:C16($1)#0;"Le contenue du param $1 est vide.")

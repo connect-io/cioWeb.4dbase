@@ -1,21 +1,20 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <grégory@connect-io.fr>
-  // Date et heure : 07/11/15, 21:59:00
-  // ----------------------------------------------------
-  // Méthode : cwPageActive (Composant CioWeb)
-  // Description
-  // Active le menu html en fonction de l'url.
-  //
-  // Paramètres
-  // page_lib : genéré dans la methode sur connexion web.
-  // $1 : recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
-  // $0 : [texte] "" ou "active"
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwPageActive (Composant CioWeb)
 
-C_TEXT:C284($0;$1;$retour_t;$texteRetour_t)
-C_LONGINT:C283($debutPosition_l;$debutFin_l)
-C_BOOLEAN:C305($boucle_b)
+Active le menu html en fonction de l'url.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($0;$1;$retour_t;$texteRetour_t)  // $0 : [texte] "" ou "active", $1 : recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
+	
+	C_LONGINT:C283($debutPosition_l;$debutFin_l)
+	C_BOOLEAN:C305($boucle_b)
+End if 
 
 $texteRetour_t:="active"
 

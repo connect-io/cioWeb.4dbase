@@ -1,20 +1,14 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 16/04/12, 16:48:13
-  // ----------------------------------------------------
-  // Méthode : ogWebMinifierJs
-  // Description
-  // Minifie les fichiers .js, gain de 20 à 30% sur le poids d'origine.
-  //
-  // Paramètres
-  // $1 = [texte] action (Utile seulement pour la methode.)
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogWebMinifierJs
 
-If (False:C215)  // Historique
-	  // 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
-End if 
+Minifie les fichiers .js, gain de 20 à 30% sur le poids d'origine.
+
+Historique
+16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($texteIn;$dirIn;$dirOut)

@@ -1,19 +1,18 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 28/11/2014, 18:21:21
-  // ----------------------------------------------------
-  // Méthode : cwTimestampLire
-  // Description
-  // Renvoi la date ou l'heure du timestamp en $1
-  //
-  // Paramètres
-  // $1 = [texte] info de sortie ("date" ou "heure")
-  // $2 = [entier long] le timestamp
-  // $0 = [texte]
-  // ----------------------------------------------------
-C_TEXT:C284($0;$1)
-C_LONGINT:C283($2;$tsAvecDecallage)
+/* ----------------------------------------------------
+Méthode : cwTimestampLire
+
+Renvoi la date ou l'heure du timestamp en $1
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($0;$1)  // $0 = [texte], $1 = [texte] info de sortie ("date" ou "heure")
+	C_LONGINT:C283($2;$tsAvecDecallage)  // $2 = [entier long] le timestamp
+End if 
 
 ASSERT:C1129(Count parameters:C259=2;"Il manque un paramêtre à cette méthode.")
 ASSERT:C1129(Type:C295($2)=Is longint:K8:6;"Le param $1 doit être de type 'entier'.")

@@ -1,17 +1,19 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 29/09/15, 17:34:05
-  // ----------------------------------------------------
-  // Méthode : cwVisiteurLogout
-  // Description
-  // Déconnexion de l'utilisateur, et renvoit vers la page d'identification.
-  //
-  // Paramètres
-  // $1 = [pointeur] objet "visiteur"
-  // ----------------------------------------------------
-C_OBJECT:C1216($visiteur)
-C_POINTER:C301($1)
+/* ----------------------------------------------------
+Méthode : cwVisiteurLogout
+
+Déconnexion de l'utilisateur, et renvoit vers la page d'identification.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_POINTER:C301($1)  // $1 = [pointeur] objet "visiteur"
+	
+	C_OBJECT:C1216($visiteur)
+End if 
 
 $visiteur:=$1->
 

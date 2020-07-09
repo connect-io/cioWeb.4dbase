@@ -1,24 +1,20 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : ogWebMinifierHtml
-  // Description
-  // Minifie les fichiers HTML. Gain de 20 à 30% sur le poids des pages HTML.
-  //
-  // Paramètres
-  // $1 = [texte] action (Utile seulement pour la methode.)
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogWebMinifierHtml
 
-If (False:C215)  // Historique
-	  // 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
-End if 
+Minifie les fichiers HTML. Gain de 20 à 30% sur le poids des pages HTML.
+
+Historique
+16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($texteIn;$texteOut;$dirIn;$dirOut)
 	C_BOOLEAN:C305($compression)
 	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
 End if 
-
 
 For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	  //Le dossier avec le html non minifié.

@@ -1,20 +1,19 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 28/06/18, 19:28:39
-  // ----------------------------------------------------
-  // Méthode : cwVisiteurTokenVerifier
-  // Description
-  // Vérifie si le token du visiteur est valide
-  //
-  // Paramètres
-  // $1 : [pointeur] visiteur
-  // $0 : [booleen] vrai si valide
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwVisiteurTokenVerifier
 
-C_OBJECT:C1216($visiteur;$O_logErreur)
-C_POINTER:C301($1)
-C_BOOLEAN:C305($0)
+Vérifie si le token du visiteur est valide
+
+Historique
+
+----------------------------------------------------*/
+
+If (True:C214)  // Déclarations
+	C_POINTER:C301($1)  // $1 : [pointeur] visiteur
+	C_BOOLEAN:C305($0)  // $0 : [booleen] vrai si valide
+	
+	C_OBJECT:C1216($visiteur;$O_logErreur)
+End if 
 
 $0:=False:C215
 $visiteur:=$1->

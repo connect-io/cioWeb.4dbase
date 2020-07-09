@@ -1,21 +1,18 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwSessionUserFolder
-  // Si possible l'on renvoi, le dossier de session du visiteur.
-  // 
-  //
-  // Paramètres
-  // $1 = [objet] visiteur 
-  // $0 = [text] chemin du dossier de session du visiteur
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwSessionUserFolder
 
-If (False:C215)  // Historique
-	  // 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+Si possible l'on renvoi, le dossier de session du visiteur.
+
+Historique
+31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($1;$visiteur_o)
-	C_TEXT:C284($0;$chFolderSession_t)
+	C_OBJECT:C1216($1;$visiteur_o)  // $1 = [objet] visiteur 
+	C_TEXT:C284($0;$chFolderSession_t)  // $0 = [text] chemin du dossier de session du visiteur
+	
 	C_OBJECT:C1216($logErreur_o)
 End if 
 

@@ -1,16 +1,14 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwSessionClean
-  // Description
-  // Supprime les sessions périmées.
-  //
-  // Paramètres
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwSessionClean
 
-If (False:C215)  // Historique
-	  // 20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Ré-écriture de la méthode
-End if 
+Supprime les sessions périmées.
+
+Historique
+20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Ré-écriture de la méthode
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_DATE:C307($creerLe_d;$modifierLe_d;$dernierJourValide_d)

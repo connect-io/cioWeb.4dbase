@@ -1,21 +1,17 @@
 //%attributes = {"invisible":true}
-  // ----------------------------------------------------
-  // Méthode : cwToolUrlCleanText
-  // Description
-  // Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
-  //
-  // Paramètres
-  // $1 : [texte] (Ballon Coeur "Rouge")
-  // $0 : [texte] Ballon-coeur-Rouge
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolUrlCleanText
 
-If (False:C215)  // Historique
-	  // 13/03/18 gregory@connect-io.fr - Création
-	  // 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioGénérique
-End if 
+Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
+
+Historique
+13/03/18 gregory@connect-io.fr - Création
+26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioGénérique
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1;$0;$textTempo_t)
+	C_TEXT:C284($1;$0;$textTempo_t)  // $1 : [texte] (Ballon Coeur "Rouge"), $0 : [texte] Ballon-coeur-Rouge
 End if 
 
 

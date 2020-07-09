@@ -1,16 +1,15 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwWebVisiteurGetInfo
-  // 
-  // Renvoi un objet avec les informations du visiteur :
-  // entête, formulaire, cookies
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwWebVisiteurGetInfo
 
+Renvoi un objet avec les informations du visiteur :
+entête, formulaire, cookies
 
-If (False:C215)  // Historique
-	  // 19/02/15 gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
-	  // 26/10/19 gregory@connect-io.fr - Passage notation objet
-End if 
+Historique
+19/02/15 gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
+26/10/19 gregory@connect-io.fr - Passage notation objet
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_OBJECT:C1216(visiteur;$1)  // Information précédente du visiteur

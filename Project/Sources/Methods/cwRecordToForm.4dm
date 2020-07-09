@@ -1,28 +1,23 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 18/08/17, 20:55:03
-  // ----------------------------------------------------
-  // Méthode : cwRecordToForm
-  // Description
-  // Permet de charger un enregistrement dans les inputs d'un formulaire.
-  //
-  // Paramètres
-  // $1 : [pointeur] de la table
-  // $2 : [text] Nom du formulaire
-  // $3 : [objet] visiteur : ajoute la liste des inputs du formulaire
-  // $0 = [text] etat de la methode
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwRecordToForm
 
+Permet de charger un enregistrement dans les inputs d'un formulaire.
+
+Historique
+
+----------------------------------------------------*/
 
   // A Réécrire...
 
 
+  //If (True)  // Déclarations
+  //C_OBJECT($3;$o_DataRecord;$o_visiteur;$o_infoForm;$o_input) // $3 : [objet] visiteur : ajoute la liste des inputs du formulaire
+  //C_POINTER($1;$p_table) // $1 : [pointeur] de la table
+  //C_TEXT($0;$2;$t_nomForm;$t_prefixe) // $2 : [text] Nom du formulaire, $0 = [text] etat de la methode
 
-  //C_OBJECT($3;$o_DataRecord;$o_visiteur;$o_infoForm;$o_input)
-  //C_POINTER($1;$p_table)
-  //C_TEXT($0;$2;$t_nomForm;$t_prefixe)
   //C_BOOLEAN($b_methodeIsValid)
+  //End if
 
   //$o_visiteur:=$3
   //$p_table:=$1

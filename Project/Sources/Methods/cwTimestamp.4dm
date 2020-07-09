@@ -1,14 +1,13 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwTimestamp
-  // Description
-  // Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre machine)
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwTimestamp
 
-If (False:C215)  // Historique
-	  // 08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre machine)
+
+Historique
+08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_DATE:C307($1)  // Date (optionnel)

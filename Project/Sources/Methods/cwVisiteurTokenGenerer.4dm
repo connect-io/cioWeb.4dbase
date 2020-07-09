@@ -1,19 +1,20 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 28/06/18, 19:11:47
-  // ----------------------------------------------------
-  // Méthode : cwVisiteurTokenGenerer
-  // Description
-  // Permet de générer un token pour le visiteur.
-  //
-  // Paramètres
-  // $1 : [pointeur] visiteur
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwVisiteurTokenGenerer
 
-C_OBJECT:C1216($visiteur)
-C_TEXT:C284($t_uuid)
-C_POINTER:C301($1)
+Permet de générer un token pour le visiteur.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_POINTER:C301($1)  // $1 : [pointeur] visiteur
+	
+	C_OBJECT:C1216($visiteur)
+	C_TEXT:C284($t_uuid)
+End if 
 
 $visiteur:=$1->
 $t_uuid:=Generate UUID:C1066

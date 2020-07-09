@@ -1,25 +1,17 @@
 //%attributes = {}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 02/05/19, 19:03:33
-  // ----------------------------------------------------
-  // Méthode : cwMotDePasseHash
-  // Description
-  // Génére un hash avec uniquement les valeurs a-Z0-9 et $
-  // (Car cela peut poser des problèmes en cas de passage dans une url ou mot de passe.
-  //
-  // Paramètres
-  // $1 : [text] mot de passe clair
-  // $0 : [text] mot de passe hash
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwMotDePasseHash
 
+Génére un hash avec uniquement les valeurs a-Z0-9 et $
+Car cela peut poser des problèmes en cas de passage dans une url ou mot de passe.
 
-If (False:C215)  // Historique
-	  // 02/05/19 Gregory@connect-io.fr - GF190502001 - Création
-End if 
+Historique
+// 02/05/19 Gregory@connect-io.fr - GF190502001 - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1;$motDePasseClair_t;$motDePasseHash_t;$0)
+	C_TEXT:C284($1;$motDePasseClair_t;$motDePasseHash_t;$0)  // $1 : [text] mot de passe clair, // $0 : [text] mot de passe hash
 End if 
 
 $motDePasseClair_t:=$1

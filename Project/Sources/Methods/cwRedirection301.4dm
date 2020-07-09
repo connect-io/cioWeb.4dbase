@@ -1,17 +1,17 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Date et heure : 18/02/15, 13:28:12
-  // ----------------------------------------------------
-  // Méthode : ogWebRedirection301
-  // Description
-  // Etabli une redirection 301 http (de type permanante)
-  //
-  // Paramètres
-  // $1 = [texte] nouvelle url
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogWebRedirection301
 
-C_TEXT:C284($1)
+Etabli une redirection 301 http (de type permanante)
+
+Historique
+
+----------------------------------------------------*/
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($1)  // $1 = [texte] nouvelle url
+End if 
+
 ARRAY TEXT:C222($champs;2)
 ARRAY TEXT:C222($valeurs;2)
 

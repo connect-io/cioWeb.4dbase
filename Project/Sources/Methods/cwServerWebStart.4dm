@@ -1,27 +1,22 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwServerStart
-  // Description
-  // charge la configuration du serveur web.
-  // (Placer cette methode sur demarrage de la base)
-  //
-  // Paramètres
-  // $1 : 
-  // $2 : 
-  // $3 : [text] nom de la variable visiteur (optionnel)
-  //
-  // Appel de la methode
-  // C_OBJECT(<>configPage;<>urlToLibelle)
-  // cwStartServeur(-><>configPage;-><>urlToLibelle)
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwServerStart
 
-If (False:C215)  // Historique
-	  // 19/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
-	  // 31/03/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des héritages
-	  // 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des routes.
-	  // 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
-End if 
+charge la configuration du serveur web.
+Placer cette methode sur demarrage de la base)
+
+Historique
+19/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
+31/03/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des héritages
+25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des routes.
+25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
+
+Appel de la methode
+C_OBJECT(<>configPage;<>urlToLibelle)
+cwStartServeur(-><>configPage;-><>urlToLibelle)
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  // Configuration global du site internet.

@@ -1,20 +1,17 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwSessionUserSave
-  // On sauvegarde la session du visiteur.
-  // 
-  //
-  // Paramètres
-  // $1 = [objet] visiteur 
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwSessionUserSave
 
-If (False:C215)  // Historique
-	  // 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Modification des notications d'erreur en cas de chargement d'une seule page
-End if 
+On sauvegarde la session du visiteur.
+
+Historique
+31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Modification des notications d'erreur en cas de chargement d'une seule page
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($1;$visiteur_o)
+	C_OBJECT:C1216($1;$visiteur_o)  // $1 = [objet] visiteur 
 	C_OBJECT:C1216($logErreur_o)
 	C_TEXT:C284($chSessionWeb_t)
 End if 

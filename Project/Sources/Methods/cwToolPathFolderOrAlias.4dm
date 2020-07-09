@@ -1,19 +1,17 @@
 //%attributes = {"shared":true}
-  // ======================================================================
-  // Methode projet : cwToolPathFolderOrAlias
-  //
-  // Renvoi le chemin d'un dossier ou son chemin depuis un alias.
-  // $1 : [text] chemin du dossier
-  // $0 : [text] chemin du dossier alias réél
-  // ----------------------------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwToolPathFolderOrAlias
 
-If (False:C215)  // Historique
-	  // 26/09/19 gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
-	  // 27/11/19 gregory@connect-io.fr - En cas de non résolutionde l'alias... on retourne la valeur d'entrée.
-End if 
+Renvoi le chemin d'un dossier ou son chemin depuis un alias.
+
+Historique
+26/09/19 gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
+27/11/19 gregory@connect-io.fr - En cas de non résolutionde l'alias... on retourne la valeur d'entrée.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$1;$chemin_t)
+	C_TEXT:C284($0;$1;$chemin_t)  // $1 : [text] chemin du dossier, $0 : [text] chemin du dossier alias réél
 End if 
 
 $chemin_t:=$1

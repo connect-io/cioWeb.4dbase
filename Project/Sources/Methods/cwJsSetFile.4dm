@@ -1,20 +1,20 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 16/10/15, 11:55:25
-  // ----------------------------------------------------
-  // Méthode : cwJsSetFile
-  // Description
-  // Ajoute le contenu d'un fichier javascript dans le code html 
-  // via la commande cwJsGetContent à placer dans le code html.
-  //
-  // Paramètres
-  // $1 : [texte] nom d'un fichier js dans le dossier /ressource/site/XXX/js/
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwJsSetFile
 
-C_LONGINT:C283($i)
+Ajoute le contenu d'un fichier javascript dans le code html 
+via la commande cwJsGetContent à placer dans le code html.
 
-C_TEXT:C284(${1})
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284(${1})  // $1 : [texte] nom d'un fichier js dans le dossier /ressource/site/XXX/js/
+	
+	C_LONGINT:C283($i)
+End if 
 
 If (Not:C34(OB Is defined:C1231(pageWeb)))
 	ALERT:C41("L'objet 'pageWeb' n'est pas défini.")
