@@ -1,14 +1,13 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwFormGetData
-  // Description
-  // La méthode reprend le principe de fonctionnement de 
-  // la methode cwFormControle mais sans les contrôles.
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwFormGetData
 
-If (False:C215)  // Historique
-	  // 07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+La méthode reprend le principe de fonctionnement de la methode cwFormControle mais sans les contrôles.
+
+Historique
+07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  // visiteur

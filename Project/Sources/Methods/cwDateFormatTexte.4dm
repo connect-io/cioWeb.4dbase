@@ -1,14 +1,13 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwDateFormatTexte
-  // Description
-  // Formate une date en fonction d'un modele.
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwDateFormatTexte
 
-If (False:C215)  // Historique
-	  // 12/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+Formate une date en fonction d'un modele.
+
+Historique
+12/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)

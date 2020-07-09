@@ -1,17 +1,18 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) :Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 22/09/15, 17:17:23
-  // ----------------------------------------------------
-  // Méthode : cwI18nCharger
-  // Description
-  // Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.
-  //
-  // Paramètres
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwI18nCharger
 
-C_OBJECT:C1216($oFullI18n;$oFichierI18n)
-C_TEXT:C284($T_langue)
+Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_OBJECT:C1216($oFullI18n;$oFichierI18n)
+	C_TEXT:C284($T_langue)
+End if 
 
 ARRAY TEXT:C222($sites;0)
 FOLDER LIST:C473(<>webApp_o.config.webAppOld.folder_f();$sites)

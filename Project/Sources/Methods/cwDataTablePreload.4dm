@@ -1,14 +1,12 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwDataTablePreload
-  // Description
-  // Precharge toutes les datatables HTML de l'application web.
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwDataTablePreload
 
-If (False:C215)  // Historique
-	  // 05/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-End if 
+Precharge toutes les datatables HTML de l'application web.
+
+Historique
+05/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
 
 
 If (True:C214)  // Déclarations

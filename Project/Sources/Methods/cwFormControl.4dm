@@ -1,18 +1,17 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Méthode : cwFormControl
-  // Description
-  // Permet de controler les informations d'un formulaire saisie par l'internaute
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwFormControl
 
-If (False:C215)  // Historique
-	  // 07/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Normalisation de la méthode.
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
-	  // 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de précision en cas d'inpossibilité de charger un formulaire.
-	  // 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-End if 
+Permet de controler les informations d'un formulaire saisie par l'internaute
+
+Historique
+07/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Normalisation de la méthode.
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
+18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de précision en cas d'inpossibilité de charger un formulaire.
+18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  // visiteur

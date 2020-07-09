@@ -1,19 +1,17 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 25/09/15, 20:18:18
-  // ----------------------------------------------------
-  // Méthode : cwIncludeHtml
-  // Description
-  // Renvoit le code html contenue dans le dossier Resources/sites/$site/pages
-  //
-  // Paramètres
-  // $1 = chemin relatif depuis le dossier pages
-  // $0 = contenu du fichier.
+/* ----------------------------------------------------
+Méthode : cwIncludeHtml
 
-  // ----------------------------------------------------
-  //C_BLOB($b_fichier)
-C_TEXT:C284($1;$0;$T_chFichier;$T_nomFichier)
+Renvoit le code html contenue dans le dossier Resources/sites/$site/pages
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($1;$0;$T_chFichier;$T_nomFichier)  // $1 = chemin relatif depuis le dossier pages, $0 = contenu du fichier.
+End if 
 
 $T_nomFichier:=Choose:C955($1="/@";Substring:C12($1;2);$1)
 $T_nomFichier:=$T_nomFichier+Choose:C955($1#"@.html";".html";"")

@@ -1,18 +1,16 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 26/03/18, 19:29:52
-  // ----------------------------------------------------
-  // Méthode : cwi18nDataPage
-  // Description
-  // 
-  //
-  // Paramètres
-  // $0 : [objet] data i18n de la page
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwi18nDataPage
 
-C_OBJECT:C1216($0;$O_dataPage;$O_langueDomaine;$langueFichier)
-C_TEXT:C284($1)
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_OBJECT:C1216($0;$O_dataPage;$O_langueDomaine;$langueFichier)  // $0 : [objet] data i18n de la page
+	C_TEXT:C284($1)
+End if 
 
 $O_dataPage:=New object:C1471
 

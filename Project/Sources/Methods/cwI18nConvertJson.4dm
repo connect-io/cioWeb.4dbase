@@ -1,21 +1,20 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 30/03/18, 18:02:13
-  // Derniere modification : 19/01/18, 21:14:46
-  // ----------------------------------------------------
-  // Méthode : cwI18nConvertJson (Composant CioRegex)
-  // Description
-  // Remplace une chaine de caractère depuis une regex par un contenu fixe.
-  //
-  // Paramètres
-  // $1 = Source [texte]
-  // $0 : [texte] le texte corrigé
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwI18nConvertJson (Composant CioRegex)
 
-C_LONGINT:C283($position;$L_pos_trouvee;$L_long_trouvée)
-C_BOOLEAN:C305($regexValid)
-C_TEXT:C284($source;$1;$0;$obsolete;$T_nouveau;$T_regex)
+Remplace une chaine de caractère depuis une regex par un contenu fixe.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($source;$1;$0;$obsolete;$T_nouveau;$T_regex)  // $1 = Source [texte], $0 : [texte] le texte corrigé
+	
+	C_LONGINT:C283($position;$L_pos_trouvee;$L_long_trouvée)
+	C_BOOLEAN:C305($regexValid)
+End if 
 
 $source:=$1
 $position:=1

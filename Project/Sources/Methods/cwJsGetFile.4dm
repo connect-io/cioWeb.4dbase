@@ -1,16 +1,8 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 17/11/15, 16:19:43
-  // ----------------------------------------------------
-  // Méthode : cwJsGetfile
-  // Description
-  // Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
-  //
-  // Paramètres
-  // $1 : [texte] domaine du CDN
-  // $0 : [texte] contenu des fichiers html
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwJsGetfile
+
+Renvoi le contenu des fichiers déclaré dans le fichier pageWeb.json
 
   //C_TEXT($jsContenu;jsHtmlModele)
   //If (OB Is defined(pageWeb;"jsFile"))
@@ -26,8 +18,12 @@
 
   //$0:=Char(Line feed)+$jsContenu
 
+----------------------------------------------------*/
 
-C_TEXT:C284($1;$T_jsContenu;$T_jsHtmlModele;$T_domaineCDN)
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($1;$T_jsContenu;$T_jsHtmlModele;$T_domaineCDN)  // $1 : [texte] domaine du CDN
+End if 
 
 $T_domaineCDN:=""
 If (Count parameters:C259=1)

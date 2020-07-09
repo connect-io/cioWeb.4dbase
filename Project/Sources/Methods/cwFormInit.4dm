@@ -1,15 +1,14 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Méthode : cwInputFormInit
-  // Description
-  // Initialise les formulaires html
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwInputFormInit
 
-If (False:C215)  // Historique
-	  // 09/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
-End if 
+Initialise les formulaires html
+
+Historique
+09/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // Nom du formulaire html

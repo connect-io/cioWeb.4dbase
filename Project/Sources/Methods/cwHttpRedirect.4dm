@@ -1,18 +1,19 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 03/10/17, 14:34:29
-  // ----------------------------------------------------
-  // Méthode : cwHttpRedirect
-  // Description
-  // Envoi une redirection d'après le libellé d'une page ou d'une page http://
-  // Et stock l'information pour la prochaine page.
-  //
-  // Paramètres
-  // $1 : [text] lib page
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwHttpRedirect
 
-C_TEXT:C284($1;$T_libPage)
+Envoi une redirection d'après le libellé d'une page ou d'une page http://
+Et stock l'information pour la prochaine page.
+
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_TEXT:C284($1;$T_libPage)  //$1 : [text] lib page
+End if 
+
 $T_libPage:=$1
 
 If ($T_libPage#"http@")

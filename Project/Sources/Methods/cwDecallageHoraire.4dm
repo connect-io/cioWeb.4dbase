@@ -1,31 +1,26 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregoryfromain@gmail.com>
-  // Arnaud DE MONTARD -> http://forums.4d.fr/User/FR/4467/1/0/0/
-  // Date et heure : 06/02/15, 21:41:24
-  // ----------------------------------------------------
-  // Méthode : ogDecallageHoraire
-  // Description
-  // Renvoi le decallage horaire depuis lheure local de la machine.
-  // origine du code : http://forums.4d.fr/Post/FR/14701949/1/14928049#14928049
-  //
-  // Paramètres
-  // $0=[entier] nombre de seconde
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : ogDecallageHoraire
 
-  //TS_TimeZoneOffset-> long
-  //retourne le décalage du fuseau horaire courant
-  //par rapport à UTC en secondes
-  //valeur à ajouter à l'heure locales dans les conversions
-C_LONGINT:C283($0)
+Renvoi le decallage horaire depuis lheure local de la machine.
 
-C_DATE:C307($day_d)
-C_LONGINT:C283($out_l)
-C_LONGINT:C283($ts_l)
-C_LONGINT:C283($tsUTC_l)
-C_TIME:C306($hour_h)
-C_TEXT:C284($ts_t)
-C_TEXT:C284($tsUTC_t)
+Historique
+
+----------------------------------------------------*/
+
+
+If (True:C214)  // Déclarations
+	C_LONGINT:C283($0)
+	
+	C_DATE:C307($day_d)
+	C_LONGINT:C283($out_l)
+	C_LONGINT:C283($ts_l)
+	C_LONGINT:C283($tsUTC_l)
+	C_TIME:C306($hour_h)
+	C_TEXT:C284($ts_t)
+	C_TEXT:C284($tsUTC_t)
+End if 
+
 
 $day_d:=Current date:C33
 $hour_h:=Current time:C178

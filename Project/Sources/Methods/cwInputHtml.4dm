@@ -1,14 +1,14 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-  // ----------------------------------------------------
-  // Méthode : cwInputHtml
-  // Description
-  // Génére le code html d'un input
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwInputHtml
 
-If (False:C215)  // Historique
-	  // 30/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-End if 
+Génére le code html d'un input
+
+Historique
+30/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($1)  // Nom de la variable du formulaire web

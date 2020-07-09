@@ -1,38 +1,29 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Grégory Fromain <gregory@connect-io.fr>
-  // Date et heure : 25/10/15, 20:27:52
-  // ----------------------------------------------------
-  // Méthode : cwFormInputSelectNewValue
-  // Description
-  // Générer des nouvelles entrée dans un input de type select.
-  //
-  // Paramètres
-  // $1 = [pointeur] ->visiteur
-  // $2 = [text] nom du input html
-  // $3 = [object] {"lib" : "valeur"}
-  // $4 = [text] resultat par defaut (optionnel)
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwFormInputSelectNewValue
 
-  // Struture de la collection
-  // [
-  //   "value": "1",
-  //   "lib": "est un admin",
-  //   "selected": true (optionnel),
-  //   "disabled": true (optionnel)
-  // ,...
-  // ]
+Générer des nouvelles entrée dans un input de type select.
 
+Historique
+03/07/19 gregory@connect-io.fr - Utilisation avec des collections
 
-If (False:C215)  // Historique
-	  // 03/07/19 gregory@connect-io.fr - Utilisation avec des collections
-End if 
+Struture de la collection
+[
+  "value": "1",
+  "lib": "est un admin",
+  "selected": true (optionnel),
+  "disabled": true (optionnel)
+,...
+]
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)
-	C_TEXT:C284($2;$4;$inputName_t;$selectOption_t)
+	C_POINTER:C301($1)  //$1 = [pointeur] ->visiteur
+	C_TEXT:C284($2;$4;$inputName_t;$selectOption_t)  // $2 = [text] nom du input html, $4 = [text] resultat par defaut (optionnel)
+	C_COLLECTION:C1488($3;$option_c;$optionSelected_c)  // $3 = [object] {"lib" : "valeur"}
+	
 	C_OBJECT:C1216($visiteur;$option_o)
-	C_COLLECTION:C1488($3;$option_c;$optionSelected_c)
 End if 
 
 

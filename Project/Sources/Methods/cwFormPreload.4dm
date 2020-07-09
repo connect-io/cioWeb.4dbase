@@ -1,19 +1,17 @@
 //%attributes = {}
-  // ----------------------------------------------------
-  // Méthode : cwFormPreload
-  // Description
-  // Precharge tout les formulaires de l'application web.
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwFormPreload
 
-If (False:C215)  // Historique
-	  // 16/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 09/12/19 - Grégory Fromain <gregory@connect-io.fr> - Gestion des collaps dans le chargement des formulaires.
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Transfert du controle des dossiers de base dans la méthode cwServerWebInit
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On stock les formulaires dans une collection au lieu d'un objet.
-	  // 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les formulaires sont rechargés uniquement si ils ont été modifié.
-	  // 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-End if 
+Precharge tout les formulaires de l'application web.
+
+Historique
+16/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+09/12/19 - Grégory Fromain <gregory@connect-io.fr> - Gestion des collaps dans le chargement des formulaires.
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Transfert du controle des dossiers de base dans la méthode cwServerWebInit
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On stock les formulaires dans une collection au lieu d'un objet.
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les formulaires sont rechargés uniquement si ils ont été modifié.
+18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+----------------------------------------------------*/
 
 
 If (True:C214)  // Déclarations
@@ -23,7 +21,6 @@ If (True:C214)  // Déclarations
 	C_OBJECT:C1216(formInput_o)  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
 	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
 End if 
-
 
 
   // Récupération des formulaires

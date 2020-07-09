@@ -1,16 +1,15 @@
 //%attributes = {}
-  // ----------------------------------------------------
-  // Méthode : cwFormatValide
-  // Description
-  // Verifie le format d'une data
-  //
-  // ----------------------------------------------------
+/* ----------------------------------------------------
+Méthode : cwFormatValide
 
-If (False:C215)  // Historique
-	  // 20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-	  // 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Maj de la methode
-	  // 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout Bool, real et int
-End if 
+Verifie le format d'une data
+
+Historique
+20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Maj de la methode
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout Bool, real et int
+----------------------------------------------------*/
+
 
 If (True:C214)  // Déclarations
 	C_TEXT:C284($0)  // $0 = ok, format inconnu, format incorrect
