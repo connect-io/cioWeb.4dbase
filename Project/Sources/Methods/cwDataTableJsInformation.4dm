@@ -13,7 +13,8 @@ Historique
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  //Variable pageWeb de l'application
 	C_TEXT:C284($2)  // Nom du dataTable HTML
-	C_OBJECT:C1216($3)  // Entité selection
+	C_VARIANT:C1683($3;$source_v)  // Entité selection
+	C_TEXT:C284($0)  // code html
 	
 	C_OBJECT:C1216($pageWeb_o)
 	C_COLLECTION:C1488($resultForm_c)
@@ -22,11 +23,17 @@ If (True:C214)  // Déclarations
 	C_OBJECT:C1216($information_o;$column_o;dataInBase_o;dataColumn_o)
 End if 
 
+If ($3=Null:C1517)
+	ALERT:C41("Le paramêtre $3 n'est pas définit dans "+$dataTableNom_t)
+End if 
+
 $pageWeb_o:=$1->
 
   // Nettoyage du param
 $dataTableNom_t:=$2
 $dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
+
+$source_v:=$3
 
   // On retrouve la dataTable
 $resultForm_c:=<>webApp_o.sites[visiteur.sousDomaine].dataTable.query("lib IS :1";$dataTableNom_t)
@@ -54,9 +61,10 @@ End for each
 
 $dataTable_o.data_c:=New collection:C1472()
 
+
   // On boucle sur chaque élément de la source...
   // Attention de bien conserver les varaibles dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
-For each (dataInBase_o;$3)
+For each (dataInBase_o;$source_v)
 	
 	dataligne_o:=New object:C1471()
 	

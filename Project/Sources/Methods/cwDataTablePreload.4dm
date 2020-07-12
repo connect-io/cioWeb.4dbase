@@ -66,7 +66,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 			$dataTable_o.maj_ts:=cwTimestamp 
 			
 			  // On indique également la source du formulaire.
-			$dataTable_o.source:=$file_o.platformPath
+			$dataTable_o.file:=$file_o.platformPath
 			
 			
 			$dataTable_o.html:=""
@@ -81,7 +81,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 			Else 
 				
 				  // Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=<>webApp_o.sites[$subDomain_t].dataTable.indices("source IS :1";$file_o.platformPath)
+				$indicesQuery_c:=<>webApp_o.sites[$subDomain_t].dataTable.indices("file IS :1";$file_o.platformPath)
 				<>webApp_o.sites[$subDomain_t].dataTable[$indicesQuery_c[0]]:=$dataTable_o
 			End if 
 		End if 
