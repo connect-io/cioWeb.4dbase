@@ -6,7 +6,7 @@ Installation
 ------------
 Ajout du composant dans votre application 4D sous GIT
 ```terminal
-sudo git submodule add https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbasse
+sudo git submodule add https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
 ```
 
 ## Attention
