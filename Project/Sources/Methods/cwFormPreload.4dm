@@ -11,6 +11,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On stock les formulaires dans une collection au lieu d'un objet.
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les formulaires sont rechargés uniquement si ils ont été modifié.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 ----------------------------------------------------*/
 
 
@@ -274,7 +275,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 					
 					$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$disabled";"<!--#4DIF (OB Get("+varVisiteurName_t+";\"loginLevel\")#\"admin\")-->disabled<!--#4DENDIF-->")
 					
-					$htmlInputTags_t:=cwI18nConvertJson ($htmlInputTags_t)
+					  //$htmlInputTags_t:=cwI18nConvertJson ($htmlInputTags_t)
 					OB SET:C1220(formInput_o;$viewHtml;$htmlInputTags_t)
 					
 				End for each 

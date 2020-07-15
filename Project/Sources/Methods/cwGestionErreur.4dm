@@ -1,6 +1,6 @@
 //%attributes = {"shared":true}
 /* ----------------------------------------------------
-Méthode : ogWebGestionErreur
+Méthode : cwGestionErreur
 
 Methode de gestion appel sur erreur du serveur web.
 ATTENTION : Cette gestion des erreurs ne s'applique que sur le composant.

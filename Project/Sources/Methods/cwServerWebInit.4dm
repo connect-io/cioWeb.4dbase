@@ -8,6 +8,7 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
 ----------------------------------------------------*/
 
 
@@ -31,11 +32,6 @@ End if
 
   // ----- Gestion du dossier WebApp -----
   // Dossier principale du composant dans l'application hôte.
-<>webApp_o.config.webAppOld:=New object:C1471()
-<>webApp_o.config.webAppOld.folderName_t:="sites"
-<>webApp_o.config.webAppOld.folder_t:=cwToolPathFolderOrAlias (Get 4D folder:C485(Current resources folder:K5:16;*))+<>webApp_o.config.webAppOld.folderName_t+Folder separator:K24:12
-<>webApp_o.config.webAppOld.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t)  // Utile simplement pour l'uniformisation...
-  // Utilisation : <>webApp_o.config.webApp.folder_f()
 
 <>webApp_o.config.webApp:=New object:C1471()
 <>webApp_o.config.webApp.folderName_t:="WebApp"
