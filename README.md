@@ -31,3 +31,7 @@ Malgré que ce composant tourne en production sur certaine bases de nos clients.
 ## Documentation des méthodes partagés
 
 [cwDataTableJsInformation](Documentation/Methods/cwDataTableJsInformation.md)
+
+Les méthodes outils
+* [cwToolGetClass](Documentation/Methods/cwToolGetClass.md)
+

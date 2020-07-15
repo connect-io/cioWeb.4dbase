@@ -18,6 +18,7 @@ cwStartServeur(-><>configPage;-><>urlToLibelle)
 ----------------------------------------------------*/
 
 
+
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  // Configuration global du site internet.
 	C_POINTER:C301($2)  // URL vers libellé des pages
