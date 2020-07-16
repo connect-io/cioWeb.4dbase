@@ -25,4 +25,6 @@ Class constructor
 	End for each 
 	
 	
-	
+	  // Adfaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
+	C_OBJECT:C1216(pageWeb)
+	pageWeb:=$page_o

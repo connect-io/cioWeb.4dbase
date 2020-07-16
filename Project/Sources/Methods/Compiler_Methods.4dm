@@ -57,10 +57,6 @@ C_TEXT:C284(cwMinifier ;$0)
 C_TEXT:C284(cwMinifier ;$1)
 C_TEXT:C284(cwSupprBaliseHtml ;$0)
 C_TEXT:C284(cwSupprBaliseHtml ;$1)
-C_TEXT:C284(cwRecordToForm ;$0)
-C_POINTER:C301(cwRecordToForm ;$1)
-C_TEXT:C284(cwRecordToForm ;$2)
-C_OBJECT:C1216(cwRecordToForm ;$3)
 C_TEXT:C284(cwHttpRedirect ;$1)
 C_TEXT:C284(cwI18nGet ;$0)
 C_TEXT:C284(cwI18nGet ;$1)
@@ -122,12 +118,6 @@ C_OBJECT:C1216(cwToolObjectMerge ;$0)
 C_OBJECT:C1216(cwToolObjectMerge ;$1)
 C_OBJECT:C1216(cwToolObjectMerge ;$2)
 
-  //cwServerWebInit
-C_TEXT:C284(cwServerWebInit ;$1)
-
-  //cwServerWebInit
-C_OBJECT:C1216(cwServerWebInit ;$0)
-
   //cwVisiteurLoginIs
 C_BOOLEAN:C305(cwVisiteurLoginIs ;$0)
 C_BOOLEAN:C305(cwVisiteurLoginIs ;$1)
@@ -140,3 +130,13 @@ C_TEXT:C284(cwFormGetData ;$2)
   //cwDateClean
 C_TEXT:C284(cwDateClean ;$0)
 C_TEXT:C284(cwDateClean ;$1)
+
+  //cwDataTableJsInformation
+C_TEXT:C284(cwDataTableJsInformation ;$0)
+C_POINTER:C301(cwDataTableJsInformation ;$1)
+C_TEXT:C284(cwDataTableJsInformation ;$2)
+C_VARIANT:C1683(cwDataTableJsInformation ;$3)
+
+  //cwToolGetClass
+C_OBJECT:C1216(cwToolGetClass ;$0)
+C_TEXT:C284(cwToolGetClass ;$1)

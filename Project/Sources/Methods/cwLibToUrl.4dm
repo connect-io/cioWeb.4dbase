@@ -18,11 +18,11 @@ End if
 
 $libPage_t:=Choose:C955($1="/@";Substring:C12($1;2);$1)
 
-ASSERT:C1129(OB Is defined:C1231(siteRoute_c);"La variable siteRoute_c n'est pas initialisé, impossible de charger l'url de la page "+$libPage_t)
+ASSERT:C1129(siteRoute_c#Null:C1517;"La variable siteRoute_c n'est pas initialisé, impossible de charger l'url de la page "+$libPage_t)
 
 
-If (siteRoute_c[$libPage_t]#Null:C1517)
-	$configPage_o:=siteRoute_c[$libPage_t]
+If (siteRoute_c.query("lib IS :1";$libPage_t).length#0)
+	$configPage_o:=siteRoute_c.query("lib IS :1";$libPage_t)[0]
 	  //On essai de travailler avec les routes.
 	Case of 
 		: ($configPage_o.route#Null:C1517)

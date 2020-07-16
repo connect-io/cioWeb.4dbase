@@ -14,8 +14,8 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 
 Appel de la methode
-C_OBJECT(<>configPage;<>urlToLibelle)
-cwStartServeur(-><>configPage;-><>urlToLibelle)
+C_OBJECT(<>configPage)
+cwStartServeur(-><>configPage)
 ----------------------------------------------------*/
 
 
@@ -34,14 +34,15 @@ If (True:C214)  // Déclarations
 	C_COLLECTION:C1488($route_c)
 End if 
 
-$route_c:=New collection:C1472()
+
 
 varVisiteurName_t:=This:C1470.config.varVisitorName_t
 
 
 
 For each ($subDomain_t;This:C1470.config.subDomain_c)
-	
+	  // On purge la liste des routes
+	$route_c:=New collection:C1472()
 	  //Récupération du plan des pages web des sites.
 	$configPage:=New object:C1471
 	ARRAY TEXT:C222($routeFile_at;0)

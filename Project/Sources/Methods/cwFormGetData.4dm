@@ -29,7 +29,7 @@ If (visiteur=Null:C1517)
 End if 
 
 If ($resultat_t="")
-	$resultForm_c:=<>webApp_o.sites[visiteur.sousDomaine].form.query("lib IS :1";$T_nomForm)
+	$resultForm_c:=siteForm_c.query("lib IS :1";$T_nomForm)
 	
 	Case of 
 		: ($resultForm_c.length=1)

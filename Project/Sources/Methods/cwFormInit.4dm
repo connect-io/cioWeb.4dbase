@@ -17,7 +17,6 @@ If (True:C214)  // Déclarations
 	C_COLLECTION:C1488($resultForm_c)
 	C_OBJECT:C1216(formulaire_o)
 	C_TEXT:C284($formNom_t)
-	C_BOOLEAN:C305($paramReadOnly)
 End if 
 
   // Nettoyage du param
@@ -25,7 +24,7 @@ $formNom_t:=Substring:C12($1;2)
 $formNom_t:=Replace string:C233($formNom_t;"/readOnly";"")
 
   // On retrouve le formulaire
-$resultForm_c:=<>webApp_o.sites[visiteur.sousDomaine].form.query("lib IS :1";$formNom_t)
+$resultForm_c:=siteForm_c.query("lib IS :1";$formNom_t)
 
 If ($resultForm_c.length=1)
 	formulaire_o:=$resultForm_c[0]

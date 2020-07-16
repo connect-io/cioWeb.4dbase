@@ -270,15 +270,26 @@ Function htmlMinify
 Function pageCurrent
 	C_OBJECT:C1216($1)  // instance de user
 	C_OBJECT:C1216($0)  // Instance de la page courante
-	C_OBJECT:C1216($page_o)
-	C_COLLECTION:C1488($siteRoute_c)
+	C_COLLECTION:C1488(siteRoute_c)
+	C_COLLECTION:C1488(siteForm_c)
+	C_COLLECTION:C1488(siteDataTable_c)
 	
-	$siteRoute_c:=This:C1470.sites[visiteur.sousDomaine].route.copy()
+	  // En attendant de faire mieux, je passe la variable en process
+	siteRoute_c:=This:C1470.sites[visiteur.sousDomaine].route.copy()
 	
-	$0:=cs:C1710.page.new($siteRoute_c;$1)
+	$0:=cs:C1710.page.new(siteRoute_c;$1)
 	
 	
 	
+	  // Petit hack pour les formulaires en attendant des jours meilleurs.
+	siteForm_c:=This:C1470.sites[visiteur.sousDomaine].form
+	
+	  // Petit hack pour les datatables en attendant des jours meilleurs.
+	siteDataTable_c:=This:C1470.sites[visiteur.sousDomaine].dataTable
+	
+	  // en attendant de faire mieux
+	C_TEXT:C284(cachePath_t)
+	cachePath_t:=This:C1470.viewCacheSubdomainPath()
 	
 	
 	

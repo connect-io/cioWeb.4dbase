@@ -36,7 +36,7 @@ $dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
 $source_v:=$3
 
   // On retrouve la dataTable
-$resultForm_c:=<>webApp_o.sites[visiteur.sousDomaine].dataTable.query("lib IS :1";$dataTableNom_t)
+$resultForm_c:=siteDataTable_c.query("lib IS :1";$dataTableNom_t)
 
   // Pour vérifier que les data soit bien brut.
 If ($resultForm_c.length=1)

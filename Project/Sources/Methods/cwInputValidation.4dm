@@ -27,7 +27,7 @@ Else
 End if 
 
   // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
-$configInput:=<>webApp_o.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
+$configInput:=siteForm_c.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
 
   // Gestion required
 Case of 
