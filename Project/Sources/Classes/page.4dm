@@ -8,12 +8,21 @@ Historique
 
   // ----- Initialisation de la page web -----
 Class constructor
-	C_OBJECT:C1216($1)  // Les informations sur les sites provenants directement de la class webApp.
+	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
 	C_OBJECT:C1216($2)  // Les informations sur le visiteur.
 	
-	This:C1470.webAppSites:=$1
+	C_OBJECT:C1216($page_o)
+	C_TEXT:C284($propriete_t)
+	
+	This:C1470.siteRoute_c:=$1
+	
 	This:C1470.user:=$2
-	TRACE:C157
-	This:C1470.route:=cwPageGetInfo 
+	
+	$page_o:=cwPageGetInfo 
+	
+	For each ($propriete_t;$page_o)
+		This:C1470[$propriete_t]:=$page_o[$propriete_t]
+	End for each 
+	
 	
 	

@@ -15,8 +15,8 @@ If (True:C214)  // Déclarations
 	C_OBJECT:C1216($0)
 	
 	C_LONGINT:C283($i)
-	C_OBJECT:C1216(urlSite;configSite;pageWeb;$routeData;$O_logErreur)
-	C_TEXT:C284($page;$libPageConnexion_t)
+	C_OBJECT:C1216(pageWeb_o_o;$routeData;$logErreur_o)
+	C_TEXT:C284($libPageConnexion_t)
 	C_BOOLEAN:C305($B_estMethodeValide)
 	ARRAY TEXT:C222($regexPage;0)
 	ARRAY LONGINT:C221($AT_positionTrouvee;0)
@@ -24,113 +24,83 @@ If (True:C214)  // Déclarations
 	ARRAY TEXT:C222($AT_routeFormatCle;0)
 End if 
 
+  // A supprimer : vairaible : urlSite
 
 $libPageConnexion_t:="userIdentification"
 
-$O_logErreur:=New object:C1471
+$logErreur_o:=New object:C1471
 
 $B_estMethodeValide:=True:C214
-$page:=""
-
-urlSite:=OB Copy:C1225(OB Get:C1224(<>cwUrlToLibSites;visiteur.sousDomaine))
-If (urlSite=Null:C1517)
-	$O_logErreur.detailErreur:="Impossible de charger les urls du sous domaine."
-	$B_estMethodeValide:=False:C215
-End if 
-
-If ($B_estMethodeValide)
-	configSite:=OB Get:C1224(This:C1470.webAppSites;visiteur.sousDomaine)
-	If (configSite=Null:C1517)
-		$O_logErreur.detailErreur:="Impossible de charger la configuration du sous domaine."
-		$B_estMethodeValide:=False:C215
-	End if 
-End if 
-
-configSite
-
 
   // Cas particulier pour la home du site.
 If ($B_estMethodeValide)
 	If ("/"=visiteur.url)
-		$page:=OB Get:C1224(urlSite;visiteur.url)
-		If ($page="")
-			$O_logErreur.detailErreur:="Impossible de charger le nom de la page /."
-			$B_estMethodeValide:=False:C215
-		End if 
+		pageWeb_o:=This:C1470.siteRoute_c.query("lib IS index")[0]
 		
 	Else 
 		  // On supprime la route home.
-		OB REMOVE:C1226(urlSite;"/")
+		  //OB REMOVE(urlSite;"/")
+		TRACE:C157
+		This:C1470.siteRoute_c.remove(This:C1470.siteRoute_c.indices("lib IS index"))
 	End if 
 End if 
 
-If ($B_estMethodeValide)
-	If ($page="")
-		OB GET PROPERTY NAMES:C1232(urlSite;$regexPage)
-		For ($i;1;Size of array:C274($regexPage))
-			If (Match regex:C1019($regexPage{$i};visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
-				$page:=OB Get:C1224(urlSite;$regexPage{$i})
-				If ($page="")
-					$O_logErreur.detailErreur:="Impossible de charger le nom de la page : "+visiteur.url
-					$B_estMethodeValide:=False:C215
-				End if 
-				$i:=Size of array:C274($regexPage)
-			End if 
-		End for 
-	End if 
-End if 
-
-If ($page#"")
+If ($B_estMethodeValide) & (pageWeb_o=Null:C1517)
 	
-	pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;$page))
-	If (Not:C34(OB Is defined:C1231(pageWeb)))
-		$O_logErreur.detailErreur:="Impossible de charger la configuration de la page : "+$page
-		$B_estMethodeValide:=False:C215
-	End if 
+	
+	For each ($page_o;This:C1470.siteRoute_c) Until (pageWeb_o#Null:C1517)
+		
+		
+		If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
+			pageWeb_o:=$page_o
+		End if 
+		
+	End for each 
+	
+	
+End if 
+
+
+If (pageWeb_o#Null:C1517)
 	
 	
 	  // On verifie si la page à besoin d'être identifier.
-	If (OB Is defined:C1231(pageWeb;"login"))
+	If (OB Is defined:C1231(pageWeb_o;"login"))
 		  // On regarde si l'utilisateur est loggué.
 		If (OB Is defined:C1231(visiteur;"loginDomaine"))
 			If (visiteur.domaine#visiteur.loginDomaine)
-				$page:=$libPageConnexion_t
-				pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;$page))
+				pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 			End if 
 		Else 
-			$page:=$libPageConnexion_t
-			pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;$page))
+			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 		End if 
 		
 		  // On vérifie que la durée de la session ne soit pas expiré.
 		  // Pour le moment on fixe une durée de session au jour même, après minuit on reset la connexion.
-		If ($page#$libPageConnexion_t)
+		If (String:C10(pageWeb_o.lib)#$libPageConnexion_t)
 			  // Donc l'utilisateur est bien connecté.
 			If (visiteur.loginExpire_ts#Null:C1517)
 				If (visiteur.loginExpire_ts<=cwTimestamp )
 					  // Delais session dépassé.
 					visiteur.loginDomaine:=""
-					$page:=$libPageConnexion_t
-					pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;$page))
+					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 					
 				End if 
 				
 			Else 
-				$page:=$libPageConnexion_t
-				pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;$page))
+				pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 			End if 
 		End if 
 	End if 
 	
-	pageWeb.lib:=$page
 	
 	$routeData:=New object:C1471
 	  // Récupération des variables de l'URL
 	$L_nbDeVariableDansUrl:=Size of array:C274($AT_positionTrouvee)
 	
 	  // Si il y a des param dans l'url & que la page est differente de la page de connexion.
-	If ($L_nbDeVariableDansUrl#0) & (pageWeb.lib#$libPageConnexion_t)
-		OB GET PROPERTY NAMES:C1232(pageWeb.route.format;$AT_routeFormatCle)
+	If ($L_nbDeVariableDansUrl#0) & (pageWeb_o.lib#$libPageConnexion_t)
+		OB GET PROPERTY NAMES:C1232(pageWeb_o.route.format;$AT_routeFormatCle)
 		
 		For ($t;1;Size of array:C274($AT_positionTrouvee))
 			OB SET:C1220($routeData;$AT_routeFormatCle{$t};Substring:C12(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t}))
@@ -141,27 +111,23 @@ If ($page#"")
 		$routeData.langue:="fr"
 	End if 
 	
-	  //coFixerObjet ($routeData;->pageWeb;"route";"data")
-	pageWeb.route.data:=$routeData
+	  //coFixerObjet ($routeData;->pageWeb_o;"route";"data")
+	pageWeb_o.route.data:=$routeData
 	
 Else 
 	  //Renvoie page 404
 	If (visiteur.url#"@.php")
-		$O_logErreur.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
+		$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
 	End if 
 	
-	If (OB Is defined:C1231(configSite;"404"))
-		pageWeb:=OB Copy:C1225(OB Get:C1224(configSite;"404"))
+	
+	
+	If (This:C1470.siteRoute_c.query("lib IS 404").length#0)
+		pageWeb_o:=This:C1470.siteRoute_c.query("lib IS 404")[0]
 		
 		  // Gestion de la langue de la page 404
-		pageWeb.lib:="404"
-		  //$routeData:=New object
-		  //If (OB Is defined(visiteur;"langue"))
-		  //$routeData.langue:=visiteur.langue
-		  //Else 
-		  //$routeData.langue:="fr"
-		  //End if 
-		  //coFixerObjet ($routeData;->pageWeb;"route";"data")
+		pageWeb_o.lib:="404"
+		
 		
 		ARRAY TEXT:C222($champs;1)
 		ARRAY TEXT:C222($valeurs;1)
@@ -169,30 +135,30 @@ Else
 		$valeurs{1}:="404 Not Found"
 		WEB SET HTTP HEADER:C660($champs;$valeurs)
 	Else 
-		$O_logErreur.detailErreur:="Impossible de charger la configuration de la page 404."
+		$logErreur_o.detailErreur:="Impossible de charger la configuration de la page 404."
 		cwRedirection301 ("/")
 	End if 
 End if 
 
   //gestion des keywords
-If (String:C10(pageWeb.keywords)="")
-	pageWeb.keywords:=""
+If (String:C10(pageWeb_o.keywords)="")
+	pageWeb_o.keywords:=""
 End if 
 
 
   //gestion des descriptions
-If (String:C10(pageWeb.description)="")
-	pageWeb.description:=""
+If (String:C10(pageWeb_o.description)="")
+	pageWeb_o.description:=""
 End if 
 
 
-  //pageWeb.i18n:=cwi18nDataPage 
+  //pageWeb_o.i18n:=cwi18nDataPage 
 
-If (OB Is defined:C1231($O_logErreur;"detailErreur"))
-	$O_logErreur.methode:=Current method name:C684
-	$O_logErreur.visiteur:=visiteur
-	cwLogErreurAjout ("Configuration serveur";$O_logErreur)
+If (OB Is defined:C1231($logErreur_o;"detailErreur"))
+	$logErreur_o.methode:=Current method name:C684
+	$logErreur_o.visiteur:=visiteur
+	cwLogErreurAjout ("Configuration serveur";$logErreur_o)
 End if 
 
 
-$0:=pageWeb
+$0:=pageWeb_o

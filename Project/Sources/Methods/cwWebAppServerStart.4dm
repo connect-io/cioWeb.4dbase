@@ -11,6 +11,7 @@ Historique
 31/03/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des héritages
 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des routes.
 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 
 Appel de la methode
 C_OBJECT(<>configPage;<>urlToLibelle)
@@ -20,40 +21,27 @@ cwStartServeur(-><>configPage;-><>urlToLibelle)
 
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)  // URL vers libellé des pages
-	
 	C_LONGINT:C283($j;$r)
 	C_TEXT:C284($routeVar;$routeRegex;$routeFormatData;$temp_o;$subDomain_t)
-	C_OBJECT:C1216($configPage;$urlToLibelle;$SiteUrlToLibelle;$page;$route;$routeDefault;$routeFormat)
+	C_OBJECT:C1216($configPage;$page;$route;$routeDefault;$routeFormat)
 	
 	C_TEXT:C284($parentLibPage;$parentLibPagePrecedent)  // Permet de gérer l'héritage des routes.
 	C_LONGINT:C283($i_l)  // Permet de gérer l'héritage des fichiers html
 	C_TEXT:C284($methodeNom_t)  //  Permet de gérer l'héritage des méthodes de la page
 	ARRAY TEXT:C222($libpage_at;0)
 	ARRAY TEXT:C222($routeFormatCle;0)
+	
+	C_COLLECTION:C1488($route_c)
 End if 
 
+$route_c:=New collection:C1472()
 
 varVisiteurName_t:=This:C1470.config.varVisitorName_t
 
 
-  // Petit hack pour des raisons d'amelioration futur...
-  // Il faut vérifier si la gestion des forms est déjà faite... Et il faut en garder une copie.
-  // Il seront réintégrés en fin de boucle.
-$copyForm_o:=New object:C1471
-For each ($subDomain_t;This:C1470.config.subDomain_c)
-	If (This:C1470.sites[$subDomain_t].form#Null:C1517)
-		$copyForm_o[$subDomain_t]:=This:C1470.sites[$subDomain_t].form
-	Else 
-		$copyForm_o[$subDomain_t]:=Null:C1517
-	End if 
-End for each 
-
-
-  // On (re-)initialise toutes les informations que l'on a sur les pages de l'application.
-This:C1470.sites:=New object:C1471
 
 For each ($subDomain_t;This:C1470.config.subDomain_c)
+	
 	  //Récupération du plan des pages web des sites.
 	$configPage:=New object:C1471
 	ARRAY TEXT:C222($routeFile_at;0)
@@ -107,6 +95,8 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		
 		$page:=OB Get:C1224($configPage;$libpage_at{$j})
 		
+		$page.lib:=$libpage_at{$j}
+		
 		If ($page.route#Null:C1517)
 			  // On récupére la route de la page.
 			$route:=$page.route
@@ -149,32 +139,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		End if 
 	End for 
 	
-	
-	  //On vide le tableau $urlToLibelle
-	ARRAY TEXT:C222($listelib;0)
-	OB GET PROPERTY NAMES:C1232($urlToLibelle;$listeLib)
-	For ($a;1;Size of array:C274($listeLib))
-		OB REMOVE:C1226($urlToLibelle;$listeLib{$a})
-	End for 
-	
-	  //Création d'un objet pour retrouver la config de la page en fonction d'une url.
-	OB GET PROPERTY NAMES:C1232($configPage;$libpage_at)
-	For ($j;1;Size of array:C274($libpage_at))
-		$page:=$configPage[$libpage_at{$j}]
-		If (OB Is defined:C1231($page;"route"))
-			$route:=$page.route
-			If (String:C10($route.regex)#"")
-				OB SET:C1220($urlToLibelle;$route.regex;$libpage_at{$j})
-			End if 
-		End if 
-		
-		If (String:C10($page.url)#"")
-			OB SET:C1220($urlToLibelle;$page.url;$libpage_at{$j})
-		End if 
-		
-	End for 
-	
-	OB SET:C1220($SiteUrlToLibelle;$subDomain_t;OB Copy:C1225($urlToLibelle))
 	
 	  //Creation du chemin complet du fichier html
 	For ($j;1;Size of array:C274($libpage_at))
@@ -233,7 +197,8 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				$page.type:=".html"
 		End case 
 		
-		OB SET:C1220($configPage;$libpage_at{$j};OB Copy:C1225($page))
+		  //OB SET($configPage;$libpage_at{$j};OB Copy($page))
+		$route_c.push(OB Copy:C1225($page))
 	End for 
 	
 	  // Si besoin, on réintégre les forms...
@@ -241,19 +206,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		$configPage.form:=$copyForm_o[$subDomain_t]
 	End if 
 	
-	
-	
-	OB SET:C1220(This:C1470.sites;$subDomain_t;OB Copy:C1225($configPage))
-	
+	This:C1470.sites[$subDomain_t].route:=$route_c
 End for each 
 
-  //Conservation des valeurs pour les autres methodes du composant.
-<>cwUrlToLibSites:=$SiteUrlToLibelle
-
-
-  //cwDataTablePreload 
-
-
-  //Renvoie des valeurs pour la base hôte.
-
-$1->:=$SiteUrlToLibelle

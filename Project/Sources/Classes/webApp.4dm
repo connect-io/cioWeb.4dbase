@@ -50,11 +50,24 @@ Class constructor
 	  // On récupére la liste des sous-domaines de l'application.
 	This:C1470.config.subDomain_c:=$source_o.folders().extract("name")
 	
+	  // On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
+	If (This:C1470.sites=Null:C1517)
+		This:C1470.sites:=New object:C1471
+	End if 
+	
+	
+	For each ($subDomain_t;This:C1470.config.subDomain_c)
+		If (This:C1470.sites[$subDomain_t]=Null:C1517)
+			This:C1470.sites[$subDomain_t]:=New object:C1471
+		End if 
+	End for each 
+	
+	
 	  // On vérifie qu'il existe bien un fichier de config pour l'utilisation du composant dans la base hôte.
 	If (Not:C34($source_o.file("config.json").exists))
 		$source_o.file("config.json").setText("{}")
 	End if 
-	TRACE:C157
+	
 	  // On charge le fichier de config et on refusionne les data avec les informations précédentes.
 	$config_o:=cwToolObjectMerge (This:C1470;JSON Parse:C1218($source_o.file("config.json").getText()))
 	
@@ -240,9 +253,7 @@ Function viewCacheSubdomainPath
 	
 	
 Function serverStart
-	C_POINTER:C301($1)
-	
-	cwWebAppServerStart ($1)
+	cwWebAppServerStart 
 	cwWebAppFormPreload 
 	cwWebAppFuncDataTablePreload 
 	  //cwI18nLoad 
@@ -258,8 +269,24 @@ Function htmlMinify
 	
 Function pageCurrent
 	C_OBJECT:C1216($1)  // instance de user
+	C_OBJECT:C1216($0)  // Instance de la page courante
 	C_OBJECT:C1216($page_o)
+	C_COLLECTION:C1488($siteRoute_c)
 	
-	$page_o:=cs:C1710.page.new(This:C1470.sites;$1)
+	$siteRoute_c:=This:C1470.sites[visiteur.sousDomaine].route.copy()
+	
+	$0:=cs:C1710.page.new($siteRoute_c;$1)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
