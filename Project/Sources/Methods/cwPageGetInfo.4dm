@@ -39,12 +39,15 @@ If (urlSite=Null:C1517)
 End if 
 
 If ($B_estMethodeValide)
-	configSite:=OB Get:C1224(<>webApp_o.sites;visiteur.sousDomaine)
+	configSite:=OB Get:C1224(This:C1470.webAppSites;visiteur.sousDomaine)
 	If (configSite=Null:C1517)
 		$O_logErreur.detailErreur:="Impossible de charger la configuration du sous domaine."
 		$B_estMethodeValide:=False:C215
 	End if 
 End if 
+
+configSite
+
 
   // Cas particulier pour la home du site.
 If ($B_estMethodeValide)

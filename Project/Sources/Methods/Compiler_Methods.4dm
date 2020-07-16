@@ -122,11 +122,6 @@ C_OBJECT:C1216(cwToolObjectMerge ;$0)
 C_OBJECT:C1216(cwToolObjectMerge ;$1)
 C_OBJECT:C1216(cwToolObjectMerge ;$2)
 
-
-  //cwServerWebStart
-C_POINTER:C301(cwServerWebStart ;$1)
-C_POINTER:C301(cwServerWebStart ;$2)
-
   //cwServerWebInit
 C_TEXT:C284(cwServerWebInit ;$1)
 

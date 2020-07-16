@@ -1,6 +1,6 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
 /* ----------------------------------------------------
-Méthode : cwFormPreload
+Méthode : cwWebAppFormPreload
 
 Precharge tout les formulaires de l'application web.
 
@@ -25,24 +25,24 @@ End if
 
 
   // Récupération des formulaires
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;This:C1470.config.subDomain_c)
 	  //For ($i;1;Size of array($sites))
 	
 	  // On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(<>webApp_o.config.source.folder_f($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
 	
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(<>webApp_o.config.source.folder_f($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
 	  // On récupére la collection de form du sousDomaine
-	If (<>webApp_o.sites[$subDomain_t].form=Null:C1517)
-		<>webApp_o.sites[$subDomain_t].form:=New collection:C1472()
+	If (This:C1470.sites[$subDomain_t].form=Null:C1517)
+		This:C1470.sites[$subDomain_t].form:=New collection:C1472()
 	End if 
 	
 	
 	ARRAY TEXT:C222($fichiersForm;0)
-	DOCUMENT LIST:C474(<>webApp_o.config.source.folder_f($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
 	For ($numForm;1;Size of array:C274($fichiersForm))
 		$analyseForm_b:=True:C214
 		C_OBJECT:C1216($form)
@@ -53,7 +53,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 		
 		If ($analyseForm_b)
 			  // On regarde si le formulaire est déjà chargé en mémoire...
-			$formCharge_c:=<>webApp_o.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
+			$formCharge_c:=This:C1470.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
 			If ($formCharge_c.length=0)
 				  // Il n'est pas chargé, on doit donc faire le job...
 				
@@ -284,12 +284,12 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 			If ($formCharge_c.length=0)
 				
 				  // Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				<>webApp_o.sites[$subDomain_t].form.push($form)
+				This:C1470.sites[$subDomain_t].form.push($form)
 			Else 
 				
 				  // Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=<>webApp_o.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
-				<>webApp_o.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
+				$indicesQuery_c:=This:C1470.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
+				This:C1470.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
 			End if 
 		End if 
 	End for 

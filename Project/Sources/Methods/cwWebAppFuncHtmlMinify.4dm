@@ -1,6 +1,6 @@
-//%attributes = {"shared":true}
+//%attributes = {"invisible":true}
 /* ----------------------------------------------------
-Méthode : ogWebMinifierHtml
+Méthode : cwWebAppFuncHtmlMinify
 
 Minifie les fichiers HTML. Gain de 20 à 30% sur le poids des pages HTML.
 
@@ -16,12 +16,12 @@ If (True:C214)  // Déclarations
 	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
 End if 
 
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;This:C1470.config.subDomain_c)
 	  //Le dossier avec le html non minifié.
-	$dirIn:=<>webApp_o.config.source.folder_f($subDomain_t)
+	$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 	
 	  //Le dossier avec le html minifié.
-	$dirOut:=<>webApp_o.config.viewCache.folder_f($subDomain_t)
+	$dirOut:=This:C1470.viewCacheSubdomainPath($subDomain_t)
 	
 	  //On recupere la liste des documents dans le répertoire.
 	DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)

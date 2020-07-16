@@ -1,5 +1,5 @@
 /* 
-Cette class permet de gerer tout les envoi de mail.
+Cette class permet de centraliser toutes les données de l'application web.
 
 Historique
 15/07/20 - gregory@connect-io.fr - Mise en place de l'historique
@@ -133,8 +133,6 @@ Class constructor
 		End if 
 	End for each 
 	
-	TRACE:C157
-	
 	
 	
 /*
@@ -240,5 +238,28 @@ Function viewCacheSubdomainPath
 	
 	$0:=This:C1470.viewCachePath()+$sousDomaine_t+Folder separator:K24:12
 	
+	
+Function serverStart
+	C_POINTER:C301($1)
+	
+	cwWebAppServerStart ($1)
+	cwWebAppFormPreload 
+	cwWebAppFuncDataTablePreload 
+	  //cwI18nLoad 
+	
+	
+Function jsMinify
+	cwWebAppFuncJsMinify 
+	
+	
+Function htmlMinify
+	cwWebAppFuncHtmlMinify 
+	
+	
+Function pageCurrent
+	C_OBJECT:C1216($1)  // instance de user
+	C_OBJECT:C1216($page_o)
+	
+	$page_o:=cs:C1710.page.new(This:C1470.sites;$1)
 	
 	

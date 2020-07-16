@@ -1,6 +1,6 @@
-//%attributes = {"shared":true}
+//%attributes = {"invisible":true}
 /* ----------------------------------------------------
-Méthode : cwDataTablePreload
+Méthode : cwWebAppFuncDataTablePreload
 
 Precharge toutes les datatables HTML de l'application web.
 
@@ -21,16 +21,16 @@ End if
 
 
   // Récupération des formulaires
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;This:C1470.config.subDomain_c)
 	
 	  // On récupére la collection de form du sousDomaine
-	If (<>webApp_o.sites[$subDomain_t].dataTable=Null:C1517)
-		<>webApp_o.sites[$subDomain_t].dataTable:=New collection:C1472()
+	If (This:C1470.sites[$subDomain_t].dataTable=Null:C1517)
+		This:C1470.sites[$subDomain_t].dataTable:=New collection:C1472()
 	End if 
 	
 	
 	  // On récupére la liste de tout les fichiers sources du sous domaine.
-	$fileSubDomain_c:=Folder:C1567(<>webApp_o.config.source.folder_f($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7+fk ignore invisible:K87:22)
+	$fileSubDomain_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7+fk ignore invisible:K87:22)
 	$fileSubDomain_c:=$fileSubDomain_c.query("fullName = :1";"@datatable.json")
 	
 	
@@ -39,7 +39,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 		$analyseDataTable_b:=True:C214
 		C_OBJECT:C1216($dataTable_o)
 		  // On regarde si le formulaire est déjà chargé en mémoire...
-		$dataTableCharge_c:=<>webApp_o.sites[$subDomain_t].dataTable.query("source IS :1";$file_o.platformPath)
+		$dataTableCharge_c:=This:C1470.sites[$subDomain_t].dataTable.query("source IS :1";$file_o.platformPath)
 		If ($dataTableCharge_c.length=0)
 			  // Il n'est pas chargé, on doit donc faire le job...
 			
@@ -77,12 +77,12 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 			If ($dataTableCharge_c.length=0)
 				
 				  // Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				<>webApp_o.sites[$subDomain_t].dataTable.push($dataTable_o)
+				This:C1470.sites[$subDomain_t].dataTable.push($dataTable_o)
 			Else 
 				
-				  // Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=<>webApp_o.sites[$subDomain_t].dataTable.indices("file IS :1";$file_o.platformPath)
-				<>webApp_o.sites[$subDomain_t].dataTable[$indicesQuery_c[0]]:=$dataTable_o
+				  // Si la dataTable à déjà été chargé, il faut la mettre à jour.
+				$indicesQuery_c:=This:C1470.sites[$subDomain_t].dataTable.indices("file IS :1";$file_o.platformPath)
+				This:C1470.sites[$subDomain_t].dataTable[$indicesQuery_c[0]]:=$dataTable_o
 			End if 
 		End if 
 	End for each 

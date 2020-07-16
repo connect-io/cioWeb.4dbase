@@ -1,12 +1,13 @@
-//%attributes = {"shared":true}
+//%attributes = {}
 /* ----------------------------------------------------
-Méthode : ogWebMinifierJs
+Méthode : cwWebAppFuncJsMinify
 
 Minifie les fichiers .js, gain de 20 à 30% sur le poids d'origine.
 
 Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
 ----------------------------------------------------*/
 
 
@@ -17,12 +18,12 @@ If (True:C214)  // Déclarations
 End if 
 
 
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;This:C1470.config.subDomain_c)
 	  //Le dossier avec le js non minifié.
-	$dirIn:=<>webApp_o.config.source.folder_f($subDomain_t)
+	$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 	
 	  //Le dossier avec les javascripts minimifié.
-	$dirOut:=<>webApp_o.config.webFolder.folder_f($subDomain_t)+"js"+Folder separator:K24:12
+	$dirOut:=This:C1470.webfolderSubdomainPath($subDomain_t)+"js"+Folder separator:K24:12
 	
 	  //On recupere la liste des documents dans le répertoire.
 	DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)

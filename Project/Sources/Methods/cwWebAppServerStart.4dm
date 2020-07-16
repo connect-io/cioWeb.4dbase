@@ -1,6 +1,6 @@
-//%attributes = {"shared":true}
+//%attributes = {}
 /* ----------------------------------------------------
-Méthode : cwServerStart
+Méthode : cwWebAppServerStart
 
 charge la configuration du serveur web.
 Placer cette methode sur demarrage de la base)
@@ -20,8 +20,7 @@ cwStartServeur(-><>configPage;-><>urlToLibelle)
 
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)  // Configuration global du site internet.
-	C_POINTER:C301($2)  // URL vers libellé des pages
+	C_POINTER:C301($1)  // URL vers libellé des pages
 	
 	C_LONGINT:C283($j;$r)
 	C_TEXT:C284($routeVar;$routeRegex;$routeFormatData;$temp_o;$subDomain_t)
@@ -35,21 +34,16 @@ If (True:C214)  // Déclarations
 End if 
 
 
-
-<>webApp_o:=$1->
-
-
-
-varVisiteurName_t:=<>webApp_o.config.varVisitorName_t
+varVisiteurName_t:=This:C1470.config.varVisitorName_t
 
 
   // Petit hack pour des raisons d'amelioration futur...
   // Il faut vérifier si la gestion des forms est déjà faite... Et il faut en garder une copie.
   // Il seront réintégrés en fin de boucle.
 $copyForm_o:=New object:C1471
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
-	If (<>webApp_o.sites[$subDomain_t].form#Null:C1517)
-		$copyForm_o[$subDomain_t]:=<>webApp_o.sites[$subDomain_t].form
+For each ($subDomain_t;This:C1470.config.subDomain_c)
+	If (This:C1470.sites[$subDomain_t].form#Null:C1517)
+		$copyForm_o[$subDomain_t]:=This:C1470.sites[$subDomain_t].form
 	Else 
 		$copyForm_o[$subDomain_t]:=Null:C1517
 	End if 
@@ -57,13 +51,13 @@ End for each
 
 
   // On (re-)initialise toutes les informations que l'on a sur les pages de l'application.
-<>webApp_o.sites:=New object:C1471
+This:C1470.sites:=New object:C1471
 
-For each ($subDomain_t;<>webApp_o.config.subDomain_c)
+For each ($subDomain_t;This:C1470.config.subDomain_c)
 	  //Récupération du plan des pages web des sites.
 	$configPage:=New object:C1471
 	ARRAY TEXT:C222($routeFile_at;0)
-	DOCUMENT LIST:C474(<>webApp_o.config.source.folder_f($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
 	
 	  // Chargement de tout les fichiers de routing.
 	For ($routeNum;1;Size of array:C274($routeFile_at))
@@ -193,7 +187,7 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];":";Folder separator:K24:12)  // Séparateur mac
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
-				$page.fichier[$i_l]:=<>webApp_o.config.viewCache.folder_f($subDomain_t)+$page.fichier[$i_l]
+				$page.fichier[$i_l]:=This:C1470.viewCacheSubdomainPath($subDomain_t)+$page.fichier[$i_l]
 				
 				  // On vérifie que le fichier existe bien
 				If (Test path name:C476($page.fichier[$i_l])#Is a document:K24:1)
@@ -249,20 +243,17 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 	
 	
 	
-	OB SET:C1220(<>webApp_o.sites;$subDomain_t;OB Copy:C1225($configPage))
+	OB SET:C1220(This:C1470.sites;$subDomain_t;OB Copy:C1225($configPage))
 	
 End for each 
 
   //Conservation des valeurs pour les autres methodes du composant.
 <>cwUrlToLibSites:=$SiteUrlToLibelle
 
-cwFormPreload 
 
-cwDataTablePreload 
+  //cwDataTablePreload 
 
-  // On charge tout les fichiers de langue.
-  //cwI18nLoad 
 
   //Renvoie des valeurs pour la base hôte.
-$1->:=<>webApp_o
-$2->:=$SiteUrlToLibelle
+
+$1->:=$SiteUrlToLibelle
