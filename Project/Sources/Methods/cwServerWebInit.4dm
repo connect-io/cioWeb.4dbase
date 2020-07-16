@@ -160,21 +160,5 @@ For each ($subDomain_t;<>webApp_o.config.subDomain_c)
 End for each 
 
 
-  // ----- Gestion des vues en dev -----
-<>webApp_o.config.viewDev:=New object:C1471()
-<>webApp_o.config.viewDev.folderName_t:="pages-dev"
-<>webApp_o.config.viewDev.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.viewDev.folderName_t+Folder separator:K24:12)
-  // Utilisation : $dossierForm_t:=<>webApp_o.config.viewDev.folder_f("www")
-
-
-
-  // ----- Gestion des js -----
-<>webApp_o.config.js:=New object:C1471()
-<>webApp_o.config.js.folderName_t:="js"
-<>webApp_o.config.js.folder_f:=Formula:C1597(<>webApp_o.config.webAppOld.folder_t+Choose:C955(Count parameters:C259=1;$1;visiteur.sousDomaine)+Folder separator:K24:12+<>webApp_o.config.js.folderName_t+Folder separator:K24:12)
-  // Utilisation : $dossierForm_t:=<>webApp_o.config.js.folder_f("www")
-
-
-
   // On remonte les informations à la base hôte.
 $0:=<>webApp_o
