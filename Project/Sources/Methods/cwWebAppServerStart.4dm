@@ -13,9 +13,6 @@ Historique
 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 
-Appel de la methode
-C_OBJECT(<>configPage)
-cwStartServeur(-><>configPage)
 ----------------------------------------------------*/
 
 
@@ -152,7 +149,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];":";Folder separator:K24:12)  // Séparateur mac
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
 				$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
-				$page.fichier[$i_l]:=This:C1470.viewCacheSubdomainPath($subDomain_t)+$page.fichier[$i_l]
+				$page.fichier[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+$page.fichier[$i_l]
 				
 				  // On vérifie que le fichier existe bien
 				If (Test path name:C476($page.fichier[$i_l])#Is a document:K24:1)

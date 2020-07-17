@@ -21,7 +21,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 	
 	  //Le dossier avec le html minifié.
-	$dirOut:=This:C1470.viewCacheSubdomainPath($subDomain_t)
+	$dirOut:=This:C1470.cacheViewSubdomainPath($subDomain_t)
 	
 	  //On recupere la liste des documents dans le répertoire.
 	DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
