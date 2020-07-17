@@ -20,13 +20,11 @@ If (True:C214)  // Déclarations
 End if 
 
 
-  // Récupération des formulaires
+  // Récupération des dataTables
 For each ($subDomain_t;This:C1470.config.subDomain_c)
 	
-	  // On récupére la collection de form du sousDomaine
-	If (This:C1470.sites[$subDomain_t].dataTable=Null:C1517)
-		This:C1470.sites[$subDomain_t].dataTable:=New collection:C1472()
-	End if 
+	  // On récupére la collection de dataTable du sousDomaine
+	This:C1470.sites[$subDomain_t].dataTable:=New collection:C1472()
 	
 	
 	  // On récupére la liste de tout les fichiers sources du sous domaine.
