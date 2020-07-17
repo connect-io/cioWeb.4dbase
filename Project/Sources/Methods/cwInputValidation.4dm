@@ -183,10 +183,13 @@ End case
 Case of 
 	: ($retour#"ok")
 		  // une erreur est deja remonté, on ne fait rien
+		
 	: ($configInput.lib#"token")
 		  // Il ne s'agit pas d'un token, on ne fait rien.
-	: (cwVisiteurTokenVerifier (->visiteur))
+		
+	: (visiteur.tokenCheck())
 		  // Le token est valide, tout va bien.
+		
 	Else 
 		  // Le token est périmé, il n'est pas possible de valider le formulaire.
 		  //$retour:="Token périmé, merci de re-valider la page."

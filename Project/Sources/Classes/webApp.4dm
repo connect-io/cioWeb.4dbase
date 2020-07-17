@@ -1,12 +1,22 @@
 /* 
-Cette class permet de centraliser toutes les données de l'application web.
+Class : webApp
 
-Historique
-15/07/20 - gregory@connect-io.fr - Mise en place de l'historique
+Cette class permet de centraliser toutes les données de l'application web.
 
 */
 
-  // ===== Initialisation de l'application web =====
+
+/* ----------------------------------------------------
+Fonction : webApp.constructor
+
+Initialisation d'un utilisateur
+
+Historique
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
+08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
+-----------------------------------------------------*/
 Class constructor
 	
 	C_OBJECT:C1216($source_o)  // dossier sources
@@ -141,20 +151,44 @@ Class constructor
 	End for each 
 	
 	
-	  // ===== Chemin du dossier WebApp =====
+	
+/* ----------------------------------------------------
+Fonction : webApp.webAppPath
+	
+Chemin du dossier WebApp
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function webAppPath
 	C_TEXT:C284($0)
 	$0:=cwToolPathFolderOrAlias (Get 4D folder:C485(Database folder:K5:14;*))+This:C1470.config.folderName_o.webApp+Folder separator:K24:12
 	
 	
-	  // ===== Chemin du dossier Source =====
+	
+/* ----------------------------------------------------
+Fonction : webApp.sourcePath
+	
+Chemin du dossier Source
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function sourcePath
-	C_TEXT:C284($0)
+	C_TEXT:C284($0)  // Chemin du dossier source
 	
 	$0:=This:C1470.webAppPath()+This:C1470.config.folderName_o.source+Folder separator:K24:12
 	
 	
-	  // ===== Chemin du dossier Source/sousDomaine =====
+	
+/* ----------------------------------------------------
+Fonction : webApp.sourceSubdomainPath
+	
+Chemin du dossier Source/sousDomaine
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function sourceSubdomainPath
 	C_TEXT:C284($1)  //Nom du sous domaine
 	C_TEXT:C284($0)
@@ -170,7 +204,14 @@ Function sourceSubdomainPath
 	
 	
 	
-	  // ===== Chemin du dossier Webfolder/sousDomaine =====
+/* ----------------------------------------------------
+Fonction : webApp.webfolderSubdomainPath
+	
+Chemin du dossier Webfolder/sousDomaine
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function webfolderSubdomainPath
 	C_TEXT:C284($1)  //Nom du sous domaine
 	C_TEXT:C284($0)
@@ -186,7 +227,14 @@ Function webfolderSubdomainPath
 	
 	
 	
-	  // ===== Chemin du dossier cache =====
+/* ----------------------------------------------------
+Fonction : webApp.cachePath
+	
+Chemin du dossier cache
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function cachePath
 	C_TEXT:C284($0)
 	
@@ -194,7 +242,14 @@ Function cachePath
 	
 	
 	
-	  // ===== Chemin du dossier cache des vues =====
+/* ----------------------------------------------------
+Fonction : webApp.cacheViewPath
+	
+Chemin du dossier cache des vues
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function cacheViewPath
 	C_TEXT:C284($0)
 	
@@ -202,10 +257,17 @@ Function cacheViewPath
 	
 	
 	
-	  // ===== Chemin du dossier cache des vues / sousDomaine =====
+/* ----------------------------------------------------
+Fonction : webApp.cacheViewSubdomainPath
+	
+Chemin du dossier cache des vues / sousDomaine
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function cacheViewSubdomainPath
-	C_TEXT:C284($1)  //Nom du sous domaine
-	C_TEXT:C284($0)
+	C_TEXT:C284($1)  // Nom du sous domaine
+	C_TEXT:C284($0)  // Chemin
 	C_TEXT:C284($sousDomaine_t)
 	
 	If (Count parameters:C259=1)
@@ -217,7 +279,15 @@ Function cacheViewSubdomainPath
 	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
-	  // =====  =====
+	
+/* ----------------------------------------------------
+Fonction : webApp.serverStart
+	
+Démérrage du serveur web
+	
+Historique
+16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function serverStart
 	cwWebAppServerStart 
 	cwWebAppFormPreload 
@@ -226,49 +296,209 @@ Function serverStart
 	
 	
 	
-	  // =====  =====
+/* ----------------------------------------------------
+Fonction : webApp.jsMinify
+	
+Minification du javascript
+	
+Historique
+16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
+-----------------------------------------------------*/
 Function jsMinify
-	cwWebAppFuncJsMinify 
+	C_TEXT:C284($texteIn;$dirIn;$dirOut)
+	C_BOOLEAN:C305($compression)
+	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
+	
+	For each ($subDomain_t;This:C1470.config.subDomain_c)
+		  //Le dossier avec le js non minifié.
+		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
+		
+		  //Le dossier avec les javascripts minimifié.
+		$dirOut:=This:C1470.webfolderSubdomainPath($subDomain_t)+"js"+Folder separator:K24:12
+		
+		  //On recupere la liste des documents dans le répertoire.
+		DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
+		
+		For ($i;1;Size of array:C274($fichierHtmlIn))
+			If ($fichierHtmlIn{$i}="@.js")
+				$compression:=True:C214
+				
+			Else 
+				$compression:=False:C215
+			End if 
+			
+			If ($compression)
+				  // Dans le cas d'un fichier dans un sous dossier, il faut supprimer le séparateur.
+				If ($fichierHtmlIn{$i}=(Folder separator:K24:12+"@"))
+					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i};2)
+					  // Si besoin on crée le dossier dans le repertoire de destination.
+					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i};*)
+				End if 
+				
+				  //Sauf si le dossier compressé existe deja et qu'il est plus jeune que le fichier d'origine.
+				If (Test path name:C476($dirOut+$fichierHtmlIn{$i})=Is a document:K24:1)
+					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i};$verrouilleIn;$invisibleIn;$creeLeIn;$creeAIn;$modifieLeIn;$modifieAIn)
+					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i};$verrouilleOut;$invisibleOut;$creeLeOut;$creeAOut;$modifieLeOut;$modifieAOut)
+					
+					Case of 
+						: ($modifieLeIn<$modifieLeOut)
+							$compression:=False:C215
+						: ($modifieLeIn=$modifieLeOut) & ($modifieAIn<$modifieAOut)
+							$compression:=False:C215
+					End case 
+					
+					If ($compression)
+						  //Il faut donc faire la minification et l'ancien fichier existe.
+						  //On le suppprime donc.
+						DELETE DOCUMENT:C159($dirOut+$fichierHtmlIn{$i})
+					End if 
+				End if 
+			End if 
+			
+			If ($compression)
+				
+				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i};"UTF-8")
+				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i};cwMinifier ($texteIn);"UTF-8")  //Et on creer le nouvau fichier.
+			End if 
+		End for 
+		
+	End for each 
 	
 	
 	
-	  // =====  =====
+/* ----------------------------------------------------
+Fonction : webApp.htmlMinify
+	
+Minification du HTML
+	
+Historique
+16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
+21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
+-----------------------------------------------------*/
 Function htmlMinify
-	cwWebAppFuncHtmlMinify 
+	C_TEXT:C284($texteIn;$texteOut;$dirIn;$dirOut)
+	C_BOOLEAN:C305($compression)
+	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
+	
+	For each ($subDomain_t;This:C1470.config.subDomain_c)
+		  //Le dossier avec le html non minifié.
+		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
+		
+		  //Le dossier avec le html minifié.
+		$dirOut:=This:C1470.cacheViewSubdomainPath($subDomain_t)
+		
+		  //On recupere la liste des documents dans le répertoire.
+		DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
+		
+		For ($i;1;Size of array:C274($fichierHtmlIn))
+			
+			If ($fichierHtmlIn{$i}="@.html")
+				$compression:=True:C214
+				
+			Else 
+				$compression:=False:C215
+			End if 
+			
+			If ($compression)
+				  // Dans le cas d'un fichier dans un sous dossier, il faut supprimer le séparateur.
+				If ($fichierHtmlIn{$i}=(Folder separator:K24:12+"@"))
+					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i};2)
+					  //Si besoin on creer le dossier dans le repertoire de destination...
+					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i};*)
+				End if 
+				
+				  //Sauf si le dossier compressé existe deja et qu'il est plus jeune que le fichier d'origine.
+				If (Test path name:C476($dirOut+$fichierHtmlIn{$i})=Is a document:K24:1)
+					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i};$verrouilleIn;$invisibleIn;$creeLeIn;$creeAIn;$modifieLeIn;$modifieAIn)
+					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i};$verrouilleOut;$invisibleOut;$creeLeOut;$creeAOut;$modifieLeOut;$modifieAOut)
+					
+					Case of 
+						: ($modifieLeIn<$modifieLeOut)
+							$compression:=False:C215
+						: ($modifieLeIn=$modifieLeOut) & ($modifieAIn<$modifieAOut)
+							$compression:=False:C215
+					End case 
+					
+					If ($compression)
+						  //Il faut donc faire la minification et l'ancien fichier existe.
+						  //On le suppprime donc.
+						DELETE DOCUMENT:C159($dirOut+$fichierHtmlIn{$i})
+					End if 
+				End if 
+			End if 
+			
+			If ($compression)
+				
+				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i};"UTF-8")
+				ASSERT:C1129(Length:C16($texteIn)#0;"Impossible de charger le fichier : "+$dirIn+$fichierHtmlIn{$i})
+				$texteOut:=Replace string:C233(cwMinifier ($texteIn);"\n";"")
+				
+				  // On retire les commentaires HTML mais pas les balises 4D.
+				  //$texteOut:=cwToolTextReplaceByRegex ($texteOut;"<!-- (.*?)-->";"")
+				
+				  // On vérifie les espace insécable.
+				$texteOut:=Replace string:C233($texteOut;" ;";Char:C90(160)+";")
+				$texteOut:=Replace string:C233($texteOut;" ?";Char:C90(160)+"?")
+				$texteOut:=Replace string:C233($texteOut;" !";Char:C90(160)+"!")
+				$texteOut:=Replace string:C233($texteOut;" :";Char:C90(160)+":")
+				$texteOut:=Replace string:C233($texteOut;" %";Char:C90(160)+"%")
+				$texteOut:=Replace string:C233($texteOut;" €";Char:C90(160)+"€")
+				
+				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i};$texteOut;"UTF-8")  //Et on creer le nouvau fichier.
+			End if 
+		End for 
+	End for each 
 	
 	
 	
-	  // =====  =====
+/* ----------------------------------------------------
+Fonction : webApp.pageCurrent
+	
+Chargement des éléments de la page courante
+	
+Historique
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function pageCurrent
-	C_OBJECT:C1216($1)  // instance de user
+	C_OBJECT:C1216($1;$user_o)  // instance de user
 	C_OBJECT:C1216($0)  // Instance de la page courante
 	C_COLLECTION:C1488(siteRoute_c)
 	C_COLLECTION:C1488(siteForm_c)
 	C_COLLECTION:C1488(siteDataTable_c)
+	C_TEXT:C284(cachePath_t)
+	
+	$user_o:=$1
 	
 	  // En attendant de faire mieux, je passe la variable en process
-	siteRoute_c:=This:C1470.sites[visiteur.sousDomaine].route.copy()
+	siteRoute_c:=This:C1470.sites[$user_o.sousDomaine].route.copy()
 	
 	$0:=cs:C1710.page.new(siteRoute_c;$1)
 	
-	
-	
 	  // Petit hack pour les formulaires en attendant des jours meilleurs.
-	siteForm_c:=This:C1470.sites[visiteur.sousDomaine].form
+	siteForm_c:=This:C1470.sites[$user_o.sousDomaine].form
 	
 	  // Petit hack pour les datatables en attendant des jours meilleurs.
-	siteDataTable_c:=This:C1470.sites[visiteur.sousDomaine].dataTable
+	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
 	
 	  // en attendant de faire mieux
-	C_TEXT:C284(cachePath_t)
 	cachePath_t:=This:C1470.cacheViewSubdomainPath()
 	
 	
 	
-	  // ===== Chemin des session Web =====
+/* ----------------------------------------------------
+Fonction : webApp.cacheSessionWebPath
+	
+Chemin des sessions Web
+	
+Historique
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
 Function cacheSessionWebPath
-	C_TEXT:C284($1)
-	C_TEXT:C284($0)
+	C_TEXT:C284($1)  // (Optionel) Forcer le chemin par defaut.
+	C_TEXT:C284($0)  // Chemin des sessions web
 	
 	If (This:C1470.sessionWeb.path=Null:C1517)
 		This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
@@ -276,7 +506,9 @@ Function cacheSessionWebPath
 	
 	  // Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
 	If (Count parameters:C259=1)
-		If (String:C10($1)="")
+		If (String:C10($1)#"")
+			This:C1470.sessionWeb.path:=$1
+		Else 
 			  // On reset le chemin pas defaut.
 			This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
 		End if 
@@ -287,9 +519,17 @@ Function cacheSessionWebPath
 	
 	
 	
-	  // =====  =====
+/* ----------------------------------------------------
+Fonction : webApp.sessionWebStart
+	
+Démarrage des sessions Web
+	
+Historique
+30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
 Function sessionWebStart
-	C_COLLECTION:C1488($1;$options_c)  // $1 : [objet] option, option du serveur web
+	C_COLLECTION:C1488($1;$options_c)  // Option, option du serveur web
 	C_OBJECT:C1216($0;$option_o)
 	
 	C_LONGINT:C283($valideMinute_l;$refProcess_l)
@@ -342,21 +582,21 @@ Function sessionWebStart
 	
 	  // ----- Nettoyage des sessions périmée -----
 	  // On en profite pour nettoyer les sessions périmées...
-	MESSAGE:C88("nettoyage des sessions web")
+	MESSAGE:C88("Nettoyage des sessions web")
 	
 	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
 	This:C1470.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
 	
 	
 	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
-	
+	$dernierJourValide_d:=Current date:C33-Num:C11(This:C1470.sessionWeb.valideDay)
 	For ($i;1;Size of array:C274($listeSessionWeb_t))
 		  // On verifie une derniere fois que le fichier existe,
 		  // Possibilité d'être supprimé par un autre process parallele...
 		If (Test path name:C476($listeSessionWeb_t{$i})=Is a document:K24:1)
 			GET DOCUMENT PROPERTIES:C477($listeSessionWeb_t{$i};$verrou_b;$invisible_b;$creerLe_d;$creerA_t;$modifierLe_d;$modifierA_t)
 			
-			If ($creerLe_d<This:C1470.sessionWeb.valideDay)
+			If ($creerLe_d<$dernierJourValide_d)
 				  //Il faut le supprimer, mais avant l'on regarde si il n'a pas un dossier temporaire associé.
 				$infoFichier_o:=Path to object:C1547($listeSessionWeb_t{$i})
 				
@@ -374,18 +614,26 @@ Function sessionWebStart
 		
 	End for 
 	
-	
-	
 	  // Et on retourne les infos pour l'application
 	$0:=This:C1470.sessionWeb
 	
 	
 	
+/* ----------------------------------------------------
+Fonction : webApp.userNew
 	
+Chargement des éléments sur l'utilisateur / visiteur
 	
+Historique
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
+Function userNew
+	C_OBJECT:C1216($0)  // Instance de l'utilisateur en cours
 	
+	C_OBJECT:C1216($infoWebApp_o)
+	$infoWebApp_o:=New object:C1471()
+	$infoWebApp_o.sessionWeb:=This:C1470.sessionWeb
 	
-	
-	
+	$0:=cs:C1710.user.new($infoWebApp_o)
 	
 	

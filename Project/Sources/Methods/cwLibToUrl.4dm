@@ -12,8 +12,12 @@ Historique
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$url_t;$1;$libPage_t;$nomVar_t;$formatInput_t)  // $0 = url de la page, $1 : [objet] lib de page
-	C_OBJECT:C1216(routeVar;$2;$configPage_o)  // $2 : [objet] objet de personnalisation de l'URL
+	C_TEXT:C284($1)  // lib de page
+	C_OBJECT:C1216($2)  // objet de personnalisation de l'URL
+	C_TEXT:C284($0)  // url de la page
+	
+	C_TEXT:C284($url_t;$libPage_t;$nomVar_t;$formatInput_t)
+	C_OBJECT:C1216(routeVar;$configPage_o)
 End if 
 
 $libPage_t:=Choose:C955($1="/@";Substring:C12($1;2);$1)
@@ -77,4 +81,4 @@ Else
 	$url_t:="Il-y-a-aucune-information-sur-la-page-"+$libPage_t
 End if 
 
-$0:=$url_t
+$0:=String:C10($url_t)
