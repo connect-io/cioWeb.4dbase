@@ -9,15 +9,17 @@ un robot google ou un autre serveur qui vient interroger le notre.
 */
 
 
+Class constructor
 /* ----------------------------------------------------
 Fonction : user.constructor
-
+	
 Initialisation d'un utilisateur
-
+ATTENTION : L'instance de la class "user" doit se faire obligatoirement par la fonction : webApp.userNew()
+	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 -----------------------------------------------------*/
-Class constructor
+	
 	C_OBJECT:C1216($1)  //Quelques infos de Web app (La config des sessions)
 	C_TEXT:C284($propriete_t)
 	
@@ -27,21 +29,7 @@ Class constructor
 	
 	
 	
-/* ----------------------------------------------------
-Fonction : user.updateVarVisiteur
-	
-Sychro avec du vieux code
-	
-Historique
-17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
-Function updateVarVisiteur
-	  // A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
-	C_OBJECT:C1216(visiteur)
-	visiteur:=This:C1470
-	
-	
-	
+Function getInfo
 /* ----------------------------------------------------
 Fonction : user.getInfo
 	
@@ -53,7 +41,7 @@ Historique
 26/10/19 - gregory@connect-io.fr - Passage notation objet
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function getInfo
+	
 	C_LONGINT:C283($i_l)
 	ARRAY TEXT:C222($nom_at;0)
 	ARRAY TEXT:C222($valeur_at;0)
@@ -123,6 +111,7 @@ Function getInfo
 	
 	
 	
+Function login
 /* ----------------------------------------------------
 Fonction : user.login
 	
@@ -136,7 +125,7 @@ Historique
 14/08/19 - Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur.action
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function login
+	
 	This:C1470.loginDomaine:=String:C10(This:C1470.domaine)
 	This:C1470.loginEMail:=String:C10(This:C1470.eMail)
 	
@@ -150,6 +139,7 @@ Function login
 	
 	
 	
+Function logout
 /* ----------------------------------------------------
 Fonction : user.logout
 	
@@ -159,13 +149,14 @@ Remplace la méthode : cwVisiteurLogout
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function logout
+	
 	This:C1470.loginDomaine:=""
 	This:C1470.loginEMail:=""
 	This:C1470.loginLevel:=""
 	
 	
 	
+Function objectMerge
 /* ----------------------------------------------------
 Fonction : user.objectMerge
 	
@@ -174,7 +165,7 @@ Permet la fusion proprement d'un objet avec l'instance utilisateur
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 -----------------------------------------------------*/
-Function objectMerge
+	
 	C_OBJECT:C1216($1)
 	C_OBJECT:C1216($objectMerge_o)
 	C_TEXT:C284($key_t)
@@ -187,6 +178,63 @@ Function objectMerge
 	
 	
 	
+Function sessionWebFolderPath
+/* ----------------------------------------------------
+Fonction : user.sessionWebFolderPath
+	
+Chemin du dossier des sessions web de l'utilisateur.
+Remplace la méthode : cwSessionUserFolder
+	
+Historique
+31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($0;$chFolderSession_t)  // $0 = [text] chemin du dossier de session du visiteur
+	
+	C_OBJECT:C1216($logErreur_o)
+	
+	$logErreur_o:=New object:C1471
+	
+	  // On vérifie que la gestion des sessions est actif
+	If (String:C10(This:C1470.sessionWeb.path)="")
+		$logErreur_o.detailErreur:="La gestion des sessions n'est pas actif."
+	End if 
+	
+	If (String:C10($logErreur_o.detailErreur)="")
+		
+		  // il faut récupérer l'UUID de la session du visiteur
+		If (String:C10(This:C1470[This:C1470.sessionWeb.name])="")
+			$logErreur_o.detailErreur:="Impossible de récupérer ID de la session du visiteur."
+		End if 
+	End if 
+	
+	If (String:C10($logErreur_o.detailErreur)="")
+		
+		  //On monte le chemin du dossier.
+		$chFolderSession_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+Folder separator:K24:12
+		
+		If (Test path name:C476($chFolderSession_t)#Is a folder:K24:2)
+			CREATE FOLDER:C475($chFolderSession_t;*)
+		End if 
+		
+		$0:=$chFolderSession_t
+	End if 
+	
+	If (String:C10($logErreur_o.detailErreur)#"")
+		$logErreur_o.methode:=Current method name:C684
+		$logErreur_o.visiteur:=This:C1470
+		cwLogErreurAjout ("erreur session";$logErreur_o)
+		
+		ALERT:C41($logErreur_o.detailErreur)
+		
+		  // On renvoie ce que l'on peut faire de mieux...
+		$0:=Get 4D folder:C485(Database folder:K5:14;*)
+	End if 
+	
+	
+	
+Function sessionWebLoad
 /* ----------------------------------------------------
 Fonction : user.sessionWebLoad
 	
@@ -199,7 +247,7 @@ Historique
 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dans la mise à jour des dossiers temporaires.
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function sessionWebLoad
+	
 	C_TEXT:C284($chFichierSession_t;$chAncienDossier_t;$chNouveauDossier_t)
 	C_OBJECT:C1216($session_o)
 	C_LONGINT:C283($i_l)
@@ -269,6 +317,7 @@ Function sessionWebLoad
 	
 	
 	
+Function sessionWebSave
 /* ----------------------------------------------------
 Fonction : user.sessionWebSave
 	
@@ -280,7 +329,7 @@ Historique
 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Modification des notications d'erreur en cas de chargement d'une seule page
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function sessionWebSave
+	
 	C_OBJECT:C1216($logErreur_o)
 	C_TEXT:C284($chSessionWeb_t)
 	
@@ -319,79 +368,7 @@ Function sessionWebSave
 	
 	
 	
-/* ----------------------------------------------------
-Fonction : user.sessionWebFolderPath
-	
-Chemin du dossier des sessions web de l'utilisateur.
-Remplace la méthode : cwSessionUserFolder
-	
-Historique
-31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
-Function sessionWebFolderPath
-	C_TEXT:C284($0;$chFolderSession_t)  // $0 = [text] chemin du dossier de session du visiteur
-	
-	C_OBJECT:C1216($logErreur_o)
-	
-	$logErreur_o:=New object:C1471
-	
-	  // On vérifie que la gestion des sessions est actif
-	If (String:C10(This:C1470.sessionWeb.path)="")
-		$logErreur_o.detailErreur:="La gestion des sessions n'est pas actif."
-	End if 
-	
-	If (String:C10($logErreur_o.detailErreur)="")
-		
-		  // il faut récupérer l'UUID de la session du visiteur
-		If (String:C10(This:C1470[This:C1470.sessionWeb.name])="")
-			$logErreur_o.detailErreur:="Impossible de récupérer ID de la session du visiteur."
-		End if 
-	End if 
-	
-	If (String:C10($logErreur_o.detailErreur)="")
-		
-		  //On monte le chemin du dossier.
-		$chFolderSession_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+Folder separator:K24:12
-		
-		If (Test path name:C476($chFolderSession_t)#Is a folder:K24:2)
-			CREATE FOLDER:C475($chFolderSession_t;*)
-		End if 
-		
-		$0:=$chFolderSession_t
-	End if 
-	
-	If (String:C10($logErreur_o.detailErreur)#"")
-		$logErreur_o.methode:=Current method name:C684
-		$logErreur_o.visiteur:=This:C1470
-		cwLogErreurAjout ("erreur session";$logErreur_o)
-		
-		ALERT:C41($logErreur_o.detailErreur)
-		
-		  // On renvoie ce que l'on peut faire de mieux...
-		$0:=Get 4D folder:C485(Database folder:K5:14;*)
-	End if 
-	
-	
-	
-/* ----------------------------------------------------
-Fonction : user.tokenGenerate
-	
-Génere un jeton pour la validation des pages web.
-Remplace la méthode : cwVisiteurTokenGenerer
-	
-Historique
-17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
-Function tokenGenerate
-	C_TEXT:C284($t_uuid)
-	
-	$t_uuid:=Generate UUID:C1066
-	This:C1470.token:=$t_uuid
-	This:C1470.tokenControle:=$t_uuid
-	
-	
-	
+Function tokenCheck
 /* ----------------------------------------------------
 Fonction : user.tokenCheck
 	
@@ -401,7 +378,7 @@ Remplace la méthode : cwVisiteurTokenVerifier
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Function tokenCheck
+	
 	C_BOOLEAN:C305($0)  // Vrai si valide
 	C_OBJECT:C1216($logErreur_o)
 	
@@ -420,6 +397,40 @@ Function tokenCheck
 		End if 
 	End if 
 	
+	
+	
+Function tokenGenerate
+/* ----------------------------------------------------
+Fonction : user.tokenGenerate
+	
+Génere un jeton pour la validation des pages web.
+Remplace la méthode : cwVisiteurTokenGenerer
+	
+Historique
+17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($t_uuid)
+	
+	$t_uuid:=Generate UUID:C1066
+	This:C1470.token:=$t_uuid
+	This:C1470.tokenControle:=$t_uuid
+	
+	
+	
+Function updateVarVisiteur
+/* ----------------------------------------------------
+Fonction : user.updateVarVisiteur
+	
+Sychro avec du vieux code
+	
+Historique
+17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
+	
+	  // A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
+	C_OBJECT:C1216(visiteur)
+	visiteur:=This:C1470
 	
 	
 	

@@ -10,9 +10,7 @@
 	"Méthodes projet par défaut": {
 		"methods": [
 			"cwJsGetFile",
-			"cwJsSetFile",
-			"cwMaxMindGetVille",
-			"cwMaxMindGetVilleTest"
+			"cwJsSetFile"
 		]
 	},
 	"Tables par défaut": {},

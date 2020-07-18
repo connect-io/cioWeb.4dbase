@@ -6,17 +6,19 @@ Cette class permet de génerer le contenue d'une page.
 */
 
 
+Class constructor
 /* ----------------------------------------------------
 Fonction : page.constructor
-
-Initialisation de la page web
-
+	
+Initialisation de la page web.
+ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
+	
 Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 -----------------------------------------------------*/
-Class constructor
+	
 	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
 	C_OBJECT:C1216($2)  // Les informations sur le visiteur.
 	
