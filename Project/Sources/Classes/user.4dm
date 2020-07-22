@@ -345,7 +345,7 @@ Historique
 		If (String:C10(This:C1470[This:C1470.sessionWeb.name])#"")
 			  // Chemin du fichier dans lequel sera stocké la session.
 			$chSessionWeb_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+".json"
-			TRACE:C157
+			
 			TEXT TO DOCUMENT:C1237($chSessionWeb_t;JSON Stringify:C1217(This:C1470;*))
 			
 			If (Test path name:C476($chSessionWeb_t)#Is a document:K24:1)
@@ -389,6 +389,7 @@ Historique
 			If (This:C1470.token=This:C1470.tokenControle)
 				$0:=True:C214
 			Else 
+				$logErreur_o:=New object:C1471()
 				$logErreur_o.detailErreur:="Erreur de Token du visiteur"
 				$logErreur_o.methode:=Current method name:C684
 				$logErreur_o.visiteur:=This:C1470

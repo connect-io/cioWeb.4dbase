@@ -795,9 +795,12 @@ Historique
 	$infoWebApp_o:=New object:C1471()
 	$infoWebApp_o.sessionWeb:=This:C1470.sessionWeb
 	
-	$0:=cs:C1710.user.new($infoWebApp_o)
+	  //$0:=cs.user.new($infoWebApp_o)
 	
-	
+	  // En attendant de faire mieux, je declare la variable visiteur pour gérer les form
+	C_OBJECT:C1216(visiteur)
+	visiteur:=cs:C1710.user.new($infoWebApp_o)
+	$0:=visiteur
 	
 Function webAppPath
 /* ----------------------------------------------------
