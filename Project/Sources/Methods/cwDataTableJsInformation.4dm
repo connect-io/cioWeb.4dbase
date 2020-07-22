@@ -55,15 +55,15 @@ $dataTable_o.column_c:=New collection:C1472()
 
 For each ($column_o;$dataTable_o.column)
 	
-	$dataTable_o.column_c.push(New object:C1471("title";$column_o.title;"data";$column_o.data))
-	
+	  //$dataTable_o.column_c.push(New object("title";$column_o.title;"data";$column_o.data))
+	$dataTable_o.column_c.push($column_o)
 End for each 
 
 $dataTable_o.data_c:=New collection:C1472()
 
 
   // On boucle sur chaque élément de la source...
-  // Attention de bien conserver les varaibles dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
+  // Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
 For each (dataInBase_o;$source_v)
 	
 	dataligne_o:=New object:C1471()
