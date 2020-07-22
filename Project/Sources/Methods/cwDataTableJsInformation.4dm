@@ -23,15 +23,19 @@ If (True:C214)  // Déclarations
 	C_OBJECT:C1216($information_o;$column_o;dataInBase_o;dataColumn_o)
 End if 
 
-If ($3=Null:C1517)
-	ALERT:C41("Le paramêtre $3 n'est pas définit dans "+$dataTableNom_t)
-End if 
-
 $pageWeb_o:=$1->
+
+If ($3=Null:C1517)
+	ALERT:C41("Le paramêtre $2 (lib) n'est pas défini dans la datatable.")
+End if 
 
   // Nettoyage du param
 $dataTableNom_t:=$2
 $dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
+
+If ($3=Null:C1517)
+	ALERT:C41("Le paramêtre $3 n'est pas défini dans la datatable "+$dataTableNom_t)
+End if 
 
 $source_v:=$3
 
