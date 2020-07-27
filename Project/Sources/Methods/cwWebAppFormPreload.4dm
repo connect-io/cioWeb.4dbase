@@ -29,10 +29,10 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	  //For ($i;1;Size of array($sites))
 	
 	  // On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"input.html";"UTF-8")
 	
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
 	  // On récupére la collection de form du sousDomaine
