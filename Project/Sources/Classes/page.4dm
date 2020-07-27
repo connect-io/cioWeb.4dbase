@@ -165,3 +165,61 @@ Historique
 	  // A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
 	C_OBJECT:C1216(pageWeb)
 	pageWeb:=pageWeb_o
+	
+	
+	
+Function scanBlock
+/* ----------------------------------------------------
+Fonction : page.scanBlock
+	
+Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
+	
+Historique
+27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($1)
+	
+	C_TEXT:C284($contenuFichierCorpsHtml_t;$nomVar_t;$valVar_t)
+	ARRAY LONGINT:C221($posTrouvee_al;0)
+	ARRAY LONGINT:C221($longTrouvee_al;0)
+	
+	$contenuFichierCorpsHtml_t:=$1
+	
+	  // On regarde si il y a des blocks de template.
+	
+	If ($contenuFichierCorpsHtml_t="@<!--#cwBlock@")
+		  // On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
+		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\r";"##r")
+		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\n";"##n")
+		
+		  // On purge les premiers caractéres.
+		$Pos:=Position:C15("<!--#cwBlock";$contenuFichierCorpsHtml_t)
+		If ($Pos#1)
+			$contenuFichierCorpsHtml_t:=Substring:C12($contenuFichierCorpsHtml_t;$Pos)
+		End if 
+		
+		  // On récupére le 1er block
+		$blockLength_l:=Position:C15("<!--#cwBlockFin-->";$contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
+		$block_t:=Substring:C12($contenuFichierCorpsHtml_t;1;$blockLength_l)
+		
+		While ((Match regex:C1019("<!--#cwBlock ([a-zA-Z0-9_-]*)-->(.*)<!--#cwBlockFin-->(.*)?";$block_t;1;$posTrouvee_al;$longTrouvee_al)))
+			
+			$nomVar_t:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{1};$longTrouvee_al{1})
+			$valVar_t:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{2};$longTrouvee_al{2})
+			
+			This:C1470[$nomVar_t]:=$valVar_t
+			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t];"##r";"\r")
+			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t];"##n";"\n")
+			
+			$group3:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{3};$longTrouvee_al{3})
+			
+			$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;$block_t;"";1)
+			$blockLength_l:=Position:C15("<!--#cwBlockFin-->";$contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
+			$block_t:=Substring:C12($contenuFichierCorpsHtml_t;1;$blockLength_l)
+			
+		End while 
+	End if 
+	
+	
+	
