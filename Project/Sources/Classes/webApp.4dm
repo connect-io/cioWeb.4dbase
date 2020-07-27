@@ -50,14 +50,8 @@ Historique
 	If ($source_o.folders().length=0)
 		$subDomain_t:=Request:C163("indiquez le sous domaine du site à creer ?";"www")
 		If (ok=1)
-			  // On crée le repertoire du nouveau sous domaine.
-			$source_o.folder($subDomain_t).create()
-			
-			  // On ajoute quelques fichiers de démo.
-			Folder:C1567(fk resources folder:K87:11).folder("modelSources").folder("_cioWeb").copyTo($source_o.folder($subDomain_t);fk overwrite:K87:5)
-			Folder:C1567(fk resources folder:K87:11).folder("modelSources").folder("helloWord").copyTo($source_o.folder($subDomain_t);fk overwrite:K87:5)
-			Folder:C1567(fk resources folder:K87:11).folder("modelSources").folder("layout").copyTo($source_o.folder($subDomain_t);fk overwrite:K87:5)
-			Folder:C1567(fk resources folder:K87:11).folder("modelSources").folder("main").copyTo($source_o.folder($subDomain_t);fk overwrite:K87:5)
+			  // On crée le repertoire du nouveau sous domaine et l'on ajoute quelques fichiers de démo.
+			Folder:C1567(fk resources folder:K87:11).folder("modelSources").copyTo($source_o;$subDomain_t)
 		End if 
 	End if 
 	
@@ -439,7 +433,7 @@ Function serverStart
 /* ----------------------------------------------------
 Fonction : webApp.serverStart
 	
-Démérrage du serveur web
+Démarrage du serveur web
 	
 Historique
 19/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -569,24 +563,24 @@ Historique
 		  //Creation du chemin complet du fichier html
 		For ($j;1;Size of array:C274($libpage_at))
 			$page:=$configPage[$libpage_at{$j}]
-			If ($page.fichier#Null:C1517)
+			If ($page.viewPath#Null:C1517)
 				
 				  // Attention : On ne peut pas utiliser ici de boucle for each car sa modification ne sera pas répercutée sur l'élément de la collection.
-				For ($i_l;0;$page.fichier.length-1)
+				For ($i_l;0;$page.viewPath.length-1)
 					  // On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-					$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];":";Folder separator:K24:12)  // Séparateur mac
-					$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
-					$page.fichier[$i_l]:=Replace string:C233($page.fichier[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
-					$page.fichier[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+$page.fichier[$i_l]
+					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];":";Folder separator:K24:12)  // Séparateur mac
+					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
+					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
+					$page.viewPath[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+$page.viewPath[$i_l]
 					
 					  // On vérifie que le fichier existe bien
-					If (Test path name:C476($page.fichier[$i_l])#Is a document:K24:1)
-						ALERT:C41("Il manque le fichier suivant : "+$page.fichier[$i_l])
+					If (Test path name:C476($page.viewPath[$i_l])#Is a document:K24:1)
+						ALERT:C41("Il manque le fichier view suivant : "+$page.viewPath[$i_l])
 					End if 
 					
 				End for 
 			Else 
-				$page.fichier:=New collection:C1472
+				$page.viewPath:=New collection:C1472
 			End if 
 			
 			
@@ -611,8 +605,8 @@ Historique
 				: (cwExtensionFichier (String:C10($page.url))#"")
 					$page.type:=cwExtensionFichier ($page.url)
 					
-				: ($page.fichier.length#0)
-					$page.type:=cwExtensionFichier ($page.fichier[($page.fichier.length-1)])
+				: ($page.viewPath.length#0)
+					$page.type:=cwExtensionFichier ($page.viewPath[($page.viewPath.length-1)])
 					
 				Else 
 					  // Si l'on arrive pas à le determiner, on fixe .html par defaut...
