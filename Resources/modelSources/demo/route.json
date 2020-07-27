@@ -1,11 +1,14 @@
 ﻿{
 	"helloWord": {
+		"parents": [
+			"parentsLayoutDemo"
+		],
 		"route": {
 			"path": "/hello-word.html"
 		},
 		"titre": "Hello word",
-		"fichier": [
-			"helloWord.html"
+		"viewPath": [
+			"demo/view/helloWord.html"
 		]
 	}
 }

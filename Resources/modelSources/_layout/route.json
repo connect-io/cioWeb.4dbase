@@ -1,0 +1,19 @@
+﻿{
+	"parentsLayoutDemo": {
+		"titre": "Hello word",
+		"viewPath": [
+			"_layout/view/layoutDemo.html"
+		],
+		"cssPath": [
+			"https://getbootstrap.com/docs/4.0/examples/cover/",
+			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
+			"https://getbootstrap.com/docs/4.0/examples/cover/cover.css",
+			"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+		],
+		"jsPath": [
+			"https://code.jquery.com/jquery-3.5.1.slim.min.js",
+			"https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
+			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		]
+	}
+}

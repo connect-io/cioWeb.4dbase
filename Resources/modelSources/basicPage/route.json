@@ -1,0 +1,11 @@
+﻿{
+	"index": {
+		"route": {
+			"path": "/"
+		},
+		"titre": "Page index",
+		"viewPath": [
+			"basicPage/view/index.html"
+		]
+	}
+}

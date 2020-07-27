@@ -1,13 +1,11 @@
 ﻿{
-	"lib": "formHelloWordContact",
+	"lib": "formHelloWord",
 	"class": "m-t g-pa-10",
 	"action": "contactDetail",
 	"method": "POST",
 	"input": [
-
-
 		{
-			"lib": "hwcNom",
+			"lib": "hwNom",
 			"type": "text",
 			"label": "Qui es-tu ?",
 			"colLabel": 4,
@@ -20,9 +18,10 @@
 		},
 
 		{
-			"lib": "hwcSubmit",
+			"lib": "hwSubmit",
+			"class": "btn btn-primary float-right",
 			"type": "submit",
-			"value": "Enregistrer"
+			"value": "Changer de nom"
 		}
 	]
 }
