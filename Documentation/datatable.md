@@ -1,33 +1,56 @@
 ﻿# Gestion des tableaux de données
 
 ## Description
-Les tableaux de données (vous retrouverez son nom anglais "datatables")
+Les tableaux de données (vous retrouverez son nom anglais "datatables") permette d'afficher sous forme de liste triable une collection 4D.
+Les dataTables du composant utilise la solution HTML/jQuery du site https://datatables.net
 
 ## Prérequis
 * La conpréhension des routes est requise.
 * La compréhension des views est requise.
 * Chargement des fichiers js et css
 
+Dans le fichier route de la page (ou la page parent) ajouté les appels CSS et JS suivant :
+```json
+
+	"nomPageRoute": {
+		"cssFile": [
+			"https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+		],
+		"jsFile": [
+            "https://code.jquery.com/jquery-3.5.1.min.js",
+			"https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
+		]
+	},
+
+```
+
 ## Coder notre tableau
 
 
-### **Création du fichier document.datatable.json**
+### Création du fichier  de configuration document.datatable.json
 
 Il faut tout d'abord définir le tableau et ses différentes caractéristiques. On va donc lui donner un **lib** qui sera le nom de notre tableau ainsi qu'une classe **class** si cela est nécessaire.
 On obtient alors:
 
 ```json
-	"lib": "dtNomPageNomTableau",
-	"class": "",
+{
+    "lib": "dtNomPageNomTableau"
+}
+
 ```
 
-Ici, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau suivi de détail et enfin l'élément qui sera réprésenté dans un tableau.
+Ici, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau et  l'élément qui sera réprésenté dans un tableau.
 
-On peut y rajouter ensuite des caractéristiques à notre tableau tel que :
+On ajoute ensuite des propriétés à notre tableau tel que :
 
-* la gestion automatique du nombre de pages de notre tableau si nécessaire avec ``` "dom": "auto", ```
+| Nom de la propriété | Type | Valeur par defaut | Commentaire |
+| ------------------- | ---- | ----------------- | ----------- |
+| class | texte | "" | Permet de personnaliser le CSS du tableau |
+| dom | texte | "auto" | Génére les éléments autour du tableau. <br>La valeur "auto" permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br>Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
+| doubleClick | objet | null | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
 
-* la possibilité de doublecliquer sur une ligne du tableau pour accéder à l'élément 
+
+a possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 
 ```json    
     "doubleClick" :{
         "link": "elementtableauDetail",
