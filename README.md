@@ -7,7 +7,7 @@
 Vous pouvez soit récupérer le composant et le copier dans votre application.
 Soit ajouter le composant dans votre application 4D sous GIT comme sous-module:
 ```terminal
-git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components2/cioWeb.4dbase
+git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
 ```
 
 Les sources et le build sont dans 2 branches distinctes.

@@ -60,7 +60,7 @@ If (True)  // Déclarations
 	C_TEXT($htmlFichierChemin_t;$resultatMethode_t;$methodeNom_t)
 End if 
 
-// ===== Chargement des informations du visiteur du site =====
+  // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
 	visiteur_o:=<>webApp_o.userNew()
 End if 
@@ -72,17 +72,14 @@ visiteur_o.ip:=$3
 visiteur_o.devMode:=visiteur_o.Host="@dev@"
 
 
-
   // ===== Rechargement des variables de l'application =====
 If (visiteur_o.devMode)
 	SET ASSERT ENABLED(True)
-	<>webApp_o.jsMinify()
-	<>webApp_o.htmlMinify()
 	<>webApp_o.serverStart()
 End if 
 
 
-// ===== Chargement des informations sur la page =====
+  // ===== Chargement des informations sur la page =====
 pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
 
   // On va fusionner les data de la route de l'url sur le visiteur.

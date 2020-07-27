@@ -458,6 +458,12 @@ Historique
 	
 	C_COLLECTION:C1488($route_c)
 	
+	  // Minification du JS.
+	This:C1470.jsMinify()
+	
+	  // Minification du HTML.
+	This:C1470.htmlMinify()
+	
 	varVisiteurName_t:=This:C1470.config.varVisitorName_t
 	
 	  // On boucle sur chaque sous domaine.
