@@ -50,7 +50,7 @@ End if
 	La méthode reçoit tout les params de la méthode sur connexion web
 	
 	Historique
-	27/07/20 -  Grégory Fromain & Tifenn Fabry - création
+	28/07/20 -  Grégory Fromain - création
 ----------------------------------------------------------------------*/
 
 If (True)  // Déclarations
@@ -68,7 +68,15 @@ End if
 visiteur_o.getInfo()
 visiteur_o.ip:=$3
 
-  // Dectection du mode developpement
+  
+  // Petit hack pour simplifier, le premier demarrage.
+  // C'est à supprimer après la configuration du fichier host de la machine.
+If (visiteur_o.Host="127.0.0.1")
+	visiteur_o.sousDomaine:=OB Keys(<>webApp_o.sites)[0]
+	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
+End if 
+
+// Dectection du mode developpement
 visiteur_o.devMode:=visiteur_o.Host="@dev@"
 
 
@@ -97,7 +105,7 @@ For each ($methodeNom_t;pageWeb_o.methode)
 	pageWeb_o.resulatMethode_t:=$resultatMethode_t
 End for each 
 
-  //Si il y a un fichier html à renvoyer... on lance le constructeur.
+  //Si il y a un fichier HTML à renvoyer... on lance le constructeur.
 visiteur_o.updateVarVisiteur()
 
 
