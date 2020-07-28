@@ -1,10 +1,9 @@
 ﻿# Gestion des tableaux de données
 
-## Description
 Les tableaux de données (vous retrouverez son nom anglais "datatables") permette d'afficher sous forme de liste triable une collection 4D.
 Les dataTables du composant utilise la solution HTML/jQuery du site https://datatables.net
 
-## Prérequis
+# Prérequis
 * La conpréhension des routes est requise.
 * La compréhension des views est requise.
 * Chargement des fichiers js et css
@@ -24,22 +23,25 @@ Dans le fichier route de la page (ou la page parent) ajouté les appels CSS et J
 
 ```
 
-## Coder notre tableau
+# Coder notre tableau
 
 
-### Création du fichier  de configuration document.datatable.json
+## Création du fichier  de configuration document.datatable.json
 
-Il faut tout d'abord définir le tableau et ses différentes caractéristiques. On va donc lui donner un **lib** qui sera le nom de notre tableau ainsi qu'une classe **class** si cela est nécessaire.
-On obtient alors:
+Il faut tout d'abord définir le fichier de configuration du tableau.<br/>
+Son emplacement est libre du moment qu'il se trouve dans le repertoire sous domaine du dossier sources.<br/>
+Le nom du fichier est également libre mais il doit terminer par datatable.json (ex : Sources/www/professeur/eleve.datatable.json )
+
+On va donc lui donner un **lib** qui sera le nom de notre tableau, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau et  l'élément qui sera réprésenté dans un tableau.
 
 ```json
 {
-    "lib": "dtNomPageNomTableau"
+    "lib": "dtNomPageNomTableau",
+    "column": [ "..." ],
+    "data": [ "..." ]
 }
 
 ```
-
-Ici, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau et  l'élément qui sera réprésenté dans un tableau.
 
 On ajoute ensuite des propriétés à notre tableau tel que :
 
@@ -50,7 +52,7 @@ On ajoute ensuite des propriétés à notre tableau tel que :
 | doubleClick | objet | null | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
 
 
-a possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 
+La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 
 ```json    
     "doubleClick" :{
         "link": "elementtableauDetail",
@@ -63,7 +65,7 @@ a possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'él
 
 
 
-### **Création des colonnes de notre tableau et utilisation des data**
+## Création des colonnes de notre tableau
 
 Après avoir crée notre tableau, il faut créer les colonnes de notre tableau et les lier aux data de 4D.
 
@@ -73,16 +75,26 @@ On peut aussi y rajouter l'élément **className** qui nous permet de choisir ou
 ```json    
     "column": [
         {
-            "title": "Element1", //on aura alors affiché pour le titre de notre colonne "Element1"
+            "title": "Element1",
             "data": "element1"
         },
         {
             "title": "Element2",
             "data": "element2",
-            "className": "text-right" // nos données pour cette colonne ne seront donc plus au milieu de la case mais à droite
+            "className": "text-right"
         }
 	],
 ```
+Liste des propriétés propre aux colonnes (column) :
+
+| Nom de la propriété | Obligatoire | Type | Valeur par defaut | Commentaire |
+| ------------------- | ----------- | ---- | ----------------- | ----------- |
+| title | Oui | Texte | "" | Nom de la colonne |
+| data | Oui | Texte | #"" | Correspond à la valeur de data.name |
+| className | Non | Texte | "" | Personnalise le CSS de la colonne (ex : ``` text-right ```) |
+
+
+## Intégration des données
 
 La deuxième partie est appelée **data**. Pour chaque colonne, on va donc créer la data avec **name** et la lier à la variable 4D avec **value**.
 On peut aussi créer des datas qui seront stockées dans le tableau, mais pas affiché. Pour cela on crée la data sans avoir avant crée la column.
@@ -104,7 +116,13 @@ On peut aussi créer des datas qui seront stockées dans le tableau, mais pas af
 	]
 ```
 
-On peut rajouter des éléments afin de personnaliser nos données. On peut par exemple rajouter le symbole "€" à la suite de notre valeur en mettant **"This.Prix+\" €\""** ou bien mettre sous forme de date avec **"string(This.Date)"** 
+Liste des propriétés propre aux données (data):
+
+| Nom de la propriété | Obligatoire | Type | Valeur par defaut | Commentaire |
+| ------------------- | ----------- | ---- | ----------------- | ----------- |
+| name | Oui | Texte | #"" | Nom de la donnée (Permet la correspondance avec les colonnes.)|
+| value | Oui | Texte | #"" | Nom de la propriété de notre collection 4D. <br>Il est possible de concaténer 2 données : ``` "This.cp+\" - \"+This.ville" ``` ou  bien ``` "This.Prix+\" €\"" ```<br> Pour les dates il est préférable de les passer sous forme de texte : ``` "string(This.Date)" ``` |
+
 
 
 Cela donne donc au final le fichier de configuration suivant :
@@ -159,7 +177,7 @@ Ce code va donc nous donner le tableau suivant :
 
 
 
-### **Incorporation dans notre fichier HTML**
+# Incorporation dans notre fichier HTML
 
 Après avoir créé le tableau, il faut ensuite le rajouter à notre code HTML pour pouvoir l'afficher.
 
@@ -169,7 +187,7 @@ Après avoir créé le tableau, il faut ensuite le rajouter à notre code HTML p
 
 Les éléments à modifier sont donc le nom du tableau qui est le "lib" de notre code JSON ainsi que entity.Element ou il faut changer Element par l'élément que l'on trouve dans le tableau.
 
-## Rajout de bouton pour agir avec le tableau
+# Rajout de bouton pour agir avec le tableau
 
 On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.default
 
@@ -179,7 +197,7 @@ On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.de
     </div>
 ```
 
-### Code HTML pour la création du bouton "supprimer ligne"
+## Code HTML pour la création du bouton "supprimer ligne"
 
 ```html
 <button type="button" id="NomBtnRetirerLigne">
@@ -189,7 +207,7 @@ On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.de
 
 Ici on définit son type avec **type="button"** puis on choisit le nom du bouton avec l'id **id="NomBtnRetirerLigne"**.
 
-### Code Javascript pour la création du bouton "supprimer ligne"
+## Code Javascript pour la création du bouton "supprimer ligne"
 
 
 ```js
