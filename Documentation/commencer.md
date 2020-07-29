@@ -1,8 +1,14 @@
 ﻿# Commencer avec le composant cioWeb
 
-## Présentation
+## Installation
 
-## Configuration du localhost
+Vous pouvez soit récupérer le composant et le copier dans votre application.
+Soit ajouter le composant dans votre application 4D sous GIT comme sous-module:
+```terminal
+git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
+```
+
+Les sources et le build sont dans 2 branches distinctes.
 
 ## Méthode de base sur ouverture
 
@@ -142,3 +148,10 @@ Case of
 		
 End case 
 ```
+
+A partir d'ici, vous pouvez redemarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
+Au lancement de l'application le logiciel vous demande quel sous domaine vous souhaitez créer ? Par defaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
+
+Vous pouvez dés à présent tester le serveur web via votre navigateur : http://127.0.0.1
+
+## Configuration du localhost

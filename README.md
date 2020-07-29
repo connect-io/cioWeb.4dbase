@@ -2,22 +2,17 @@
     <img src="http://www.connect-io.fr/uploads/3/logo-base.png">
 </a></p>
 
-## Installation
 
-Vous pouvez soit récupérer le composant et le copier dans votre application.
-Soit ajouter le composant dans votre application 4D sous GIT comme sous-module:
-```terminal
-git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
-```
+# Présentation
+Le composant cioWeb permet de transformer une application 4D existante traditionnelle en une véritable application web.
 
-Les sources et le build sont dans 2 branches distinctes.
+Il nécessite du code supplémentaire dans votre application, mais ne modifie aucune méthode de votre application. (Sauf la méthode sur ouverture pour le chargement du serveur web)
 
-Actuellement le composant est compatible 4D v18.X mais risque prochainement d'utiliser des class et sera donc comptatible uniquement à partir de la 4D v18r3.
-
+Le composant permet de gérer des interfaces de site complètement indépendantes en fonction du sous-domaine. Vous pourrez par exemple depuis votre application 4D utiliser le sous domaine "www." pour le public, "admin." pour la modération et "api." pour les connexions de serveur à serveur.
 
 ## Attention
-
-Malgré que ce composant tourne en production sur certaine bases de nos clients. Il n'est pas encore documenté, reste difficile à utiliser dans l'état et subit de grosse transformations en ce moment.
+Actuellement le composant est compatible uniquement à partir de 4D V18 r3.
+Malgré que ce composant tourne en production sur certaines bases de nos clients. Il n'est pas encore documenté, reste difficile à utiliser dans l'état et subit de grosses transformations en ce moment.
 
 ## Utilisation
 
