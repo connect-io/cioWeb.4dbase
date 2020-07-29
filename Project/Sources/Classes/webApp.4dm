@@ -234,6 +234,74 @@ Historique
 	
 	
 	
+Function dataTableInit
+/* ----------------------------------------------------
+Fonction : webApp.dataTableInit
+	
+Initialisation des dataTables.
+	
+Historique
+28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
+	
+	C_OBJECT:C1216($1;$user_o)  // instance de user
+	
+	C_OBJECT:C1216($0)  // Instance de la dataTable en cours
+	
+	$user_o:=$1
+	$0:=New object:C1471()
+	
+	ASSERT:C1129($user_o.sousDomaine#"";"webApp.dataTableNew : Impossible de determiner le sous domaine de user.")
+	TRACE:C157
+	$0.config_o:=This:C1470.sites[$user_o.sousDomaine].dataTable
+	
+	$0.class:=cwToolGetClass ("dataTable")
+	
+	
+	
+	
+Function dataTableNew
+/* ----------------------------------------------------
+Fonction : webApp.dataTableNew
+	
+Chargement d'une nouvelle dataTable
+	
+Historique
+28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($1)  // Lib du dataTable
+	C_POINTER:C301($2)
+	
+	C_OBJECT:C1216($0;$instance_o)  // Instance de la dataTable en cours
+	
+	$user_o:=visiteur
+	
+	ASSERT:C1129($1#"";"webApp.dataTableNew : Le param $1 ne doit pas être vide.")
+	ASSERT:C1129($user_o.sousDomaine#"";"webApp.dataTableNew : Impossible de determiner le sous domaine de user.")
+	
+	
+	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1)
+	
+	ASSERT:C1129($dataTableConfig_o.length#0;"webApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
+	
+	$instance_o:=cs:C1710.dataTable.new($dataTableConfig_o[0])
+	
+	  // Pour le retour de la fonction, il y a 2 methodes possibles.
+	If (Count parameters:C259=1)
+		
+		  // Soit un retournement simple dans $0
+		$0:=$instance_o
+	Else 
+		  // Soit le dans un pointeur (qui est un objet) passé dans $2, dans lequel on 
+		  // rajoute une propriété qui correspond au libellé du dataTable, cela permet 
+		  // de regrouper toutes les dataTable dans un seul objet.
+		
+		$2->[$1]:=$instance_o
+	End if 
+	
+	
+	
 Function htmlMinify
 /* ----------------------------------------------------
 Fonction : webApp.htmlMinify
@@ -801,6 +869,8 @@ Historique
 	C_OBJECT:C1216(visiteur)
 	visiteur:=cs:C1710.user.new($infoWebApp_o)
 	$0:=visiteur
+	
+	
 	
 Function webAppPath
 /* ----------------------------------------------------
