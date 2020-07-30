@@ -166,7 +166,7 @@ Function cacheSessionWebPath
 /* ----------------------------------------------------
 Fonction : webApp.cacheSessionWebPath
 	
-Chemin complet plateforme des sessions Web
+Chemin complet plateforme des sessions web
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création

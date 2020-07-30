@@ -48,7 +48,7 @@ On ajoute ensuite des propriétés à notre tableau tel que :
 | Nom de la propriété | Type | Valeur par defaut | Commentaire |
 | ------------------- | ---- | ----------------- | ----------- |
 | class | texte | "" | Permet de personnaliser le CSS du tableau |
-| dom | texte | "auto" | Génére les éléments autour du tableau. <br>La valeur "auto" permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br>Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
+| dom | texte | "auto" | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
 | doubleClick | objet | null | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
 
 
@@ -182,8 +182,13 @@ Ce code va donc nous donner le tableau suivant :
 Après avoir créé le tableau, il faut ensuite le rajouter à notre code HTML pour pouvoir l'afficher.
 
 ```html
-<table <!--#4DHTML cwDataTableJsInformation (->pageWeb_o;"dtNomPageNomTableau";entity_o.Element)-->></table>
+<!--#4DHTML dataTables_o.libDeMonDataTable.getHtml()-->
 ```
+
+```dataTables_o``` : variable process contenant toutes les informations sur les dataTables<br />
+```libDeMonDataTable``` : Libellé de la dataTable.<br />
+```getHtml()``` : Fonction de la class dataTable.getHtml()<br />
+
 
 Les éléments à modifier sont donc le nom du tableau qui est le "lib" de notre code JSON ainsi que entity.Element ou il faut changer Element par l'élément que l'on trouve dans le tableau.
 
