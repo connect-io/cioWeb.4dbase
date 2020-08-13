@@ -33,10 +33,12 @@ Son emplacement est libre du moment qu'il se trouve dans le repertoire sous doma
 Le nom du fichier est également libre mais il doit terminer par datatable.json (ex : Sources/www/professeur/eleve.datatable.json )
 
 On va donc lui donner un **lib** qui sera le nom de notre tableau, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau et  l'élément qui sera réprésenté dans un tableau.
+On rajoute ensuite une **source** qui est la dont provient les éléments du tableau.
 
 ```json
 {
     "lib": "dtNomPageNomTableau",
+    "source": "entity_o.param_o.elementtableau",
     "column": [ "..." ],
     "data": [ "..." ]
 }
@@ -130,6 +132,7 @@ Cela donne donc au final le fichier de configuration suivant :
 ```json  
 {
 	"lib": "dtNomPageNomTableau",
+    "source": "entity_o.param_o.elementtableau",
 	"class": "",
     "dom": "auto",
     "doubleClick" :{
