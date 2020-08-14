@@ -18,9 +18,9 @@ Le fichir route est composé d'une suite d'élément de  la forme suivante.
 
 ```
 
-Chacun de ces élèments reprensentera la **route** pour une page en particulier.
+Chacun de ces éléments reprensentera la **route** pour une page en particulier.
 
-Ona ensuite complété avec différents élèments.default
+Ona ensuite complété avec différents éléments.default
 
 ```json
 
@@ -41,7 +41,7 @@ Le **titre** est ce qui s'affichera sur l'onglet du moteur de recherche.
 Enfin **viewPath** 
 
 
-# Ajout d'un élèment parent 
+# Ajout d'un élément parent 
 
 On peut rajouter un parent à notre route. Cela permet d'ajouter des éléments communs à toutes les routes qui ont ce parent.
 
@@ -57,7 +57,7 @@ Pour cela, il faut d'abord rajouter la ligne suivante à toutes les routes ou l'
 
 Il faut ensuite créer un autre fichier route.json qui sera celui du parent. Sa construction est identique aux routes classique.default
 
-On peut y mettre par exemple les élèments de js et de css afin de pas avoir à les attribuer pour chaque route. On aura juste à attribuer le parents aux routes concernées. 
+On peut y mettre par exemple les éléments de js et de css afin de pas avoir à les attribuer pour chaque route. On aura juste à attribuer le parents aux routes concernées. 
 
 
 ```json
