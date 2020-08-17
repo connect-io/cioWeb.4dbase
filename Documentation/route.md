@@ -1,38 +1,30 @@
 ﻿# Gestion des routes
 
 ## Description
-Les routes permettents de construire les url de notre application ainsi que le comportement attendu pour la page.
-
-## Prérequis
-*
-*
-*
+Les routes permettents de construire les URL de notre application ainsi que le comportement attendu pour la page.
 
 # Coder notre fichier route
 
-Le fichir route est composé d'une suite d'élément de  la forme suivante.
+Le fichir route est un fichier json de la forme suivante.
 ```json
-
-	"nomdelapage": {
+"nomdelapage": {
 	},
-
 ```
 
 Chacun de ces éléments reprensentera la **route** pour une page en particulier.
+Généralement, ce fichier se trouve dans le dossier **Webapp** de notre projet et plus exactement dans le fichier **Source**. Dans le fichier source se trouve chaque élément de notre site rangé chacun dans un dossier. Dans ces dossier on retrouvera donc les dossier form, view et js ainsi que le fichier qui nous intéresse ici le fichier **route**.json.
 
-Ona ensuite complété avec différents éléments.default
+On doit ensuite complété avec différents éléments.
 
 ```json
-
 "route": {
-			"path": "/"
-		},
+	"path": "/"
+},
 "titre": "Page 1 - Titre",
-"keywords" : "keyword1",
+"keywords": "keyword1",
 "viewPath": [
 	"vitrine/view/index.html"
-		]
-
+]
 ```
 
 Le **titre** est ce qui s'affichera sur l'onglet du moteur de recherche.
@@ -43,13 +35,13 @@ Enfin **viewPath**
 
 # Ajout d'un élément parent 
 
-On peut rajouter un parent à notre route. Cela permet d'ajouter des éléments communs à toutes les routes qui ont ce parent.
+On peut rajouter un parent à notre route. Cela permet d'ajouter des éléments communs à toutes les routes qui ont ce parent. Le nom de notre parent commencera toujours par parents suivi du nom du parent.
 
 Pour cela, il faut d'abord rajouter la ligne suivante à toutes les routes ou l'on veut attrbuer ce parent.
 
 ```json
 
-"parents": [
+"parentsNom": [
 	"nomParent"
 ],
 
@@ -63,14 +55,20 @@ On peut y mettre par exemple les éléments de js et de css afin de pas avoir à
 ```json
 
 "cssPath": [
-			"/<!--4DTEXT visiteur_o.sousDomaine-->/css/1.css",
-			"/<!--4DTEXT visiteur_o.sousDomaine-->/css/2.css",
-
-
-		],
-		"jsPath": [
-			"/<!--4DTEXT visiteur_o.sousDomaine-->/js/1.js",
-			"/<!--4DTEXT visiteur_o.sousDomaine-->/js/2.js",
-			"/<!--4DTEXT visiteur_o.sousDomaine-->/js/3.js",
-		]
+	"/<!--4DTEXT visiteur_o.sousDomaine-->/css/1.css",
+	"/<!--4DTEXT visiteur_o.sousDomaine-->/css/2.css",
+],
+"jsPath": [
+	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/1.js",
+	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/2.js",
+	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/3.js",
+]
 ```
+Après avoir créé notre route il faut ensuite l'appeler sur notre page HTML.
+Pour cela, on va utiliser la ligne de code suivante :
+
+```html
+<!--#4DSCRIPT/cwLibToUrl/nomdelapage-->
+```
+
+On peut utiliser par exemple un bouton dont le href sera la ligne de code ci dessus. On va alors appeler la page correspondant lorsqu'on clique sur ce bouton.
