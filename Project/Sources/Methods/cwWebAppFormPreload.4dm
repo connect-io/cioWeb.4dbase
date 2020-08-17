@@ -12,6 +12,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les formulaires sont rechargés uniquement si ils ont été modifié.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
+30/08/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion optionnel de la propriété action dans la balise <form>
 ----------------------------------------------------*/
 
 
@@ -105,6 +106,9 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				$formMethod:=" method=\""+OB Get:C1224($form;"method")+"\""
 			End if 
 			
+			  // En 2013, avec tous les éléments HTML5, vous pouvez simplement omettre l'attribut 'action' pour soumettre un formulaire sur la page courante.
+			$formAction_t:=Choose:C955(String:C10($form.action)#"";" action=\"$action\"";"")
+			
 			  // On vérifie que dans notre formulaire il y a pas un input type "file"
 			  // Si c'est le cas on force la method à POST et on force un enctype
 			
@@ -119,7 +123,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				End if 
 			End for each 
 			
-			$form.html:=$formEnctype+$formId+$formClass+$formMethod+" action=\"$action\""
+			$form.html:=$formEnctype+$formId+$formClass+$formMethod+$formAction_t
 			
 			  //Configuration des inputs.
 			For each (formInput_o;$form.input)
