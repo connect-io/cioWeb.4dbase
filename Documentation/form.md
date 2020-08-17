@@ -1,0 +1,107 @@
+﻿# Gestion de form
+
+## Description
+Le fichier form permet la création des variables utilisées dans le fichier view.
+
+## Prérequis
+* La conpréhension des routes est requise.
+* La compréhension des views est requise.
+
+# Initialiser notre fichier form
+
+Notre fichier form est en language json.
+La crréation de ce fichier est presque identique dans chaque cas. Il faut seulement changer le **lib** et **action**
+
+```json
+
+{
+	"lib": "formPageDetail",
+	"class": "m-t g-pa-10",
+	"action": "pageDetail",
+	"method": "POST",
+	"input": [
+	]
+}
+
+```
+
+# Remplissage de "input"
+
+Après avoir créé le docmuent il faut remplir la partie **input** qui contient nos variables.default
+
+Dans sa forme la plus basique, une variable aura la forme suivante :
+
+```json
+
+		{
+			"lib": "pdVariable1",
+			"type": "text",
+			"label": "C'est la variable 1",
+			"colLabel": 4
+		},
+
+```
+
+Le **lib** sera le nom de notre variable. Généralement, on choisit les premières lettres du lib de notrefichier (ici PageDetail donc pd). 
+
+Il y a aussi le **label** qui sera un texte qui s'affichera notre élément (zone de complétion, menu déroulant, etc) il permet de donner des infos à l'utilisateur sur ce qu'il doit faire.
+
+Il y a ensuite le **collabel** qui permet de gérer l'espace entre le label et notre élément. C'est un entier comprit entre 0 et 12.
+
+Enfin, il y a le **type** qui permet de choisir le type de varaible. Cela peut être une zone de texte ou bien un menu déroulant, une case à cocher ou encore un élément cacher.
+
+On peut donc utiliser:
+* **text** pour une zone de texte
+* **textarea** pour une zone de texte de taille plus importante
+* **select** pour un menu déroulant
+dans ce cas il faut rajouter:
+```json
+		"selection": [
+			{
+				"lib": "choix1",
+				"value": "0"
+			},
+			{
+				"lib": "choix2",
+				"value": "1"
+			}
+		]
+```
+Pour les values, elles se retrouvent dans 4D.
+
+* **checkbox** pour une case à cocher
+
+Il en existe d'autres qui se retrouve facilement sur internet.
+
+
+## Element constant
+
+Pour chacune des page il faut toujours mettre le **token** qui est très utile pour la sécurité de la page.
+
+```json
+		{
+			"lib": "token"
+		},
+```
+
+Il y a aussi **Submit** que l'on peut mettre en format cacher. Pour cela, il faut la class **hidden**. Mais on peut aussi afficher le bouton qui permet de valider la saisie. 
+
+```json
+		{
+			"lib": "pdSubmit",
+			"type": "submit",
+			"class": "hidden",
+			"value": "Enregistrer"
+		}
+```
+ou
+
+```json
+		{
+			"lib": "pdSubmit",
+			"type": "submit",
+			"class": "btn btn-large u-btn-outline-teal rounded-0 ",
+			"value": "Valider"
+		}
+```
+
