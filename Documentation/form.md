@@ -27,7 +27,7 @@ La crréation de ce fichier est presque identique dans chaque cas. Il faut seule
 
 # Remplissage de "input"
 
-Après avoir créé le docmuent il faut remplir la partie **input** qui contient nos variables.default
+Après avoir créé le docmuent il faut remplir la partie **input** qui contient nos variables.
 
 Dans sa forme la plus basique, une variable aura la forme suivante :
 
@@ -68,11 +68,23 @@ dans ce cas il faut rajouter:
 		]
 ```
 Pour les values, elles se retrouvent dans 4D.
-
 * **checkbox** pour une case à cocher
-
 Il en existe d'autres qui se retrouve facilement sur internet.
 
+
+Pour résumer nous avons dans input :
+
+| Nom de la propriété | Type | Valeur par defaut | Commentaire |
+| ------------------- | ---- | ----------------- | ----------- |
+| lib | texte | "" | C'est le nom de la variable |
+| type | texte | "" | Permet de choisir le type de notre variable (text, textarea, select, etc) |
+| label | texte | "" | C'est le texte qui s'affichera avec notre variable sur la page web |
+| collabel | entier entre 1 et 12 | "" | Permet de gérer l'espace entre le label et la variable |
+| class | texte | "" | Permet de rajouter des propriétés à notre variable |
+| clientDisabled | boolean | false | Permet de choisir si les champs sont saisissble ou pas (false = saisissable) |
+| append | texte | "" | Permet de rajouter un petit texte au bout du champ de saisi (€, m2, etc) |
+| selection | texte | "" | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessus) |
+| format | texte | "" | Permet de définir des format spécifique tel que des dates( °°/°°/°°°°) |
 
 ## Element constant
 
