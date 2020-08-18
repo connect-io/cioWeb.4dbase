@@ -176,7 +176,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					formInput_o.colLabel:=3
 				End if 
 				
-				  // Ondetermine la largueur de l'input
+				  // On determine la largueur de l'input
 				Case of 
 					: (OB Is defined:C1231(formInput_o;"colInput"))
 						If (formInput_o.colInput>=0) & (formInput_o.colInput<=12)
@@ -277,9 +277,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
 					End case 
 					
-					$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$disabled";"<!--#4DIF (OB Get("+varVisiteurName_t+";\"loginLevel\")#\"admin\")-->disabled<!--#4DENDIF-->")
-					
-					  //$htmlInputTags_t:=cwI18nConvertJson ($htmlInputTags_t)
 					OB SET:C1220(formInput_o;$viewHtml;$htmlInputTags_t)
 					
 				End for each 
