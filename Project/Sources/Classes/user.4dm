@@ -423,7 +423,7 @@ Function updateVarVisiteur
 /* ----------------------------------------------------
 Fonction : user.updateVarVisiteur
 	
-Sychro avec du vieux code
+Synchro avec du vieux code
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création

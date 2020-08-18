@@ -48,7 +48,7 @@ If (ok#1)
 End if 
 ```
 
-## Méthode de base sur conenxion web
+## Méthode de base sur connexion web
 ```4d
 /* ----------------------------------------------------------------------
 	Méthode : Sur connexion web
