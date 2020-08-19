@@ -72,12 +72,12 @@ Pour les values, elles se retrouvent dans 4D.
 Il en existe d'autres qui se retrouve facilement sur internet.
 
 
-Pour résumer nous avons dans input :
+Pour résumer les différents éléments que l'on peut trouver dans l'input, nous avons  :
 
 | Nom de la propriété | Type    | Valeur par defaut | Commentaire |
 | ------------------- | ------- | ----------------- | ----------- |
 | lib                 | texte   | ""                | C'est le nom de la variable |
-| type                | texte   | ""                | Permet de choisir le type de notre variable (text, textarea, select, etc) |
+| type                | texte   | ""                | Permet de choisir le type de notre variable (text, textarea, select, etc) Voir tableau suivant |
 | label               | texte   | ""                | C'est le texte qui s'affichera avec notre variable sur la page web |
 | collabel            | entier  | ""                | Permet de gérer l'espace entre le label et la variable |
 | class               | texte   | ""                | Permet de rajouter des propriétés à notre variable |
@@ -94,6 +94,19 @@ Pour résumer nous avons dans input :
 | dateMin             | texte   | ""                | Permet de choisir la date minimum lorsqu'on a un type date |
 | dateMax             | texte   | ""                | Permet de choisir la date maximum lorsqu'on a un type date  |
 | blobSize            | texte   | ""                | |
+
+
+Voici un tableau regroupant les différentes valeur que peut prendre type:
+
+| Nom de la propriété | Element nécessaire dans input | Element facultatif dans input                          | Commentaire |
+| ------------------- | ------------------------------| ------------------------------------------------------ | ----------- |
+| text                |                               | append, label, collabel, class, clientDisabled, append | Permet de créer un champ de texte|
+| textarea            |                               | label, collabel, clientDisabled                        | Permet de créer un champ de texteprenant plusieurs lignes |
+| select              | selection                     | label, collabel, clientDisabled                        | Permet de créer un menu déroulant |
+| checkbox            |                               | label, collabel, clientDisabled                        | Permet de creer une case à cocher |
+| radio               | selection                     | label, collabel, clientDisabled, colRadio              | Permet de créer des boutons radio|
+
+
 
 ## Element constant
 
