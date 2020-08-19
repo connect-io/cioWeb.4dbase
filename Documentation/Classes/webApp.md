@@ -23,6 +23,7 @@ C'est la class principale du composant cioWeb.
 * [Fonction : webfolderSubdomainPath](#fonction--webfolderSubdomainPath)
 
 
+------------------------------------------------------
 
 ## Fonction : cachePath
 Chemin complet (format plateforme) du dossier cache dans l'application webApp.
@@ -53,6 +54,7 @@ $chemin_t:=myWebApp_o.cachePath()
 ```
 
 
+------------------------------------------------------
 
 ## Fonction : cacheSessionWebPath
 Chemin complet (format plateforme) des sessions web.<br />
@@ -84,6 +86,9 @@ myWebApp_o:=$webApp.new("Tonton")
 $chemin_t:=myWebApp_o.cacheSessionWebPath()
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : cacheViewPath
 Chemin complet plateforme du dossier cache des vues
 
@@ -98,6 +103,9 @@ Chemin complet plateforme du dossier cache des vues
 
 ### Example
 ???
+
+
+------------------------------------------------------
 
 ## Fonction : cacheViewSubdomainPath
 Chemin complet plateforme du dossier cache des vues / sousDomaine
@@ -118,6 +126,9 @@ Chemin complet plateforme du dossier cache des vues / sousDomaine
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : dataTableInit
 Initialisation des dataTables.
 		
@@ -136,6 +147,9 @@ Initialisation des dataTables.
 ```html
 ???
 ```
+
+
+------------------------------------------------------
 
 ## Fonction : dataTableNew
 Chargement d'une nouvelle dataTable
@@ -158,6 +172,8 @@ Chargement d'une nouvelle dataTable
 ```
 
 
+------------------------------------------------------
+
 ## Fonction : htmlMinify
 Minification du HTML
 		
@@ -176,6 +192,8 @@ Minification du HTML
 ???
 ```
 
+
+------------------------------------------------------
 
 ## Fonction : pageCurrent
 Chargement des éléments de la page courante
@@ -196,6 +214,9 @@ Chargement des éléments de la page courante
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : serverStart
 Démarrage du serveur web
 		
@@ -213,6 +234,9 @@ Démarrage du serveur web
 ```html
 ???
 ```
+
+
+------------------------------------------------------
 
 ## Fonction : sessionWebStart
 Démarrage des sessions Web
@@ -233,6 +257,9 @@ Démarrage des sessions Web
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : sourcePath
 Chemin complet plateforme du dossier Source
 		
@@ -251,6 +278,8 @@ Chemin complet plateforme du dossier Source
 ???
 ```
 
+
+------------------------------------------------------
 
 ## Fonction : sourceSubdomainPath
 Chemin complet plateforme du dossier Source/sousDomaine
@@ -271,6 +300,9 @@ Chemin complet plateforme du dossier Source/sousDomaine
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : userNew
 Chargement des éléments sur l'utilisateur / visiteur
 		
@@ -289,6 +321,9 @@ Chargement des éléments sur l'utilisateur / visiteur
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : webAppPath
 Chemin complet plateforme du dossier WebApp
 		
@@ -306,6 +341,9 @@ Chemin complet plateforme du dossier WebApp
 ```html
 ???
 ```
+
+
+------------------------------------------------------
 
 ## Fonction : webfolderSubdomainPath
 Chemin complet plateforme du dossier Webfolder/sousDomaine

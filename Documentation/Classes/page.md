@@ -8,6 +8,9 @@ Cette class permet de génerer le contenue d'une page.
 * [Fonction : constructor](#fonction--constructor)
 * [Fonction : scanBlock](#fonction--scanBlock)
 
+
+------------------------------------------------------
+
 ## Fonction : constructor
 Initialisation de la page web.
 ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
@@ -29,7 +32,7 @@ ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la f
 ```
 
 
-
+------------------------------------------------------
 
 ## Fonction : cachePath
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.

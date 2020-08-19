@@ -33,12 +33,12 @@ Dans sa forme la plus basique, une variable aura la forme suivante :
 
 ```json
 
-		{
-			"lib": "pdVariable1",
-			"type": "text",
-			"label": "C'est la variable 1",
-			"colLabel": 4
-		},
+{
+	"lib": "pdVariable1",
+	"type": "text",
+	"label": "C'est la variable 1",
+	"colLabel": 4
+},
 
 ```
 
@@ -56,16 +56,16 @@ On peut donc utiliser:
 * **select** pour un menu déroulant
 dans ce cas il faut rajouter:
 ```json
-		"selection": [
-			{
-				"lib": "choix1",
-				"value": "0"
-			},
-			{
-				"lib": "choix2",
-				"value": "1"
-			}
-		]
+"selection": [
+	{
+		"lib": "choix1",
+		"value": "0"
+	},
+	{
+		"lib": "choix2",
+		"value": "1"
+	}
+]
 ```
 Pour les values, elles se retrouvent dans 4D.
 * **checkbox** pour une case à cocher
@@ -74,46 +74,47 @@ Il en existe d'autres qui se retrouve facilement sur internet.
 
 Pour résumer nous avons dans input :
 
-| Nom de la propriété | Type | Valeur par defaut | Commentaire |
-| ------------------- | ---- | ----------------- | ----------- |
-| lib | texte | "" | C'est le nom de la variable |
-| type | texte | "" | Permet de choisir le type de notre variable (text, textarea, select, etc) |
-| label | texte | "" | C'est le texte qui s'affichera avec notre variable sur la page web |
-| collabel | entier entre 1 et 12 | "" | Permet de gérer l'espace entre le label et la variable |
-| class | texte | "" | Permet de rajouter des propriétés à notre variable |
-| clientDisabled | boolean | false | Permet de choisir si les champs sont saisissble ou pas (false = saisissable) |
-| append | texte | "" | Permet de rajouter un petit texte au bout du champ de saisi (€, m2, etc) |
-| selection | texte | "" | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessus) |
-| format | texte | "" | Permet de définir des format spécifique tel que des dates( °°/°°/°°°°) |
+| Nom de la propriété | Type    | Valeur par defaut | Commentaire |
+| ------------------- | ------- | ----------------- | ----------- |
+| lib                 | texte   | ""                | C'est le nom de la variable |
+| type                | texte   | ""                | Permet de choisir le type de notre variable (text, textarea, select, etc) |
+| label               | texte   | ""                | C'est le texte qui s'affichera avec notre variable sur la page web |
+| collabel            | entier  | ""                | Permet de gérer l'espace entre le label et la variable |
+| class               | texte   | ""                | Permet de rajouter des propriétés à notre variable |
+| clientDisabled      | boolean | false             | Permet de choisir si les champs sont saisissble ou pas (false = saisissable) |
+| append              | texte   | ""                | Permet de rajouter un petit texte au bout du champ de saisi (€, m2, etc) |
+| selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessus) |
+| format              | texte   | ""                | Permet de définir des format spécifique tel que des dates( °°/°°/°°°°) |
+| colRadio            | entier  | ""                | Lorsqu'on a un type: radio cela permet d'aligner les boutons radios |
 
 ## Element constant
 
 Pour chacune des page il faut toujours mettre le **token** qui est très utile pour la sécurité de la page.
 
 ```json
-		{
-			"lib": "token"
-		},
+{
+	"lib": "token"
+},
 ```
 
 Il y a aussi **Submit** que l'on peut mettre en format cacher. Pour cela, il faut la class **hidden**. Mais on peut aussi afficher le bouton qui permet de valider la saisie. 
 
 ```json
-		{
-			"lib": "pdSubmit",
-			"type": "submit",
-			"class": "hidden",
-			"value": "Enregistrer"
-		}
+{
+	"lib": "pdSubmit",
+	"type": "submit",
+	"class": "hidden",
+	"value": "Enregistrer"
+}
 ```
 ou
 
 ```json
-		{
-			"lib": "pdSubmit",
-			"type": "submit",
-			"class": "btn btn-large u-btn-outline-teal rounded-0 ",
-			"value": "Valider"
-		}
+{
+	"lib": "pdSubmit",
+	"type": "submit",
+	"class": "btn btn-large u-btn-outline-teal rounded-0 ",
+	"value": "Valider"
+}
 ```
 

@@ -9,6 +9,9 @@ Gestion des tableaux de données en HTML.
 * [Fonction : setData](#fonction--setData)
 * [Fonction : getHtml](#fonction--getHtml)
 
+
+------------------------------------------------------
+
 ## Fonction : constructor			
 Initialisation d'une dataTable
 
@@ -28,6 +31,9 @@ Initialisation d'une dataTable
 ???
 ```
 
+
+------------------------------------------------------
+
 ## Fonction : setData
 Charger les data dans le tableau de donnée.
 
@@ -45,6 +51,9 @@ Charger les data dans le tableau de donnée.
 ```html
 ???
 ```
+
+
+------------------------------------------------------
 
 ## Fonction : getHtml
 Génére le code HTML pour le tableau.
