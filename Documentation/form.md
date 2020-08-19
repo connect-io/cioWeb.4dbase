@@ -86,6 +86,14 @@ Pour résumer nous avons dans input :
 | selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessus) |
 | format              | texte   | ""                | Permet de définir des format spécifique tel que des dates( °°/°°/°°°°) |
 | colRadio            | entier  | ""                | Lorsqu'on a un type: radio cela permet d'aligner les boutons radios |
+| required            | texte   | ""                | |
+| placeholder         | texte   | ""                | |
+| collapse            | texte   | ""                | |
+| contentType         | entier  | ""                | |
+| divClassSubmit      | boolean | false             | |
+| dateMin             | texte   | ""                | Permet de choisir la date minimum lorsqu'on a un type date |
+| dateMax             | texte   | ""                | Permet de choisir la date maximum lorsqu'on a un type date  |
+| blobSize            | texte   | ""                | |
 
 ## Element constant
 
