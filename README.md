@@ -20,7 +20,7 @@ Malgré que ce composant tourne en production sur certaines bases de nos clients
 * [Gestion des routes](Documentation/route.md)
 * [Les vues](Documentation/vue.md)
 * [Le javascript](Documentation/javascript.md)
-* [Utilisation des formulaires web](Documentation/formulaire.md)
+* [Utilisation des formulaires web](Documentation/form.md)
 * [Utilisation des tableaux de données](Documentation/datatable.md)
 
 ## Documentation des méthodes partagés
@@ -30,3 +30,9 @@ Malgré que ce composant tourne en production sur certaines bases de nos clients
 Les méthodes outils
 * [cwToolGetClass](Documentation/Methods/cwToolGetClass.md)
 
+## Classes
+
+* [dataTable](Documentation/Classes/dataTable.md)
+* [page](Documentation/Classes/page.md)
+* [user](Documentation/Classes/user.md)
+* [webApp](Documentation/Classes/route.md)
