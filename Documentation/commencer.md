@@ -16,7 +16,7 @@ Les sources et le build sont dans 2 branches distinctes.
 /* ----------------------------------------------------------------------
 	Méthode : Sur ouverture
 	
-	Charger tout les éléments propres à l'application Web
+	Charger tous les éléments propres à l'application Web
 	
 	Historique
 	27/07/20 -  Grégory Fromain - création
@@ -35,13 +35,13 @@ $classWebApp_v:=cwToolGetClass ("webApp")
 <>webApp_o:=$classWebApp_v.new()
 
 
-MESSAGE("Arret du serveur serveur web..."+Char(Carriage return))
+MESSAGE("Arrêt du serveur web..."+Char(Carriage return))
 WEB STOP SERVER
 
 MESSAGE("Chargement de l'application web..."+Char(Carriage return))
 <>webApp_o.serverStart()
 
-MESSAGE("Redémarrage du serveur serveur web..."+Char(Carriage return))
+MESSAGE("Redémarrage du serveur web..."+Char(Carriage return))
 WEB START SERVER
 If (ok#1)
 	ALERT("Le serveur web n'est pas correctement démarré.")
@@ -75,7 +75,7 @@ visiteur_o.getInfo()
 visiteur_o.ip:=$3
 
   
-  // Petit hack pour simplifier, le premier demarrage.
+  // Petit hack pour simplifier, le premier démarrage.
   // C'est à supprimer après la configuration du fichier host de la machine.
 If (visiteur_o.Host="127.0.0.1")
 	visiteur_o.sousDomaine:=OB Keys(<>webApp_o.sites)[0]
@@ -96,7 +96,7 @@ End if
   // ===== Chargement des informations sur la page =====
 pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
 
-  // On va fusionner les data de la route de l'url sur le visiteur.
+  // On va fusionner les datas de la route de l'URL sur le visiteur.
 If (pageWeb_o.route.data#Null)
 	
 	For each ($routeData_t;pageWeb_o.route.data)
@@ -105,7 +105,7 @@ If (pageWeb_o.route.data#Null)
 End if 
 
 
-  // On execute si besoin les méthodes relative à la page
+  // On exécute si besoin les méthodes relatives à la page
 For each ($methodeNom_t;pageWeb_o.methode)
 	EXECUTE METHOD($methodeNom_t;$resultatMethode_t)
 	pageWeb_o.resulatMethode_t:=$resultatMethode_t
@@ -130,7 +130,7 @@ Case of
 			visiteur_o.tokenGenerate()
 		End if 
 		
-		  //Pour charger les éléments HTML de la page, on demarre par les éléments de plus bas niveau.
+		  //Pour charger les éléments HTML de la page, on démarre par les éléments de plus bas niveaux.
 		pageWeb_o.viewPath:=pageWeb_o.viewPath.reverse()
 		
 		For each ($htmlFichierChemin_t;pageWeb_o.viewPath)
@@ -149,9 +149,31 @@ Case of
 End case 
 ```
 
-A partir d'ici, vous pouvez redemarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
-Au lancement de l'application le logiciel vous demande quel sous domaine vous souhaitez créer ? Par defaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
+A partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
+Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
 
-Vous pouvez dés à présent tester le serveur web via votre navigateur : http://127.0.0.1
+Vous pouvez dès à présent tester le serveur web via votre navigateur : http://127.0.0.1
 
 ## Configuration du localhost
+
+La gestion du composant fonctionne en fonction des sous-domaines pour définir les environnements de travail. Il est donc essentiel de les configurer sur le fichier hosts du poste de travail de développement :
+
+Depuis MacOS :
+Lancer un terminal (Cmd + espace)
+```
+# Ouvrir le fichier hosts en sudo.
+# Pour éditer, touche : Entrée
+# Pour sauvegarder, touche : Ctrl+O
+
+sudo nano /etc/hosts
+```
+
+Il faut maintenant ajouter les sous-domaines sur lesquels on souhaite travailler.
+Par exemple si votre application possède un sous domaine www., admin. ou alors api.:
+
+```
+127.0.0.1       www.dev.local
+127.0.0.1       admin.dev.local
+127.0.0.1       api.dev.local
+```
+
