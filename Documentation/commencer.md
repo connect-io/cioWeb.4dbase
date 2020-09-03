@@ -82,7 +82,7 @@ If (visiteur_o.Host="127.0.0.1")
 	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
 End if 
 
-// Dectection du mode developpement
+// Dectection du mode développement
 visiteur_o.devMode:=visiteur_o.Host="@dev@"
 
 
@@ -121,7 +121,7 @@ Case of
 		WEB SEND TEXT(pageWeb_o.resulatMethode_t;pageWeb_o.type)
 		
 	: (pageWeb_o.viewPath.length=0)
-		  // On ne fait rien la méthode d'appel renvoit déjà du contenu
+		  // On ne fait rien la méthode d'appel renvoie déjà du contenu
 		  // (Exemple fichier Excel)
 		
 	Else 
@@ -152,7 +152,7 @@ End case
 A partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
 Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
 
-Lors de la premiere ré-ouverture de votre application, le composant génére automatiquement l'arborescence de votre application web.
+Lors de la première réouverture de votre application, le composant génère automatiquement l'arborescence de votre application web.
 
 Vous pouvez dès à présent tester le serveur web via votre navigateur : http://127.0.0.1
 
@@ -166,7 +166,7 @@ Vous pouvez dès à présent tester le serveur web via votre navigateur : http:/
  ┣ 📂Project
  ┣ 📂Resources
  ┣ 📂WebApp                              // Répertoire principale de votre application web                           
- ┃ ┣ 📂Cache                             // Contient tout les fichiers caches de votre application web
+ ┃ ┣ 📂Cache                             // Contient tous les fichiers caches de votre application web
  ┃ ┃ ┗ 📂View                            // Contient toutes les vues en HTML minifié
  ┃ ┃   ┗ 📂www
  ┃ ┃     ┣ 📂_cioWeb
@@ -174,13 +174,13 @@ Vous pouvez dès à présent tester le serveur web via votre navigateur : http:/
  ┃ ┃     ┃   ┣ 📜notification.html       // HTML minifié
  ┃ ┃     ┃   ┣ 📜...
  ┃ ┃     ┗ 📂...
- ┃ ┣ 📂Sources                           // Dossier principale de code source
+ ┃ ┣ 📂Sources                           // Dossier principal de code source
  ┃ ┃ ┣ 📂www                             // Dossier du sous domaine de votre application
  ┃ ┃ ┃ ┣ 📂_cioWeb                       // [Obligatoire] Il personnalise certain affichage web
  ┃ ┃ ┃ ┃ ┗ 📂view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code
  ┃ ┃ ┃ ┃   ┣ 📜notification.html         // Personnalisation des notifications
  ┃ ┃ ┃ ┃   ┣ 📜input.html                // Personnalisation des inputs des formulaires
- ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seul
+ ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seule
  ┃ ┃ ┃ ┣ 📂_layout                       // [Obligatoire] Il permet la construction de page web sous forme de layout
  ┃ ┃ ┃ ┃ ┣ 📂view
  ┃ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
@@ -196,14 +196,16 @@ Vous pouvez dès à présent tester le serveur web via votre navigateur : http:/
  ┃ ┃ ┃   ┃ ┗ 📜helloWord.html
  ┃ ┃ ┃   ┗ 📜route.json
  ┃ ┃ ┗ 📜config.json                     // Configuration générale de application web
- ┃ ┗ 📂WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accèssible sur internet.
+ ┃ ┗ 📂WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accessible sur internet.
  ┃   ┣ 📂uploads                         // Stocker les documents que les utilisateurs charges, photos de profil, photo d'article,...
- ┃   ┗ 📂www                             // Dossier public de votre sous domaine
+ ┃   ┗ 📂www                             // Dossier public de votre sous-domaine
  ┃     ┣ 📂css
  ┃     ┣ 📂img
  ┃     ┗ 📂js
  ┗ 📂userPreferences.XXX
  ```
+
+ Une chose importante, chaque sous domaine est géré de façon indépendante, seul le fichier  ```Sources>config.json ``` est partagé entre les sous-domaines.
 
 ## Configuration du localhost
 
