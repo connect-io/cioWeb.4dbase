@@ -180,50 +180,48 @@ Par exemple si votre application possède un sous domaine www., admin. ou alors 
 
 ## Arborescence des fichiers de votre application web
 ```
-📦WebApp
- ┣ 📂Cache
- ┃ ┗ 📂View
- ┃ ┃ ┗ 📂www
- ┃ ┃ ┃ ┣ 📂_cioWeb
- ┃ ┃ ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┃ ┃ ┣ 📜alert.html
- ┃ ┃ ┃ ┃ ┃ ┣ 📜input.html
- ┃ ┃ ┃ ┃ ┃ ┗ 📜inputReadOnly.html
- ┃ ┃ ┃ ┣ 📂_layout
- ┃ ┃ ┃ ┃ ┗ 📂view
+ 📦VotreApplication
+ ┣ 📂Components
+ ┃ ┣ 📂cioWeb.4dbase                     // Composant cioWeb
+ ┣ 📂Data
+ ┣ 📂Project
+ ┣ 📂Resources
+ ┣ 📂WebApp                              // Répertoire principale de votre application web                           
+ ┃ ┣ 📂Cache                             // Contient tout les fichiers caches de votre application web
+ ┃ ┃ ┗ 📂View                            // Contient toutes les vues en HTML minifié
+ ┃ ┃   ┗ 📂www
+ ┃ ┃     ┣ 📂_cioWeb
+ ┃ ┃     ┃ ┗ 📂view
+ ┃ ┃     ┃   ┣ 📜notification.html       // HTML minifié
+ ┃ ┃     ┃   ┣ 📜...
+ ┃ ┃     ┗ 📂...
+ ┃ ┣ 📂Sources                           // Dossier principale de code source
+ ┃ ┃ ┣ 📂www                             // Dossier du sous domaine de votre application
+ ┃ ┃ ┃ ┣ 📂_cioWeb                       // [Obligatoire] Il personnalise certain affichage web
+ ┃ ┃ ┃ ┃ ┗ 📂view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code
+ ┃ ┃ ┃ ┃   ┣ 📜notification.html         // Personnalisation des notifications
+ ┃ ┃ ┃ ┃   ┣ 📜input.html                // Personnalisation des inputs des formulaires
+ ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seul
+ ┃ ┃ ┃ ┣ 📂_layout                       // [Obligatoire] Il permet la construction de page web sous forme de layout
+ ┃ ┃ ┃ ┃ ┣ 📂view
  ┃ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
+ ┃ ┃ ┃ ┃ ┗ 📜route.json                  // Configuration des routes du layout
  ┃ ┃ ┃ ┣ 📂basicPage
- ┃ ┃ ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┗ 📂demo
- ┃ ┃ ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┃ ┃ ┗ 📜helloWord.html
- ┣ 📂Sources
- ┃ ┣ 📂www
- ┃ ┃ ┣ 📂_cioWeb
- ┃ ┃ ┃ ┗ 📂view
- ┃ ┃ ┃ ┃ ┣ 📜alert.html
- ┃ ┃ ┃ ┃ ┣ 📜input.html
- ┃ ┃ ┃ ┃ ┗ 📜inputReadOnly.html
- ┃ ┃ ┣ 📂_layout
- ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
- ┃ ┃ ┃ ┗ 📜route.json
- ┃ ┃ ┣ 📂basicPage
- ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┗ 📜route.json
- ┃ ┃ ┗ 📂demo
- ┃ ┃ ┃ ┣ 📂form
- ┃ ┃ ┃ ┃ ┗ 📜helloWord.form.json
- ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┗ 📜helloWord.html
- ┃ ┃ ┃ ┗ 📜route.json
- ┃ ┗ 📜config.json
- ┗ 📂WebFolder
- ┃ ┣ 📂uploads
- ┃ ┗ 📂www
- ┃ ┃ ┣ 📂css
- ┃ ┃ ┣ 📂img
- ┃ ┃ ┗ 📂js
+ ┃ ┃ ┃ ┃ ┣ 📂view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html                // HTML de votre page
+ ┃ ┃ ┃ ┃ ┗ 📜route.json
+ ┃ ┃ ┃ ┗ 📂demo                          // Module de demonstration
+ ┃ ┃ ┃   ┣ 📂form
+ ┃ ┃ ┃   ┃ ┗ 📜helloWord.form.json       // Configuration du formulaire helloWord
+ ┃ ┃ ┃   ┣ 📂view
+ ┃ ┃ ┃   ┃ ┗ 📜helloWord.html
+ ┃ ┃ ┃   ┗ 📜route.json
+ ┃ ┃ ┗ 📜config.json                     // Configuration générale de application web
+ ┃ ┗ 📂WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accèssible sur internet.
+ ┃   ┣ 📂uploads                         // Stocker les documents que les utilisateurs charges, photos de profil, photo d'article,...
+ ┃   ┗ 📂www                             // Dossier public de votre sous domaine
+ ┃     ┣ 📂css
+ ┃     ┣ 📂img
+ ┃     ┗ 📂js
+ ┗ 📂userPreferences.XXX
  ```
