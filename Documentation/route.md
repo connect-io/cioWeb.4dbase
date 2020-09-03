@@ -1,11 +1,12 @@
 ﻿# Gestion des routes
 
 ## Description
-Les routes permettents de construire les URL de notre application ainsi que le comportement attendu pour la page.
+Les routes permettents de construire les URL de notre application ainsi que le comportement attendu pour la page web.
 
 # Coder notre fichier route
 
-Le fichir route est un fichier json de la forme suivante.
+Les fichiers route sont des fichiers JSON nommer de facon suivante ```*.route.json```, le nom du fichier n'a pas d'importance est ils peuvents être placer n'importe où dans le repertoire source de votre sous domaine.
+
 ```json
 "nomdelapage": {
 	},

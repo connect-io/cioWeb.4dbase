@@ -10,7 +10,7 @@ Le fichier form permet la création des variables utilisées dans le fichier vie
 # Initialiser notre fichier form
 
 Notre fichier form est en language json.
-La crréation de ce fichier est presque identique dans chaque cas. Il faut seulement changer le **lib** et **action**
+La création de ce fichier est presque identique dans chaque cas. Il faut seulement changer le **lib** et **action**
 
 ```json
 

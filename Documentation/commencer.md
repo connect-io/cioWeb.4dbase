@@ -177,3 +177,53 @@ Par exemple si votre application possède un sous domaine www., admin. ou alors 
 127.0.0.1       api.dev.local
 ```
 
+
+## Arborescence des fichiers de votre application web
+```
+📦WebApp
+ ┣ 📂Cache
+ ┃ ┗ 📂View
+ ┃ ┃ ┗ 📂www
+ ┃ ┃ ┃ ┣ 📂_cioWeb
+ ┃ ┃ ┃ ┃ ┗ 📂view
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜alert.html
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜input.html
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜inputReadOnly.html
+ ┃ ┃ ┃ ┣ 📂_layout
+ ┃ ┃ ┃ ┃ ┗ 📂view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
+ ┃ ┃ ┃ ┣ 📂basicPage
+ ┃ ┃ ┃ ┃ ┗ 📂view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html
+ ┃ ┃ ┃ ┗ 📂demo
+ ┃ ┃ ┃ ┃ ┗ 📂view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜helloWord.html
+ ┣ 📂Sources
+ ┃ ┣ 📂www
+ ┃ ┃ ┣ 📂_cioWeb
+ ┃ ┃ ┃ ┗ 📂view
+ ┃ ┃ ┃ ┃ ┣ 📜alert.html
+ ┃ ┃ ┃ ┃ ┣ 📜input.html
+ ┃ ┃ ┃ ┃ ┗ 📜inputReadOnly.html
+ ┃ ┃ ┣ 📂_layout
+ ┃ ┃ ┃ ┣ 📂view
+ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
+ ┃ ┃ ┃ ┗ 📜route.json
+ ┃ ┃ ┣ 📂basicPage
+ ┃ ┃ ┃ ┣ 📂view
+ ┃ ┃ ┃ ┃ ┗ 📜index.html
+ ┃ ┃ ┃ ┗ 📜route.json
+ ┃ ┃ ┗ 📂demo
+ ┃ ┃ ┃ ┣ 📂form
+ ┃ ┃ ┃ ┃ ┗ 📜helloWord.form.json
+ ┃ ┃ ┃ ┣ 📂view
+ ┃ ┃ ┃ ┃ ┗ 📜helloWord.html
+ ┃ ┃ ┃ ┗ 📜route.json
+ ┃ ┗ 📜config.json
+ ┗ 📂WebFolder
+ ┃ ┣ 📂uploads
+ ┃ ┗ 📂www
+ ┃ ┃ ┣ 📂css
+ ┃ ┃ ┣ 📂img
+ ┃ ┃ ┗ 📂js
+ ```
