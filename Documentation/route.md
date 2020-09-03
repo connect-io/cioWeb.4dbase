@@ -22,14 +22,14 @@ Exemple d'organisation :
        ┃ ┗ 📜...
        ┗ 📂view
          ┗ 📜userDetail.html
-		 ┣ 📜blogListe.html
+         ┣ 📜blogListe.html
          ┗ 📜...
  ```
 
 Mais une meilleure pratique consiste à créer un dossier par module avec les routes, HTML, JS, datable, formulaire à l'intérieur.
  ```
  📦VotreApplication
- ┗ 📂WebApp                         
+ ┗ 📂WebApp
    ┗📂Sources
      ┗📂www
        ┣ 📂user
