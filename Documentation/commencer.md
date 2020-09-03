@@ -152,30 +152,9 @@ End case
 A partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
 Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
 
+Lors de la premiere ré-ouverture de votre application, le composant génére automatiquement l'arborescence de votre application web.
+
 Vous pouvez dès à présent tester le serveur web via votre navigateur : http://127.0.0.1
-
-## Configuration du localhost
-
-La gestion du composant fonctionne en fonction des sous-domaines pour définir les environnements de travail. Il est donc essentiel de les configurer sur le fichier hosts du poste de travail de développement :
-
-Depuis MacOS :
-Lancer un terminal (Cmd + espace)
-```
-# Ouvrir le fichier hosts en sudo.
-# Pour éditer, touche : Entrée
-# Pour sauvegarder, touche : Ctrl+O
-
-sudo nano /etc/hosts
-```
-
-Il faut maintenant ajouter les sous-domaines sur lesquels on souhaite travailler.
-Par exemple si votre application possède un sous domaine www., admin. ou alors api.:
-
-```
-127.0.0.1       www.dev.local
-127.0.0.1       admin.dev.local
-127.0.0.1       api.dev.local
-```
 
 
 ## Arborescence des fichiers de votre application web
@@ -225,3 +204,28 @@ Par exemple si votre application possède un sous domaine www., admin. ou alors 
  ┃     ┗ 📂js
  ┗ 📂userPreferences.XXX
  ```
+
+## Configuration du localhost
+
+La gestion du composant fonctionne en fonction des sous-domaines pour définir les environnements de travail. Il est donc essentiel de les configurer sur le fichier hosts du poste de travail de développement :
+
+Depuis MacOS :
+Lancer un terminal (Cmd + espace)
+```
+# Ouvrir le fichier hosts en sudo.
+# Pour éditer, touche : Entrée
+# Pour sauvegarder, touche : Ctrl+O
+
+sudo nano /etc/hosts
+```
+
+Il faut maintenant ajouter les sous-domaines sur lesquels on souhaite travailler.
+Par exemple si votre application possède un sous domaine www., admin. ou alors api.:
+
+```
+127.0.0.1       www.dev.local
+127.0.0.1       admin.dev.local
+127.0.0.1       api.dev.local
+```
+
+[Continuer avec la présentation des routes](/Documentation/route.md)
