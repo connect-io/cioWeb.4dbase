@@ -116,7 +116,7 @@ Historique
 		pageWeb_o.route.data:=$routeData
 		
 	Else 
-		  //Renvoie page 404
+		  // Renvoie page 404
 		If (visiteur.url#"@.php")
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
 		End if 
@@ -137,15 +137,21 @@ Historique
 		End if 
 	End if 
 	
-	  //gestion des keywords
+	  // Gestion des keywords
 	If (String:C10(pageWeb_o.keywords)="")
 		pageWeb_o.keywords:=""
 	End if 
 	
-	  //gestion des descriptions
+	  // Gestion des descriptions
 	If (String:C10(pageWeb_o.description)="")
 		pageWeb_o.description:=""
 	End if 
+	
+	  // Gestion des fichiers JS à inclure dans le HTML.
+	If (pageWeb_o.jsPathInHtml=Null:C1517)
+		pageWeb_o.jsPathInHtml:=New collection:C1472
+	End if 
+	
 	
 	
 	  //pageWeb_o.i18n:=cwi18nDataPage 
