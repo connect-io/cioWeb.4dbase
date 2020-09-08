@@ -69,9 +69,9 @@ On doit ensuite compléter avec différents éléments.
 	}
 }
 ```
-Dans cet exemple la propriété ```parents``` permet à la route d'hériter intégralement de la route parent.
-Le **titre** est utilisé dans le calque (layout) parent de la page web pour définir la valeur du title : ```<title><!--#4DTEXT pageWeb_o.titre--> | Composant cioWeb</title>```
-La propriété ```route``` quand à lui permet de gérer l'URL de la page.
+Dans cet exemple la propriété ```parents``` permet à la route d'hériter intégralement de la route parent.  
+Le **titre** est utilisé dans le calque (layout) parent de la page web pour définir la valeur du title : ```<title><!--#4DTEXT pageWeb_o.titre--> | Composant cioWeb</title>```  
+La propriété ```route``` quand à lui permet de gérer l'URL de la page.  
 La propriété ```viewPath``` est le chemin relatif du fichier HTML qui sera chargé depuis le sous domaine du dossier Sources.
 
 
@@ -112,17 +112,31 @@ On peut y mettre par exemple les éléments de js et de css afin de pas avoir à
 
 
 ```json
-
-"cssPath": [
-	"/<!--4DTEXT visiteur_o.sousDomaine-->/css/1.css",
-	"/<!--4DTEXT visiteur_o.sousDomaine-->/css/2.css",
-],
-"jsPath": [
-	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/1.js",
-	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/2.js",
-	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/3.js",
-]
+{
+	"nomParent": {
+    "cssPath": [
+      "/<!--4DTEXT visiteur_o.sousDomaine-->/css/1.css",
+      "/<!--4DTEXT visiteur_o.sousDomaine-->/css/2.css",
+    ],
+    "jsPath": [
+      "/<!--4DTEXT visiteur_o.sousDomaine-->/js/1.js",
+      "/<!--4DTEXT visiteur_o.sousDomaine-->/js/2.js",
+      "/<!--4DTEXT visiteur_o.sousDomaine-->/js/3.js",
+    ]
+	}
+}
 ```
+
+## Bien utilisé la propriété route
+La propriété route dans les routes permet de générer mais également de comprendre comment est construit une URL.
+
+
+| Nom de la propriété | Type          | Valeur par defaut | Commentaire |
+| ------------------- | ------------- | ----------------- | ----------- |
+| path                | texte         | Obligatoire       |  |
+| format              | tableau texte | Obligatoire       |  |
+| force               | tableau texte | Obligatoire       |  |
+
 
 ## Appel d'une route depuis le HTML
 

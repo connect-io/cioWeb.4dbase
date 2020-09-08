@@ -47,11 +47,11 @@ On rajoute ensuite une **source** qui est la dont provient les éléments du tab
 
 On ajoute ensuite des propriétés à notre tableau tel que :
 
-| Nom de la propriété | Type | Valeur par defaut | Commentaire |
-| ------------------- | ---- | ----------------- | ----------- |
-| class | texte | "" | Permet de personnaliser le CSS du tableau |
-| dom | texte | "auto" | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
-| doubleClick | objet | null | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
+| Nom de la propriété | Type  | Valeur par defaut | Commentaire |
+| ------------------- | ----- | ----------------- | ----------- |
+| class               | texte | ""                | Permet de personnaliser le CSS du tableau |
+| dom                 | texte | "auto"            | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
+| doubleClick         | objet | null              | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
 
 
 La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 
@@ -89,11 +89,11 @@ On peut aussi y rajouter l'élément **className** qui nous permet de choisir ou
 ```
 Liste des propriétés propre aux colonnes (column) :
 
-| Nom de la propriété | Obligatoire | Type | Valeur par defaut | Commentaire |
-| ------------------- | ----------- | ---- | ----------------- | ----------- |
-| title | Oui | Texte | "" | Nom de la colonne |
-| data | Oui | Texte | #"" | Correspond à la valeur de data.name |
-| className | Non | Texte | "" | Personnalise le CSS de la colonne (ex : ``` text-right ```) |
+| Nom de la propriété | Obligatoire | Type  | Valeur par defaut | Commentaire |
+| ------------------- | ----------- | ----- | ----------------- | ----------- |
+| title               | Oui         | Texte | ""                | Nom de la colonne |
+| data                | Oui         | Texte | #""               | Correspond à la valeur de data.name |
+| className           | Non         | Texte | ""                | Personnalise le CSS de la colonne (ex : ``` text-right ```) |
 
 
 ## Intégration des données
@@ -120,10 +120,10 @@ On peut aussi créer des datas qui seront stockées dans le tableau, mais pas af
 
 Liste des propriétés propre aux données (data):
 
-| Nom de la propriété | Obligatoire | Type | Valeur par defaut | Commentaire |
-| ------------------- | ----------- | ---- | ----------------- | ----------- |
-| name | Oui | Texte | #"" | Nom de la donnée (Permet la correspondance avec les colonnes.)|
-| value | Oui | Texte | #"" | Nom de la propriété de notre collection 4D. <br>Il est possible de concaténer 2 données : ``` "This.cp+\" - \"+This.ville" ``` ou  bien ``` "This.Prix+\" €\"" ```<br> Pour les dates il est préférable de les passer sous forme de texte : ``` "string(This.Date)" ``` |
+| Nom de la propriété | Obligatoire | Type  | Valeur par defaut | Commentaire |
+| ------------------- | ----------- | ----- | ----------------- | ----------- |
+| name                | Oui         | Texte | #""               | Nom de la donnée (Permet la correspondance avec les colonnes.)|
+| value               | Oui         | Texte | #""               | Nom de la propriété de notre collection 4D. <br>Il est possible de concaténer 2 données : ``` "This.cp+\" - \"+This.ville" ``` ou  bien ``` "This.Prix+\" €\"" ```<br> Pour les dates il est préférable de les passer sous forme de texte : ``` "string(This.Date)" ``` |
 
 
 
@@ -173,8 +173,8 @@ Cela donne donc au final le fichier de configuration suivant :
 
 Ce code va donc nous donner le tableau suivant :
 
-| Element1 | Element2 |
-| -------- | -------- |
+| Element1        | Element2 |
+| --------------- | -------- |
 | "This.Element1" | "This.Element2" |
 
 
