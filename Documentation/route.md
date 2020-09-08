@@ -49,34 +49,50 @@ Mais une meilleure pratique consiste à créer un dossier par module avec les ro
        ┗ 📂...
  ```
 
-```json
-"nomdelapage": {
-},
-```
-
-Chacun de ces éléments représentera la **route** pour une page en particulier.
-Généralement, ce fichier se trouve dans le dossier **Webapp** de notre projet et plus exactement dans le fichier **Source**. Dans le fichier source se trouve chaque élément de notre site rangé chacun dans un dossier. Dans ces dossiers on retrouvera donc les dossier form, view et js ainsi que le fichier qui nous intéresse ici le fichier **route**.json.
+Chacun de ces éléments représentera la **route** pour une page/URL en particulier.
 
 On doit ensuite compléter avec différents éléments.
 
 ```json
-"route": {
-	"path": "/"
-},
-"titre": "Page 1 - Titre",
-"keywords": "keyword1",
-"viewPath": [
-	"vitrine/view/index.html"
-]
+{
+	"helloWord": {
+		"parents": [
+			"parentsLayoutDemo"
+		],
+		"route": {
+			"path": "/hello-word.html"
+		},
+		"titre": "Hello word",
+		"viewPath": [
+			"demo/view/helloWord.html"
+		]
+	}
+}
 ```
+Dans cet exemple la propriété ```parents``` permet à la route d'hériter intégralement de la route parent.
+Le **titre** est utilisé dans le calque (layout) parent de la page web pour définir la valeur du title : ```<title><!--#4DTEXT pageWeb_o.titre--> | Composant cioWeb</title>```
+La propriété ```route``` quand à lui permet de gérer l'URL de la page.
+La propriété ```viewPath``` est le chemin relatif du fichier HTML qui sera chargé depuis le sous domaine du dossier Sources.
 
-Le **titre** est ce qui s'affichera sur l'onglet du moteur de recherche.
-**route** quand à lui permet de gérer se qui s'affiche dans la barre de recherche lorsque tu passes d'une page à une autre.
-**keyword** permet d'associer des mots clés à la page ce qui aidera son référencement.
-Enfin **viewPath** 
+
+## Liste des propriétés d'une route
+
+Attention il faut savoir la liste n'est pas exhaustif car vous avez également la possibilité de créer vous-même des propriétés qui pourront directement être utilisable depuis la variable pageWeb_o.
+
+| Nom de la propriété | Type          | Valeur par defaut | Commentaire |
+| ------------------- | ------------- | ----------------- | ----------- |
+| parents             | tableau texte | ""                | Permet de fixer un certain nombre de parent qui seront fusionnés avec la route. |
+| route               | objet         | Obligatoire       | la propriété ```path``` est obligatoire. |
+| titre               | texte         | ""                | Définit la variable title d'une page web : ```<title><!--#4DTEXT pageWeb_o.titre--> | Composant cioWeb</title>``` |
+| description         | text          | ""                | Définit le meta description d'une page web : ```<meta name="description" content="<!--#4DHTML pageWeb_o.description-->" />``` |
+| keywords            | texte         | ""                | Définit le meta keywords d'une page web : ```<meta NAME="keywords" content="<!--#4DHTML pageWeb_o.keywords-->" />``` |
+| methode             | tableau texte |                   | Définit la méthode qui sera executé au chargement de la page. |
+| cssPath             | tableau texte |                   | Définit les fichiers CSS qui seront chargé avec la page. Pour être activé le layout HTMl doit éxécuté le code suivant après les appeles CSS en dur : ```<!--#4DHTML cwCssGetfile-->``` |
+| jsPath              | tableau texte |                   | Définit les fichiers JS qui seront chargé avec la page. Pour être activé le layout HTMl doit éxécuté le code suivant après les appeles JS en dur : ```<!--#4DHTML cwJsGetfile-->``` |
+| login               | boolean       | false             | Définit si la page à besoin d'être authenfié pour être délivré. |
 
 
-# Ajout d'un élément parent 
+### Ajout d'un élément parent 
 
 On peut rajouter un parent à notre route. Cela permet d'ajouter des éléments communs à toutes les routes qui ont ce parent. Le nom de notre parent commencera toujours par parents suivis du nom du parent.
 
@@ -107,11 +123,13 @@ On peut y mettre par exemple les éléments de js et de css afin de pas avoir à
 	"/<!--4DTEXT visiteur_o.sousDomaine-->/js/3.js",
 ]
 ```
-Après avoir créé notre route, il faut ensuite l'appeler sur notre page HTML.
-Pour cela, on va utiliser la ligne de code suivante :
+
+## Appel d'une route depuis le HTML
+
+Après avoir créé notre route, Il vous est possible de générer l'URL dans une page HTML via la commande suivante :
 
 ```html
-<!--#4DSCRIPT/cwLibToUrl/nomdelapage-->
+<!--#4DSCRIPT/cwLibToUrl/nomDeLaRoute-->
 ```
 
 On peut utiliser par exemple un bouton dont le href sera la ligne de code ci dessus. On va alors appeler la page correspondant lorsqu'on clique sur ce bouton.
