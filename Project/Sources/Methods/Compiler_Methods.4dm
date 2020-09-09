@@ -55,8 +55,8 @@ C_TEXT:C284(cwI18nConvertJson ;$0)
 C_TEXT:C284(cwI18nConvertJson ;$1)
 C_TEXT:C284(cwMotDePasseHash ;$0)
 C_TEXT:C284(cwMotDePasseHash ;$1)
-C_TEXT:C284(cwCssGetFile ;$0)
-C_TEXT:C284(cwCssGetFile ;$1)
+C_TEXT:C284(cwCssGetFile;$0)
+C_TEXT:C284(cwCssGetFile;$1)
 C_BOOLEAN:C305(cwInputInjection4DHtmlIsValide ;$0)
 C_TEXT:C284(cwInputInjection4DHtmlIsValide ;$1)
 C_TEXT:C284(cwInputInjection4DHtmlSafeUse ;$0)
@@ -97,9 +97,6 @@ C_OBJECT:C1216(cwToolObjectMerge ;$0)
 C_OBJECT:C1216(cwToolObjectMerge ;$1)
 C_OBJECT:C1216(cwToolObjectMerge ;$2)
 
-  //cwVisiteurLoginIs
-C_BOOLEAN:C305(cwVisiteurLoginIs;$0)
-C_BOOLEAN:C305(cwVisiteurLoginIs;$1)
 
   //cwFormGetData
 C_OBJECT:C1216(cwFormGetData ;$0)
