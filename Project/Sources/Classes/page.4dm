@@ -174,6 +174,44 @@ Historique
 	
 	
 	
+Function cssGetHtmlPath
+/* ----------------------------------------------------
+Fonction : page.cssGetHtmlPath
+	
+Renvoi le HTML pour le chargement des fichiers CSS.
+	
+Historique
+19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
+10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
+09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($1)  // Domaine du CDN
+	C_TEXT:C284($0)  // Contenu des fichiers html
+	
+	C_TEXT:C284($cssContenu_t;$cssHtmlModele_t;$cssPath_t)
+	
+	
+	$cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssPath\">"
+	$cssContenu_t:=""
+	
+	
+	If (This:C1470.cssPath#Null:C1517)
+		
+		For each ($cssPath_t;This:C1470.cssPath)
+			
+			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Line feed:K15:40)
+		End for each 
+		
+	End if 
+	
+	If (Count parameters:C259=1)
+		$cssContenu_t:=Replace string:C233($cssContenu_t;"domaineCDN";$1)
+	End if 
+	
+	$0:=$cssContenu_t
+	
+	
 Function scanBlock
 /* ----------------------------------------------------
 Fonction : page.scanBlock
