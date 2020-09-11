@@ -9,7 +9,6 @@
 	"Formulaires par défaut": {},
 	"Méthodes projet par défaut": {
 		"methods": [
-			"cwJsGetFile",
 			"cwJsSetFile"
 		]
 	},

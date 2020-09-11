@@ -56,6 +56,27 @@ user.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 
 ------------------------------------------------------
 
+## Fonction : jsGetHtmlPath
+Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
+
+### Fonctionnement
+```4d
+user.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
+```
+
+| Paramêtre      | Type       | entrée/sortie | Description |
+| -------------- | ---------- | ------------- | ----------- |
+| $domaineCDN_t  | Texte      | Entrée        | Permet d'ajouter un CDN en production. |
+| $jsHtmlLink_t  | Texte      | Sortie        | Contenu HTML des appels JS |
+
+
+### Example
+```html
+<!--#4DHTML pageWeb_o.jsGetHtmlPath()-->
+```
+
+------------------------------------------------------
+
 ## Fonction : cachePath
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 

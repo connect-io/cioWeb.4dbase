@@ -212,6 +212,40 @@ Historique
 	$0:=$cssContenu_t
 	
 	
+	
+Function jsGetHtmlPath
+/* ----------------------------------------------------
+Fonction : page.jsGetHtmlPath
+	
+Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
+	
+Historique
+27/07/2020 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
+11/20/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+-----------------------------------------------------*/
+	
+	C_TEXT:C284($1)  // $1 : [texte] domaine du CDN
+	C_TEXT:C284($0)  // Contenu des fichiers html
+	
+	C_TEXT:C284($T_jsContenu;$jsHtmlModele_t;$jsPath_t)
+	
+	$jsHtmlModele_t:="<script type=\"text/javascript\" src=\"$jsPath\"></script>"
+	
+	If (This:C1470.jsPath#Null:C1517)
+		
+		For each ($jsPath_t;This:C1470.jsPath)
+			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Line feed:K15:40)
+		End for each 
+	End if 
+	
+	If (Count parameters:C259=1)
+		$T_jsContenu:=Replace string:C233($T_jsContenu;"domaineCDN";$1)
+	End if 
+	
+	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
+	
+	
+	
 Function scanBlock
 /* ----------------------------------------------------
 Fonction : page.scanBlock
