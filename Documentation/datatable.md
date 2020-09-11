@@ -11,15 +11,15 @@ Les dataTables du composant utilise la solution HTML/jQuery du site https://data
 Dans le fichier route de la page (ou la page parent) ajouté les appels CSS et JS suivant :
 ```json
 
-	"nomPageRoute": {
-		"cssFile": [
-			"https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
-		],
-		"jsFile": [
-            "https://code.jquery.com/jquery-3.5.1.min.js",
-			"https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
-		]
-	},
+"nomPageRoute": {
+    "cssPath": [
+        "https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+    ],
+    "jsPath": [
+        "https://code.jquery.com/jquery-3.5.1.min.js",
+        "https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
+    ]
+},
 
 ```
 
@@ -61,7 +61,7 @@ La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'é
         "linkVariable": {
             "urlDataClass" : "ElementTableau",
             "urlEntityPK": "maskID_t",
-			"urlEntityAction": "edit"
+            "urlEntityAction": "edit"
         } 
 ```
 
@@ -85,7 +85,7 @@ On peut aussi y rajouter l'élément **className** qui nous permet de choisir ou
             "data": "element2",
             "className": "text-right"
         }
-	],
+    ],
 ```
 Liste des propriétés propre aux colonnes (column) :
 
@@ -131,16 +131,16 @@ Cela donne donc au final le fichier de configuration suivant :
 
 ```json  
 {
-	"lib": "dtNomPageNomTableau",
+    "lib": "dtNomPageNomTableau",
     "source": "entity_o.param_o.elementtableau",
-	"class": "",
+    "class": "",
     "dom": "auto",
     "doubleClick" :{
         "link": "elementtableauDetail",
         "linkVariable": {
             "urlDataClass" : "ElementTableau",
             "urlEntityPK": "maskID_t",
-			"urlEntityAction": "edit"
+            "urlEntityAction": "edit"
         } 
     },  
    "column": [
@@ -153,8 +153,8 @@ Cela donne donc au final le fichier de configuration suivant :
             "data": "element2",
             "className": "text-right" 
         }
-	],
-	"data": [
+    ],
+    "data": [
         {
             "name": "maskID_t", 
             "value": "this.PK"
@@ -167,7 +167,7 @@ Cela donne donc au final le fichier de configuration suivant :
             "name": "element2",
             "value": "This.Element2"
         },
-	]
+    ]
 }
 ```
 
