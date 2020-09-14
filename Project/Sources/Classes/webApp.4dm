@@ -732,10 +732,12 @@ Historique
 	$options_c:=New collection:C1472
 	$options_c.push(New object:C1471("key";Web session cookie name:K73:4;"value";"CIOSID"))  // nom du cookies de la session
 	$options_c.push(New object:C1471("key";Web inactive session timeout:K73:3;"value";30*24*60))  // 30 jours, en minute
-	$options_c.push(New object:C1471("key";Web inactive process timeout:K73:13;"value";60))
-	$options_c.push(New object:C1471("key";Web max sessions:K73:2;"value";200))
-	$options_c.push(New object:C1471("key";Web Session IP address validation enabled:K73:17;"value";0))
-	$options_c.push(New object:C1471("key";Web keep session:K73:1;"value";1))
+	$options_c.push(New object:C1471("key";Web inactive process timeout:K73:13;"value";0))  // 480 min de durée de vie des process inactifs associés aux sessions
+	$options_c.push(New object:C1471("key";Web max sessions:K73:2;"value";300))  // 300 sessions simultanées
+	$options_c.push(New object:C1471("key";Web Session IP address validation enabled:K73:17;"value";0))  // Déconnecte la relation entre l'IP et le cookies
+	$options_c.push(New object:C1471("key";Web keep session:K73:1;"value";1))  // activation de la gestion automatique des sessions.
+	$options_c.push(New object:C1471("key";Web HTTP compression level:K73:11;"value";-1))  // Niveau de compression des pages automatique.
+	$options_c.push(New object:C1471("key";Web max concurrent processes:K73:7;"value";1000))  // Limite du nombre de process Web acceptés et retourne le message “Serveur non disponible”.
 	
 	  // Puis l'on vient combiner avec les informations 
 	If (Count parameters:C259>=1)

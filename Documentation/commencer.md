@@ -19,7 +19,7 @@ Les sources et le build sont dans 2 branches distinctes.
 	Charger tous les éléments propres à l'application Web
 	
 	Historique
-	27/07/20 -  Grégory Fromain - création
+	27/07/20 - Grégory Fromain - création
 ---------------------------------------------------------------------- */
 
 If (True)  // Déclarations
@@ -46,6 +46,9 @@ WEB START SERVER
 If (ok#1)
 	ALERT("Le serveur web n'est pas correctement démarré.")
 End if 
+
+  // Démarrage des sessions.
+<>webApp_o.sessionWebStart()
 ```
 
 ## Méthode de base sur connexion web
@@ -53,11 +56,11 @@ End if
 /* ----------------------------------------------------------------------
 	Méthode : Sur connexion web
 	
-	La méthode reçoit tout les params de la méthode sur connexion web
+	Traitement de la réquête web
 	
 	Historique
-	28/07/20 -  Grégory Fromain - création
-----------------------------------------------------------------------*/
+	28/07/20 - Grégory Fromain - création
+---------------------------------------------------------------------- */
 
 If (True)  // Déclarations
 	C_TEXT($3)  // Adresse IP du navigateur.
@@ -73,6 +76,9 @@ End if
 
 visiteur_o.getInfo()
 visiteur_o.ip:=$3
+
+  //Gestion des sessions web.
+visiteur_o.sessionWebLoad()
 
   
   // Petit hack pour simplifier, le premier démarrage.
@@ -148,6 +154,23 @@ Case of
 		
 End case 
 ```
+
+## Méthode de base sur fermeture process web
+```4d
+/* ----------------------------------------------------------------------
+	Méthode : Sur fermeture process web
+	
+	Stock les datas du visiteur, correctement.
+	
+	Historique
+	14/09/20 - Grégory Fromain - Création
+---------------------------------------------------------------------- */
+
+
+  // On utilise la fonction du composant pour stocker les informations du visiteur.
+visiteur_o.sessionWebSave()
+```
+
 
 A partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
 Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
