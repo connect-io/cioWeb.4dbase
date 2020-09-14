@@ -861,7 +861,7 @@ Historique
 	
 	C_OBJECT:C1216($infoWebApp_o)
 	$infoWebApp_o:=New object:C1471()
-	$infoWebApp_o.sessionWeb:=This:C1470.sessionWeb
+	$infoWebApp_o.sessionWeb:=OB Copy:C1225(This:C1470.sessionWeb)
 	
 	  //$0:=cs.user.new($infoWebApp_o)
 	
