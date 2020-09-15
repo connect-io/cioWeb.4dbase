@@ -10,7 +10,7 @@ Class constructor
 /* ----------------------------------------------------
 Fonction : webApp.constructor
 	
-Initialisation d'un utilisateur
+Initialisation de l'application web
 	
 Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création

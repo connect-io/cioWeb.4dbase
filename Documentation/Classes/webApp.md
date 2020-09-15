@@ -325,21 +325,21 @@ Chargement des éléments sur l'utilisateur / visiteur
 ------------------------------------------------------
 
 ## Fonction : webAppPath
-Chemin complet plateforme du dossier WebApp
+Chemin complet plateforme du dossier WebApp.
 		
 
 ### Fonctionnement
 ```4d
-???
+webApp.webAppPath() -> $path_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???        | Texte      | Sortie        | Chemin du dossier webfolder|
+| $path_t       | Texte      | Sortie        | Chemin du dossier WebApp |
 
 ### Example
-```html
-???
+```4d
+$chemin_t:=<>webApp_o.webAppPath()
 ```
 
 
@@ -360,6 +360,6 @@ Chemin complet plateforme du dossier Webfolder/sousDomaine
 | ???        | Texte      | Sortie        |Chemin du dossier webfolder du sous domaine|
 
 ### Example
-```html
-???
+```4d
+
 ```

@@ -6,6 +6,8 @@ Cette class permet de génerer le contenue d'une page.
 
 ### Accès aux fonctions
 * [Fonction : constructor](#fonction--constructor)
+* [Fonction : cssGetHtmlPath](#fonction--cssGetHtmlPath)
+* [Fonction : jsGetHtmlPath](#fonction--jsGetHtmlPath)
 * [Fonction : scanBlock](#fonction--scanBlock)
 
 
@@ -17,18 +19,12 @@ ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la f
 
 
 ### Fonctionnement
-```4d
-???
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| ???           | Collection | Entrée        | Information sur les routes du site provenants directement de la class webApp. |
-| ???           | Objet      | Entrée        |Les informations sur le visiteur. |
+Interne au composant cioWeb.
 
 ### Example
-```html
-???
+```4d
+  // ===== Chargement des informations sur la page =====
+pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
 ```
 
 
@@ -39,7 +35,7 @@ Renvoi le HTML pour le chargement des fichiers CSS.
 
 ### Fonctionnement
 ```4d
-user.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
+page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
@@ -61,7 +57,7 @@ Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page
 
 ### Fonctionnement
 ```4d
-user.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
+page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
@@ -77,21 +73,21 @@ user.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 
 ------------------------------------------------------
 
-## Fonction : cachePath
+## Fonction : scanBlock
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 
 ### Fonctionnement
 ```4d
-???
+page.scanBlock($corpsHtml_t) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???           | Texte      | Entée         | ??? |
+| $corpsHtml_t  | Texte      | Entée         | Contenu HTML dans lequel on souhaite retrouver les blocks. |
 
 
 ### Example
 ```html
-???
+pageWeb_o.scanBlock($contenuFichierCorpsHtml_t)
 ```
 
