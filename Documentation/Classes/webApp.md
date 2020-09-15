@@ -223,16 +223,14 @@ Démarrage du serveur web
 
 ### Fonctionnement
 ```4d
-???
+?webApp.serverStart() -> Modifie this
 ```
 
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-???
+La fonction ne requiert pas de paramètre.
 
 ### Example
-```html
-???
+```4d
+<>webApp_o.serverStart()
 ```
 
 
@@ -244,17 +242,17 @@ Démarrage des sessions Web
 
 ### Fonctionnement
 ```4d
-???
+webApp.sessionWebStart({$option_c}) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???     | Collection      | Entée         |option du serveur web|
-| ???        | Objet      | Sortie        | Retourne tout les paramêtres de la session|
+| $option_c     | Collection      | Entée         |option du serveur web|
 
 ### Example
-```html
-???
+```4d
+  // Démarrage des sessions.
+<>webApp_o.sessionWebStart()
 ```
 
 
@@ -266,16 +264,18 @@ Chemin complet plateforme du dossier Source
 
 ### Fonctionnement
 ```4d
-???
+webApp.sourcePath() -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???        | Texte      | Sortie        | Chemin du dossier source|
+| $chemin_t     | Texte      | Sortie        | Chemin du dossier source |
 
 ### Example
-```html
-???
+```4d
+$cheminSource_t:=<>webApp_o.sourcePath()
+
+// $cheminSource_t = [...]/monApp4D/WebApp/Sources/
 ```
 
 
@@ -287,17 +287,19 @@ Chemin complet plateforme du dossier Source/sousDomaine
 
 ### Fonctionnement
 ```4d
-???
+webApp.sourceSubdomainPath({$domaine_t}) -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???     | Texte      | Entée         |Nom du sous domaine|
-| ???        | Texte      | Sortie        | Chemin du dossier source du sous domaine|
+| $domaine_t    | Texte      | Entée         | Nom du sous domaine |
+| $chemin_t     | Texte      | Sortie        | Chemin du dossier source du sous domaine |
 
 ### Example
-```html
-???
+```4d
+$cheminSourceSousDomaine_t:=<>webApp_o.sourceSubdomainPath("www")
+
+// $cheminSourceSousDomaine_t = [...]/monApp4D/WebApp/Sources/www/
 ```
 
 
@@ -309,16 +311,21 @@ Chargement des éléments sur l'utilisateur / visiteur
 
 ### Fonctionnement
 ```4d
-???
+webApp.userNew() -> $visiteur_o
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???        | Objet      | Sortie        | Instance de l'utilisateur en cours|
+| visiteur_o    | Objet      | Sortie        | Instance de l'utilisateur en cours|
 
 ### Example
-```html
-???
+```4d
+// Méthode : Sur connexion web
+// ===== Chargement des informations du visiteur du site =====
+If (visiteur_o=Null)
+	visiteur_o:=<>webApp_o.userNew()
+	dataTables_o:=New object()
+End if 
 ```
 
 
@@ -330,36 +337,41 @@ Chemin complet plateforme du dossier WebApp.
 
 ### Fonctionnement
 ```4d
-webApp.webAppPath() -> $path_t
+webApp.webAppPath() -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $path_t       | Texte      | Sortie        | Chemin du dossier WebApp |
+| $chemin_t     | Texte      | Sortie        | Chemin du dossier WebApp |
 
 ### Example
 ```4d
-$chemin_t:=<>webApp_o.webAppPath()
+$cheminDossierWebApp_t:=<>webApp_o.webAppPath()
+
+// $cheminDossierWebApp_t = [...]/monApp4D/WebApp/
 ```
 
 
 ------------------------------------------------------
 
 ## Fonction : webfolderSubdomainPath
-Chemin complet plateforme du dossier Webfolder/sousDomaine
-		
+Chemin complet plateforme du dossier Webfolder/sousDomaine  
+Il est possible de forcer l'accés à un sous domaine en l'inscrivant dans $domaine_t. Dans le cas contraire, vous utiliserez le domaine de la requête HTTPS.
+
 
 ### Fonctionnement
 ```4d
-???
+webApp.webfolderSubdomainPath({$domaine_t}) -> $path_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???     | Texte      | Entée         |Nom du sous domaine|
-| ???        | Texte      | Sortie        |Chemin du dossier webfolder du sous domaine|
+| $domaine_t    | Texte      | Entée         |Nom du sous domaine|
+| $chemin_t     | Texte      | Sortie        |Chemin du dossier webfolder du sous domaine|
 
 ### Example
 ```4d
+$cheminDossierWebAppSousDomaine_t:=<>webApp_o.webfolderSubdomainPath("www")
 
+// $cheminDossierWebAppSousDomaine_t = [...]/monApp4D/WebApp/WebFolder/www/
 ```

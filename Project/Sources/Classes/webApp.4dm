@@ -715,11 +715,12 @@ Démarrage des sessions Web
 Historique
 30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+15/09/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de $0
 -----------------------------------------------------*/
 	
 	C_COLLECTION:C1488($1;$options_c)  // Option, option du serveur web
-	C_OBJECT:C1216($0;$option_o)  // Retourne tout les paramêtres de la session
 	
+	C_OBJECT:C1216($option_o)
 	C_LONGINT:C283($valideMinute_l;$refProcess_l)
 	C_DATE:C307($creerLe_d;$modifierLe_d;$dernierJourValide_d)
 	C_TIME:C306($creerA_t;$modifierA_t)
@@ -777,7 +778,6 @@ Historique
 	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
 	This:C1470.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
 	
-	
 	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
 	$dernierJourValide_d:=Current date:C33-Num:C11(This:C1470.sessionWeb.valideDay)
 	For ($i;1;Size of array:C274($listeSessionWeb_t))
@@ -803,9 +803,6 @@ Historique
 		End if 
 		
 	End for 
-	
-	  // Et on retourne les infos pour l'application
-	$0:=This:C1470.sessionWeb
 	
 	
 	
