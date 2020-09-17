@@ -67,11 +67,14 @@ If (True)  // Déclarations
 	
 	C_OBJECT(visiteur_o;pageWeb_o)
 	C_TEXT($htmlFichierChemin_t;$resultatMethode_t;$methodeNom_t)
+	C_OBJECT(dataTables_o)
 End if 
 
   // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
 	visiteur_o:=<>webApp_o.userNew()
+	// Contient les datatables que le visiteur va utiliser dans son processs
+	dataTables_o:=New object() 
 End if 
 
 visiteur_o.getInfo()
