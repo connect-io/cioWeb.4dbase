@@ -475,6 +475,7 @@ Historique
 	C_OBJECT:C1216($1;$user_o)  // instance de user
 	C_OBJECT:C1216($0)  // Instance de la page courante
 	C_COLLECTION:C1488(siteRoute_c)
+	C_OBJECT:C1216($info_o)
 	C_COLLECTION:C1488(siteForm_c)
 	C_COLLECTION:C1488(siteDataTable_c)
 	C_TEXT:C284(cachePath_t)
@@ -484,7 +485,11 @@ Historique
 	  // En attendant de faire mieux, je passe la variable en process
 	siteRoute_c:=This:C1470.sites[$user_o.sousDomaine].route.copy()
 	
-	$0:=cs:C1710.page.new(siteRoute_c;$1)
+	  // Informations diverses
+	$info_o:=New object:C1471()
+	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
+	
+	$0:=cs:C1710.page.new(siteRoute_c;$1;$info_o)
 	
 	  // Petit hack pour les formulaires en attendant des jours meilleurs.
 	siteForm_c:=This:C1470.sites[$user_o.sousDomaine].form

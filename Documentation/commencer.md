@@ -73,10 +73,12 @@ End if
   // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
 	visiteur_o:=<>webApp_o.userNew()
+	
 	// Contient les datatables que le visiteur va utiliser dans son processs
 	dataTables_o:=New object() 
 End if 
 
+  // Récupération des informations du visiteur.
 visiteur_o.getInfo()
 visiteur_o.ip:=$3
 

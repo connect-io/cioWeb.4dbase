@@ -71,6 +71,38 @@ page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 <!--#4DHTML pageWeb_o.jsGetHtmlPath()-->
 ```
 
+
+------------------------------------------------------
+
+## Fonction : jsInHtml
+Place le contenue du fichier javascript dans le HTML.
+
+### Fonctionnement
+```4d
+page.jsInHtml() -> $jsInHtml_t
+```
+
+| Paramêtre      | Type       | entrée/sortie | Description |
+| -------------- | ---------- | ------------- | ----------- |
+| $jsInHtml_t    | Texte      | Sortie        | Contenu JS  |
+
+
+### Example
+
+Déclaration dans le fichier *.route.json:
+```json
+"jsPathInHtml":[
+  "_cioWeb/js/notification.js",
+  "_layout/js/layout.js"
+]
+```
+
+Utilisation dans le fichier *.html:
+```html
+<!--#4DHTML pageWeb_o.jsInHtml()-->
+```
+
+
 ------------------------------------------------------
 
 ## Fonction : scanBlock

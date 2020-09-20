@@ -17,10 +17,11 @@ Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+---------------------------------------------------- */
 	
 	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
 	C_OBJECT:C1216($2)  // Les informations sur le visiteur.
+	C_OBJECT:C1216($3)  // Information diverse
 	
 	C_OBJECT:C1216($page_o)
 	C_TEXT:C284($propriete_t)
@@ -34,6 +35,8 @@ Historique
 	This:C1470.siteRoute_c:=$1
 	
 	This:C1470.user:=$2
+	
+	This:C1470.info:=$3
 	
 	$libPageConnexion_t:="userIdentification"
 	
@@ -184,7 +187,7 @@ Historique
 19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
 10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
 09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+---------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Domaine du CDN
 	C_TEXT:C284($0)  // Contenu des fichiers html
@@ -222,10 +225,10 @@ Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page
 Historique
 27/07/2020 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+---------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // $1 : [texte] domaine du CDN
-	C_TEXT:C284($0)  // Contenu des fichiers html
+	C_TEXT:C284($0)  // Contenu des chemin JS à insérer dans le HTML.
 	
 	C_TEXT:C284($T_jsContenu;$jsHtmlModele_t;$jsPath_t)
 	
@@ -246,6 +249,45 @@ Historique
 	
 	
 	
+Function jsInHtml
+/* ----------------------------------------------------
+Fonction : page.jsInHtml
+	
+Place le contenue du fichier javascript dans le HTML
+	
+Historique
+20/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------*/
+	
+	C_TEXT:C284($0)  // Contenu des fichiers JS à insérer dans le HTML
+	
+	C_TEXT:C284($jsInHtml_t)
+	
+	If (pageWeb_o.jsPathInHtml=Null:C1517)
+		pageWeb_o.jsPathInHtml:=New collection:C1472()
+	End if 
+	
+	  // Intégration du JS dans la page HTML.
+	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
+		
+		  // On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
+		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
+		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
+		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
+		
+		
+		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)=Is a document:K24:1)
+			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)+Char:C90(Line feed:K15:40)
+		Else 
+			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)
+		End if 
+		
+	End for each 
+	
+	$0:=$jsInHtml_t
+	
+	
+	
 Function scanBlock
 /* ----------------------------------------------------
 Fonction : page.scanBlock
@@ -254,7 +296,7 @@ Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 	
 Historique
 27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+---------------------------------------------------- */
 	
 	C_TEXT:C284($1)
 	
