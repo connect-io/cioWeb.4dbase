@@ -45,6 +45,22 @@ Historique
 	End if 
 	
 	
+	  //----- Gestion du lien en ajax -----
+	If (This:C1470.ajax#Null:C1517)
+		
+		  // On génére l'url du double click sur une ligne du dataTable.
+		ASSERT:C1129(This:C1470.ajax.link#"";"dataTable.constructor : La propriété $dataTable_o.ajax.link n'est pas définit dans "+This:C1470.lib)
+		
+		If (This:C1470.ajax.linkVariable=Null:C1517)
+			This:C1470.ajax.linkVariable:=New object:C1471
+		End if 
+		
+		This:C1470.ajax.link:=cwLibToUrl (This:C1470.ajax.link;This:C1470.ajax.linkVariable)
+		
+		  // Securité navigateur
+		This:C1470.ajax.linkVariable:=Null:C1517
+	End if 
+	
 	
 Function setData
 /* ----------------------------------------------------

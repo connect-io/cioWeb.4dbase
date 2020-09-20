@@ -2,6 +2,12 @@
 // ----- Init de l'objet de récupération des datas 4D -----
 if(data4D == null){
     var data4D = {};
+
+    data4D.debugConsole = function (message) {
+        if (this.debugMode) {
+            console.log(message);
+        }
+    };   
 }
 
 
@@ -87,7 +93,7 @@ if(data4D == null){
 
     <!--#4DIF (dataTable_o[i].ajax # null)-->
     function <!--#4DTEXT dataTable_o[i].lib-->Reload() {
-        var urlAjax = '<!--#4DTEXT cwLibToUrl(dataTable_o[i].ajax.link; dataTable_o[i].ajax.linkVariable)-->?urlDataTableName=<!--#4DTEXT dataTable_o[i].lib-->';
+        var urlAjax = '<!--#4DTEXT cwLibToUrl(dataTable_o[i].ajax.link)-->?urlDataTableName=<!--#4DTEXT dataTable_o[i].lib-->';
         data4D.debugConsole('Rechargement du tableau <!--#4DTEXT dataTable_o[i].lib--> : '+urlAjax);
 
         <!--#4DTEXT dataTable_o[i].lib-->.clear();

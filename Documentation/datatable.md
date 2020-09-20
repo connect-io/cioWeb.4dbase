@@ -208,7 +208,7 @@ On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.de
 ## Code HTML pour la création du bouton "supprimer ligne"
 
 ```html
-<button type="button" id="NomBtnRetirerLigne">
+<button type="button" id="btnRetirerLigne">
     Retirer la ligne 
 </button> 
 ```
@@ -221,12 +221,36 @@ Ici on définit son type avec **type="button"** puis on choisit le nom du bouton
 ```js
 
 // ----- Bouton retirer ligne -----
-$('#NomBtnRetirerLigne').click( function () {
+$('#btnRetirerLigne').click( function () {
     table.dtNomPageNomTableau.row('.selected').remove().draw( false );
-    } );
+
+    // Si aucune ligne n'est séléctionné, on prévient l'utilisateur.
+    if( rowData === undefined){
+        alert("Merci de séléctionner une ligne.");
+        return;
+    }
+
+    // On envoi une requête au serveur pour informer que l'on souhaite retirer une ligne.
+    $.ajax({
+        method: "POST",
+        // Url de destination
+        url: data4D.urlCustom ,
+        data: {
+            // On envoi le PK de la ligne.
+            lignePk: rowData.maskID_t,
+            action: "retirerLigne"
+        },
+        success: function(response) {
+            // Tout ce passe bien, on recharge le tableau.
+            dtNomPageNomTableauReload();
+
+            // Et pour finir on fait une demande de mise à jour diu cache.
+            cacheUpdate();
+        }
+    });
+});
     
 // ----- FIN - Bouton retirer ligne -----
-
 ```
 
 Ici on verifie si l'on clique sur le bouton d'id NomBtnRetirerLigne et on supprime la ligne selectionnée dans le tableau dtNomPageDetailElementTableau.
