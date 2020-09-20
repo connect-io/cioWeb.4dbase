@@ -60,7 +60,8 @@ End if
 	
 	Historique
 	28/07/20 - Grégory Fromain - création
----------------------------------------------------------------------- */
+	28/07/20 - Grégory Fromain - Gestion des blocks recursifs.
+----------------------------------------------------------------------*/
 
 If (True)  // Déclarations
 	C_TEXT($3)  // Adresse IP du navigateur.
@@ -68,14 +69,15 @@ If (True)  // Déclarations
 	C_OBJECT(visiteur_o;pageWeb_o)
 	C_TEXT($htmlFichierChemin_t;$resultatMethode_t;$methodeNom_t)
 	C_OBJECT(dataTables_o)
+	C_TEXT($retour_t)
 End if 
 
   // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
 	visiteur_o:=<>webApp_o.userNew()
 	
-	// Contient les datatables que le visiteur va utiliser dans son processs
-	dataTables_o:=New object() 
+	  // Contient les datatables que le visiteur va utiliser dans son processs
+	dataTables_o:=New object()
 End if 
 
   // Récupération des informations du visiteur.
@@ -85,7 +87,7 @@ visiteur_o.ip:=$3
   //Gestion des sessions web.
 visiteur_o.sessionWebLoad()
 
-  
+
   // Petit hack pour simplifier, le premier démarrage.
   // C'est à supprimer après la configuration du fichier host de la machine.
 If (visiteur_o.Host="127.0.0.1")
@@ -93,7 +95,7 @@ If (visiteur_o.Host="127.0.0.1")
 	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
 End if 
 
-// Dectection du mode développement
+  // Dectection du mode développement
 visiteur_o.devMode:=visiteur_o.Host="@dev@"
 
 
@@ -106,6 +108,8 @@ End if
 
   // ===== Chargement des informations sur la page =====
 pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
+
+visiteur_o.notificationSuccess:="salut"
 
   // On va fusionner les datas de la route de l'URL sur le visiteur.
 If (pageWeb_o.route.data#Null)
@@ -136,7 +140,7 @@ Case of
 		  // (Exemple fichier Excel)
 		
 	Else 
-		  // On génére un nouveau token pour le visiteur
+		  // Si nous ne sommes pas en ajax et pas en page d'erreur, on génére un nouveau token pour le visiteur
 		If (pageWeb_o.lib#"404")
 			visiteur_o.tokenGenerate()
 		End if 
@@ -145,18 +149,10 @@ Case of
 		pageWeb_o.viewPath:=pageWeb_o.viewPath.reverse()
 		
 		For each ($htmlFichierChemin_t;pageWeb_o.viewPath)
-			$contenuFichierCorpsHtml_t:=Document to text($htmlFichierChemin_t)
-			
-			PROCESS 4D TAGS($contenuFichierCorpsHtml_t;$contenuFichierCorpsHtml_t)
-			
-			pageWeb_o.scanBlock($contenuFichierCorpsHtml_t)
-			
-			pageWeb_o.corps:=$contenuFichierCorpsHtml_t
+			$retour_t:=pageWeb_o.scanBlock(Document to text($htmlFichierChemin_t))
 		End for each 
 		
-		
-		WEB SEND TEXT(pageWeb_o.corps;pageWeb_o.type)
-		
+		WEB SEND TEXT($retour_t;pageWeb_o.type)
 End case 
 ```
 

@@ -300,6 +300,7 @@ Historique
 ---------------------------------------------------- */
 	
 	C_TEXT:C284($1)
+	C_TEXT:C284($0)  // Retourne les élements du fichiers qui ne sont pas dans un block
 	
 	C_TEXT:C284($contenuFichierCorpsHtml_t;$nomVar_t;$valVar_t)
 	ARRAY LONGINT:C221($posTrouvee_al;0)
@@ -341,6 +342,8 @@ Historique
 			
 		End while 
 	End if 
+	
+	$0:=$contenuFichierCorpsHtml_t
 	
 	
 	
