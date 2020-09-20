@@ -31,7 +31,6 @@
 			"_layout/view/layoutDemo.html"
 		],
 		"cssPath": [
-			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
 			"https://getbootstrap.com/docs/4.0/examples/cover/cover.css",
 			"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
 
