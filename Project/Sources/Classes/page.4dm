@@ -17,6 +17,7 @@ Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
 ---------------------------------------------------- */
 	
 	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
@@ -112,8 +113,8 @@ Historique
 			End for 
 		End if 
 		
-		If (String:C10($routeData.langue)="")
-			$routeData.langue:="fr"
+		If (String:C10($routeData.lang)="")
+			$routeData.lang:="fr"
 		End if 
 		
 		pageWeb_o.route.data:=$routeData

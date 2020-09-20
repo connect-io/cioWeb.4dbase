@@ -17,8 +17,8 @@ $O_dataPage:=New object
   // On récupére les data du sous dommaine du site et de la langue qui nous intérresse.
 If (OB Is defined(<>webApp_o.i18n;OB Get(visiteur;"sousDomaine")))
 $O_langueDomaine:=OB Get(<>webApp_o.i18n;OB Get(visiteur;"sousDomaine"))
-If (OB Is defined($O_langueDomaine;String(pageWeb.route.data.langue)))
-$langueFichier:=OB Get($O_langueDomaine;String(pageWeb.route.data.langue))
+If (OB Is defined($O_langueDomaine;String(pageWeb.route.data.lang)))
+$langueFichier:=OB Get($O_langueDomaine;String(pageWeb.route.data.lang))
 
   // On récupére les data du layout
   // On regarde si un layout existe dans la config du site.
