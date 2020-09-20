@@ -1,0 +1,49 @@
+<!-- ---------------------------------------------------------------------------
+  layout.html
+  
+  C'est depuis ce fichier que toutes les pages .html sont générés.
+
+  Historique
+  20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+---------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html lang="<!--#4DTEXT pageWeb_o.lang-->">
+
+	<head>
+		<title><!--#4DTEXT pageWeb_o.titre--></title>
+ 
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<meta name="description" content="<!--#4DTEXT pageWeb_o.description-->">  
+		<meta name="keywords" content="<!--#4DTEXT pageWeb_o.keywords-->">
+
+		<link rel="shortcut icon" href="/favicon.ico">
+
+		<!--#4DHTML pageWeb_o.cssGetHtmlPath()-->
+
+		<!-- Global site tag (gtag.js) - Ne pas supprimer -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70713551-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-70713551-2');
+		</script>
+
+	</head>
+
+	<body>
+
+		<!--#4DHTML string(pageWeb_o.blockBody)-->
+    
+		<!--#4DHTML pageWeb_o.jsGetHtmlPath()-->
+
+		<script>
+			<!--#4DHTML pageWeb_o.jsInHtml()-->
+		</script>
+	</body>
+</html>

@@ -1,42 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="https://fr.4d.com/sites/all/themes/bactency/favicon.ico">
-		<title><!--#4DTEXT pageWeb_o.titre--> | Composant cioWeb</title>
+<!-- ---------------------------------------------------------------------------
+  layoutDemo.html
+  
+  Demonstration du calque (entete et pied de page) qui sera appliqué à toutes la demo.
 
-		<!--#4DHTML pageWeb_o.cssGetHtmlPath()-->
+  Historique
+  20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête & block
+---------------------------------------------------------------------------- -->
 
-	</head>
-	<body>
-		<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-			<header class="masthead mb-auto">
-				<div class="inner">
-					<h3 class="masthead-brand" style="font-family: Ubuntu;">Connect <span style="color: #82E83F;">IO</span></h3>
-					<nav class="nav nav-masthead justify-content-center">
-						<a class="nav-link active" href="<!--4DSCRIPT/cwLibToUrl/index-->">Accueil</a>
-						<a class="nav-link" href="https://github.com/connect-io/cioWeb.4dbase" target="_blank">Suivre le projet sur github</a>
-						<a class="nav-link" href="mailto:contact@connect-io.fr">Contact</a>
-					</nav>
-				</div>
-			</header>
+<!--#cwBlock blockBody-->
+	<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+		<header class="masthead mb-auto">
+			<div class="inner">
+				<h3 class="masthead-brand" style="font-family: Ubuntu;">Connect <span style="color: #82E83F;">IO</span></h3>
+				<nav class="nav nav-masthead justify-content-center">
+					<a class="nav-link active" href="<!--4DSCRIPT/cwLibToUrl/index-->">Accueil</a>
+					<a class="nav-link" href="https://github.com/connect-io/cioWeb.4dbase" target="_blank">Suivre le projet sur github</a>
+					<a class="nav-link" href="mailto:contact@connect-io.fr">Contact</a>
+				</nav>
+			</div>
+		</header>
 
-			<!--#4DHTML pageWeb_o.corps-->
+		<!--#4DHTML pageWeb_o.corps-->
 
-			<footer class="mastfoot mt-auto">
-				<div class="inner">
-					<p>Composant cioWeb, par <a href="http://www.connect-io.fr">Connect IO</a>.</p>
-				</div>
-			</footer>
-		</div>
-		
-		<!--#4DHTML pageWeb_o.jsGetHtmlPath()-->
-		<!--#4DSCRIPT/cwIncludePageHtml/_cioWeb/view/notification.html-->
-		
-		<script>
-			<!--#4DHTML string(pageWeb_o.jsInHtml_t)-->
-		</script>
-
-	</body>
-</html>
+		<footer class="mastfoot mt-auto">
+			<div class="inner">
+				<p>Composant cioWeb, par <a href="http://www.connect-io.fr">Connect IO</a>.</p>
+			</div>
+		</footer>
+	</div>
+<!--#cwBlockFin-->
