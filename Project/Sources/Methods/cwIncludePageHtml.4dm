@@ -1,12 +1,12 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwIncludePageHtml
 
 Renvoie le code html contenue dans le dossier Resources/sites/$site/pages
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

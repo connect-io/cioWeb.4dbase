@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwInputFormInit
 
 Initialise les formulaires html
@@ -7,7 +7,7 @@ Initialise les formulaires html
 Historique
 09/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

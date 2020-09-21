@@ -1,12 +1,12 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwWebAppFuncDataTablePreload
 
 Precharge toutes les datatables HTML de l'application web.
 
 Historique
 05/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

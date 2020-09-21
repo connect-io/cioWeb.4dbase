@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwInputValidation
 
 Valide la valeur d'une variable web via son fichier de configuration
@@ -7,7 +7,7 @@ Valide la valeur d'une variable web via son fichier de configuration
 Historique
 03/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

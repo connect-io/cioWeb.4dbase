@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ---------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : c(io)w(eb)ToolHashUrl
 
 Génére un hash avec uniquement les valeurs a-Z0-9 et $
@@ -8,7 +8,7 @@ Génére un hash avec uniquement les valeurs a-Z0-9 et $
 Historique
 02/05/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 14/09/20 - Grégory Fromain <gregory@connect-io.fr> - Import dans le composant
----------------------------------------------------- */
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

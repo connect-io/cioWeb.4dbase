@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwHttpRedirect
 
 Envoi une redirection d'après le libellé d'une page ou d'une page http://
@@ -7,7 +7,7 @@ Et stock l'information pour la prochaine page.
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwFormInputSelectNewValue
 
 Générer des nouvelles entrée dans un input de type select.
@@ -15,7 +15,7 @@ Struture de la collection
   "disabled": true (optionnel)
 ,...
 ]
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

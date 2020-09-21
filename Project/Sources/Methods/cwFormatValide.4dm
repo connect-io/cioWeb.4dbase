@@ -1,5 +1,5 @@
 //%attributes = {}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwFormatValide
 
 Verifie le format d'une data
@@ -8,7 +8,7 @@ Historique
 20/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Maj de la methode
 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout Bool, real et int
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

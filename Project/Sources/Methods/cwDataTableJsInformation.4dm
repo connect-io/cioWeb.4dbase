@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwDataTableJsInformation
 
 Renvoie au navigateur les informations sur la dataTable.
@@ -7,7 +7,7 @@ Renvoie au navigateur les informations sur la dataTable.
 Historique
 06/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/07/20 - Grégory Fromain <gregory@connect-io.fr> - Renvoi de toutes les informations sur la dataTable.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

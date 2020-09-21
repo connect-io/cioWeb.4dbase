@@ -1,12 +1,12 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwTimestamp
 
 Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre machine)
 
 Historique
 08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

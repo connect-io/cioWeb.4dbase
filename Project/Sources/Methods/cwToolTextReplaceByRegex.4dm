@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwToolTextReplaceByRegex
 
 Remplace une chaine de caractère depuis une regex par un contenu fixe.
@@ -7,7 +7,7 @@ Remplace une chaine de caractère depuis une regex par un contenu fixe.
 Historique
 19/09/16 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioRegex et ré-écriture
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwDateClean
 
 Reconstruire une date depuis une saisie client
@@ -8,7 +8,7 @@ Historique
 19/06/17 - Grégory Fromain <gregory@connect-io.fr> - Création
 25/02/20 - Grégory Fromain <gregory@connect-io.fr> - Récupération depuis le projet livrerunballon et amélioration
 13/06/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du cas : ($1="00/00/00")|($1="00-00-00")
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

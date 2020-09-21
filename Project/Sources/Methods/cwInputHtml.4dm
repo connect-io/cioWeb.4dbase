@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwInputHtml
 
 Génére le code html d'un input
@@ -7,7 +7,7 @@ Génére le code html d'un input
 Historique
 30/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

@@ -7,7 +7,7 @@ Cette class permet de centraliser toutes les données de l'application web.
 
 
 Class constructor
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.constructor
 	
 Initialisation de l'application web
@@ -17,7 +17,7 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_OBJECT:C1216($source_o)  // dossier sources
 	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
@@ -147,14 +147,14 @@ Historique
 	
 	
 Function cachePath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.cachePath
 	
 Chemin complet plateforme du dossier cache
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($0)  // Chemin dossier cache
 	
@@ -163,14 +163,14 @@ Historique
 	
 	
 Function cacheSessionWebPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.cacheSessionWebPath
 	
 Chemin complet plateforme des sessions web
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // (Optionel) Forcer le chemin par defaut.
 	C_TEXT:C284($0)  // Chemin des sessions web
@@ -195,14 +195,14 @@ Historique
 	
 	
 Function cacheViewPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.cacheViewPath
 	
 Chemin complet plateforme du dossier cache des vues
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($0)  // Chemin du dossier cache des vues
 	
@@ -211,14 +211,14 @@ Historique
 	
 	
 Function cacheViewSubdomainPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.cacheViewSubdomainPath
 	
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Nom du sous domaine
 	C_TEXT:C284($0)  // Chemin des vues du sous domaine
@@ -235,14 +235,14 @@ Historique
 	
 	
 Function dataTableInit
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.dataTableInit
 	
 Initialisation des dataTables.
 	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_OBJECT:C1216($1;$user_o)  // instance de user
 	
@@ -261,14 +261,14 @@ Historique
 	
 	
 Function dataTableNew
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.dataTableNew
 	
 Chargement d'une nouvelle dataTable
 	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Lib du dataTable
 	C_POINTER:C301($2)
@@ -303,7 +303,7 @@ Historique
 	
 	
 Function htmlMinify
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.htmlMinify
 	
 Minification du HTML
@@ -312,7 +312,7 @@ Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($texteIn;$texteOut;$dirIn;$dirOut)
 	C_BOOLEAN:C305($compression)
@@ -390,7 +390,7 @@ Historique
 	
 	
 Function jsMinify
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.jsMinify
 	
 Minification du javascript
@@ -399,7 +399,7 @@ Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($texteIn;$dirIn;$dirOut)
 	C_BOOLEAN:C305($compression)
@@ -463,14 +463,14 @@ Historique
 	
 	
 Function pageCurrent
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.pageCurrent
 	
 Chargement des éléments de la page courante
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_OBJECT:C1216($1;$user_o)  // instance de user
 	C_OBJECT:C1216($0)  // Instance de la page courante
@@ -503,7 +503,7 @@ Historique
 	
 	
 Function serverStart
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.serverStart
 	
 Démarrage du serveur web
@@ -516,7 +516,7 @@ Historique
 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 18/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	  // La fonction ne requiere pas de paramêtre.
 	C_LONGINT:C283($j;$r)
@@ -712,7 +712,7 @@ Historique
 	
 	
 Function sessionWebStart
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.sessionWebStart
 	
 Démarrage des sessions Web
@@ -721,7 +721,7 @@ Historique
 30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 15/09/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de $0
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_COLLECTION:C1488($1;$options_c)  // Option, option du serveur web
 	
@@ -812,14 +812,14 @@ Historique
 	
 	
 Function sourcePath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.sourcePath
 	
 Chemin complet plateforme du dossier Source
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($0)  // Chemin du dossier source
 	
@@ -828,14 +828,14 @@ Historique
 	
 	
 Function sourceSubdomainPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.sourceSubdomainPath
 	
 Chemin complet plateforme du dossier Source/sousDomaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Nom du sous domaine
 	C_TEXT:C284($0)  // Chemin du dossier source du sous domaine
@@ -852,14 +852,14 @@ Historique
 	
 	
 Function userNew
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.userNew
 	
 Chargement des éléments sur l'utilisateur / visiteur
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_OBJECT:C1216($0)  // Instance de l'utilisateur en cours
 	
@@ -877,14 +877,14 @@ Historique
 	
 	
 Function webAppPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.webAppPath
 	
 Chemin complet plateforme du dossier WebApp
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($0)  // Chemin du dossier webfolder
 	
@@ -893,14 +893,14 @@ Historique
 	
 	
 Function webfolderSubdomainPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : webApp.webfolderSubdomainPath
 	
 Chemin complet plateforme du dossier Webfolder/sousDomaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Nom du sous domaine
 	C_TEXT:C284($0)  // Chemin du dossier webfolder du sous domaine

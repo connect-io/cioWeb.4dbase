@@ -1,12 +1,12 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwI18nConvertJson (Composant CioRegex)
 
 Remplace une chaine de caractère depuis une regex par un contenu fixe.
 
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 /*
 If (True)  // Déclarations

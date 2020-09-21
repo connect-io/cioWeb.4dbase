@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"publishedWeb":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwLibToUrl
 
 Permet de renvoyer l'url d'une page.
@@ -8,7 +8,7 @@ Historique
 21/03/15 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - notation objet
 30/10/19 gregory@connect-io.fr - ajout possibilité de forcer une variable de l'url depuis le routing.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

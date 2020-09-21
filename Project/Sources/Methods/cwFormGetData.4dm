@@ -1,12 +1,12 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwFormGetData
 
 La méthode reprend le principe de fonctionnement de la methode cwFormControle mais sans les contrôles.
 
 Historique
 07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

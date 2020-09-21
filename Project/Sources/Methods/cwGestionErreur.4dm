@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwGestionErreur
 
 Methode de gestion appel sur erreur du serveur web.
@@ -8,7 +8,7 @@ Pensez à la copier dans une methode de votre projet pour en profiter...
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

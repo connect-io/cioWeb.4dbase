@@ -1,12 +1,12 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwExtensionFichier (composant Cioweb)
 
 Trouve l'extension d'un fichier depuis une chaine de caractere
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

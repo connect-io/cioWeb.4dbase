@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwWebAppFormPreload
 
 Precharge tout les formulaires de l'application web.
@@ -13,7 +13,7 @@ Historique
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 30/08/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion optionnel de la propriété action dans la balise <form>
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

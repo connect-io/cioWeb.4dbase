@@ -7,7 +7,7 @@ Cette class permet de génerer le contenue d'une page.
 
 
 Class constructor
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : page.constructor
 	
 Initialisation de la page web.
@@ -18,7 +18,7 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
----------------------------------------------------- */
+----------------------------------------------------------------------------- */
 	
 	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
 	C_OBJECT:C1216($2)  // Les informations sur le visiteur.
@@ -179,7 +179,7 @@ Historique
 	
 	
 Function cssGetHtmlPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : page.cssGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers CSS.
@@ -188,7 +188,7 @@ Historique
 19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
 10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
 09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
----------------------------------------------------- */
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // Domaine du CDN
 	C_TEXT:C284($0)  // Contenu des fichiers html
@@ -218,7 +218,7 @@ Historique
 	
 	
 Function jsGetHtmlPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : page.jsGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
@@ -226,7 +226,7 @@ Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page
 Historique
 27/07/2020 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
----------------------------------------------------- */
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)  // $1 : [texte] domaine du CDN
 	C_TEXT:C284($0)  // Contenu des chemin JS à insérer dans le HTML.
@@ -251,14 +251,14 @@ Historique
 	
 	
 Function jsInHtml
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : page.jsInHtml
 	
 Place le contenue du fichier javascript dans le HTML
 	
 Historique
 20/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($0)  // Contenu des fichiers JS à insérer dans le HTML
 	
@@ -290,14 +290,14 @@ Historique
 	
 	
 Function scanBlock
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : page.scanBlock
 	
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 	
 Historique
 27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
----------------------------------------------------- */
+----------------------------------------------------------------------------- */
 	
 	C_TEXT:C284($1)
 	C_TEXT:C284($0)  // Retourne les élements du fichiers qui ne sont pas dans un block

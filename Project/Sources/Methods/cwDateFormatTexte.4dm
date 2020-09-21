@@ -1,12 +1,12 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwDateFormatTexte
 
 Formate une date en fonction d'un modele.
 
 Historique
 12/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

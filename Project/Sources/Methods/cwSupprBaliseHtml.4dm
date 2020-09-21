@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwSupprBaliseHtml (composant CioWeb)
 
 Supprimer les balises html d'un chaine de caractére.
@@ -7,7 +7,7 @@ Supprimer les balises html d'un chaine de caractére.
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

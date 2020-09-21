@@ -1,10 +1,10 @@
 //%attributes = {"shared":true,"publishedWeb":true,"preemptive":"capable"}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwInputInjection4DHtmlSafeUse
 
 Historique
 29/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

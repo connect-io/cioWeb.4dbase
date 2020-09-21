@@ -7,14 +7,14 @@ Gestion des tableaux de données en HTML.
 
 
 Class constructor
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : dataTable.constructor
 	
 Initialisation d'une dataTable
 	
 Historique
 21/07/20 - Grégory Fromain <gregory@connect-io.fr> - Réflexion
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	C_OBJECT:C1216($1)  // Le lib de la dataTable.
 	C_TEXT:C284($propriete_t)
 	
@@ -63,14 +63,14 @@ Historique
 	
 	
 Function setData
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : dataTable.setData
 	
 Charger les data dans le tableau de donnée.
 	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	C_VARIANT:C1683($1;$source_v)  // Entité selection
 	C_OBJECT:C1216(dataInBase_o;dataligne_o;dataColumn_o)
 	
@@ -102,14 +102,14 @@ Historique
 	
 	
 Function getHtml
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : dataTable.html
 	
 Génére le code HTML pour le tableau.
 	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	C_TEXT:C284($0)
 	
 	$0:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"

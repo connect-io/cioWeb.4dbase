@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwToolObjectMerge (composant CioWeb)
 
 Fusionne 2 objets
@@ -7,7 +7,7 @@ Fusionne 2 objets
 Historique
 27/10/15 gregory@connect-io.fr - Création
 27/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

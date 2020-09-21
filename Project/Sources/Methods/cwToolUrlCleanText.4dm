@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwToolUrlCleanText
 
 Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
@@ -7,7 +7,7 @@ Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
 Historique
 13/03/18 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioGénérique
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

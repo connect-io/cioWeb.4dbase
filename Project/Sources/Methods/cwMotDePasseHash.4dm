@@ -1,5 +1,5 @@
 //%attributes = {}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwMotDePasseHash
 
 Génére un hash avec uniquement les valeurs a-Z0-9 et $
@@ -7,7 +7,7 @@ Car cela peut poser des problèmes en cas de passage dans une url ou mot de pass
 
 Historique
 // 02/05/19 Gregory@connect-io.fr - GF190502001 - Création
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

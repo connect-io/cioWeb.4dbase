@@ -10,7 +10,7 @@ un robot google ou un autre serveur qui vient interroger le notre.
 
 
 Class constructor
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.constructor
 	
 Initialisation d'un utilisateur
@@ -18,7 +18,7 @@ ATTENTION : L'instance de la class "user" doit se faire obligatoirement par la f
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_OBJECT:C1216($1)  //Quelques infos de Web app (La config des sessions)
 	C_TEXT:C284($propriete_t)
@@ -30,7 +30,7 @@ Historique
 	
 	
 Function getInfo
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.getInfo
 	
 Chargement des éléments sur l'utilisateur / visiteur
@@ -40,7 +40,7 @@ Historique
 19/02/15 - gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
 26/10/19 - gregory@connect-io.fr - Passage notation objet
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_LONGINT:C283($i_l)
 	ARRAY TEXT:C222($nom_at;0)
@@ -112,7 +112,7 @@ Historique
 	
 	
 Function login
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.login
 	
 À utiliser après la vérification des utilisateurs.
@@ -124,7 +124,7 @@ Historique
 29/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 14/08/19 - Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur.action
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	This:C1470.loginDomaine:=String:C10(This:C1470.domaine)
 	This:C1470.loginEMail:=String:C10(This:C1470.eMail)
@@ -140,7 +140,7 @@ Historique
 	
 	
 Function logout
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.logout
 	
 Déconnexion de l'utilisateur
@@ -148,7 +148,7 @@ Remplace la méthode : cwVisiteurLogout
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	This:C1470.loginDomaine:=""
 	This:C1470.loginEMail:=""
@@ -157,14 +157,14 @@ Historique
 	
 	
 Function objectMerge
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_OBJECT:C1216($1)
 	C_OBJECT:C1216($objectMerge_o)
@@ -179,7 +179,7 @@ Historique
 	
 	
 Function sessionWebFolderPath
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.sessionWebFolderPath
 	
 Chemin du dossier des sessions web de l'utilisateur.
@@ -188,7 +188,7 @@ Remplace la méthode : cwSessionUserFolder
 Historique
 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_TEXT:C284($0;$chFolderSession_t)  // $0 = [text] chemin du dossier de session du visiteur
 	
@@ -235,7 +235,7 @@ Historique
 	
 	
 Function sessionWebLoad
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.sessionWebLoad
 	
 Chargement des sessions web de l'utilisateur.
@@ -246,7 +246,7 @@ Historique
 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Ré-écriture de la méthode
 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dans la mise à jour des dossiers temporaires.
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_TEXT:C284($chFichierSession_t;$chAncienDossier_t;$chNouveauDossier_t)
 	C_OBJECT:C1216($session_o)
@@ -318,7 +318,7 @@ Historique
 	
 	
 Function sessionWebSave
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.sessionWebSave
 	
 Sauvegarder des sessions web de l'utilisateur.
@@ -328,7 +328,7 @@ Historique
 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 13/05/20 - Grégory Fromain <gregory@connect-io.fr> - Modification des notications d'erreur en cas de chargement d'une seule page
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_OBJECT:C1216($logErreur_o)
 	C_TEXT:C284($chSessionWeb_t)
@@ -369,7 +369,7 @@ Historique
 	
 	
 Function tokenCheck
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.tokenCheck
 	
 Vérifie un jeton pour la validation d'une pages web.
@@ -377,7 +377,7 @@ Remplace la méthode : cwVisiteurTokenVerifier
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_BOOLEAN:C305($0)  // Vrai si valide
 	C_OBJECT:C1216($logErreur_o)
@@ -401,7 +401,7 @@ Historique
 	
 	
 Function tokenGenerate
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.tokenGenerate
 	
 Génere un jeton pour la validation des pages web.
@@ -409,7 +409,7 @@ Remplace la méthode : cwVisiteurTokenGenerer
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	C_TEXT:C284($t_uuid)
 	
@@ -420,14 +420,14 @@ Historique
 	
 	
 Function updateVarVisiteur
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Fonction : user.updateVarVisiteur
 	
 Synchro avec du vieux code
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------*/
+------------------------------------------------------------------------------ */
 	
 	  // A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
 	C_OBJECT:C1216(visiteur)

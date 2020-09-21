@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwToolDeletePrefixKey
 
 Supprime un suffixe à chaque clé d'un objet.
@@ -7,7 +7,7 @@ Supprime un suffixe à chaque clé d'un objet.
 Historique
 15/08/17 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

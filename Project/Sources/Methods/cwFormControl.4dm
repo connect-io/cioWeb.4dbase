@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwFormControl
 
 Permet de controler les informations d'un formulaire saisie par l'internaute
@@ -10,7 +10,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de précision en cas d'inpossibilité de charger un formulaire.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations

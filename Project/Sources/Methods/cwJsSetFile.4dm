@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-/* ----------------------------------------------------
+/* -----------------------------------------------------------------------------
 Méthode : cwJsSetFile
 
 Ajoute le contenu d'un fichier javascript dans le code html 
@@ -7,7 +7,7 @@ via la commande cwJsGetContent à placer dans le code html.
 
 Historique
 
-----------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
