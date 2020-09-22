@@ -1,0 +1,13 @@
+﻿{
+	"parentsNotification" : {
+		"cssPath": [
+			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+		],
+		"jsPath": [
+			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/notification.js"
+		]
+	}
+}

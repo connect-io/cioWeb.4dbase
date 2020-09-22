@@ -516,6 +516,7 @@ Historique
 25/06/20 - Grégory Fromain <gregory@connect-io.fr> - Mise à jour emplacement des views.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 18/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+23/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion de parent multiple
 ----------------------------------------------------------------------------- */
 	
 	  // La fonction ne requiere pas de paramêtre.
@@ -562,19 +563,39 @@ Historique
 			If ($libPage#"parent@")
 				
 				If ($configPage[$libPage].parents#Null:C1517)
-					$parentLibPage:=$configPage[$libPage].parents[0]
-					Repeat 
-						$parentLibPagePrecedent:=$parentLibPage
+/*
+$parentLibPage:=$configPage[$libPage].parents[0]
+Repeat 
+$parentLibPagePrecedent:=$parentLibPage
+					
+If ($configPage[$parentLibPage]=Null)
+ALERT("La route parent suivante n'est pas définie :"+$parentLibPage)
+$parentLibPage:=""  // Permet de sortir de la boucle.
+Else 
+$configPage[$libPage]:=cwToolObjectMerge ($configPage[$parentLibPage];$configPage[$libPage])
+$parentLibPage:=$configPage[$libPage].parents[0]
+End if 
+					
+Until ($parentLibPagePrecedent=$parentLibPage)
+*/
+					
+					$iReel_l:=-1
+					$i:=0
+					While ($i<$configPage[$libPage].parents.length)
 						
+						$iReel_l:=$configPage[$libPage].parents.length-$i-1
+						
+						$parentLibPage:=$configPage[$libPage].parents[$iReel_l]
 						If ($configPage[$parentLibPage]=Null:C1517)
 							ALERT:C41("La route parent suivante n'est pas définie :"+$parentLibPage)
 							$parentLibPage:=""  // Permet de sortir de la boucle.
 						Else 
 							$configPage[$libPage]:=cwToolObjectMerge ($configPage[$parentLibPage];$configPage[$libPage])
-							$parentLibPage:=$configPage[$libPage].parents[0]
 						End if 
 						
-					Until ($parentLibPagePrecedent=$parentLibPage)
+						$i:=$i+1
+					End while 
+					
 					
 				End if 
 			End if 

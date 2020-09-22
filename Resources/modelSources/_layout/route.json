@@ -1,30 +1,26 @@
 ﻿{
 	"parentsLayout" : {
 		"viewPath": [
-			"_layout/view/layout.html"
+			"_layout/view/layoutMain.html"
 		],
 		"titre": "Composant cioWeb",
 		"description": "Ceci est une demonstration du composant cioWeb.",
 		"keywords":"Composant 4D, connect IO, cioWeb",
 		"cssPath": [
-			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
-			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 		
 		],
 		"jsPath": [
 			"https://code.jquery.com/jquery-3.5.1.min.js",
 			"https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
-			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js",
-			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-		],
-		"jsPathInHtml":[
-			"_cioWeb/js/notification.js"
+			"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		]
 	},
 
 	"parentsLayoutDemo": {
 		"parents": [
-			"parentsLayout"
+			"parentsLayout",
+			"parentsNotification"
 		],
 		"titre": "Hello word",
 		"viewPath": [
