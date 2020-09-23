@@ -612,9 +612,14 @@ End for each
 		
 		  // Une fois que l'on a merge les routes avec des dependance, on supprime les pages de configuration qui n'ont pas de route.
 		For each ($libPage;$configPage)
-			If ($configPage[$libPage].route=Null:C1517)
-				OB REMOVE:C1226($configPage;$libPage)
-			End if 
+			Case of 
+				: ($configPage[$libPage].route=Null:C1517)
+					OB REMOVE:C1226($configPage;$libPage)
+					
+				: ($configPage[$libPage].route.path=Null:C1517)
+					OB REMOVE:C1226($configPage;$libPage)
+					
+			End case 
 		End for each 
 		
 		
