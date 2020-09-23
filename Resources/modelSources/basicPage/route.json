@@ -1,7 +1,7 @@
 ﻿{
 	"index": {
 		"parents": [
-			"parentsLayout"
+			"layoutMain"
 		],
 		"route": {
 			"path": "/"

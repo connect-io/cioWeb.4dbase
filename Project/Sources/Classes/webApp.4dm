@@ -602,11 +602,21 @@ Until ($parentLibPagePrecedent=$parentLibPage)
 		End for each 
 		
 		  // Une fois que l'on a merge les routes parents, on peut les supprimer...
+/*
+For each ($libPage;$configPage)
+If ($libPage="parent@")
+OB REMOVE($configPage;$libPage)
+End if 
+End for each 
+*/
+		
+		  // Une fois que l'on a merge les routes avec des dependance, on supprime les pages de configuration qui n'ont pas de route.
 		For each ($libPage;$configPage)
-			If ($libPage="parent@")
+			If ($configPage[$libPage].route=Null:C1517)
 				OB REMOVE:C1226($configPage;$libPage)
 			End if 
 		End for each 
+		
 		
 		
 		  // On precharge les routes

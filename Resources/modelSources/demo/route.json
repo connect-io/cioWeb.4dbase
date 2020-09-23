@@ -1,7 +1,7 @@
 ﻿{
 	"helloWord": {
 		"parents": [
-			"parentsLayoutDemo"
+			"layoutDemo"
 		],
 		"route": {
 			"path": "/hello-word.html"

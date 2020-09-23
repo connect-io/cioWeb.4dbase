@@ -1,5 +1,5 @@
 ﻿{
-	"parentsNotification" : {
+	"notification" : {
 		"cssPath": [
 			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
 		],
@@ -9,5 +9,47 @@
 		"jsPathInHtml":[
 			"_cioWeb/js/notification.js"
 		]
+	},
+
+	"dataTable" : {
+		"cssPath": [
+			"https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css",
+			"https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+		],
+		"jsPath": [
+			"https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/dataTable.js"
+		]
+	},
+
+	"summernote" : {
+		"cssPath": [
+			"https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+		],
+		"jsPath": [
+			"https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/summernote.js"
+		]
+	},
+
+	"confirmation" : {
+		"jsPath": [
+			"https://raw.githubusercontent.com/ethaizone/Bootstrap-Confirmation/master/bootstrap-confirmation.js"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/confirmation.js"
+		]
+	},	
+
+	"fontawesome" : {
+		"cssPath": [
+			"https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		]
 	}
+
+
 }

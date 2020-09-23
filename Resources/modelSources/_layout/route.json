@@ -1,5 +1,5 @@
 ﻿{
-	"parentsLayout" : {
+	"layoutMain" : {
 		"viewPath": [
 			"_layout/view/layoutMain.html"
 		],
@@ -17,10 +17,10 @@
 		]
 	},
 
-	"parentsLayoutDemo": {
+	"layoutDemo": {
 		"parents": [
-			"parentsLayout",
-			"parentsNotification"
+			"layoutMain",
+			"notification"
 		],
 		"titre": "Hello word",
 		"viewPath": [
