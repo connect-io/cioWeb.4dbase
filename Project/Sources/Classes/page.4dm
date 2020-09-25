@@ -125,8 +125,8 @@ Historique
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
 		End if 
 		
-		If (This:C1470.siteRoute_c.query("lib IS 404").length#0)
-			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS 404")[0]
+		If (This:C1470.siteRoute_c.query("lib IS '404'").length#0)
+			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS '404'")[0]
 			
 			  // Gestion de la langue de la page 404
 			pageWeb_o.lib:="404"

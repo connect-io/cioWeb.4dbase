@@ -1,5 +1,5 @@
 ﻿{
-	"notification" : {
+	"notification": {
 		"cssPath": [
 			"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
 		],
@@ -11,7 +11,7 @@
 		]
 	},
 
-	"dataTable" : {
+	"dataTable": {
 		"cssPath": [
 			"https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css",
 			"https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
@@ -24,7 +24,7 @@
 		]
 	},
 
-	"summernote" : {
+	"summernote": {
 		"cssPath": [
 			"https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
 		],
@@ -36,7 +36,7 @@
 		]
 	},
 
-	"confirmation" : {
+	"confirmation": {
 		"jsPath": [
 			"https://raw.githubusercontent.com/ethaizone/Bootstrap-Confirmation/master/bootstrap-confirmation.js"
 		],
@@ -45,11 +45,19 @@
 		]
 	},	
 
-	"fontawesome" : {
+	"fontawesome": {
 		"cssPath": [
 			"https://use.fontawesome.com/releases/v5.7.2/css/all.css"
 		]
-	}
+	},
 
+	"404":{
+		"route": {
+			"path": "/404.html"
+		},
+		"viewPath": [
+			"_cioWeb/view/404.html"
+		]
+	}
 
 }
