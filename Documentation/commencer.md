@@ -13,14 +13,14 @@ Les sources et le build sont dans 2 branches distinctes.
 ## Méthode de base sur ouverture
 
 ```4d
-/* ----------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
 	Méthode : Sur ouverture
 	
 	Charger tous les éléments propres à l'application Web
 	
 	Historique
 	27/07/20 - Grégory Fromain - création
----------------------------------------------------------------------- */
+----------------------------------------------------------------------------- */
 
 If (True)  // Déclarations
 	C_OBJECT(<>webApp_o)
@@ -53,7 +53,7 @@ End if
 
 ## Méthode de base sur connexion web
 ```4d
-/* ----------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
 	Méthode : Sur connexion web
 	
 	Traitement de la réquête web
@@ -61,7 +61,7 @@ End if
 	Historique
 	28/07/20 - Grégory Fromain - création
 	28/07/20 - Grégory Fromain - Gestion des blocks recursifs.
-----------------------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 
 If (True)  // Déclarations
 	C_TEXT($3)  // Adresse IP du navigateur.
@@ -109,16 +109,12 @@ End if
   // ===== Chargement des informations sur la page =====
 pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
 
-visiteur_o.notificationSuccess:="salut"
-
   // On va fusionner les datas de la route de l'URL sur le visiteur.
 If (pageWeb_o.route.data#Null)
-	
 	For each ($routeData_t;pageWeb_o.route.data)
 		visiteur_o[$routeData_t]:=pageWeb_o.route.data[$routeData_t]
 	End for each 
 End if 
-
 
   // On exécute si besoin les méthodes relatives à la page
 For each ($methodeNom_t;pageWeb_o.methode)
@@ -145,9 +141,6 @@ Case of
 			visiteur_o.tokenGenerate()
 		End if 
 		
-		  //Pour charger les éléments HTML de la page, on démarre par les éléments de plus bas niveaux.
-		pageWeb_o.viewPath:=pageWeb_o.viewPath.reverse()
-		
 		For each ($htmlFichierChemin_t;pageWeb_o.viewPath)
 			$retour_t:=pageWeb_o.scanBlock(Document to text($htmlFichierChemin_t))
 		End for each 
@@ -158,14 +151,14 @@ End case
 
 ## Méthode de base sur fermeture process web
 ```4d
-/* ----------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
 	Méthode : Sur fermeture process web
 	
 	Stock les datas du visiteur, correctement.
 	
 	Historique
 	14/09/20 - Grégory Fromain - Création
----------------------------------------------------------------------- */
+----------------------------------------------------------------------------- */
 
 
   // On utilise la fonction du composant pour stocker les informations du visiteur.

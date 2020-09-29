@@ -517,6 +517,7 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion des routes sous forme de collection.
 18/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 23/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion de parent multiple
+29/09/20 - Grégory Fromain <gregory@connect-io.fr> - On inverse l'ordre de chargement des méthodes et view.
 ----------------------------------------------------------------------------- */
 	
 	  // La fonction ne requiere pas de paramêtre.
@@ -694,6 +695,10 @@ End for each
 					End if 
 					
 				End for 
+				
+				  // On retourne l'ordre des pages HTML pour commencer par les pages de plus bas niveau.
+				$page.viewPath:=$page.viewPath.reverse()
+				
 			Else 
 				$page.viewPath:=New collection:C1472
 			End if 
@@ -708,6 +713,9 @@ End for each
 						ALERT:C41("Il manque la méthode suivante de l'application : "+$methodeNom_t)
 					End if 
 				End for each 
+				
+				  // On retourne l'ordre des méthodes pour commencer par les méthodes de plus bas niveau.
+				$page.methode:=$page.methode.reverse()
 			Else 
 				$page.methode:=New collection:C1472
 			End if 
