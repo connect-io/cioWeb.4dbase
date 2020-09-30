@@ -101,7 +101,7 @@ Voici un tableau regroupant les différentes valeur que peut prendre type:
 | Nom de la propriété | Element nécessaire dans input | Element facultatif dans input                          | Commentaire |
 | ------------------- | ------------------------------| ------------------------------------------------------ | ----------- |
 | text                |                               | append, label, collabel, class, clientDisabled, append | Permet de créer un champ de texte|
-| textarea            |                               | label, collabel, clientDisabled                        | Permet de créer un champ de texteprenant plusieurs lignes |
+| textarea            |                               | label, collabel, clientDisabled, class                 | Permet de créer un champ de texteprenant plusieurs lignes.<br> L'ajout de la class ``` "class": "4dStyledText"``` permet de renvoyer un text multistyle sous 4D accessible depuis ```visiteur.dataFormTyping```. |
 | select              | selection                     | label, collabel, clientDisabled                        | Permet de créer un menu déroulant |
 | checkbox            |                               | label, collabel, clientDisabled                        | Permet de creer une case à cocher |
 | radio               | selection                     | label, collabel, clientDisabled, colRadio              | Permet de créer des boutons radio|

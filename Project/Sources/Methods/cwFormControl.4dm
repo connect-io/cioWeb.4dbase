@@ -12,7 +12,6 @@ Historique
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 ----------------------------------------------------------------------------- */
 
-
 If (True:C214)  // Déclarations
 	C_POINTER:C301($1)  // visiteur
 	C_TEXT:C284($2)  // nom du formulaire
@@ -113,6 +112,20 @@ If ($resultat_t="")
 					
 				: (String:C10($formInput_o.format)="date")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean (visiteur.dataForm[$formInput_o.lib]))
+					
+				: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")
+					  // Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
+					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataForm[$formInput_o.lib];"<br>";"\r")
+					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"<br />";"\r")
+					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"<p>";"")
+					
+					  // On supprime completement la balise </p> si elle est a la fin du text.
+					If (visiteur.dataFormTyping[$formInput_o.lib]="@</p>")
+						visiteur.dataFormTyping[$formInput_o.lib]:=Substring:C12(visiteur.dataFormTyping[$formInput_o.lib];1;Length:C16(visiteur.dataFormTyping[$formInput_o.lib])-4)
+					End if 
+					
+					  // Dans les autres cas on remplace </p> par 2 fins de ligne.
+					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"</p>";"\r\r")
 					
 				Else 
 					visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]
