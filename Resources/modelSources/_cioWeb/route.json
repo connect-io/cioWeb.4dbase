@@ -51,6 +51,15 @@
 		]
 	},
 
+	"autoNumeric":{
+		"jsPath": [
+			"https://unpkg.com/autonumeric"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/autonumeric.js"
+		]
+	}
+
 	"404":{
 		"route": {
 			"path": "/404.html"
