@@ -372,7 +372,7 @@ Historique
 				$texteOut:=Replace string:C233(cwMinifier ($texteIn);"\n";"")
 				
 				  // On retire les commentaires HTML mais pas les balises 4D.
-				  //$texteOut:=cwToolTextReplaceByRegex ($texteOut;"<!-- (.*?)-->";"")
+				$texteOut:=cwToolTextReplaceByRegex ($texteOut;"<!-- (.*?)-->";"")
 				
 				  // On vérifie les espace insécable.
 				$texteOut:=Replace string:C233($texteOut;" ;";Char:C90(160)+";")

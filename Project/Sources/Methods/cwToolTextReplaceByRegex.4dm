@@ -20,6 +20,10 @@ End if
 $source_t:=$1
 $position_l:=1
 
+  // On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
+$source_t:=Replace string:C233($source_t;"\r";"##r")
+$source_t:=Replace string:C233($source_t;"\n";"##n")
+
 If ($2#"")
 	Repeat 
 		$regexValid_b:=Match regex:C1019($2;$source_t;$position_l;$pos_trouvee_l;$long_trouvée_l)
@@ -30,5 +34,8 @@ If ($2#"")
 		End if 
 	Until (Not:C34($regexValid_b))
 End if 
+
+$source_t:=Replace string:C233($source_t;"##r";"\r")
+$source_t:=Replace string:C233($source_t;"##n";"\n")
 
 $0:=$source_t
