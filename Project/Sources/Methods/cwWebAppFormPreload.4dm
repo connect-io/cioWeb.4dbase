@@ -13,6 +13,7 @@ Historique
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 30/08/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion optionnel de la propriété action dans la balise <form>
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 ----------------------------------------------------------------------------- */
 
 
@@ -48,7 +49,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		$analyseForm_b:=True:C214
 		C_OBJECT:C1216($form)
 		
-		If ($fichiersForm{$numForm}#"@form.json")
+		If ($fichiersForm{$numForm}#"@form.json@")
 			$analyseForm_b:=False:C215
 		End if 
 		
@@ -69,7 +70,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		End if 
 		
 		If ($analyseForm_b)
-			$form:=JSON Parse:C1218(Document to text:C1236($fichiersForm{$numForm};"UTF-8"))
+			$form:=cwToolObjectFromPlatformPath ($fichiersForm{$numForm})
 			If (Not:C34(OB Is defined:C1231($form)))
 				ALERT:C41("Impossible de parse "+$fichiersForm{$numForm})
 				$analyseForm_b:=False:C215

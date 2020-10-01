@@ -17,6 +17,7 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 ----------------------------------------------------------------------------- */
 	
 	C_OBJECT:C1216($source_o)  // dossier sources
@@ -67,13 +68,19 @@ Historique
 	
 	
 	  // ----- Chargement du fichier de config -----
-	  // On vérifie qu'il existe bien un fichier de config pour l'utilisation du composant dans la base hôte.
-	If (Not:C34($source_o.file("config.json").exists))
-		$source_o.file("config.json").setText("{}")
-	End if 
+	MESSAGE:C88("Chargement du fichier de config..."+Char:C90(Carriage return:K15:38))
+	Case of 
+			  // Si il existe un fichier de config dans l'ancien format, on le renome.
+		: ($source_o.file("config.json").exists)
+			$source_o.file("config.json").rename("config.jsonc")
+			
+		: (Not:C34($source_o.file("config.jsonc").exists))
+			  // Il n'existe pas de fichier de configuration pour l'utilisation du composant dans la base hôte, on le crée
+			$source_o.file("config.jsonc").setText("{}")
+	End case 
 	
 	  // On charge le fichier de config et on refusionne les data avec les informations précédentes.
-	$config_o:=cwToolObjectMerge (This:C1470;JSON Parse:C1218($source_o.file("config.json").getText()))
+	$config_o:=cwToolObjectMerge (This:C1470;cwToolObjectFromFile ($source_o.file("config.jsonc")))
 	
 	For each ($propriete_t;$config_o)
 		This:C1470[$propriete_t]:=$config_o[$propriete_t]
@@ -81,6 +88,8 @@ Historique
 	
 	
 	  // ----- Gestion du webfolder -----
+	MESSAGE:C88("Validation du webfolder..."+Char:C90(Carriage return:K15:38))
+	
 	  // On vérifie que le repertoire WebFolder existe dans le dossier WebApp
 	  // On fixe le dossier racine
 	If (Count parameters:C259=1)
@@ -518,6 +527,7 @@ Historique
 18/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 23/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion de parent multiple
 29/09/20 - Grégory Fromain <gregory@connect-io.fr> - On inverse l'ordre de chargement des méthodes et view.
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 ----------------------------------------------------------------------------- */
 	
 	  // La fonction ne requiere pas de paramêtre.
@@ -534,14 +544,17 @@ Historique
 	C_COLLECTION:C1488($route_c)
 	
 	  // Minification du JS.
+	MESSAGE:C88("Minification du JS..."+Char:C90(Carriage return:K15:38))
 	This:C1470.jsMinify()
 	
 	  // Minification du HTML.
+	MESSAGE:C88("Minification du HTML..."+Char:C90(Carriage return:K15:38))
 	This:C1470.htmlMinify()
 	
 	varVisiteurName_t:=This:C1470.config.varVisitorName_t
 	
 	  // On boucle sur chaque sous domaine.
+	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
 	For each ($subDomain_t;This:C1470.config.subDomain_c)
 		  // On purge la liste des routes
 		$route_c:=New collection:C1472()
@@ -550,11 +563,12 @@ Historique
 		ARRAY TEXT:C222($routeFile_at;0)
 		DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
 		
-		  // Chargement de tout les fichiers de routing.
+		  // Chargement de tous les fichiers de routing.
 		For ($routeNum;1;Size of array:C274($routeFile_at))
 			  // On charge toutes les routes, mais pas le modele
-			If ($routeFile_at{$routeNum}="@route.json")
-				$configPage:=cwToolObjectMerge ($configPage;JSON Parse:C1218(Document to text:C1236($routeFile_at{$routeNum};"UTF-8")))
+			If ($routeFile_at{$routeNum}="@route.json@")
+				  //$configPage:=cwToolObjectMerge ($configPage;JSON Parse(Document to text($routeFile_at{$routeNum};"UTF-8")))
+				$configPage:=cwToolObjectMerge ($configPage;cwToolObjectFromPlatformPath ($routeFile_at{$routeNum}))
 			End if 
 		End for 
 		
@@ -748,8 +762,10 @@ End for each
 		This:C1470.sites[$subDomain_t].route:=$route_c
 	End for each 
 	
-	
+	MESSAGE:C88("Chargement des formulaires..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFormPreload 
+	
+	MESSAGE:C88("Chargement des datatables..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFuncDataTablePreload 
 	  //cwI18nLoad 
 	

@@ -39,8 +39,8 @@ C_COLLECTION:C1488(cwFormInputSelectNewValue ;$3)
 C_TEXT:C284(cwFormInputSelectNewValue ;$4)
 C_TEXT:C284(cwPageActive ;$0)
 C_TEXT:C284(cwPageActive ;$1)
-C_TEXT:C284(cwJsGetFile ;$0)
-C_TEXT:C284(cwJsGetFile ;$1)
+C_TEXT:C284(cwJsGetFile;$0)
+C_TEXT:C284(cwJsGetFile;$1)
 C_TEXT:C284(cwMinifier ;$0)
 C_TEXT:C284(cwMinifier ;$1)
 C_TEXT:C284(cwSupprBaliseHtml ;$0)
@@ -116,3 +116,19 @@ C_VARIANT:C1683(cwDataTableJsInformation ;$3)
   //cwToolGetClass
 C_OBJECT:C1216(cwToolGetClass ;$0)
 C_TEXT:C284(cwToolGetClass ;$1)
+
+  //cwToolObjectFromPlatformPath
+C_OBJECT:C1216(cwToolObjectFromPlatformPath ;$0)
+C_TEXT:C284(cwToolObjectFromPlatformPath ;$1)
+
+  //cwToolHashUrl
+C_TEXT:C284(cwToolHashUrl ;$0)
+C_TEXT:C284(cwToolHashUrl ;$1)
+
+  //cwToolJsoncToJson
+C_TEXT:C284(cwToolJsoncToJson ;$0)
+C_TEXT:C284(cwToolJsoncToJson ;$1)
+
+  //cwToolObjectFromFile
+C_OBJECT:C1216(cwToolObjectFromFile ;$0)
+C_OBJECT:C1216(cwToolObjectFromFile ;$1)

@@ -6,6 +6,7 @@ Precharge toutes les datatables HTML de l'application web.
 
 Historique
 05/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 ----------------------------------------------------------------------------- */
 
 
@@ -29,7 +30,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	
 	  // On récupére la liste de tout les fichiers sources du sous domaine.
 	$fileSubDomain_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7+fk ignore invisible:K87:22)
-	$fileSubDomain_c:=$fileSubDomain_c.query("fullName = :1";"@datatable.json")
+	$fileSubDomain_c:=$fileSubDomain_c.query("fullName = :1";"@datatable.json@")
 	
 	
 	For each ($file_o;$fileSubDomain_c)
@@ -50,7 +51,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		End if 
 		
 		If ($analyseDataTable_b)
-			$dataTable_o:=JSON Parse:C1218($file_o.getText())
+			$dataTable_o:=cwToolObjectFromFile ($file_o)
 			If (Not:C34(OB Is defined:C1231($dataTable_o)))
 				ALERT:C41("Impossible de parse "+$file_o.platformPath)
 				$analyseDataTable_b:=False:C215
@@ -66,10 +67,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			  // On indique également la source du formulaire.
 			$dataTable_o.file:=$file_o.platformPath
 			
-			
 			$dataTable_o.html:=""
-			
-			
 			
 			
 			If ($dataTableCharge_c.length=0)
