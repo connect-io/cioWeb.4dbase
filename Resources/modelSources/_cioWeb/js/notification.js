@@ -36,7 +36,7 @@ data4D.notificationSuccess = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": true
+			"escapeHtml": false
 		}
 	);			
 
@@ -71,7 +71,7 @@ data4D.notificationError = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": true
+			"escapeHtml": false
 		}
 	);
 }; 
@@ -105,7 +105,7 @@ data4D.notificationWarning = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": true
+			"escapeHtml": false
 		}
 	);
 }; 
@@ -140,7 +140,7 @@ data4D.notificationInfo = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": true
+			"escapeHtml": false
 		}
 	);
 };	
