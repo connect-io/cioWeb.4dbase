@@ -15,7 +15,7 @@ If (True:C214)  // Déclarations
 	C_TEXT:C284($2)  // Nom de la variable
 	C_TEXT:C284($0)  // Retour : "ok" ou message d'erreur
 	
-	C_TEXT:C284($valeurInput;$retour)
+	C_TEXT:C284($valeurInput;$retour;$varNomPublic_t)
 	C_OBJECT:C1216($configInput)
 End if 
 
@@ -29,6 +29,12 @@ End if
   // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
 $configInput:=siteForm_c.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
 
+If (String:C10($configInput.label)#"")
+	$varNomPublic_t:=$configInput.label
+Else 
+	$varNomPublic_t:=$configInput.lib
+End if 
+
   // Gestion required
 Case of 
 	: ($retour#"ok")
@@ -41,7 +47,7 @@ Case of
 		  //La valeur est differente de vide, donc tout va bien, on ne fait rien.
 	Else 
 		  //Erreur, la valeur est vide !
-		$retour:=OB Get:C1224($configInput;"lib")+", la variable est vide."
+		$retour:=$varNomPublic_t+", la variable est vide."
 End case 
 
   // Gestion format
@@ -64,7 +70,7 @@ Case of
 		$retour:=cwFormatValide (OB Get:C1224($configInput;"format");$valeurInput)
 		
 		If ($retour#"ok")
-			$retour:=OB Get:C1224($configInput;"lib")+", "+$retour
+			$retour:=$varNomPublic_t+", "+$retour
 		End if 
 		
 		  // Puisque que l'on est dans le format de date... Autant vérifier si il n'y a pas de date min et date max à controler...
@@ -123,7 +129,7 @@ If (($retour="ok") & ($configInput.type="file"))
 				  //La cle blobSize n'est pas initialisé, on ne fait rien
 				
 			: (BLOB size:C605($vPartContentBlob)>$configInput.blobSize)
-				$retour:=OB Get:C1224($configInput;"lib")+", le fichier est trop gros."
+				$retour:=$varNomPublic_t+", le fichier est trop gros."
 		End case 
 		
 		  // On vérifie que le type de fichier soit le type attendu.
@@ -135,7 +141,7 @@ If (($retour="ok") & ($configInput.type="file"))
 				  //La cle contentType n'est pas initialisé, on ne fait rien
 				
 			: ($configInput.contentType.join()#("@"+$vPartMimeType+"@"))
-				$retour:=OB Get:C1224($configInput;"lib")+", le type de fichier n'est pas valide."
+				$retour:=$varNomPublic_t+", le type de fichier n'est pas valide."
 				
 		End case 
 	End if 
@@ -161,10 +167,10 @@ Case of
 				: ($vPartFileName="") & (BLOB size:C605($vPartContentBlob)=0)
 					  // L'input n'est pas renseigné dans le formulaire, ne rien faire.
 				: ($vPartFileName="")
-					$retour:=OB Get:C1224($configInput;"lib")+", le fichier ne semble pas avoir été importé."
+					$retour:=$varNomPublic_t+", le fichier ne semble pas avoir été importé."
 					$i:=WEB Get body part count:C1211  //On sort de la boucle.
 				: (BLOB size:C605($vPartContentBlob)>OB Get:C1224($configInput;"blobSize"))
-					$retour:=OB Get:C1224($configInput;"lib")+", le fichier est trop gros."
+					$retour:=$varNomPublic_t+", le fichier est trop gros."
 					$i:=WEB Get body part count:C1211  //On sort de la boucle.
 			End case 
 			

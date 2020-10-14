@@ -99,6 +99,10 @@ If ($resultat_t="")
 			OB SET:C1220(visiteur.dataForm;$formInput_o.lib;visiteur[$formInput_o.lib])
 			
 			Case of 
+				: (String:C10($formInput_o.format)="bool")
+					  // visiteur.dataFormTyping[$formInput_o.lib]:=Num(visiteur.dataForm[$formInput_o.lib])
+					visiteur.dataFormTyping[$formInput_o.lib]:=Bool:C1537(Num:C11(visiteur.dataForm[$formInput_o.lib]))
+					
 				: ($formInput_o.type="checkbox")
 					  // Si la valeur est on, on la transforme en boolean.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib]="on")
@@ -106,9 +110,6 @@ If ($resultat_t="")
 				: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib])
 					
-				: (String:C10($formInput_o.format)="bool")
-					  // visiteur.dataFormTyping[$formInput_o.lib]:=Num(visiteur.dataForm[$formInput_o.lib])
-					visiteur.dataFormTyping[$formInput_o.lib]:=Bool:C1537(Num:C11(visiteur.dataForm[$formInput_o.lib]))
 					
 				: (String:C10($formInput_o.format)="date")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean (visiteur.dataForm[$formInput_o.lib]))
