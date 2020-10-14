@@ -574,10 +574,10 @@ Historique
 		
 		  //---------- On merge les routes parents ----------
 		For each ($libPage;$configPage)
-			
-			If ($libPage#"parent@")
-				
-				If ($configPage[$libPage].parents#Null:C1517)
+			  // On ne merge pas les routes qui n'ont pas de parent... Pas d'intéret.
+			  // On ne merge pas les routes qui n'ont pas d'url... Cela crée des doublons car ce sont des routes de layout...
+			If ($configPage[$libPage].parents#Null:C1517) & ($configPage[$libPage].route#Null:C1517)
+				If ($configPage[$libPage].route.path#Null:C1517)
 /*
 $parentLibPage:=$configPage[$libPage].parents[0]
 Repeat 
