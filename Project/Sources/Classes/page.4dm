@@ -69,7 +69,6 @@ Historique
 	
 	If (pageWeb_o#Null:C1517)
 		
-		
 		  // On verifie si la page à besoin d'être identifier.
 		If (OB Is defined:C1231(pageWeb_o;"login"))
 			  // On regarde si l'utilisateur est loggué.
@@ -164,6 +163,10 @@ Historique
 		$logErreur_o.methode:=Current method name:C684
 		$logErreur_o.visiteur:=visiteur
 		cwLogErreurAjout ("Configuration serveur";$logErreur_o)
+		
+		If (Bool:C1537(visiteur.devMode))
+			ALERT:C41($logErreur_o.methode+" : "+$logErreur_o.detailErreur)
+		End if 
 	End if 
 	
 	
