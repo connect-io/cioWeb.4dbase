@@ -62,6 +62,37 @@ Historique
 	End if 
 	
 	
+	
+Function getHtml
+/* -----------------------------------------------------------------------------
+Fonction : dataTable.getHtml
+	
+Génére le code HTML pour le tableau.
+	
+Historique
+28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
+----------------------------------------------------------------------------- */
+	C_TEXT:C284($0)
+	
+	$0:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"
+	
+	
+	
+Function sendDataAjax
+/* -----------------------------------------------------------------------------
+Fonction : dataTable.sendDataAjax
+	
+Génére le JSON des données à renvoyer au navigateur.
+	
+Historique
+16/10/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	C_TEXT:C284($0)
+	
+	$0:=JSON Stringify:C1217(New object:C1471("data";This:C1470.data_c))
+	
+	
+	
 Function setData
 /* -----------------------------------------------------------------------------
 Fonction : dataTable.setData
@@ -100,23 +131,6 @@ Historique
 	
 	
 	
-	
-Function getHtml
-/* -----------------------------------------------------------------------------
-Fonction : dataTable.html
-	
-Génére le code HTML pour le tableau.
-	
-Historique
-28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------ */
-	C_TEXT:C284($0)
-	
-	$0:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"
-	
-	
-	
-Function ajaxReload
 	
 	
 Function ajaxRowRemove
