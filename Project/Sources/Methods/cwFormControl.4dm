@@ -99,12 +99,16 @@ If ($resultat_t="")
 			OB SET:C1220(visiteur.dataForm;$formInput_o.lib;visiteur[$formInput_o.lib])
 			
 			Case of 
+				: (String:C10($formInput_o.format)="bool") & ($formInput_o.type="checkbox")
+					  // Si la valeur est on, on la transforme en bool.
+					visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]="on"
+					
 				: (String:C10($formInput_o.format)="bool")
 					  // visiteur.dataFormTyping[$formInput_o.lib]:=Num(visiteur.dataForm[$formInput_o.lib])
 					visiteur.dataFormTyping[$formInput_o.lib]:=Bool:C1537(Num:C11(visiteur.dataForm[$formInput_o.lib]))
 					
 				: ($formInput_o.type="checkbox")
-					  // Si la valeur est on, on la transforme en boolean.
+					  // Si la valeur est on, on la transforme en numérique.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib]="on")
 					
 				: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
