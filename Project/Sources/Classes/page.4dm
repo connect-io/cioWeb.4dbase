@@ -47,7 +47,7 @@ Historique
 	
 	pageWeb_o:=Null:C1517
 	
-	  // Cas particulier pour la home du site.
+	// Cas particulier pour la home du site.
 	If ($B_estMethodeValide)
 		If ("/"=visiteur.url)
 			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS index")[0]
@@ -69,9 +69,9 @@ Historique
 	
 	If (pageWeb_o#Null:C1517)
 		
-		  // On verifie si la page à besoin d'être identifier.
+		// On verifie si la page à besoin d'être identifier.
 		If (OB Is defined:C1231(pageWeb_o;"login"))
-			  // On regarde si l'utilisateur est loggué.
+			// On regarde si l'utilisateur est loggué.
 			If (OB Is defined:C1231(visiteur;"loginDomaine"))
 				If (visiteur.domaine#visiteur.loginDomaine)
 					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
@@ -80,13 +80,13 @@ Historique
 				pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 			End if 
 			
-			  // On vérifie que la durée de la session ne soit pas expiré.
-			  // Pour le moment on fixe une durée de session au jour même, après minuit on reset la connexion.
+			// On vérifie que la durée de la session ne soit pas expiré.
+			// Pour le moment on fixe une durée de session au jour même, après minuit on reset la connexion.
 			If (String:C10(pageWeb_o.lib)#$libPageConnexion_t)
-				  // Donc l'utilisateur est bien connecté.
+				// Donc l'utilisateur est bien connecté.
 				If (visiteur.loginExpire_ts#Null:C1517)
-					If (visiteur.loginExpire_ts<=cwTimestamp )
-						  // Delais session dépassé.
+					If (visiteur.loginExpire_ts<=cwTimestamp)
+						// Delais session dépassé.
 						visiteur.loginDomaine:=""
 						pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
 						
@@ -100,10 +100,10 @@ Historique
 		
 		
 		$routeData:=New object:C1471
-		  // Récupération des variables de l'URL
+		// Récupération des variables de l'URL
 		$L_nbDeVariableDansUrl:=Size of array:C274($AT_positionTrouvee)
 		
-		  // Si il y a des param dans l'url & que la page est differente de la page de connexion.
+		// Si il y a des param dans l'url & que la page est differente de la page de connexion.
 		If ($L_nbDeVariableDansUrl#0) & (pageWeb_o.lib#$libPageConnexion_t)
 			OB GET PROPERTY NAMES:C1232(pageWeb_o.route.format;$AT_routeFormatCle)
 			
@@ -119,7 +119,7 @@ Historique
 		pageWeb_o.route.data:=$routeData
 		
 	Else 
-		  // Renvoie page 404
+		// Renvoie page 404
 		If (visiteur.url#"@.php")
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
 		End if 
@@ -127,7 +127,7 @@ Historique
 		If (This:C1470.siteRoute_c.query("lib IS '404'").length#0)
 			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS '404'")[0]
 			
-			  // Gestion de la langue de la page 404
+			// Gestion de la langue de la page 404
 			pageWeb_o.lib:="404"
 			ARRAY TEXT:C222($champs;1)
 			ARRAY TEXT:C222($valeurs;1)
@@ -136,33 +136,33 @@ Historique
 			WEB SET HTTP HEADER:C660($champs;$valeurs)
 		Else 
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page 404."
-			cwRedirection301 ("/")
+			cwRedirection301("/")
 		End if 
 	End if 
 	
-	  // Gestion des keywords
+	// Gestion des keywords
 	If (String:C10(pageWeb_o.keywords)="")
 		pageWeb_o.keywords:=""
 	End if 
 	
-	  // Gestion des descriptions
+	// Gestion des descriptions
 	If (String:C10(pageWeb_o.description)="")
 		pageWeb_o.description:=""
 	End if 
 	
-	  // Gestion des fichiers JS à inclure dans le HTML.
+	// Gestion des fichiers JS à inclure dans le HTML.
 	If (pageWeb_o.jsPathInHtml=Null:C1517)
 		pageWeb_o.jsPathInHtml:=New collection:C1472
 	End if 
 	
 	
 	
-	  //pageWeb_o.i18n:=cwi18nDataPage 
+	//pageWeb_o.i18n:=cwi18nDataPage 
 	
 	If (OB Is defined:C1231($logErreur_o;"detailErreur"))
 		$logErreur_o.methode:=Current method name:C684
 		$logErreur_o.visiteur:=visiteur
-		cwLogErreurAjout ("Configuration serveur";$logErreur_o)
+		cwLogErreurAjout("Configuration serveur";$logErreur_o)
 		
 		If (Bool:C1537(visiteur.devMode))
 			ALERT:C41($logErreur_o.methode+" : "+$logErreur_o.detailErreur)
@@ -175,7 +175,7 @@ Historique
 	End for each 
 	
 	
-	  // A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
+	// A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
 	C_OBJECT:C1216(pageWeb)
 	pageWeb:=pageWeb_o
 	
@@ -193,10 +193,10 @@ Historique
 09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 ----------------------------------------------------------------------------- */
 	
-	C_TEXT:C284($1)  // Domaine du CDN
-	C_TEXT:C284($0)  // Contenu des fichiers html
+	var $1 : Text  // Domaine du CDN
+	var $0 : Text  // Contenu des fichiers html
 	
-	C_TEXT:C284($cssContenu_t;$cssHtmlModele_t;$cssPath_t)
+	var $cssContenu_t;$cssHtmlModele_t;$cssPath_t : Text
 	
 	
 	$cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssPath\">"
@@ -271,10 +271,10 @@ Historique
 		pageWeb_o.jsPathInHtml:=New collection:C1472()
 	End if 
 	
-	  // Intégration du JS dans la page HTML.
+	// Intégration du JS dans la page HTML.
 	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
 		
-		  // On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
+		// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
 		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
 		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
 		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
@@ -311,20 +311,20 @@ Historique
 	
 	$contenuFichierCorpsHtml_t:=$1
 	
-	  // On regarde si il y a des blocks de template.
+	// On regarde si il y a des blocks de template.
 	
 	If ($contenuFichierCorpsHtml_t="@<!--#cwBlock@")
-		  // On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
+		// On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
 		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\r";"##r")
 		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\n";"##n")
 		
-		  // On purge les premiers caractéres.
+		// On purge les premiers caractéres.
 		$Pos:=Position:C15("<!--#cwBlock";$contenuFichierCorpsHtml_t)
 		If ($Pos#1)
 			$contenuFichierCorpsHtml_t:=Substring:C12($contenuFichierCorpsHtml_t;$Pos)
 		End if 
 		
-		  // On récupére le 1er block
+		// On récupére le 1er block
 		$blockLength_l:=Position:C15("<!--#cwBlockFin-->";$contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
 		$block_t:=Substring:C12($contenuFichierCorpsHtml_t;1;$blockLength_l)
 		

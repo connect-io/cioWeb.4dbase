@@ -62,6 +62,19 @@ Historique
 	End if 
 	
 	
+Function addData
+/* -----------------------------------------------------------------------------
+Fonction : dataTable.addData
+	
+Ajoute une ligne à votre tableau.
+	
+Historique
+16/10/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	C_COLLECTION:C1488($1)
+	
+	This:C1470.data_c.push($1)
+	
 	
 Function getHtml
 /* -----------------------------------------------------------------------------

@@ -6,6 +6,7 @@ Gestion des tableaux de données en HTML.
 
 ### Accès aux fonctions
 * [Fonction : constructor](#fonction--constructor)
+* [Fonction : addData](#fonction--addData)
 * [Fonction : getHtml](#fonction--getHtml)
 * [Fonction : sendDataAjax](#fonction--sendDataAjax)
 * [Fonction : setData](#fonction--setData)
@@ -34,6 +35,29 @@ dataTable.new($libDataTable_t) -> $instance_o
 ```4d
 /* Consultez la documentation concernant la fonction dataTableNew de la class webApp. */
 $instance_o:=cs.dataTable.new($libDataTable_t)
+```
+
+
+------------------------------------------------------
+
+## Fonction : addData
+Ajoute une ligne à votre tableau.
+
+### Fonctionnement
+```4d
+dataTable.addData($data_o) -> Modifie this
+```
+
+| Paramêtre     | Type       | entrée/sortie | Description |
+| ------------- | ---------- | ------------- | ----------- |
+| $data_o       | Variante   | Entée         | Nouvelle valeur en derniere position de votre tableau. |
+
+
+### Example
+```4d
+C_OBJECT($data_es)
+$data_es:=ds.personne.query("actif IS true")
+dataTables_o.dtPersonneListe.setData(data_es)
 ```
 
 
