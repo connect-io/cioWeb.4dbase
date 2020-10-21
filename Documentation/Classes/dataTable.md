@@ -26,7 +26,7 @@ dataTable.new($libDataTable_t) -> $instance_o
 
 | Paramêtre       | Type       | entrée/sortie | Description |
 | --------------- | ---------- | ------------- | ----------- |
-| $libDataTable_t | Texte      | Entée         | Le lib de la dataTable |
+| $libDataTable_t | Texte      | Entrée         | Le lib de la dataTable |
 | $instance_o     | Texte      | Sortie        | Nouvelle instance |
 
 
@@ -50,7 +50,7 @@ dataTable.addData($data_o) -> Modifie this
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $data_o       | Variante   | Entée         | Nouvelle valeur en derniere position de votre tableau. |
+| $data_o       | Variante   | Entrée         | Nouvelle valeur en derniere position de votre tableau. |
 
 
 ### Example
@@ -115,7 +115,7 @@ dataTable.setData($data_v) -> Modifie this
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $data_v       | Variante   | Entée         | Les données à intégrer dans la dataTable (Collection ou Entité selection) |
+| $data_v       | Variante   | Entrée         | Les données à intégrer dans la dataTable (Collection ou Entité selection) |
 
 
 ### Example
