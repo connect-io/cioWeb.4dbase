@@ -29,7 +29,7 @@ If ($3=Null:C1517)
 	ALERT:C41("Le paramêtre $2 (lib) n'est pas défini dans la datatable.")
 End if 
 
-  // Nettoyage du param
+// Nettoyage du param
 $dataTableNom_t:=$2
 $dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
 
@@ -39,10 +39,10 @@ End if
 
 $source_v:=$3
 
-  // On retrouve la dataTable
+// On retrouve la dataTable
 $resultForm_c:=siteDataTable_c.query("lib IS :1";$dataTableNom_t)
 
-  // Pour vérifier que les data soit bien brut.
+// Pour vérifier que les data soit bien brut.
 If ($resultForm_c.length=1)
 	$dataTable_o:=OB Copy:C1225($resultForm_c[0])
 	$dataTable_o.readOnly:=$2="@/readOnly@"
@@ -53,26 +53,26 @@ Else
 End if 
 
 
-  // On génére les éléments pour construire le tableau html
-  // On récupére les tableaux de contact de Philippe pour en refaire une collection...
+// On génére les éléments pour construire le tableau html
+// On récupére les tableaux de contact de Philippe pour en refaire une collection...
 $dataTable_o.column_c:=New collection:C1472()
 
 For each ($column_o;$dataTable_o.column)
 	
-	  //$dataTable_o.column_c.push(New object("title";$column_o.title;"data";$column_o.data))
+	//$dataTable_o.column_c.push(New object("title";$column_o.title;"data";$column_o.data))
 	$dataTable_o.column_c.push($column_o)
 End for each 
 
 $dataTable_o.data_c:=New collection:C1472()
 
 
-  // On boucle sur chaque élément de la source...
-  // Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
+// On boucle sur chaque élément de la source...
+// Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
 For each (dataInBase_o;$source_v)
 	
 	dataligne_o:=New object:C1471()
 	
-	  // On boucle sur chaque colonne des données.
+	// On boucle sur chaque colonne des données.
 	For each (dataColumn_o;$dataTable_o.data)
 		dataligne_o[dataColumn_o.name]:=Formula from string:C1601(Replace string:C233(dataColumn_o.value;"this.";"dataInBase_o.")).call()
 	End for each 
@@ -82,25 +82,25 @@ For each (dataInBase_o;$source_v)
 End for each 
 
 
-  //----- Gestion du double click -----
+//----- Gestion du double click -----
 If ($dataTable_o.doubleClick#Null:C1517)
 	
-	  // On génére l'url du double click sur une ligne du dataTable.
+	// On génére l'url du double click sur une ligne du dataTable.
 	ASSERT:C1129($dataTable_o.doubleClick.link#Null:C1517;"La propriété $dataTable_o.doubleClick.link n'est pas définit dans "+$dataTableNom_t)
 	
 	If ($dataTable_o.doubleClick.linkVariable=Null:C1517)
 		$dataTable_o.doubleClick.linkVariable:=New object:C1471
 	End if 
 	
-	$dataTable_o.doubleClick.link:=cwLibToUrl ($dataTable_o.doubleClick.link;$dataTable_o.doubleClick.linkVariable)
+	$dataTable_o.doubleClick.link:=cwLibToUrl($dataTable_o.doubleClick.link;$dataTable_o.doubleClick.linkVariable)
 	
-	  // Securité navigateur
+	// Securité navigateur
 	$dataTable_o.doubleClick.linkVariable:=Null:C1517
 End if 
 
 
 
-  // Pour des raisons de sécurité on efface certaine propriété de l'objet.
+// Pour des raisons de sécurité on efface certaine propriété de l'objet.
 
 $dataTable_o.source:=Null:C1517
 
