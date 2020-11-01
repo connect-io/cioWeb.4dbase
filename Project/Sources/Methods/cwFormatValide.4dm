@@ -10,16 +10,17 @@ Historique
 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout Bool, real et int
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité d'un espace dans un real.
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du bool pour un checkbox
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0)  // $0 = ok, format inconnu, format incorrect
-	C_TEXT:C284($1;$formatNom_t)  // $1 = format recherché
-	C_TEXT:C284($2;$dataValue_t)  // $2 = valeur de la data
+	var $0 : Text  // $0 = ok, format inconnu, format incorrect
+	var $1;$formatNom_t : Text  // $1 = format recherché
+	var $2;$dataValue_t : Text  // $2 = valeur de la data
 	
-	C_TEXT:C284($T_regex)
-	C_OBJECT:C1216($format_o)
+	var $T_regex : Text
+	var $format_o : Object
 End if 
 
 $formatNom_t:=$1

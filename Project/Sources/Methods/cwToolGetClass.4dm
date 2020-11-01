@@ -6,11 +6,12 @@ Renvoie une class vers la base hôte.
 
 Historique
 03/07/2020 - gregory@connect-io.fr - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 If (True:C214)
-	C_TEXT:C284($1)  // Nom de la classe à renvoyer.
-	C_OBJECT:C1216($0)  // Objet de la class
+	var $1 : Text  // Nom de la classe à renvoyer.
+	var $0 : Object  // Objet de la class
 End if 
 
 ASSERT:C1129($1#"";"La variable $1 est vide.")

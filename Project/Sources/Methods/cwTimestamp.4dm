@@ -6,17 +6,17 @@ Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre mac
 
 Historique
 08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_DATE:C307($1)  // Date (optionnel)
-	C_TIME:C306($2)  // Heure (optionnel)
-	C_LONGINT:C283($0)  // Timestamp
+	var $1;$date_d : Date  // Date (optionnel)
+	var $2 : Time  // Heure (optionnel)
+	var $0 : Integer  // Timestamp
 	
-	C_DATE:C307($date_d)
-	C_LONGINT:C283($heure_l)
-	C_LONGINT:C283($nb_jour_sec_l)
+	var $heure_l : Integer
+	var $nbJourSec_l : Integer
 End if 
 
 
@@ -31,5 +31,5 @@ Else
 	$heure_l:=Current time:C178+0
 End if 
 
-$nb_jour_sec_l:=Int:C8(($date_d-!1970-01-01!)*86400)
-$0:=$nb_jour_sec_l+$heure_l-cwDecallageHoraire 
+$nbJourSec_l:=Int:C8(($date_d-!1970-01-01!)*86400)
+$0:=$nbJourSec_l+$heure_l-cwDecallageHoraire

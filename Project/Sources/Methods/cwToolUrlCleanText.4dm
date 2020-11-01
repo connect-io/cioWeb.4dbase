@@ -7,11 +7,13 @@ Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
 Historique
 13/03/18 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioGénérique
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1;$0;$textTempo_t)  // $1 : [texte] (Ballon Coeur "Rouge"), $0 : [texte] Ballon-coeur-Rouge
+	var $1;$textTempo_t : Text  // $1 : [texte] (Ballon Coeur "Rouge")
+	var $0 : Text  // $0 : [texte] Ballon-coeur-Rouge
 End if 
 
 

@@ -7,12 +7,12 @@ ATTENTION : Cette gestion des erreurs ne s'applique que sur le composant.
 Pensez à la copier dans une methode de votre projet pour en profiter...
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($erreur)
+	var $erreur : Object
 	ARRAY LONGINT:C221($code;0)
 	ARRAY TEXT:C222($composantInterne;0)
 	ARRAY TEXT:C222($lib;0)
@@ -30,7 +30,7 @@ If (OB Is defined:C1231(visiteur))
 	OB SET:C1220($erreur;"visiteur";visiteur)
 End if 
 
-cwLogErreurAjout ("Serveur Web";$erreur)
+cwLogErreurAjout("Serveur Web";$erreur)
 
 If (Get assert enabled:C1130)
 	WEB SEND TEXT:C677(JSON Stringify:C1217($erreur))

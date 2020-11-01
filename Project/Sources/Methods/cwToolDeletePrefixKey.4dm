@@ -7,14 +7,16 @@ Supprime un suffixe à chaque clé d'un objet.
 Historique
 15/08/17 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_OBJECT:C1216($1;$source_o)  // $1 [pointeur] objet
-	C_TEXT:C284($2)  // $2 [text] le suffixe à supprimer
+	var $1;$source_o : Object
+	var $2 : Text  // le suffixe à supprimer
 	
-	C_LONGINT:C283($i_l;$nbCar_l)
+	var $i_l : Integer
+	var $nbCar_l : Integer
 	ARRAY TEXT:C222($nomLib_at;0)
 End if 
 
@@ -32,6 +34,6 @@ For ($i_l;1;Size of array:C274($nomLib_at))
 	End if 
 End for 
 
-  //$1:=$source_o
+//$1:=$source_o
 
 

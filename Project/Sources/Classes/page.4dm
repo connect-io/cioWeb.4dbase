@@ -18,17 +18,20 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	C_COLLECTION:C1488($1)  // Information sur les routes du site provenants directement de la class webApp.
-	C_OBJECT:C1216($2)  // Les informations sur le visiteur.
-	C_OBJECT:C1216($3)  // Information diverse
+	var $1 : Collection  // Information sur les routes du site provenants directement de la class webApp.
+	var $2 : Object  // Les informations sur le visiteur.
+	var $3 : Object  // Information diverse
 	
-	C_OBJECT:C1216($page_o)
-	C_TEXT:C284($propriete_t)
-	C_OBJECT:C1216(pageWeb_o;$routeData;$logErreur_o)
-	C_TEXT:C284($libPageConnexion_t)
-	C_BOOLEAN:C305($B_estMethodeValide)
+	var $page_o : Object
+	var $propriete_t : Text
+	var pageWeb_o : Object
+	var $routeData : Object
+	var $logErreur_o : Object
+	var $libPageConnexion_t : Text
+	var $B_estMethodeValide : Boolean
 	ARRAY LONGINT:C221($AT_positionTrouvee;0)
 	ARRAY LONGINT:C221($AT_longueurTrouvee;0)
 	ARRAY TEXT:C222($AT_routeFormatCle;0)
@@ -176,7 +179,7 @@ Historique
 	
 	
 	// A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
-	C_OBJECT:C1216(pageWeb)
+	var pageWeb : Object
 	pageWeb:=pageWeb_o
 	
 	
@@ -191,6 +194,7 @@ Historique
 19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
 10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
 09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // Domaine du CDN
@@ -229,12 +233,15 @@ Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page
 Historique
 27/07/2020 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	C_TEXT:C284($1)  // $1 : [texte] domaine du CDN
-	C_TEXT:C284($0)  // Contenu des chemin JS à insérer dans le HTML.
+	var $1 : Text  // $1 : [texte] domaine du CDN
+	var $0 : Text  // Contenu des chemin JS à insérer dans le HTML.
 	
-	C_TEXT:C284($T_jsContenu;$jsHtmlModele_t;$jsPath_t)
+	var $T_jsContenu : Text
+	var $jsHtmlModele_t : Text
+	var $jsPath_t : Text
 	
 	$jsHtmlModele_t:="<script type=\"text/javascript\" src=\"$jsPath\"></script>"
 	
@@ -261,11 +268,12 @@ Place le contenue du fichier javascript dans le HTML
 	
 Historique
 20/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	C_TEXT:C284($0)  // Contenu des fichiers JS à insérer dans le HTML
+	var $0 : Text  // Contenu des fichiers JS à insérer dans le HTML
 	
-	C_TEXT:C284($jsInHtml_t)
+	var $jsInHtml_t : Text
 	
 	If (pageWeb_o.jsPathInHtml=Null:C1517)
 		pageWeb_o.jsPathInHtml:=New collection:C1472()
@@ -300,12 +308,15 @@ Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 	
 Historique
 27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	C_TEXT:C284($1)
-	C_TEXT:C284($0)  // Retourne les élements du fichiers qui ne sont pas dans un block
+	var $1 : Text
+	var $0 : Text  // Retourne les élements du fichiers qui ne sont pas dans un block
 	
-	C_TEXT:C284($contenuFichierCorpsHtml_t;$nomVar_t;$valVar_t)
+	var $contenuFichierCorpsHtml_t : Text
+	var $nomVar_t : Text
+	var $valVar_t : Text
 	ARRAY LONGINT:C221($posTrouvee_al;0)
 	ARRAY LONGINT:C221($longTrouvee_al;0)
 	

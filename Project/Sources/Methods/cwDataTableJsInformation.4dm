@@ -7,20 +7,21 @@ Renvoie au navigateur les informations sur la dataTable.
 Historique
 06/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/07/20 - Grégory Fromain <gregory@connect-io.fr> - Renvoi de toutes les informations sur la dataTable.
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)  //Variable pageWeb de l'application
-	C_TEXT:C284($2)  // Nom du dataTable HTML
-	C_VARIANT:C1683($3;$source_v)  // Entité selection
-	C_TEXT:C284($0)  // code html
+	var $1 : Pointer  //Variable pageWeb de l'application
+	var $2 : Text  // Nom du dataTable HTML
+	var $3;$source_v : Variant  // Entité selection
+	var $0 : Text  // code html
 	
-	C_OBJECT:C1216($pageWeb_o)
-	C_COLLECTION:C1488($resultForm_c)
-	C_OBJECT:C1216($dataTable_o)
-	C_TEXT:C284($dataTableNom_t)
-	C_OBJECT:C1216($information_o;$column_o;dataInBase_o;dataColumn_o)
+	var $pageWeb_o : Object
+	var $resultForm_c : Collection
+	var $dataTable_o : Object
+	var $dataTableNom_t : Text
+	var $information_o;$column_o;dataInBase_o;dataColumn_o : Object
 End if 
 
 $pageWeb_o:=$1->

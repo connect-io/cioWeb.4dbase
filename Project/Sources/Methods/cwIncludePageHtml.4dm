@@ -5,12 +5,15 @@ Méthode : cwIncludePageHtml
 Renvoie le code html contenue dans le dossier Resources/sites/$site/pages
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1;$0;$T_nomFichier)  // $1 = chemin relatif depuis le dossier pages, $0 = contenu du fichier.
+	var $1 : Text  // $1 = chemin relatif depuis le dossier pages
+	var $0 : Text  // $0 = contenu du fichier.
+	
+	var $T_nomFichier : Text
 End if 
 
 $T_nomFichier:=Choose:C955($1="/@";Substring:C12($1;2);$1)

@@ -14,30 +14,33 @@ Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 30/08/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion optionnel de la propriété action dans la balise <form>
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_LONGINT:C283($numForm;$i)
-	C_BOOLEAN:C305($analyseForm_b)
-	C_COLLECTION:C1488($formCharge_c;$indicesQuery_c)
-	C_OBJECT:C1216(formInput_o)  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
-	C_TEXT:C284($subDomain_t)  // Nom du sous domaine
+	var $numForm : Integer
+	var $i : Integer
+	var $analyseForm_b : Boolean
+	var $indicesQuery_c : Collection
+	var $formCharge_c : Collection
+	var formInput_o : Object  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
+	var $subDomain_t : Text  // Nom du sous domaine
 End if 
 
 
-  // Récupération des formulaires
+// Récupération des formulaires
 For each ($subDomain_t;This:C1470.config.subDomain_c)
-	  //For ($i;1;Size of array($sites))
+	//For ($i;1;Size of array($sites))
 	
-	  // On récupére les modéles d'input
+	// On récupére les modéles d'input
 	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"input.html";"UTF-8")
 	
 	
 	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
 	
 	
-	  // On récupére la collection de form du sousDomaine
+	// On récupére la collection de form du sousDomaine
 	If (This:C1470.sites[$subDomain_t].form=Null:C1517)
 		This:C1470.sites[$subDomain_t].form:=New collection:C1472()
 	End if 
@@ -47,30 +50,30 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
 	For ($numForm;1;Size of array:C274($fichiersForm))
 		$analyseForm_b:=True:C214
-		C_OBJECT:C1216($form)
+		var $form : Object
 		
 		If ($fichiersForm{$numForm}#"@form.json@")
 			$analyseForm_b:=False:C215
 		End if 
 		
 		If ($analyseForm_b)
-			  // On regarde si le formulaire est déjà chargé en mémoire...
+			// On regarde si le formulaire est déjà chargé en mémoire...
 			$formCharge_c:=This:C1470.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
 			If ($formCharge_c.length=0)
-				  // Il n'est pas chargé, on doit donc faire le job...
+				// Il n'est pas chargé, on doit donc faire le job...
 				
 			Else 
-				  // Il est déjà chargé... mais est-ce que la source est plus récente ?
+				// Il est déjà chargé... mais est-ce que la source est plus récente ?
 				GET DOCUMENT PROPERTIES:C477($fichiersForm{$numForm};$verrouille;$invisible;$creeLe;$creeA;$modifie_d;$modifie_h)
-				If (Num:C11($formCharge_c[0].maj_ts)>cwTimestamp ($modifie_d;$modifie_h))
-					  // La source est plus ancienne... Donc pas besoin d'intégrer le fichier du formulaire
+				If (Num:C11($formCharge_c[0].maj_ts)>cwTimestamp($modifie_d;$modifie_h))
+					// La source est plus ancienne... Donc pas besoin d'intégrer le fichier du formulaire
 					$analyseForm_b:=False:C215
 				End if 
 			End if 
 		End if 
 		
 		If ($analyseForm_b)
-			$form:=cwToolObjectFromPlatformPath ($fichiersForm{$numForm})
+			$form:=cwToolObjectFromPlatformPath($fichiersForm{$numForm})
 			If (Not:C34(OB Is defined:C1231($form)))
 				ALERT:C41("Impossible de parse "+$fichiersForm{$numForm})
 				$analyseForm_b:=False:C215
@@ -78,12 +81,12 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		End if 
 		
 		If ($analyseForm_b)
-			  //chargement de l'objet form
+			//chargement de l'objet form
 			
-			  // On commence par ajouter un timestamp de MAJ du formulaire.
-			$form.maj_ts:=cwTimestamp 
+			// On commence par ajouter un timestamp de MAJ du formulaire.
+			$form.maj_ts:=cwTimestamp
 			
-			  // On indique également la source du formulaire.
+			// On indique également la source du formulaire.
 			$form.source:=$fichiersForm{$numForm}
 			
 			If ($form.readOnly=Null:C1517)
@@ -107,11 +110,11 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				$formMethod:=" method=\""+OB Get:C1224($form;"method")+"\""
 			End if 
 			
-			  // En 2013, avec tous les éléments HTML5, vous pouvez simplement omettre l'attribut 'action' pour soumettre un formulaire sur la page courante.
+			// En 2013, avec tous les éléments HTML5, vous pouvez simplement omettre l'attribut 'action' pour soumettre un formulaire sur la page courante.
 			$formAction_t:=Choose:C955(String:C10($form.action)#"";" action=\"$action\"";"")
 			
-			  // On vérifie que dans notre formulaire il y a pas un input type "file"
-			  // Si c'est le cas on force la method à POST et on force un enctype
+			// On vérifie que dans notre formulaire il y a pas un input type "file"
+			// Si c'est le cas on force la method à POST et on force un enctype
 			
 			
 			For each (formInput_o;$form.input)
@@ -126,13 +129,13 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			
 			$form.html:=$formEnctype+$formId+$formClass+$formMethod+$formAction_t
 			
-			  //Configuration des inputs.
+			//Configuration des inputs.
 			For each (formInput_o;$form.input)
 				
 				If (String:C10(formInput_o.type)="submit")
 					$form.submit:=formInput_o.lib
 					
-					  // On retrouve le préfixe des inputs
+					// On retrouve le préfixe des inputs
 					$form.inputPrefixe:=Replace string:C233(formInput_o.lib;"submit";"")
 				End if 
 				
@@ -156,20 +159,20 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					formInput_o.placeholder:=""
 				End if 
 				
-				  // On determine la largeur d'un label
+				// On determine la largeur d'un label
 				Case of 
 					: (formInput_o.label=Null:C1517)
-						  // Il n'y a pas de label dans la l'input
+						// Il n'y a pas de label dans la l'input
 						formInput_o.colLabel:=0
 						
 					: (formInput_o.colLabel=Null:C1517)
 						formInput_o.colLabel:=3
 						
 					: (formInput_o.colLabel>=0) & (formInput_o.colLabel<=12)
-						  // On garde la valeur inscrite
+						// On garde la valeur inscrite
 						
 					Else 
-						  // Si <0 ou >12
+						// Si <0 ou >12
 						formInput_o.colInput:=12
 				End case 
 				
@@ -177,11 +180,11 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					formInput_o.colLabel:=3
 				End if 
 				
-				  // On determine la largueur de l'input
+				// On determine la largueur de l'input
 				Case of 
 					: (OB Is defined:C1231(formInput_o;"colInput"))
 						If (formInput_o.colInput>=0) & (formInput_o.colInput<=12)
-							  // On garde la valeur inscrite
+							// On garde la valeur inscrite
 						Else 
 							formInput_o.colInput:=12
 						End if 
@@ -190,7 +193,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 						formInput_o.colInput:=12-formInput_o.colLabel
 						
 					Else 
-						  // Label en pleine largueur, donc input en pleine largueur
+						// Label en pleine largueur, donc input en pleine largueur
 						formInput_o.colInput:=12
 				End case 
 				
@@ -198,7 +201,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					formInput_o.colInput:=12-formInput_o.colLabel
 				End if 
 				
-				  // Gestion des collapse
+				// Gestion des collapse
 				If (Bool:C1537(formInput_o.collapse)=False:C215)
 					formInput_o.collapse:=False:C215
 				End if 
@@ -231,27 +234,27 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				
 				For each ($viewHtml;New collection:C1472("html";"htmlReadOnly"))
 					
-					  // Traitement des balises HTML
+					// Traitement des balises HTML
 					If ($viewHtml="html")
 						PROCESS 4D TAGS:C816($htmlInput_t;$htmlInputTags_t)
 					Else 
 						PROCESS 4D TAGS:C816($htmlInputReadOnly_t;$htmlInputTags_t)
 					End if 
 					
-					  // Traitement apres 4D tags
+					// Traitement apres 4D tags
 					$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"<!--# 4 D";"<!--#4D")
 					Case of 
-							  // Value input default,Petite verru pour les tokens.
+							// Value input default,Petite verru pour les tokens.
 						: (formInput_o.type=Null:C1517)
 							formInput_o.type:="hidden"
 							
 						: (formInput_o.type="select")
 							If (OB Is defined:C1231(formInput_o;"selection"))
-								C_COLLECTION:C1488($selection_c)
-								C_OBJECT:C1216($option_o)
+								var $selection_c : Collection
+								var $option_o : Object
 								$selectOption_t:=""
 								
-								  // On récupére le tableau avec la config à utiliser
+								// On récupére le tableau avec la config à utiliser
 								$selection_c:=formInput_o.selection
 								
 								For each ($option_o;$selection_c)
@@ -285,11 +288,11 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			
 			If ($formCharge_c.length=0)
 				
-				  // Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
+				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
 				This:C1470.sites[$subDomain_t].form.push($form)
 			Else 
 				
-				  // Si le formulaire à déjà été chargé, il faut le mettre à jour.
+				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
 				$indicesQuery_c:=This:C1470.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
 				This:C1470.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
 			End if 

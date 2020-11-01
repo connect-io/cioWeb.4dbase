@@ -6,14 +6,14 @@ Ajoute le contenu d'un fichier javascript dans le code html
 via la commande cwJsGetContent à placer dans le code html.
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284(${1})  // $1 : [texte] nom d'un fichier js dans le dossier /ressource/site/XXX/js/
+	var ${1} : Text  // $1 : [texte] nom d'un fichier js dans le dossier /ressource/site/XXX/js/
 	
-	C_LONGINT:C283($i)
+	var $i : Integer
 End if 
 
 If (Not:C34(OB Is defined:C1231(pageWeb)))

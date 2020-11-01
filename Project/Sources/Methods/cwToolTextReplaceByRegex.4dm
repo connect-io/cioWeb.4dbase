@@ -7,20 +7,27 @@ Remplace une chaine de caractère depuis une regex par un contenu fixe.
 Historique
 19/09/16 gregory@connect-io.fr - Création
 26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioRegex et ré-écriture
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($source_t;$1;$2;$3;$0;$obsolete_t)  // $1 = Source [texte], $2 = Expression recherché [regex], $3 = texte à remplacer. [texte], $0 : [texte] le texte corrigé
+	var $1;$source_t : Text  // Source
+	var $2 : Text  // Expression recherché [regex]
+	var $3 : Text  // texte à remplacer
+	var $0 : Text  // le texte corrigé
 	
-	C_LONGINT:C283($position_l;$pos_trouvee_l;$long_trouvée_l)
-	C_BOOLEAN:C305($regexValid_b)
+	var $obsolete_t : Text
+	var $position_l : Integer
+	var $pos_trouvee_l : Integer
+	var $long_trouvée_l : Integer
+	var $regexValid_b : Boolean
 End if 
 
 $source_t:=$1
 $position_l:=1
 
-  // On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
+// On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
 $source_t:=Replace string:C233($source_t;"\r";"##r")
 $source_t:=Replace string:C233($source_t;"\n";"##n")
 

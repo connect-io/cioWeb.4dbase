@@ -5,22 +5,21 @@ Méthode : ogDecallageHoraire
 Renvoie le decallage horaire depuis lheure local de la machine.
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_LONGINT:C283($0)
+	var $0 : Integer
 	
-	C_DATE:C307($day_d)
-	C_LONGINT:C283($out_l)
-	C_LONGINT:C283($ts_l)
-	C_LONGINT:C283($tsUTC_l)
-	C_TIME:C306($hour_h)
-	C_TEXT:C284($ts_t)
-	C_TEXT:C284($tsUTC_t)
+	var $day_d : Date
+	var $out_l : Integer
+	var $ts_l : Integer
+	var $tsUTC_l : Integer
+	var $hour_h : Time
+	var $ts_t : Text
+	var $tsUTC_t : Text
 End if 
-
 
 $day_d:=Current date:C33
 $hour_h:=Current time:C178

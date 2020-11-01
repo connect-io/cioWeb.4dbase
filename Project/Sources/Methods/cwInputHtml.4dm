@@ -7,12 +7,13 @@ Génére le code html d'un input
 Historique
 30/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1)  // Nom de la variable du formulaire web
-	C_TEXT:C284($0)  // Code html du formulaire
+	var $1 : Text  // Nom de la variable du formulaire web
+	var $0 : Text  // Code html du formulaire
 End if 
 
 
@@ -32,4 +33,4 @@ Else
 	$0:="Aucun formulaire est initialisé."
 End if 
 
-  // TODO : Penser à faire une gestion des erreurs.
+// TODO : Penser à faire une gestion des erreurs.

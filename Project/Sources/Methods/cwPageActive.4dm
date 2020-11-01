@@ -5,15 +5,18 @@ Méthode : cwPageActive (Composant CioWeb)
 Active le menu html en fonction de l'url.
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$1;$retour_t;$texteRetour_t)  // $0 : [texte] "" ou "active", $1 : recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
+	var $1 : Text  // recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
+	var $0;$retour_t : Text  // "" ou "active"
 	
-	C_LONGINT:C283($debutPosition_l;$debutFin_l)
-	C_BOOLEAN:C305($boucle_b)
+	var $texteRetour_t : Text
+	var $debutPosition_l : Integer
+	var $debutFin_l : Integer
+	var $boucle_b : Boolean
 End if 
 
 $texteRetour_t:="active"

@@ -11,9 +11,10 @@ Historique
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$1;$in;$out)  // $1 = [texte] chaine avec balise, $0 = [texte] chaine sans balise
+	var $1;$in : Text  // chaine avec balise
+	var $0;$out : Text  // chaine sans balise
 	
-	C_BOOLEAN:C305($B)
+	var $B : Boolean
 End if 
 
 $in:=$1

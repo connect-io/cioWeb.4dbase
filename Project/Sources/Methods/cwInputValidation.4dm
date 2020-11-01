@@ -7,16 +7,19 @@ Valide la valeur d'une variable web via son fichier de configuration
 Historique
 03/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1)  // Nom du formulaire
-	C_TEXT:C284($2)  // Nom de la variable
-	C_TEXT:C284($0)  // Retour : "ok" ou message d'erreur
+	var $1 : Text  // Nom du formulaire
+	var $2 : Text  // Nom de la variable
+	var $0 : Text  // Retour : "ok" ou message d'erreur
 	
-	C_TEXT:C284($valeurInput;$retour;$varNomPublic_t)
-	C_OBJECT:C1216($configInput)
+	var $valeurInput : Text
+	var $retour : Text
+	var $varNomPublic_t : Text
+	var $configInput : Object
 End if 
 
 $retour:="ok"
@@ -26,7 +29,7 @@ Else
 	$valeurInput:=""
 End if 
 
-  // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
+// Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
 $configInput:=siteForm_c.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
 
 If (String:C10($configInput.label)#"")
@@ -35,45 +38,45 @@ Else
 	$varNomPublic_t:=$configInput.lib
 End if 
 
-  // Gestion required
+// Gestion required
 Case of 
 	: ($retour#"ok")
-		  // une erreur est deja remonté, on ne fait rien
+		// une erreur est deja remonté, on ne fait rien
 	: (Not:C34(OB Is defined:C1231($configInput;"required")))
-		  //La cle required n'est pas initialisé, on ne fait rien
+		//La cle required n'est pas initialisé, on ne fait rien
 	: (Not:C34(OB Get:C1224($configInput;"required")))
-		  //La cle required est initialisé à false, on ne fait rien
+		//La cle required est initialisé à false, on ne fait rien
 	: ($valeurInput#"")
-		  //La valeur est differente de vide, donc tout va bien, on ne fait rien.
+		//La valeur est differente de vide, donc tout va bien, on ne fait rien.
 	Else 
-		  //Erreur, la valeur est vide !
+		//Erreur, la valeur est vide !
 		$retour:=$varNomPublic_t+", la variable est vide."
 End case 
 
-  // Gestion format
+// Gestion format
 Case of 
 	: ($retour#"ok")
-		  // une erreur est deja remonté, on ne fait rien
+		// une erreur est deja remonté, on ne fait rien
 	: ($valeurInput="") | ($valeurInput="nonObligatoire")  // nonObligatoire : petit hack pour certain cas en javascript.
-		  //La valeur est vide, donc il y a rien a controler, on ne fait rien.
+		//La valeur est vide, donc il y a rien a controler, on ne fait rien.
 	: (Not:C34(OB Is defined:C1231($configInput;"format")))
-		  //La cle format n'est pas initialisé, on ne fait rien
+		//La cle format n'est pas initialisé, on ne fait rien
 	Else 
 		
-		  // Il y a bien une gestion des formats...
-		  // Si le format est une date, on peut faire un petit traitement.
+		// Il y a bien une gestion des formats...
+		// Si le format est une date, on peut faire un petit traitement.
 		If ($configInput.format="date")
-			$valeurInput:=cwDateClean ($valeurInput)
+			$valeurInput:=cwDateClean($valeurInput)
 		End if 
 		
-		  // On vérifie la validité du format.
-		$retour:=cwFormatValide (OB Get:C1224($configInput;"format");$valeurInput)
+		// On vérifie la validité du format.
+		$retour:=cwFormatValide(OB Get:C1224($configInput;"format");$valeurInput)
 		
 		If ($retour#"ok")
 			$retour:=$varNomPublic_t+", "+$retour
 		End if 
 		
-		  // Puisque que l'on est dans le format de date... Autant vérifier si il n'y a pas de date min et date max à controler...
+		// Puisque que l'on est dans le format de date... Autant vérifier si il n'y a pas de date min et date max à controler...
 		If (String:C10($configInput.dateMin)#"") & ($retour="ok")
 			If ($configInput.dateMin="*@")
 				$configInput.dateMin_d:=Current date:C33(*)+Num:C11($configInput.dateMin)
@@ -100,15 +103,18 @@ Case of
 		
 End case 
 
-  // *** Gestion des differents cas en cas d'input de type : file ***
+// *** Gestion des differents cas en cas d'input de type : file ***
 
 If (($retour="ok") & ($configInput.type="file"))
 	
-	  // On le recherche dans le body part...
-	C_TEXT:C284($vPartName;$vPartMimeType;$vPartFileName)
-	C_BLOB:C604($vPartContentBlob)
-	C_LONGINT:C283($i)
-	C_BOOLEAN:C305($trouve_b)
+	// On le recherche dans le body part...
+	var $vPartName : Text
+	var $vPartMimeType : Text
+	var $vPartFileName : Text
+	var $vPartContentBlob : Blob
+	var $i : Integer
+	var $trouve_b : Boolean
+	
 	
 	$trouve_b:=False:C215
 	For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
@@ -121,24 +127,24 @@ If (($retour="ok") & ($configInput.type="file"))
 	End for 
 	
 	If ($trouve_b)
-		  // On a retrouver notre fichier...
-		  // On va l'analyser un peu...
-		  // On regarde la taille
+		// On a retrouver notre fichier...
+		// On va l'analyser un peu...
+		// On regarde la taille
 		Case of 
 			: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
-				  //La cle blobSize n'est pas initialisé, on ne fait rien
+				//La cle blobSize n'est pas initialisé, on ne fait rien
 				
 			: (BLOB size:C605($vPartContentBlob)>$configInput.blobSize)
 				$retour:=$varNomPublic_t+", le fichier est trop gros."
 		End case 
 		
-		  // On vérifie que le type de fichier soit le type attendu.
+		// On vérifie que le type de fichier soit le type attendu.
 		Case of 
 			: ($retour#"ok")
-				  // une erreur est deja remonté, on ne fait rien
+				// une erreur est deja remonté, on ne fait rien
 				
 			: (Not:C34(OB Is defined:C1231($configInput;"contentType")))
-				  //La cle contentType n'est pas initialisé, on ne fait rien
+				//La cle contentType n'est pas initialisé, on ne fait rien
 				
 			: ($configInput.contentType.join()#("@"+$vPartMimeType+"@"))
 				$retour:=$varNomPublic_t+", le type de fichier n'est pas valide."
@@ -149,23 +155,27 @@ If (($retour="ok") & ($configInput.type="file"))
 End if 
 
 
-  // Gestion size
+// Gestion size
 Case of 
 	: ($retour#"ok")
-		  // une erreur est deja remonté, on ne fait rien
+		// une erreur est deja remonté, on ne fait rien
 	: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
-		  //La cle blobSize n'est pas initialisé, on ne fait rien
+		//La cle blobSize n'est pas initialisé, on ne fait rien
 	Else 
-		C_TEXT:C284($vPartName;$vPartMimeType;$vPartFileName)
-		C_BLOB:C604($vPartContentBlob)
-		C_LONGINT:C283($i)
+		var $vPartName : Text
+		var $vPartMimeType : Text
+		var $vPartFileName : Text
+		var $vPartContentBlob : Blob
+		var $i : Integer
+		
+		
 		For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
 			WEB GET BODY PART:C1212($i;$vPartContentBlob;$vPartName;$vPartMimeType;$vPartFileName)
 			Case of 
 				: ($vPartName#OB Get:C1224($configInput;"lib"))
-					  //la variable ne figure pas dans le formulaire."
+					//la variable ne figure pas dans le formulaire."
 				: ($vPartFileName="") & (BLOB size:C605($vPartContentBlob)=0)
-					  // L'input n'est pas renseigné dans le formulaire, ne rien faire.
+					// L'input n'est pas renseigné dans le formulaire, ne rien faire.
 				: ($vPartFileName="")
 					$retour:=$varNomPublic_t+", le fichier ne semble pas avoir été importé."
 					$i:=WEB Get body part count:C1211  //On sort de la boucle.
@@ -177,28 +187,28 @@ Case of
 		End for 
 End case 
 
-  // Gestion insertion html
+// Gestion insertion html
 Case of 
 	: ($retour#"ok")
-		  // une erreur est deja remonté, on ne fait rien
-	: (Not:C34(cwInputInjection4DHtmlIsValide ($valeurInput)))
+		// une erreur est deja remonté, on ne fait rien
+	: (Not:C34(cwInputInjection4DHtmlIsValide($valeurInput)))
 		$retour:="injection de balise html 4D détécté sur le champ : "+String:C10($configInput.lib)
 End case 
 
-  // Gestion token
+// Gestion token
 Case of 
 	: ($retour#"ok")
-		  // une erreur est deja remonté, on ne fait rien
+		// une erreur est deja remonté, on ne fait rien
 		
 	: ($configInput.lib#"token")
-		  // Il ne s'agit pas d'un token, on ne fait rien.
+		// Il ne s'agit pas d'un token, on ne fait rien.
 		
 	: (visiteur.tokenCheck())
-		  // Le token est valide, tout va bien.
+		// Le token est valide, tout va bien.
 		
 	Else 
-		  // Le token est périmé, il n'est pas possible de valider le formulaire.
-		  //$retour:="Token périmé, merci de re-valider la page."
+		// Le token est périmé, il n'est pas possible de valider le formulaire.
+		//$retour:="Token périmé, merci de re-valider la page."
 		$retour:="Le formulaire n'a pas été validé, car la page de validation n'est pas la dernière générée pour votre session. Merci de le valider de nouveau."
 End case 
 

@@ -8,13 +8,13 @@ Génére un hash avec uniquement les valeurs a-Z0-9 et $
 Historique
 02/05/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 14/09/20 - Grégory Fromain <gregory@connect-io.fr> - Import dans le composant
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1;$motDePasseClair_t)
-	C_TEXT:C284($0;$motDePasseHash_t)
-	
+	var $1;$motDePasseClair_t : Text
+	var $0;$motDePasseHash_t : Text
 End if 
 
 $motDePasseClair_t:=$1

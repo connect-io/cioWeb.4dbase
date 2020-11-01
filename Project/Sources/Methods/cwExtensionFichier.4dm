@@ -5,14 +5,16 @@ Méthode : cwExtensionFichier (composant Cioweb)
 Trouve l'extension d'un fichier depuis une chaine de caractere
 
 Historique
-
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0;$1;$extension)  // $1 = chemin du fichier. $0 = extension
+	var $1 : Text  // chemin du fichier
+	var $0 : Text  // extension
 	
-	C_LONGINT:C283($i)
+	var $extension : Text
+	var $i : Integer
 End if 
 
 For ($i;Length:C16($1);1;-1)
@@ -22,7 +24,7 @@ For ($i;Length:C16($1);1;-1)
 		$i:=0
 	End if 
 	
-	  //Cas d'un fichier qui n'a pas d'extension
+	//Cas d'un fichier qui n'a pas d'extension
 	If ($i=1)
 		$extension:=""
 	End if 

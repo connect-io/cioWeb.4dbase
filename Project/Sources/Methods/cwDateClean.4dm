@@ -8,27 +8,28 @@ Historique
 19/06/17 - Grégory Fromain <gregory@connect-io.fr> - Création
 25/02/20 - Grégory Fromain <gregory@connect-io.fr> - Récupération depuis le projet livrerunballon et amélioration
 13/06/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du cas : ($1="00/00/00")|($1="00-00-00")
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($0)  // $0 = [texte] date formatté
-	C_TEXT:C284($1)  // $1= [texte] saisie client
+	var $0 : Text  // $0 = [texte] date formatté
+	var $1 : Text  // $1= [texte] saisie client
 	
-	C_BOOLEAN:C305($stop_b)
+	var $stop_b : Boolean
 End if 
 
 
 $stop_b:=False:C215
 
-  // Si le champ est vide, on ne va pas plus loin...
+// Si le champ est vide, on ne va pas plus loin...
 If ($1="") | ($1="00/00/00") | ($1="00-00-00")
 	$0:=$1
 	$stop_b:=True:C214
 End if 
 
 
-  // La date est déjà propre.
+// La date est déjà propre.
 If (Not:C34($stop_b))
 	If (Date:C102($1)#!00-00-00!)
 		$0:=$1
@@ -88,7 +89,7 @@ If (Not:C34($stop_b))
 	
 	$posParenthese:=Position:C15("(";$1)
 	If ($posParenthese#0)
-		  // il y surement un commentaire du client genre : 01/01/01 (avant 10h)
+		// il y surement un commentaire du client genre : 01/01/01 (avant 10h)
 		$posParentheseFin:=Position:C15(")";$1)
 		$commentaire:=Substring:C12($1;$posParenthese;$posParentheseFin-$posParenthese+1)
 		$1:=Replace string:C233($1;$commentaire;"")

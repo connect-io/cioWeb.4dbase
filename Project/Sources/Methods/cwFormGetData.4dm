@@ -6,17 +6,21 @@ La méthode reprend le principe de fonctionnement de la methode cwFormControle m
 
 Historique
 07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)  // visiteur
-	C_TEXT:C284($2)  // nom du formulaire
-	C_OBJECT:C1216($0)  // etat du formulaire
+	var $1 : Pointer  // visiteur
+	var $2 : Text  // nom du formulaire
+	var $0 : Object  // etat du formulaire
 	
-	C_TEXT:C284($T_nomForm;$T_prefixe;$resultat_t)
-	C_OBJECT:C1216($infoForm_o;$formInput_o)
-	C_COLLECTION:C1488($resultForm_c)
+	var $T_nomForm : Text
+	var $T_prefixe : Text
+	var $resultat_t : Text
+	var $formInput_o : Object
+	var $infoForm_o : Object
+	var $resultForm_c : Collection
 End if 
 
 visiteur:=$1->
@@ -47,7 +51,7 @@ End if
 
 
 If ($resultat_t="")
-	  //On supprime les précédentes dataForm
+	//On supprime les précédentes dataForm
 	If (visiteur.dataForm#Null:C1517)
 		OB REMOVE:C1226(visiteur;"dataForm")
 		OB REMOVE:C1226(visiteur;"dataFormTyping")
@@ -57,24 +61,24 @@ End if
 
 If ($resultat_t="")
 	
-	  // On crée un objet pour les nouvelles data du formulaire
+	// On crée un objet pour les nouvelles data du formulaire
 	If (visiteur.dataForm=Null:C1517)
 		visiteur.dataForm:=New object:C1471
 		visiteur.dataFormTyping:=New object:C1471
 	End if 
 	
-	  // On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
+	// On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
 	For each ($formInput_o;$infoForm_o.input)
 		
-		  // Si la data est valide, on stock la valeur dans dataForm.
+		// Si la data est valide, on stock la valeur dans dataForm.
 		OB SET:C1220(visiteur.dataForm;$formInput_o.lib;visiteur[$formInput_o.lib])
 		
 		Case of 
 			: ($formInput_o.lib=$infoForm_o.submit)
-				  // Ne rien faire, on ne veut pas récupérer le submit.
+				// Ne rien faire, on ne veut pas récupérer le submit.
 				
 			: ($formInput_o.type="checkbox")
-				  // Si la valeur est on, on la transforme en boolean.
+				// Si la valeur est on, on la transforme en boolean.
 				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib]="on")
 				
 			: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
@@ -84,7 +88,7 @@ If ($resultat_t="")
 				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib])
 				
 			: (String:C10($formInput_o.format)="date")
-				visiteur.dataFormTyping[$formInput_o.lib]:=cwDateClean (visiteur.dataForm[$formInput_o.lib])
+				visiteur.dataFormTyping[$formInput_o.lib]:=cwDateClean(visiteur.dataForm[$formInput_o.lib])
 				
 			Else 
 				visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]
@@ -96,10 +100,10 @@ If ($resultat_t="")
 End if 
 
 $T_prefixe:=Replace string:C233($infoForm_o.submit;"submit";"")
-  // On supprime le prefixe des clés.
-cwToolDeletePrefixKey (visiteur.dataForm;$T_prefixe)
-cwToolDeletePrefixKey (visiteur.dataFormTyping;$T_prefixe)
+// On supprime le prefixe des clés.
+cwToolDeletePrefixKey(visiteur.dataForm;$T_prefixe)
+cwToolDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
 
-  // DataFromTyping est renvoyé dans la méthode et dans visiteur... C'est Kdo.
+// DataFromTyping est renvoyé dans la méthode et dans visiteur... C'est Kdo.
 $0:=visiteur.dataFormTyping
 $1->:=visiteur

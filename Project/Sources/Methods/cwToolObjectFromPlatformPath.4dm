@@ -7,13 +7,14 @@ Cette methode n'est pas partagé avec la base hote car il est préférable d'uti
 
 Historique
 01/10/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 
-C_TEXT:C284($1)  // Chemin du fichier à charger. (format plateforme)
-C_OBJECT:C1216($0)  // Objet contenu dans le fichier.
+var $1 : Text  // Chemin du fichier à charger. (format plateforme)
+var $0 : Object  // Objet contenu dans le fichier.
 
-C_OBJECT:C1216($file_o)
+var $file_o : Object
 
 $file_o:=File:C1566($1;fk platform path:K87:2)
 
-$0:=cwToolObjectFromFile ($file_o)
+$0:=cwToolObjectFromFile($file_o)

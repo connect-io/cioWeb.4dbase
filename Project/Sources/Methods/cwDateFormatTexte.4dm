@@ -6,19 +6,18 @@ Formate une date en fonction d'un modele.
 
 Historique
 12/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 
 If (True:C214)  // Déclarations
-	C_TEXT:C284($1)  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)
-	C_DATE:C307($2)  // Date à formater, si inexistant la date sera la date du jour.
-	C_TEXT:C284($0)  // Date formaté
+	var $1 : Text  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)
+	var $2 : Date  // Date à formater, si inexistant la date sera la date du jour.
+	var $0 : Text  // Date formaté
 	
-	C_TEXT:C284($jj_t;$mm_t;$aa_t;$miseEnForme_t)
-	C_DATE:C307($dateAFormater_d)
+	var $jj_t;$mm_t;$aa_t;$miseEnForme_t : Text
+	var $dateAFormater_d : Date
 End if 
-
-
 
 ASSERT:C1129(Length:C16($1)#0;"Le contenue du param $1 est vide.")
 

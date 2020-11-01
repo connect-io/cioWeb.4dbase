@@ -10,16 +10,21 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de précision en cas d'inpossibilité de charger un formulaire.
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 If (True:C214)  // Déclarations
-	C_POINTER:C301($1)  // visiteur
-	C_TEXT:C284($2)  // nom du formulaire
-	C_TEXT:C284($0)  // etat du formulaire
+	var $1 : Pointer  // visiteur
+	var $2 : Text  // nom du formulaire
+	var $0 : Text  // etat du formulaire
 	
-	C_TEXT:C284($T_nomForm;$T_prefixe;$resultat_t;$inputValide_t)
-	C_OBJECT:C1216($infoForm_o;$formInput_o)
-	C_COLLECTION:C1488($resultForm_c)
+	var $T_nomForm : Text
+	var $T_prefixe : Text
+	var $resultat_t : Text
+	var $inputValide_t : Text
+	var $infoForm_o : Object
+	var $formInput_o : Object
+	var $resultForm_c : Collection
 End if 
 
 visiteur:=$1->
@@ -57,23 +62,23 @@ If ($resultat_t="")
 End if 
 
 If ($resultat_t="")
-	  // Il y a bien un formulaire de soumis.
-	  // On supprime la validation de celui-ci.
+	// Il y a bien un formulaire de soumis.
+	// On supprime la validation de celui-ci.
 	OB REMOVE:C1226(visiteur;$infoForm_o.submit)
 	
-	  //On supprime les précédentes dataForm
+	//On supprime les précédentes dataForm
 	If (visiteur.dataForm#Null:C1517)
 		OB REMOVE:C1226(visiteur;"dataForm")
 		OB REMOVE:C1226(visiteur;"dataFormTyping")
 	End if 
 	
 	
-	  // On vérifie que la méthod HTTP soit conforme.
+	// On vérifie que la méthod HTTP soit conforme.
 	If (String:C10($infoForm_o.method)="")
-		  // Il n'y a pas de méthode préconisé, donc on avance.
+		// Il n'y a pas de méthode préconisé, donc on avance.
 	Else 
 		If ($infoForm_o.method=String:C10(visiteur["X-METHOD"]))
-			  // La methode http du visiteur est identique à celle attendu par le formulaire.
+			// La methode http du visiteur est identique à celle attendu par le formulaire.
 		Else 
 			$resultat_t:="La méthode http du visiteur n'est pas identique à celle attendu par le formulaire."
 		End if 
@@ -82,33 +87,33 @@ End if
 
 If ($resultat_t="")
 	
-	  // On crée un objet pour les nouvelles data du formulaire
+	// On crée un objet pour les nouvelles data du formulaire
 	If (visiteur.dataForm=Null:C1517)
 		visiteur.dataForm:=New object:C1471
 		visiteur.dataFormTyping:=New object:C1471
 	End if 
 	
-	  // On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
+	// On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
 	For each ($formInput_o;$infoForm_o.input) Until ($inputValide_t#"ok")
 		
-		  // On vérfie que la data de l'input soit valide.
-		$inputValide_t:=cwInputValidation ($T_nomForm;$formInput_o.lib)
+		// On vérfie que la data de l'input soit valide.
+		$inputValide_t:=cwInputValidation($T_nomForm;$formInput_o.lib)
 		If ($inputValide_t="ok")
 			
-			  // Si la data est valide, on stock la valeur dans dataForm.
+			// Si la data est valide, on stock la valeur dans dataForm.
 			OB SET:C1220(visiteur.dataForm;$formInput_o.lib;visiteur[$formInput_o.lib])
 			
 			Case of 
 				: (String:C10($formInput_o.format)="bool") & ($formInput_o.type="checkbox")
-					  // Si la valeur est on, on la transforme en bool.
+					// Si la valeur est on, on la transforme en bool.
 					visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]="on"
 					
 				: (String:C10($formInput_o.format)="bool")
-					  // visiteur.dataFormTyping[$formInput_o.lib]:=Num(visiteur.dataForm[$formInput_o.lib])
+					// visiteur.dataFormTyping[$formInput_o.lib]:=Num(visiteur.dataForm[$formInput_o.lib])
 					visiteur.dataFormTyping[$formInput_o.lib]:=Bool:C1537(Num:C11(visiteur.dataForm[$formInput_o.lib]))
 					
 				: ($formInput_o.type="checkbox")
-					  // Si la valeur est on, on la transforme en numérique.
+					// Si la valeur est on, on la transforme en numérique.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib]="on")
 					
 				: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
@@ -116,20 +121,20 @@ If ($resultat_t="")
 					
 					
 				: (String:C10($formInput_o.format)="date")
-					visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean (visiteur.dataForm[$formInput_o.lib]))
+					visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean(visiteur.dataForm[$formInput_o.lib]))
 					
 				: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")
-					  // Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
+					// Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataForm[$formInput_o.lib];"<br>";"\r")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"<br />";"\r")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"<p>";"")
 					
-					  // On supprime completement la balise </p> si elle est a la fin du text.
+					// On supprime completement la balise </p> si elle est a la fin du text.
 					If (visiteur.dataFormTyping[$formInput_o.lib]="@</p>")
 						visiteur.dataFormTyping[$formInput_o.lib]:=Substring:C12(visiteur.dataFormTyping[$formInput_o.lib];1;Length:C16(visiteur.dataFormTyping[$formInput_o.lib])-4)
 					End if 
 					
-					  // Dans les autres cas on remplace </p> par 2 fins de ligne.
+					// Dans les autres cas on remplace </p> par 2 fins de ligne.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"</p>";"\r\r")
 					
 				Else 
@@ -139,7 +144,7 @@ If ($resultat_t="")
 		
 	End for each 
 	
-	  // On retourne l'etat de la vérification du dernier input controlé.
+	// On retourne l'etat de la vérification du dernier input controlé.
 	$resultat_t:=$inputValide_t
 	
 End if 
@@ -147,12 +152,12 @@ End if
 
 If ($inputValide_t="ok")
 	$T_prefixe:=Replace string:C233($infoForm_o.submit;"submit";"")
-	  // On supprime le prefixe des clés.
-	cwToolDeletePrefixKey (visiteur.dataForm;$T_prefixe)
-	cwToolDeletePrefixKey (visiteur.dataFormTyping;$T_prefixe)
+	// On supprime le prefixe des clés.
+	cwToolDeletePrefixKey(visiteur.dataForm;$T_prefixe)
+	cwToolDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
 End if 
 
-  // Notification du message d'erreur au visiteur.
+// Notification du message d'erreur au visiteur.
 If (Not:C34($inputValide_t="ok")) & (Not:C34($resultat_t="non soumis"))
 	visiteur.notificationError:=$resultat_t
 End if 

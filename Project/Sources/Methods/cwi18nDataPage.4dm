@@ -4,12 +4,13 @@ Méthode : cwi18nDataPage
 
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
 /*
 If (True)  // Déclarations
 C_OBJECT($0;$O_dataPage;$O_langueDomaine;$langueFichier)  // $0 : [objet] data i18n de la page
-C_TEXT($1)
+var $1 : Text
 End if 
 
 $O_dataPage:=New object
