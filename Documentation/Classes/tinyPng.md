@@ -9,6 +9,7 @@ Cette class permet d'utiliser l'API du site tinyPNG.com afin de retailler des im
 * [Fonction : uploadFromFile](#fonction--uploadFromFile)
 * [Fonction : uploadfromUrl](#fonction--uploadfromUrl)
 * [Fonction : downloadRequest](#fonction--downloadRequest)
+* [Fonction : lastExportInfo](#fonction--lastExportInfo)
 
 
 ------------------------------------------------------
@@ -32,20 +33,20 @@ Importation du fichier et envoi vers l'API depuis le chemin d'un fichier écrit 
 
 ### Fonctionnement
 ```4d
-tinyPng_o.uploadFromFile($chemin_upload) -> $dataTransfert
+tinyPng_o.uploadFromFile($chemin_upload) -> $isValide
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
 | $chemin_upload| Texte      | Entrée        | Chemin vers l'image qu'on veut modifier au format system |
-| $dataTransfert | Objet     | Sortie        | Resultat de la requete HTTP de l'upload |
+| $isValide | Bool     | Sortie        | Renvoie true si la requete a bien été envoyée |
 
 
 ### Example
 ```4d
   // ===== upload depuis le chemin POSIX $stringToPath_t ====
 $chemin_upload:=Convert path POSIX to system($stringToPath_t)
-$dataTransfert:=tinyPng_o.uploadFromFile($chemin_upload)
+$isValide:=tinyPng_o.uploadFromFile($chemin_upload)
 ```
 
 
@@ -56,20 +57,20 @@ Importation du fichier et envoi vers l'API depuis le chemin d'un fichier écrit 
 
 ### Fonctionnement
 ```4d
-tinyPng_o.uploadFromuRL($chemin_upload) -> $dataTransfert
+tinyPng_o.uploadFromuRL($chemin_upload) -> $isValide
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
 | $chemin_upload| Texte      | Entrée        | URL de l'image que l'on veut modifier |
-| $dataTransfert | Objet     | Sortie        | Resultat de la requete HTTP de l'upload |
+| $isValide | Bool     | Sortie        | Renvoie true si la requete a bien été envoyée |
 
 
 ### Example
 ```4d
   // ===== upload depuis l'URL $urlImage_t ====
 $chemin_upload:=$urlImage_t
-$dataTransfert:=tinyPng_o.uploadFromFile($chemin_upload)
+$isValide:=tinyPng_o.uploadFromFile($chemin_upload)
 ```
 
 
@@ -85,7 +86,6 @@ tinyPng_o.downloadRequest($dataTransfert;$chemin_download;$method_resize;$largeu
 
 | Paramêtre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
-| $dataTransfert| Objet     | Entrée        | résultat de la méthode Upload |
 | $chemin_download | Texte     | Entrée       | Chemin vers l'endroit ou on veut insérer l'image au format system  |
 | $method_resize | Texte     | Entrée       | Optionnel - Permet de choisir la méthode de resize. Voir la doc de l'api pour plus d'infos (scale, cover, ...)  |
 | $largeur | Texte     | Entrée       | Optionnel ou pas en fonctoin de la méthode de resize choisie - largeur désirée  |
@@ -99,8 +99,20 @@ tinyPng_o.downloadRequest($dataTransfert;$chemin_download;$method_resize;$largeu
 
 ```4d
 $chemin_download:=Convert path POSIX to system("/Users/titouanguillon/Desktop/figurine-kangourou_resize.jpg")
+$isValide:=tinyPng_o.uploadFromFile($chemin_upload)
+tinyPng_o.downloadRequest($chemin_download;"scale";15;)
+```
 
-$dataTransfert:=tinyPng_o.uploadFromFile($chemin_upload)
 
-tinyPng_o.downloadRequest($dataTransfert;$chemin_download;"scale";15;)
+------------------------------------------------------
+
+## Fonction : lastExportInfo
+Renvoie les informations de la derniere importation dans un objet
+
+
+### Example
+```4d
+$chemin_download:=Convert path POSIX to system("/Users/titouanguillon/Desktop/figurine-kangourou_resize.jpg")
+$isValide:=tinyPng_o.uploadFromFile($chemin_upload)
+$resultat:=tinyPng_o.lastExportInfo
 ```
