@@ -30,6 +30,9 @@ Historique
 	End if 
 	This:C1470.host:="https://api.tinify.com/"
 	
+	This:C1470.lastExportInfo:=New object:C1471
+	This:C1470.CompressionCount:=-1  // On ne connait pas encore le nombre de requete
+	
 	
 Function downloadRequest
 /* -----------------------------------------------------------------------------
@@ -189,10 +192,7 @@ Doc : https://tinypng.com/developers/reference
 	var $data_p : Picture  // Image à envoyer
 	var $etat_i : Integer
 	var $reponse_o : Object  // réponse temporaire
-	
-	
-	//Ajout d'un header 
-	ARRAY TEXT:C222(HeaderNames_at;0)
+	ARRAY TEXT:C222(HeaderNames_at;0)  //Ajout d'un header 
 	ARRAY TEXT:C222(HeaderValues_at;0)
 	
 	//Initialisation
@@ -223,7 +223,7 @@ Doc : https://tinypng.com/developers/reference
 		If ($etat_i=201)  // Succès)
 			$reponse_o.isValide:=True:C214  // éffacé par la réponse du serveur.
 			// On récupére le nombre de compression que l'on a fait ce mois-ci.
-			OB SET:C1220($reponse_o;"Compression-Count";HeaderValues_at{Find in array:C230(HeaderNames_at;"Compression-Count")})
+			This:C1470.CompressionCount:=Num:C11(HeaderValues_at{Find in array:C230(HeaderNames_at;"Compression-Count")})
 		Else 
 			$reponse_o.isValide:=False:C215
 			// Le détail de l'erreur est dans la réponse du serveur.
@@ -237,7 +237,7 @@ Doc : https://tinypng.com/developers/reference
 	$0:=$reponse_o.isValide
 	
 Function uploadFromUrl
-/* ----------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
 Fonction : tinyPng.uploadFromUrl
 	
 Importation du fichier depuis une URL et envoi vers l'API
@@ -248,24 +248,24 @@ Doc : https://tinypng.com/developers/reference
 01/09/17 Grégory gregory@connect-io.fr - Création de la fonction
 05/11/20 titouan titouan@connect-io.fr - Implémentation dans la classe
 	
--------------------------------------------------------------------------*/
-	
+----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // L'URL depuis laquelle on veut upload
 	var $0 : Boolean
+	
 	var $data_o : Object
 	var $reponse_o : Object
 	var $etat_l : Integer
+	ARRAY TEXT:C222(HeaderNames_at;0)  //Ajout d'un header
+	ARRAY TEXT:C222(HeaderValues_at;0)
 	
 	// Idée pour plus tard... Tester que l'url fonctionne bien...
 	
 	$data_o:=New object:C1471
+	$data_o.source:=New object:C1471
 	$data_o.source.url:=$1
 	
 	
-	//Ajout d'un header
-	ARRAY TEXT:C222(HeaderNames_at;0)
-	ARRAY TEXT:C222(HeaderValues_at;0)
 	APPEND TO ARRAY:C911(HeaderNames_at;"Content-Type")
 	APPEND TO ARRAY:C911(HeaderValues_at;"application/json")
 	
@@ -278,6 +278,5 @@ Doc : https://tinypng.com/developers/reference
 	End if 
 	
 	This:C1470.lastExportInfo:=$reponse_o.output
-	
 	$0:=$reponse_o.isValide
 	

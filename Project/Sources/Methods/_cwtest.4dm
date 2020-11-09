@@ -9,6 +9,6 @@ $chemin_download:=Convert path POSIX to system:C1107("/Users/titouanguillon/Desk
 
 If (tinyPng_o.uploadFromFile($chemin_upload))
 	
-	tinyPng_o.downloadRequest($chemin_download;"scale";15;)
+	tinyPng_o.downloadRequest($chemin_download;"scale";15)
 	
 End if 
