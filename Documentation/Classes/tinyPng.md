@@ -99,8 +99,9 @@ tinyPng_o.downloadRequest($dataTransfert;$chemin_download;$method_resize;$largeu
 
 ```4d
 $chemin_download:=Convert path POSIX to system("/Users/titouanguillon/Desktop/figurine-kangourou_resize.jpg")
-$isValide:=tinyPng_o.uploadFromFile($chemin_upload)
+If(tinyPng_o.uploadFromFile($chemin_upload))
 tinyPng_o.downloadRequest($chemin_download;"scale";15;)
+End if
 ```
 
 
