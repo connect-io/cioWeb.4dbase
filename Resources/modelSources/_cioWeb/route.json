@@ -58,7 +58,7 @@
 		"jsPathInHtml":[
 			"_cioWeb/js/autonumeric.js"
 		]
-	}
+	},
 
 	"404":{
 		"route": {
