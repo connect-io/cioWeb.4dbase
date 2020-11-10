@@ -1,5 +1,5 @@
 ﻿<!-- Type your summary here -->
-# Class : page
+# Class : Page
 
 ### Description
 Cette class permet de génerer le contenue d'une page.
@@ -15,7 +15,7 @@ Cette class permet de génerer le contenue d'une page.
 
 ## Fonction : constructor
 Initialisation de la page web.
-ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
+ATTENTION : L'instance de la class "Page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
 
 
 ### Fonctionnement
@@ -35,7 +35,7 @@ Renvoi le HTML pour le chargement des fichiers CSS.
 
 ### Fonctionnement
 ```4d
-page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
+Page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
@@ -57,7 +57,7 @@ Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page
 
 ### Fonctionnement
 ```4d
-page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
+Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
@@ -79,7 +79,7 @@ Place le contenue du fichier javascript dans le HTML.
 
 ### Fonctionnement
 ```4d
-page.jsInHtml() -> $jsInHtml_t
+Page.jsInHtml() -> $jsInHtml_t
 ```
 
 | Paramêtre      | Type       | entrée/sortie | Description |
@@ -110,7 +110,7 @@ Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 
 ### Fonctionnement
 ```4d
-page.scanBlock($corpsHtml_t) -> Modifie this
+Page.scanBlock($corpsHtml_t) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |

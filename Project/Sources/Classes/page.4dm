@@ -1,5 +1,5 @@
 /* 
-Class : page
+Class : cs.Page
 
 Cette class permet de génerer le contenue d'une page.
 
@@ -8,7 +8,7 @@ Cette class permet de génerer le contenue d'une page.
 
 Class constructor
 /* -----------------------------------------------------------------------------
-Fonction : page.constructor
+Fonction : Page.constructor
 	
 Initialisation de la page web.
 ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
@@ -186,7 +186,7 @@ Historique
 	
 Function cssGetHtmlPath
 /* -----------------------------------------------------------------------------
-Fonction : page.cssGetHtmlPath
+Fonction : Page.cssGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers CSS.
 	
@@ -226,7 +226,7 @@ Historique
 	
 Function jsGetHtmlPath
 /* -----------------------------------------------------------------------------
-Fonction : page.jsGetHtmlPath
+Fonction : Page.jsGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
 	
@@ -262,7 +262,7 @@ Historique
 	
 Function jsInHtml
 /* -----------------------------------------------------------------------------
-Fonction : page.jsInHtml
+Fonction : Page.jsInHtml
 	
 Place le contenue du fichier javascript dans le HTML
 	
@@ -302,7 +302,7 @@ Historique
 	
 Function scanBlock
 /* -----------------------------------------------------------------------------
-Fonction : page.scanBlock
+Fonction : Page.scanBlock
 	
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 	

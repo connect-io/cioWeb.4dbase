@@ -1,5 +1,5 @@
 /* 
-Class : dataTable
+Class : cs.DataTable
 
 Gestion des tableaux de données en HTML.
 
@@ -8,7 +8,7 @@ Gestion des tableaux de données en HTML.
 
 Class constructor
 /* -----------------------------------------------------------------------------
-Fonction : dataTable.constructor
+Fonction : DataTable.constructor
 	
 Initialisation d'une dataTable
 	
@@ -67,7 +67,7 @@ Historique
 	
 Function addData
 /* -----------------------------------------------------------------------------
-Fonction : dataTable.addData
+Fonction : DataTable.addData
 	
 Ajoute une ligne à votre tableau.
 	
@@ -83,7 +83,7 @@ Historique
 	
 Function getHtml
 /* -----------------------------------------------------------------------------
-Fonction : dataTable.getHtml
+Fonction : DataTable.getHtml
 	
 Génére le code HTML pour le tableau.
 	
@@ -99,7 +99,7 @@ Historique
 	
 Function sendDataAjax
 /* -----------------------------------------------------------------------------
-Fonction : dataTable.sendDataAjax
+Fonction : DataTable.sendDataAjax
 	
 Génére le JSON des données à renvoyer au navigateur.
 	
@@ -116,7 +116,7 @@ Historique
 	
 Function setData
 /* -----------------------------------------------------------------------------
-Fonction : dataTable.setData
+Fonction : DataTable.setData
 	
 Charger les data dans le tableau de donnée.
 	

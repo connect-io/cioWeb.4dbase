@@ -1,5 +1,5 @@
 /* 
-Class : user
+Class : cs.User
 
 Gére l'utilisateur / client web
 
@@ -11,10 +11,10 @@ un robot google ou un autre serveur qui vient interroger le notre.
 
 Class constructor
 /* -----------------------------------------------------------------------------
-Fonction : user.constructor
+Fonction : User.constructor
 	
 Initialisation d'un utilisateur
-ATTENTION : L'instance de la class "user" doit se faire obligatoirement par la fonction : webApp.userNew()
+ATTENTION : L'instance de la class "User" doit se faire obligatoirement par la fonction : webApp.userNew()
 	
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -32,7 +32,7 @@ Historique
 	
 Function getInfo
 /* -----------------------------------------------------------------------------
-Fonction : user.getInfo
+Fonction : User.getInfo
 	
 Chargement des éléments sur l'utilisateur / visiteur
 Remplace la méthode : cwVisiteurGetInfo
@@ -115,7 +115,7 @@ Historique
 	
 Function login
 /* -----------------------------------------------------------------------------
-Fonction : user.login
+Fonction : User.login
 	
 À utiliser après la vérification des utilisateurs.
 Permet de garder l'information durant la  session.
@@ -143,7 +143,7 @@ Historique
 	
 Function logout
 /* -----------------------------------------------------------------------------
-Fonction : user.logout
+Fonction : User.logout
 	
 Déconnexion de l'utilisateur
 Remplace la méthode : cwVisiteurLogout
@@ -160,7 +160,7 @@ Historique
 	
 Function objectMerge
 /* -----------------------------------------------------------------------------
-Fonction : user.objectMerge
+Fonction : User.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
 	
@@ -184,7 +184,7 @@ Historique
 	
 Function sessionWebFolderPath
 /* -----------------------------------------------------------------------------
-Fonction : user.sessionWebFolderPath
+Fonction : User.sessionWebFolderPath
 	
 Chemin du dossier des sessions web de l'utilisateur.
 Remplace la méthode : cwSessionUserFolder
@@ -241,7 +241,7 @@ Historique
 	
 Function sessionWebLoad
 /* -----------------------------------------------------------------------------
-Fonction : user.sessionWebLoad
+Fonction : User.sessionWebLoad
 	
 Chargement des sessions web de l'utilisateur.
 Remplace la méthode : cwSessionUserLoad
@@ -327,7 +327,7 @@ Historique
 	
 Function sessionWebSave
 /* -----------------------------------------------------------------------------
-Fonction : user.sessionWebSave
+Fonction : User.sessionWebSave
 	
 Sauvegarder des sessions web de l'utilisateur.
 Remplace la méthode : cwSessionUserSave
@@ -379,7 +379,7 @@ Historique
 	
 Function tokenCheck
 /* -----------------------------------------------------------------------------
-Fonction : user.tokenCheck
+Fonction : User.tokenCheck
 	
 Vérifie un jeton pour la validation d'une pages web.
 Remplace la méthode : cwVisiteurTokenVerifier
@@ -413,7 +413,7 @@ Historique
 	
 Function tokenGenerate
 /* -----------------------------------------------------------------------------
-Fonction : user.tokenGenerate
+Fonction : User.tokenGenerate
 	
 Génere un jeton pour la validation des pages web.
 Remplace la méthode : cwVisiteurTokenGenerer
@@ -433,7 +433,7 @@ Historique
 	
 Function updateVarVisiteur
 /* -----------------------------------------------------------------------------
-Fonction : user.updateVarVisiteur
+Fonction : User.updateVarVisiteur
 	
 Synchro avec du vieux code
 	

@@ -16,4 +16,6 @@ End if
 
 ASSERT:C1129($1#"";"La variable $1 est vide.")
 
+$1:=Uppercase:C13(Substring:C12($1;1;1))+Substring:C12($1;2)
+
 $0:=cs:C1710[$1]

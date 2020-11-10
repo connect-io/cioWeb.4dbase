@@ -1,5 +1,5 @@
 ﻿<!-- Type your summary here -->
-# Class : datatable
+# Class : Datatable
 
 ### Description
 Gestion des tableaux de données en HTML.
@@ -21,7 +21,7 @@ Initialisation d'une dataTable
 
 ### Fonctionnement
 ```4d
-dataTable.new($libDataTable_t) -> $instance_o
+Datatable.new($libDataTable_t) -> $instance_o
 ```
 
 | Paramêtre       | Type       | entrée/sortie | Description |
@@ -45,7 +45,7 @@ Ajoute une ligne à votre tableau.
 
 ### Fonctionnement
 ```4d
-dataTable.addData($data_o) -> Modifie this
+Datatable.addData($data_o) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -68,7 +68,7 @@ Génére le code HTML pour le tableau.
 
 ### Fonctionnement
 ```4d
-datatable.getHtml() -> $html_t
+Datatable.getHtml() -> $html_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -89,7 +89,7 @@ Génére le JSON des données à renvoyer au navigateur.
 
 ### Fonctionnement
 ```4d
-datatable.sendDataAjax() -> $json_t
+Datatable.sendDataAjax() -> $json_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -110,7 +110,7 @@ Charger les data dans le tableau de donnée.
 
 ### Fonctionnement
 ```4d
-dataTable.setData($data_v) -> Modifie this
+Datatable.setData($data_v) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |

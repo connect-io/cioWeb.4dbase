@@ -1,5 +1,5 @@
 ﻿<!-- Type your summary here -->
-# Class : user
+# Class : User
 
 ### Description
 Gère l'utilisateur / client web
@@ -24,7 +24,7 @@ Utilisateur sur le serveur web peut-être un visiteur d'une page web, un robot g
 
 ## Fonction : constructor			
 Initialisation d'un utilisateur
-ATTENTION : L'instance de la class "user" doit se faire obligatoirement par la fonction : webApp.userNew()
+ATTENTION : L'instance de la class "User" doit se faire obligatoirement par la fonction : webApp.userNew()
 			
 ### Fonctionnement
 Interne au composant cioWeb.
@@ -48,7 +48,7 @@ Remplace la méthode : cwVisiteurGetInfo
 			
 ### Fonctionnement
 ```4d
-user.getInfo() -> Modifie this
+User.getInfo() -> Modifie this
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -65,7 +65,7 @@ Conserve l'information durant la session.
 			
 ### Fonctionnement
 ```4d
-user.login() -> Modifie this
+User.login() -> Modifie this
 ```
 La fonction ne requiert pas de paramètre.
 
@@ -82,7 +82,7 @@ Déconnexion de l'utilisateur.
 			
 ### Fonctionnement
 ```4d
-user.logout() -> Modifie this
+User.logout() -> Modifie this
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -101,7 +101,7 @@ Permet la fusion proprement d'un objet avec l'instance utilisateur
 			
 ### Fonctionnement
 ```4d
-user.objectMerge($fils_o) -> Modifie this
+User.objectMerge($fils_o) -> Modifie this
 ```
 
 | Paramètre     | Type       | entrée/sortie | Description |
@@ -128,7 +128,7 @@ Chemin du dossier des sessions web de l'utilisateur.
 			
 ### Fonctionnement
 ```4d
-user.objectMerge() -> $cheminSession_t
+User.objectMerge() -> $cheminSession_t
 ```
 
 | Paramètre     | Type       | entrée/sortie | Description |
@@ -150,7 +150,7 @@ Chargement des sessions web de l'utilisateur.
 			
 ### Fonctionnement
 ```4d
-user.sessionWebLoad() -> Modifie this
+User.sessionWebLoad() -> Modifie this
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -167,7 +167,7 @@ Sauvegarder des sessions web de l'utilisateur. Cette fonction est à utiliser da
 			
 ### Fonctionnement
 ```4d
-user.sessionWebSave()
+User.sessionWebSave()
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -186,7 +186,7 @@ Vérifie un jeton pour la validation d'une pages web. Remplace la méthode : cwV
 			
 ### Fonctionnement
 ```4d
-user.sessionWebSave() -> $tokenValide_o
+User.sessionWebSave() -> $tokenValide_o
 ```
 
 | Paramètre      | Type       | entrée/sortie | Description |
@@ -212,7 +212,7 @@ Génere un jeton pour la validation des pages web.
 			
 ### Fonctionnement
 ```4d
-user.tokenGenerate() -> Modifie this
+User.tokenGenerate() -> Modifie this
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -228,7 +228,7 @@ Synchro avec du vieux code. Ne pas utiliser dans de nouveau projet.
 			
 ### Fonctionnement
 ```4d
-user.updateVarVisiteur()
+User.updateVarVisiteur()
 ```
 
 La fonction ne requiert pas de paramètre.

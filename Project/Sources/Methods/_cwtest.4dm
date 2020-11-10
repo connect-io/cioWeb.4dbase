@@ -1,7 +1,7 @@
 //%attributes = {"shared":true}
 
-var tinyPng_o : cs:C1710.tinyPng
-tinyPng_o:=cs:C1710.tinyPng.new("Kzioor4VCZXDlMTnAB093q46JJRFr03Q")
+var tinyPng_o : cs:C1710.TinyPng
+tinyPng_o:=cs:C1710.TinyPng.new("Kzioor4VCZXDlMTnAB093q46JJRFr03Q")
 $chemin_upload:=Convert path POSIX to system:C1107("/Users/titouanguillon/Desktop/figurine-kangourou.jpg")
 $chemin_download:=Convert path POSIX to system:C1107("/Users/titouanguillon/Desktop/figurine-kangourou_resize.jpg")
 

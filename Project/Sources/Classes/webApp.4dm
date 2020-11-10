@@ -1,5 +1,5 @@
 /* 
-Class : webApp
+Class : cs.WebApp
 
 Cette class permet de centraliser toutes les données de l'application web.
 
@@ -8,7 +8,7 @@ Cette class permet de centraliser toutes les données de l'application web.
 
 Class constructor
 /* -----------------------------------------------------------------------------
-Fonction : webApp.constructor
+Fonction : WebApp.constructor
 	
 Initialisation de l'application web
 	
@@ -159,7 +159,7 @@ Historique
 	
 Function cachePath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.cachePath
+Fonction : WebApp.cachePath
 	
 Chemin complet plateforme du dossier cache
 	
@@ -176,7 +176,7 @@ Historique
 	
 Function cacheSessionWebPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.cacheSessionWebPath
+Fonction : WebApp.cacheSessionWebPath
 	
 Chemin complet plateforme des sessions web
 	
@@ -209,7 +209,7 @@ Historique
 	
 Function cacheViewPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.cacheViewPath
+Fonction : WebApp.cacheViewPath
 	
 Chemin complet plateforme du dossier cache des vues
 	
@@ -226,7 +226,7 @@ Historique
 	
 Function cacheViewSubdomainPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.cacheViewSubdomainPath
+Fonction : WebApp.cacheViewSubdomainPath
 	
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
@@ -249,35 +249,35 @@ Historique
 	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
-	
+/* - J'ai l'impression que cette fonction ne sert à rien.
 Function dataTableInit
-/* -----------------------------------------------------------------------------
-Fonction : webApp.dataTableInit
+-----------------------------------------------------------------------------
+Fonction : WebApp.dataTableInit
 	
 Initialisation des dataTables.
 	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------ */
+----------------------------------------------------------------------------- 
 	
-	var $1;$user_o : Object  // instance de user
-	var $0 : Object  // Instance de la dataTable en cours
+var $1;$user_o : Object  // Instance de user
+var $0 : Object  // Instance de la dataTable en cours
 	
-	$user_o:=$1
-	$0:=New object:C1471()
+$user_o:=$1
+$0:=New object()
 	
-	ASSERT:C1129($user_o.sousDomaine#"";"webApp.dataTableNew : Impossible de determiner le sous domaine de user.")
-	TRACE:C157
-	$0.config_o:=This:C1470.sites[$user_o.sousDomaine].dataTable
+ASSERT($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
+TRACE
+$0.config_o:=This.sites[$user_o.sousDomaine].dataTable
 	
-	$0.class:=cwToolGetClass("dataTable")
-	
+$0.class:=cwToolGetClass("DataTable")
+*/
 	
 	
 	
 Function dataTableNew
 /* -----------------------------------------------------------------------------
-Fonction : webApp.dataTableNew
+Fonction : WebApp.dataTableNew
 	
 Chargement d'une nouvelle dataTable
 	
@@ -288,21 +288,21 @@ Historique
 	
 	var $1 : Text  // Lib du dataTable
 	var $2 : Pointer
-	var $0 : cs:C1710.dataTable
+	var $0 : cs:C1710.DataTable
 	
-	var $instance_o : cs:C1710.dataTable  // Instance de la dataTable en cours
+	var $instance_o : cs:C1710.DataTable  // Instance de la DataTable en cours
 	
 	$user_o:=visiteur
 	
-	ASSERT:C1129($1#"";"webApp.dataTableNew : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($user_o.sousDomaine#"";"webApp.dataTableNew : Impossible de determiner le sous domaine de user.")
+	ASSERT:C1129($1#"";"WebApp.dataTableNew : Le param $1 ne doit pas être vide.")
+	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
 	
 	
 	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1)
 	
-	ASSERT:C1129($dataTableConfig_o.length#0;"webApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
+	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
 	
-	$instance_o:=cs:C1710.dataTable.new($dataTableConfig_o[0])
+	$instance_o:=cs:C1710.DataTable.new($dataTableConfig_o[0])
 	
 	// Pour le retour de la fonction, il y a 2 methodes possibles.
 	If (Count parameters:C259=1)
@@ -321,7 +321,7 @@ Historique
 	
 Function htmlMinify
 /* -----------------------------------------------------------------------------
-Fonction : webApp.htmlMinify
+Fonction : WebApp.htmlMinify
 	
 Minification du HTML
 	
@@ -412,14 +412,14 @@ Historique
 	
 Function jsMinify
 /* -----------------------------------------------------------------------------
-Fonction : webApp.jsMinify
+Fonction : WebApp.jsMinify
 	
 Minification du javascript
 	
 Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
-16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
+16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class WebApp
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
@@ -488,7 +488,7 @@ Historique
 	
 Function pageCurrent
 /* -----------------------------------------------------------------------------
-Fonction : webApp.pageCurrent
+Fonction : WebApp.pageCurrent
 	
 Chargement des éléments de la page courante
 	
@@ -498,7 +498,7 @@ Historique
 ----------------------------------------------------------------------------- */
 	
 	var $1;$user_o : Object  // instance de user
-	var $0 : Object  // Instance de la page courante
+	var $0 : cs:C1710.Page  // Instance de la page courante
 	
 	var siteRoute_c : Collection
 	var $info_o : Object
@@ -515,7 +515,7 @@ Historique
 	$info_o:=New object:C1471()
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
 	
-	$0:=cs:C1710.page.new(siteRoute_c;$1;$info_o)
+	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
 	
 	// Petit hack pour les formulaires en attendant des jours meilleurs.
 	siteForm_c:=This:C1470.sites[$user_o.sousDomaine].form
@@ -530,7 +530,7 @@ Historique
 	
 Function serverStart
 /* -----------------------------------------------------------------------------
-Fonction : webApp.serverStart
+Fonction : WebApp.serverStart
 	
 Démarrage du serveur web
 	
@@ -604,21 +604,6 @@ Historique
 			// On ne merge pas les routes qui n'ont pas d'url... Cela crée des doublons car ce sont des routes de layout...
 			If ($configPage[$libPage].parents#Null:C1517) & ($configPage[$libPage].route#Null:C1517)
 				If ($configPage[$libPage].route.path#Null:C1517)
-/*
-$parentLibPage:=$configPage[$libPage].parents[0]
-Repeat 
-$parentLibPagePrecedent:=$parentLibPage
-					
-If ($configPage[$parentLibPage]=Null)
-ALERT("La route parent suivante n'est pas définie :"+$parentLibPage)
-$parentLibPage:=""  // Permet de sortir de la boucle.
-Else 
-$configPage[$libPage]:=cwToolObjectMerge ($configPage[$parentLibPage];$configPage[$libPage])
-$parentLibPage:=$configPage[$libPage].parents[0]
-End if 
-					
-Until ($parentLibPagePrecedent=$parentLibPage)
-*/
 					
 					$iReel_l:=-1
 					$i:=0
@@ -641,15 +626,6 @@ Until ($parentLibPagePrecedent=$parentLibPage)
 				End if 
 			End if 
 		End for each 
-		
-		// Une fois que l'on a merge les routes parents, on peut les supprimer...
-/*
-For each ($libPage;$configPage)
-If ($libPage="parent@")
-OB REMOVE($configPage;$libPage)
-End if 
-End for each 
-*/
 		
 		// Une fois que l'on a merge les routes avec des dependance, on supprime les pages de configuration qui n'ont pas de route.
 		For each ($libPage;$configPage)
@@ -799,7 +775,7 @@ End for each
 	
 Function sessionWebStart
 /* -----------------------------------------------------------------------------
-Fonction : webApp.sessionWebStart
+Fonction : WebApp.sessionWebStart
 	
 Démarrage des sessions Web
 	
@@ -906,7 +882,7 @@ Historique
 	
 Function sourcePath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.sourcePath
+Fonction : WebApp.sourcePath
 	
 Chemin complet plateforme du dossier Source
 	
@@ -923,7 +899,7 @@ Historique
 	
 Function sourceSubdomainPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.sourceSubdomainPath
+Fonction : WebApp.sourceSubdomainPath
 	
 Chemin complet plateforme du dossier Source/sousDomaine
 	
@@ -965,18 +941,17 @@ Historique
 	$infoWebApp_o:=New object:C1471()
 	$infoWebApp_o.sessionWeb:=OB Copy:C1225(This:C1470.sessionWeb)
 	
-	//$0:=cs.user.new($infoWebApp_o)
 	
 	// En attendant de faire mieux, je declare la variable visiteur pour gérer les form
-	var visiteur : Object
-	visiteur:=cs:C1710.user.new($infoWebApp_o)
+	var visiteur : cs:C1710.User
+	visiteur:=cs:C1710.User.new($infoWebApp_o)
 	$0:=visiteur
 	
 	
 	
 Function webAppPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.webAppPath
+Fonction : WebApp.webAppPath
 	
 Chemin complet plateforme du dossier WebApp
 	
@@ -993,7 +968,7 @@ Historique
 	
 Function webfolderSubdomainPath
 /* -----------------------------------------------------------------------------
-Fonction : webApp.webfolderSubdomainPath
+Fonction : WebApp.webfolderSubdomainPath
 	
 Chemin complet plateforme du dossier Webfolder/sousDomaine
 	

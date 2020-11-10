@@ -1,5 +1,5 @@
 ﻿<!-- Type your summary here -->
-# Class : webApp
+# Class : WebApp
 
 ### Description
 C'est la class principale du composant cioWeb.
@@ -9,7 +9,6 @@ C'est la class principale du composant cioWeb.
 * [Fonction : cacheSessionWebPath](#fonction--cacheSessionWebPath)
 * [Fonction : cacheViewPath](#fonction--cacheViewPath)
 * [Fonction : cacheViewSubdomainPath](#fonction--cacheViewSubdomainPath)
-* [Fonction : dataTableInit](#fonction--dataTableInit)
 * [Fonction : dataTableNew](#fonction--dataTableNew)
 * [Fonction : htmlMinify](#fonction--htmlMinify)
 * [Fonction : jsMinify](#fonction--jsMinify)
@@ -30,7 +29,7 @@ Chemin complet (format plateforme) du dossier cache dans l'application webApp.
 
 ### Fonctionnement
 ```4d
-webApp.cachePath () -> chemin_t
+WebApp.cachePath () -> chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -44,7 +43,7 @@ C_OBJECT(myWebApp_o)
 C_TEXT($chemin_t)
 
 // On récupére la class depuis notre composant.
-$webApp:=caToolGetClass ("webApp")
+$webApp:=caToolGetClass ("WebApp")
 
 // On génére une instance de la class webApp.
 myWebApp_o:=$webApp.new("Tonton")
@@ -62,7 +61,7 @@ Dans le cas ou l'on souhaite forcer un nouveau chemin, il suffit de passer un ch
 
 ### Fonctionnement
 ```4d
-webApp.cacheSessionWebPath ({newPath_t}) -> path_t
+WebApp.cacheSessionWebPath ({newPath_t}) -> path_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -77,7 +76,7 @@ C_OBJECT(myWebApp_o)
 C_TEXT($chemin_t)
 
 // On récupére la class depuis notre composant.
-$webApp:=caToolGetClass ("webApp")
+$webApp:=caToolGetClass ("WebApp")
 
 // On génére une instance de la class webApp.
 myWebApp_o:=$webApp.new("Tonton")
@@ -94,7 +93,7 @@ Chemin complet plateforme du dossier cache des vues
 
 ### Fonctionnement
 ```4d
-???
+WebApp.cacheViewPath()
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -113,7 +112,7 @@ Chemin complet plateforme du dossier cache des vues / sousDomaine
 
 ### Fonctionnement
 ```4d
-???
+WebApp.cacheViewSubdomainPath()
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -129,35 +128,13 @@ Chemin complet plateforme du dossier cache des vues / sousDomaine
 
 ------------------------------------------------------
 
-## Fonction : dataTableInit
-Initialisation des dataTables.
-		
-
-### Fonctionnement
-```4d
-???
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| ???     | Objet      | Entée         | instance de user|
-| ???        | Objet      | Sortie        |Instance de la dataTable en cours|
-
-### Example
-```html
-???
-```
-
-
-------------------------------------------------------
-
 ## Fonction : dataTableNew
 Chargement d'une nouvelle dataTable
 		
 
 ### Fonctionnement
 ```4d
-???
+WebApp.dataTableNew()
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -180,7 +157,7 @@ Minification du HTML
 
 ### Fonctionnement
 ```4d
-???
+WebApp.htmlMinify()
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -201,7 +178,7 @@ Chargement des éléments de la page courante
 
 ### Fonctionnement
 ```4d
-???
+WebApp.pageCurrent()
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -223,7 +200,7 @@ Démarrage du serveur web
 
 ### Fonctionnement
 ```4d
-?webApp.serverStart() -> Modifie this
+WebApp.serverStart() -> Modifie this
 ```
 
 La fonction ne requiert pas de paramètre.
@@ -242,7 +219,7 @@ Démarrage des sessions Web
 
 ### Fonctionnement
 ```4d
-webApp.sessionWebStart({$option_c}) -> Modifie this
+WebApp.sessionWebStart({$option_c}) -> Modifie this
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -264,7 +241,7 @@ Chemin complet plateforme du dossier Source
 
 ### Fonctionnement
 ```4d
-webApp.sourcePath() -> $chemin_t
+WebApp.sourcePath() -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -287,7 +264,7 @@ Chemin complet plateforme du dossier Source/sousDomaine
 
 ### Fonctionnement
 ```4d
-webApp.sourceSubdomainPath({$domaine_t}) -> $chemin_t
+WebApp.sourceSubdomainPath({$domaine_t}) -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -311,7 +288,7 @@ Chargement des éléments sur l'utilisateur / visiteur
 
 ### Fonctionnement
 ```4d
-webApp.userNew() -> $visiteur_o
+WebApp.userNew() -> $visiteur_o
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -337,7 +314,7 @@ Chemin complet plateforme du dossier WebApp.
 
 ### Fonctionnement
 ```4d
-webApp.webAppPath() -> $chemin_t
+WebApp.webAppPath() -> $chemin_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |
@@ -361,7 +338,7 @@ Il est possible de forcer l'accés à un sous domaine en l'inscrivant dans $doma
 
 ### Fonctionnement
 ```4d
-webApp.webfolderSubdomainPath({$domaine_t}) -> $path_t
+WebApp.webfolderSubdomainPath({$domaine_t}) -> $path_t
 ```
 
 | Paramêtre     | Type       | entrée/sortie | Description |

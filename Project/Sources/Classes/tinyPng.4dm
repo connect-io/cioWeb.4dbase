@@ -1,5 +1,5 @@
 /* 
-Classe : tinyPng
+Classe : cs.TinyPng
 Permet l'utilisation de l'api du site tinypng.com
 
 */
@@ -7,7 +7,7 @@ Permet l'utilisation de l'api du site tinypng.com
 
 Class constructor
 /* -----------------------------------------------------------------------------
-Fonction : tinyPng.constructor
+Fonction : TinyPng.constructor
 	
 Initialisation de la clé de l'API
 Si aucune clé n'est renseignée, on utilisera une clé de "démonstration"
@@ -16,12 +16,9 @@ Historique
 01/09/17 Grégory gregory@connect-io.fr - Création de la méthode
 05/11/20 titouan titouan@connect-io.fr - Clean méthode + adaptation aux nouvelles formulations
 06/11/20 titouan titouan@connect-io.fr - Création du constructeur
-------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
-	If (True:C214)  // Déclarations
-		var $1 : Text  // Clé API
-	End if 
-	
+	var $1 : Text  // Clé API
 	
 	If (Count parameters:C259=1)
 		This:C1470.keys:=$1
@@ -34,9 +31,10 @@ Historique
 	This:C1470.CompressionCount:=-1  // On ne connait pas encore le nombre de requete
 	
 	
+	
 Function downloadRequest
 /* -----------------------------------------------------------------------------
-Fonction : tinyPng.downloadRequest
+Fonction : TinyPng.downloadRequest
 	
 Récupération du fichier depuis l'API
 Doc : https://tinypng.com/developers/reference
@@ -45,14 +43,14 @@ Historique
 	
 01/09/17 Grégory gregory@connect-io.fr - Création de la méthode
 05/11/20 titouan titouan@connect-io.fr - Implémentation dans la classe
-------------------------------------------------------------------------------*/
-	
+----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // (optionnel) Destination du fichier sur le disque.
 	var $2 : Text  // (optionnel) type de retaillage (scale, fit, cover)
 	var $3 : Integer  // (optionnel) largueur en px
 	var $4 : Integer  // (optionnel) hauteur en px
 	var $0 : Object
+	
 	var $reponse_o : Object
 	var $data_o : Object
 	var $filePath_t : Text
@@ -158,21 +156,26 @@ Historique
 	
 	$0:=$reponse_o
 	
+	
+	
 Function lastExportInfo
 /* -----------------------------------------------------------------------------
-Fonction : tinyPng.lastExportInfo
+Fonction : TinyPng.lastExportInfo
 	
 renvoie les informations de la derniere importation dans un objet
 	
 Historique
 	
 09/11/20 titouan titouan@connect-io.fr - Création de la fonction
-------------------------------------------------------------------------------*/
+-----------------------------------------------------------------------------*/
+	
 	$0:=This:C1470.lastExportInfo
 	
+	
+	
 Function uploadFromFile
-/* ----------------------------------------------------------------------
-Fonction : tinyPng.uploadFromFile
+/* -----------------------------------------------------------------------------
+Fonction : TinyPng.uploadFromFile
 	
 Importation du fichier et envoi vers l'API
 Doc : https://tinypng.com/developers/reference
@@ -182,7 +185,7 @@ Doc : https://tinypng.com/developers/reference
 01/09/17 Grégory gregory@connect-io.fr - Création de la fonction
 05/11/20 titouan titouan@connect-io.fr - Implémentation dans la classe
 	
--------------------------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
 	// Déclarations
 	var $1 : Text  // chemin du fichier
@@ -236,9 +239,11 @@ Doc : https://tinypng.com/developers/reference
 	
 	$0:=$reponse_o.isValide
 	
+	
+	
 Function uploadFromUrl
-/* ----------------------------------------------------------------------------
-Fonction : tinyPng.uploadFromUrl
+/* -----------------------------------------------------------------------------
+Fonction : TinyPng.uploadFromUrl
 	
 Importation du fichier depuis une URL et envoi vers l'API
 Doc : https://tinypng.com/developers/reference
