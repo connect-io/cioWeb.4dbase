@@ -42,6 +42,11 @@
         <mj-button align="center" background-color="#ccc" color="#FFFFFF" border-radius="2px" href="#" inner-padding="15px 30px" padding-bottom="100px" padding-top="20px">Git<span style="color: #5FA91D">Hub</span> - Plume</mj-button>
       </mj-column>
     </mj-section>
+
+    <mj-section>
+      <mj-text><!--#4DHTML string(corps_t)--></mj-text>
+    </mj-section>
+
     <mj-section background-color="#fff">
       <mj-column width="100%">
         <mj-text padding="40px 40px" font-weight="300">Il dispose de différents niveaux de complexité d'emailing en partant de l'envoi simple d'un email, jusqu'à l'envoie d'un email comprenant un layout, modèle, IHM et pièces jointes.</mj-text>

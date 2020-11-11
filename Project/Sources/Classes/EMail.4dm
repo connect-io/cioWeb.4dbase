@@ -140,6 +140,7 @@ Historique
 		If ($mailStatus_o.success)
 			This:C1470.to:=Null:C1517
 			This:C1470.from:=Null:C1517
+			This:C1470.object:=Null:C1517
 			This:C1470.htmlBody:=Null:C1517
 			This:C1470.textBody:=Null:C1517
 			This:C1470.attachmentsPath_c:=New collection:C1472()
@@ -159,98 +160,92 @@ Historique
 	
 	
 Function sendModel
-	// ----------------------------------------------------
-	// Méthode : plSendModel
-	// Description
-	// 
-	// Envoie d'un email avec son modèle
-	// ----------------------------------------------------
+/* -----------------------------------------------------------------------------
+Méthode : EMail.sendModel
 	
-	If (False:C215)
-		// 06/01/2020 - quentin@connect-io.fr - Création
-		// 09/01/2020 - quentin@connect-io.fr - Ajout paramètre 3
+Envoi d'un e-mail depuis un modèle.
+	
+Historique
+11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
+----------------------------------------------------------------------------- */
+	
+	// Déclaration
+	var $1 : Text  // Var nom du modèle
+	var $2 : Object  // Var content
+	var $0 : Object  // retour sur le résultat de la fonction.
+	
+	var $error_t : Text  // Gestion des erreurs.
+	var $model_c : Collection  // Informations tableau JSON du modèle
+	var $model_o : Object  // Detail du modèle
+	var $returnVar_t : Text  // Retourne le texte si 3ème paramètre
+	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
+	
+	ASSERT:C1129($1#"";"EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
+	
+	
+	If (Count parameters:C259=2)
+		
+		For each ($propriete_t;$2)
+			This:C1470[$propriete_t]:=$2[$propriete_t]
+		End for each 
+		
 	End if 
 	
-	// Déclaration de variables
-	If (True:C214)
-		C_COLLECTION:C1488($model_c)  // Informations tableau JSON du modèle
-		C_OBJECT:C1216($mail_o)  // Informations sur l'email
-		C_OBJECT:C1216($model_o;$0)  // Le modèle
-		C_TEXT:C284($1)  // Var nom du modèle
-		C_OBJECT:C1216($2)  // Var email
-		C_OBJECT:C1216($3)  // Var content
-		C_TEXT:C284($returnVar_t)  // Retourne le texte si 3ème paramètre
-		C_TEXT:C284($modeleNom_t)  // Nom du modèle
-		C_TEXT:C284($nameFolderInResources_t)  // Nom du dossier
-		C_OBJECT:C1216(content)  // 3ème paramètre
-	End if 
-	
-	content:=New object:C1471()
-	
-	$nameFolderInResources_t:="plumeMail"
-	
-	// Attribuer des variables aux parametres
-	$modeleNom_t:=$1
-	$mail_o:=$2
-	
-	If (Count parameters:C259=3)
-		content:=$3
-	End if 
 	
 	// Vérification fichier modèle
-	$model_c:=<>plumeConfig.model.query("name IS :1";$modeleNom_t)
+	$model_c:=Storage:C1525.eMail.model.query("name IS :1";$1)
 	
 	// Retrouver les informations du modèle
 	If ($model_c.length=1)
 		$model_o:=$model_c[0]
 		
-		corps_t:=Document to text:C1236(<>plumeConfig.info.hostPath+$model_o.source;"UTF-8")
+		corps_t:=File:C1566(Storage:C1525.eMail.modelPath+$model_o.source).getText()
 		
 		// Gestion du layout
 		If (String:C10($model_o.layout)#"")
-			$mail_o.htmlBody:=Document to text:C1236(<>plumeConfig.info.hostPath+$model_o.layout;"UTF-8")
-			
+			This:C1470.htmlBody:=File:C1566(Storage:C1525.eMail.modelPath+$model_o.layout).getText()
 		Else 
-			$mail_o.htmlBody:=corps_t
+			This:C1470.htmlBody:=corps_t
 		End if 
 		
+	Else 
+		$error_t:="EMail.sendModel : Impossible de retrouver le modèle : "+$1
+	End if 
+	
+	If ($error_t="")
 		
-		// Si parametre 3 
-		If (Count parameters:C259=3) | (String:C10($model_o.layout)#"")
+		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")
 			// Les variables html sont utilisées dans l'email, il faut les traités avec 4D.
-			PROCESS 4D TAGS:C816($mail_o.htmlBody;$returnVar_t)
-			$mail_o.htmlBody:=$returnVar_t
+			PROCESS 4D TAGS:C816(This:C1470.htmlBody;$returnVar_t)
+			This:C1470.htmlBody:=$returnVar_t
 		End if 
 		
 		// Si l'objet n'est pas défini avant on applique celui du modèle.
-		If (String:C10($mail_o.subject)="")
-			$mail_o.subject:=String:C10($model_o.object)
+		If (String:C10(This:C1470.subject)="")
+			This:C1470.subject:=String:C10($model_o.object)
 		End if 
 		
 		// On gère les destinataires du message.
-		If ($mail_o.to=Null:C1517)
+		If (This:C1470.to=Null:C1517)
 			If ($model_o.to#Null:C1517)
-				$mail_o.to:=$model_o.to
+				This:C1470.to:=$model_o.to
 			End if 
 		End if 
 		
 		// Envoie du mail
-		$mailInfo_o:=plSend($mail_o)
-		
-		// Si l'envoie = True
-		If ($mailInfo_o.success=True:C214)
-			ALERT:C41("L'email est envoyé.")
-			// Sinon..
-		Else 
-			ALERT:C41($mailInfo_o.statusText)
-		End if 
-		
-		
-		
-		$0:=$model_o
-	Else 
-		// to do: faire remonter l'erreur dans le cas ou on ne retrouve pas le modele dans la config
+		$mailStatus_o:=This:C1470.send()
 	End if 
+	
+	
+	If ($error_t#"")
+		$mailStatus_o.statusText:=$error_t
+		$mailStatus_o.status:=-1
+	End if 
+	
+	// Retourne les informations concernant l'envoie du mail
+	$0:=$mailStatus_o
+	
+	
 	
 	
 	

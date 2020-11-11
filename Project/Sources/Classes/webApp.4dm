@@ -395,7 +395,37 @@ Historique
 	
 	
 	// Authentification API 
-	//HTTP AUTHENTICATE(appID;secretKey;1)
+	//
+	
+	
+	If (Storage:C1525.eMail.mjml#Null:C1517)
+		
+		
+		
+		// si le modèle a un layout
+		If (String:C10($model_o.layout)#"")
+			
+			
+			If ($modelFolder_o.file($model_o.layout).extension="mjml")
+				
+				
+			End if 
+			
+			
+		End for each 
+		
+		
+		
+		HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID;Storage:C1525.eMail.mjml.secretKey;1)
+		
+		
+		$contenu_o:=New object:C1471()
+		
+		$contenu_o.mjlm:=File:C1566().getTest()
+		
+		HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$contenu_o)
+		
+	End if 
 	
 	
 	

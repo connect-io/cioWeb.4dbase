@@ -32,14 +32,23 @@
 		},
 		{
 			"name": "Demo2",
-			"object": "Demo 3 Envoie modèle",
+			"object": "Demo 2 Envoie modèle",
 			"source": "demo2.html"
 		},
 		{
-			"name": "Demo43",
+			"name": "Demo3",
 			"object": "Demo 3 Envoie modèle avec variables",
-			"source": "demo2.html",
+			"source": "demo3.html",
 			"layout": "layout.html"
+		},
+		{
+			"name": "Demo4",
+			"object": "Demo 4 Envoie modèle avec variables",
+			"source": "demo4.html",
+			"layout": "layout4.mjml",
+			"to": [
+				"gregory@connect-io.fr"
+			]
 		}
 
 
