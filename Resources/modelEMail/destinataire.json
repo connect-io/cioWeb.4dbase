@@ -1,0 +1,22 @@
+{
+	"destinataire":[
+		{
+			"name": "quentin",
+			"toto": "tata1",
+			"to": "quentin@connect-io.fr",
+			"age": 55
+		},
+		{
+			"name": "gregory",
+			"toto": "tata1",
+			"to": "quentin@connect-io.fr",
+			"age": 52
+		},
+		{
+			"name": "plume",
+			"to": "plume4d@gmail.com",
+			"toto": "tata1",
+			"age" : 54
+		}
+	]
+}

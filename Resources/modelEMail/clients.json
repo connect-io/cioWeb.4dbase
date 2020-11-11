@@ -1,0 +1,27 @@
+{
+	"clients":[
+		{
+			"name": "toto",
+			"to": "quentin@connect-io.fr",
+			"age": 55
+		},
+		{
+			"name": "toto2",
+			"to": "plume4d@gmail.com",
+			"age" : 54
+		}
+	],
+
+	"employe":[
+	{
+		"name": "employe1",
+		"to": "quentin@connect-io.fr",
+		"age": 55
+	},
+	{
+		"name": "employe2",
+		"to": "plume4d@gmail.com",
+		"age" : 54
+	}
+]
+}

@@ -1,0 +1,26 @@
+{
+	"destinataire": [
+		{
+			"name": "Quentin",
+			"email": "quentin@connect-io.fr"
+		},
+		{
+			"name": "Plume",
+			"email": "plume4d@gmail.com"
+		}
+
+	],
+	"model": [
+		{
+			"name": "trainingModel1",
+			"object": "Demo Envoie modèle",
+			"source": "demo.html"
+		},
+		{
+			"name": "trainingModel2",
+			"object": "Entraînement envoie modèle",
+			"source": "demo3.html"
+		}
+	]
+	
+}

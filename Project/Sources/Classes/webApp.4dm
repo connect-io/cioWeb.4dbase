@@ -44,7 +44,7 @@ Historique
 	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
-	$source_o:=Folder:C1567(This:C1470.sourcePath();fk platform path:K87:2)
+	$source_o:=Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2)
 	If ($source_o.isFolder)
 		$source_o.create()
 	End if 
@@ -316,6 +316,87 @@ Historique
 		
 		$2->[$1]:=$instance_o
 	End if 
+	
+	
+	
+Function eMailConfigLoad
+/* -----------------------------------------------------------------------------
+Méthode : WebApp.eMailConfigLoad
+	
+Precharge toutes les e-mails de l'application web.
+	
+Historique
+10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
+----------------------------------------------------------------------------- */
+	
+	var $configFile_o : 4D:C1709.File
+	var $modelFolder_o : 4D:C1709.Folder
+	var $model_o : Object  // Un model de la config
+	
+	// Chemin du fichier de config dans la base hôte.
+	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc";fk platform path:K87:2)
+	If (Not:C34($configFile_o.exists)
+		// Si le fichier de config n'existe pas, on le crée.
+		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2))
+	End if 
+	
+	// Chargement de la configuration des eMails.
+	Use (Storage:C1525)
+		Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o;ck shared:K85:29)
+		
+		Use (Storage:C1525.eMail)
+			// chargement complet du dossier des models.
+			Storage:C1525.eMail.modelPath:=cwToolPathSeparator(This:C1470.sourcesPath()+Storage:C1525.eMail.modelPath;"/")
+		End use 
+	End use 
+	
+	$modelFolder_o:=Folder:C1567(Storage:C1525.eMail.modelPath)
+	
+	If (Not:C34($modelFolder_o.exists))
+		$modelFolder_o.create()
+	End if 
+	
+	
+	// On boucle tout les modeles
+	For each ($model_o;Storage:C1525.eMail.model)
+		
+		// Si le modéle n'existe pas, on l'importe
+		If (Not:C34($modelFolder_o.file($model_o.source).exists))
+			
+			// On vérifie si le document existe dans notre composant
+			If (Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.source).exists)
+				Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.source).copyTo($modelFolder_o.file($model_o.source).parent)
+			Else 
+				
+				// Si ce n'est pas possible on lance une alerte.
+				ALERT:C41("Il manque la source du modèle "+$model_o.name+" pour le composant cioWeb.")
+			End if 
+		End if 
+		
+		// si le modèle a un layout
+		If (String:C10($model_o.layout)#"")
+			
+			// On verifie si le layout est deja chargé sur la base hôte
+			If (Not:C34($modelFolder_o.file($model_o.layout).exists))
+				
+				// On verifie si le layout est disponible dans le composant
+				If (Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.layout).exists)
+					Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.layout).copyTo($modelFolder_o.file($model_o.layout).parent)
+				Else 
+					
+					// Si ce n'est pas possible on lance une alerte.
+					ALERT:C41("Il manque le layout du modèle "+$model_o.name+" pour le composant cioWeb.")
+				End if 
+				
+			End if 
+		End if 
+		
+	End for each 
+	
+	
+	// Authentification API 
+	//HTTP AUTHENTICATE(appID;secretKey;1)
+	
 	
 	
 	
@@ -686,7 +767,7 @@ Historique
 				End for 
 				OB SET:C1220($route;"variable";$routeVar)
 				
-				OB SET:C1220($page;"route";$route)
+				$page.route:=$route
 				OB SET:C1220($configPage;$libpage_at{$j};$page)
 			End if 
 		End for 
@@ -700,10 +781,7 @@ Historique
 				// Attention : On ne peut pas utiliser ici de boucle for each car sa modification ne sera pas répercutée sur l'élément de la collection.
 				For ($i_l;0;$page.viewPath.length-1)
 					// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];":";Folder separator:K24:12)  // Séparateur mac
-					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];"/";Folder separator:K24:12)  // Séparateur unix
-					$page.viewPath[$i_l]:=Replace string:C233($page.viewPath[$i_l];"\\";Folder separator:K24:12)  // Séparateur windows
-					$page.viewPath[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+$page.viewPath[$i_l]
+					$page.viewPath[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+cwToolPathSeparator($page.viewPath[$i_l])
 					
 					// On vérifie que le fichier existe bien
 					If (Test path name:C476($page.viewPath[$i_l])#Is a document:K24:1)
@@ -880,9 +958,9 @@ Historique
 	
 	
 	
-Function sourcePath
+Function sourcesPath
 /* -----------------------------------------------------------------------------
-Fonction : WebApp.sourcePath
+Fonction : WebApp.sourcesPath
 	
 Chemin complet plateforme du dossier Source
 	
@@ -919,7 +997,7 @@ Historique
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=This:C1470.sourcePath()+$sousDomaine_t+Folder separator:K24:12
+	$0:=This:C1470.sourcesPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
 	

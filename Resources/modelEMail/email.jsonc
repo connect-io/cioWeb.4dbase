@@ -1,0 +1,54 @@
+﻿{
+	// Chemin depuis le dossier source pour atteindre les models.
+	"modelPath": "www/email/",
+
+	"smtp":[
+		{
+			"name": "transactionnel",
+			"host": "pro1.mail.ovh.net",
+			"user": "titouan@connect-io.fr",
+			"password":	"ConnectIO06+"
+		},
+		{
+			"name": "prospection",
+			"host": "xxx",
+			"port":	465,
+			"user": "xxx@connect-io.fr",
+			"password":	"xxxx",
+			"from":	"xxxx"
+		}
+	],
+
+	"model": [
+		{
+			"name": "demo1",
+			"object": "E-mail de démonstration Plume 4D",
+
+			// Attention la source des models doit être au format POSIX.
+			"source": "facture/demo1.html",
+			"to": [
+				"gregory@connect-io.fr"
+			]
+		},
+		{
+			"name": "Demo2",
+			"object": "Demo 3 Envoie modèle",
+			"source": "demo2.html"
+		},
+		{
+			"name": "Demo43",
+			"object": "Demo 3 Envoie modèle avec variables",
+			"source": "demo2.html",
+			"layout": "layout.html"
+		}
+
+
+	],
+
+	"mjml": {
+		"applicationID" : "7b0c7e8a-1262-4866-8508-e5aa800089d9",
+		"secretKey": "90c3824d-d095-4bfa-bd42-4aca21331b08",
+		"urlAPI" : "https://api.mjml.io/v1/render"
+	}
+
+}

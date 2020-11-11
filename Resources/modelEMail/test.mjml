@@ -1,0 +1,90 @@
+<mjml>
+  <mj-head>
+    <mj-title>Dîtes bonjour à Plume 4D</mj-title>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500"></mj-font>
+    <mj-attributes>
+      <mj-all font-family="Montserrat, Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px"></mj-text>
+      <mj-section padding="0px"></mj-section>
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#F2F2F2">
+    <mj-section padding="10px 0 20px 0">
+      <mj-column>
+        <mj-text align="center" color="#9B9B9B" font-size="11px">Plume 4D est un composant 4D - Open Source</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="20px 20px 0 20px" background-color="#FFFFFF">
+      <mj-column width="100%">
+        <mj-text align="center" font-size="20px" font-weight="500">//&nbsp;Plume&nbsp;<span style="color: #5FA91D">IO</span></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="20px 20px 0 20px" background-color="#FFFFFF">
+      <mj-column>
+        <mj-text align="center" font-weight="300" padding="30px 40px 10px 40px" font-size="32px" line-height="40px" color="#5FA91D">PLUME 4D</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="10px 20px" background-color="#FFFFFF">
+      <mj-column>
+        <mj-divider width="30px" border-width="3px" border-color="#9B9B9B"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0 20px 20px 20px" background-color="#FFFFFF">
+      <mj-column width="80%">
+        <mj-text align="center" padding-top="10px" font-weight="500" padding="0px">Adoptez Plume, pour un emailing simple &amp; rapide.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-url="https://www.luxe-infinity.com/wp-content/uploads/2019/06/white-feathers-background-P74GGRM.jpg" background-size="cover" background-repeat="no-repeat">
+      <mj-column width="100%">
+        <mj-image src="http://nimus.de/share/tpl-card/lineshadow.png" alt="" align="center" border="none" padding="0px"></mj-image>
+        <mj-text align="center" padding="20px 0" font-weight="300">Grâce à Plume,</mj-text>
+        <mj-text align="center" padding="0 40px 0 40px" font-weight="300">Vous serez en mesure d'envoyez des emails rapidement en toute simplicité.</mj-text>
+        <mj-button align="center" background-color="#ccc" color="#FFFFFF" border-radius="2px" href="#" inner-padding="15px 30px" padding-bottom="100px" padding-top="20px">Git<span style="color: #5FA91D">Hub</span> - Plume</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="100%">
+        <mj-text padding="40px 40px" font-weight="300">Il dispose de différents niveaux de complexité d'emailing en partant de l'envoi simple d'un email, jusqu'à l'envoie d'un email comprenant un layout, modèle, IHM et pièces jointes.</mj-text>
+        <mj-text padding="0 40px" font-weight="300">
+          <ul>
+            <li style="padding-bottom: 20px"><strong>Simplicité :</strong> Plume a été conçu afin de simplifié le plus possible l'emailing.</li>
+            <li style="padding-bottom: 20px"><strong>Gain de temps :</strong> Ce dernier dispose d'un code clair et commenté afin que la relecture et la compréhension de ce dernier soit la meilleure qu'il soit.</li>
+            <li><strong>Multiples possibilitées :</strong> Plume dispose de différentes versions, pour lesquelles les plus simples gérera le simple envoie d'un email, jusqu'à l'envoie d'un email comportant un layout, modèle, IHM et pièce jointes !</li>
+          </ul>
+        </mj-text>
+        <mj-text padding="20px 40px" font-weight="300">Ce composant a été réaliser par Connect <span style="color: #5FA91D">IO</span> , Agence Web - 4D comportant 3 membres à ce jour. Pour les plus anciens ce sont plus de 13 ans d'expérience 4D qui les occupents.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-left="70px" padding-right="10px">
+      <mj-column width="50%">
+        <mj-text color="#212b35" font-size="12px" font-weight="bold" padding-bottom="0">
+          Adresse
+        </mj-text>
+        <mj-text color="#637381" font-size="14px" padding-top="0">
+          7, Avenue Sidi Brahim
+          <br/> 06130 Grasse
+        </mj-text>
+      </mj-column>
+      <mj-column width="50%">
+        <mj-text color="#212b35" font-size="12px" font-weight="bold" padding-bottom="0">
+          Contact
+        </mj-text>
+        <mj-text color="#637381" font-size="14px" padding-top="0">
+          <a href="mailto:contact@connect-io.fr" style="text-decoration: none;"><span style="color: #5FA91D">contact@connect-io.fr</span></a>
+          <br/><a href="http://www.connect-io.fr" style="text-decoration: none;"><span style="color: #5FA91D">www.connect-io.fr</span></a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="50px 0 0 0" background-color="#FFFFFF">
+      <mj-column>
+        <mj-image src="http://nimus.de/share/tpl-card/bottom.png" alt="bottom border" align="center" border="none" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="10px 0 20px 0">
+      <mj-column>
+        <mj-text align="center" color="#9B9B9B" font-size="11px"><a href="#" style="color: #9B9B9B;">Se désinscrire</a> des newsletters<br/>7, Avenue Sidi Brahim, 06130 Grasse<br/> <a href="#" style="color: #9B9B9B; text-decoration:none;">&copy; Connect <span style="color: #5FA91D;">IO</span></a></mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
