@@ -337,7 +337,7 @@ Historique
 	
 	// Chemin du fichier de config dans la base hôte.
 	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc";fk platform path:K87:2)
-	If (Not:C34($configFile_o.exists)
+	If (Not:C34($configFile_o.exists))
 		// Si le fichier de config n'existe pas, on le crée.
 		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2))
 	End if 
@@ -420,7 +420,7 @@ Historique
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($reponse_o.html)
 						Else 
-							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+$resultat_i
+							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
 					End if 
 					
@@ -447,7 +447,7 @@ Historique
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.source).parent.file($name_t).setText($reponse_o.html)
 						Else 
-							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+$resultat_i
+							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
 						
 					End if 
