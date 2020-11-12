@@ -334,6 +334,8 @@ Historique
 	var $configFile_o : 4D:C1709.File
 	var $modelFolder_o : 4D:C1709.Folder
 	var $model_o : Object  // Un model de la config
+	var $mjmlReponse_o : Object  // Reponse de la requête
+	var $mjmlContenu_o : Object  // Contenu de la requête MJML
 	
 	// Chemin du fichier de config dans la base hôte.
 	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc";fk platform path:K87:2)
@@ -400,6 +402,10 @@ Historique
 	
 	If (Storage:C1525.eMail.mjml#Null:C1517)
 		
+		$mjmlReponse_o:=New object:C1471()
+		
+		HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID;Storage:C1525.eMail.mjml.secretKey;1)
+		
 		// On parcourt les modèles
 		For each ($model_o;Storage:C1525.eMail.model)
 			
@@ -411,14 +417,11 @@ Historique
 					$name_t:=$modelFolder_o.file($model_o.layout).name+".html"
 					
 					If ((Not:C34($modelFolder_o.file($model_o.layout).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.layout).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.layout).modificationTime))
-						HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID;Storage:C1525.eMail.mjml.secretKey;1)
-						$contenu_o:=New object:C1471()
-						$contenu_o.mjml:=$modelFolder_o.file($model_o.layout).getText()
-						$reponse_o:=New object:C1471()
-						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$contenu_o;$reponse_o)
+						$mjmlContenu_o:=New object:C1471("mjml";$modelFolder_o.file($model_o.layout).getText())
+						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$mjmlContenu_o;$mjmlReponse_o)
 						
 						If ($resultat_i=200)
-							$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($reponse_o.html)
+							$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($mjmlReponse_o.html)
 						Else 
 							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
@@ -429,7 +432,6 @@ Historique
 			End if 
 			
 			
-			
 			// Si il existe une source 
 			If (String:C10($model_o.source)#"")
 				
@@ -438,14 +440,11 @@ Historique
 					$name_t:=$modelFolder_o.file($model_o.source).name+".html"
 					
 					If ((Not:C34($modelFolder_o.file($model_o.source).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.source).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.source).modificationTime))
-						HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID;Storage:C1525.eMail.mjml.secretKey;1)
-						$contenu_o:=New object:C1471()
-						$contenu_o.mjml:=$modelFolder_o.file($model_o.source).getText()
-						$reponse_o:=New object:C1471()
-						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$contenu_o;$reponse_o)
+						$mjmlContenu_o:=New object:C1471("mjml";$modelFolder_o.file($model_o.source).getText())
+						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$mjmlContenu_o;$mjmlReponse_o)
 						
 						If ($resultat_i=200)
-							$modelFolder_o.file($model_o.source).parent.file($name_t).setText($reponse_o.html)
+							$modelFolder_o.file($model_o.source).parent.file($name_t).setText($mjmlReponse_o.html)
 						Else 
 							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
