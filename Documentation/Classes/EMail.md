@@ -18,12 +18,12 @@ Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier
 Ce fichier recense diverses informations sur la configuration des emails.
 Il contient 4 objets.
 
-| Objet       | Utilité       | 
-| --------------- | ---------- | 
+| Objet     | Utilité       | 
+| --------- | ---------- | 
 | modelPath |  Chemin depuis le dossier source pour atteindre les models|
-| smtp |  Dans cet objet, on recense les différents transporteurs que l'on souhaite utiliser|
-| model |  Définit les modèles des mails enregistrés par défaut|
-| mjml |  Optionnel, il permet d'utiliser l'API de MJML, qui transforme un fichier mjml en fichier html|
+| smtp      |  Dans cet objet, on recense les différents transporteurs que l'on souhaite utiliser|
+| model     |  Définit les modèles des mails enregistrés par défaut|
+| mjml      |  Optionnel, il permet d'utiliser l'API de MJML, qui transforme un fichier mjml en fichier html|
 
 
 
