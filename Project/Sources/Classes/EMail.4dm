@@ -215,16 +215,13 @@ Historique
 	
 	If ($error_t="")
 		
-		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")
-			// Les variables html sont utilisées dans l'email, il faut les traités avec 4D.
-			PROCESS 4D TAGS:C816(This:C1470.htmlBody;$returnVar_t)
-			This:C1470.htmlBody:=$returnVar_t
-		End if 
-		
 		// Si l'objet n'est pas défini avant on applique celui du modèle.
 		If (String:C10(This:C1470.subject)="")
-			This:C1470.subject:=String:C10($model_o.object)
+			This:C1470.subject:=String:C10($model_o.subject)
 		End if 
+		
+		PROCESS 4D TAGS:C816(This:C1470.subject;$returnVar_t)
+		This:C1470.subject:=$returnVar_t
 		
 		// On gère les destinataires du message.
 		If (This:C1470.to=Null:C1517)
@@ -233,6 +230,11 @@ Historique
 			End if 
 		End if 
 		
+		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")
+			// Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
+			PROCESS 4D TAGS:C816(This:C1470.htmlBody;$returnVar_t)
+			This:C1470.htmlBody:=$returnVar_t
+		End if 
 		// Envoie du mail
 		$mailStatus_o:=This:C1470.send()
 	End if 

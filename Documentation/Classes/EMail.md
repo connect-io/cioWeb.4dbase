@@ -18,12 +18,12 @@ Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier
 Ce fichier recense diverses informations sur la configuration des emails.
 Il contient 4 objets.
 
-| Objet     | Utilité       | 
-| --------- | ---------- | 
-| modelPath |  Chemin depuis le dossier source pour atteindre les models|
+| Objet     | Utilité                                                                            | 
+| --------- | ---------------------------------------------------------------------------------- | 
+| modelPath |  Chemin depuis le dossier source pour atteindre les models                         |
 | smtp      |  Dans cet objet, on recense les différents transporteurs que l'on souhaite utiliser|
-| model     |  Définit les modèles des mails enregistrés par défaut|
-| mjml      |  Optionnel, il permet d'utiliser l'API de MJML, qui transforme un fichier mjml en fichier html|
+| model     |  Définit les modèles des mails enregistrés par défaut                              |
+| mjml      |  Optionnel, il permet d'utiliser l'API de MJML, qui transforme un fichier mjml en fichier html                                                                                     |
 
 
 
@@ -86,10 +86,10 @@ Initialisation du transporteur de mail
 cs.EMail.new(options) -> Configure le transporteur
 ```
 
-| Paramêtre       | Type       | entrée/sortie | Description |
-| --------------- | ---------- | ------------- | ----------- |
-| $name_t | Texte      | Entrée         | Le nom de l'instance du SMTP souhaité, et défini dans le fichier de config email.jsonc|
-| $paramOptionnel_o     | Objet      | Entrée      | Un objet correspondant aux options que l'on souhaite rajouer / ecraser par rapport au transporteur choisi|
+| Paramêtre            | Type       | entrée/sortie | Description                   |
+| -------------------- | ---------- | ------------- | ----------------------------- |
+| $name_t              | Texte      | Entrée        | Le nom de l'instance du SMTP souhaité, et défini dans le fichier de config email.jsonc   |
+| $paramOptionnel_o    | Objet      | Entrée        | Un objet correspondant aux options que l'on souhaite rajouer / ecraser par rapport au transporteur choisi     |
 
 
 
@@ -113,12 +113,12 @@ Permet d'envoyer un mail sans modèle particulier, en fonction des instances de 
 $EMail.send() -> $resultat_o
 ```
 
-| Paramêtre     | Type       | Description |
-| ------------- | ---------- | ----------- |
-| this.to      | Texte   | adresse du destinataire |
-| this.htmlBody     | Texte   | Corps du texte |
-| this.attachmentsPath_c      | Collection   | Collection contenant les pièces jointes à inclure au mail |
-| this.subject     | Texte  | L'objet du mail en question|
+| Paramêtre              | Type       | Description                                               |
+| ---------------------- | ---------- | --------------------------------------------------------- |
+| this.to                | Texte      | adresse du destinataire                                   |
+| this.htmlBody          | Texte      | Corps du texte                                            |
+| this.attachmentsPath_c | Collection | Collection contenant les pièces jointes à inclure au mail |
+| this.subject           | Texte      | L'objet du mail en question                               |
 
 
 La méthode send renverra des informations sur l'envoi de l'email. Voir <a href="https://doc.4d.com/4Dv18/4D/18/SMTP-transportersend.305-4505974.en.html">ici</a> pour obtenir des informations précises sur ce qui est renvoyé, et pour en savoir plus sur les paramètres optionnels qu'on peut rajouter au mail.
@@ -169,11 +169,11 @@ Voila la description des différents paramètres utilisés dans la fonction :
 
 
 
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $nomModel_t       | Texte      | Entrée        | Chaine de caractères contenant dle nom du modèle qu'on souhaite utiliser, comme indiqué dans le fichier de config |
-| $variableDansMail_o (Optionnel)       | Objet      | Entrée        | Dans le cas où l'on souhaite inclure des variables dans le mail de démo (dans le fichier html), on peut créer un objet contenant ces variables |
-| $retour_o      | Objet      | Sortie        | Renvoie des informations sur le resultat de la méthode send. Voir plus haut pour plus d'informations sur les différents attributs de cet objet. |
+| Paramêtre                       | Type       | entrée/sortie | Description                     |
+| ------------------------------- | ---------- | ------------- | ------------------------------- |
+| $nomModel_t                     | Texte      | Entrée        | Chaine de caractères contenant dle nom du modèle qu'on souhaite utiliser, comme indiqué dans le fichier de config                          |
+| $variableDansMail_o (Optionnel) | Objet      | Entrée        | Dans le cas où l'on souhaite inclure des variables dans le mail de démo (dans le fichier html), on peut créer un objet contenant ces variables |
+| $retour_o                       | Objet      | Sortie        | Renvoie des informations sur le resultat de la méthode send. Voir plus haut pour plus d'informations sur les différents attributs de cet objet. |
 
 
 ### Example
