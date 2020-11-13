@@ -182,6 +182,7 @@ Historique
 	
 	ASSERT:C1129($1#"";"EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
 	
+	$mailStatus_o:=New object:C1471("success";False:C215)
 	
 	If (Count parameters:C259=2)
 		

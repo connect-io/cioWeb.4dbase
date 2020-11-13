@@ -422,11 +422,17 @@ Historique
 						
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($mjmlReponse_o.html)
+							
 						Else 
 							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
 					End if 
 					
+					// On change le nom du layout pour qu'il soit en .html
+					
+					Use (Storage:C1525.eMail.model)
+						$model_o.layout:=Replace string:C233($model_o.layout;".mjml";".html")
+					End use 
 				End if 
 				
 			End if 
@@ -445,11 +451,19 @@ Historique
 						
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.source).parent.file($name_t).setText($mjmlReponse_o.html)
+							
+							
 						Else 
 							visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
 						End if 
 						
 					End if 
+					
+					// On change le nom de la source pour qu'il soit en .html
+					
+					Use (Storage:C1525.eMail.model)
+						$model_o.source:=Replace string:C233($model_o.source;".mjml";".html")
+					End use 
 					
 				End if 
 				
