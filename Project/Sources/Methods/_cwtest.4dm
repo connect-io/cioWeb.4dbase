@@ -17,3 +17,5 @@ If (tinyPng_o.uploadFromFile($chemin_upload))
 	tinyPng_o.downloadRequest($chemin_download;"scale";15)
 	
 End if 
+
+$topto:=1+2
