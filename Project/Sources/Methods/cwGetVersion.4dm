@@ -7,18 +7,16 @@ Permet de recuperer la version de 4D
 Historique
 13/11/2020 - Titouan Guillon titouan@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
+// Déclarations
+var $0 : Text
 
+var $version_t : Text
+var $major_t : Text
+var $release_t : Text
+var $info_t : Text
+var $minor_t : Text
 
-If (True:C214)  // Déclarations
-	var $0 : Text  // 
-	var $version_t : Text
-	var $major_t : Text
-	var $release_t : Text
-	var $info_t : Text
-	var $minor_t : Text
-	var $build_i : Integer
-End if 
-$version_t:=Application version:C493($build_i)
+$version_t:=Application version:C493()
 $major_t:=$version_t[[1]]+$version_t[[2]]  //numéro de version, p.e. 14
 $release_t:=$version_t[[3]]  //Rx
 $minor_t:=$version_t[[4]]  //.x
