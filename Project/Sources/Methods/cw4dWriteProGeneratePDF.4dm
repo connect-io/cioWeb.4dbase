@@ -83,11 +83,7 @@ End case
 
 // Configuration de base du PDF.
 $option_o:=New object:C1471
-$option_o[wk visible headers:K81:287]:=True:C214
-$option_o[wk visible footers:K81:288]:=True:C214
-$option_o[wk visible background:K81:289]:=True:C214
-$option_o[wk max picture DPI:K81:316]:=96  //override default value for screen (192 DPI) to limit doc size
-$option_o[wk optimized for:K81:317]:=wk screen:K81:319
+$option_o[wk optimized for:K81:317]:=wk print:K81:318
 $option_o[wk recompute formulas:K81:320]:=True:C214
 
 // si besoin, sur-configuration du PDF.
