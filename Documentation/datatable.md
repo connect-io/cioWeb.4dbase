@@ -50,6 +50,7 @@ On ajoute ensuite des propriétés à notre tableau tel que :
 | Nom de la propriété | Type  | Valeur par defaut | Commentaire |
 | ------------------- | ----- | ----------------- | ----------- |
 | class               | texte | ""                | Permet de personnaliser le CSS du tableau |
+| multiSelect         | bool  | ""                | Permet la selection multiple dans un tableau. |
 | dom                 | texte | "auto"            | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
 | doubleClick         | objet | null              | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
 
