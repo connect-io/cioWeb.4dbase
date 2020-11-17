@@ -1,5 +1,5 @@
 <p align="center"><a href="http://www.connect-io.fr" target="_blank">
-    <img src="http://www.connect-io.fr/uploads/3/logo-base.png">
+    <img src="https://www.connect-io.fr/www/img/logoConnectio.png">
 </a></p>
 
 
