@@ -475,6 +475,25 @@ Historique
 	
 	
 	
+Function eMailModelList
+/* -----------------------------------------------------------------------------
+Fonction : WebApp.eMailModelList
+	
+Minification du HTML
+	
+Historique
+17/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création
+----------------------------------------------------------------------------- */
+	var $0 : Collection
+	
+	If (Storage:C1525.eMail=Null:C1517)
+		This:C1470.eMailConfigLoad()
+	End if 
+	
+	$0:=Storage:C1525.eMail.model
+	
+	
+	
 Function htmlMinify
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.htmlMinify
