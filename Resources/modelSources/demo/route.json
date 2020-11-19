@@ -1,14 +1,14 @@
 ﻿{
-	"helloWord": {
+	"helloWorld": {
 		"parents": [
 			"layoutDemo"
 		],
 		"route": {
-			"path": "/hello-word.html"
+			"path": "/hello-world.html"
 		},
 		"titre": "Hello word",
 		"viewPath": [
-			"demo/view/helloWord.html"
+			"demo/view/helloWorld.html"
 		]
 	}
 }

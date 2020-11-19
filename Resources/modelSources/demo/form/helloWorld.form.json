@@ -1,7 +1,7 @@
 ﻿{
-	"lib": "formHelloWord",
+	"lib": "formHelloWorld",
 	"class": "m-t g-pa-10",
-	"action": "contactDetail",
+	"action": "helloWorld",
 	"method": "POST",
 	"input": [
 		{
