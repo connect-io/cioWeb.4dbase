@@ -102,7 +102,10 @@ visiteur_o.devMode:=visiteur_o.Host="@dev@"
   // ===== Rechargement des variables de l'application =====
 If (visiteur_o.devMode)
 	SET ASSERT ENABLED(True)
+	<>webApp_o.jsMinify()
+	<>webApp_o.htmlMinify()
 	<>webApp_o.serverStart()
+	<>webApp_o.urlCDN:=""
 End if 
 
 
