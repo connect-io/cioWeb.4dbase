@@ -129,7 +129,7 @@ Voici le rendu HTML généré par le composant :
             <input type="password" id="upMotDePasseConfirmation" name="upMotDePasseConfirmation" class="form-control rounded-0 " placeholder="" value="" required="">
         </div>
     </div>
-
+    <!-- On retrouve ici le token qui est généré automatiquement. -->
     <input type="hidden" name="token" id="token" value="FD4D4BFA25AB450EBA7D813BDA4C1D16">
 
     <div class="form-group">
@@ -146,6 +146,79 @@ Voici le rendu HTML généré par le composant :
 Rendu Visuel dans un navigateur :
 
 ![Demo formulaire 1](images/formDemo1.png "Demo formulaire 1")
+
+Voici maintenant le traitement qui peut être fait dans la méthode 4D de ma route du formulaire : wpTmUserParametre
+
+```4d
+C_OBJECT($contactAcces_o;$societe_o)
+
+If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
+    
+    // On vérifie si le mot de passe actuel est valide.
+    
+    // On retrouve la fiche de la personne.
+    $contactAcces_o:=ds.ContactAcces.query("PKU IS :1";visiteur_o.ContactAccesPKU).first()
+    
+    If ($contactAcces_o=Null)
+        visiteur_o.notificationError:="Impossible de retrouver la fiche de la personne."
+    End if 
+    
+    If (visiteur_o.notificationError="")
+        If (Not(Verify password hash(visiteur_o.dataForm.motDePasseActuel;$contactAcces_o.HashPassword)))
+            visiteur_o.notificationError:="La saisie du mot de passe actuel n'est pas valide."
+            OB REMOVE(visiteur_o;"upMotDePasseActuel")
+        End if 
+    End if 
+    
+    // On a retrouvé la fiche du contact, test du nouveau MDP.
+    If (visiteur_o.notificationError="") & (visiteur_o.dataForm.motDePasseNouveau#visiteur_o.dataForm.motDePasseConfirmation)
+        visiteur_o.notificationError:="Le mot de passe saisi est différent de la confirmation."
+    End if 
+    
+    If (visiteur_o.notificationError="") & (Num(visiteur_o.dataForm.motDePasseNouveau)=0)
+        visiteur_o.notificationError:="Le nouveau mot de passe doit contenir au moins 1 chiffre"
+    End if 
+    
+    If (visiteur_o.notificationError="") & (Not(Match regex("^(.*)[a-zA-Z]+(.*)$";visiteur_o.dataForm.motDePasseNouveau)))
+        visiteur_o.notificationError:="Le nouveau mot de passe doit contenir au moins 1 lettre."
+    End if 
+    
+    If (visiteur_o.notificationError="") & (Length(visiteur_o.dataForm.motDePasseNouveau)<<>webConfig_o.motDePasse.nombreDeCaracteres)
+        visiteur_o.notificationError:="Le nouveau mot de passe doit contenir au moins "+String(<>webConfig_o.motDePasse.nombreDeCaracteres)+" caractéres."
+    End if 
+    
+    // Différent des 2 derniers mot de passe.
+    If (visiteur_o.notificationError="")
+        If ($contactAcces_o.HashPassword#"")
+            If (Verify password hash(visiteur_o.dataForm.motDePasseNouveau;$contactAcces_o.HashPassword))
+                visiteur_o.notificationError:="Le nouveau mot de passe doit être différent du dernier mots de passe."
+            End if 
+        End if 
+    End if 
+    
+    If (visiteur_o.notificationError="")
+        // Tout les controles sont passé... On prend en compte la modification du mot de passe.
+        //$contactAcces_o.HashPasswordOld:=$contactAcces_o.HashPassword
+        $contactAcces_o.HashPassword:=weboHashMotDePasse(visiteur_o.dataForm.motDePasseNouveau)
+        $contactAcces_o.DernierChangementPass:=Current date
+        $contactAcces_o.save()
+        
+        // Pour des raisons de sécurité on supprimer les variables sur le mot de passe.
+        OB REMOVE(visiteur_o;"upMotDePasseActuel")
+        OB REMOVE(visiteur_o;"upMotDePasseNouveau")
+        OB REMOVE(visiteur_o;"upMotDePasseConfirmation")
+        
+        visiteur_o.notificationSuccess:="Votre nouveau mot de passe est actif."
+        
+    Else 
+        
+        // Si il y a une erreur on vide l'input du nouveau mot de passe.
+        OB REMOVE(visiteur_o;"upMotDePasseNouveau")
+        OB REMOVE(visiteur_o;"upMotDePasseConfirmation")
+    End if 
+    
+End if 
+```
 
 # Remplissage de "input"
 
