@@ -28,6 +28,74 @@ Historique
 		This:C1470[$propriete_t]:=$1[$propriete_t]
 	End for each 
 	
+Function entityToForm
+/* -----------------------------------------------------------------------------
+ Nom utilisateur (OS) : Alban Catoire <alban@connect-io.fr>
+ Date et heure : 23/11/20, 15h00
+ ----------------------------------------------------
+ Méthode : entityToForm
+ Description
+ Remplit un formulaire avec les infos d'une entité
+	
+ Paramètres
+ $1 : l'entité dont on charge les infos
+ $2 : [text] Nom du formulaire 
+-----------------------------------------------------------------------------*/
+	
+	var $Form_o : Object
+	var $nomForm_t : Text
+	var $prefixe_t : Text
+	var $entityNameCalcule_t : Text
+	var $Form_c : Collection
+	var test : Object
+	
+	$Form_c:=New collection:C1472()
+	$Form_o:=New object:C1471()
+	$nomForm_t:=$2
+	$entity:=$1
+	
+	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1";$nomForm_t)
+	
+	If ($Form_c.length=1)
+		$Form_o:=$Form_c[0]
+		$prefixe_t:=$Form_o.inputPrefixe
+		
+		For each ($input;$Form_o.input)
+			$compatible_b:=False:C215
+			
+			$entityNameCalcule_t:=Replace string:C233($input.lib;$prefixe_t;"")
+			
+			If ($entity[$entityNameCalcule_t]#Null:C1517)
+				// Dans le cas ou le champ commence par une majuscule.
+				visiteur_o[$input.lib]:=$entity[$entityNameCalcule_t]
+				$compatible_b:=True:C214
+			Else 
+				$entityNameCalcule_t:=Lowercase:C14(Substring:C12($entityNameCalcule_t;1;1))+Substring:C12($entityNameCalcule_t;2)
+				
+				If ($entity[$entityNameCalcule_t]#Null:C1517)
+					// Dans le cas ou le champ commence par une minuscule.
+					$compatible_b:=True:C214
+				End if 
+			End if 
+			
+			If ($compatible_b)
+				Case of 
+					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is boolean:K8:9)
+						visiteur_o[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t];"1";"0")
+						
+					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is text:K8:3)
+						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						
+					: (OB Get type:C1230($entity[$entityNameCalcule_t])=Is real:K8:4)
+						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						
+					Else 
+						// Ne pas traiter... (Exemple image, blog, object,..)
+				End case 
+			End if 
+			
+		End for each 
+	End if 
 	
 	
 Function getInfo
