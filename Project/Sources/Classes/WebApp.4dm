@@ -28,6 +28,10 @@ Historique
 	var $reponse_o : Object
 	var $resultat_i : Integer
 	
+	Use (Storage:C1525)
+		Storage:C1525.sites:=New shared object:C1526
+	End use 
+	
 	This:C1470.config:=New object:C1471
 	This:C1470.config.folderName_o:=New object:C1471
 	This:C1470.config.folderName_o.webApp:="WebApp"
@@ -67,6 +71,11 @@ Historique
 	For each ($subDomain_t;This:C1470.config.subDomain_c)
 		If (This:C1470.sites[$subDomain_t]=Null:C1517)
 			This:C1470.sites[$subDomain_t]:=New object:C1471
+			
+			Use (Storage:C1525.sites)
+				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
+			End use 
+			
 		End if 
 	End for each 
 	
@@ -942,6 +951,10 @@ Historique
 	MESSAGE:C88("Chargement des datatables..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFuncDataTablePreload
 	//cwI18nLoad 
+	
+	Use (Storage:C1525)
+		
+	End use 
 	
 	
 	

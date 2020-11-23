@@ -43,6 +43,10 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	// On récupére la collection de form du sousDomaine
 	If (This:C1470.sites[$subDomain_t].form=Null:C1517)
 		This:C1470.sites[$subDomain_t].form:=New collection:C1472()
+		
+		Use (Storage:C1525.sites[$subDomain_t])
+			Storage:C1525.sites[$subDomain_t].form:=New shared collection:C1527()
+		End use 
 	End if 
 	
 	
@@ -290,13 +294,22 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				
 				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
 				This:C1470.sites[$subDomain_t].form.push($form)
+				
+				Use (Storage:C1525.sites[$subDomain_t].form)
+					Storage:C1525.sites[$subDomain_t].form.push(OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form))
+				End use 
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
 				$indicesQuery_c:=This:C1470.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
 				This:C1470.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
+				
+				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
+					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form)
+				End use 
 			End if 
 		End if 
 	End for 
 	
 End for each 
+
