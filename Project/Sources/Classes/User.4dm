@@ -81,13 +81,13 @@ Function entityToForm
 			If ($compatible_b)
 				Case of 
 					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is boolean:K8:9)
-						visiteur_o[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t];"1";"0")
+						This:C1470[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t];"1";"0")
 						
 					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is text:K8:3)
-						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
 					: (OB Get type:C1230($entity[$entityNameCalcule_t])=Is real:K8:4)
-						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
 					Else 
 						// Ne pas traiter... (Exemple image, blog, object,..)
