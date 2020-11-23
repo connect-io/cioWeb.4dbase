@@ -8,26 +8,25 @@ Pensez à la copier dans une methode de votre projet pour en profiter...
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Clean code
 ----------------------------------------------------------------------------- */
 
-
-If (True:C214)  // Déclarations
-	var $erreur : Object
-	ARRAY LONGINT:C221($code;0)
-	ARRAY TEXT:C222($composantInterne;0)
-	ARRAY TEXT:C222($lib;0)
-End if 
+// Déclarations
+var $erreur : Object
+ARRAY LONGINT:C221($code;0)
+ARRAY TEXT:C222($composantInterne;0)
+ARRAY TEXT:C222($lib;0)
 
 GET LAST ERROR STACK:C1015($code;$composantInterne;$lib)
 
-OB SET:C1220($erreur;\
+$erreur:=New object:C1471(\
 "libelle";$lib{1};\
 "methode";Error Method;\
 "ligne";Error Line;\
 "code";Error)
 
-If (OB Is defined:C1231(visiteur))
-	OB SET:C1220($erreur;"visiteur";visiteur)
+If (visiteur#Null:C1517)
+	$erreur.visiteur:=visiteur
 End if 
 
 cwLogErreurAjout("Serveur Web";$erreur)

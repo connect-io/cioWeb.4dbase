@@ -30,12 +30,9 @@ Historique
 	
 Function entityToForm
 /* -----------------------------------------------------------------------------
- Nom utilisateur (OS) : Alban Catoire <alban@connect-io.fr>
- Date et heure : 23/11/20, 15h00
- ----------------------------------------------------
- Méthode : entityToForm
- Description
- Remplit un formulaire avec les infos d'une entité.
+Fonction : User.entityToForm
+	
+Remplit un formulaire avec les infos d'une entité.
 	
 Historique
 23/11/20 - Alban Catoire alban@connect-io.fr> - Reprise de code en fonction
@@ -79,10 +76,8 @@ Historique
 			Else 
 				$entityNameCalcule_t:=Lowercase:C14(Substring:C12($entityNameCalcule_t;1;1))+Substring:C12($entityNameCalcule_t;2)
 				
-				If ($entity[$entityNameCalcule_t]#Null:C1517)
-					// Dans le cas ou le champ commence par une minuscule.
-					$compatible_b:=True:C214
-				End if 
+				// Dans le cas ou le champ commence par une minuscule.
+				$compatible_b:=$entity[$entityNameCalcule_t]#Null:C1517
 			End if 
 			
 			If ($compatible_b)
@@ -93,7 +88,7 @@ Historique
 					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is text:K8:3)
 						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
-					: (OB Get type:C1230($entity[$entityNameCalcule_t])=Is real:K8:4)
+					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is real:K8:4)
 						visiteur_o[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
 					Else 

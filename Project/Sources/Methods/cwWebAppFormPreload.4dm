@@ -17,16 +17,14 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
-
-If (True:C214)  // Déclarations
-	var $numForm : Integer
-	var $i : Integer
-	var $analyseForm_b : Boolean
-	var $indicesQuery_c : Collection
-	var $formCharge_c : Collection
-	var formInput_o : Object  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
-	var $subDomain_t : Text  // Nom du sous domaine
-End if 
+// Déclarations
+var $numForm : Integer
+var $i : Integer
+var $analyseForm_b : Boolean
+var $indicesQuery_c : Collection
+var $formCharge_c : Collection
+var formInput_o : Object  // La variable est declaré en variable process car l'on l'utilise dans le fichier input.html
+var $subDomain_t : Text  // Nom du sous domaine
 
 
 // Récupération des formulaires
@@ -51,12 +49,9 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	ARRAY TEXT:C222($fichiersForm;0)
 	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
 	For ($numForm;1;Size of array:C274($fichiersForm))
-		$analyseForm_b:=True:C214
 		var $form : Object
 		
-		If ($fichiersForm{$numForm}#"@form.json@")
-			$analyseForm_b:=False:C215
-		End if 
+		$analyseForm_b:=$fichiersForm{$numForm}="@form.json@"
 		
 		If ($analyseForm_b)
 			// On regarde si le formulaire est déjà chargé en mémoire...
@@ -204,9 +199,12 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				End if 
 				
 				// Gestion des collapse
-				If (Bool:C1537(formInput_o.collapse)=False:C215)
-					formInput_o.collapse:=False:C215
-				End if 
+				
+				//If (Bool(formInput_o.collapse)=False)
+				//formInput_o.collapse:=False
+				//End if 
+				
+				formInput_o.collapse:=Bool:C1537(formInput_o.collapse)
 				
 				
 				If (OB Is defined:C1231(formInput_o;"contentType"))
@@ -216,14 +214,13 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					$type:=Replace string:C233($type;"[";"")
 					$type:=Replace string:C233($type;"]";"")
 					$type:=Replace string:C233($type;"\"";"")
-					OB SET:C1220(formInput_o;"accept";$type)
-					
+					formInput_o.accept:=$type
 				Else 
-					OB SET:C1220(formInput_o;"accept";"")
+					formInput_o.accept:=""
 				End if 
 				
 				If (Not:C34(OB Is defined:C1231(formInput_o;"divClassSubmit")))
-					OB SET:C1220(formInput_o;"divClassSubmit";"")
+					formInput_o.divClassSubmit:=""
 				End if 
 				
 				If (formInput_o.type="radio")
@@ -283,8 +280,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
 					End case 
 					
-					OB SET:C1220(formInput_o;$viewHtml;$htmlInputTags_t)
-					
+					formInput_o[$viewHtml]:=$htmlInputTags_t
 				End for each 
 			End for each 
 			

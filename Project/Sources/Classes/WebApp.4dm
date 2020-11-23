@@ -864,7 +864,7 @@ Historique
 					End if 
 					$routeVar:=Replace string:C233($routeVar;$routeFormatCle{$r};$routeFormatData)
 				End for 
-				OB SET:C1220($route;"variable";$routeVar)
+				$route.variable:=$routeVar
 				
 				$page.route:=$route
 				OB SET:C1220($configPage;$libpage_at{$j};$page)
