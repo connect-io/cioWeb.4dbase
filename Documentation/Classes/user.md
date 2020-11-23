@@ -186,7 +186,7 @@ Vérifie un jeton pour la validation d'une pages web. Remplace la méthode : cwV
 			
 ### Fonctionnement
 ```4d
-User.sessionWebSave() -> $tokenValide_o
+User.tokenCheck() -> $tokenValide_o
 ```
 
 | Paramètre      | Type       | entrée/sortie | Description |
