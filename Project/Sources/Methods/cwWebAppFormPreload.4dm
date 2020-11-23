@@ -41,9 +41,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	
 	
 	// On récupére la collection de form du sousDomaine
-	If (This:C1470.sites[$subDomain_t].form=Null:C1517)
-		This:C1470.sites[$subDomain_t].form:=New collection:C1472()
-		
+	If (Storage:C1525.sites[$subDomain_t].form=Null:C1517)
 		Use (Storage:C1525.sites[$subDomain_t])
 			Storage:C1525.sites[$subDomain_t].form:=New shared collection:C1527()
 		End use 
@@ -62,7 +60,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		
 		If ($analyseForm_b)
 			// On regarde si le formulaire est déjà chargé en mémoire...
-			$formCharge_c:=This:C1470.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
+			$formCharge_c:=Storage:C1525.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
 			If ($formCharge_c.length=0)
 				// Il n'est pas chargé, on doit donc faire le job...
 				
@@ -293,7 +291,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			If ($formCharge_c.length=0)
 				
 				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				This:C1470.sites[$subDomain_t].form.push($form)
 				
 				Use (Storage:C1525.sites[$subDomain_t].form)
 					Storage:C1525.sites[$subDomain_t].form.push(OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form))
@@ -301,8 +298,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=This:C1470.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
-				This:C1470.sites[$subDomain_t].form[$indicesQuery_c[0]]:=$form
+				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].for.indices("source IS :1";$fichiersForm{$numForm})
 				
 				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
 					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form)

@@ -30,7 +30,7 @@ Else
 End if 
 
 // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
-$configInput:=siteForm_c.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
+$configInput:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
 
 If (String:C10($configInput.label)#"")
 	$varNomPublic_t:=$configInput.label

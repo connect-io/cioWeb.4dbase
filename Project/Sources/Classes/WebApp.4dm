@@ -686,7 +686,6 @@ Historique
 	
 	var siteRoute_c : Collection
 	var $info_o : Object
-	var siteForm_c : Collection
 	var siteDataTable_c : Collection
 	var cachePath_t : Text
 	
@@ -700,9 +699,6 @@ Historique
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
 	
 	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
-	
-	// Petit hack pour les formulaires en attendant des jours meilleurs.
-	siteForm_c:=This:C1470.sites[$user_o.sousDomaine].form
 	
 	// Petit hack pour les datatables en attendant des jours meilleurs.
 	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
