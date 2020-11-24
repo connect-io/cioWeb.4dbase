@@ -30,16 +30,13 @@ Historique
 	
 Function entityToForm
 /* -----------------------------------------------------------------------------
- Nom utilisateur (OS) : Alban Catoire <alban@connect-io.fr>
- Date et heure : 23/11/20, 15h00
- ----------------------------------------------------
- Méthode : entityToForm
- Description
- Remplit un formulaire avec les infos d'une entité
+Fonction : User.entityToForm
 	
- Paramètres
- $1 : l'entité dont on charge les infos
- $2 : [text] Nom du formulaire 
+Chargement des information d'une entité dans un form
+Remplace la méthode : cwRecordToForm
+	
+Historique
+23/11/2020 - alban@connect-io.fr - creation
 -----------------------------------------------------------------------------*/
 	
 	var $Form_o : Object
@@ -47,7 +44,8 @@ Function entityToForm
 	var $prefixe_t : Text
 	var $entityNameCalcule_t : Text
 	var $Form_c : Collection
-	var test : Object
+	var $infoAEnregistrer : Variant
+	
 	
 	$Form_c:=New collection:C1472()
 	$Form_o:=New object:C1471()
@@ -79,6 +77,7 @@ Function entityToForm
 			End if 
 			
 			If ($compatible_b)
+				$infoAEnregistrer:=$entity[$entityNameCalcule_t]
 				Case of 
 					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is boolean:K8:9)
 						This:C1470[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t];"1";"0")
@@ -86,7 +85,7 @@ Function entityToForm
 					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is text:K8:3)
 						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
-					: (OB Get type:C1230($entity[$entityNameCalcule_t])=Is real:K8:4)
+					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is real:K8:4)
 						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
 					Else 
