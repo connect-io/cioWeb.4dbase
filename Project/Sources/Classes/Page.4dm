@@ -178,11 +178,6 @@ Historique
 	End for each 
 	
 	
-	// A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
-	var pageWeb : Object
-	pageWeb:=pageWeb_o
-	
-	
 	
 Function cssGetHtmlPath
 /* -----------------------------------------------------------------------------

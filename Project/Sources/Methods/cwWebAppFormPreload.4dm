@@ -224,10 +224,16 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 				End if 
 				
 				If (formInput_o.type="radio")
-					ARRAY OBJECT:C1221(selection_ao;0)
-					If (OB Is defined:C1231(formInput_o;"selection"))
-						OB GET ARRAY:C1229(formInput_o;"selection";selection_ao)
+/* clean code
+ARRAY OBJECT(selection_ao;0)
+If (OB Is defined(formInput_o;"selection"))
+OB GET ARRAY(formInput_o;"selection";selection_ao)
+End if 
+*/
+					If (formInput_o.selection#Null:C1517)
+						formInput_o.selection:=New collection:C1472()
 					End if 
+					
 				End if 
 				
 				

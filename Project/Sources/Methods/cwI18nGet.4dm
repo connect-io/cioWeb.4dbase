@@ -16,7 +16,7 @@ End if
 If (Count parameters=2)
 $O_ressource:=$2
 Else 
-$O_ressource:=OB Get(pageWeb;"i18n")
+$O_ressource:=OB Get(pageWeb_o;"i18n")
 End if 
 
   // Si la ressource existe on l'utilise sinon on renvoie la cle.

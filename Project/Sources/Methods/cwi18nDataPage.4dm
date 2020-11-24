@@ -18,34 +18,34 @@ $O_dataPage:=New object
   // On récupére les data du sous dommaine du site et de la langue qui nous intérresse.
 If (OB Is defined(<>webApp_o.i18n;OB Get(visiteur;"sousDomaine")))
 $O_langueDomaine:=OB Get(<>webApp_o.i18n;OB Get(visiteur;"sousDomaine"))
-If (OB Is defined($O_langueDomaine;String(pageWeb.route.data.lang)))
-$langueFichier:=OB Get($O_langueDomaine;String(pageWeb.route.data.lang))
+If (OB Is defined($O_langueDomaine;String(pageWeb_o.route.data.lang)))
+$langueFichier:=OB Get($O_langueDomaine;String(pageWeb_o.route.data.lang))
 
   // On récupére les data du layout
   // On regarde si un layout existe dans la config du site.
-If (OB Is defined(pageWeb;"layout"))
+If (OB Is defined(pageWeb_o;"layout"))
 
   // On regarde si il y a des infos sur le layout dans l'i18n
-If (OB Is defined($langueFichier;OB Get(pageWeb;"layout")))
+If (OB Is defined($langueFichier;OB Get(pageWeb_o;"layout")))
 
-$O_dataPage:=OB Get($langueFichier;OB Get(pageWeb;"layout"))
+$O_dataPage:=OB Get($langueFichier;OB Get(pageWeb_o;"layout"))
 End if 
 End if 
 
   // On récupére des data de la page html.
 
   // On regarde si il y a des infos sur le layout dans l'i18n
-If (OB Is defined($langueFichier;OB Get(pageWeb;"lib")))
+If (OB Is defined($langueFichier;OB Get(pageWeb_o;"lib")))
 
-$O_dataPage:=cwToolObjectMerge ($O_dataPage;OB Get($langueFichier;OB Get(pageWeb;"lib")))
+$O_dataPage:=cwToolObjectMerge ($O_dataPage;OB Get($langueFichier;OB Get(pageWeb_o;"lib")))
 End if 
 
 
   // On récupére les data additionnelles.
-If (OB Is defined(pageWeb;"i18nAddOn"))
+If (OB Is defined(pageWeb_o;"i18nAddOn"))
 
 ARRAY TEXT($T_i18nAddOn;0)
-OB GET ARRAY(pageWeb;"i18nAddOn";$T_i18nAddOn)
+OB GET ARRAY(pageWeb_o;"i18nAddOn";$T_i18nAddOn)
 
 For ($i;1;Size of array($T_i18nAddOn))
 If (OB Is defined($langueFichier;$T_i18nAddOn{$i}))

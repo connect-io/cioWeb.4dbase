@@ -30,10 +30,10 @@ While ($boucle_b)
 	$debutFin_l:=Position:C15("/";$1;$debutPosition_l)
 	
 	If ($debutFin_l=0)
-		$retour_t:=Choose:C955(pageWeb.lib=Substring:C12($1;$debutPosition_l);$texteRetour_t;"")
+		$retour_t:=Choose:C955(pageWeb_o.lib=Substring:C12($1;$debutPosition_l);$texteRetour_t;"")
 		$boucle_b:=False:C215
 	Else 
-		$retour_t:=Choose:C955(pageWeb.lib=Substring:C12($1;$debutPosition_l;$debutFin_l-$debutPosition_l);$texteRetour_t;"")
+		$retour_t:=Choose:C955(pageWeb_o.lib=Substring:C12($1;$debutPosition_l;$debutFin_l-$debutPosition_l);$texteRetour_t;"")
 	End if 
 	
 	If ($debutFin_l=0) | ($retour_t#"")

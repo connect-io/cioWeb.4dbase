@@ -16,8 +16,8 @@ If (True:C214)  // Déclarations
 	var $i : Integer
 End if 
 
-If (Not:C34(OB Is defined:C1231(pageWeb)))
-	ALERT:C41("L'objet 'pageWeb' n'est pas défini.")
+If (Not:C34(OB Is defined:C1231(pageWeb_o)))
+	ALERT:C41("L'objet 'pageWeb_o' n'est pas défini.")
 Else 
 	If (Count parameters:C259>=1)
 		ARRAY TEXT:C222($jsFileContent;0)
@@ -25,7 +25,7 @@ Else
 			APPEND TO ARRAY:C911($jsFileContent;${$i})
 		End for 
 		
-		OB SET ARRAY:C1227(pageWeb;"jsFile";$jsFileContent)
+		OB SET ARRAY:C1227(pageWeb_o;"jsFile";$jsFileContent)
 	End if 
 End if 
 
