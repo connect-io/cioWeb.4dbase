@@ -21,6 +21,7 @@ End if
 
 $oParent:=$1
 $oFils:=$2
+$oFusion:=New object:C1471()
 
 //On fusionne toutes les cles de 1er niveau.
 OB GET PROPERTY NAMES:C1232($oParent;$cles)
