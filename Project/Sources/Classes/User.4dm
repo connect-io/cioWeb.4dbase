@@ -28,6 +28,8 @@ Historique
 		This:C1470[$propriete_t]:=$1[$propriete_t]
 	End for each 
 	
+	
+	
 Function entityToForm
 /* -----------------------------------------------------------------------------
 Fonction : User.entityToForm
@@ -101,6 +103,31 @@ Historique
 	
 	
 	
+Function formInfo
+/* -----------------------------------------------------------------------------
+Fonction : User.formInfo
+	
+Retourne les informations d'un formulaire.
+	
+Historique
+24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------------------------------- */
+	
+	var $1;$nomForm_t : Text  // Nom du formulaire
+	var $0 : Object  // Information sur le formulaire.
+	
+	ASSERT:C1129(String:C10($1)#"";"Le param $1, ne doit pas être vide.")
+	
+	$nomForm_t:=$1
+	$0:=New object:C1471()
+	
+	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1";$nomForm_t)
+	
+	If ($Form_c.length=1)
+		$0:=$Form_c[0]
+	End if 
+	
+	
 Function getInfo
 /* -----------------------------------------------------------------------------
 Fonction : User.getInfo
@@ -109,8 +136,8 @@ Chargement des éléments sur l'utilisateur / visiteur
 Remplace la méthode : cwVisiteurGetInfo
 	
 Historique
-19/02/15 - gregory@connect-io.fr - Recopie de la methode depuis le composant CioGénérique
-26/10/19 - gregory@connect-io.fr - Passage notation objet
+19/02/15 - Grégory Fromain <gregory@connect-io.fr> - Recopie de la methode depuis le composant CioGénérique
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Passage notation objet
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ------------------------------------------------------------------------------ */
