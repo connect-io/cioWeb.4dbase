@@ -359,7 +359,7 @@ Historique
 		
 		Use (Storage:C1525.eMail)
 			// chargement complet du dossier des models.
-			Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(This:C1470.sourcesPath()+Storage:C1525.eMail.modelPath)
+			Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(This:C1470.sourcesPath())+Storage:C1525.eMail.modelPath
 		End use 
 	End use 
 	
