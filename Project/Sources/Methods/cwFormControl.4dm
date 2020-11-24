@@ -39,7 +39,7 @@ End if
 
 If ($resultat_t="")
 	
-	$resultForm_c:=siteForm_c.query("lib IS :1";$T_nomForm)
+	$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$T_nomForm)
 	
 	Case of 
 		: ($resultForm_c.length=1)

@@ -101,7 +101,6 @@ Historique
 			End if 
 		End if 
 		
-		
 		$routeData:=New object:C1471
 		// Récupération des variables de l'URL
 		$L_nbDeVariableDansUrl:=Size of array:C274($AT_positionTrouvee)
@@ -111,7 +110,8 @@ Historique
 			OB GET PROPERTY NAMES:C1232(pageWeb_o.route.format;$AT_routeFormatCle)
 			
 			For ($t;1;Size of array:C274($AT_positionTrouvee))
-				OB SET:C1220($routeData;$AT_routeFormatCle{$t};Substring:C12(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t}))
+				//OB SET($routeData;$AT_routeFormatCle{$t};Substring(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t}))
+				$routeData[$AT_routeFormatCle{$t}]:=Substring:C12(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t})
 			End for 
 		End if 
 		

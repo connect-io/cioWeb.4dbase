@@ -25,7 +25,7 @@ $formNom_t:=Substring:C12($1;2)
 $formNom_t:=Replace string:C233($formNom_t;"/readOnly";"")
 
 // On retrouve le formulaire
-$resultForm_c:=siteForm_c.query("lib IS :1";$formNom_t)
+$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$formNom_t)
 
 If ($resultForm_c.length=1)
 	formulaire_o:=$resultForm_c[0]

@@ -32,25 +32,31 @@ Function entityToForm
 /* -----------------------------------------------------------------------------
 Fonction : User.entityToForm
 	
-Chargement des information d'une entité dans un form
-Remplace la méthode : cwRecordToForm
+Remplit un formulaire avec les infos d'une entité.
 	
 Historique
-23/11/2020 - alban@connect-io.fr - creation
------------------------------------------------------------------------------*/
+23/11/20 - Alban Catoire alban@connect-io.fr> - Reprise de code en fonction
+23/11/20 - Grégory Fromain <gregory@connect-io.fr> - Clean code
+----------------------------------------------------------------------------- */
+	
+	var $1;$entity : Object  // l'entité dont on charge les infos
+	var $2;$nomForm_t : Text  // Nom du formulaire 
 	
 	var $Form_o : Object
-	var $nomForm_t : Text
 	var $prefixe_t : Text
 	var $entityNameCalcule_t : Text
 	var $Form_c : Collection
-	var $infoAEnregistrer : Variant
+	var $compatible_b : Boolean
+	var $input : Object
 	
+	ASSERT:C1129(Count parameters:C259=2;"Le nombre de paramêtre n'est pas bon.")
+	ASSERT:C1129(Type:C295($2)=Is text:K8:3;"Le param $2, doit être de type text.")
+	
+	$nomForm_t:=$2
+	$entity:=$1
 	
 	$Form_c:=New collection:C1472()
 	$Form_o:=New object:C1471()
-	$nomForm_t:=$2
-	$entity:=$1
 	
 	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1";$nomForm_t)
 	
@@ -70,10 +76,8 @@ Historique
 			Else 
 				$entityNameCalcule_t:=Lowercase:C14(Substring:C12($entityNameCalcule_t;1;1))+Substring:C12($entityNameCalcule_t;2)
 				
-				If ($entity[$entityNameCalcule_t]#Null:C1517)
-					// Dans le cas ou le champ commence par une minuscule.
-					$compatible_b:=True:C214
-				End if 
+				// Dans le cas ou le champ commence par une minuscule.
+				$compatible_b:=$entity[$entityNameCalcule_t]#Null:C1517
 			End if 
 			
 			If ($compatible_b)
@@ -95,6 +99,7 @@ Historique
 			
 		End for each 
 	End if 
+	
 	
 	
 Function getInfo

@@ -43,20 +43,23 @@ For ($i;1;Size of array:C274($cles))
 				OB GET ARRAY:C1229($oParent;$cles{$i};$tParents)
 				OB SET ARRAY:C1227($oFusion;$cles{$i};$tParents)
 			Else 
-				OB SET:C1220($oFusion;$cles{$i};OB Get:C1224($oParent;$cles{$i}))
+				$oFusion[$cles{$i}]:=$oParent[$cles{$i}]
 			End if 
 			
 		: (Not:C34(OB Is defined:C1231($oParent;$cles{$i})))
 			//Ob parent n'existe pas, donc on rajoute celui du fils.
-			OB SET:C1220($oFusion;$cles{$i};OB Get:C1224($oFils;$cles{$i}))
+			//OB SET($oFusion;$cles{$i};OB Get($oFils;$cles{$i}))
+			$oFusion[$cles{$i}]:=$oFils[$cles{$i}]
 			
 		: (OB Get type:C1230($oFils;$cles{$i})=Is object:K8:27) & (OB Get type:C1230($oParent;$cles{$i})=Is object:K8:27)
-			If (OB Is empty:C1297(OB Get:C1224($oFils;$cles{$i}))) & (OB Is empty:C1297(OB Get:C1224($oParent;$cles{$i})))
+			If ($oFils[$cles{$i}]=Null:C1517) & ($oParent[$cles{$i}]=Null:C1517)
 				// Si les 2 objets sont vide, on crée un objet vide.
-				OB SET:C1220($oFusion;$cles{$i};New object:C1471)
+				//OB SET($oFusion;$cles{$i};New object)
+				$oFusion[$cles{$i}]:=New object:C1471()
 			Else 
 				//Du moment qu'ils ont le même type, on prend la valeur du fils
-				OB SET:C1220($oFusion;$cles{$i};cwToolObjectMerge(OB Get:C1224($oParent;$cles{$i});OB Get:C1224($oFils;$cles{$i})))
+				//OB SET($oFusion;$cles{$i};cwToolObjectMerge(OB Get($oParent;$cles{$i});OB Get($oFils;$cles{$i})))
+				$oFusion[$cles{$i}]:=cwToolObjectMerge($oParent[$cles{$i}];$oFils[$cles{$i}])
 			End if 
 			
 		: (OB Get type:C1230($oFils;$cles{$i})=Object array:K8:28) & (OB Get type:C1230($oParent;$cles{$i})=Object array:K8:28)
@@ -80,7 +83,8 @@ For ($i;1;Size of array:C274($cles))
 		Else 
 			// Si objet existe dans les 2 parties, peut importe le type (different de type objet)
 			// On prend l'objet fils.
-			OB SET:C1220($oFusion;$cles{$i};OB Get:C1224($oFils;$cles{$i}))
+			//OB SET($oFusion;$cles{$i};OB Get($oFils;$cles{$i}))
+			$oFusion[$cles{$i}]:=$oFils[$cles{$i}]
 	End case 
 End for 
 
@@ -88,36 +92,41 @@ $0:=$oFusion
 
 
 //*** Test de la méthode ***//
-//C_OBJECT(oParent;oFils;oFusion)
-//C_OBJECT($a;$b)
+/*
+C_OBJECT(oParent;oFils;oFusion)
+C_OBJECT($a;$b)
 
-//OB SET($a;"toto";"tutu";"momo";"mumuPere")
-//OB SET($b;"toto1";"tutu";"momo";"mumuFils")
+$a:=new object("toto";"tutu";"momo";"mumuPere")
+$b:=new object("toto1";"tutu";"momo";"mumuFils")
 
-//OB SET(oParent;"cle1";"val1")
-//OB SET(oParent;"cle2";"val2")
-//OB SET(oParent;"cle3";"val3")
-//OB SET(oParent;"cle4";"val4")
-//OB SET(oParent;"cle5";$a)
+oParent.cle1:="val1"
+oParent.cle2:="val2"
+oParent.cle3:="val3"
+oParent.cle4:="val4"
+oParent.cle5:=$a
 
-//OB SET(oFils;"cle1";"val1bis")
-//OB SET(oFils;"cle2";"val2")
-//OB SET(oFils;"cle3";"val3bis")
-//OB SET(oFils;"cle5";$b)
-//OB SET(oFils;"cle6";1)
+oFils.cle1:="val1bis"
+oFils.cle2:="val2"
+oFils.cle3:="val3bis"
+oFils.cle5:=$b
+oFils.cle6:=1
 
-//oFusion:=cwToolObjectMerge (oParent;oFils)
+oFusion:=cwToolObjectMerge(oParent;oFils)
 
-// Résultat attendu sur oFusion
-//{
-// "cle1" : "val1bis",
-// "cle2" : "val2",
-// "cle3" : "val3bis",
-// "cle4" : "val4",
-// "cle5" : {
-//   "toto1" : "tutu",
-//   "momo" : "mumuFils",
-//   "toto" : ""
-// },
-// "cle6" : 1
-// }
+*/
+
+/*
+ Résultat attendu sur oFusion
+{
+ "cle1" : "val1bis",
+ "cle2" : "val2",
+ "cle3" : "val3bis",
+ "cle4" : "val4",
+ "cle5" : {
+   "toto1" : "tutu",
+   "momo" : "mumuFils",
+   "toto" : ""
+ },
+ "cle6" : 1
+ }
+*/
