@@ -8,6 +8,7 @@ Historique
 09/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
 ----------------------------------------------------------------------------- */
 
 
@@ -28,7 +29,7 @@ $formNom_t:=Replace string:C233($formNom_t;"/readOnly";"")
 $resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$formNom_t)
 
 If ($resultForm_c.length=1)
-	formulaire_o:=$resultForm_c[0]
+	formulaire_o:=OB Copy:C1225($resultForm_c[0])
 	formulaire_o.readOnly:=$1="@/readOnly@"
 	
 Else 

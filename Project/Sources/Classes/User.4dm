@@ -45,9 +45,7 @@ Historique
 	var $2;$nomForm_t : Text  // Nom du formulaire 
 	
 	var $Form_o : Object
-	var $prefixe_t : Text
 	var $entityNameCalcule_t : Text
-	var $Form_c : Collection
 	var $compatible_b : Boolean
 	var $input : Object
 	
@@ -57,19 +55,14 @@ Historique
 	$nomForm_t:=$2
 	$entity:=$1
 	
-	$Form_c:=New collection:C1472()
-	$Form_o:=New object:C1471()
+	$Form_o:=This:C1470.formInfo($nomForm_t)
 	
-	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1";$nomForm_t)
-	
-	If ($Form_c.length=1)
-		$Form_o:=$Form_c[0]
-		$prefixe_t:=$Form_o.inputPrefixe
+	If ($Form_o#Null:C1517)
 		
 		For each ($input;$Form_o.input)
 			$compatible_b:=False:C215
 			
-			$entityNameCalcule_t:=Replace string:C233($input.lib;$prefixe_t;"")
+			$entityNameCalcule_t:=Replace string:C233($input.lib;$Form_o.inputPrefixe;"")
 			
 			If ($entity[$entityNameCalcule_t]#Null:C1517)
 				// Dans le cas ou le champ commence par une majuscule.
@@ -85,13 +78,13 @@ Historique
 			If ($compatible_b)
 				$infoAEnregistrer:=$entity[$entityNameCalcule_t]
 				Case of 
-					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is boolean:K8:9)
+					: (Value type:C1509($entity[$entityNameCalcule_t])=Is boolean:K8:9)
 						This:C1470[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t];"1";"0")
 						
-					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is text:K8:3)
+					: (Value type:C1509($entity[$entityNameCalcule_t])=Is text:K8:3)
 						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
-					: (OB Get type:C1230($entity;$entityNameCalcule_t)=Is real:K8:4)
+					: (Value type:C1509($entity[$entityNameCalcule_t])=Is real:K8:4) | (Value type:C1509($entity[$entityNameCalcule_t])=Is longint:K8:6)
 						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
 						
 					Else 
@@ -120,12 +113,11 @@ Historique
 	ASSERT:C1129(String:C10($1)#"";"Le param $1, ne doit pas être vide.")
 	
 	$nomForm_t:=$1
-	$0:=New object:C1471()
 	
 	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1";$nomForm_t)
 	
 	If ($Form_c.length=1)
-		$0:=$Form_c[0]
+		$0:=OB Copy:C1225($Form_c[0])
 	End if 
 	
 	
