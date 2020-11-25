@@ -42,6 +42,49 @@ visiteur_o:=<>webConfig_o.userNew()
 
 ------------------------------------------------------
 
+## Fonction : entityToForm		
+Chargement des informations d'une entité dans un formulaire 
+
+			
+### Fonctionnement
+```4d
+User.entityToForm($entity, "nomDeMonFormulaire") -> Modifie this
+```
+
+| Paramètre     | Type       | entrée/sortie | Description |
+| ------------- | ---------- | ------------- | ----------- |
+| $entity       | entité     | Entrée         | L'entité dont on charge les infos dans le formulaire|
+| "nomDuFormulaire"      | texte    | Entrée         | Le nom du formulaire à remplir|
+
+### Example
+```4d
+visiteur_o.entityToForm($Article_entity, "formShopArticle")
+```
+
+
+------------------------------------------------------
+
+## Fonction : formInfo	
+Renvoie une copie des information d'un formulaire
+
+			
+### Fonctionnement
+```4d
+User.formInfo("nomDuFormulaire") -> $form_o
+```
+
+| Paramètre     | Type       | entrée/sortie | Description |
+| ------------- | ---------- | ------------- | ----------- |
+| "nomDuFormulaire"      | texte    | Entrée         | Le nom du formulaire à renvoyer|
+
+### Example
+```4d
+$form_o := visiteur_o.formInfo("formShopArticle")
+```
+
+
+------------------------------------------------------
+
 ## Fonction : getInfo			
 Chargement des éléments sur l'utilisateur / visiteur
 Remplace la méthode : cwVisiteurGetInfo
