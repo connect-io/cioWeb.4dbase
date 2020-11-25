@@ -300,7 +300,7 @@ End if
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].for.indices("source IS :1";$fichiersForm{$numForm})
+				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
 				
 				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
 					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form)

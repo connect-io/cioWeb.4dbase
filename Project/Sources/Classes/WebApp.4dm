@@ -946,7 +946,7 @@ Historique
 	
 	MESSAGE:C88("Chargement des datatables..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFuncDataTablePreload
-	//cwI18nLoad 
+	cwI18nLoad
 	
 	Use (Storage:C1525)
 		
