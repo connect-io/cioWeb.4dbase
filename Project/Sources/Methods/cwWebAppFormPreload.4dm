@@ -15,6 +15,7 @@ Historique
 30/08/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion optionnel de la propriété action dans la balise <form>
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+26/10/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug sur le chargement des boutons radios.
 ----------------------------------------------------------------------------- */
 
 // Déclarations
@@ -223,19 +224,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					formInput_o.divClassSubmit:=""
 				End if 
 				
-				If (formInput_o.type="radio")
-/* clean code
-ARRAY OBJECT(selection_ao;0)
-If (OB Is defined(formInput_o;"selection"))
-OB GET ARRAY(formInput_o;"selection";selection_ao)
-End if 
-*/
-					If (formInput_o.selection#Null:C1517)
-						formInput_o.selection:=New collection:C1472()
-					End if 
-					
-				End if 
-				
 				
 				For each ($viewHtml;New collection:C1472("html";"htmlReadOnly"))
 					
@@ -300,7 +288,7 @@ End if
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].for.indices("source IS :1";$fichiersForm{$numForm})
+				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
 				
 				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
 					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form)
