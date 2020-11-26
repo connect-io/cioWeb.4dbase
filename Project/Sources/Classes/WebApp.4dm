@@ -697,6 +697,7 @@ Historique
 	// Informations diverses
 	$info_o:=New object:C1471()
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
+	$info_o.subDomain_t:=$user_o.sousDomaine
 	
 	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
 	
@@ -946,7 +947,11 @@ Historique
 	
 	MESSAGE:C88("Chargement des datatables..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFuncDataTablePreload
+	
+	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
 	cwI18nLoad
+	
+	
 	
 	Use (Storage:C1525)
 		

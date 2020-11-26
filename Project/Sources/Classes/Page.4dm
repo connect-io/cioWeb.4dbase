@@ -41,6 +41,7 @@ Historique
 	This:C1470.user:=$2
 	
 	This:C1470.info:=$3
+	// This info contient le sous domaine -> This.info.subDomain_t
 	
 	$libPageConnexion_t:="userIdentification"
 	
@@ -159,8 +160,15 @@ Historique
 	End if 
 	
 	
+	// Chargement des informations i18n.
+	pageWeb_o.i18n:=New object:C1471()
+	pageWeb_o.i18n:=Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
 	
-	//pageWeb_o.i18n:=cwi18nDataPage 
+	For each ($parentName_t;pageWeb_o.parents)
+		pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
+	End for each 
+	
+	//pageWeb_o.i18n.fr:=cwi18nDataPage 
 	
 	If (OB Is defined:C1231($logErreur_o;"detailErreur"))
 		$logErreur_o.methode:=Current method name:C684
@@ -216,6 +224,28 @@ Historique
 	End if 
 	
 	$0:=$cssContenu_t
+	
+	
+	
+Function cwI18nGet
+/* -----------------------------------------------------------------------------
+Fonction : Page.cwI18nGet
+	
+Historique
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
+26/11/2020 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
+----------------------------------------------------------------------------- */
+	
+	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
+	var $0 : Text  // le text en retour
+	
+	ASSERT:C1129($1#"";"Le param $1 doit être une chaine de caractère non vide.")
+	
+	$0:=String:C10(This:C1470.i18n[$1])
+	// Exemple : Storage.sites.www.I18n.page.fr.index.title
+	If ($0="")
+		$0:="Traduction inconnu : "+$1
+	End if 
 	
 	
 	
