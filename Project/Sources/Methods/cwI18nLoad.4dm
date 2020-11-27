@@ -76,7 +76,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			
 			// Si c'est le 1er chargement de la traduction, on l'ajoute à la collection.
 			Use (Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]])
-				Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]]))
+				Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]])
 			End use 
 			//Else 
 			//Use (Storage.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]][$indicesQuery_c[0]])
