@@ -130,6 +130,8 @@ Historique
 		
 		If (This:C1470.siteRoute_c.query("lib IS '404'").length#0)
 			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS '404'")[0]
+			pageWeb_o.route:=New object:C1471()
+			pageWeb_o.route.data:=New object:C1471()
 			
 			// Gestion de la langue de la page 404
 			pageWeb_o.lib:="404"
@@ -140,7 +142,7 @@ Historique
 			WEB SET HTTP HEADER:C660($champs;$valeurs)
 		Else 
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page 404."
-			cwRedirection301("/")
+			pageWeb_o.redirection301("/")
 		End if 
 	End if 
 	
@@ -385,4 +387,34 @@ Historique
 	$0:=$contenuFichierCorpsHtml_t
 	
 	
+	
+Function redirection301
+/* -----------------------------------------------------------------------------
+Méthode : ogWebRedirection301
+	
+Etabli une redirection 301 http (de type permanante)
+	
+Historique
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+----------------------------------------------------------------------------- */
+	
+	// Déclarations
+	var $1 : Text  // $1 = [texte] nouvelle url
+	
+	ARRAY TEXT:C222($champs;2)
+	ARRAY TEXT:C222($valeurs;2)
+	
+	$champs{1}:="X-STATUS"
+	$valeurs{1}:="301 Moved Permanently, false, 301"
+	$champs{2}:="Location"
+	$valeurs{2}:=$1
+	
+	WEB SET HTTP HEADER:C660($champs;$valeurs)
+	WEB SEND TEXT:C677("redirection")
+	
+	This:C1470.route:=New object:C1471()
+	This:C1470.route.data:=New object:C1471()
+	
+	This:C1470.methode:=New collection:C1472()
+	This:C1470.viewPath:=New collection:C1472()
 	

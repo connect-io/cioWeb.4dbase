@@ -228,7 +228,7 @@ Historique
 	This:C1470.action:=Null:C1517
 	
 	// On redirige vers la page d'index.
-	cwRedirection301(cwLibToUrl("index"))
+	cwHttpRedirect("index")
 	
 	
 	
