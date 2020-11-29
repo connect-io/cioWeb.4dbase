@@ -8,16 +8,15 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
+var $0;$retour_t : Text  // "" ou "active"
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)
-	var $0;$retour_t : Text  // "" ou "active"
-	
-	var $texteRetour_t : Text
-	var $debutPosition_l : Integer
-	var $debutFin_l : Integer
-	var $boucle_b : Boolean
-End if 
+var $texteRetour_t : Text
+var $debutPosition_l : Integer
+var $debutFin_l : Integer
+var $boucle_b : Boolean
+
 
 $texteRetour_t:="active"
 

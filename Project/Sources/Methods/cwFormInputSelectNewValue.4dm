@@ -18,18 +18,17 @@ Struture de la collection
 ]
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Pointer  // ->visiteur
+var $2;$inputName_t : Text  // nom du input html
+var $3;$option_c : Collection  // {"lib" : "valeur"}
+var $4 : Text  // resultat par defaut (optionnel)
 
-If (True:C214)  // Déclarations
-	var $1 : Pointer  // ->visiteur
-	var $2;$inputName_t : Text  // nom du input html
-	var $3;$option_c : Collection  // {"lib" : "valeur"}
-	var $4 : Text  // resultat par defaut (optionnel)
-	
-	var $selectOption_t : Text
-	var $optionSelected_c : Collection
-	var $visiteur : Object
-	var $option_o : Object
-End if 
+var $selectOption_t : Text
+var $optionSelected_c : Collection
+var $visiteur : Object
+var $option_o : Object
+
 
 
 $visiteur:=$1->

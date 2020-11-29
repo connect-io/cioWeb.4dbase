@@ -10,13 +10,11 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // chemin du dossier
+var $0 : Text  // chemin du dossier alias réél
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // chemin du dossier
-	var $0 : Text  // chemin du dossier alias réél
-	
-	var $chemin_t : Text
-End if 
+var $chemin_t : Text
 
 $chemin_t:=$1
 

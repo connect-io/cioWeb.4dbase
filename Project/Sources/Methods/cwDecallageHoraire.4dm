@@ -8,18 +8,17 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $0 : Integer
 
-If (True:C214)  // Déclarations
-	var $0 : Integer
-	
-	var $day_d : Date
-	var $out_l : Integer
-	var $ts_l : Integer
-	var $tsUTC_l : Integer
-	var $hour_h : Time
-	var $ts_t : Text
-	var $tsUTC_t : Text
-End if 
+var $day_d : Date
+var $out_l : Integer
+var $ts_l : Integer
+var $tsUTC_l : Integer
+var $hour_h : Time
+var $ts_t : Text
+var $tsUTC_t : Text
+
 
 $day_d:=Current date:C33
 $hour_h:=Current time:C178

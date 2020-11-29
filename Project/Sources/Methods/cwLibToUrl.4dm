@@ -11,19 +11,18 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // lib de page
+var $2 : Object  // objet de personnalisation de l'URL
+var $0 : Text  // url de la page
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // lib de page
-	var $2 : Object  // objet de personnalisation de l'URL
-	var $0 : Text  // url de la page
-	
-	var $url_t : Text
-	var $libPage_t : Text
-	var $nomVar_t : Text
-	var $formatInput_t : Text
-	var routeVar : Object
-	var $configPage_o : Object
-End if 
+var $url_t : Text
+var $libPage_t : Text
+var $nomVar_t : Text
+var $formatInput_t : Text
+var routeVar : Object
+var $configPage_o : Object
+
 
 $libPage_t:=Choose:C955($1="/@";Substring:C12($1;2);$1)
 

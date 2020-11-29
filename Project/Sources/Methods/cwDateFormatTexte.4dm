@@ -9,15 +9,14 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)
+var $2 : Date  // Date à formater, si inexistant la date sera la date du jour.
+var $0 : Text  // Date formaté
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)
-	var $2 : Date  // Date à formater, si inexistant la date sera la date du jour.
-	var $0 : Text  // Date formaté
-	
-	var $jj_t;$mm_t;$aa_t;$miseEnForme_t : Text
-	var $dateAFormater_d : Date
-End if 
+var $jj_t;$mm_t;$aa_t;$miseEnForme_t : Text
+var $dateAFormater_d : Date
+
 
 ASSERT:C1129(Length:C16($1)#0;"Le contenue du param $1 est vide.")
 

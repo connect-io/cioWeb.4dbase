@@ -9,13 +9,12 @@ Historique
 
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$in : Text  // chaine avec balise
+var $0;$out : Text  // chaine sans balise
 
-If (True:C214)  // Déclarations
-	var $1;$in : Text  // chaine avec balise
-	var $0;$out : Text  // chaine sans balise
-	
-	var $B : Boolean
-End if 
+var $B : Boolean
+
 
 $in:=$1
 $B:=PHP Execute:C1058("";"strip_tags";$out;$in)

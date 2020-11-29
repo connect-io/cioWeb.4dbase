@@ -8,14 +8,13 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // chemin du fichier
+var $0 : Text  // extension
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // chemin du fichier
-	var $0 : Text  // extension
-	
-	var $extension : Text
-	var $i : Integer
-End if 
+var $extension : Text
+var $i : Integer
+
 
 For ($i;Length:C16($1);1;-1)
 	$extension:=Substring:C12($1;$i)

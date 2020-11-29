@@ -8,14 +8,12 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$ressource_o : Object
+var $0 : Object
 
-If (True:C214)  // Déclarations
-	var $1;$ressource_o : Object
-	var $0 : Object
-	
-	var $cle_t : Text
-	var $tampon_t : Text
-End if 
+var $cle_t : Text
+var $tampon_t : Text
 
 $ressource_o:=$1
 

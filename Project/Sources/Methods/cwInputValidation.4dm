@@ -10,17 +10,16 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // Nom du formulaire
+var $2 : Text  // Nom de la variable
+var $0 : Text  // Retour : "ok" ou message d'erreur
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // Nom du formulaire
-	var $2 : Text  // Nom de la variable
-	var $0 : Text  // Retour : "ok" ou message d'erreur
-	
-	var $valeurInput : Text
-	var $retour : Text
-	var $varNomPublic_t : Text
-	var $configInput : Object
-End if 
+var $valeurInput : Text
+var $retour : Text
+var $varNomPublic_t : Text
+var $configInput : Object
+
 
 $retour:="ok"
 If (OB Is defined:C1231(visiteur;String:C10($2)))

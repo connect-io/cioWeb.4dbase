@@ -8,20 +8,19 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;texteIn : Text  // action (Utile seulement pour la methode.)
+var $0;texteOut : Text
 
-If (True:C214)  // Déclarations
-	var $1;texteIn : Text  // action (Utile seulement pour la methode.)
-	var $0;texteOut : Text
-	
-	var car : Text
-	var $car1 : Text
-	var $car2 : Text
-	var $p : Integer
-	var $l : Integer
-	var posTexte : Integer
-	var $fin : Boolean
-	var $tjrsCommentaire : Boolean
-End if 
+var car : Text
+var $car1 : Text
+var $car2 : Text
+var $p : Integer
+var $l : Integer
+var posTexte : Integer
+var $fin : Boolean
+var $tjrsCommentaire : Boolean
+
 
 If (Count parameters:C259=1)
 	

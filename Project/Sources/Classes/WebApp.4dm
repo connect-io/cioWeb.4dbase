@@ -26,11 +26,16 @@ Historique
 	var $source_o : Object  // dossier sources
 	var $subDomain_t : Text  // Nom du sous domaine
 	var $folderSubDomaine_o : Object  // Dossier du sous domaine.
-	var $reponse_o : Object
 	var $resultat_i : Integer
 	
 	Use (Storage:C1525)
 		Storage:C1525.sites:=New shared object:C1526
+		Storage:C1525.config:=New shared object:C1526
+	End use 
+	
+	// Nom de la variable visiteur dans l'application hôte.
+	Use (Storage:C1525.config)
+		Storage:C1525.config.varVisitorName_t:="visiteur_o"
 	End use 
 	
 	This:C1470.config:=New object:C1471
@@ -46,8 +51,7 @@ Historique
 	// Objet des datas pour les sites.
 	This:C1470.sites:=New object:C1471
 	
-	// Nom de la variable visiteur dans l'application hôte.
-	This:C1470.config.varVisitorName_t:="visiteur_o"
+	
 	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
@@ -693,7 +697,6 @@ Historique
 	var siteRoute_c : Collection
 	var $info_o : Object
 	var siteDataTable_c : Collection
-	var cachePath_t : Text
 	
 	$user_o:=$1
 	
@@ -709,9 +712,6 @@ Historique
 	
 	// Petit hack pour les datatables en attendant des jours meilleurs.
 	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
-	
-	// en attendant de faire mieux
-	cachePath_t:=This:C1470.cacheViewSubdomainPath()
 	
 	
 	
@@ -748,7 +748,6 @@ Historique
 	var $route : Object
 	var $routeDefault : Object
 	var $routeFormat : Object
-	var $parentLibPagePrecedent : Text  // Permet de gérer l'héritage des routes.
 	var $parentLibPage : Text  // Permet de gérer l'héritage des routes.
 	var $i_l : Integer  // Permet de gérer l'héritage des fichiers HTML
 	var $methodeNom_t : Text  //  Permet de gérer l'héritage des méthodes de la page
@@ -764,7 +763,6 @@ Historique
 	MESSAGE:C88("Minification du HTML..."+Char:C90(Carriage return:K15:38))
 	This:C1470.htmlMinify()
 	
-	varVisiteurName_t:=This:C1470.config.varVisitorName_t
 	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
@@ -982,7 +980,6 @@ Historique
 	
 	var $options_c : Collection
 	var $option_o : Object
-	var $refProcess_l : Integer
 	var $valideMinute_l : Integer
 	var $creerLe_d : Date
 	var $modifierLe_d : Date

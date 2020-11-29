@@ -8,15 +8,14 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // type erreur
+var $2 : Object  // Message erreur
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // type erreur
-	var $2 : Object  // Message erreur
-	
-	var $chErreur : Text
-	var $nouveauLog : Object
-	ARRAY OBJECT:C1221($logJson;0)
-End if 
+var $chErreur : Text
+var $nouveauLog : Object
+ARRAY OBJECT:C1221($logJson;0)
+
 
 ASSERT:C1129(Length:C16($1)#0;"Le contenue du param $1 est vide.")
 

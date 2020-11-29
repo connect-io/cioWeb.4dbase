@@ -11,15 +11,14 @@ Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // Nom du formulaire html
+var $0 : Text  // Code html du formulaire
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // Nom du formulaire html
-	var $0 : Text  // Code html du formulaire
-	
-	var $resultForm_c : Collection
-	var formulaire_o : Object
-	var $formNom_t : Text
-End if 
+var $resultForm_c : Collection
+var formulaire_o : Object
+var $formNom_t : Text
+
 
 // Nettoyage du param
 $formNom_t:=Substring:C12($1;2)

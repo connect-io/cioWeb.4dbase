@@ -20,7 +20,6 @@ Historique
 
 // Déclarations
 var $numForm : Integer
-var $i : Integer
 var $analyseForm_b : Boolean
 var $indicesQuery_c : Collection
 var $formCharge_c : Collection
@@ -251,7 +250,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 								$selection_c:=formInput_o.selection
 								
 								For each ($option_o;$selection_c)
-									$selected:="<!--#4DIF string("+varVisiteurName_t+"."+formInput_o.lib+")=\""+String:C10($option_o.value)+"\"--> selected <!--#4DELSEIF ("+Choose:C955(Bool:C1537($option_o.selected);"True";"False")+"&("+varVisiteurName_t+"."+formInput_o.lib+"=Null))--> selected<!--#4DENDIF-->"
+									$selected:="<!--#4DIF string("+Storage:C1525.config.varVisitorName_t+"."+formInput_o.lib+")=\""+String:C10($option_o.value)+"\"--> selected <!--#4DELSEIF ("+Choose:C955(Bool:C1537($option_o.selected);"True";"False")+"&("+Storage:C1525.config.varVisitorName_t+"."+formInput_o.lib+"=Null))--> selected<!--#4DENDIF-->"
 									
 									$selectOption_t:=$selectOption_t+\
 										"<option value=\""+String:C10($option_o.value)+"\""+$selected+Choose:C955(Bool:C1537($option_o.disabled);" disabled";"")+">"+\
@@ -261,17 +260,17 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";$selectOption_t)
 								
 							Else 
-								$selectOption:="<!--#4DIF OB Is defined ("+varVisiteurName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
-								$selectOption:=$selectOption+"<!--#4DHTML OB Get("+varVisiteurName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
-								$selectOption:=$selectOption+"<!--#4DELSE-->Impossible de trouver : OB Get("+varVisiteurName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")<!--#4DENDIF-->"
+								$selectOption:="<!--#4DIF OB Is defined ("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
+								$selectOption:=$selectOption+"<!--#4DHTML OB Get("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
+								$selectOption:=$selectOption+"<!--#4DELSE-->Impossible de trouver : OB Get("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")<!--#4DENDIF-->"
 								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";$selectOption)
 							End if 
 							
 						: (formInput_o.type="toggle")
-							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
+							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
 							
 						Else 
-							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+varVisiteurName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
+							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
 					End case 
 					
 					formInput_o[$viewHtml]:=$htmlInputTags_t

@@ -7,11 +7,7 @@
 		]
 	},
 	"Formulaires par défaut": {},
-	"Méthodes projet par défaut": {
-		"methods": [
-			"cwJsSetFile"
-		]
-	},
+	"Méthodes projet par défaut": {},
 	"Tables par défaut": {},
 	"trash": {}
 }

@@ -9,19 +9,18 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Pointer  // visiteur
+var $2 : Text  // nom du formulaire
+var $0 : Object  // etat du formulaire
 
-If (True:C214)  // Déclarations
-	var $1 : Pointer  // visiteur
-	var $2 : Text  // nom du formulaire
-	var $0 : Object  // etat du formulaire
-	
-	var $T_nomForm : Text
-	var $T_prefixe : Text
-	var $resultat_t : Text
-	var $formInput_o : Object
-	var $infoForm_o : Object
-	var $resultForm_c : Collection
-End if 
+var $T_nomForm : Text
+var $T_prefixe : Text
+var $resultat_t : Text
+var $formInput_o : Object
+var $infoForm_o : Object
+var $resultForm_c : Collection
+
 
 visiteur:=$1->
 $T_nomForm:=$2

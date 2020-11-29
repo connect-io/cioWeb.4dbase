@@ -10,11 +10,10 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Text  // Nom de la variable du formulaire web
+var $0 : Text  // Code html du formulaire
 
-If (True:C214)  // Déclarations
-	var $1 : Text  // Nom de la variable du formulaire web
-	var $0 : Text  // Code html du formulaire
-End if 
 
 
 If (OB Is defined:C1231(formulaire_o))

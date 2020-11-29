@@ -10,19 +10,18 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1 : Pointer  //Variable pageWeb de l'application
+var $2 : Text  // Nom du dataTable HTML
+var $3;$source_v : Variant  // Entité selection
+var $0 : Text  // code html
 
-If (True:C214)  // Déclarations
-	var $1 : Pointer  //Variable pageWeb de l'application
-	var $2 : Text  // Nom du dataTable HTML
-	var $3;$source_v : Variant  // Entité selection
-	var $0 : Text  // code html
-	
-	var $pageWeb_o : Object
-	var $resultForm_c : Collection
-	var $dataTable_o : Object
-	var $dataTableNom_t : Text
-	var $information_o;$column_o;dataInBase_o;dataColumn_o : Object
-End if 
+var $pageWeb_o : Object
+var $resultForm_c : Collection
+var $dataTable_o : Object
+var $dataTableNom_t : Text
+var $column_o;dataInBase_o;dataColumn_o : Object
+
 
 $pageWeb_o:=$1->
 

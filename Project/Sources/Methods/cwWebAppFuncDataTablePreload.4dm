@@ -10,17 +10,14 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
-
-If (True:C214)  // Déclarations
-	var $i : Integer
-	var $analyseDataTable_b : Boolean
-	var $dataTableCharge_c : Collection
-	var $indicesQuery_c : Collection
-	var formInput_o : Object
-	var $subDomain_t : Text
-	var $fileSubDomain_c : Collection
-	var $file_o : Object
-End if 
+// Déclarations
+var $analyseDataTable_b : Boolean
+var $dataTableCharge_c : Collection
+var $indicesQuery_c : Collection
+var formInput_o : Object
+var $subDomain_t : Text
+var $fileSubDomain_c : Collection
+var $file_o : Object
 
 
 // Récupération des dataTables

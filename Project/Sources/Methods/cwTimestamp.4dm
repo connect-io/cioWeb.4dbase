@@ -9,15 +9,13 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$date_d : Date  // Date (optionnel)
+var $2 : Time  // Heure (optionnel)
+var $0 : Integer  // Timestamp
 
-If (True:C214)  // Déclarations
-	var $1;$date_d : Date  // Date (optionnel)
-	var $2 : Time  // Heure (optionnel)
-	var $0 : Integer  // Timestamp
-	
-	var $heure_l : Integer
-	var $nbJourSec_l : Integer
-End if 
+var $heure_l : Integer
+var $nbJourSec_l : Integer
 
 
 If (Count parameters:C259=2)

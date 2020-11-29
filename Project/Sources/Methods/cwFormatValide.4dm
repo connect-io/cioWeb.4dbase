@@ -13,15 +13,14 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $0 : Text  // ok, format inconnu, format incorrect
+var $1;$formatNom_t : Text  // format recherché
+var $2;$dataValue_t : Text  // valeur de la data
 
-If (True:C214)  // Déclarations
-	var $0 : Text  // $0 = ok, format inconnu, format incorrect
-	var $1;$formatNom_t : Text  // $1 = format recherché
-	var $2;$dataValue_t : Text  // $2 = valeur de la data
-	
-	var $T_regex : Text
-	var $format_o : Object
-End if 
+var $T_regex : Text
+var $format_o : Object
+
 
 $formatNom_t:=$1
 $dataValue_t:=$2

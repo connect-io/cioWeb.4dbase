@@ -11,11 +11,9 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
-
-If (True:C214)  // Déclarations
-	var $1;$motDePasseClair_t : Text
-	var $0;$motDePasseHash_t : Text
-End if 
+// Déclarations
+var $1;$motDePasseClair_t : Text
+var $0;$motDePasseHash_t : Text
 
 $motDePasseClair_t:=$1
 

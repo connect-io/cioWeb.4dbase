@@ -10,19 +10,18 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$source_t : Text  // Source
+var $2 : Text  // Expression recherché [regex]
+var $3 : Text  // texte à remplacer
+var $0 : Text  // le texte corrigé
 
-If (True:C214)  // Déclarations
-	var $1;$source_t : Text  // Source
-	var $2 : Text  // Expression recherché [regex]
-	var $3 : Text  // texte à remplacer
-	var $0 : Text  // le texte corrigé
-	
-	var $obsolete_t : Text
-	var $position_l : Integer
-	var $pos_trouvee_l : Integer
-	var $long_trouvée_l : Integer
-	var $regexValid_b : Boolean
-End if 
+var $obsolete_t : Text
+var $position_l : Integer
+var $pos_trouvee_l : Integer
+var $long_trouvée_l : Integer
+var $regexValid_b : Boolean
+
 
 $source_t:=$1
 $position_l:=1

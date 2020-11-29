@@ -10,14 +10,13 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$oParent : Object  // Parent
+var $2;$oFils : Object  // Fils
+var $0;$oFusion : Object  // Fusionné
 
-If (True:C214)  // Déclarations
-	var $1;$oParent : Object  // Parent
-	var $2;$oFils : Object  // Fils
-	var $0;$oFusion : Object  // Fusionné
-	
-	ARRAY TEXT:C222($cles;0)
-End if 
+ARRAY TEXT:C222($cles;0)
+
 
 $oParent:=$1
 $oFils:=$2

@@ -9,10 +9,9 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $1;$T_libPage : Text  // lib page
 
-If (True:C214)  // Déclarations
-	var $1;$T_libPage : Text  //$1 : [text] lib page
-End if 
 
 $T_libPage:=$1
 

@@ -9,10 +9,9 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
-If (True:C214)
-	var $1 : Text  // Nom de la classe à renvoyer.
-	var $0 : Object  // Objet de la class
-End if 
+var $1 : Text  // Nom de la classe à renvoyer.
+var $0 : Object  // Objet de la class
+
 
 ASSERT:C1129($1#"";"La variable $1 est vide.")
 

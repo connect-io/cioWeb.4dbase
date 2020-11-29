@@ -11,13 +11,11 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
+// Déclarations
+var $0 : Text  // $0 = [texte] date formatté
+var $1 : Text  // $1= [texte] saisie client
 
-If (True:C214)  // Déclarations
-	var $0 : Text  // $0 = [texte] date formatté
-	var $1 : Text  // $1= [texte] saisie client
-	
-	var $stop_b : Boolean
-End if 
+var $stop_b : Boolean
 
 
 $stop_b:=False:C215

@@ -9,7 +9,6 @@ Historique
 ----------------------------------------------------------------------------- */
 
 // Déclarations
-
 var $1 : Text  // Chemin à controler
 var $2 : Text  // Séparateur à appliquer... Si non utilisé, on utilise la constante "Folder separator"
 var $0 : Text  // Chemin controlé

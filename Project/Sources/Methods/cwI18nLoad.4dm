@@ -7,10 +7,11 @@ Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 ----------------------------------------------------------------------------- */
+
+// Déclarations
 var $analyseTrad_b : Boolean
 var $subDomain_t : Text  // Nom du sous domaine
 var $SplitNomDoc : Collection
-var $type : Text
 
 $SplitNomDoc:=New collection:C1472
 

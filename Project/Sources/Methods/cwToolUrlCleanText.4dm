@@ -10,11 +10,9 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 
-
-If (True:C214)  // Déclarations
-	var $1;$textTempo_t : Text  // $1 : [texte] (Ballon Coeur "Rouge")
-	var $0 : Text  // $0 : [texte] Ballon-coeur-Rouge
-End if 
+// Déclarations
+var $1;$textTempo_t : Text  // $1 : [texte] (Ballon Coeur "Rouge")
+var $0 : Text  // $0 : [texte] Ballon-coeur-Rouge
 
 
 $textTempo_t:=$1
