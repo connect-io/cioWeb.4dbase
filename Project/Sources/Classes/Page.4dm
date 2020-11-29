@@ -196,9 +196,9 @@ Fonction : Page.cssGetHtmlPath
 Renvoi le HTML pour le chargement des fichiers CSS.
 	
 Historique
-19/06/2019 - Grégory Fromain <gregory@connect-io.fr> - Création
-10/02/2020 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
-09/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+19/06/19 - Grégory Fromain <gregory@connect-io.fr> - Création
+10/02/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
+09/09/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
@@ -210,6 +210,9 @@ Historique
 	
 	$cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssPath\">"
 	$cssContenu_t:=""
+	
+	// On ajoute en dernier le custom.css
+	This:C1470.cssPath.push("/<!--4DTEXT visiteur_o.sousDomaine-->/css/custom.css")
 	
 	
 	If (This:C1470.cssPath#Null:C1517)
@@ -235,7 +238,7 @@ Fonction : Page.cwI18nGet
 	
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
-26/11/2020 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
+26/11/20 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
 ----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
@@ -258,8 +261,8 @@ Fonction : Page.jsGetHtmlPath
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
 	
 Historique
-27/07/2020 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
-11/20/2020 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
+27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
+11/20/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
@@ -294,7 +297,7 @@ Fonction : Page.jsInHtml
 Place le contenue du fichier javascript dans le HTML
 	
 Historique
-20/09/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	

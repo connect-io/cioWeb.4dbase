@@ -19,6 +19,7 @@ Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création automatique de custom.css si besoin.
 ----------------------------------------------------------------------------- */
 	
 	
@@ -135,6 +136,11 @@ Historique
 		
 		If (Not:C34($folderSubDomaine_o.folder("css").exists))
 			$folderSubDomaine_o.folder("css").create()
+		End if 
+		
+		// On ajoute un fichier custom.css pour chaque domaine, il sera inséré automatiquement dans chaque page en dernier.
+		If (Not:C34($folderSubDomaine_o.folder("css").file("custom.css").exists))
+			$folderSubDomaine_o.folder("css").file("custom.css").create()
 		End if 
 		
 		If (Not:C34($folderSubDomaine_o.folder("img").exists))
