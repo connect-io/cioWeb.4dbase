@@ -100,8 +100,8 @@ End if
 
 $T_prefixe:=Replace string:C233($infoForm_o.submit;"submit";"")
 // On supprime le prefixe des clés.
-cwToolDeletePrefixKey(visiteur.dataForm;$T_prefixe)
-cwToolDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
+cwToolObjectDeletePrefixKey(visiteur.dataForm;$T_prefixe)
+cwToolObjectDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
 
 // DataFromTyping est renvoyé dans la méthode et dans visiteur... C'est Kdo.
 $0:=visiteur.dataFormTyping

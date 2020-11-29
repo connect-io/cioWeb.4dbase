@@ -153,8 +153,8 @@ End if
 If ($inputValide_t="ok")
 	$T_prefixe:=Replace string:C233($infoForm_o.submit;"submit";"")
 	// On supprime le prefixe des clés.
-	cwToolDeletePrefixKey(visiteur.dataForm;$T_prefixe)
-	cwToolDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
+	cwToolObjectDeletePrefixKey(visiteur.dataForm;$T_prefixe)
+	cwToolObjectDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
 End if 
 
 // Notification du message d'erreur au visiteur.

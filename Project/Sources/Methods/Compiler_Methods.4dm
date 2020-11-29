@@ -109,9 +109,6 @@ C_TEXT:C284(cwLibToUrl;$0)
 C_TEXT:C284(cwLibToUrl;$1)
 C_OBJECT:C1216(cwLibToUrl;$2)
 
-//cwToolDeletePrefixKey
-C_OBJECT:C1216(cwToolDeletePrefixKey;$1)
-C_TEXT:C284(cwToolDeletePrefixKey;$2)
 
 //cwFormInit
 C_TEXT:C284(cwFormInit;$0)
