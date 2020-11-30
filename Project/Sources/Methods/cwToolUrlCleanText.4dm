@@ -23,7 +23,6 @@ $textTempo_t:=Replace string:C233($textTempo_t;"“";"")
 $textTempo_t:=Replace string:C233($textTempo_t;"”";"")
 $textTempo_t:=Replace string:C233($textTempo_t;"«";"")
 $textTempo_t:=Replace string:C233($textTempo_t;"»";"")
-
 $textTempo_t:=Replace string:C233($textTempo_t;"ç";"c")  // fr : Çç
 $textTempo_t:=Replace string:C233($textTempo_t;"Æ";"ae")
 $textTempo_t:=Replace string:C233($textTempo_t;"a";"a")  // fr : ÀÂàâ  es : Áá
@@ -43,6 +42,4 @@ $textTempo_t:=Replace string:C233($textTempo_t;"¿";"")
 $textTempo_t:=Replace string:C233($textTempo_t;"/";"")
 $textTempo_t:=Replace string:C233($textTempo_t;"&";"et")
 
-
 $0:=$textTempo_t
-

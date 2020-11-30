@@ -22,11 +22,16 @@ var $configInput : Object
 
 
 $retour:="ok"
-If (OB Is defined:C1231(visiteur;String:C10($2)))
-	$valeurInput:=String:C10(OB Get:C1224(visiteur;$2))
+
+/*
+If (OB Is defined(visiteur;String($2)))
+$valeurInput:=String(OB Get(visiteur;$2))
 Else 
-	$valeurInput:=""
-End if 
+$valeurInput:=""
+End if
+*/
+
+$valeurInput:=String:C10(visiteur[String:C10($2)])
 
 // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
 $configInput:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
@@ -37,27 +42,31 @@ Else
 	$varNomPublic_t:=$configInput.lib
 End if 
 
-// Gestion required
+// ----- Gestion required -----
 Case of 
-	: ($retour#"ok")
-		// une erreur est deja remonté, on ne fait rien
 	: (Not:C34(OB Is defined:C1231($configInput;"required")))
 		//La cle required n'est pas initialisé, on ne fait rien
+		
 	: (Not:C34(OB Get:C1224($configInput;"required")))
 		//La cle required est initialisé à false, on ne fait rien
+		
 	: ($valeurInput#"")
 		//La valeur est differente de vide, donc tout va bien, on ne fait rien.
+		
 	Else 
 		//Erreur, la valeur est vide !
 		$retour:=$varNomPublic_t+", la variable est vide."
 End case 
 
-// Gestion format
+
+// ----- Gestion format -----
 Case of 
 	: ($retour#"ok")
 		// une erreur est deja remonté, on ne fait rien
+		
 	: ($valeurInput="") | ($valeurInput="nonObligatoire")  // nonObligatoire : petit hack pour certain cas en javascript.
 		//La valeur est vide, donc il y a rien a controler, on ne fait rien.
+		
 	: (Not:C34(OB Is defined:C1231($configInput;"format")))
 		//La cle format n'est pas initialisé, on ne fait rien
 	Else 
@@ -102,8 +111,8 @@ Case of
 		
 End case 
 
-// *** Gestion des differents cas en cas d'input de type : file ***
 
+// ----- Gestion des differents cas en cas d'input de type : file -----
 If (($retour="ok") & ($configInput.type="file"))
 	
 	// On le recherche dans le body part...
@@ -150,16 +159,17 @@ If (($retour="ok") & ($configInput.type="file"))
 				
 		End case 
 	End if 
-	
 End if 
 
 
-// Gestion size
+// ----- Gestion size -----
 Case of 
 	: ($retour#"ok")
 		// une erreur est deja remonté, on ne fait rien
+		
 	: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
 		//La cle blobSize n'est pas initialisé, on ne fait rien
+		
 	Else 
 		var $vPartName : Text
 		var $vPartMimeType : Text
@@ -171,30 +181,36 @@ Case of
 		For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
 			WEB GET BODY PART:C1212($i;$vPartContentBlob;$vPartName;$vPartMimeType;$vPartFileName)
 			Case of 
-				: ($vPartName#OB Get:C1224($configInput;"lib"))
+				: ($vPartName#$configInput.lib)
 					//la variable ne figure pas dans le formulaire."
+					
 				: ($vPartFileName="") & (BLOB size:C605($vPartContentBlob)=0)
 					// L'input n'est pas renseigné dans le formulaire, ne rien faire.
+					
 				: ($vPartFileName="")
 					$retour:=$varNomPublic_t+", le fichier ne semble pas avoir été importé."
 					$i:=WEB Get body part count:C1211  //On sort de la boucle.
+					
 				: (BLOB size:C605($vPartContentBlob)>OB Get:C1224($configInput;"blobSize"))
 					$retour:=$varNomPublic_t+", le fichier est trop gros."
 					$i:=WEB Get body part count:C1211  //On sort de la boucle.
+					
 			End case 
-			
 		End for 
 End case 
 
-// Gestion insertion html
+
+// ----- Gestion insertion html -----
 Case of 
 	: ($retour#"ok")
 		// une erreur est deja remonté, on ne fait rien
+		
 	: (Not:C34(cwInputInjection4DHtmlIsValide($valeurInput)))
 		$retour:="injection de balise html 4D détécté sur le champ : "+String:C10($configInput.lib)
 End case 
 
-// Gestion token
+
+// ----- Gestion token -----
 Case of 
 	: ($retour#"ok")
 		// une erreur est deja remonté, on ne fait rien

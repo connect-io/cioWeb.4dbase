@@ -25,7 +25,7 @@ var $column_o;dataInBase_o;dataColumn_o : Object
 
 $pageWeb_o:=$1->
 
-If ($3=Null:C1517)
+If (String:C10($2)="")
 	ALERT:C41("Le paramêtre $2 (lib) n'est pas défini dans la datatable.")
 End if 
 
@@ -58,13 +58,10 @@ End if
 $dataTable_o.column_c:=New collection:C1472()
 
 For each ($column_o;$dataTable_o.column)
-	
-	//$dataTable_o.column_c.push(New object("title";$column_o.title;"data";$column_o.data))
 	$dataTable_o.column_c.push($column_o)
 End for each 
 
 $dataTable_o.data_c:=New collection:C1472()
-
 
 // On boucle sur chaque élément de la source...
 // Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
@@ -98,12 +95,9 @@ If ($dataTable_o.doubleClick#Null:C1517)
 	$dataTable_o.doubleClick.linkVariable:=Null:C1517
 End if 
 
-
-
 // Pour des raisons de sécurité on efface certaine propriété de l'objet.
 
 $dataTable_o.source:=Null:C1517
-
 $dataTable_o.column:=Null:C1517
 $dataTable_o.data:=Null:C1517
 

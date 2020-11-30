@@ -14,9 +14,7 @@ var $0;$texteOut : Text  // texte en format JSON
 
 
 $texteOut:=$1
-
 $texteOut:=cwToolTextReplaceByRegex($texteOut;"\\/\\*(.*?)\\*\\/";"")
 $texteOut:=cwToolTextReplaceByRegex($texteOut;"[^:\"]\\/\\/(.*?)##r";"##r")
-
 
 $0:=$texteOut

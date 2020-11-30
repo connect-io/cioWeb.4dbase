@@ -34,9 +34,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	// On récupére les modéles d'input
 	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"input.html";"UTF-8")
 	
-	
 	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
-	
 	
 	// On récupére la collection de form du sousDomaine
 	If (Storage:C1525.sites[$subDomain_t].form=Null:C1517)
@@ -44,7 +42,6 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			Storage:C1525.sites[$subDomain_t].form:=New shared collection:C1527()
 		End use 
 	End if 
-	
 	
 	ARRAY TEXT:C222($fichiersForm;0)
 	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)

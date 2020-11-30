@@ -163,14 +163,16 @@ Historique
 	
 	
 	// Chargement des informations i18n.
-	pageWeb_o.i18n:=New object:C1471()
-	pageWeb_o.i18n:=Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
+/*
+pageWeb_o.i18n:=New object()
+pageWeb_o.i18n:=Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
 	
-	For each ($parentName_t;pageWeb_o.parents)
-		pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
-	End for each 
+For each ($parentName_t;pageWeb_o.parents)
+pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
+End for each 
 	
-	//pageWeb_o.i18n.fr:=cwi18nDataPage 
+//pageWeb_o.i18n.fr:=cwi18nDataPage
+*/
 	
 	If (OB Is defined:C1231($logErreur_o;"detailErreur"))
 		$logErreur_o.methode:=Current method name:C684
