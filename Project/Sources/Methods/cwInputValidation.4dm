@@ -34,7 +34,7 @@ End if
 $valeurInput:=String:C10(visiteur[String:C10($2)])
 
 // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
-$configInput:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0]
+$configInput:=OB Copy:C1225(Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0])
 
 If (String:C10($configInput.label)#"")
 	$varNomPublic_t:=$configInput.label
