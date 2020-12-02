@@ -48,6 +48,7 @@ Historique
 	
 	pageWeb_o:=Null:C1517
 	
+	
 	// Cas particulier pour la home du site.
 	If ("/"=visiteur.url)
 		pageWeb_o:=This:C1470.siteRoute_c.query("lib IS index")[0]
@@ -59,6 +60,7 @@ Historique
 			
 			If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
 				pageWeb_o:=$page_o
+				pageWeb_o.info:=$3
 			End if 
 			
 		End for each 
@@ -156,22 +158,8 @@ Historique
 	End if 
 	
 	// Chargement des informations i18n.
-	
-	
 	pageWeb_o.i18n:=This:C1470.siteRoute_c.query("lib IS :1";pageWeb_o.lib)[0].i18n
-	//$traduction:=New object()
-	//if ($traduction.length#0)
-	//pageWeb_o.i18n:=$traduction[0]
-	//End if
 	
-	
-	//pageWeb_o.i18n:=Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
-	//For each ($parentName_t;pageWeb_o.parents)
-	//pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
-	//End for each 
-	
-//pageWeb_o.i18n.fr:=cwi18nDataPage
-*/
 	
 	If (OB Is defined:C1231($logErreur_o;"detailErreur"))
 		$logErreur_o.methode:=Current method name:C684
@@ -191,17 +179,17 @@ Historique
 	
 	
 Function cssGetHtmlPath
-/* -----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 Fonction : Page.cssGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers CSS.
 	
 Historique
-19/06/19 - Grégory Fromain <gregory@connect-io.fr> - Création
-10/02/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
-09/09/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+19/6/19-Grégory Fromain<gregory@connect-io.fr>-Création
+10/2/20-Grégory Fromain<gregory@connect-io.fr>-Mise en place de la boucle for each.
+9/9/20-Grégory Fromain<gregory@connect-io.fr>-Conversion en fonction
+31/10/20-Grégory Fromain<gregory@connect-io.fr>-Déclaration des variables via var
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Domaine du CDN
 	var $0 : Text  // Contenu des fichiers html
@@ -233,14 +221,14 @@ Historique
 	
 	
 	
-Function I18nGet
+Function i18nGet
 /* -----------------------------------------------------------------------------
 Fonction : Page.I18nGet
 	
 Historique
-15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
-26/11/20 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
------------------------------------------------------------------------------ */
+15/8/20-Grégory Fromain<gregory@connect-io.fr>-Mise en veille de l'internalisation
+26/11/20-Alban Catoire<alban@connect-io.fr>-Actualisation avec utilisation de storage
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
 	var $0 : Text  // le text en retour
@@ -255,16 +243,16 @@ Historique
 	
 	
 Function jsGetHtmlPath
-/* -----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 Fonction : Page.jsGetHtmlPath
 	
-Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
+Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page.json
 	
 Historique
-27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
-11/20/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+27/7/20-Grégory Fromain<gregory@connect-io.fr>-Changement du nom de la propriete jsFile en jsPath
+11/20/20-Grégory Fromain<gregory@connect-io.fr>-Conversion en fonction
+31/10/20-Grégory Fromain<gregory@connect-io.fr>-Déclaration des variables via var
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text  // $1 : [texte] domaine du CDN
 	var $0 : Text  // Contenu des chemin JS à insérer dans le HTML.
@@ -291,15 +279,15 @@ Historique
 	
 	
 Function jsInHtml
-/* -----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 Fonction : Page.jsInHtml
 	
 Place le contenue du fichier javascript dans le HTML
 	
 Historique
-20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+20/9/20-Grégory Fromain<gregory@connect-io.fr>-Création
+31/10/20-Grégory Fromain<gregory@connect-io.fr>-Déclaration des variables via var
+-----------------------------------------------------------------------------*/
 	
 	var $0 : Text  // Contenu des fichiers JS à insérer dans le HTML
 	
@@ -331,15 +319,15 @@ Historique
 	
 	
 Function scanBlock
-/* -----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 Fonction : Page.scanBlock
 	
-Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
+Niveau suppreme du template 4D :o) : -p Permet la gestion des blocs dans le HTML.
 	
 Historique
-27/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+27/7/20-Grégory Fromain<gregory@connect-io.fr>-Conversion en fonction
+31/10/20-Grégory Fromain<gregory@connect-io.fr>-Déclaration des variables via var
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text
 	var $0 : Text  // Retourne les élements du fichiers qui ne sont pas dans un block
@@ -392,14 +380,14 @@ Historique
 	
 	
 Function redirection301
-/* -----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 Méthode : ogWebRedirection301
 	
-Etabli une redirection 301 http (de type permanante)
+Etabli une redirection 301 http(de type permanante)
 	
 Historique
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+31/10/20-Grégory Fromain<gregory@connect-io.fr>-Déclaration des variables via var
+-----------------------------------------------------------------------------*/
 	
 	// Déclarations
 	var $1 : Text  // $1 = [texte] nouvelle url

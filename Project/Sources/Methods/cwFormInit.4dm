@@ -9,6 +9,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
+02/12/20 - Alban Catoire alban@connect-io.fr> - Gestion de la traduction dans les formulaires
 ----------------------------------------------------------------------------- */
 
 // Déclarations
@@ -34,7 +35,6 @@ If ($resultForm_c.length=1)
 Else 
 	formulaire_o:=New object:C1471()
 End if 
-
 
 //On utilisera la variable "formulaire_o" aussi pour l'appel des inputs html.
 

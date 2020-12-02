@@ -32,4 +32,6 @@ Else
 	$0:="Aucun formulaire est initialisé."
 End if 
 
+$0:=cwI18nConvertJson($0)
+
 // TODO : Penser à faire une gestion des erreurs.
