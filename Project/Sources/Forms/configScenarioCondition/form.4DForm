@@ -1,0 +1,427 @@
+﻿{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onValidate"
+	],
+	"windowTitle": "Configuration des condtions du scénario",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"imageMale": {
+					"type": "input",
+					"left": 14,
+					"top": 48,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageMale",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageMale.4dm"
+				},
+				"imageFemale": {
+					"type": "input",
+					"left": 83,
+					"top": 48,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageFemale",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageFemale.4dm"
+				},
+				"Texte": {
+					"type": "text",
+					"text": "Choix du sexe :",
+					"top": 20,
+					"left": 14,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"imageMaleFemale": {
+					"type": "input",
+					"left": 152,
+					"top": 48,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageMaleFemale",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageMaleFemale.4dm"
+				},
+				"Texte1": {
+					"type": "text",
+					"text": "Tranche d'âge :",
+					"top": 95,
+					"left": 14,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"Texte2": {
+					"type": "text",
+					"text": "De",
+					"top": 123,
+					"left": 14,
+					"width": 28,
+					"height": 15
+				},
+				"ageMinimum": {
+					"type": "input",
+					"left": 46,
+					"top": 123,
+					"width": 45,
+					"height": 15,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.scenarioDetail.condition.ageMinimum"
+				},
+				"Texte3": {
+					"type": "text",
+					"text": "À",
+					"top": 123,
+					"left": 109,
+					"width": 14,
+					"height": 16
+				},
+				"ageMaximum": {
+					"type": "input",
+					"left": 139,
+					"top": 123,
+					"width": 45,
+					"height": 15,
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.scenarioDetail.condition.ageMaximum"
+				},
+				"Texte4": {
+					"type": "text",
+					"text": "Rang : ",
+					"top": 152,
+					"left": 14,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"rang": {
+					"type": "ruler",
+					"left": 14,
+					"top": 181,
+					"width": 142,
+					"height": 28,
+					"max": 5,
+					"events": [
+						"onDataChange"
+					],
+					"min": 0,
+					"dataSource": "Form:C1466.scenarioDetail.condition.rang",
+					"labelsPlacement": "bottom",
+					"showGraduations": true,
+					"graduationStep": 1
+				},
+				"Texte5": {
+					"type": "text",
+					"text": "Adresse email existante :",
+					"top": 236,
+					"left": 14,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"imageEmail": {
+					"type": "input",
+					"left": 14,
+					"top": 263,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageEmail",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageEmail.4dm"
+				},
+				"Texte6": {
+					"type": "text",
+					"text": "Date mail cliqué :",
+					"top": 20,
+					"left": 225,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"Texte7": {
+					"type": "text",
+					"text": "Du",
+					"top": 50,
+					"left": 225,
+					"width": 28,
+					"height": 15
+				},
+				"dateDebutMailClique": {
+					"type": "subform",
+					"top": 45,
+					"left": 257,
+					"width": 138,
+					"height": 25,
+					"dataSource": "dateDebutMailClique",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateEntry",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dateDebutMailClique.4dm",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					]
+				},
+				"Texte8": {
+					"type": "text",
+					"text": "Au",
+					"top": 84,
+					"left": 225,
+					"width": 28,
+					"height": 15
+				},
+				"dateFinMailClique": {
+					"type": "subform",
+					"top": 79,
+					"left": 257,
+					"width": 138,
+					"height": 25,
+					"dataSource": "dateFinMailClique",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateEntry",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dateFinMailClique.4dm",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					]
+				},
+				"Texte9": {
+					"type": "text",
+					"text": "Date mail ouvert :",
+					"top": 125,
+					"left": 225,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"Texte10": {
+					"type": "text",
+					"text": "Du",
+					"top": 155,
+					"left": 225,
+					"width": 28,
+					"height": 15
+				},
+				"dateDebutMailOuvert": {
+					"type": "subform",
+					"top": 150,
+					"left": 257,
+					"width": 138,
+					"height": 25,
+					"dataSource": "dateDebutMailOuvert",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateEntry",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dateDebutMailOuvert.4dm",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					]
+				},
+				"Texte11": {
+					"type": "text",
+					"text": "Au",
+					"top": 189,
+					"left": 225,
+					"width": 28,
+					"height": 15
+				},
+				"dateFinMailOuvert": {
+					"type": "subform",
+					"top": 184,
+					"left": 257,
+					"width": 138,
+					"height": 25,
+					"dataSource": "dateFinMailOuvert",
+					"dataSourceTypeHint": "date",
+					"detailForm": "DateEntry",
+					"hideFocusRing": true,
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/dateFinMailOuvert.4dm",
+					"events": [
+						"onLoad",
+						"onDataChange"
+					]
+				},
+				"Texte12": {
+					"type": "text",
+					"text": "Désabonnement :",
+					"top": 236,
+					"left": 225,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"imageDesabonnement": {
+					"type": "input",
+					"left": 225,
+					"top": 263,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageDesabonnement",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageDesabonnement.4dm"
+				},
+				"Bouton": {
+					"type": "button",
+					"text": "Valider",
+					"top": 316,
+					"left": 104,
+					"width": 202,
+					"height": 30,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Bouton.4dm"
+				},
+				"refreshDateDebutMailClique": {
+					"type": "pictureButton",
+					"left": 403,
+					"top": 45,
+					"width": 25,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"picture": "/RESOURCES/Images/refresh.png",
+					"method": "ObjectMethods/refreshDateDebutMailClique.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"refreshDateFinMailClique": {
+					"type": "pictureButton",
+					"left": 403,
+					"top": 79,
+					"width": 25,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"picture": "/RESOURCES/Images/refresh.png",
+					"method": "ObjectMethods/refreshDateFinMailClique.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"refreshDateDebutMailOuvert": {
+					"type": "pictureButton",
+					"left": 403,
+					"top": 150,
+					"width": 25,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"picture": "/RESOURCES/Images/refresh.png",
+					"method": "ObjectMethods/refreshDateDebutMailOuvert.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"refreshDateFinMailOuvert": {
+					"type": "pictureButton",
+					"left": 403,
+					"top": 184,
+					"width": 25,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"picture": "/RESOURCES/Images/refresh.png",
+					"method": "ObjectMethods/refreshDateFinMailOuvert.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				}
+			}
+		}
+	],
+	"geometryStamp": 176,
+	"method": "method.4dm"
+}

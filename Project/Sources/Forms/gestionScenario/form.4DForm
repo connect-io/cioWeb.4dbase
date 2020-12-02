@@ -1,0 +1,571 @@
+﻿{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onLosingFocus"
+	],
+	"windowTitle": "Gestion des scénarios",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 58,
+					"left": 718,
+					"width": 214,
+					"height": 567,
+					"fill": "transparent"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 58,
+					"left": 213,
+					"width": 214,
+					"height": 567,
+					"fill": "transparent"
+				},
+				"scenarioDetailBoutonSauvegarder": {
+					"type": "button",
+					"text": "Sauvegarder le scénario",
+					"top": 639,
+					"left": 257,
+					"width": 170,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioDetailBoutonSauvegarder.4dm"
+				},
+				"scenarioListeBoutonSupprimer": {
+					"type": "button",
+					"text": "-",
+					"top": 639,
+					"left": 106,
+					"width": 37,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioListeBoutonSupprimer.4dm"
+				},
+				"scenarioListeBoutonAjout": {
+					"type": "button",
+					"text": "+",
+					"top": 639,
+					"left": 143,
+					"width": 37,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioListeBoutonAjout.4dm"
+				},
+				"sceneDetailBoutonSauvegarder": {
+					"type": "button",
+					"text": "Sauvegarder la scène",
+					"top": 639,
+					"left": 762,
+					"width": 170,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/sceneDetailBoutonSauvegarder.4dm"
+				},
+				"Texte4": {
+					"type": "text",
+					"text": "Gestion des scénarios",
+					"top": 19,
+					"left": 20,
+					"width": 179,
+					"height": 19,
+					"fontWeight": "bold",
+					"fontSize": 16
+				},
+				"scenarioDetailBoutonAppliquer": {
+					"type": "button",
+					"text": "Appliquer le scénario",
+					"top": 671,
+					"left": 257,
+					"width": 170,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioDetailBoutonAppliquer.4dm"
+				},
+				"scenarioDetailPersonnePossibleChaine": {
+					"type": "input",
+					"left": 221,
+					"top": 561,
+					"width": 156,
+					"height": 26,
+					"dataSource": "Form:C1466.scenarioPersonnePossible",
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontSize": 10
+				},
+				"scenarioDetailPersonnePossible": {
+					"type": "button",
+					"text": "Voir",
+					"top": 558,
+					"left": 383,
+					"width": 36,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioDetailPersonnePossible.4dm"
+				},
+				"scenarioDetailPersonneEnCoursChaine": {
+					"type": "input",
+					"left": 221,
+					"top": 589,
+					"width": 156,
+					"height": 14,
+					"dataSource": "Form:C1466.scenarioPersonneEnCours",
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontSize": 10
+				},
+				"Personnes possible scene": {
+					"type": "input",
+					"left": 724,
+					"top": 553,
+					"width": 151,
+					"height": 17
+				},
+				"scenarioDetailPersonneEnCours": {
+					"type": "button",
+					"text": "Voir",
+					"top": 586,
+					"left": 383,
+					"width": 36,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/scenarioDetailPersonneEnCours.4dm"
+				},
+				"Bouton9": {
+					"type": "button",
+					"text": "Voir",
+					"top": 550,
+					"left": 887,
+					"width": 36,
+					"height": 23,
+					"events": [
+						"onClick"
+					]
+				},
+				"scenarioListe": {
+					"type": "listbox",
+					"left": 20,
+					"top": 58,
+					"width": 160,
+					"height": 567,
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.scenario",
+					"currentItemSource": "Form:C1466.ScenarioCurrentElement",
+					"currentItemPositionSource": "Form:C1466.ScenarioCurrentPosition",
+					"selectedItemsSource": "Form:C1466.ScenarioSelectedElement",
+					"fill": "automatic",
+					"scrollbarHorizontal": "hidden",
+					"rowHeight": "30px",
+					"verticalAlign": "middle",
+					"method": "ObjectMethods/scenarioListe.4dm",
+					"selectionMode": "single",
+					"columns": [
+						{
+							"header": {
+								"text": "Sélection des scénarios",
+								"name": "Entête1"
+							},
+							"name": "Nom",
+							"footer": {
+								"name": "Pied1"
+							},
+							"maxWidth": 145,
+							"width": 145,
+							"dataSource": "This:C1470.nom",
+							"textAlign": "center",
+							"enterable": false,
+							"wordwrap": "normal",
+							"pictureFormat": "proportionalCenter"
+						}
+					]
+				},
+				"scenarioDetailNom": {
+					"type": "input",
+					"left": 223,
+					"top": 125,
+					"width": 195,
+					"height": 17,
+					"contextMenu": "automatic",
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.scenarioDetail.nom",
+					"keyboardDialect": "fr",
+					"spellcheck": true,
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Texte1": {
+					"type": "text",
+					"text": "Information sur le scénario séléctionné.",
+					"top": 63,
+					"left": 223,
+					"width": 195,
+					"height": 31,
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"Texte": {
+					"type": "text",
+					"text": "Nom",
+					"top": 102,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"scenarioDetailObjectif": {
+					"type": "input",
+					"left": 223,
+					"top": 175,
+					"width": 195,
+					"height": 33,
+					"contextMenu": "automatic",
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.scenarioDetail.objectif"
+				},
+				"Texte7": {
+					"type": "text",
+					"text": "Objectif",
+					"top": 152,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"scenarioDetailDescription": {
+					"type": "input",
+					"left": 223,
+					"top": 240,
+					"width": 195,
+					"height": 129,
+					"contextMenu": "automatic",
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.scenarioDetail.description"
+				},
+				"Texte8": {
+					"type": "text",
+					"text": "Description",
+					"top": 217,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"Texte9": {
+					"type": "text",
+					"text": "Actif",
+					"top": 379,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"scenarioDetailActif": {
+					"type": "checkbox",
+					"text": "",
+					"top": 402,
+					"left": 223,
+					"width": 23,
+					"height": 17,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.scenarioDetail.actif",
+					"dataSourceTypeHint": "boolean"
+				},
+				"Texte10": {
+					"type": "text",
+					"text": "Condition",
+					"top": 429,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"scenarioDetailCondition": {
+					"type": "button",
+					"text": "Définir les conditions",
+					"top": 452,
+					"left": 234,
+					"width": 173,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "regular",
+					"method": "ObjectMethods/scenarioDetailCondition.4dm"
+				},
+				"sceneListe": {
+					"type": "listbox",
+					"left": 465,
+					"top": 58,
+					"width": 215,
+					"height": 565,
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.scene",
+					"currentItemSource": "Form:C1466.SceneCurrentElement",
+					"currentItemPositionSource": "Form:C1466.SceneCurrentPosition",
+					"selectedItemsSource": "Form:C1466.SceneSelectedElement",
+					"fill": "automatic",
+					"scrollbarHorizontal": "hidden",
+					"rowHeight": "30px",
+					"verticalAlign": "middle",
+					"method": "ObjectMethods/sceneListe.4dm",
+					"selectionMode": "single",
+					"columns": [
+						{
+							"header": {
+								"text": "Sélection des scènes",
+								"name": "Entête2"
+							},
+							"name": "Nom1",
+							"footer": {
+								"name": "Pied2"
+							},
+							"maxWidth": 200,
+							"width": 200,
+							"dataSource": "This:C1470.nom",
+							"textAlign": "center",
+							"enterable": false,
+							"wordwrap": "normal",
+							"pictureFormat": "proportionalCenter"
+						}
+					]
+				},
+				"sceneListeBoutonSupprimer": {
+					"type": "button",
+					"text": "-",
+					"top": 639,
+					"left": 606,
+					"width": 37,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/sceneListeBoutonSupprimer.4dm"
+				},
+				"sceneListeBoutonAjout": {
+					"type": "button",
+					"text": "+",
+					"top": 639,
+					"left": 643,
+					"width": 37,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/sceneListeBoutonAjout.4dm"
+				},
+				"Texte2": {
+					"type": "text",
+					"text": "Information sur la scène séléctionnée.",
+					"top": 63,
+					"left": 724,
+					"width": 195,
+					"height": 31,
+					"borderStyle": "none",
+					"fontWeight": "bold"
+				},
+				"sceneDetailNom": {
+					"type": "input",
+					"left": 728,
+					"top": 125,
+					"width": 195,
+					"height": 17,
+					"contextMenu": "automatic",
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.sceneDetail.nom",
+					"keyboardDialect": "fr",
+					"spellcheck": true,
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Texte3": {
+					"type": "text",
+					"text": "Nom",
+					"top": 102,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"sceneDetailAction": {
+					"type": "input",
+					"left": 728,
+					"top": 175,
+					"width": 195,
+					"height": 33,
+					"contextMenu": "automatic",
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.sceneDetail.action",
+					"keyboardDialect": "fr",
+					"spellcheck": true,
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Texte11": {
+					"type": "text",
+					"text": "Action",
+					"top": 152,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"Texte12": {
+					"type": "text",
+					"text": "Condition d'action",
+					"top": 275,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"sceneDetailConditionAction": {
+					"type": "button",
+					"text": "Définir les conditions d'action",
+					"top": 298,
+					"left": 728,
+					"width": 195,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "regular",
+					"method": "ObjectMethods/sceneDetailConditionAction.4dm"
+				},
+				"Texte13": {
+					"type": "text",
+					"text": "Condition de saut",
+					"top": 333,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"sceneDetailConditionSaut": {
+					"type": "button",
+					"text": "Définir les conditions de saut",
+					"top": 356,
+					"left": 728,
+					"width": 195,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "regular",
+					"method": "ObjectMethods/sceneDetailConditionSaut.4dm"
+				},
+				"sceneDetailPersonneEnCoursChaine": {
+					"type": "input",
+					"left": 725,
+					"top": 589,
+					"width": 156,
+					"height": 14,
+					"dataSource": "Form:C1466.scenePersonneEnCours",
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontSize": 10
+				},
+				"sceneDetailPersonneEnCours": {
+					"type": "button",
+					"text": "Voir",
+					"top": 586,
+					"left": 887,
+					"width": 36,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/sceneDetailPersonneEnCours.4dm"
+				},
+				"Texte5": {
+					"type": "text",
+					"text": "Configuration",
+					"top": 487,
+					"left": 223,
+					"width": 195,
+					"height": 16
+				},
+				"scenarioDetailDecor": {
+					"type": "button",
+					"text": "Définir la configuration",
+					"top": 510,
+					"left": 234,
+					"width": 173,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "regular",
+					"method": "ObjectMethods/scenarioDetailDecor.4dm"
+				},
+				"Texte6": {
+					"type": "text",
+					"text": "Paramètre de la scène",
+					"top": 217,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"sceneDetailConditionAction1": {
+					"type": "button",
+					"text": "Définir les paramètres",
+					"top": 240,
+					"left": 728,
+					"width": 195,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "regular",
+					"method": "ObjectMethods/sceneDetailConditionAction1.4dm"
+				}
+			}
+		}
+	],
+	"geometryStamp": 374,
+	"method": "method.4dm"
+}
