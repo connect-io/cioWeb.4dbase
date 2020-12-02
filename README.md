@@ -32,7 +32,9 @@ Les méthodes outils
 
 ## Classes
 
-* [dataTable](Documentation/Classes/dataTable.md)
-* [page](Documentation/Classes/page.md)
-* [user](Documentation/Classes/user.md)
-* [webApp](Documentation/Classes/route.md)
+* [DataTable](Documentation/Classes/DataTable.md)
+* [EMail](Documentation/Classes/EMail.md)
+* [Page](Documentation/Classes/Page.md)
+* [TinyPng](Documentation/Classes/TinyPng.md)
+* [User](Documentation/Classes/User.md)
+* [WebApp](Documentation/Classes/Route.md)

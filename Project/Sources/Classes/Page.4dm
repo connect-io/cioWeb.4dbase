@@ -31,7 +31,6 @@ Historique
 	var $routeData : Object
 	var $logErreur_o : Object
 	var $libPageConnexion_t : Text
-	var $B_estMethodeValide : Boolean
 	ARRAY LONGINT:C221($AT_positionTrouvee;0)
 	ARRAY LONGINT:C221($AT_longueurTrouvee;0)
 	ARRAY TEXT:C222($AT_routeFormatCle;0)
@@ -47,19 +46,14 @@ Historique
 	
 	$logErreur_o:=New object:C1471
 	
-	$B_estMethodeValide:=True:C214
-	
 	pageWeb_o:=Null:C1517
 	
 	// Cas particulier pour la home du site.
-	If ($B_estMethodeValide)
-		If ("/"=visiteur.url)
-			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS index")[0]
-			
-		End if 
+	If ("/"=visiteur.url)
+		pageWeb_o:=This:C1470.siteRoute_c.query("lib IS index")[0]
 	End if 
 	
-	If ($B_estMethodeValide) & (pageWeb_o=Null:C1517)
+	If (pageWeb_o=Null:C1517)
 		
 		For each ($page_o;This:C1470.siteRoute_c.query("lib IS NOT index")) Until (pageWeb_o#Null:C1517)
 			
