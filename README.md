@@ -19,8 +19,8 @@ Malgré que ce composant tourne en production sur certaines bases de nos clients
 * [Commencer](Documentation/commencer.md)
 * [Gestion des routes](Documentation/route.md)
 * [Les vues](Documentation/vue.md)
+* [Les formulaires web](Documentation/form.md)
 * [Le javascript](Documentation/javascript.md)
-* [Utilisation des formulaires web](Documentation/form.md)
 * [Utilisation des tableaux de données](Documentation/datatable.md)
 
 ## Documentation des méthodes partagés

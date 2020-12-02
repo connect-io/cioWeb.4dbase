@@ -1,19 +1,18 @@
 ﻿# Gestion des formulaires
 
 ## Description
-Les fichiers ```.form.json``` permettend la gestion des formulaires HTML.
+Les fichiers ```.form.json``` permettent la gestion des formulaires HTML.
 
 ## Prérequis
-* La conpréhension des routes est requise.
+* La compréhension des routes est requise.
 * La compréhension des views est requise.
 
-# Initialiser notre fichier form
+Les fichiers de configuration des formulaires sont au format JSON (ou JSONC). Il est nécessaire de créer un fichier par formulaire et son emplacement est libre dans le dossier ```Sources```.
 
-Les fichiers de configuration des formulaires sont au format JSON (ou JSONC). Il est nécessaire de créer un fichier par formulaire et son emplacement est libre dans le dossier source.
-
+# Exemple d'utilisation d'un formulaire web
 Voici un exemple de fichier de configuration JSON permettant à un utilisateur de modifier son mot de passe.
 
-Extrait d'une configuration d'une route.
+Extrait d'une configuration d'une route :
 ```jsonc
 // Nom du fichier :  WebApp/Sources/www/user/route.jsonc
 "userParametre": {                                   // Nom de la route
@@ -28,18 +27,18 @@ Extrait d'une configuration d'une route.
         "user/view/parametre.html"                   // Emplacement du fichier HTML
     ],
     "methode": [
-        "wpTmUserParametre"                          // La méthode qui sera éxécuté par 4D.
+        "wpTmUserParametre"                          // La méthode qui est exécutée par 4D.
     ]
 }
 ```
-Configuration proprement dit du formulaire :
+Configuration du formulaire :
 ```jsonc
 // Nom du fichier :  WebApp/Sources/www/user/form/parametre.form.jsonc
 {
     "lib": "formUserParametre",                      // Nom du formulaire
-    "class": "m-t",                                  // Class dans l'on insere dans la balise <form>
+    "class": "m-t",                                  // Class que l'on insère dans la balise <form>
     "action": "userParametre",                       // Route (URL) de validation du formulaire
-    "method": "POST",                                // Methode de transfert des data du formulaire
+    "method": "POST",                                // Méthode de transfert des données du formulaire
     "input": [                                       // Détail des entrées du formulaire
         {
             "lib": "upMotDePasseActuel",             // Nom de l'input du formulaire
@@ -63,13 +62,13 @@ Configuration proprement dit du formulaire :
             "required": true
         },
         {
-            "lib": "token"                           // Le token permet de valider l'autenticité de la demande.
+            "lib": "token"                           // Le token permet de valider l'authenticité de la demande.
         },
         {
             "lib": "upSubmit",                       // Configuration du bouton submit.
             "type": "submit",
-            "class": "btn btn-large",                // Class qui ser intégré dans le HTML de l'input.
-            "divClassSubmit": "text-right",          // Class parent qui ser intégré dans le HTML.
+            "class": "btn btn-large",                // Class qui est intégré dans le HTML de l'input.
+            "divClassSubmit": "text-right",          // Class parent qui est intégré dans le HTML.
             "value": "Modifier mon mot de passe"     // Texte affiché dans le bouton de validation.
         }
     ]
@@ -147,7 +146,7 @@ Rendu Visuel dans un navigateur :
 
 ![Demo formulaire 1](images/formDemo1.png "Demo formulaire 1")
 
-Voici maintenant le traitement qui peut être fait dans la méthode 4D de ma route du formulaire : wpTmUserParametre
+Voici maintenant le traitement qui peut être réalisé dans la méthode 4D de ma route du formulaire : ```wpTmUserParametre```
 
 ```4d
 C_OBJECT($contactAcces_o;$societe_o)
@@ -197,13 +196,13 @@ If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
     End if 
     
     If (visiteur_o.notificationError="")
-        // Tout les controles sont passé... On prend en compte la modification du mot de passe.
+        // tous les controles sont passé... On prend en compte la modification du mot de passe.
         //$contactAcces_o.HashPasswordOld:=$contactAcces_o.HashPassword
         $contactAcces_o.HashPassword:=weboHashMotDePasse(visiteur_o.dataForm.motDePasseNouveau)
         $contactAcces_o.DernierChangementPass:=Current date
         $contactAcces_o.save()
         
-        // Pour des raisons de sécurité on supprimer les variables sur le mot de passe.
+        // Pour des raisons de sécurité on supprime les variables sur le mot de passe.
         OB REMOVE(visiteur_o;"upMotDePasseActuel")
         OB REMOVE(visiteur_o;"upMotDePasseNouveau")
         OB REMOVE(visiteur_o;"upMotDePasseConfirmation")
@@ -220,16 +219,16 @@ If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
 End if 
 ```
 
-# Remplissage de "input"
+# Configuration des différents type d'"input"
 
-Après avoir créé le docmuent il faut remplir la partie **input** qui contient nos variables.
+Lors de la configuration d'un formulaire, il faut renseigner la collection ```input``` permettant de définir le comportement et l'apparance des entrée HTML.
 
-Dans sa forme la plus basique, une variable aura la forme suivante :
+Dans sa forme la plus basique, une entrée du formulaire aura la forme suivante :
 
 ```json
 
 {
-    "lib": "pdVariable1",
+    "lib": "upVariable1",
     "type": "text",
     "label": "C'est la variable 1",
     "colLabel": 4
@@ -237,100 +236,85 @@ Dans sa forme la plus basique, une variable aura la forme suivante :
 
 ```
 
-Le **lib** sera le nom de notre variable. Généralement, on choisit les premières lettres du lib de notrefichier (ici PageDetail donc pd). 
+Le ```lib``` est le nom de notre variable. Généralement, on définit les premières lettres du lib de chaque input par les initiales de notre formualaire. (ici formUserParametre donc up). 
 
-Il y a aussi le **label** qui sera un texte qui s'affichera notre élément (zone de complétion, menu déroulant, etc) il permet de donner des infos à l'utilisateur sur ce qu'il doit faire.
+Le ```label``` est le texte qui s'affiche pour renseigner sur la nature des données à saisir dans l'input.
 
-Il y a ensuite le **collabel** qui permet de gérer l'espace entre le label et notre élément. C'est un entier comprit entre 0 et 12.
+Le ```collabel``` organise l'espace entre le label et l'input HTML. C'est un entier comprit entre 0 et 12.
 
-Enfin, il y a le **type** qui permet de choisir le type de varaible. Cela peut être une zone de texte ou bien un menu déroulant, une case à cocher ou encore un élément cacher.
+Enfin, le ```type``` définit le type de variable. Une zone de texte, un menu déroulant, une case à cocher ou encore un élément cacher.
+Voici un tableau regroupant les différentes valeur que peut prendre ```type``` :
 
-On peut donc utiliser:
-* **text** pour une zone de texte
-* **textarea** pour une zone de texte de taille plus importante
-* **select** pour un menu déroulant
-dans ce cas il faut rajouter:
-```json
-"selection": [
-    {
-        "lib": "choix1",
-        "value": "0"
-    },
-    {
-        "lib": "choix2",
-        "value": "1"
-    }
-]
-```
-Pour les values, elles se retrouvent dans 4D.
-* **checkbox** pour une case à cocher
-Il en existe d'autres qui se retrouve facilement sur internet.
+| Nom de la propriété | Element nécessaire dans input | Element facultatif dans input                          | Commentaire |
+| ------------------- | ------------------------------| ------------------------------------------------------ | ----------- |
+| text                |                               | append, label, collabel, class, clientDisabled, append | Input de type texte|
+| textarea            |                               | label, collabel, clientDisabled, class                 | Input de type texte multi-lignes.<br> L'ajout de la class ``` "class": "4dStyledText"``` permet de renvoyer un text multistyle sous 4D accessible depuis ```visiteur.dataFormTyping```. |
+| password            |                               | append, label, collabel, class, clientDisabled, append | Input de type mot de passe|
+| select              | selection                     | label, collabel, clientDisabled                        | Input de type menu déroulant |
+| checkbox            |                               | label, collabel, clientDisabled                        | Input de type case à cocher |
+| radio               | selection                     | label, collabel, clientDisabled, colRadio              | Input de type es boutons radio|
+| hidden              |                               |                                                        | Input de type invisible|
+| file                |                               | contentType                                            | Input de type envoi de document|
+| toggle              |                               |                                                        | Input de type interrupteur, c'est un dérivé des checkbox|
+| submit              |                               | divClassSubmit, blobSize                               | Input de type validation du formulaire|
+
 
 
 Pour résumer les différents éléments que l'on peut trouver dans l'input, nous avons  :
 
 | Nom de la propriété | Type    | Valeur par defaut | Commentaire |
 | ------------------- | ------- | ----------------- | ----------- |
-| lib                 | texte   | ""                | C'est le nom de la variable |
-| type                | texte   | ""                | Permet de choisir le type de notre variable (text, textarea, select, etc) Voir tableau suivant |
-| label               | texte   | ""                | C'est le texte qui s'affichera avec notre variable sur la page web |
-| collabel            | entier  | ""                | Permet de gérer l'espace entre le label et la variable |
-| class               | texte   | ""                | Permet de rajouter des propriétés à notre variable |
-| clientDisabled      | boolean | false             | Permet de choisir si les champs sont saisissble ou pas (false = saisissable) |
-| append              | texte   | ""                | Permet de rajouter un petit texte au bout du champ de saisi (€, m2, etc) |
-| selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessus) |
-| format              | texte   | ""                | Permet de définir des format spécifique tel que des dates( °°/°°/°°°°) |
-| colRadio            | entier  | ""                | Lorsqu'on a un type: radio cela permet d'aligner les boutons radios |
-| required            | texte   | ""                | |
-| placeholder         | texte   | ""                | |
-| collapse            | texte   | ""                | |
-| contentType         | entier  | ""                | |
-| divClassSubmit      | boolean | false             | |
-| dateMin             | texte   | ""                | Permet de choisir la date minimum lorsqu'on a un type date |
-| dateMax             | texte   | ""                | Permet de choisir la date maximum lorsqu'on a un type date  |
-| blobSize            | texte   | ""                | |
+| lib                 | texte   | ""                | Le nom de la variable |
+| type                | texte   | ""                | Définit le type de notre variable (text, textarea, select, etc), voir tableau ci-dessus |
+| label               | texte   | ""                | Texte qui s'affiche avec notre variable sur la page web |
+| collabel            | entier  | ""                | Organise l'espace entre le label et l'input HTML|
+| class               | texte   | ""                | Rajoute des class HTML à l'input |
+| clientDisabled      | boolean | false             | Définit si l'input est saisissable ou pas (false = saisissable) |
+| append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisi (€, m2, etc) |
+| selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessous) |
+| format              | texte   | ""                | Définit des formats spécifiques tel que des dates( ##/##/####) |
+| colRadio            | entier  | ""                | Utilisé avec un type ```radio``` cela permet d'aligner les boutons radios |
+| required            | texte   | ""                | Le renseignement de l'input est obligatoire |
+| placeholder         | texte   | ""                |  |
+| collapse            | texte   | ""                |  |
+| contentType         | entier  | ""                |  |
+| divClassSubmit      | texte   | ""                | Ajout d'un class parent pour les inputs type submit. |
+| dateMin             | texte   | ""                | Définit la date minimum lorsqu'on a un type date |
+| dateMax             | texte   | ""                | Définit la date maximum lorsqu'on a un type date  |
+| blobSize            | texte   | ""                |  |
 
 
-Voici un tableau regroupant les différentes valeur que peut prendre type:
+Dans ce cas d'input nécéssitant une séléction (select ou radio), une configuration en dur peut-être définit de la manière suivante :
+```json
+{
+    "lib": "upVariable1",
+    "type": "text",
+    "label": "C'est la variable 1",
+    "colLabel": 4
+    "selection": [
+        {
+            "lib": "choix1",
+            "value": "0"
+        },
+        {
+            "lib": "choix2",
+            "value": "1"
+        }
+    ]
+}
+```
 
-| Nom de la propriété | Element nécessaire dans input | Element facultatif dans input                          | Commentaire |
-| ------------------- | ------------------------------| ------------------------------------------------------ | ----------- |
-| text                |                               | append, label, collabel, class, clientDisabled, append | Permet de créer un champ de texte|
-| textarea            |                               | label, collabel, clientDisabled, class                 | Permet de créer un champ de texteprenant plusieurs lignes.<br> L'ajout de la class ``` "class": "4dStyledText"``` permet de renvoyer un text multistyle sous 4D accessible depuis ```visiteur.dataFormTyping```. |
-| select              | selection                     | label, collabel, clientDisabled                        | Permet de créer un menu déroulant |
-| checkbox            |                               | label, collabel, clientDisabled                        | Permet de creer une case à cocher |
-| radio               | selection                     | label, collabel, clientDisabled, colRadio              | Permet de créer des boutons radio|
+Pour définir une valeur depuis 4D à un input HTML, il est nécéssaire de le définir dans l'objet visiteur.
+```4d
+visiteur_o.upVariable1:="Manager"
+```
 
+## Les jetons
 
-
-## Element constant
-
-Pour chacune des page il faut toujours mettre le **token** qui est très utile pour la sécurité de la page.
+Pour chacun formulaire, il est préférable d'utiliser un mécanisme de jeton ```token```. En effet celui-ci est regénéré à chaque chargement de page et a la particularité de controler automatiquement que le formulaire envoyé depuis le navigateur est bien issu de la dernier page généré. En cas contraire, une notification est envoyé à utilisateur.
 
 ```json
 {
     "lib": "token"
-},
-```
-
-Il y a aussi **Submit** que l'on peut mettre en format cacher. Pour cela, il faut la class **hidden**. Mais on peut aussi afficher le bouton qui permet de valider la saisie. 
-
-```json
-{
-    "lib": "pdSubmit",
-    "type": "submit",
-    "class": "hidden",
-    "value": "Enregistrer"
 }
 ```
-ou
-
-```json
-{
-    "lib": "pdSubmit",
-    "type": "submit",
-    "class": "btn btn-large u-btn-outline-teal rounded-0 ",
-    "value": "Valider"
-}
-```
-
