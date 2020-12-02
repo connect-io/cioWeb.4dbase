@@ -19,7 +19,6 @@ var $boucle_b : Boolean
 
 
 $texteRetour_t:="active"
-
 $debutFin_l:=1
 $boucle_b:=True:C214
 

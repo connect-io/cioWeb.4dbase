@@ -115,7 +115,7 @@ $EMail.send() -> $resultat_o
 
 | Paramêtre              | Type       | Description                                               |
 | ---------------------- | ---------- | --------------------------------------------------------- |
-| this.to                | Texte      | adresse du destinataire                                   |
+| this.to                | Texte      | Adresse du destinataire                                   |
 | this.htmlBody          | Texte      | Corps du texte                                            |
 | this.attachmentsPath_c | Collection | Collection contenant les pièces jointes à inclure au mail |
 | this.subject           | Texte      | L'objet du mail en question                               |
