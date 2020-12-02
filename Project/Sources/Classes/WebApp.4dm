@@ -294,6 +294,101 @@ $0.config_o:=This.sites[$user_o.sousDomaine].dataTable
 $0.class:=cwToolGetClass("DataTable")
 */
 	
+Function I18NLoad
+/* -----------------------------------------------------------------------------
+Fonction : I18NLoad
+	
+Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.
+	
+Historique
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
+27/11/20 - Alban Catoire <Alban@connect-io.fr> - Mise à jour avec Storage
+-----------------------------------------------------------------------------*/
+	
+	var $analyseTrad_b : Boolean
+	var $subDomain_t : Text  // Nom du sous domaine
+	var $SplitNomDoc : Collection
+	var $type_t : Text
+	var $langue_t : Text
+	var $tsModification_i : Integer
+	var $tsLastUpload_i : Integer
+	
+	$SplitNomDoc:=New collection:C1472
+	// On parcourt les sous domaine ("www" et "admin")
+	For each ($subDomain_t;This:C1470.config.subDomain_c)
+		
+		//Si pour un sous domaine la traduction n'est pas chargé dans le storage on la crée
+		If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
+			Use (Storage:C1525.sites[$subDomain_t])
+				Storage:C1525.sites[$subDomain_t].I18n:=New shared object:C1526()
+			End use 
+		End if 
+		//On charge la collection de fichier du dossier
+		$files_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7)
+		
+		For each ($file_o;$files_c)
+			//Si le fichier est un fichier de traduction
+			If ($file_o.name="@.i18n@")
+				
+				// On recupere le type ("form" ou "page") et la langue ("fr", "en" ou "es")
+				$SplitNomDoc:=Split string:C1554($file_o.name;".")
+				$type_t:=$SplitNomDoc[0]
+				$langue_t:=$SplitNomDoc[1]
+				
+				//Si le storage n'existe pas encore pour ce fichier on le crée
+				If (Storage:C1525.sites[$subDomain_t].I18n[$type_t]=Null:C1517)
+					Use (Storage:C1525.sites[$subDomain_t].I18n)
+						Storage:C1525.sites[$subDomain_t].I18n[$type_t]:=New shared object:C1526()
+					End use 
+				End if 
+				
+				If (Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]=Null:C1517)
+					Use (Storage:C1525.sites[$subDomain_t].I18n[$type_t])
+						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=New shared object:C1526()
+					End use 
+				End if 
+				
+				// Date de la derniere modification du fichier de traduction
+				$tsModification_i:=Num:C11(cwTimestamp($file_o.modificationDate;$file_o.modificationTime))
+				// Date du dernier chargement du fichier de traduction
+				$tsLastUpload_i:=Num:C11(Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t].maj_ts)
+				
+				//Si le fichier n'a jamais été chargé ou n'est pas à jour, on le recharge
+				If (($tsLastUpload_i=0) | (Num:C11($tsModification_i)>Num:C11($tsLastUpload_i)))
+					$trad:=cwToolObjectFromFile($file_o)
+					$trad.maj_ts:=cwTimestamp
+					Use (Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
+						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]))
+					End use 
+				End if 
+				
+			End if 
+			
+		End for each 
+	End for each 
+	
+	//On remplit les traductions utiles à chaque page dans WebApp
+	For each ($page_o;This:C1470.sites[$subDomain_t].route)
+		$page_o.i18n:=New object:C1471()
+		For each ($lang;New collection:C1472("en";"es";"fr"))
+			$page_o.i18n[$lang]:=New object:C1471()
+			//Chargment des traductions du corps de la page
+			If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]#Null:C1517)
+				$page_o.i18n[$lang]:=Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]
+			End if 
+			
+			//Chargement des traductions des parents 
+			If ($page_o.parents#Null:C1517)
+				For each ($parentName_t;$page_o.parents)
+					//Si on connait la traduction du parent
+					If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]#Null:C1517)
+						$page_o.i18n[$lang]:=cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t])
+					End if 
+				End for each 
+			End if 
+			
+		End for each 
+	End for each 
 	
 	
 Function dataTableNew
@@ -953,7 +1048,7 @@ Historique
 	cwWebAppFuncDataTablePreload
 	
 	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
-	cwI18nLoad
+	This:C1470.I18NLoad()
 	
 	
 	

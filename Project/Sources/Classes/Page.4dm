@@ -161,14 +161,20 @@ Historique
 		pageWeb_o.jsPathInHtml:=New collection:C1472
 	End if 
 	
-	
 	// Chargement des informations i18n.
-	pageWeb_o.i18n:=New object:C1471()
-	pageWeb_o.i18n:=Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
 	
-	For each ($parentName_t;pageWeb_o.parents)
-		pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage:C1525.sites[This:C1470.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
-	End for each 
+	
+	pageWeb_o.i18n:=This:C1470.siteRoute_c.query("lib IS :1";pageWeb_o.lib)[0].i18n
+	//$traduction:=New object()
+	//if ($traduction.length#0)
+	//pageWeb_o.i18n:=$traduction[0]
+	//End if
+	
+	
+	//pageWeb_o.i18n:=Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][pageWeb_o.lib]
+	//For each ($parentName_t;pageWeb_o.parents)
+	//pageWeb_o.i18n:=cwToolObjectMerge(pageWeb_o.i18n;Storage.sites[This.info.subDomain_t].I18n.page[pageWeb_o.route.data.lang][$parentName_t])
+	//End for each 
 	
 	//pageWeb_o.i18n.fr:=cwi18nDataPage 
 	
@@ -232,9 +238,9 @@ Historique
 	
 	
 	
-Function cwI18nGet
+Function I18nGet
 /* -----------------------------------------------------------------------------
-Fonction : Page.cwI18nGet
+Fonction : Page.I18nGet
 	
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
@@ -245,8 +251,7 @@ Historique
 	var $0 : Text  // le text en retour
 	
 	ASSERT:C1129($1#"";"Le param $1 doit être une chaine de caractère non vide.")
-	
-	$0:=String:C10(This:C1470.i18n[$1])
+	$0:=String:C10(This:C1470.i18n[This:C1470.route.data.lang][$1])
 	// Exemple : Storage.sites.www.I18n.page.fr.index.title
 	If ($0="")
 		$0:="Traduction inconnu : "+$1
