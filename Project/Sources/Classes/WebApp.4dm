@@ -358,7 +358,7 @@ Historique
 					$trad:=cwToolObjectFromFile($file_o)
 					$trad.maj_ts:=cwTimestamp
 					Use (Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
-						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]))
+						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
 					End use 
 				End if 
 				
