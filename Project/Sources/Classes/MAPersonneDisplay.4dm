@@ -75,9 +75,9 @@ Function updateStringPersonneForm
 	$libFemme_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe;"femme")
 	
 	Case of 
-		: ($1.sexe=$libHomme_t)
+		: (String:C10($1.sexe)=$libHomme_t)
 			$civilite_t:="Mr."
-		: ($1.sexe=$libFemme_t)
+		: (String:C10($1.sexe)=$libFemme_t)
 			$civilite_t:="Mme."
 	End case 
 	

@@ -1,18 +1,18 @@
 //%attributes = {"shared":true}
-  // ----------------------------------------------------
-  // Nom utilisateur (OS) : Scanu Rémy
-  // Date et heure : 31/03/20, 18:24:39
-  // ----------------------------------------------------
-  // Méthode : caCreateWindowsFormCenter
-  // Description
-  // 
-  //
-  // Paramètres
-  // $1 = Nom du formulaire
-  // $2 = Espace en pixel entre le haut/bas de l'écran et le formulaire [numérique ou objet]
-  // $3 = Entity Selection [optionnel]
-  // $4 = Pointeur de la Table [optionnel]
-  // ----------------------------------------------------
+// ----------------------------------------------------
+// Nom utilisateur (OS) : Scanu Rémy
+// Date et heure : 31/03/20, 18:24:39
+// ----------------------------------------------------
+// Méthode : caCreateWindowsFormCenter
+// Description
+// 
+//
+// Paramètres
+// $1 = Nom du formulaire
+// $2 = Espace en pixel entre le haut/bas de l'écran et le formulaire [numérique ou objet]
+// $3 = Entity Selection [optionnel]
+// $4 = Pointeur de la Table [optionnel]
+// ----------------------------------------------------
 C_TEXT:C284($1)
 C_VARIANT:C1683($2)
 C_OBJECT:C1216($3)
@@ -35,16 +35,16 @@ $moitie_el:=$largeurForm_el/2
 
 Case of 
 	: (Value type:C1509($2)=Est un objet:K8:27)
-		$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;$menu_el+Num:C11($2.ecartHautEcran);($largeur_el/2)+$moitie_el;$hauteur_el-Num:C11($2.ecartBasEcran);Fenêtre standard:K34:13;"";"caCloseWindows")
+		$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;$menu_el+Num:C11($2.ecartHautEcran);($largeur_el/2)+$moitie_el;$hauteur_el-Num:C11($2.ecartBasEcran);Fenêtre standard:K34:13;"";"cwToolCloseWindows")
 	: (Value type:C1509($2)=Est un entier long:K8:6)
-		$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;$menu_el+$2;($largeur_el/2)+$moitie_el;$hauteur_el-$2;Fenêtre standard:K34:13;"";"caCloseWindows")
+		$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;$menu_el+$2;($largeur_el/2)+$moitie_el;$hauteur_el-$2;Fenêtre standard:K34:13;"";"cwToolCloseWindows")
 	: (Value type:C1509($2)=Est un texte:K8:3)
 		
 		Case of 
 			: ($2="centerModal")
-				$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;(($hauteur_el/2)-10)-($hauteurForm_el/2);($largeur_el/2)+$moitie_el;(($hauteur_el/2)-10)+($hauteurForm_el/2);Form dialogue modal:K39:7;"";"caCloseWindows")
+				$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;(($hauteur_el/2)-10)-($hauteurForm_el/2);($largeur_el/2)+$moitie_el;(($hauteur_el/2)-10)+($hauteurForm_el/2);Form dialogue modal:K39:7;"";"cwToolCloseWindows")
 			: ($2="center")
-				$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;(($hauteur_el/2)-10)-($hauteurForm_el/2);($largeur_el/2)+$moitie_el;(($hauteur_el/2)-10)+($hauteurForm_el/2);Fenêtre standard:K34:13;"";"caCloseWindows")
+				$refFen_el:=Open window:C153(($largeur_el/2)-$moitie_el;(($hauteur_el/2)-10)-($hauteurForm_el/2);($largeur_el/2)+$moitie_el;(($hauteur_el/2)-10)+($hauteurForm_el/2);Fenêtre standard:K34:13;"";"cwToolCloseWindows")
 		End case 
 		
 End case 

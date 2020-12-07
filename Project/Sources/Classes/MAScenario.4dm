@@ -13,7 +13,7 @@ Function newScenario
 	
 	$caScenario_o.nom:="Nouveau scénario"
 	$caScenario_o.actif:=True:C214
-	$caScenario_o.condition:=New object:C1471("ageMinimum";18;"ageMaximum";99;"rang";1;"dateDebutMailClique";!00-00-00!;"dateFinMailClique";!00-00-00!;"dateDebutMailOuvert";!00-00-00!;"dateFinMailOuvert";!00-00-00!)
+	$caScenario_o.condition:=New object:C1471("ageMinimum";18;"ageMaximum";99;"rang";0;"dateDebutMailClique";!00-00-00!;"dateFinMailClique";!00-00-00!;"dateDebutMailOuvert";!00-00-00!;"dateFinMailOuvert";!00-00-00!)
 	
 	$retour_o:=$caScenario_o.save()
 	
@@ -27,7 +27,7 @@ Function loadScenarioDisplay
 	
 	cwToolWindowsFormCenter("gestionScenario";"center";This:C1470)
 	
-Function SearchPersonToScenario
+Function searchPersonToScenario
 	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction
 	C_TEXT:C284($lib_t;$nomLien_t;$libEmail_t)
 	C_LONGINT:C283($ts_el)
@@ -159,9 +159,13 @@ Function SearchPersonToScenario
 					End if 
 					
 				: ($cleValeur_o.key="rang")
-					$table_o:=ds:C1482.CaPersonneMarketing.query("rang = :1";$cleValeur_o.value).OnePersonne
 					
-					$personne_o:=$personne_o.and($table_o)
+					If ($cleValeur_o.value#0)
+						$table_o:=ds:C1482.CaPersonneMarketing.query("rang = :1";$cleValeur_o.value).OnePersonne
+						
+						$personne_o:=$personne_o.and($table_o)
+					End if 
+					
 				: ($cleValeur_o.key="sexe")
 					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"sexe")
 					
@@ -262,9 +266,9 @@ Function updateStringScenarioForm
 	
 	Case of 
 		: ($1=1)  // Gestion du scénario
-			This:C1470.SearchPersonToScenario(1)
+			This:C1470.searchPersonToScenario(1)
 		: ($1=2)  // Application scénario à une sélection de personne
-			This:C1470.SearchPersonToScenario(2)
+			This:C1470.searchPersonToScenario(2)
 	End case 
 	
 	If ($1=1) | ($1=2)

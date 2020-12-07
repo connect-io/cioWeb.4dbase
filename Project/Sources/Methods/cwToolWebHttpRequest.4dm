@@ -1,13 +1,13 @@
 //%attributes = {"shared":true}
-  // ======================================================================
-  // Methode projet : webHttpRequest
-  // 
-  // Méthode qui permet de faire des requêtes http
-  //
-  // ----------------------------------------------------------------------
+// ======================================================================
+// Methode projet : webHttpRequest
+// 
+// Méthode qui permet de faire des requêtes http
+//
+// ----------------------------------------------------------------------
 
 If (False:C215)  // Historique
-	  // 02/07/20 remy@connect-io.fr - Création
+	// 02/07/20 remy@connect-io.fr - Création
 End if 
 
 If (True:C214)  // Déclarations
@@ -34,7 +34,7 @@ Case of
 		$reponse_v:=$blobVide_b
 End case 
 
-ON ERR CALL:C155("webGestionErreur")
+ON ERR CALL:C155("cwGestionErreur")
 $etat_el:=HTTP Request:C1158($1;$2;$3;$reponse_v;$headerNames_at;$headerValues_at)
 ON ERR CALL:C155("")
 
