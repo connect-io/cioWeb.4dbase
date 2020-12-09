@@ -11,12 +11,17 @@ Historique
 
 // Déclarations
 var $1;$T_libPage : Text  // lib page
-
+var $2 : Object  // Param de l'url
 
 $T_libPage:=$1
 
+If (Count parameters:C259=1)
+	$2:=New object:C1471()
+End if 
+
 If ($T_libPage#"http@")
-	$T_libPage:=cwLibToUrl($T_libPage)
+	
+	$T_libPage:=cwLibToUrl($T_libPage;$2)
 End if 
 
 visiteur.envoiHttpRedirection:=True:C214
