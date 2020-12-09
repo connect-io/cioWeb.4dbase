@@ -87,7 +87,7 @@ If ($resultat_t="")
 				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib])
 				
 			: (String:C10($formInput_o.format)="date")
-				visiteur.dataFormTyping[$formInput_o.lib]:=cwDateClean(visiteur.dataForm[$formInput_o.lib])
+				visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean(visiteur.dataForm[$formInput_o.lib]))
 				
 			Else 
 				visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]
