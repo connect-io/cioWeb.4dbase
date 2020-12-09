@@ -44,7 +44,7 @@ Configuration du formulaire :
             "lib": "upMotDePasseActuel",             // Nom de l'input du formulaire
             "label": "Mot de passe actuel",          // Label, indication sur le nom du champ.
             "type": "password",                      // Type d'input HTML
-            "colLabel": 4,                           // Largueur du label (cf. Bootstrap : row - col)
+            "colLabel": 4,                           // Largeur du label (cf. Bootstrap : row - col)
             "required": true                         // Indique que ce champ est obligatoire.
         },
         {
@@ -75,9 +75,9 @@ Configuration du formulaire :
 }
 ```
 
-Code à inserer dans la view (page HTML) :
+Code à insérer dans la view (page HTML) :
 ```html
-// On remarquera que l'insertion de balise 4D est fait sous forme de commentaire HTML.
+// On remarquera que l'insertion de balise 4D est faite sous forme de commentaire HTML.
 
 <form <!--#4DSCRIPT/cwFormInit/formUserParametre-->>
     <!--#4DSCRIPT/cwInputHtml/upMotDePasseActuel-->
@@ -90,7 +90,7 @@ Code à inserer dans la view (page HTML) :
 
 Voici le rendu HTML généré par le composant :
 ```html
-<!-- On retrouve la balise FORM avec les éléments indiqués dans le fichier de configuration, la route à également été calculé pour l'action. -->
+<!-- On retrouve la balise FORM avec les éléments indiqués dans le fichier de configuration, la route à également été calculée pour l'action. -->
 <form id="formUserParametre" class="m-t" method="POST" action="/fr/utilisateur-parametre.html">
 
     <!-- Génération du 1er input -->
@@ -99,7 +99,7 @@ Voici le rendu HTML généré par le composant :
         <label class="col-sm-4 col-form-label" for="upMotDePasseActuel">
             <!-- On retrouve ici l'indication du label. -->
             Mot de passe actuel
-            <!-- L'indication textuel require est généré automatiquement. -->
+            <!-- L'indication textuelle requière est générée automatiquement. -->
             <span class="required">*</span> 
         </label>
         <!-- L'indication col-sm-8 est déduite par le composant : 12 colonnes initiales moins les 4 du label. -->
@@ -142,9 +142,9 @@ Voici le rendu HTML généré par le composant :
 </form>
 ```
 
-Rendu Visuel dans un navigateur :
+Rendu visuel dans un navigateur :
 
-![Demo formulaire 1](images/formDemo1.png "Demo formulaire 1")
+![Demo formulaire 1](images/formDemo1.png "Démo formulaire 1")
 
 Voici maintenant le traitement qui peut être réalisé dans la méthode 4D de ma route du formulaire : ```wpTmUserParametre```
 
@@ -159,7 +159,7 @@ If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
     $contactAcces_o:=ds.ContactAcces.query("PKU IS :1";visiteur_o.ContactAccesPKU).first()
     
     If ($contactAcces_o=Null)
-        visiteur_o.notificationError:="Impossible de retrouver la fiche de la personne."
+        visiteur_o.notificationError:="impossible de retrouver la fiche de la personne."
     End if 
     
     If (visiteur_o.notificationError="")
@@ -186,17 +186,17 @@ If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
         visiteur_o.notificationError:="Le nouveau mot de passe doit contenir au moins "+String(<>webConfig_o.motDePasse.nombreDeCaracteres)+" caractéres."
     End if 
     
-    // Différent des 2 derniers mot de passe.
+    // Différent des 2 derniers mots de passe.
     If (visiteur_o.notificationError="")
         If ($contactAcces_o.HashPassword#"")
             If (Verify password hash(visiteur_o.dataForm.motDePasseNouveau;$contactAcces_o.HashPassword))
-                visiteur_o.notificationError:="Le nouveau mot de passe doit être différent du dernier mots de passe."
+                visiteur_o.notificationError:="Le nouveau mot de passe doit être différent du dernier mot de passe."
             End if 
         End if 
     End if 
     
     If (visiteur_o.notificationError="")
-        // tous les controles sont passé... On prend en compte la modification du mot de passe.
+        // tous les contrôles sont passés... On prend en compte la modification du mot de passe.
         //$contactAcces_o.HashPasswordOld:=$contactAcces_o.HashPassword
         $contactAcces_o.HashPassword:=weboHashMotDePasse(visiteur_o.dataForm.motDePasseNouveau)
         $contactAcces_o.DernierChangementPass:=Current date
@@ -219,9 +219,9 @@ If (cwFormControl(->visiteur_o;"formUserParametre")="ok")
 End if 
 ```
 
-# Configuration des différents type d'"input"
+# Configuration des différents types d'"input"
 
-Lors de la configuration d'un formulaire, il faut renseigner la collection ```input``` permettant de définir le comportement et l'apparance des entrée HTML.
+Lors de la configuration d'un formulaire, il faut renseigner la collection ```input``` permettant de définir le comportement et l'apparence des entrées HTML.
 
 Dans sa forme la plus basique, une entrée du formulaire aura la forme suivante :
 
@@ -236,16 +236,16 @@ Dans sa forme la plus basique, une entrée du formulaire aura la forme suivante 
 
 ```
 
-Le ```lib``` est le nom de notre variable. Généralement, on définit les premières lettres du lib de chaque input par les initiales de notre formualaire. (ici formUserParametre donc up). 
+Le ```lib``` est le nom de notre variable. Généralement, on définit les premières lettres du lib de chaque input par les initiales de notre formulaire. (ici formUserParametre donc up). 
 
 Le ```label``` est le texte qui s'affiche pour renseigner sur la nature des données à saisir dans l'input.
 
-Le ```collabel``` organise l'espace entre le label et l'input HTML. C'est un entier comprit entre 0 et 12.
+Le ```collabel``` organise l'espace entre le label et l'input HTML. C'est un entier compris entre 0 et 12.
 
-Enfin, le ```type``` définit le type de variable. Une zone de texte, un menu déroulant, une case à cocher ou encore un élément cacher.
-Voici un tableau regroupant les différentes valeur que peut prendre ```type``` :
+Enfin, le ```type``` définit le type de variable. Une zone de texte, un menu déroulant, une case à cocher ou encore un élément caché.
+Voici un tableau regroupant les différentes valeurs que peut prendre ```type``` :
 
-| Nom de la propriété | Element nécessaire dans input | Element facultatif dans input                          | Commentaire |
+| Nom de la propriété | Élément nécessaire dans input | Élément facultatif dans input                          | Commentaire |
 | ------------------- | ------------------------------| ------------------------------------------------------ | ----------- |
 | text                |                               | append, label, collabel, class, clientDisabled, append | Input de type texte|
 | textarea            |                               | label, collabel, clientDisabled, class                 | Input de type texte multi-lignes.<br> L'ajout de la class ``` "class": "4dStyledText"``` permet de renvoyer un text multistyle sous 4D accessible depuis ```visiteur.dataFormTyping```. |
@@ -262,29 +262,29 @@ Voici un tableau regroupant les différentes valeur que peut prendre ```type``` 
 
 Pour résumer les différents éléments que l'on peut trouver dans l'input, nous avons  :
 
-| Nom de la propriété | Type    | Valeur par defaut | Commentaire |
+| Nom de la propriété | Type    | Valeur par défaut | Commentaire |
 | ------------------- | ------- | ----------------- | ----------- |
 | lib                 | texte   | ""                | Le nom de la variable |
 | type                | texte   | ""                | Définit le type de notre variable (text, textarea, select, etc), voir tableau ci-dessus |
 | label               | texte   | ""                | Texte qui s'affiche avec notre variable sur la page web |
 | collabel            | entier  | ""                | Organise l'espace entre le label et l'input HTML|
 | class               | texte   | ""                | Rajoute des class HTML à l'input |
-| clientDisabled      | boolean | false             | Définit si l'input est saisissable ou pas (false = saisissable) |
-| append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisi (€, m2, etc) |
-| selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radios (voir au dessous) |
-| format              | texte   | ""                | Définit des formats spécifiques tel que des dates( ##/##/####) |
-| colRadio            | entier  | ""                | Utilisé avec un type ```radio``` cela permet d'aligner les boutons radios |
+| clientDisabled      | boolean | false             | Défini si l'input est saisissable ou pas (false = saisissable) |
+| append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisie (€, m2, etc) |
+| selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radio (voir au-dessous) |
+| format              | texte   | ""                | Définit des formats spécifiques tels que des dates( ##/##/####) |
+| colRadio            | entier  | ""                | Utilisé avec un type ```radio``` cela permet d'aligner les boutons radio |
 | required            | texte   | ""                | Le renseignement de l'input est obligatoire |
 | placeholder         | texte   | ""                |  |
 | collapse            | texte   | ""                |  |
 | contentType         | entier  | ""                |  |
 | divClassSubmit      | texte   | ""                | Ajout d'un class parent pour les inputs type submit. |
-| dateMin             | texte   | ""                | Définit la date minimum lorsqu'on a un type date |
-| dateMax             | texte   | ""                | Définit la date maximum lorsqu'on a un type date  |
+| dateMin             | texte   | ""                | Définis la date minimum lorsqu'on a un type date |
+| dateMax             | texte   | ""                | Définis la date maximum lorsqu'on a un type date  |
 | blobSize            | texte   | ""                |  |
 
 
-Dans ce cas d'input nécéssitant une séléction (select ou radio), une configuration en dur peut-être définit de la manière suivante :
+Dans ce cas d'input nécessitant une sélection (select ou radio), une configuration en dur peut être définie de la manière suivante :
 ```json
 {
     "lib": "upVariable1",
@@ -304,14 +304,14 @@ Dans ce cas d'input nécéssitant une séléction (select ou radio), une configu
 }
 ```
 
-Pour définir une valeur depuis 4D à un input HTML, il est nécéssaire de le définir dans l'objet visiteur.
+Pour définir une valeur depuis 4D à un input HTML, il est nécessaire de le définir dans l'objet visiteur.
 ```4d
 visiteur_o.upVariable1:="Manager"
 ```
 
 ## Les jetons
 
-Pour chacun formulaire, il est préférable d'utiliser un mécanisme de jeton ```token```. En effet celui-ci est regénéré à chaque chargement de page et a la particularité de controler automatiquement que le formulaire envoyé depuis le navigateur est bien issu de la dernier page généré. En cas contraire, une notification est envoyé à utilisateur.
+Pour chacun formulaire, il est préférable d'utiliser un mécanisme de jeton ```token```. En effet celui-ci est régénéré à chaque chargement de page et a la particularité de contrôler automatiquement que le formulaire envoyé depuis le navigateur est bien issu de la dernière page générée. En cas contraire, une notification est envoyée à l'utilisateur.
 
 ```json
 {
