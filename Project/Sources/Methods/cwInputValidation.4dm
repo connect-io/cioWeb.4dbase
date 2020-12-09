@@ -50,6 +50,9 @@ Case of
 	: (Not:C34(OB Get:C1224($configInput;"required")))
 		//La cle required est initialisé à false, on ne fait rien
 		
+	: ($configInput.type="file")
+		//En cas d'import de fichier, le navigateur renvoi un variable vide ici, on ne fait rien
+		
 	: ($valeurInput#"")
 		//La valeur est differente de vide, donc tout va bien, on ne fait rien.
 		
