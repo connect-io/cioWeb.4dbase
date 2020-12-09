@@ -131,6 +131,12 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 					
 					// On retrouve le préfixe des inputs
 					$form.inputPrefixe:=Replace string:C233(formInput_o.lib;"submit";"")
+					
+					// On détermine si d'autres input sont obligatoire.
+					// Dans ce cas on récupére l'information pour l'utiliser par exemple dans le contexte :
+					// <p class="small"><span class="required">*</span> Ce champ est obligatoire.</p>
+					formInput_o.requiredMention_i:=$form.input.query("required IS true").length
+					
 				End if 
 				
 				If (formInput_o.required=Null:C1517)

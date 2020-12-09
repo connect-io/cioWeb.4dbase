@@ -54,7 +54,7 @@
 		<input type="hidden" name="<!--#4DTEXT formInput_o.lib-->" value="off" />
 		<label class="form-check-inline u-check g-pl-25">
 			<input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox" id="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->"
-			<!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="on"-->checked<!--# 4 DENDIF-->
+			<!--# 4 DIF string(<!--#4DTEXT Storage.config.varVisitorName_t-->.<!--#4DTEXT formInput_o.lib-->)="on"-->checked<!--# 4 DENDIF-->
 			<!--#4DIF (formInput_o.required)--> required<!--#4DENDIF--> />
 			<div class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
 				<i class="fa" data-check-icon="&#xf00c"></i>
@@ -154,9 +154,9 @@
 						<!--#4DLOOP (i<formInput_o.selection.length)-->
 							<label class="u-check">
 							<input type="radio" name="<!--#4DTEXT formInput_o.lib-->" value="<!--#4DTEXT formInput_o.selection[i].value-->"
-								<!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT formInput_o.selection[i].value-->"-->
+								<!--# 4 DIF string(<!--#4DTEXT Storage.config.varVisitorName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT formInput_o.selection[i].value-->"-->
 									checked=""
-								<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(formInput_o.selection[i].selected);"True";"False")-->&(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
+								<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(formInput_o.selection[i].selected);"True";"False")-->&(<!--#4DTEXT Storage.config.varVisitorName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
 									checked=""
 								<!--# 4 DENDIF-->
 								class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"<!--#4DIF (formInput_o.required)--> required<!--#4DENDIF--><!--#4DIF (formInput_o.clientDisabled)--> disabled<!--#4DENDIF-->>
@@ -172,12 +172,12 @@
 				<div class="col-<!--#4DIF (string(formInput_o.colRadio)#"")--><!--#4DTEXT formInput_o.colRadio --><!--#4DELSE-->12<!--#4DENDIF-->">
 					<label class="u-check">
 					<input type="radio" class="<!--#4DTEXT formInput_o.lib-->" name="<!--#4DTEXT formInput_o.lib-->" value="<!--#4DTEXT formInput_o.selection[i].value-->"
-						<!--# 4 DIF string(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT formInput_o.selection[i].value-->"-->
+						<!--# 4 DIF string(<!--#4DTEXT Storage.config.varVisitorName_t-->.<!--#4DTEXT formInput_o.lib-->)="<!--#4DTEXT formInput_o.selection[i].value-->"-->
 							checked=""
-						<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(formInput_o.selection[i].selected);"True";"False")-->&(<!--#4DTEXT varVisiteurName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
+						<!--# 4 DELSEIF (<!--#4DTEXT choose(Bool(formInput_o.selection[i].selected);"True";"False")-->&(<!--#4DTEXT Storage.config.varVisitorName_t-->.<!--#4DTEXT formInput_o.lib-->=Null))-->
 							checked=""
 						<!--# 4 DENDIF-->
-						class="" <!--#4DIF (formInput_o.required) & (selection_ao=1)--> required<!--#4DENDIF--> <!--#4DIF (formInput_o.clientDisabled)--> disabled<!--#4DENDIF-->>
+						class="" <!--#4DIF (formInput_o.required) & (formInput_o.selection.length=1)--> required<!--#4DENDIF--> <!--#4DIF (formInput_o.clientDisabled)--> disabled<!--#4DENDIF-->>
 					<!--#4DTEXT formInput_o.selection[i].lib-->
 				</label>
 				</div>
@@ -210,19 +210,29 @@
 
 
 <!--#4DELSEIF (formInput_o.type="submit")-->
-<div class="form-group">
-	<!-- J'ajoute un hidden du même nom que le submit pour pouvoir sérialiser en ajax.  -->
-	<input type="hidden" name="<!--#4DTEXT formInput_o.lib-->" value="" />	
-<!--#4DIF (string(formInput_o.divClassSubmit)#"")--><div class="<!--#4DTEXT formInput_o.divClassSubmit-->"><!--#4DENDIF-->
-	<button type="submit" id="<!--#4DTEXT formInput_o.lib-->"
-		name="<!--#4DTEXT formInput_o.lib-->"
-		class="<!--#4DTEXT formInput_o.class-->"
-		<!--#4DIF (string(formInput_o.style)#"")-->style="<!--#4DTEXT formInput_o.style-->"<!--#4DENDIF-->
-		<!--#4DIF (formInput_o.clientDisabled)--> disabled<!--#4DENDIF-->>
-		<!--#4DTEXT formInput_o.value-->
-	</button>
-<!--#4DIF (string(formInput_o.divClassSubmit)#"")--></div><!--#4DENDIF-->
+<div class="row">
+	<!--#4DIF (formInput_o.requiredMention_i#0)-->
+	<div class="col">
+		<p class="small"><span class="required">*</span> Champ obligatoire.</p>
+	</div>
+	<!--#4DENDIF-->
+	<div class="col">
+		<div class="form-group">
+			<!-- J'ajoute un hidden du même nom que le submit pour pouvoir sérialiser en ajax.  -->
+			<input type="hidden" name="<!--#4DTEXT formInput_o.lib-->" value="" />	
+		<!--#4DIF (string(formInput_o.divClassSubmit)#"")--><div class="<!--#4DTEXT formInput_o.divClassSubmit-->"><!--#4DENDIF-->
+			<button type="submit" id="<!--#4DTEXT formInput_o.lib-->"
+				name="<!--#4DTEXT formInput_o.lib-->"
+				class="btn rounded-0 u-btn-primary <!--#4DTEXT formInput_o.class-->"
+				<!--#4DIF (string(formInput_o.style)#"")-->style="<!--#4DTEXT formInput_o.style-->"<!--#4DENDIF-->
+				<!--#4DIF (formInput_o.clientDisabled)--> disabled<!--#4DENDIF-->>
+				<!--#4DTEXT formInput_o.value-->
+			</button>
+		<!--#4DIF (string(formInput_o.divClassSubmit)#"")--></div><!--#4DENDIF-->
+		</div>
+	</div>
 </div>
+
 
 <!--#4DELSEIF (formInput_o.type="hidden")-->
 <input type="hidden" name="<!--#4DTEXT formInput_o.lib-->"  id="<!--#4DTEXT formInput_o.lib-->" class="<!--#4DTEXT formInput_o.class-->" value="$valueInput" />
