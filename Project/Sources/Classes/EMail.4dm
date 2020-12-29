@@ -53,6 +53,9 @@ Historique
 	// Initialisation des pieces jointes
 	This:C1470.attachmentsPath_c:=New collection:C1472()
 	
+	If (String:C10($server_o.from)#"")
+		This:C1470.from:=$server_o.from
+	End if 
 	
 	
 Function send
