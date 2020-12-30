@@ -31,3 +31,4 @@ End if
 OBJECT SET ENABLED:C1123(*;"sceneDetail@";False:C215)
 
 Form:C1466.scenePersonneEnCours:=Null:C1517  // Chaine qui indique le nombre de personne auquel la scène du scénario sélectionné est appliqué
+Form:C1466.sceneSuivanteDelai:=Null:C1517  // Chaine qui indique le délai avec la scène suivante du scénario sélectionné
