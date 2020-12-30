@@ -26,7 +26,7 @@
 				"Bouton1": {
 					"type": "button",
 					"text": "Valider",
-					"top": 278,
+					"top": 220,
 					"left": 46,
 					"width": 160,
 					"height": 30,
@@ -37,14 +37,14 @@
 				},
 				"Texte13": {
 					"type": "text",
-					"text": "Choix du layout : [optionnel]",
+					"text": "Choix du modèle : [optionnel]",
 					"top": 72,
 					"left": 14,
-					"width": 185,
+					"width": 200,
 					"height": 16,
 					"fontWeight": "bold"
 				},
-				"apercuLayout": {
+				"sceneDetailApercuModele": {
 					"type": "pictureButton",
 					"left": 219,
 					"top": 97,
@@ -55,7 +55,7 @@
 						"onMouseMove"
 					],
 					"picture": "/RESOURCES/Images/preview.png",
-					"method": "ObjectMethods/apercuLayout.4dm",
+					"method": "ObjectMethods/sceneDetailApercuModele.4dm",
 					"loopBackToFirstFrame": true,
 					"switchBackWhenReleased": true,
 					"useLastFrameAsDisabled": true
@@ -112,13 +112,13 @@
 					"switchBackWhenReleased": true,
 					"useLastFrameAsDisabled": true
 				},
-				"scenarioDetailPersonnePossibleChaine": {
+				"sceneDetailModele": {
 					"type": "input",
 					"left": 43,
 					"top": 97,
 					"width": 156,
 					"height": 25,
-					"dataSource": "Form:C1466.layout",
+					"dataSource": "Form:C1466.modele",
 					"enterable": false,
 					"focusable": false,
 					"contextMenu": "none",
@@ -126,19 +126,10 @@
 					"borderStyle": "none",
 					"fontSize": 10,
 					"textAlign": "automatic"
-				},
-				"Texte5": {
-					"type": "text",
-					"text": "Layout actif :",
-					"top": 199,
-					"left": 14,
-					"width": 172,
-					"height": 25,
-					"fontWeight": "bold"
 				}
 			}
 		}
 	],
-	"geometryStamp": 334,
+	"geometryStamp": 348,
 	"method": "method.4dm"
 }
