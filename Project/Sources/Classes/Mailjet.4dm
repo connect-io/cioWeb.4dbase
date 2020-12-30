@@ -18,6 +18,86 @@ Class constructor
 		ALERT:C41("Impossible d'intialiser le composant cioMailjet")
 	End if 
 	
+Function getStatistic
+	C_TEXT:C284($1)  // Email OU Contact ID de la personne dont on souhaite avoir les stats
+	C_OBJECT:C1216($0)  // Retour de mailjet
+	C_TEXT:C284($resultatHttp_t)
+	
+	cwToolWebHttpRequest("GET";This:C1470.config.domainRequest+"/REST/contactstatistics/"+String:C10($1);"";->$resultatHttp_t)
+	
+	If ($resultatHttp_t="{@}")
+		$0:=JSON Parse:C1218($resultatHttp_t)
+	Else 
+		$0:=New object:C1471("errorHttp";$resultatHttp_t)
+	End if 
+	
+Function getMessageID
+	C_TEXT:C284($1)  // Chaine à analyser
+	C_POINTER:C301($2)  // Pointeur tabeau texte qui contient les id des messages
+	C_TEXT:C284($demonteChaine_t;$chaineObjet_t;$messageID_t)
+	C_LONGINT:C283($positionCrochet_el;$positionAccolade_el;$positionID_el;$positionVirgule_el)
+	
+	// Petite galère qui fait bien chier, je vais devoir passer en revu ma chaine $resultatHTTP car l'ID du message est supérieur à la valeur autorisée par la commande JSON PARSE ±10.421e±10...
+	$demonteChaine_t:=$1
+	
+	$positionCrochet_el:=Position:C15("[";$demonteChaine_t)
+	If ($positionCrochet_el>0)
+		$demonteChaine_t:=Delete string:C232($demonteChaine_t;1;$positionCrochet_el+1)
+		
+		$positionCrochet_el:=Position:C15("]";$demonteChaine_t)
+		If ($positionCrochet_el>0)
+			$demonteChaine_t:=Substring:C12($demonteChaine_t;1;$positionCrochet_el-1)
+			
+			// On devrait se retrouver avec une chaine comme ça : {...},{...},{...}
+			$positionAccolade_el:=Position:C15("}";$demonteChaine_t)
+			If ($positionAccolade_el>0)
+				
+				While ($positionAccolade_el>0)
+					$chaineObjet_t:=Substring:C12($demonteChaine_t;1;$positionAccolade_el)
+					
+					// $chaineObjet_t devrait ressembler à une chaine comme ça : {...}
+					$positionID_el:=Position:C15("\"ID\" :";$chaineObjet_t)
+					If ($positionID_el>0)
+						$chaineObjet_t:=Substring:C12($chaineObjet_t;$positionID_el+7)
+						
+						$positionVirgule_el:=Position:C15(",";$chaineObjet_t)
+						If ($positionVirgule_el>0)
+							$messageID_t:=Substring:C12($chaineObjet_t;1;$positionVirgule_el-1)
+							
+							// Enfin on est arrivé au bout !
+							APPEND TO ARRAY:C911($2->;$messageID_t)
+						End if 
+						
+					End if 
+					
+					$demonteChaine_t:=Delete string:C232($demonteChaine_t;1;$positionAccolade_el+1)
+					$positionAccolade_el:=Position:C15("}";$demonteChaine_t)
+				End while 
+				
+			End if 
+			
+		End if 
+		
+	End if 
+	
+Function getMessageEvent
+	C_TEXT:C284($1)  // Statut des emails qu'on souhaite avoir
+	C_LONGINT:C283($2)  // TS début
+	C_LONGINT:C283($3)  // TS fin
+	C_POINTER:C301($4)  // Retour de mailjet
+	C_TEXT:C284($resultatHttp_t;$tsFrom_t;$tsTo_t)
+	
+	$tsFrom_t:="&FromTS="+String:C10($2)
+	$tsTo_t:="&ToTS="+String:C10($3)
+	
+	cwToolWebHttpRequest("GET";This:C1470.config.domainRequest+"/REST/message?MessageStatus="+$1+"&countOnly=1"+$tsFrom_t+$tsTo_t;"";->$resultatHttp_t)
+	
+	If ($resultatHttp_t="{@}")
+		$4->:=JSON Parse:C1218($resultatHttp_t)
+	Else 
+		$4->:=New object:C1471("errorHttp";$resultatHttp_t)
+	End if 
+	
 Function getLabelSearch
 	C_TEXT:C284($1)  // Numéro du label qu'on souhaite
 	C_COLLECTION:C1488($typeSearch_c)
@@ -65,37 +145,6 @@ Function setHistoryRequestContent
 	
 	If (This:C1470.historyRequest#Null:C1517)
 		This:C1470.historyRequest.setText($1;"UTF-8")
-	End if 
-	
-Function getStatistic
-	C_TEXT:C284($1)  // Email OU Contact ID de la personne dont on souhaite avoir les stats
-	C_OBJECT:C1216($0)  // Retour de mailjet
-	C_TEXT:C284($resultatHttp_t)
-	
-	cwToolWebHttpRequest("GET";This:C1470.config.domainRequest+"/REST/contactstatistics/"+String:C10($1);"";->$resultatHttp_t)
-	
-	If ($resultatHttp_t="{@}")
-		$0:=JSON Parse:C1218($resultatHttp_t)
-	Else 
-		$0:=New object:C1471("errorHttp";$resultatHttp_t)
-	End if 
-	
-Function getMessageEvent
-	C_TEXT:C284($1)  // Statut des emails qu'on souhaite avoir
-	C_LONGINT:C283($2)  // TS début
-	C_LONGINT:C283($3)  // TS fin
-	C_POINTER:C301($4)  // Retour de mailjet
-	C_TEXT:C284($resultatHttp_t;$tsFrom_t;$tsTo_t)
-	
-	$tsFrom_t:="&FromTS="+String:C10($2)
-	$tsTo_t:="&ToTS="+String:C10($3)
-	
-	cwToolWebHttpRequest("GET";This:C1470.config.domainRequest+"/REST/message?MessageStatus="+$1+"&countOnly=1"+$tsFrom_t+$tsTo_t;"";->$resultatHttp_t)
-	
-	If ($resultatHttp_t="{@}")
-		$4->:=JSON Parse:C1218($resultatHttp_t)
-	Else 
-		$4->:=New object:C1471("errorHttp";$resultatHttp_t)
 	End if 
 	
 Function AnalysisMessageEvent
@@ -164,54 +213,5 @@ Function AnalysisMessageEvent
 			End if 
 			
 		End for 
-		
-	End if 
-	
-Function getMessageID
-	C_TEXT:C284($1)  // Chaine à analyser
-	C_POINTER:C301($2)  // Pointeur tabeau texte qui contient les id des messages
-	C_TEXT:C284($demonteChaine_t;$chaineObjet_t;$messageID_t)
-	C_LONGINT:C283($positionCrochet_el;$positionAccolade_el;$positionID_el;$positionVirgule_el)
-	
-	// Petite galère qui fait bien chier, je vais devoir passer en revu ma chaine $resultatHTTP car l'ID du message est supérieur à la valeur autorisée par la commande JSON PARSE ±10.421e±10...
-	$demonteChaine_t:=$1
-	
-	$positionCrochet_el:=Position:C15("[";$demonteChaine_t)
-	If ($positionCrochet_el>0)
-		$demonteChaine_t:=Delete string:C232($demonteChaine_t;1;$positionCrochet_el+1)
-		
-		$positionCrochet_el:=Position:C15("]";$demonteChaine_t)
-		If ($positionCrochet_el>0)
-			$demonteChaine_t:=Substring:C12($demonteChaine_t;1;$positionCrochet_el-1)
-			
-			// On devrait se retrouver avec une chaine comme ça : {...},{...},{...}
-			$positionAccolade_el:=Position:C15("}";$demonteChaine_t)
-			If ($positionAccolade_el>0)
-				
-				While ($positionAccolade_el>0)
-					$chaineObjet_t:=Substring:C12($demonteChaine_t;1;$positionAccolade_el)
-					
-					// $chaineObjet_t devrait ressembler à une chaine comme ça : {...}
-					$positionID_el:=Position:C15("\"ID\" :";$chaineObjet_t)
-					If ($positionID_el>0)
-						$chaineObjet_t:=Substring:C12($chaineObjet_t;$positionID_el+7)
-						
-						$positionVirgule_el:=Position:C15(",";$chaineObjet_t)
-						If ($positionVirgule_el>0)
-							$messageID_t:=Substring:C12($chaineObjet_t;1;$positionVirgule_el-1)
-							
-							// Enfin on est arrivé au bout !
-							APPEND TO ARRAY:C911($2->;$messageID_t)
-						End if 
-						
-					End if 
-					
-					$demonteChaine_t:=Delete string:C232($demonteChaine_t;1;$positionAccolade_el+1)
-					$positionAccolade_el:=Position:C15("}";$demonteChaine_t)
-				End while 
-				
-			End if 
-			
-		End if 
 		
 	End if 

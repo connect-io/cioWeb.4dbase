@@ -19,6 +19,17 @@ Class constructor
 	This:C1470.dateNaissance:=""
 	This:C1470.dateCreation:=""
 	
+Function load
+	C_TEXT:C284(${1})  // Nom de la propriété à charger dans la class This.personne
+	C_LONGINT:C283($i_el)
+	
+	For ($i_el;1;Count parameters:C259)
+		This:C1470[${$i_el}]:=This:C1470.getData(${$i_el})
+	End for 
+	
+Function loadAll
+	This:C1470.personne:=ds:C1482[This:C1470.passerelle.tableHote].all()
+	
 Function loadByUID
 	C_TEXT:C284($1)  // UID de la personne
 	C_BOOLEAN:C305($0)  // Booléen qui indique si on a trouvé ou pas la personne
@@ -59,16 +70,27 @@ Function loadByEmail
 		
 	End if 
 	
-Function loadAll
-	This:C1470.personne:=ds:C1482[This:C1470.passerelle.tableHote].all()
+Function loadCaMarketing
+	C_OBJECT:C1216($0)  // Entity CaMarketing
+	C_OBJECT:C1216($caPersonneMarketing_o;$retour_o)
 	
-Function load
-	C_TEXT:C284(${1})  // Nom de la propriété à charger dans la class This.personne
-	C_LONGINT:C283($i_el)
-	
-	For ($i_el;1;Count parameters:C259)
-		This:C1470[${$i_el}]:=This:C1470.getData(${$i_el})
-	End for 
+	If (This:C1470.personne.length=1)
+		$caPersonneMarketing_o:=This:C1470.personne.AllCaPersonneMarketing
+		
+		If ($caPersonneMarketing_o.length=0)
+			$caPersonneMarketing_o:=ds:C1482.CaPersonneMarketing.new()
+			
+			$caPersonneMarketing_o.personneID:=This:C1470.UID
+			$caPersonneMarketing_o.rang:=1  // 1 pour Suspect
+			
+			$retour_o:=$caPersonneMarketing_o.save()
+			
+			$0:=$caPersonneMarketing_o
+		Else 
+			$0:=$caPersonneMarketing_o.first()
+		End if 
+		
+	End if 
 	
 Function getData
 	C_TEXT:C284($1)  // Champ à retourner
@@ -113,6 +135,15 @@ Function getData
 	
 	$0:=String:C10(data_v)
 	
+Function getInfo
+	C_OBJECT:C1216($mailjet_cs;$mailjet_o)
+	
+	$mailjet_cs:=cwToolGetClass("Mailjet")  // Initialisation de la class
+	
+	$mailjet_o:=$mailjet_cs.new()  // Instanciation de la class
+	
+	This:C1470.statMailjet:=$mailjet_o.getStatistic(This:C1470.email)
+	
 Function sendMail
 	C_TEXT:C284($1)  // objet
 	C_TEXT:C284($2)  // Corps
@@ -121,14 +152,7 @@ Function sendMail
 	C_OBJECT:C1216($mail_cs;$mail_o)
 	
 	$mail_cs:=cwToolGetClass("EMail")  // Initialisation de la class
-	
 	$mail_o:=$mail_cs.new()  // Instanciation de class
-	
-	//$mail_o.to:="adresse@mail.com"
-	//$mail_o.subject:="mail de démonstration"
-	//$mail_o.htmlBody:="Bonjour, ceci est un exemple de mail"
-	
-	//$0:=$mail_o.send($1;This.email;$2)  // Envoie du mail
 	
 Function sendMailModel
 	C_TEXT:C284($1)  // Nom du model
@@ -138,19 +162,7 @@ Function sendMailModel
 	C_OBJECT:C1216($mail_cs;$mail_o)
 	
 	$mail_cs:=cwToolGetClass("EMail")  // Initialisation de la class
-	
 	$mail_o:=$mail_cs.new()  // Instanciation de class
-	
-	//$0:=$mail_o.sendModel($1;This.email;$2)  // Envoie du mail
-	
-Function mailSendInfoUpdate
-	C_OBJECT:C1216($mailjet_cs;$mailjet_o)
-	
-	$mailjet_cs:=cwToolGetClass("Mailjet")  // Initialisation de la class
-	
-	$mailjet_o:=$mailjet_cs.new()  // Instanciation de la class
-	
-	This:C1470.statMailjet:=$mailjet_o.getStatistic(This:C1470.email)
 	
 Function updateCaMarketingStatisticManual
 	C_BOOLEAN:C305($0)

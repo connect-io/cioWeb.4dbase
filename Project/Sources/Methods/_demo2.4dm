@@ -10,7 +10,7 @@ $marketingAutomation_o.loadPasserelle("Personne")  // Création de la passerelle
 $entity_o:=$marketingAutomation_o.loadPeopleByUID("2237F6C0D8AC4A78AC7AB423C57AF5F8")  // Recherche et chargement de l'entité de la personne
 
 // On va récupérer les informations utiles sur mailjet pour mettre à jour la stratégie de relance.
-$entity_o.mailSendInfoUpdate()
+$entity_o.getInfo()
 
 // On pensera à mettre à jour les informations marketing.
 $entity_o.updateCaMarketingStatisticManual()

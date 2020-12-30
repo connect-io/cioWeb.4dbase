@@ -36,7 +36,8 @@ Function searchPersonToScenario
 	
 	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
 	
-	$personne_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
+	//$personne_o:=ds[This.marketingAutomation.passerelle.tableHote].newSelection()
+	$personne_o:=This:C1470.marketingAutomation.loadCurrentPeople()
 	$personneAEnlever_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
 	
 	Case of 
@@ -70,7 +71,7 @@ Function searchPersonToScenario
 					
 					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" <= :1";cwToolNumToDate($cleValeur_o.value;"year";"less"))
 					
-					$personne_o:=$table_o  // Première propriété de ma collection d'objet $cleValeur_c
+					$personne_o:=$personne_o.and($table_o)  // Première propriété de ma collection d'objet $cleValeur_c
 				: ($cleValeur_o.key="ageMaximum")
 					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"dateNaissance")
 					
@@ -317,6 +318,28 @@ Function updateStringSceneForm
 				This:C1470.scenePersonneEnCoursEntity:=This:C1470.sceneDetail.AllCaScenarioEvent.OneCaPersonneScenario.OnePersonne
 			Else 
 				This:C1470.scenePersonneEnCoursEntity:=This:C1470.sceneDetail.OneCaScenario.AllCaPersonneScenario.OnePersonne
+			End if 
+			
+			If (This:C1470.sceneDetail.tsAttente=0)
+				This:C1470.sceneSuivanteDelai:="0"
+				
+				If (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="")
+					This:C1470.sceneDetail.paramAction.echelleDelai:="jour(s)"
+				End if 
+				
+			Else 
+				
+				Case of 
+					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="jour(s)") | (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="jour(s)")
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/5184000;0))
+					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="semaine(s)")
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*7);0))
+					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="mois(s)")
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*30);0))
+					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="année(s)")
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*365);0))
+				End case 
+				
 			End if 
 			
 	End case 

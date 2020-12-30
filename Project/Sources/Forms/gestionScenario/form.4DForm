@@ -150,13 +150,6 @@
 					"borderStyle": "none",
 					"fontSize": 10
 				},
-				"Personnes possible scene": {
-					"type": "input",
-					"left": 724,
-					"top": 553,
-					"width": 151,
-					"height": 17
-				},
 				"scenarioDetailPersonneEnCours": {
 					"type": "button",
 					"text": "Voir",
@@ -168,17 +161,6 @@
 						"onClick"
 					],
 					"method": "ObjectMethods/scenarioDetailPersonneEnCours.4dm"
-				},
-				"Bouton9": {
-					"type": "button",
-					"text": "Voir",
-					"top": 550,
-					"left": 887,
-					"width": 36,
-					"height": 23,
-					"events": [
-						"onClick"
-					]
 				},
 				"scenarioListe": {
 					"type": "listbox",
@@ -456,7 +438,7 @@
 				"Texte12": {
 					"type": "text",
 					"text": "Condition d'action",
-					"top": 275,
+					"top": 335,
 					"left": 728,
 					"width": 195,
 					"height": 16
@@ -464,7 +446,7 @@
 				"sceneDetailConditionAction": {
 					"type": "button",
 					"text": "Définir les conditions d'action",
-					"top": 298,
+					"top": 358,
 					"left": 728,
 					"width": 195,
 					"height": 25,
@@ -477,7 +459,7 @@
 				"Texte13": {
 					"type": "text",
 					"text": "Condition de saut",
-					"top": 333,
+					"top": 393,
 					"left": 728,
 					"width": 195,
 					"height": 16
@@ -485,7 +467,7 @@
 				"sceneDetailConditionSaut": {
 					"type": "button",
 					"text": "Définir les conditions de saut",
-					"top": 356,
+					"top": 416,
 					"left": 728,
 					"width": 195,
 					"height": 25,
@@ -545,15 +527,15 @@
 				"Texte6": {
 					"type": "text",
 					"text": "Paramètre de la scène",
-					"top": 217,
+					"top": 277,
 					"left": 728,
 					"width": 195,
 					"height": 16
 				},
-				"sceneDetailConditionAction1": {
+				"sceneDetailParametre": {
 					"type": "button",
 					"text": "Définir les paramètres",
-					"top": 240,
+					"top": 300,
 					"left": 728,
 					"width": 195,
 					"height": 25,
@@ -561,11 +543,88 @@
 						"onClick"
 					],
 					"style": "regular",
-					"method": "ObjectMethods/sceneDetailConditionAction1.4dm"
+					"method": "ObjectMethods/sceneDetailParametre.4dm"
+				},
+				"Texte14": {
+					"type": "text",
+					"text": "Scène suivante",
+					"top": 217,
+					"left": 728,
+					"width": 195,
+					"height": 16
+				},
+				"sceneDetailSceneSuivanteDelai": {
+					"type": "input",
+					"left": 730,
+					"top": 244,
+					"width": 61,
+					"height": 17,
+					"dataSource": "Form:C1466.sceneSuivanteDelai",
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"sceneDetailDelaiUp": {
+					"type": "pictureButton",
+					"left": 806,
+					"top": 239,
+					"width": 13,
+					"height": 13,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/up-arrow.png",
+					"method": "ObjectMethods/sceneDetailDelaiUp.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"sceneDetailDelaiDown": {
+					"type": "pictureButton",
+					"left": 806,
+					"top": 253,
+					"width": 13,
+					"height": 13,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/down-arrow.png",
+					"method": "ObjectMethods/sceneDetailDelaiDown.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"sceneDetailSceneSuivanteDelaiEchelle": {
+					"type": "input",
+					"left": 827,
+					"top": 244,
+					"width": 69,
+					"height": 17,
+					"dataSource": "Form:C1466.sceneDetail.paramAction.echelleDelai",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false
+				},
+				"sceneDetailDelaiChangeEchelle": {
+					"type": "pictureButton",
+					"left": 906,
+					"top": 244,
+					"width": 17,
+					"height": 17,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/resize.png",
+					"method": "ObjectMethods/sceneDetailDelaiChangeEchelle.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 374,
+	"geometryStamp": 426,
 	"method": "method.4dm"
 }
