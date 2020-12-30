@@ -1,0 +1,84 @@
+﻿{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad"
+	],
+	"windowTitle": "Choix du modèle emailing à utiliser",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Bouton": {
+					"type": "button",
+					"text": "Valider",
+					"top": 225,
+					"left": 38,
+					"width": 202,
+					"height": 30,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Bouton.4dm"
+				},
+				"modeleListe": {
+					"type": "dropdown",
+					"left": 14,
+					"top": 50,
+					"width": 250,
+					"height": 20,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "modeleListe_at",
+					"method": "ObjectMethods/modeleListe.4dm"
+				},
+				"Texte": {
+					"type": "text",
+					"text": "Choix du modèle :",
+					"top": 20,
+					"left": 14,
+					"width": 130,
+					"height": 20,
+					"fontWeight": "bold"
+				},
+				"Texte1": {
+					"type": "text",
+					"text": "Information du modèle sélectionné : ",
+					"top": 80,
+					"left": 14,
+					"width": 240,
+					"height": 20,
+					"fontWeight": "bold"
+				},
+				"modeleDetail": {
+					"type": "input",
+					"left": 14,
+					"top": 110,
+					"width": 250,
+					"height": 80,
+					"dataSource": "Form:C1466.modeleDetail",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"bottom": 190
+				}
+			}
+		}
+	],
+	"geometryStamp": 373,
+	"method": "method.4dm"
+}
