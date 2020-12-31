@@ -1,5 +1,5 @@
 ﻿/* -----------------------------------------------------------------------------
-  notification.js
+  summernote.js
 
   Prise en charge de summernote.
 
@@ -11,8 +11,15 @@
 // Chargement de l'editeur de texte
 $(document).ready(function() {
 	$('.summernote').summernote({
-	  height: 200
+	  height: 200,
+    styleWithCSS: true
+    
   });
+});
+
+$(".summernote").on("summernote.enter", function(we, e) {
+  $(this).summernote("pasteHTML", "<br><br>");
+  e.preventDefault();
 });
 
 /*
