@@ -9,7 +9,7 @@ Historique
 08/07/20 - Grégory Fromain <gregory@connect-io.fr> - Renvoi de toutes les informations sur la dataTable.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
-
+/*
 // Déclarations
 var $1 : Pointer  //Variable pageWeb de l'application
 var $2 : Text  // Nom du dataTable HTML
@@ -25,16 +25,16 @@ var $column_o;dataInBase_o;dataColumn_o : Object
 
 $pageWeb_o:=$1->
 
-If (String:C10($2)="")
-	ALERT:C41("Le paramêtre $2 (lib) n'est pas défini dans la datatable.")
+If (String($2)="")
+ALERT("Le paramêtre $2 (lib) n'est pas défini dans la datatable.")
 End if 
 
 // Nettoyage du param
 $dataTableNom_t:=$2
-$dataTableNom_t:=Replace string:C233($dataTableNom_t;"/readOnly";"")
+$dataTableNom_t:=Replace string($dataTableNom_t;"/readOnly";"")
 
-If ($3=Null:C1517)
-	ALERT:C41("Le paramêtre $3 n'est pas défini dans la datatable "+$dataTableNom_t)
+If ($3=Null)
+ALERT("Le paramêtre $3 n'est pas défini dans la datatable "+$dataTableNom_t)
 End if 
 
 $source_v:=$3
@@ -44,65 +44,65 @@ $resultForm_c:=siteDataTable_c.query("lib IS :1";$dataTableNom_t)
 
 // Pour vérifier que les data soit bien brut.
 If ($resultForm_c.length=1)
-	$dataTable_o:=OB Copy:C1225($resultForm_c[0])
-	$dataTable_o.readOnly:=$2="@/readOnly@"
-	
+$dataTable_o:=OB Copy($resultForm_c[0])
+$dataTable_o.readOnly:=$2="@/readOnly@"
+
 Else 
-	$dataTable_o:=New object:C1471()
-	ALERT:C41("Impossible de retrouver la dataTable : "+$dataTableNom_t)
+$dataTable_o:=New object()
+ALERT("Impossible de retrouver la dataTable : "+$dataTableNom_t)
 End if 
 
 
 // On génére les éléments pour construire le tableau html
 // On récupére les tableaux de contact de Philippe pour en refaire une collection...
-$dataTable_o.column_c:=New collection:C1472()
+$dataTable_o.column_c:=New collection()
 
 For each ($column_o;$dataTable_o.column)
-	$dataTable_o.column_c.push($column_o)
+$dataTable_o.column_c.push($column_o)
 End for each 
 
-$dataTable_o.data_c:=New collection:C1472()
+$dataTable_o.data_c:=New collection()
 
 // On boucle sur chaque élément de la source...
 // Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
 For each (dataInBase_o;$source_v)
-	
-	dataligne_o:=New object:C1471()
-	
-	// On boucle sur chaque colonne des données.
-	For each (dataColumn_o;$dataTable_o.data)
-		dataligne_o[dataColumn_o.name]:=Formula from string:C1601(Replace string:C233(dataColumn_o.value;"this.";"dataInBase_o.")).call()
-	End for each 
-	
-	$dataTable_o.data_c.push(dataligne_o)
-	
+
+dataligne_o:=New object()
+
+// On boucle sur chaque colonne des données.
+For each (dataColumn_o;$dataTable_o.data)
+dataligne_o[dataColumn_o.name]:=Formula from string(Replace string(dataColumn_o.value;"this.";"dataInBase_o.")).call()
+End for each 
+
+$dataTable_o.data_c.push(dataligne_o)
+
 End for each 
 
 
 //----- Gestion du double click -----
-If ($dataTable_o.doubleClick#Null:C1517)
-	
-	// On génére l'url du double click sur une ligne du dataTable.
-	ASSERT:C1129($dataTable_o.doubleClick.link#Null:C1517;"La propriété $dataTable_o.doubleClick.link n'est pas définit dans "+$dataTableNom_t)
-	
-	If ($dataTable_o.doubleClick.linkVariable=Null:C1517)
-		$dataTable_o.doubleClick.linkVariable:=New object:C1471
-	End if 
-	
-	$dataTable_o.doubleClick.link:=cwLibToUrl($dataTable_o.doubleClick.link;$dataTable_o.doubleClick.linkVariable)
-	
-	// Securité navigateur
-	$dataTable_o.doubleClick.linkVariable:=Null:C1517
+If ($dataTable_o.doubleClick#Null)
+
+// On génére l'url du double click sur une ligne du dataTable.
+ASSERT($dataTable_o.doubleClick.link#Null;"La propriété $dataTable_o.doubleClick.link n'est pas définit dans "+$dataTableNom_t)
+
+If ($dataTable_o.doubleClick.linkVariable=Null)
+$dataTable_o.doubleClick.linkVariable:=New object
+End if 
+
+$dataTable_o.doubleClick.link:=cwLibToUrl($dataTable_o.doubleClick.link;$dataTable_o.doubleClick.linkVariable)
+
+// Securité navigateur
+$dataTable_o.doubleClick.linkVariable:=Null
 End if 
 
 // Pour des raisons de sécurité on efface certaine propriété de l'objet.
 
-$dataTable_o.source:=Null:C1517
-$dataTable_o.column:=Null:C1517
-$dataTable_o.data:=Null:C1517
+$dataTable_o.source:=Null
+$dataTable_o.column:=Null
+$dataTable_o.data:=Null
 
-If ($pageWeb_o.dataTable_c=Null:C1517)
-	$pageWeb_o.dataTable_c:=New collection:C1472()
+If ($pageWeb_o.dataTable_c=Null)
+$pageWeb_o.dataTable_c:=New collection()
 End if 
 
 $pageWeb_o.dataTable_c.push($dataTable_o)
@@ -110,3 +110,5 @@ $pageWeb_o.dataTable_c.push($dataTable_o)
 $1->:=$pageWeb_o
 
 $0:="id=\""+$dataTableNom_t+"\" class=\"table table-striped table-bordered\" width=\"100%\""
+
+*/
