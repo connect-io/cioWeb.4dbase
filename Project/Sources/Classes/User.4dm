@@ -69,7 +69,10 @@ Historique
 				visiteur_o[$input.lib]:=$entity[$entityNameCalcule_t]
 				$compatible_b:=True:C214
 			Else 
-				$entityNameCalcule_t:=Lowercase:C14(Substring:C12($entityNameCalcule_t;1;1))+Substring:C12($entityNameCalcule_t;2)
+				//$entityNameCalcule_t:=Lowercase(Substring($entityNameCalcule_t;1;1))+Substring($entityNameCalcule_t;2)
+				
+				// 1er caractère en minuscule.
+				$entityNameCalcule_t[[1]]:=Lowercase:C14($entityNameCalcule_t[[1]])
 				
 				// Dans le cas ou le champ commence par une minuscule.
 				$compatible_b:=$entity[$entityNameCalcule_t]#Null:C1517
@@ -119,6 +122,33 @@ Historique
 	If ($Form_c.length=1)
 		$0:=OB Copy:C1225($Form_c[0])
 	End if 
+	
+	
+	
+Function formToEntity
+/* -----------------------------------------------------------------------------
+Fonction : User.formToEntity
+	
+Charger les valeurs d'un formulaire vers une entité (ou objet).
+	
+Historique
+04/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
+----------------------------------------------------------------------------- */
+	
+	// Déclarations
+	var $1 : Pointer  // Objet qui sert à remplir les inputs du formulaire $1
+	// Si true : On ne modifie pas le input.
+	
+	var $inputName_t : Text
+	
+	For each ($inputName_t;This:C1470.dataFormTyping)
+		If ($inputName_t#"token")
+			ASSERT:C1129($1->[$inputName_t]#Null:C1517;"La propriete "+$inputName_t+" n'est pas déclaré dans l'entité.")
+			
+			$1->[$inputName_t]:=This:C1470.dataFormTyping[$inputName_t]
+		End if 
+	End for each 
+	
 	
 	
 Function getInfo
