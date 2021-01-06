@@ -57,6 +57,10 @@ Historique
 		This:C1470.from:=$server_o.from
 	End if 
 	
+	If (Storage:C1525.eMail.globalVar#Null:C1517)
+		This:C1470.globalVar:=OB Copy:C1225(Storage:C1525.eMail.globalVar)
+	End if 
+	
 	
 Function send
 /* -----------------------------------------------------------------------------

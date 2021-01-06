@@ -1,10 +1,17 @@
 //%attributes = {"shared":true}
 
+$test:=New object:C1471
+$test.toto:="tata"
 
-$ablan:="Salut je suis i18n(peter) à la campagne."
+$dodo:=New shared object:C1526("ok";1)
+Use (Storage:C1525.eMail)
+	Storage:C1525.eMail.globalVar:=New object:C1471
+	Storage:C1525.eMail.globalVar:=OB Copy:C1225($test)
+End use 
 
-$cleATraduire_t:=Substring:C12($ablan;Position:C15("i18n(";$ablan)+5)
 
-$cleATraduire_t:=Substring:C12($cleATraduire_t;1;Position:C15(")";$cleATraduire_t)-1)
 
-$ablan:=cwToolTextReplaceByRegex($ablan;"i18n(.*?)\\)";"Spiderman")
+$infoBase_o:=New object:C1471
+$infoBase_o.societeNom:="Guillon Corportate SAS"
+
+<>webApp_o.eMailConfigLoad($infoBase_o)

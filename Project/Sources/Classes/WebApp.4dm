@@ -444,6 +444,7 @@ Precharge toutes les e-mails de l'application web.
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 ----------------------------------------------------------------------------- */
+	var $1 : Object
 	
 	var $configFile_o : 4D:C1709.File
 	var $modelFolder_o : 4D:C1709.Folder
@@ -461,6 +462,13 @@ Historique
 	// Chargement de la configuration des eMails.
 	Use (Storage:C1525)
 		Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o;ck shared:K85:29)
+		
+		// On stock les variables communes à tout les mails.
+		If (Count parameters:C259=1)
+			Use (Storage:C1525.eMail)
+				Storage:C1525.eMail.globalVar:=OB Copy:C1225($1;ck shared:K85:29)
+			End use 
+		End if 
 		
 		Use (Storage:C1525.eMail)
 			// chargement complet du dossier des models.
