@@ -400,6 +400,7 @@ Chargement d'une nouvelle dataTable
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
 ----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // Lib du dataTable
@@ -414,7 +415,7 @@ Historique
 	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
 	
 	
-	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1)
+	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
 	
 	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
 	
