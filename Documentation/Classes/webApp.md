@@ -389,5 +389,5 @@ Une fois que ces variables sont chargées dans les mails, il est simple de les a
 ```html
 <!--#4DTEXT this.globalVar.*nomAttribut*-->
 ```
-Pour plus d'informations sur les mails, merci de vous référer à la classe [webApp](EMail.md)
+Pour plus d'informations sur les mails, merci de vous référer à la classe [webApp](EMail.md).
 
