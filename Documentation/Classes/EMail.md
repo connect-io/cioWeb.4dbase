@@ -2,7 +2,7 @@
 # Class : EMail
 
 ### Description
-Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier de config "email.json" qui se trouve à la racine du dossier Sources. La lecture de ce document se fait nécessairement en appelant la fonction EMailConfigLoad de la classe * [EMail](WebApp.md)
+Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier de config "email.json" qui se trouve à la racine du dossier Sources. La lecture de ce document se fait nécessairement en appelant la fonction EMailConfigLoad de la classe [EMail](webApp.md).
 
 ### Accès aux fonctions
 * [Fichier : email.json](#fichier--email.json)
