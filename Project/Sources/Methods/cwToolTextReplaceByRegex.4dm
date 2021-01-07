@@ -1,4 +1,4 @@
-//%attributes = {"invisible":true}
+//%attributes = {"shared":true}
 /* -----------------------------------------------------------------------------
 Méthode : cwToolTextReplaceByRegex
 
