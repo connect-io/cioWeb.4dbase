@@ -20,6 +20,7 @@ C'est la class principale du composant cioWeb.
 * [Fonction : userNew](#fonction--userNew)
 * [Fonction : webAppPath](#fonction--webAppPath)
 * [Fonction : webfolderSubdomainPath](#fonction--webfolderSubdomainPath)
+* [Fonction : eMailConfigLoad](#fonction--eMailConfigLoad)
 
 
 ------------------------------------------------------
@@ -352,3 +353,40 @@ $cheminDossierWebAppSousDomaine_t:=<>webApp_o.webfolderSubdomainPath("www")
 
 // $cheminDossierWebAppSousDomaine_t = [...]/monApp4D/WebApp/WebFolder/www/
 ```
+
+
+
+------------------------------------------------------
+
+## Fonction : eMailConfigLoad
+Permet de configurer la boite mail et les modèles présents. On doit obligatoirement avoir inclus un fichier email.json sur dans le dossier. Ces variables viendront se greffer au champ globalVar d'un mail nouvellement créé grace à la classe mail.
+
+
+### Fonctionnement
+```4d
+WebApp.eMailConfigLoad({$globalVar})
+```
+
+| Paramêtre             | Type       | entrée/sortie             | Description |
+| --------------------- | ---------- | ------------------------- | ----------- |
+| $globalVar            | Objet      | Entrée  (optionnel)       |Permet de mettre des variables globales que l'on pourra inclure dans tous les mails (par exemple le nom de la boutique, du domaine, le lien vers la page facebook, un numero de telephone, ...)|
+
+### Example
+```4d
+// Configuration du chargement des emails
+
+$globalVar:=New object()
+
+$globalVar.boutiqueDomaine:="connect-io.fr"
+$globalVar.boutiqueNom:="connect-io.fr"
+$globalVar.boutiqueUrlFaceBook:="https://www.connect-io.fr"
+$globalVar.boutiqueTelephone:="0123456789"
+
+<>webApp_o.eMailConfigLoad($globalVar)
+```
+### Inclure ces variables dans un modèle de mail
+Une fois que ces variables sont chargées dans les mails, il est simple de les appeler depuis le modèle html d'un mail : 
+```html
+<!--#4DTEXT this.globalVar.*nomAttribut*-->
+```
+* [WebApp](Documentation/Classes/Route.md)
