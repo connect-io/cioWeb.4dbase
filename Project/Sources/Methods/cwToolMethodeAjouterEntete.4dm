@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"shared":true}
 /* -----------------------------------------------------------------------------
 Methode projet : cwToolMethodeAjouterEntete
 
