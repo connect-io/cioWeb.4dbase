@@ -45,20 +45,24 @@ For each ($traduction_o;$traduction_c)
 		If ($tabNoms{$vlElem}#Current method name:C684)  // On évite de toucher à la méthode en cours d'execution...
 			
 			METHOD GET CODE:C1190($tabNoms{$vlElem};$source_t)
+			$position_l:=1
 			$source_t:=Replace string:C233($source_t;"\r";"##r")
 			$source_t:=Replace string:C233($source_t;"\n";"##n")
 			$obsolete_t:=""
 			
 			Repeat 
 				
-				$regexValid_b:=Match regex:C1019($traduction_o.old;$source_t;1;$pos_trouvee_l;$long_trouvée_l)
+				$regexValid_b:=Match regex:C1019($traduction_o.old;$source_t;$position_l;$pos_trouvee_l;$long_trouvée_l)
 				
 				If ($regexValid_b)
 					
 					$obsolete_t:=Substring:C12($source_t;$pos_trouvee_l;$long_trouvée_l)
 					$modeleRemplacer:="var "+Substring:C12($source_t;$pos_trouvee_l+$longueur_l;$long_trouvée_l-$longueur_l-1)+" : "+$traduction_o.new
-					$source_t:=Replace string:C233($source_t;$obsolete_t;$modeleRemplacer)
-					$compteur_i:=$compteur_i+1
+					If (Substring:C12($source_t;$pos_trouvee_l+$longueur_l;$long_trouvée_l-$longueur_l-1)#"<>@")
+						$source_t:=Replace string:C233($source_t;$obsolete_t;$modeleRemplacer)
+						$compteur_i:=$compteur_i+1
+					End if 
+					$position_l:=$pos_trouvee_l+Length:C16($obsolete_t)
 				End if 
 				
 			Until (Not:C34($regexValid_b))
@@ -76,7 +80,6 @@ For each ($traduction_o;$traduction_c)
 End for each 
 
 ALERT:C41("Modifications terminées. Nombre de variables modifiées : "+String:C10($compteur_i))
-
 
 
 
