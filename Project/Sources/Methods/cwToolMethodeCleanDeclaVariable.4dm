@@ -5,9 +5,8 @@ Methode projet : cwToolMethodeCleanDeclaVariable
 Convertit dans le code 4D la déclaration des variables dans le nouveau format "var"
 
 Historique
-07/01/2021 titouan@connect-io.fr - Création
+07/01/2021 - Titouan Guillon <titouan@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
-
 
 //Déclarations
 var $traduction_c : Collection

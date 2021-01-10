@@ -5,7 +5,7 @@ Méthode : cwToolJsoncToJson
 Converti du JSONC en JSON
 
 Historique
-01/10/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

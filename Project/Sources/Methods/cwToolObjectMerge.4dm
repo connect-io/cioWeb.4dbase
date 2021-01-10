@@ -5,8 +5,8 @@ Méthode : cwToolObjectMerge (composant CioWeb)
 Fusionne 2 objets
 
 Historique
-27/10/15 gregory@connect-io.fr - Création
-27/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
+27/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+27/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération de la méthode depuis le composant cioObjet
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

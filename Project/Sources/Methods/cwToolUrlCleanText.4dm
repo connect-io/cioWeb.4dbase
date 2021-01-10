@@ -5,8 +5,8 @@ Méthode : cwToolUrlCleanText
 Permet de nettoyer un texte que l'on souhaite utiliser dans une url.
 
 Historique
-13/03/18 gregory@connect-io.fr - Création
-26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioGénérique
+13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération méthode depuis composant cioGénérique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

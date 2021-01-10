@@ -5,8 +5,8 @@ Methode projet : cwToolMethodeAjouterEntete
 
 
 Historique
-07/01/2021 titouan@connect-io.fr - Création
-08/01/2021 titouan@connect-io.fr - Finitions
+07/01/2021 - Titouan Guillon <titouan@connect-io.fr> - Création
+08/01/2021 - Titouan Guillon <titouan@connect-io.fr> - Finitions
 -----------------------------------------------------------------------------*/
 
 //Déclaration

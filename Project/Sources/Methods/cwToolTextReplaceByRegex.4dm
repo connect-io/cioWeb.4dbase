@@ -5,8 +5,8 @@ Méthode : cwToolTextReplaceByRegex
 Remplace une chaine de caractère depuis une regex par un contenu fixe.
 
 Historique
-19/09/16 gregory@connect-io.fr - Création
-26/10/19 gregory@connect-io.fr - Récupération méthode depuis composant cioRegex et ré-écriture
+19/09/16 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération méthode depuis composant cioRegex et ré-écriture
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

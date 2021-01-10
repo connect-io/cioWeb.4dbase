@@ -6,7 +6,7 @@ Remplace une chaine de caractère depuis une regex par un contenu fixe.
 
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
-02/12/20 - Alban Catoire alban@connect-io.fr> - Réveil avec storage
+02/12/20 - Alban Catoire <alban@connect-io.fr> - Réveil avec storage
 -----------------------------------------------------------------------------*/
 
 // Déclarations

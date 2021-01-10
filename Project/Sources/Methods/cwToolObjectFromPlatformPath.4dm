@@ -6,7 +6,7 @@ Charge un objet depuis le chemin d'un fichier. (Compatible JSON et JSONC)
 Cette methode n'est pas partagé avec la base hote car il est préférable d'utiliser : cwToolObjectFromFile
 
 Historique
-01/10/2020 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 

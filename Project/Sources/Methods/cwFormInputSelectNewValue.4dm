@@ -5,7 +5,7 @@ Méthode : cwFormInputSelectNewValue
 Générer des nouvelles entrée dans un input de type select.
 
 Historique
-03/07/19 gregory@connect-io.fr - Utilisation avec des collections
+03/07/19 - Grégory Fromain <gregory@connect-io.fr> - Utilisation avec des collections
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 
 Struture de la collection
