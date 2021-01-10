@@ -267,6 +267,7 @@ Pour résumer les différents éléments que l'on peut trouver dans l'input, nou
 | lib                 | texte   | ""                | Le nom de la variable |
 | type                | texte   | ""                | Définit le type de notre variable (text, textarea, select, etc), voir tableau ci-dessus |
 | label               | texte   | ""                | Texte qui s'affiche avec notre variable sur la page web |
+| helpBlock           | texte   | ""                | Affiche un message d'aide pour renseigner le champ |
 | collabel            | entier  | ""                | Organise l'espace entre le label et l'input HTML|
 | class               | texte   | ""                | Rajoute des class HTML à l'input |
 | clientDisabled      | boolean | false             | Défini si l'input est saisissable ou pas (false = saisissable) |
@@ -281,7 +282,7 @@ Pour résumer les différents éléments que l'on peut trouver dans l'input, nou
 | divClassSubmit      | texte   | ""                | Ajout d'un class parent pour les inputs type submit. |
 | dateMin             | texte   | ""                | Définis la date minimum lorsqu'on a un type date |
 | dateMax             | texte   | ""                | Définis la date maximum lorsqu'on a un type date  |
-| blobSize            | texte   | ""                |  |
+| blobSize            | texte   | ""                | Taille maximum autorisé pour le transfert d'un fichier |
 
 
 Dans ce cas d'input nécessitant une sélection (select ou radio), une configuration en dur peut être définie de la manière suivante :
