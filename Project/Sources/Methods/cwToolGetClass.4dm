@@ -5,7 +5,7 @@ Méthode : cwToolGetClass
 Renvoie une class vers la base hôte.
 
 Historique
-03/07/2020 - gregory@connect-io.fr - Création
+03/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

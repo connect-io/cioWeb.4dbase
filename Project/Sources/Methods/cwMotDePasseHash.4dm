@@ -6,7 +6,7 @@ Génére un hash avec uniquement les valeurs a-Z0-9 et $
 Car cela peut poser des problèmes en cas de passage dans une url ou mot de passe.
 
 Historique
-02/05/19 Gregory@connect-io.fr - GF190502001 - Création
+02/05/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

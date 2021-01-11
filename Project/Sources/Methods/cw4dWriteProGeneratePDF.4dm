@@ -1,12 +1,11 @@
 //%attributes = {"shared":true}
 /* -----------------------------------------------------------------------------
- Methode projet : cw4dWriteProGeneratePDF
+Methode projet : cw4dWriteProGeneratePDF
 
- Detail des entreprises ajax
+Detail des entreprises ajax
 
- Historique
-  03/11/20 - Grégory Fromain - Création
-
+Historique
+03/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
 
 /*

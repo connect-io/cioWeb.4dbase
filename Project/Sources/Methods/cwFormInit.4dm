@@ -9,7 +9,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - On utilise les formulaires depuis une collection au lieux d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
-02/12/20 - Alban Catoire alban@connect-io.fr> - Gestion de la traduction dans les formulaires
+02/12/20 - Alban Catoire <alban@connect-io.fr> - Gestion de la traduction dans les formulaires
 ----------------------------------------------------------------------------- */
 
 // Déclarations

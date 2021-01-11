@@ -2,7 +2,7 @@
 # Class : EMail
 
 ### Description
-Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier de config "email.json" qui se trouve à la racine du dossier Sources.
+Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier de config "email.json" qui se trouve à la racine du dossier Sources. La lecture de ce document se fait nécessairement en appelant la fonction EMailConfigLoad de la classe [EMail](webApp.md).
 
 ### Accès aux fonctions
 * [Fichier : email.json](#fichier--email.json)
@@ -177,7 +177,7 @@ Voila la description des différents paramètres utilisés dans la fonction :
 
 
 ### Example
-```html
+```4d
 $mail:=cs.EMail.new("transactionnel")
 
 $variableDansMail_o:=New object()
@@ -194,7 +194,12 @@ $retour:=$mail.sendModel("demo3";$variableDansMail_o)
 Note : 
 <ul>
 <li>
-Les variables <b>$variableDansMail_o.name</b> et <b>$variableDansMail_o.produits</b> sont instancées dans le html de la manière suivante : <!--#4DTEXT this.name--> ou <!--#4DTEXT this.produits[i].nomAttribut-->
+Les variables <b>$variableDansMail_o.name</b> et <b>$variableDansMail_o.produits</b> sont instancées dans le html de la manière suivante : 
+
+
+```html
+<!--#4DTEXT this.name--> ou <!--#4DTEXT this.produits[i].nomAttribut-->
+```
 </li>
 
 <li>

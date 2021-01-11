@@ -5,9 +5,9 @@ Méthode : cwLibToUrl
 Permet de renvoyer l'url d'une page.
 
 Historique
-21/03/15 gregory@connect-io.fr - Création
-26/10/19 gregory@connect-io.fr - notation objet
-30/10/19 gregory@connect-io.fr - ajout possibilité de forcer une variable de l'url depuis le routing.
+21/03/15 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - notation objet
+30/10/19 - Grégory Fromain <gregory@connect-io.fr> - ajout possibilité de forcer une variable de l'url depuis le routing.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 

@@ -400,6 +400,7 @@ Chargement d'une nouvelle dataTable
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
 ----------------------------------------------------------------------------- */
 	
 	var $1 : Text  // Lib du dataTable
@@ -414,7 +415,7 @@ Historique
 	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
 	
 	
-	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1)
+	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
 	
 	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
 	
@@ -444,6 +445,7 @@ Precharge toutes les e-mails de l'application web.
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 ----------------------------------------------------------------------------- */
+	var $1 : Object
 	
 	var $configFile_o : 4D:C1709.File
 	var $modelFolder_o : 4D:C1709.Folder
@@ -461,6 +463,13 @@ Historique
 	// Chargement de la configuration des eMails.
 	Use (Storage:C1525)
 		Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o;ck shared:K85:29)
+		
+		// On stock les variables communes à tout les mails.
+		If (Count parameters:C259=1)
+			Use (Storage:C1525.eMail)
+				Storage:C1525.eMail.globalVar:=OB Copy:C1225($1;ck shared:K85:29)
+			End use 
+		End if 
 		
 		Use (Storage:C1525.eMail)
 			// chargement complet du dossier des models.

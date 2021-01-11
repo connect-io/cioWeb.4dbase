@@ -5,8 +5,8 @@ Méthode : cwToolObjectDeletePrefixKey
 Supprime un suffixe à chaque clé d'un objet.
 
 Historique
-15/08/17 gregory@connect-io.fr - Création
-26/10/19 gregory@connect-io.fr - Récupération de la méthode depuis le composant cioObjet
+15/08/17 - Grégory Fromain <gregory@connect-io.fr> - Création
+26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération de la méthode depuis le composant cioObjet
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Ré-ecriture de la méthode
 ----------------------------------------------------------------------------- */
