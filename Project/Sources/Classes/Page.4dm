@@ -120,9 +120,6 @@ Historique
 		
 	Else 
 		// Renvoie page 404
-		If (visiteur.url#"@.php")
-			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
-		End if 
 		
 		If (This:C1470.siteRoute_c.query("lib IS '404'").length#0)
 			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS '404'")[0]
@@ -131,6 +128,11 @@ Historique
 			
 			// Gestion de la langue de la page 404
 			pageWeb_o.lib:="404"
+			If (This:C1470.user.lang#Null:C1517)
+				If (This:C1470.user.lang#"")
+					pageWeb_o.route.data.lang:=This:C1470.user.lang
+				End if 
+			End if 
 			ARRAY TEXT:C222($champs;1)
 			ARRAY TEXT:C222($valeurs;1)
 			$champs{1}:="X-STATUS"
@@ -234,6 +236,9 @@ Historique
 	var $0 : Text  // le text en retour
 	
 	ASSERT:C1129($1#"";"Le param $1 doit être une chaine de caractère non vide.")
+	If (This:C1470.route.data.lang=Null:C1517)
+		This:C1470.route.data.lang:="fr"
+	End if 
 	$0:=String:C10(This:C1470.i18n[This:C1470.route.data.lang][$1])
 	// Exemple : Storage.sites.www.I18n.page.fr.index.title
 	If ($0="")
