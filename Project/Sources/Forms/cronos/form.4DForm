@@ -1,0 +1,83 @@
+﻿{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onCloseBox",
+		"onTimer"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Form.cronosImage": {
+					"type": "input",
+					"left": 10,
+					"top": 14,
+					"width": 64,
+					"height": 64,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.cronosImage",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none"
+				},
+				"Texte": {
+					"type": "text",
+					"text": "Message de Cronos",
+					"top": 89,
+					"left": 10,
+					"width": 147,
+					"height": 16,
+					"fontWeight": "bold",
+					"textDecoration": "underline"
+				},
+				"Form.cronosMessage": {
+					"type": "input",
+					"left": 10,
+					"top": 120,
+					"width": 220,
+					"height": 81,
+					"dataSource": "Form:C1466.cronosMessage",
+					"enterable": false,
+					"contextMenu": "none",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontFamily": "Arial",
+					"fontSize": 12
+				},
+				"Bouton": {
+					"type": "button",
+					"text": "Arrêt Cronos",
+					"top": 29,
+					"left": 124,
+					"width": 106,
+					"height": 34,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Bouton.4dm"
+				}
+			}
+		}
+	],
+	"geometryStamp": 41,
+	"method": "method.4dm"
+}

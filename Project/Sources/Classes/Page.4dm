@@ -210,7 +210,7 @@ Historique
 		
 		For each ($cssPath_t;This:C1470.cssPath)
 			
-			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Line feed:K15:40)
+			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Retour à la ligne:K15:40)
 		End for each 
 		
 	End if 
@@ -271,7 +271,7 @@ Historique
 	If (This:C1470.jsPath#Null:C1517)
 		
 		For each ($jsPath_t;This:C1470.jsPath)
-			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Line feed:K15:40)
+			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
 		End for each 
 	End if 
 	
@@ -279,7 +279,7 @@ Historique
 		$T_jsContenu:=Replace string:C233($T_jsContenu;"domaineCDN";$1)
 	End if 
 	
-	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
+	$0:=Char:C90(Retour à la ligne:K15:40)+$T_jsContenu
 	
 	
 	
@@ -306,15 +306,15 @@ Historique
 	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
 		
 		// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
-		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
-		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
+		$jsPath_t:=Replace string:C233($jsPath_t;":";Séparateur dossier:K24:12)  // Séparateur mac
+		$jsPath_t:=Replace string:C233($jsPath_t;"/";Séparateur dossier:K24:12)  // Séparateur unix
+		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Séparateur dossier:K24:12)  // Séparateur windows
 		
 		
-		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)=Is a document:K24:1)
-			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)+Char:C90(Line feed:K15:40)
+		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)=Est un document:K24:1)
+			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
 		Else 
-			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)
+			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)
 		End if 
 		
 	End for each 

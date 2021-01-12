@@ -1,0 +1,57 @@
+{
+    "smtpKeyPublic" : "16c327b992935b03423a31e8b041ce53",
+    "smtpKeySecret" : "ecb2602c5147576326a909a44a49fe0d",
+    "smtpHost" : "in-v3.mailjet.com",
+    "smtpVersion" : "v3",
+    "newAccount" : true,
+    "typeSearch" : [
+        {
+            "number" : "0",
+            "label" : "traités"
+        },
+        {
+            "number" : "1",
+            "label" : "en file d'attente"
+        },
+        {
+            "number" : "2",
+            "label" : "envoyés"
+        },
+        {
+            "number" : "3",
+            "label" : "ouverts"
+        },
+        {
+            "number" : "4",
+            "label" : "cliqués"
+        },
+        {
+            "number" : "5",
+            "label" : "en bounce"
+        },
+        {
+            "number" : "6",
+            "label" : "en spam"
+        },
+        {
+            "number" : "7",
+            "label" : "de désabonnement"
+        },
+        {
+            "number" : "8",
+            "label" : "bloqués"
+        },
+        {
+            "number" : "9",
+            "label" : "SoftBounce"
+        },
+        {
+            "number" : "10",
+            "label" : "HardBounce"
+        },
+        {
+            "number" : "11",
+            "label" : "différés"
+        }
+    ]
+}

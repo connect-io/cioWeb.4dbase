@@ -17,12 +17,12 @@ var $tsAvecDecallage : Integer
 
 
 ASSERT:C1129(Count parameters:C259=2;"Il manque un paramêtre à cette méthode.")
-ASSERT:C1129(Type:C295($2)=Is longint:K8:6;"Le param $1 doit être de type 'entier'.")
+ASSERT:C1129(Type:C295($2)=Est un entier long:K8:6;"Le param $1 doit être de type 'entier'.")
 ASSERT:C1129(($1="date") | ($1="heure");"La valeur de $1 est incorrect.")
 
-$tsAvecDecallage:=$2+cwDecallageHoraire
+$tsAvecDecallage:=$2+cwToolJetLag
 If ($1="date")
-	$0:=String:C10(Int:C8($tsAvecDecallage/86400)+!1970-01-01!;Internal date short:K1:7)
+	$0:=String:C10(Int:C8($tsAvecDecallage/86400)+!1970-01-01!;Interne date court:K1:7)
 Else 
-	$0:=String:C10(Time:C179(Mod:C98($tsAvecDecallage;86400));HH MM SS:K7:1)
+	$0:=String:C10(Time:C179(Mod:C98($tsAvecDecallage;86400));h mn s:K7:1)
 End if 

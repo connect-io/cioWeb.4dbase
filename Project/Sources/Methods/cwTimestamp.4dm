@@ -30,4 +30,4 @@ Else
 End if 
 
 $nbJourSec_l:=Int:C8(($date_d-!1970-01-01!)*86400)
-$0:=$nbJourSec_l+$heure_l-cwDecallageHoraire
+$0:=$nbJourSec_l+$heure_l-cwToolJetLag
