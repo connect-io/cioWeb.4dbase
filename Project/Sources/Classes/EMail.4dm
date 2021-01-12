@@ -103,8 +103,8 @@ Historique
 		This:C1470.from:=This:C1470.transporter.user
 	End if 
 	
-	//On vérifie que notre corps de message n'est pas vide
-	If (String:C10(This:C1470.htmlBody)="") & (String:C10(This:C1470.textBody)="")
+	//On vérifie que notre corps de message n'est pas vide (si This.bodyStructure est null ça veux dire qu'on ne passe pas par un mime mais par du code HTMLEUH classico-classique !)
+	If (String:C10(This:C1470.htmlBody)="") & (String:C10(This:C1470.textBody)="") & (This:C1470.bodyStructure=Null:C1517)
 		$error_t:="Il manque le contenu de votre message."
 	End if 
 	
