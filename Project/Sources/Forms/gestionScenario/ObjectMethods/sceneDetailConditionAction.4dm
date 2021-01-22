@@ -1,0 +1,1 @@
+  //caCreateWindowsFormCenter ("configSceneConditionAction";"center";Form)

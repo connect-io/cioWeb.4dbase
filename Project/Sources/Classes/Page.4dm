@@ -120,9 +120,6 @@ Historique
 		
 	Else 
 		// Renvoie page 404
-		If (visiteur.url#"@.php")
-			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page : "+visiteur.url
-		End if 
 		
 		If (This:C1470.siteRoute_c.query("lib IS '404'").length#0)
 			pageWeb_o:=This:C1470.siteRoute_c.query("lib IS '404'")[0]
@@ -131,6 +128,11 @@ Historique
 			
 			// Gestion de la langue de la page 404
 			pageWeb_o.lib:="404"
+			If (This:C1470.user.lang#Null:C1517)
+				If (This:C1470.user.lang#"")
+					pageWeb_o.route.data.lang:=This:C1470.user.lang
+				End if 
+			End if 
 			ARRAY TEXT:C222($champs;1)
 			ARRAY TEXT:C222($valeurs;1)
 			$champs{1}:="X-STATUS"
@@ -208,7 +210,7 @@ Historique
 		
 		For each ($cssPath_t;This:C1470.cssPath)
 			
-			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Line feed:K15:40)
+			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Retour à la ligne:K15:40)
 		End for each 
 		
 	End if 
@@ -234,6 +236,9 @@ Historique
 	var $0 : Text  // le text en retour
 	
 	ASSERT:C1129($1#"";"Le param $1 doit être une chaine de caractère non vide.")
+	If (This:C1470.route.data.lang=Null:C1517)
+		This:C1470.route.data.lang:="fr"
+	End if 
 	$0:=String:C10(This:C1470.i18n[This:C1470.route.data.lang][$1])
 	// Exemple : Storage.sites.www.I18n.page.fr.index.title
 	If ($0="")
@@ -266,7 +271,7 @@ Historique
 	If (This:C1470.jsPath#Null:C1517)
 		
 		For each ($jsPath_t;This:C1470.jsPath)
-			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Line feed:K15:40)
+			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
 		End for each 
 	End if 
 	
@@ -274,7 +279,7 @@ Historique
 		$T_jsContenu:=Replace string:C233($T_jsContenu;"domaineCDN";$1)
 	End if 
 	
-	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
+	$0:=Char:C90(Retour à la ligne:K15:40)+$T_jsContenu
 	
 	
 	
@@ -301,15 +306,15 @@ Historique
 	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
 		
 		// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
-		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
-		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
+		$jsPath_t:=Replace string:C233($jsPath_t;":";Séparateur dossier:K24:12)  // Séparateur mac
+		$jsPath_t:=Replace string:C233($jsPath_t;"/";Séparateur dossier:K24:12)  // Séparateur unix
+		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Séparateur dossier:K24:12)  // Séparateur windows
 		
 		
-		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)=Is a document:K24:1)
-			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)+Char:C90(Line feed:K15:40)
+		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)=Est un document:K24:1)
+			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
 		Else 
-			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)
+			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)
 		End if 
 		
 	End for each 

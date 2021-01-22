@@ -26,7 +26,7 @@ $retour:="ok"
 /*
 If (OB Is defined(visiteur;String($2)))
 $valeurInput:=String(OB Get(visiteur;$2))
-Else 
+Else
 $valeurInput:=""
 End if
 */

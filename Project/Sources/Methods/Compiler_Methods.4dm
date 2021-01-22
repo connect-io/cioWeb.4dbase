@@ -141,10 +141,6 @@ C_TEXT:C284(cwMinifier;$1)
 C_OBJECT:C1216(cwToolGetClass;$0)
 C_TEXT:C284(cwToolGetClass;$1)
 
-//cwIncludePageHtml
-C_TEXT:C284(cwIncludePageHtml;$0)
-C_TEXT:C284(cwIncludePageHtml;$1)
-
 //cwTimestamp
 C_LONGINT:C283(cwTimestamp;$0)
 C_DATE:C307(cwTimestamp;$1)
