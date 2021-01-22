@@ -75,9 +75,6 @@ End if
   // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
 	visiteur_o:=<>webApp_o.userNew()
-	
-	  // Contient les datatables que le visiteur va utiliser dans son processs
-	dataTables_o:=New object()
 End if 
 
   // Récupération des informations du visiteur.
@@ -102,8 +99,6 @@ visiteur_o.devMode:=visiteur_o.Host="@dev@"
   // ===== Rechargement des variables de l'application =====
 If (visiteur_o.devMode)
 	SET ASSERT ENABLED(True)
-	<>webApp_o.jsMinify()
-	<>webApp_o.htmlMinify()
 	<>webApp_o.serverStart()
 	<>webApp_o.urlCDN:=""
 End if 
@@ -111,6 +106,12 @@ End if
 
   // ===== Chargement des informations sur la page =====
 pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
+
+// On purge les dataTables.
+If (pageWeb_o.lib#"@ajax@")|(dataTables_o=null)
+	// Contient les datatables que le visiteur va utiliser dans son processs
+	dataTables_o:=New object()
+End if
 
   // On va fusionner les datas de la route de l'URL sur le visiteur.
 If (pageWeb_o.route.data#Null)

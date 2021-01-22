@@ -124,7 +124,6 @@ If ($resultat_t="")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean(visiteur.dataForm[$formInput_o.lib]))
 					
 				: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")
-					
 					// Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataForm[$formInput_o.lib];"<br>";"\r")
 					visiteur.dataFormTyping[$formInput_o.lib]:=Replace string:C233(visiteur.dataFormTyping[$formInput_o.lib];"<br>\r";"\r")
