@@ -1,7 +1,7 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 // Dans cette demo on veut envoyer un email simple à une personne.
-C_OBJECT:C1216($marketingAutomation_cs;$marketingAutomation_o)
-C_OBJECT:C1216($statut_o;$variable_o;$personne_o)
+var $marketingAutomation_cs; $marketingAutomation_o : Object
+var $statut_o; $variable_o; $personne_o : Object
 
 $marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
 
@@ -11,7 +11,7 @@ $marketingAutomation_o.loadPasserelle("Personne")  // Création de la passerelle
 $personne_o:=$marketingAutomation_o.loadPeopleByUID("2237F6C0D8AC4A78AC7AB423C57AF5F8")  // Recherche et chargement de l'entité de la personne
 
 //----- Envoi d'un e-mail simple -----
-$statut_o:=$personne_o.sendMail("Objet du mail";"Contenue de l'email")
+$statut_o:=$personne_o.sendMail("Objet du mail"; "Contenue de l'email")
 
 If (String:C10($statut_o.statusText)="ok@")  // Statut de l'envoie du mail
 	ALERT:C41("Votre email a bien été envoyé")
@@ -25,7 +25,7 @@ $variable_o:=New object:C1471()
 $variable_o.name:="Antoine"
 $variable_o.email:="XxXxXxXx@outlook.fr"
 
-$statut_o:=$personne_o.sendMailModel("Demo8";$variable_o)
+$statut_o:=$personne_o.sendMailModel("Demo8"; $variable_o)
 
 If (String:C10($statut_o.statusText)="ok")  // Statut de l'envoie du mail
 	ALERT:C41("Votre email a bien été envoyé")

@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 /* -----------------------------------------------------------------------------
 Méthode : cwFormInputSelectNewValue
 
@@ -20,8 +20,8 @@ Struture de la collection
 
 // Déclarations
 var $1 : Pointer  // ->visiteur
-var $2;$inputName_t : Text  // nom du input html
-var $3;$option_c : Collection  // {"lib" : "valeur"}
+var $2; $inputName_t : Text  // nom du input html
+var $3; $option_c : Collection  // {"lib" : "valeur"}
 var $4 : Text  // resultat par defaut (optionnel)
 
 var $selectOption_t : Text
@@ -37,23 +37,23 @@ $option_c:=$3
 $selectOption_t:=""
 
 
-If (Asserted:C1132($inputName_t#"";"le nom du formulaire ($2) est vide."))
-	If (Asserted:C1132(Type:C295($option_c)=Is collection:K8:32;Current method name:C684+", le type de $3 n'est pas valide pour le formulaire "+$inputName_t))
+If (Asserted:C1132($inputName_t#""; "le nom du formulaire ($2) est vide."))
+	If (Asserted:C1132(Type:C295($option_c)=Is collection:K8:32; Current method name:C684+", le type de $3 n'est pas valide pour le formulaire "+$inputName_t))
 		
 		If (Count parameters:C259=4)
 			// Si le param 4 est définit, on essai de séléctionner l'option en question.
-			$optionSelected_c:=$option_c.query("value IS :1";String:C10($4))
+			$optionSelected_c:=$option_c.query("value IS :1"; String:C10($4))
 			If ($optionSelected_c.length=1)
 				$optionSelected_c[0].selected:=True:C214
 			End if 
 		End if 
 		
-		For each ($option_o;$option_c)
+		For each ($option_o; $option_c)
 			$selectOption_t:=$selectOption_t+\
-				"<option value=\""+String:C10($option_o.value)+"\""+Choose:C955(Bool:C1537($option_o.selected);" selected";"")+Choose:C955(Bool:C1537($option_o.disabled);" disabled";"")+">"+\
+				"<option value=\""+String:C10($option_o.value)+"\""+Choose:C955(Bool:C1537($option_o.selected); " selected"; "")+Choose:C955(Bool:C1537($option_o.disabled); " disabled"; "")+">"+\
 				String:C10($option_o.lib)+"</option>"
 		End for each 
-		OB SET:C1220($visiteur;"selectOption"+$2;$selectOption_t)
+		OB SET:C1220($visiteur; "selectOption"+$2; $selectOption_t)
 	End if 
 End if 
 
@@ -81,9 +81,9 @@ $1->:=$visiteur
 // $4 = [text] resultat par defaut (optionnel)
 // ----------------------------------------------------
 
-//C_TEXT($2;$selected;$selectOption;$4)
-//C_POINTER($1)
-//C_OBJECT($3;$option;$visiteur)
+//var $2;$selected;$selectOption;$4 : text
+//var $1 : pointer
+//var $3;$option;$visiteur : object
 
 //$visiteur:=$1->
 //$option:=$3

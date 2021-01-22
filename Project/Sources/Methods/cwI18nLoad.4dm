@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 /* -----------------------------------------------------------------------------
 Méthode : cwI18nCharger
 
@@ -17,7 +17,7 @@ $SplitNomDoc:=New collection:C1472
 
 //Storage.i18n.sousDomaine.fr.page.titre
 //Storage.i18n.sousDomaine.fr.form.titre
-For each ($subDomain_t;This:C1470.config.subDomain_c)
+For each ($subDomain_t; This:C1470.config.subDomain_c)
 	
 	If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
 		Use (Storage:C1525.sites[$subDomain_t])
@@ -26,15 +26,15 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 	End if 
 	
 	
-	ARRAY TEXT:C222($fichiersTrad;0)
-	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersTrad;Recursive parsing:K24:13+Absolute path:K24:14)
+	ARRAY TEXT:C222($fichiersTrad; 0)
+	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t); $fichiersTrad; Recursive parsing:K24:13+Absolute path:K24:14)
 	
-	For ($numTrad;1;Size of array:C274($fichiersTrad))
+	For ($numTrad; 1; Size of array:C274($fichiersTrad))
 		$analyseTrad_b:=$fichiersTrad{$numTrad}="@i18n.json@"
 		
 		If ($analyseTrad_b)
-			$SplitNomDoc:=Split string:C1554($fichiersTrad{$numTrad};".")
-			$SplitNomDoc[0]:=Split string:C1554($SplitNomDoc[0];":")[Split string:C1554($SplitNomDoc[0];":").length-1]
+			$SplitNomDoc:=Split string:C1554($fichiersTrad{$numTrad}; ".")
+			$SplitNomDoc[0]:=Split string:C1554($SplitNomDoc[0]; ":")[Split string:C1554($SplitNomDoc[0]; ":").length-1]
 			// On récupére la collection de fichier de traduction
 			If (Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]]=Null:C1517)
 				Use (Storage:C1525.sites[$subDomain_t].I18n)
@@ -77,7 +77,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			
 			// Si c'est le 1er chargement de la traduction, on l'ajoute à la collection.
 			Use (Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]])
-				Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]])
+				Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]]:=OB Copy:C1225($trad; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]])
 			End use 
 			//Else 
 			//Use (Storage.sites[$subDomain_t].I18n[$SplitNomDoc[0]][$SplitNomDoc[1]][$indicesQuery_c[0]])
@@ -94,8 +94,8 @@ End for each
 
 /*
 If (True)  // Déclarations
-C_OBJECT($oFullI18n;$oFichierI18n)
-C_TEXT($T_langue)
+var $oFullI18n;$oFichierI18n : object
+var $T_langue : text
 End if 
 
 ARRAY TEXT($sites;0)

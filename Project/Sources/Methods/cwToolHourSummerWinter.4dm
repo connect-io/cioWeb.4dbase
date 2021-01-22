@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 // ----------------------------------------------------
 // Nom utilisateur (OS) : Programmeur
 // Date et heure : 13/07/20, 16:31:05
@@ -9,11 +9,11 @@
 //
 // Paramètres
 // ----------------------------------------------------
-C_DATE:C307($1)
-C_LONGINT:C283($0)
+var $1 : Date
+var $0 : Integer
 
-C_DATE:C307($date_machine;$date)
-C_BOOLEAN:C305($heure_hiver;$heure_hiver_bis;$heure_ete;$heure_ete_bis)
+var $date_machine; $date : Date
+var $heure_hiver; $heure_hiver_bis; $heure_ete; $heure_ete_bis : Boolean
 
 $date_machine:=Current date:C33
 $date:=$1

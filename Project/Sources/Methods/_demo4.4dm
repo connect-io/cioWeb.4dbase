@@ -1,8 +1,8 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 // Dans cette démo on va montrer comment on gère les scénarios et scènes
 
 // Comment faire une selection de personne ?
-C_OBJECT:C1216($marketingAutomation_cs;$marketingAutomation_o;$scenario_cs;$scenario_o)
+var $marketingAutomation_cs; $marketingAutomation_o; $scenario_cs; $scenario_o : Object
 
 $marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
 

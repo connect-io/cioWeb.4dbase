@@ -1,6 +1,6 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"lang":"en"}
 // Dans cette demo on va tacher de mettre à jour les informations d'une personne concernant les envoie de mail passé.
-C_OBJECT:C1216($marketingAutomation_cs;$marketingAutomation_o;$entity_o;$caPersonneMarketing_o;$retour_o)
+var $marketingAutomation_cs; $marketingAutomation_o; $entity_o; $caPersonneMarketing_o; $retour_o : Object
 
 $marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
 

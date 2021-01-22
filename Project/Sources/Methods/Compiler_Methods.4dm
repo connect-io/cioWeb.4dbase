@@ -1,172 +1,172 @@
-//%attributes = {"invisible":true}
+//%attributes = {"invisible":true,"lang":"en"}
 
 
 //cwDecallageHoraire
-C_LONGINT:C283(cwDecallageHoraire;$0)
+var cwDecallageHoraire; $0 : Integer
 
 //cwToolTextReplaceByRegex
-C_TEXT:C284(cwToolTextReplaceByRegex;$0)
-C_TEXT:C284(cwToolTextReplaceByRegex;$1)
-C_TEXT:C284(cwToolTextReplaceByRegex;$2)
-C_TEXT:C284(cwToolTextReplaceByRegex;$3)
+var cwToolTextReplaceByRegex; $0 : Text
+var cwToolTextReplaceByRegex; $1 : Text
+var cwToolTextReplaceByRegex; $2 : Text
+var cwToolTextReplaceByRegex; $3 : Text
 
 //cwDateFormatTexte
-C_TEXT:C284(cwDateFormatTexte;$0)
-C_TEXT:C284(cwDateFormatTexte;$1)
-C_DATE:C307(cwDateFormatTexte;$2)
+var cwDateFormatTexte; $0 : Text
+var cwDateFormatTexte; $1 : Text
+var cwDateFormatTexte; $2 : Date
 
 //cwMotDePasseHash
-C_TEXT:C284(cwMotDePasseHash;$0)
-C_TEXT:C284(cwMotDePasseHash;$1)
+var cwMotDePasseHash; $0 : Text
+var cwMotDePasseHash; $1 : Text
 
 //cwFormInputSelectNewValue
-C_POINTER:C301(cwFormInputSelectNewValue;$1)
-C_TEXT:C284(cwFormInputSelectNewValue;$2)
-C_COLLECTION:C1488(cwFormInputSelectNewValue;$3)
-C_TEXT:C284(cwFormInputSelectNewValue;$4)
+var cwFormInputSelectNewValue; $1 : Pointer
+var cwFormInputSelectNewValue; $2 : Text
+var cwFormInputSelectNewValue; $3 : Collection
+var cwFormInputSelectNewValue; $4 : Text
 
 //cwToolObjectProgress4DTag
-C_OBJECT:C1216(cwToolObjectProgress4DTag;$0)
-C_OBJECT:C1216(cwToolObjectProgress4DTag;$1)
+var cwToolObjectProgress4DTag; $0 : Object
+var cwToolObjectProgress4DTag; $1 : Object
 
 //cwLogErreurAjout
-C_TEXT:C284(cwLogErreurAjout;$1)
-C_OBJECT:C1216(cwLogErreurAjout;$2)
+var cwLogErreurAjout; $1 : Text
+var cwLogErreurAjout; $2 : Object
 
 //cwInputInjection4DHtmlSafeUse
-C_TEXT:C284(cwInputInjection4DHtmlSafeUse;$0)
-C_TEXT:C284(cwInputInjection4DHtmlSafeUse;$1)
+var cwInputInjection4DHtmlSafeUse; $0 : Text
+var cwInputInjection4DHtmlSafeUse; $1 : Text
 
 //cwLangueActive
-C_TEXT:C284(cwLangueActive;$1)
+var cwLangueActive; $1 : Text
 
 //cwInputInjection4DHtmlIsValide
-C_BOOLEAN:C305(cwInputInjection4DHtmlIsValide;$0)
-C_TEXT:C284(cwInputInjection4DHtmlIsValide;$1)
+var cwInputInjection4DHtmlIsValide; $0 : Boolean
+var cwInputInjection4DHtmlIsValide; $1 : Text
 
 //cwTimestampLire
-C_TEXT:C284(cwTimestampLire;$0)
-C_TEXT:C284(cwTimestampLire;$1)
-C_LONGINT:C283(cwTimestampLire;$2)
+var cwTimestampLire; $0 : Text
+var cwTimestampLire; $1 : Text
+var cwTimestampLire; $2 : Integer
 
 //cwToolObjectFromPlatformPath
-C_OBJECT:C1216(cwToolObjectFromPlatformPath;$0)
-C_TEXT:C284(cwToolObjectFromPlatformPath;$1)
+var cwToolObjectFromPlatformPath; $0 : Object
+var cwToolObjectFromPlatformPath; $1 : Text
 
 //cwHttpRedirect
-C_TEXT:C284(cwHttpRedirect;$1)
+var cwHttpRedirect; $1 : Text
 
 //cwFormGetData
-C_OBJECT:C1216(cwFormGetData;$0)
-C_POINTER:C301(cwFormGetData;$1)
-C_TEXT:C284(cwFormGetData;$2)
+var cwFormGetData; $0 : Object
+var cwFormGetData; $1 : Pointer
+var cwFormGetData; $2 : Text
 
 //cwSupprBaliseHtml
-C_TEXT:C284(cwSupprBaliseHtml;$0)
-C_TEXT:C284(cwSupprBaliseHtml;$1)
+var cwSupprBaliseHtml; $0 : Text
+var cwSupprBaliseHtml; $1 : Text
 
 //cwRedirection301
-C_TEXT:C284(cwRedirection301;$1)
+var cwRedirection301; $1 : Text
 
 //cwPageActive
-C_TEXT:C284(cwPageActive;$0)
-C_TEXT:C284(cwPageActive;$1)
+var cwPageActive; $0 : Text
+var cwPageActive; $1 : Text
 
 //cwDataTableJsInformation
-C_TEXT:C284(cwDataTableJsInformation;$0)
-C_POINTER:C301(cwDataTableJsInformation;$1)
-C_TEXT:C284(cwDataTableJsInformation;$2)
-C_VARIANT:C1683(cwDataTableJsInformation;$3)
+var cwDataTableJsInformation; $0 : Text
+var cwDataTableJsInformation; $1 : Pointer
+var cwDataTableJsInformation; $2 : Text
+var cwDataTableJsInformation; $3 : Variant
 
 //cwInputValidation
-C_TEXT:C284(cwInputValidation;$0)
-C_TEXT:C284(cwInputValidation;$1)
-C_TEXT:C284(cwInputValidation;$2)
+var cwInputValidation; $0 : Text
+var cwInputValidation; $1 : Text
+var cwInputValidation; $2 : Text
 
 //cwExtensionFichier
-C_TEXT:C284(cwExtensionFichier;$0)
-C_TEXT:C284(cwExtensionFichier;$1)
+var cwExtensionFichier; $0 : Text
+var cwExtensionFichier; $1 : Text
 
 //cwToolPathFolderOrAlias
-C_TEXT:C284(cwToolPathFolderOrAlias;$0)
-C_TEXT:C284(cwToolPathFolderOrAlias;$1)
+var cwToolPathFolderOrAlias; $0 : Text
+var cwToolPathFolderOrAlias; $1 : Text
 
 //cwInputHtml
-C_TEXT:C284(cwInputHtml;$0)
-C_TEXT:C284(cwInputHtml;$1)
+var cwInputHtml; $0 : Text
+var cwInputHtml; $1 : Text
 
 //cwToolObjectMerge
-C_OBJECT:C1216(cwToolObjectMerge;$0)
-C_OBJECT:C1216(cwToolObjectMerge;$1)
-C_OBJECT:C1216(cwToolObjectMerge;$2)
+var cwToolObjectMerge; $0 : Object
+var cwToolObjectMerge; $1 : Object
+var cwToolObjectMerge; $2 : Object
 
 //cwToolUrlCleanText
-C_TEXT:C284(cwToolUrlCleanText;$0)
-C_TEXT:C284(cwToolUrlCleanText;$1)
+var cwToolUrlCleanText; $0 : Text
+var cwToolUrlCleanText; $1 : Text
 
 //cwLibToUrl
-C_TEXT:C284(cwLibToUrl;$0)
-C_TEXT:C284(cwLibToUrl;$1)
-C_OBJECT:C1216(cwLibToUrl;$2)
+var cwLibToUrl; $0 : Text
+var cwLibToUrl; $1 : Text
+var cwLibToUrl; $2 : Object
 
 
 //cwFormInit
-C_TEXT:C284(cwFormInit;$0)
-C_TEXT:C284(cwFormInit;$1)
+var cwFormInit; $0 : Text
+var cwFormInit; $1 : Text
 
 //cwFormControl
-C_TEXT:C284(cwFormControl;$0)
-C_POINTER:C301(cwFormControl;$1)
-C_TEXT:C284(cwFormControl;$2)
+var cwFormControl; $0 : Text
+var cwFormControl; $1 : Pointer
+var cwFormControl; $2 : Text
 
 //cwToolHashUrl
-C_TEXT:C284(cwToolHashUrl;$0)
-C_TEXT:C284(cwToolHashUrl;$1)
-C_TEXT:C284(cwJsSetFile;${1})
+var cwToolHashUrl; $0 : Text
+var cwToolHashUrl; $1 : Text
+var cwJsSetFile; ${1} : Text
 
 //cwDateClean
-C_TEXT:C284(cwDateClean;$0)
-C_TEXT:C284(cwDateClean;$1)
+var cwDateClean; $0 : Text
+var cwDateClean; $1 : Text
 
 //cwFormatValide
-C_TEXT:C284(cwFormatValide;$0)
-C_TEXT:C284(cwFormatValide;$1)
-C_TEXT:C284(cwFormatValide;$2)
+var cwFormatValide; $0 : Text
+var cwFormatValide; $1 : Text
+var cwFormatValide; $2 : Text
 
 //cwMinifier
-C_TEXT:C284(cwMinifier;$0)
-C_TEXT:C284(cwMinifier;$1)
+var cwMinifier; $0 : Text
+var cwMinifier; $1 : Text
 
 //cwToolGetClass
-C_OBJECT:C1216(cwToolGetClass;$0)
-C_TEXT:C284(cwToolGetClass;$1)
+var cwToolGetClass; $0 : Object
+var cwToolGetClass; $1 : Text
 
 //cwTimestamp
-C_LONGINT:C283(cwTimestamp;$0)
-C_DATE:C307(cwTimestamp;$1)
-C_TIME:C306(cwTimestamp;$2)
+var cwTimestamp; $0 : Integer
+var cwTimestamp; $1 : Date
+var cwTimestamp; $2 : Time
 
 //cwToolJsoncToJson
-C_TEXT:C284(cwToolJsoncToJson;$0)
-C_TEXT:C284(cwToolJsoncToJson;$1)
+var cwToolJsoncToJson; $0 : Text
+var cwToolJsoncToJson; $1 : Text
 
 //cwToolObjectFromFile
-C_OBJECT:C1216(cwToolObjectFromFile;$0)
-C_OBJECT:C1216(cwToolObjectFromFile;$1)
+var cwToolObjectFromFile; $0 : Object
+var cwToolObjectFromFile; $1 : Object
 
 //cw4dWriteProGeneratePDF
-C_TEXT:C284(cw4dWriteProGeneratePDF;$0)
-C_VARIANT:C1683(cw4dWriteProGeneratePDF;$1)
-C_VARIANT:C1683(cw4dWriteProGeneratePDF;$2)
-C_OBJECT:C1216(cw4dWriteProGeneratePDF;$3)
+var cw4dWriteProGeneratePDF; $0 : Text
+var cw4dWriteProGeneratePDF; $1 : Variant
+var cw4dWriteProGeneratePDF; $2 : Variant
+var cw4dWriteProGeneratePDF; $3 : Object
 
 //cwGetVersion
-C_TEXT:C284(cwGetVersion;$0)
+var cwGetVersion; $0 : Text
 
 //cwToolPathSeparator
-C_TEXT:C284(cwToolPathSeparator;$0)
-C_TEXT:C284(cwToolPathSeparator;$1)
-C_TEXT:C284(cwToolPathSeparator;$2)
+var cwToolPathSeparator; $0 : Text
+var cwToolPathSeparator; $1 : Text
+var cwToolPathSeparator; $2 : Text
 
 //cwToolObjectFromFile
-C_LONGINT:C283(cwToolObjectFromFile;$2)
+var cwToolObjectFromFile; $2 : Integer

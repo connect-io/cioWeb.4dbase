@@ -1,17 +1,17 @@
-//%attributes = {"invisible":true}
-C_TEXT:C284(car)
-C_VARIANT:C1683(corps_t)
-C_OBJECT:C1216(dataColumn_o)
-C_OBJECT:C1216(dataInBase_o)
-C_OBJECT:C1216(dataligne_o)
-C_OBJECT:C1216(formInput_o)
-C_OBJECT:C1216(formulaire_o)
-C_OBJECT:C1216(pageWeb_o)
-C_LONGINT:C283(posTexte)
-C_OBJECT:C1216(routeVar)
-C_COLLECTION:C1488(siteDataTable_c)
-C_COLLECTION:C1488(siteRoute_c)
-C_TEXT:C284(texteIn)
-C_TEXT:C284(texteOut)
-C_OBJECT:C1216(visiteur)
-C_VARIANT:C1683(visiteur_o)
+//%attributes = {"invisible":true,"lang":"en"}
+var car : Text
+var corps_t : Variant
+var dataColumn_o : Object
+var dataInBase_o : Object
+var dataligne_o : Object
+var formInput_o : Object
+var formulaire_o : Object
+var pageWeb_o : Object
+var posTexte : Integer
+var routeVar : Object
+var siteDataTable_c : Collection
+var siteRoute_c : Collection
+var texteIn : Text
+var texteOut : Text
+var visiteur : Object
+var visiteur_o : Variant
