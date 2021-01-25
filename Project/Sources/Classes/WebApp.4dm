@@ -20,8 +20,7 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création automatique de custom.css si besoin.
------------------------------------------------------------------------------ */
-	
+-----------------------------------------------------------------------------*/
 	
 	var $source_o : Object  // dossier sources
 	var $subDomain_t : Text  // Nom du sous domaine
@@ -52,20 +51,19 @@ Historique
 	This:C1470.sites:=New object:C1471
 	
 	
-	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
-	$source_o:=Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2)
+	$source_o:=Folder:C1567(This:C1470.sourcesPath(); fk platform path:K87:2)
 	If ($source_o.isFolder)
 		$source_o.create()
 	End if 
 	
 	// On regarde si des sous-domaines sont inialisés.
 	If ($source_o.folders().length=0)
-		$subDomain_t:=Request:C163("indiquez le sous domaine du site à creer ?";"www")
+		$subDomain_t:=Request:C163("indiquez le sous domaine du site à creer ?"; "www")
 		If (ok=1)
 			// On crée le repertoire du nouveau sous domaine et l'on ajoute quelques fichiers de démo.
-			Folder:C1567(fk resources folder:K87:11).folder("modelSources").copyTo($source_o;$subDomain_t)
+			Folder:C1567(fk resources folder:K87:11).folder("modelSources").copyTo($source_o; $subDomain_t)
 		End if 
 	End if 
 	
@@ -73,7 +71,7 @@ Historique
 	This:C1470.config.subDomain_c:=$source_o.folders().extract("name")
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		If (This:C1470.sites[$subDomain_t]=Null:C1517)
 			This:C1470.sites[$subDomain_t]:=New object:C1471
 			
@@ -98,9 +96,9 @@ Historique
 	End case 
 	
 	// On charge le fichier de config et on refusionne les data avec les informations précédentes.
-	$config_o:=cwToolObjectMerge(This:C1470;cwToolObjectFromFile($source_o.file("config.jsonc")))
+	$config_o:=cwToolObjectMerge(This:C1470; cwToolObjectFromFile($source_o.file("config.jsonc")))
 	
-	For each ($propriete_t;$config_o)
+	For each ($propriete_t; $config_o)
 		This:C1470[$propriete_t]:=$config_o[$propriete_t]
 	End for each 
 	
@@ -117,21 +115,21 @@ Historique
 		WEB SET ROOT FOLDER:C634(This:C1470.webAppPath()+This:C1470.config.folderName_o.webFolder+Folder separator:K24:12)
 	End if 
 	
-	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20;*))#Is a folder:K24:2)
+	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20; *))#Is a folder:K24:2)
 		// Il n'existe pas... On crée le dossier avec son arborescence.
-		CREATE FOLDER:C475(Get 4D folder:C485(HTML Root folder:K5:20;*);*)
+		CREATE FOLDER:C475(Get 4D folder:C485(HTML Root folder:K5:20; *); *)
 	End if 
 	
 	// Creation du dossier upload par defaut dans le dossier web public
 	// La 1er lettre du nom du fichier n'est pas en majuscule, car c'est moins esthétique dans une URL
-	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20;*)+"uploads"+Folder separator:K24:12)#Is a folder:K24:2)
-		CREATE FOLDER:C475(Get 4D folder:C485(HTML Root folder:K5:20;*)+"uploads"+Folder separator:K24:12;*)
+	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20; *)+"uploads"+Folder separator:K24:12)#Is a folder:K24:2)
+		CREATE FOLDER:C475(Get 4D folder:C485(HTML Root folder:K5:20; *)+"uploads"+Folder separator:K24:12; *)
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
-		$folderSubDomaine_o:=Folder:C1567(This:C1470.webfolderSubdomainPath($subDomain_t);fk platform path:K87:2)
+		$folderSubDomaine_o:=Folder:C1567(This:C1470.webfolderSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
 		// Si il existe pas, on lui crée une petite arborescense.
 		If (Not:C34($folderSubDomaine_o.exists))
@@ -162,13 +160,13 @@ Historique
 	// Et donc implicitement les dossiers WebApp, Cache et View
 	If (Test path name:C476(This:C1470.cacheViewPath())#Is a folder:K24:2)
 		// Il n'existe pas... On crée le dossier avec son arborescence.
-		CREATE FOLDER:C475(This:C1470.cacheViewPath();*)
+		CREATE FOLDER:C475(This:C1470.cacheViewPath(); *)
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
-		$folderSubDomaine_o:=Folder:C1567(This:C1470.cacheViewSubdomainPath($subDomain_t);fk platform path:K87:2)
+		$folderSubDomaine_o:=Folder:C1567(This:C1470.cacheViewSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
 		// Si il existe pas, on lui crée une petite arborescense.
 		If (Not:C34($folderSubDomaine_o.exists))
@@ -178,36 +176,38 @@ Historique
 	
 	
 	
-Function cachePath
+Function cachePath()->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cachePath
 	
 Chemin complet plateforme du dossier cache
 	
+Paramètres
+$path_t : Chemin dossier cache
+	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Chemin dossier cache
-	
-	$0:=This:C1470.webAppPath()+"Cache"+Folder separator:K24:12
+	$path_t:=This:C1470.webAppPath()+"Cache"+Folder separator:K24:12
 	
 	
 	
-Function cacheSessionWebPath
+Function cacheSessionWebPath($pathDefault_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheSessionWebPath
 	
 Chemin complet plateforme des sessions web
 	
+Paramètres
+$pathDefault_t : (Optionel) Forcer le chemin par defaut.
+$path_t : Chemin des sessions web
+	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
-	
-	var $1 : Text  // (Optionel) Forcer le chemin par defaut.
-	var $0 : Text  // Chemin des sessions web
+-----------------------------------------------------------------------------*/
 	
 	If (This:C1470.sessionWeb.path=Null:C1517)
 		This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
@@ -215,8 +215,8 @@ Historique
 	
 	// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
 	If (Count parameters:C259=1)
-		If (String:C10($1)#"")
-			This:C1470.sessionWeb.path:=$1
+		If (String:C10($pathDefault_t)#"")
+			This:C1470.sessionWeb.path:=$pathDefault_t
 		Else 
 			// On reset le chemin pas defaut.
 			This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
@@ -224,77 +224,56 @@ Historique
 	End if 
 	
 	// Dans tout les cas, on retourne un chemin
-	$0:=This:C1470.sessionWeb.path
+	$path_t:=This:C1470.sessionWeb.path
 	
 	
 	
-Function cacheViewPath
+Function cacheViewPath()->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheViewPath
 	
 Chemin complet plateforme du dossier cache des vues
 	
+Paramètres
+$path_t : Chemin du dossier cache des vues
+	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Chemin du dossier cache des vues
-	
-	$0:=This:C1470.cachePath()+This:C1470.config.folderName_o.viewCache+Folder separator:K24:12
+	$path_t:=This:C1470.cachePath()+This:C1470.config.folderName_o.viewCache+Folder separator:K24:12
 	
 	
 	
-Function cacheViewSubdomainPath
+Function cacheViewSubdomainPath($forceSousDomaine_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheViewSubdomainPath
 	
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
+Paramètres
+$forceSousDomaine_t : Nom du sous domaine
+$path_t : Chemin des vues du sous domaine
+	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
-	
-	var $1 : Text  // Nom du sous domaine
-	var $0 : Text  // Chemin des vues du sous domaine
+-----------------------------------------------------------------------------*/
 	
 	var $sousDomaine_t : Text
 	
 	If (Count parameters:C259=1)
-		$sousDomaine_t:=$1
+		$sousDomaine_t:=$forceSousDomaine_t
 	Else 
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
+	$path_t:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
-/* - J'ai l'impression que cette fonction ne sert à rien.
-Function dataTableInit
------------------------------------------------------------------------------
-Fonction : WebApp.dataTableInit
 	
-Initialisation des dataTables.
-	
-Historique
-28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------ 
-	
-var $1;$user_o : Object  // Instance de user
-var $0 : Object  // Instance de la dataTable en cours
-	
-$user_o:=$1
-$0:=New object()
-	
-ASSERT($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
-TRACE
-$0.config_o:=This.sites[$user_o.sousDomaine].dataTable
-	
-$0.class:=cwToolGetClass("DataTable")
-*/
-	
-Function I18NLoad
+Function I18NLoad()
 /* -----------------------------------------------------------------------------
 Fonction : I18NLoad
 	
@@ -315,7 +294,7 @@ Historique
 	
 	$SplitNomDoc:=New collection:C1472
 	// On parcourt les sous domaine ("www" et "admin")
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		
 		//Si pour un sous domaine la traduction n'est pas chargé dans le storage on la crée
 		If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
@@ -324,14 +303,14 @@ Historique
 			End use 
 		End if 
 		//On charge la collection de fichier du dossier
-		$files_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7)
+		$files_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t); fk platform path:K87:2).files(fk recursive:K87:7)
 		
-		For each ($file_o;$files_c)
+		For each ($file_o; $files_c)
 			//Si le fichier est un fichier de traduction
 			If ($file_o.name="@.i18n@")
 				
 				// On recupere le type ("form" ou "page") et la langue ("fr", "en" ou "es")
-				$SplitNomDoc:=Split string:C1554($file_o.name;".")
+				$SplitNomDoc:=Split string:C1554($file_o.name; ".")
 				$type_t:=$SplitNomDoc[0]
 				$langue_t:=$SplitNomDoc[1]
 				
@@ -349,7 +328,7 @@ Historique
 				End if 
 				
 				// Date de la derniere modification du fichier de traduction
-				$tsModification_i:=Num:C11(cwTimestamp($file_o.modificationDate;$file_o.modificationTime))
+				$tsModification_i:=Num:C11(cwTimestamp($file_o.modificationDate; $file_o.modificationTime))
 				// Date du dernier chargement du fichier de traduction
 				$tsLastUpload_i:=Num:C11(Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t].maj_ts)
 				
@@ -358,7 +337,7 @@ Historique
 					$trad:=cwToolObjectFromFile($file_o)
 					$trad.maj_ts:=cwTimestamp
 					Use (Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
-						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=OB Copy:C1225($trad;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
+						Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t]:=OB Copy:C1225($trad; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].I18n[$type_t][$langue_t])
 					End use 
 				End if 
 				
@@ -368,9 +347,9 @@ Historique
 	End for each 
 	
 	//On remplit les traductions utiles à chaque page dans WebApp
-	For each ($page_o;This:C1470.sites[$subDomain_t].route)
+	For each ($page_o; This:C1470.sites[$subDomain_t].route)
 		$page_o.i18n:=New object:C1471()
-		For each ($lang;New collection:C1472("en";"es";"fr"))
+		For each ($lang; New collection:C1472("en"; "es"; "fr"))
 			$page_o.i18n[$lang]:=New object:C1471()
 			//Chargment des traductions du corps de la page
 			If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]#Null:C1517)
@@ -379,10 +358,10 @@ Historique
 			
 			//Chargement des traductions des parents 
 			If ($page_o.parents#Null:C1517)
-				For each ($parentName_t;$page_o.parents)
+				For each ($parentName_t; $page_o.parents)
 					//Si on connait la traduction du parent
 					If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]#Null:C1517)
-						$page_o.i18n[$lang]:=cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t])
+						$page_o.i18n[$lang]:=cwToolObjectMerge($page_o.i18n[$lang]; Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t])
 					End if 
 				End for each 
 			End if 
@@ -391,52 +370,48 @@ Historique
 	End for each 
 	
 	
-Function dataTableNew
+Function dataTableNew($libDataTable_t : Text; $DataTableVisiteur_p : Pointer)->$instance_o : cs:C1710.DataTable
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.dataTableNew
 	
 Chargement d'une nouvelle dataTable
 	
+Paramètres
+$libDataTable_t : Lib du dataTable
+$DataTableVisiteur_p : (optionnel) Pointeur de dataTable du visiteur
+$instance_o : Instance de la dataTable
+	
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Lib du dataTable
-	var $2 : Pointer
-	var $0 : cs:C1710.DataTable
+	var $user_o : Object
 	
-	var $instance_o : cs:C1710.DataTable  // Instance de la DataTable en cours
+	$user_o:=visiteur  // Petit hack en attendant de faire mieux...
 	
-	$user_o:=visiteur
+	ASSERT:C1129($libDataTable_t#""; "WebApp.dataTableNew : Le param $1 ne doit pas être vide.")
+	ASSERT:C1129($user_o.sousDomaine#""; "WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
 	
-	ASSERT:C1129($1#"";"WebApp.dataTableNew : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
+	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1"; $libDataTable_t).copy()
 	
-	
-	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
-	
-	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
+	ASSERT:C1129($dataTableConfig_o.length#0; "WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$libDataTable_t)
 	
 	$instance_o:=cs:C1710.DataTable.new($dataTableConfig_o[0])
 	
 	// Pour le retour de la fonction, il y a 2 methodes possibles.
-	If (Count parameters:C259=1)
-		
-		// Soit un retournement simple dans $0
-		$0:=$instance_o
-	Else 
+	// Soit un retournement simple dans $instance_o
+	If (Count parameters:C259#1)
 		// Soit le dans un pointeur (qui est un objet) passé dans $2, dans lequel on 
 		// rajoute une propriété qui correspond au libellé du dataTable, cela permet 
 		// de regrouper toutes les dataTable dans un seul objet.
-		
-		$2->[$1]:=$instance_o
+		$DataTableVisiteur_p->[$libDataTable_t]:=$instance_o
 	End if 
 	
 	
 	
-Function eMailConfigLoad
+Function eMailConfigLoad()
 /* -----------------------------------------------------------------------------
 Méthode : WebApp.eMailConfigLoad
 	
@@ -444,7 +419,7 @@ Precharge toutes les e-mails de l'application web.
 	
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	var $1 : Object
 	
 	var $configFile_o : 4D:C1709.File
@@ -454,20 +429,20 @@ Historique
 	var $mjmlContenu_o : Object  // Contenu de la requête MJML
 	
 	// Chemin du fichier de config dans la base hôte.
-	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc";fk platform path:K87:2)
+	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc"; fk platform path:K87:2)
 	If (Not:C34($configFile_o.exists))
 		// Si le fichier de config n'existe pas, on le crée.
-		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2))
+		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(This:C1470.sourcesPath(); fk platform path:K87:2))
 	End if 
 	
 	// Chargement de la configuration des eMails.
 	Use (Storage:C1525)
-		Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o;ck shared:K85:29)
+		Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o; ck shared:K85:29)
 		
 		// On stock les variables communes à tout les mails.
 		If (Count parameters:C259=1)
 			Use (Storage:C1525.eMail)
-				Storage:C1525.eMail.globalVar:=OB Copy:C1225($1;ck shared:K85:29)
+				Storage:C1525.eMail.globalVar:=OB Copy:C1225($1; ck shared:K85:29)
 			End use 
 		End if 
 		
@@ -485,7 +460,7 @@ Historique
 	
 	
 	// On boucle tout les modeles
-	For each ($model_o;Storage:C1525.eMail.model)
+	For each ($model_o; Storage:C1525.eMail.model)
 		
 		// Si le modéle n'existe pas, on l'importe
 		If (Not:C34($modelFolder_o.file($model_o.source).exists))
@@ -527,10 +502,10 @@ Historique
 		
 		$mjmlReponse_o:=New object:C1471()
 		
-		HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID;Storage:C1525.eMail.mjml.secretKey;1)
+		HTTP AUTHENTICATE:C1161(Storage:C1525.eMail.mjml.applicationID; Storage:C1525.eMail.mjml.secretKey; 1)
 		
 		// On parcourt les modèles
-		For each ($model_o;Storage:C1525.eMail.model)
+		For each ($model_o; Storage:C1525.eMail.model)
 			
 			// Si il existe un layout
 			If (String:C10($model_o.layout)#"")
@@ -540,8 +515,8 @@ Historique
 					$name_t:=$modelFolder_o.file($model_o.layout).name+".html"
 					
 					If ((Not:C34($modelFolder_o.file($model_o.layout).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.layout).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.layout).modificationTime))
-						$mjmlContenu_o:=New object:C1471("mjml";$modelFolder_o.file($model_o.layout).getText())
-						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$mjmlContenu_o;$mjmlReponse_o)
+						$mjmlContenu_o:=New object:C1471("mjml"; $modelFolder_o.file($model_o.layout).getText())
+						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
 						
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($mjmlReponse_o.html)
@@ -554,7 +529,7 @@ Historique
 					// On change le nom du layout pour qu'il soit en .html
 					
 					Use (Storage:C1525.eMail.model)
-						$model_o.layout:=Replace string:C233($model_o.layout;".mjml";".html")
+						$model_o.layout:=Replace string:C233($model_o.layout; ".mjml"; ".html")
 					End use 
 				End if 
 				
@@ -569,8 +544,8 @@ Historique
 					$name_t:=$modelFolder_o.file($model_o.source).name+".html"
 					
 					If ((Not:C34($modelFolder_o.file($model_o.source).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.source).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.source).modificationTime))
-						$mjmlContenu_o:=New object:C1471("mjml";$modelFolder_o.file($model_o.source).getText())
-						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2;Storage:C1525.eMail.mjml.urlAPI;$mjmlContenu_o;$mjmlReponse_o)
+						$mjmlContenu_o:=New object:C1471("mjml"; $modelFolder_o.file($model_o.source).getText())
+						$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
 						
 						If ($resultat_i=200)
 							$modelFolder_o.file($model_o.source).parent.file($name_t).setText($mjmlReponse_o.html)
@@ -585,7 +560,7 @@ Historique
 					// On change le nom de la source pour qu'il soit en .html
 					
 					Use (Storage:C1525.eMail.model)
-						$model_o.source:=Replace string:C233($model_o.source;".mjml";".html")
+						$model_o.source:=Replace string:C233($model_o.source; ".mjml"; ".html")
 					End use 
 					
 				End if 
@@ -598,26 +573,28 @@ Historique
 	
 	
 	
-Function eMailModelList
+Function eMailModelList()->$model_c : Collection
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.eMailModelList
 	
 Minification du HTML
 	
+Paramètres
+model_c : Liste des modeles
+	
 Historique
 17/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création
------------------------------------------------------------------------------ */
-	var $0 : Collection
+-----------------------------------------------------------------------------*/
 	
 	If (Storage:C1525.eMail=Null:C1517)
 		This:C1470.eMailConfigLoad()
 	End if 
 	
-	$0:=Storage:C1525.eMail.model
+	$model_c:=Storage:C1525.eMail.model
 	
 	
 	
-Function htmlMinify
+Function htmlMinify()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.htmlMinify
 	
@@ -628,16 +605,16 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $texteIn : Text
 	var $texteOut : Text
 	var $dirIn : Text
 	var $dirOut : Text
-	var $compression : Boolean
+	var $compression_b : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		//Le dossier avec le html non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -645,38 +622,38 @@ Historique
 		$dirOut:=This:C1470.cacheViewSubdomainPath($subDomain_t)
 		
 		//On recupere la liste des documents dans le répertoire.
-		DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
+		DOCUMENT LIST:C474($dirIn; $fichierHtmlIn; Recursive parsing:K24:13)
 		
-		For ($i;1;Size of array:C274($fichierHtmlIn))
+		For ($i; 1; Size of array:C274($fichierHtmlIn))
 			
 			If ($fichierHtmlIn{$i}="@.html")
-				$compression:=True:C214
+				$compression_b:=True:C214
 				
 			Else 
-				$compression:=False:C215
+				$compression_b:=False:C215
 			End if 
 			
-			If ($compression)
+			If ($compression_b)
 				// Dans le cas d'un fichier dans un sous dossier, il faut supprimer le séparateur.
 				If ($fichierHtmlIn{$i}=(Folder separator:K24:12+"@"))
-					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i};2)
+					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i}; 2)
 					//Si besoin on creer le dossier dans le repertoire de destination...
-					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i};*)
+					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i}; *)
 				End if 
 				
 				//Sauf si le dossier compressé existe deja et qu'il est plus jeune que le fichier d'origine.
 				If (Test path name:C476($dirOut+$fichierHtmlIn{$i})=Is a document:K24:1)
-					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i};$verrouilleIn;$invisibleIn;$creeLeIn;$creeAIn;$modifieLeIn;$modifieAIn)
-					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i};$verrouilleOut;$invisibleOut;$creeLeOut;$creeAOut;$modifieLeOut;$modifieAOut)
+					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i}; $verrouilleIn; $invisibleIn; $creeLeIn; $creeAIn; $modifieLeIn; $modifieAIn)
+					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i}; $verrouilleOut; $invisibleOut; $creeLeOut; $creeAOut; $modifieLeOut; $modifieAOut)
 					
 					Case of 
 						: ($modifieLeIn<$modifieLeOut)
-							$compression:=False:C215
+							$compression_b:=False:C215
 						: ($modifieLeIn=$modifieLeOut) & ($modifieAIn<$modifieAOut)
-							$compression:=False:C215
+							$compression_b:=False:C215
 					End case 
 					
-					If ($compression)
+					If ($compression_b)
 						//Il faut donc faire la minification et l'ancien fichier existe.
 						//On le suppprime donc.
 						DELETE DOCUMENT:C159($dirOut+$fichierHtmlIn{$i})
@@ -684,24 +661,24 @@ Historique
 				End if 
 			End if 
 			
-			If ($compression)
+			If ($compression_b)
 				
-				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i};"UTF-8")
-				ASSERT:C1129(Length:C16($texteIn)#0;"Impossible de charger le fichier : "+$dirIn+$fichierHtmlIn{$i})
-				$texteOut:=Replace string:C233(cwMinifier($texteIn);"\n";"")
+				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i}; "UTF-8")
+				ASSERT:C1129(Length:C16($texteIn)#0; "Impossible de charger le fichier : "+$dirIn+$fichierHtmlIn{$i})
+				$texteOut:=Replace string:C233(cwMinifier($texteIn); "\n"; "")
 				
 				// On retire les commentaires HTML mais pas les balises 4D.
-				$texteOut:=cwToolTextReplaceByRegex($texteOut;"<!-- (.*?)-->";"")
+				$texteOut:=cwToolTextReplaceByRegex($texteOut; "<!-- (.*?)-->"; "")
 				
 				// On vérifie les espace insécable.
-				$texteOut:=Replace string:C233($texteOut;" ;";Char:C90(160)+";")
-				$texteOut:=Replace string:C233($texteOut;" ?";Char:C90(160)+"?")
-				$texteOut:=Replace string:C233($texteOut;" !";Char:C90(160)+"!")
-				$texteOut:=Replace string:C233($texteOut;" :";Char:C90(160)+":")
-				$texteOut:=Replace string:C233($texteOut;" %";Char:C90(160)+"%")
-				$texteOut:=Replace string:C233($texteOut;" €";Char:C90(160)+"€")
+				$texteOut:=Replace string:C233($texteOut; " ;"; Char:C90(160)+";")
+				$texteOut:=Replace string:C233($texteOut; " ?"; Char:C90(160)+"?")
+				$texteOut:=Replace string:C233($texteOut; " !"; Char:C90(160)+"!")
+				$texteOut:=Replace string:C233($texteOut; " :"; Char:C90(160)+":")
+				$texteOut:=Replace string:C233($texteOut; " %"; Char:C90(160)+"%")
+				$texteOut:=Replace string:C233($texteOut; " €"; Char:C90(160)+"€")
 				
-				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i};$texteOut;"UTF-8")  //Et on creer le nouvau fichier.
+				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i}; $texteOut; "UTF-8")  //Et on creer le nouvau fichier.
 			End if 
 		End for 
 	End for each 
@@ -719,7 +696,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class WebApp
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $texteIn : Text
 	var $dirIn : Text
@@ -727,7 +704,7 @@ Historique
 	var $compression : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		//Le dossier avec le js non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -735,9 +712,9 @@ Historique
 		$dirOut:=This:C1470.webfolderSubdomainPath($subDomain_t)+"js"+Folder separator:K24:12
 		
 		//On recupere la liste des documents dans le répertoire.
-		DOCUMENT LIST:C474($dirIn;$fichierHtmlIn;Recursive parsing:K24:13)
+		DOCUMENT LIST:C474($dirIn; $fichierHtmlIn; Recursive parsing:K24:13)
 		
-		For ($i;1;Size of array:C274($fichierHtmlIn))
+		For ($i; 1; Size of array:C274($fichierHtmlIn))
 			If ($fichierHtmlIn{$i}="@.js")
 				$compression:=True:C214
 				
@@ -748,15 +725,15 @@ Historique
 			If ($compression)
 				// Dans le cas d'un fichier dans un sous dossier, il faut supprimer le séparateur.
 				If ($fichierHtmlIn{$i}=(Folder separator:K24:12+"@"))
-					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i};2)
+					$fichierHtmlIn{$i}:=Substring:C12($fichierHtmlIn{$i}; 2)
 					// Si besoin on crée le dossier dans le repertoire de destination.
-					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i};*)
+					CREATE FOLDER:C475($dirOut+$fichierHtmlIn{$i}; *)
 				End if 
 				
 				//Sauf si le dossier compressé existe deja et qu'il est plus jeune que le fichier d'origine.
 				If (Test path name:C476($dirOut+$fichierHtmlIn{$i})=Is a document:K24:1)
-					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i};$verrouilleIn;$invisibleIn;$creeLeIn;$creeAIn;$modifieLeIn;$modifieAIn)
-					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i};$verrouilleOut;$invisibleOut;$creeLeOut;$creeAOut;$modifieLeOut;$modifieAOut)
+					GET DOCUMENT PROPERTIES:C477($dirIn+$fichierHtmlIn{$i}; $verrouilleIn; $invisibleIn; $creeLeIn; $creeAIn; $modifieLeIn; $modifieAIn)
+					GET DOCUMENT PROPERTIES:C477($dirOut+$fichierHtmlIn{$i}; $verrouilleOut; $invisibleOut; $creeLeOut; $creeAOut; $modifieLeOut; $modifieAOut)
 					
 					Case of 
 						: ($modifieLeIn<$modifieLeOut)
@@ -775,8 +752,8 @@ Historique
 			
 			If ($compression)
 				
-				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i};"UTF-8")
-				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i};cwMinifier($texteIn);"UTF-8")  //Et on creer le nouvau fichier.
+				$texteIn:=Document to text:C1236($dirIn+$fichierHtmlIn{$i}; "UTF-8")
+				TEXT TO DOCUMENT:C1237($dirOut+$fichierHtmlIn{$i}; cwMinifier($texteIn); "UTF-8")  //Et on creer le nouvau fichier.
 			End if 
 		End for 
 		
@@ -793,9 +770,9 @@ Chargement des éléments de la page courante
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
-	var $1;$user_o : Object  // instance de user
+	var $1; $user_o : Object  // instance de user
 	var $0 : cs:C1710.Page  // Instance de la page courante
 	
 	var siteRoute_c : Collection
@@ -812,7 +789,7 @@ Historique
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
 	$info_o.subDomain_t:=$user_o.sousDomaine
 	
-	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
+	$0:=cs:C1710.Page.new(siteRoute_c; $1; $info_o)
 	
 	// Petit hack pour les datatables en attendant des jours meilleurs.
 	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
@@ -837,7 +814,7 @@ Historique
 29/09/20 - Grégory Fromain <gregory@connect-io.fr> - On inverse l'ordre de chargement des méthodes et view.
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	// La fonction ne requiere pas de paramêtre.
 	var $j : Integer
@@ -856,8 +833,8 @@ Historique
 	var $i_l : Integer  // Permet de gérer l'héritage des fichiers HTML
 	var $methodeNom_t : Text  //  Permet de gérer l'héritage des méthodes de la page
 	var $route_c : Collection
-	ARRAY TEXT:C222($libpage_at;0)
-	ARRAY TEXT:C222($routeFormatCle;0)
+	ARRAY TEXT:C222($libpage_at; 0)
+	ARRAY TEXT:C222($routeFormatCle; 0)
 	
 	// Minification du JS.
 	MESSAGE:C88("Minification du JS..."+Char:C90(Carriage return:K15:38))
@@ -870,25 +847,25 @@ Historique
 	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t; This:C1470.config.subDomain_c)
 		// On purge la liste des routes
 		$route_c:=New collection:C1472()
 		//Récupération du plan des pages web des sites.
 		$configPage:=New object:C1471
-		ARRAY TEXT:C222($routeFile_at;0)
-		DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$routeFile_at;Recursive parsing:K24:13+Absolute path:K24:14)
+		ARRAY TEXT:C222($routeFile_at; 0)
+		DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t); $routeFile_at; Recursive parsing:K24:13+Absolute path:K24:14)
 		
 		// Chargement de tous les fichiers de routing.
-		For ($routeNum;1;Size of array:C274($routeFile_at))
+		For ($routeNum; 1; Size of array:C274($routeFile_at))
 			// On charge toutes les routes, mais pas le modele
 			If ($routeFile_at{$routeNum}="@route.json@")
 				//$configPage:=cwToolObjectMerge ($configPage;JSON Parse(Document to text($routeFile_at{$routeNum};"UTF-8")))
-				$configPage:=cwToolObjectMerge($configPage;cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
+				$configPage:=cwToolObjectMerge($configPage; cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
 			End if 
 		End for 
 		
 		//---------- On merge les routes parents ----------
-		For each ($libPage;$configPage)
+		For each ($libPage; $configPage)
 			// On ne merge pas les routes qui n'ont pas de parent... Pas d'intéret.
 			// On ne merge pas les routes qui n'ont pas d'url... Cela crée des doublons car ce sont des routes de layout...
 			If ($configPage[$libPage].parents#Null:C1517) & ($configPage[$libPage].route#Null:C1517)
@@ -905,7 +882,7 @@ Historique
 							ALERT:C41("La route parent suivante n'est pas définie :"+$parentLibPage)
 							$parentLibPage:=""  // Permet de sortir de la boucle.
 						Else 
-							$configPage[$libPage]:=cwToolObjectMerge($configPage[$parentLibPage];$configPage[$libPage])
+							$configPage[$libPage]:=cwToolObjectMerge($configPage[$parentLibPage]; $configPage[$libPage])
 						End if 
 						
 						$i:=$i+1
@@ -917,13 +894,13 @@ Historique
 		End for each 
 		
 		// Une fois que l'on a merge les routes avec des dependance, on supprime les pages de configuration qui n'ont pas de route.
-		For each ($libPage;$configPage)
+		For each ($libPage; $configPage)
 			Case of 
 				: ($configPage[$libPage].route=Null:C1517)
-					OB REMOVE:C1226($configPage;$libPage)
+					OB REMOVE:C1226($configPage; $libPage)
 					
 				: ($configPage[$libPage].route.path=Null:C1517)
-					OB REMOVE:C1226($configPage;$libPage)
+					OB REMOVE:C1226($configPage; $libPage)
 					
 			End case 
 		End for each 
@@ -931,10 +908,10 @@ Historique
 		
 		
 		// On precharge les routes
-		OB GET PROPERTY NAMES:C1232($configPage;$libpage_at)
-		For ($j;1;Size of array:C274($libpage_at))
+		OB GET PROPERTY NAMES:C1232($configPage; $libpage_at)
+		For ($j; 1; Size of array:C274($libpage_at))
 			
-			$page:=OB Get:C1224($configPage;$libpage_at{$j})
+			$page:=OB Get:C1224($configPage; $libpage_at{$j})
 			
 			$page.lib:=$libpage_at{$j}
 			
@@ -946,17 +923,17 @@ Historique
 				$routeRegex:=$route.path
 				
 				// On charge les variables de l'url
-				$routeFormat:=Choose:C955(OB Is defined:C1231($route;"format");$route.format;New object:C1471)
+				$routeFormat:=Choose:C955(OB Is defined:C1231($route; "format"); $route.format; New object:C1471)
 				
 				// On charge les valeurs des variables par defaut.
-				$routeDefault:=Choose:C955(OB Is defined:C1231($route;"default");$route.default;New object:C1471)
+				$routeDefault:=Choose:C955(OB Is defined:C1231($route; "default"); $route.default; New object:C1471)
 				
 				// On boucle sur les formats de variables
-				If (OB Is defined:C1231($route;"format"))
-					OB GET PROPERTY NAMES:C1232($route.format;$routeFormatCle)
-					For ($r;1;Size of array:C274($routeFormatCle))
+				If (OB Is defined:C1231($route; "format"))
+					OB GET PROPERTY NAMES:C1232($route.format; $routeFormatCle)
+					For ($r; 1; Size of array:C274($routeFormatCle))
 						$temp_t:=$route.format[$routeFormatCle{$r}]
-						$routeRegex:=Replace string:C233($routeRegex;$routeFormatCle{$r};"("+$temp_t+")")
+						$routeRegex:=Replace string:C233($routeRegex; $routeFormatCle{$r}; "("+$temp_t+")")
 					End for 
 				End if 
 				
@@ -965,29 +942,29 @@ Historique
 				$routeVar:=$route.path
 				
 				
-				For ($r;1;Size of array:C274($routeFormatCle))
-					If (OB Is defined:C1231($routeDefault;$routeFormatCle{$r}))
-						$routeFormatData:="<!--#4DIF (OB is defined(routeVar;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE-->"+OB Get:C1224($routeDefault;$routeFormatCle{$r})+"<!--#4DENDIF-->"
+				For ($r; 1; Size of array:C274($routeFormatCle))
+					If (OB Is defined:C1231($routeDefault; $routeFormatCle{$r}))
+						$routeFormatData:="<!--#4DIF (OB is defined(routeVar;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE-->"+OB Get:C1224($routeDefault; $routeFormatCle{$r})+"<!--#4DENDIF-->"
 					Else 
 						$routeFormatData:="<!--#4DIF (OB is defined(routeVar;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE--> il manque la variable "+$routeFormatCle{$r}+"+<!--#4DENDIF-->"
 					End if 
-					$routeVar:=Replace string:C233($routeVar;$routeFormatCle{$r};$routeFormatData)
+					$routeVar:=Replace string:C233($routeVar; $routeFormatCle{$r}; $routeFormatData)
 				End for 
 				$route.variable:=$routeVar
 				
 				$page.route:=$route
-				OB SET:C1220($configPage;$libpage_at{$j};$page)
+				OB SET:C1220($configPage; $libpage_at{$j}; $page)
 			End if 
 		End for 
 		
 		
 		//Creation du chemin complet du fichier html
-		For ($j;1;Size of array:C274($libpage_at))
+		For ($j; 1; Size of array:C274($libpage_at))
 			$page:=$configPage[$libpage_at{$j}]
 			If ($page.viewPath#Null:C1517)
 				
 				// Attention : On ne peut pas utiliser ici de boucle for each car sa modification ne sera pas répercutée sur l'élément de la collection.
-				For ($i_l;0;$page.viewPath.length-1)
+				For ($i_l; 0; $page.viewPath.length-1)
 					// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
 					$page.viewPath[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+cwToolPathSeparator($page.viewPath[$i_l])
 					
@@ -1008,9 +985,9 @@ Historique
 			
 			If ($page.methode#Null:C1517)
 				
-				For each ($methodeNom_t;$page.methode)
-					ARRAY TEXT:C222($methodName_at;0)
-					METHOD GET NAMES:C1166($methodName_at;$methodeNom_t+"@";*)
+				For each ($methodeNom_t; $page.methode)
+					ARRAY TEXT:C222($methodName_at; 0)
+					METHOD GET NAMES:C1166($methodName_at; $methodeNom_t+"@"; *)
 					If (Size of array:C274($methodName_at)=0)
 						ALERT:C41("Il manque la méthode suivante de l'application : "+$methodeNom_t)
 					End if 
@@ -1078,7 +1055,7 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 15/09/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de $0
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Collection  // Option, option du serveur web
 	
@@ -1093,65 +1070,65 @@ Historique
 	var $verrou_b : Boolean
 	var $invisible_b : Boolean
 	var $infoFichier_o : Object
-	ARRAY TEXT:C222($listeSessionWeb_t;0)
+	ARRAY TEXT:C222($listeSessionWeb_t; 0)
 	
 	
 	// On applique quelques valeurs par defaut, pour que cela fonctionne même sans param.
 	$options_c:=New collection:C1472
-	$options_c.push(New object:C1471("key";Web session cookie name:K73:4;"value";"CIOSID"))  // nom du cookies de la session
-	$options_c.push(New object:C1471("key";Web inactive session timeout:K73:3;"value";30*24*60))  // 30 jours, en minute
-	$options_c.push(New object:C1471("key";Web inactive process timeout:K73:13;"value";480))  // 480 min de durée de vie des process inactifs associés aux sessions
-	$options_c.push(New object:C1471("key";Web max sessions:K73:2;"value";300))  // 300 sessions simultanées
-	$options_c.push(New object:C1471("key";Web Session IP address validation enabled:K73:17;"value";0))  // Déconnecte la relation entre l'IP et le cookies
-	$options_c.push(New object:C1471("key";Web keep session:K73:1;"value";1))  // activation de la gestion automatique des sessions.
-	$options_c.push(New object:C1471("key";Web HTTP compression level:K73:11;"value";-1))  // Niveau de compression des pages automatique.
-	$options_c.push(New object:C1471("key";Web max concurrent processes:K73:7;"value";1000))  // Limite du nombre de process Web acceptés et retourne le message “Serveur non disponible”.
+	$options_c.push(New object:C1471("key"; Web session cookie name:K73:4; "value"; "CIOSID"))  // nom du cookies de la session
+	$options_c.push(New object:C1471("key"; Web inactive session timeout:K73:3; "value"; 30*24*60))  // 30 jours, en minute
+	$options_c.push(New object:C1471("key"; Web inactive process timeout:K73:13; "value"; 480))  // 480 min de durée de vie des process inactifs associés aux sessions
+	$options_c.push(New object:C1471("key"; Web max sessions:K73:2; "value"; 300))  // 300 sessions simultanées
+	$options_c.push(New object:C1471("key"; Web Session IP address validation enabled:K73:17; "value"; 0))  // Déconnecte la relation entre l'IP et le cookies
+	$options_c.push(New object:C1471("key"; Web keep session:K73:1; "value"; 1))  // activation de la gestion automatique des sessions.
+	$options_c.push(New object:C1471("key"; Web HTTP compression level:K73:11; "value"; -1))  // Niveau de compression des pages automatique.
+	$options_c.push(New object:C1471("key"; Web max concurrent processes:K73:7; "value"; 1000))  // Limite du nombre de process Web acceptés et retourne le message “Serveur non disponible”.
 	
 	// Puis l'on vient combiner avec les informations 
 	If (Count parameters:C259>=1)
 		If (Type:C295($1)=Is collection:K8:32)
 			
-			$options_c:=$options_c.query("NOT (key IN :1)";$1.extract("key"))
+			$options_c:=$options_c.query("NOT (key IN :1)"; $1.extract("key"))
 			$options_c.combine($1)
 		End if 
 	End if 
 	
 	// Pour les options il suffit de faire une boucle
-	For each ($option_o;$options_c)
-		WEB SET OPTION:C1210($option_o.key;$option_o.value)
+	For each ($option_o; $options_c)
+		WEB SET OPTION:C1210($option_o.key; $option_o.value)
 	End for each 
 	
 	
 	// On test que le dossier des sessions web existe bien, sinon on le crée.
 	If (Test path name:C476(This:C1470.cacheSessionWebPath())#Is a folder:K24:2)
-		CREATE FOLDER:C475(This:C1470.cacheSessionWebPath();*)
+		CREATE FOLDER:C475(This:C1470.cacheSessionWebPath(); *)
 		If (ok=0)
 			ALERT:C41("Impossible de créer le dossier des sessions Web : "+This:C1470.cacheSessionWebPath())
 			
 			// Il y a une erreur dans le dossier des sessions web, on va mettre le chemin par defaut avec le param "" et le créer au besoin.
-			CREATE FOLDER:C475(This:C1470.cacheSessionWebPath("");*)
+			CREATE FOLDER:C475(This:C1470.cacheSessionWebPath(""); *)
 		End if 
 	End if 
 	
 	
 	// On va conserver des informations importantes a porté de main...
-	This:C1470.sessionWeb.name:=$options_c.query("key IS :1";Web session cookie name:K73:4)[0].value
+	This:C1470.sessionWeb.name:=$options_c.query("key IS :1"; Web session cookie name:K73:4)[0].value
 	
 	
 	// ----- Nettoyage des sessions périmée -----
 	// On en profite pour nettoyer les sessions périmées...
 	MESSAGE:C88("Nettoyage des sessions web")
 	
-	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
+	$valideMinute_l:=$options_c.query("key IS :1"; Web inactive session timeout:K73:3)[0].value
 	This:C1470.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
 	
-	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath(); $listeSessionWeb_t; Recursive parsing:K24:13+Absolute path:K24:14)
 	$dernierJourValide_d:=Current date:C33-Num:C11(This:C1470.sessionWeb.valideDay)
-	For ($i;1;Size of array:C274($listeSessionWeb_t))
+	For ($i; 1; Size of array:C274($listeSessionWeb_t))
 		// On verifie une derniere fois que le fichier existe,
 		// Possibilité d'être supprimé par un autre process parallele...
 		If (Test path name:C476($listeSessionWeb_t{$i})=Is a document:K24:1)
-			GET DOCUMENT PROPERTIES:C477($listeSessionWeb_t{$i};$verrou_b;$invisible_b;$creerLe_d;$creerA_t;$modifierLe_d;$modifierA_t)
+			GET DOCUMENT PROPERTIES:C477($listeSessionWeb_t{$i}; $verrou_b; $invisible_b; $creerLe_d; $creerA_t; $modifierLe_d; $modifierA_t)
 			
 			If ($creerLe_d<$dernierJourValide_d)
 				//Il faut le supprimer, mais avant l'on regarde si il n'a pas un dossier temporaire associé.
@@ -1161,7 +1138,7 @@ Historique
 				$infoFichier_o.folderTemp:=$infoFichier_o.parentFolder+$infoFichier_o.name+Folder separator:K24:12
 				
 				If (Test path name:C476($infoFichier_o.folderTemp)=Is a folder:K24:2)
-					DELETE FOLDER:C693($infoFichier_o.folderTemp;Delete with contents:K24:24)
+					DELETE FOLDER:C693($infoFichier_o.folderTemp; Delete with contents:K24:24)
 				End if 
 				
 				// Maintenant on supprime le fichier de session
@@ -1182,7 +1159,7 @@ Chemin complet plateforme du dossier Source
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $0 : Text  // Chemin du dossier source
 	
@@ -1199,7 +1176,7 @@ Chemin complet plateforme du dossier Source/sousDomaine
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Nom du sous domaine
 	var $0 : Text  // Chemin du dossier source du sous domaine
@@ -1225,7 +1202,7 @@ Chargement des éléments sur l'utilisateur / visiteur
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $0 : Object  // Instance de l'utilisateur en cours
 	
@@ -1251,11 +1228,11 @@ Chemin complet plateforme du dossier WebApp
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $0 : Text  // Chemin du dossier webfolder
 	
-	$0:=cwToolPathFolderOrAlias(Get 4D folder:C485(Database folder:K5:14;*))+This:C1470.config.folderName_o.webApp+Folder separator:K24:12
+	$0:=cwToolPathFolderOrAlias(Get 4D folder:C485(Database folder:K5:14; *))+This:C1470.config.folderName_o.webApp+Folder separator:K24:12
 	
 	
 	
@@ -1268,7 +1245,7 @@ Chemin complet plateforme du dossier Webfolder/sousDomaine
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Nom du sous domaine
 	var $0 : Text  // Chemin du dossier webfolder du sous domaine
@@ -1280,7 +1257,7 @@ Historique
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=Get 4D folder:C485(HTML Root folder:K5:20;*)+$sousDomaine_t+Folder separator:K24:12
+	$0:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$sousDomaine_t+Folder separator:K24:12
 	
 	
 	
