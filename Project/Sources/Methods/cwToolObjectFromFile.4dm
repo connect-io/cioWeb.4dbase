@@ -36,6 +36,6 @@ $0:=JSON Parse:C1218($fileContent_t)
 
 If (Count parameters:C259=2)
 	If (Num:C11($2)=ck shared:K85:29)
-		$0:=OB Copy:C1225($0;ck shared:K85:29)
+		$0:=OB Copy:C1225($0; ck shared:K85:29)
 	End if 
 End if 

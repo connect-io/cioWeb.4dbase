@@ -1,0 +1,112 @@
+{
+    "passerelle" : [
+        {
+            "tableComposant" : "Personne",
+            "tableHote" : "ELV_Élèves",
+            "champ" : [
+                {
+                    "lib" : "adresse",
+                    "value" : "Adresse1"
+                },
+                {
+                    "lib" : "adresseComplement",
+                    "value" : "Adresse2"
+                },
+                {
+                    "lib" : "codePostal",
+                    "value" : "CodePostal"
+                },
+                {
+                    "lib" : "dateCreation",
+                    "value" : "CreateDate"
+                },
+                {
+                    "lib" : "dateNaissance",
+                    "value" : "Naissance"
+                },
+                {
+                    "lib" : "nom",
+                    "value" : "Nom"
+                },
+                {
+                    "lib" : "prenom",
+                    "value" : "Prénom"
+                },
+                {
+                    "lib" : "sexe",
+                    "value" : "Titre"
+                },
+                {
+                    "lib" : "UID",
+                    "value" : "UID"
+                },
+                {
+                    "lib" : "ville",
+                    "value" : "Ville"
+                }
+            ],
+            "lienAvecTelecom" : [
+                {
+                    "lib" : "email",
+                    "value" : ""
+                },
+                {
+                    "lib" : "nomLien",
+                    "value" : ""
+                }
+            ],
+            "libelleSexe" : [
+                {
+                    "lib" : "homme",
+                    "value" : "1"
+                },
+                {
+                    "lib" : "femme",
+                    "value" : "2"
+                }
+            ]
+        },
+        {
+            "tableComposant" : "Telecom",
+            "tableHote" : "",
+            "champ" : [
+                {
+                    "lib" : "type",
+                    "value" : ""
+                },
+                {
+                    "lib" : "UID",
+                    "value" : ""
+                },
+                {
+                    "lib" : "value",
+                    "value" : ""
+                }
+            ],
+            "lienAvecPersonne" : [
+                {
+                    "lib" : "nomLien",
+                    "value" : ""
+                },
+                {
+                    "lib" : "UID",
+                    "value" : ""
+                }
+            ],
+            "libelleType" : [
+                {
+                    "lib" : "email",
+                    "value" : ""
+                },
+                {
+                    "lib" : "mobile",
+                    "value" : ""
+                },
+                {
+                    "lib" : "domicile",
+                    "value" : ""
+                }
+            ]
+        }          
+    ]
+}
