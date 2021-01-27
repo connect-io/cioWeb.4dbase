@@ -17,7 +17,7 @@ ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la f
 Historique
 02/01/20 - quentin@connect-io.fr - Création
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $1 : Text  // Nom du transporteur
@@ -26,12 +26,12 @@ Historique
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
 	var $server_o : Object  // Informations SMTP
 	
-	ASSERT:C1129($1#"";"EMail.constructor : le Param $1 est obligatoire.")
+	ASSERT:C1129($1#""; "EMail.constructor : le Param $1 est obligatoire.")
 	
 	$server_o:=New object:C1471()
 	
 	// Vérifie que le nom du transporteur soit bien dans la config
-	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1";$1)
+	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $1)
 	
 	If ($transporter_c.length=1)
 		$server_o:=$transporter_c[0]
@@ -39,7 +39,7 @@ Historique
 	
 	// Il est possible de surcharger le transporteur.
 	If (Count parameters:C259=2)
-		$server_o:=cwToolObjectMerge($server_o;$2)
+		$server_o:=cwToolObjectMerge($server_o; $2)
 	End if 
 	
 	If ($server_o#Null:C1517)
@@ -60,7 +60,6 @@ Historique
 		This:C1470.globalVar:=OB Copy:C1225(Storage:C1525.eMail.globalVar)
 	End if 
 	
-	
 Function send
 /* -----------------------------------------------------------------------------
 Méthode : EMail.send
@@ -78,7 +77,7 @@ this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
 	
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $0 : Object  // Remonte les informations sur l'envoi d'e-mail 
@@ -87,7 +86,7 @@ Historique
 	var $error_t : Text  // Info concernant les erreurs
 	var $cheminPj_v : Variant  // Chemin pièce jointe
 	
-	$mailStatus_o:=New object:C1471("success";False:C215)
+	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
 	//On vérifie que l'on a bien notre transporter
 	If (This:C1470.transporter=Null:C1517)
@@ -118,7 +117,7 @@ Historique
 			This:C1470.attachments:=New collection:C1472()
 			
 			// on boucle sur les pièces jointes
-			For each ($cheminPj_t;This:C1470.attachmentsPath_c)
+			For each ($cheminPj_t; This:C1470.attachmentsPath_c)
 				
 				// On vérifie que le chemin de pièce jointe est bien de type texte
 				If (Type:C295($cheminPj_t)=Est un texte:K8:3)
@@ -171,7 +170,7 @@ Envoi d'un e-mail depuis un modèle.
 	
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $1 : Text  // Var nom du modèle
@@ -184,26 +183,26 @@ Historique
 	var $returnVar_t : Text  // Retourne le texte si 3ème paramètre
 	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
 	
-	ASSERT:C1129($1#"";"EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
+	ASSERT:C1129($1#""; "EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
 	
-	$mailStatus_o:=New object:C1471("success";False:C215)
+	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
 	If (Count parameters:C259=2)
 		
-		For each ($propriete_t;$2)
+		For each ($propriete_t; $2)
 			This:C1470[$propriete_t]:=$2[$propriete_t]
 		End for each 
 		
 	End if 
 	
 	// Vérification fichier modèle
-	$model_c:=Storage:C1525.eMail.model.query("name IS :1";$1)
+	$model_c:=Storage:C1525.eMail.model.query("name IS :1"; $1)
 	
 	// Retrouver les informations du modèle
 	If ($model_c.length=1)
 		$model_o:=$model_c[0]
 		
-		corps_t:=File:C1566(Storage:C1525.eMail.modelPath+"/"+$model_o.source).getText()
+		corps_t:=File:C1566(Storage:C1525.eMail.modelPath+$model_o.source).getText()
 		
 		// Gestion du layout
 		If (String:C10($model_o.layout)#"")
@@ -223,7 +222,7 @@ Historique
 			This:C1470.subject:=String:C10($model_o.subject)
 		End if 
 		
-		PROCESS 4D TAGS:C816(This:C1470.subject;$returnVar_t)
+		PROCESS 4D TAGS:C816(This:C1470.subject; $returnVar_t)
 		This:C1470.subject:=$returnVar_t
 		
 		// On gère les destinataires du message.
@@ -235,7 +234,7 @@ Historique
 		
 		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")
 			// Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
-			PROCESS 4D TAGS:C816(This:C1470.htmlBody;$returnVar_t)
+			PROCESS 4D TAGS:C816(This:C1470.htmlBody; $returnVar_t)
 			This:C1470.htmlBody:=$returnVar_t
 		End if 
 		// Envoie du mail

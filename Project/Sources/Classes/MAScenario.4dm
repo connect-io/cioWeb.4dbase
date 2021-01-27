@@ -7,13 +7,13 @@ Class constructor
 	
 Function newScenario
 	C_BOOLEAN:C305($0)
-	C_OBJECT:C1216($caScenario_o;$retour_o)
+	C_OBJECT:C1216($caScenario_o; $retour_o)
 	
 	$caScenario_o:=ds:C1482.CaScenario.new()
 	
 	$caScenario_o.nom:="Nouveau scénario"
 	$caScenario_o.actif:=True:C214
-	$caScenario_o.condition:=New object:C1471("ageMinimum";18;"ageMaximum";99;"rang";0;"dateDebutMailClique";!00-00-00!;"dateFinMailClique";!00-00-00!;"dateDebutMailOuvert";!00-00-00!;"dateFinMailOuvert";!00-00-00!)
+	$caScenario_o.condition:=New object:C1471("ageMinimum"; 18; "ageMaximum"; 99; "rang"; 0; "dateDebutMailClique"; !00-00-00!; "dateFinMailClique"; !00-00-00!; "dateDebutMailOuvert"; !00-00-00!; "dateFinMailOuvert"; !00-00-00!)
 	
 	$retour_o:=$caScenario_o.save()
 	
@@ -25,13 +25,13 @@ Function loadAllScenario
 Function loadScenarioDisplay
 	This:C1470.loadAllScenario()
 	
-	cwToolWindowsFormCenter("gestionScenario";"center";This:C1470)
+	cwToolWindowsForm("gestionScenario"; "center"; This:C1470)
 	
 Function searchPersonToScenario
 	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction
-	C_TEXT:C284($lib_t;$nomLien_t;$libEmail_t)
+	C_TEXT:C284($lib_t; $nomLien_t; $libEmail_t)
 	C_LONGINT:C283($ts_el)
-	C_OBJECT:C1216($condition_o;$cleValeur_o;$personne_o;$table_o;$personneAEnlever_o;$statut_o)
+	C_OBJECT:C1216($condition_o; $cleValeur_o; $personne_o; $table_o; $personneAEnlever_o; $statut_o)
 	C_COLLECTION:C1488($cleValeur_c)
 	
 	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
@@ -63,27 +63,27 @@ Function searchPersonToScenario
 	If ($condition_o#Null:C1517)
 		$cleValeur_c:=OB Entries:C1720($condition_o)
 		
-		For each ($cleValeur_o;$cleValeur_c)
+		For each ($cleValeur_o; $cleValeur_c)
 			
 			Case of 
 				: ($cleValeur_o.key="ageMinimum")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"dateNaissance")
+					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "dateNaissance")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" <= :1";cwToolNumToDate($cleValeur_o.value;"year";"less"))
+					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" <= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
 					
 					$personne_o:=$personne_o.and($table_o)  // Première propriété de ma collection d'objet $cleValeur_c
 				: ($cleValeur_o.key="ageMaximum")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"dateNaissance")
+					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "dateNaissance")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" >= :1";cwToolNumToDate($cleValeur_o.value;"year";"less"))
+					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" >= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
 					
 					$personne_o:=$personne_o.and($table_o)
 				: ($cleValeur_o.key="dateDebutMailClique")
 					
 					If ($cleValeur_o.value#!00-00-00!)
-						$ts_el:=cwTimestamp($cleValeur_o.value;?00:00:00?)
+						$ts_el:=cwTimestamp($cleValeur_o.value; ?00:00:00?)
 						
-						$table_o:=ds:C1482.CaPersonneMarketing.query("lastClicked # :1 AND lastClicked >= :2";0;$ts_el).OnePersonne
+						$table_o:=ds:C1482.CaPersonneMarketing.query("lastClicked # :1 AND lastClicked >= :2"; 0; $ts_el).OnePersonne
 						
 						$personne_o:=$personne_o.and($table_o)
 					End if 
@@ -91,9 +91,9 @@ Function searchPersonToScenario
 				: ($cleValeur_o.key="dateFinMailClique")
 					
 					If ($cleValeur_o.value#!00-00-00!)
-						$ts_el:=cwTimestamp($cleValeur_o.value;?23:59:59?)
+						$ts_el:=cwTimestamp($cleValeur_o.value; ?23:59:59?)
 						
-						$table_o:=ds:C1482.CaPersonneMarketing.query("lastClicked # :1 AND lastClicked <= :2";0;$ts_el).OnePersonne
+						$table_o:=ds:C1482.CaPersonneMarketing.query("lastClicked # :1 AND lastClicked <= :2"; 0; $ts_el).OnePersonne
 						
 						$personne_o:=$personne_o.and($table_o)
 					End if 
@@ -101,9 +101,9 @@ Function searchPersonToScenario
 				: ($cleValeur_o.key="dateDebutMailOuvert")
 					
 					If ($cleValeur_o.value#!00-00-00!)
-						$ts_el:=cwTimestamp($cleValeur_o.value;?00:00:00?)
+						$ts_el:=cwTimestamp($cleValeur_o.value; ?00:00:00?)
 						
-						$table_o:=ds:C1482.CaPersonneMarketing.query("lastOpened # :1 AND lastOpened >= :2";0;$ts_el).OnePersonne
+						$table_o:=ds:C1482.CaPersonneMarketing.query("lastOpened # :1 AND lastOpened >= :2"; 0; $ts_el).OnePersonne
 						
 						$personne_o:=$personne_o.and($table_o)
 					End if 
@@ -111,28 +111,28 @@ Function searchPersonToScenario
 				: ($cleValeur_o.key="dateFinMailOuvert")
 					
 					If ($cleValeur_o.value#!00-00-00!)
-						$ts_el:=cwTimestamp($cleValeur_o.value;?23:59:59?)
+						$ts_el:=cwTimestamp($cleValeur_o.value; ?23:59:59?)
 						
-						$table_o:=ds:C1482.CaPersonneMarketing.query("lastOpened # :1 AND lastOpened <= :2";0;$ts_el).OnePersonne
+						$table_o:=ds:C1482.CaPersonneMarketing.query("lastOpened # :1 AND lastOpened <= :2"; 0; $ts_el).OnePersonne
 						
 						$personne_o:=$personne_o.and($table_o)
 					End if 
 					
 				: ($cleValeur_o.key="email")
-					$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecTelecom;"nomLien")
+					$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecTelecom; "nomLien")
 					
 					$table_o:=$personne_o[$nomLien_t]
 					
 					If (Num:C11($table_o.length)>0)
 						This:C1470.marketingAutomation.loadPasserelle("Telecom")  // Chargement de la passerelle Telecom
 						
-						$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"type")
-						$libEmail_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleType;"email")
+						$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "type")
+						$libEmail_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleType; "email")
 						
-						$table_o:=$table_o.query($lib_t+" = :1";$libEmail_t)
+						$table_o:=$table_o.query($lib_t+" = :1"; $libEmail_t)
 						
 						If (Num:C11($table_o.length)>0)
-							$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecPersonne;"nomLien")
+							$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecPersonne; "nomLien")
 							
 							$table_o:=$table_o[$nomLien_t]
 							
@@ -162,15 +162,15 @@ Function searchPersonToScenario
 				: ($cleValeur_o.key="rang")
 					
 					If ($cleValeur_o.value#0)
-						$table_o:=ds:C1482.CaPersonneMarketing.query("rang = :1";$cleValeur_o.value).OnePersonne
+						$table_o:=ds:C1482.CaPersonneMarketing.query("rang = :1"; $cleValeur_o.value).OnePersonne
 						
 						$personne_o:=$personne_o.and($table_o)
 					End if 
 					
 				: ($cleValeur_o.key="sexe")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ;"sexe")
+					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "sexe")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" = :1";$cleValeur_o.value)
+					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" = :1"; $cleValeur_o.value)
 					
 					$personne_o:=$personne_o.and($table_o)
 			End case 
@@ -187,11 +187,11 @@ Function searchPersonToScenario
 	This:C1470.scenarioPersonneEnCoursEntity:=$personneAEnlever_o
 	
 Function applyScenarioToPerson
-	C_OBJECT:C1216($enregistrement_o;$caPersonneScenario_o;$retour_o)
+	C_OBJECT:C1216($enregistrement_o; $caPersonneScenario_o; $retour_o)
 	
 	If (This:C1470.scenarioSelectionPossiblePersonne#Null:C1517)
 		
-		For each ($enregistrement_o;This:C1470.scenarioSelectionPossiblePersonne)
+		For each ($enregistrement_o; This:C1470.scenarioSelectionPossiblePersonne)
 			$caPersonneScenario_o:=ds:C1482.CaPersonneScenario.new()
 			
 			$caPersonneScenario_o.personneID:=$enregistrement_o.getKey()
@@ -209,9 +209,9 @@ Function deleteScenarioToPerson
 	C_VARIANT:C1683($1)  // UID Personne
 	C_TEXT:C284($2)  // UID Scenario
 	C_BOOLEAN:C305($0)
-	C_OBJECT:C1216($table_o;$statut_o)
+	C_OBJECT:C1216($table_o; $statut_o)
 	
-	$table_o:=ds:C1482.CaPersonneScenario.query("personneID is :1 AND scenarioID is :2";$1;$2)
+	$table_o:=ds:C1482.CaPersonneScenario.query("personneID is :1 AND scenarioID is :2"; $1; $2)
 	
 	If (Num:C11($table_o.length)=1)
 		$statut_o:=$table_o.first().drop()
@@ -222,7 +222,7 @@ Function deleteScenarioToPerson
 Function loadImageScenarioCondition
 	C_TEXT:C284($lib_t)
 	
-	$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe;"femme")
+	$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe; "femme")
 	
 	This:C1470.imageMale:=This:C1470.marketingAutomation.image["male"]
 	This:C1470.imageFemale:=This:C1470.marketingAutomation.image["female"]
@@ -281,7 +281,7 @@ Function updateStringScenarioForm
 			This:C1470.scenarioPersonnePossible:=This:C1470.scenarioPersonnePossible+Char:C90(Retour chariot:K15:38)+"0 personne sélectionnée."
 			
 			If (This:C1470.scenarioSelectionPossiblePersonne#Null:C1517)
-				OB REMOVE:C1226(This:C1470;"scenarioSelectionPossiblePersonne")
+				OB REMOVE:C1226(This:C1470; "scenarioSelectionPossiblePersonne")
 			End if 
 			
 		End if 
@@ -291,7 +291,7 @@ Function updateStringScenarioForm
 	
 Function newScene
 	C_BOOLEAN:C305($0)
-	C_OBJECT:C1216($caScene_o;$retour_o)
+	C_OBJECT:C1216($caScene_o; $retour_o)
 	
 	$caScene_o:=ds:C1482.CaScene.new()
 	
@@ -331,13 +331,13 @@ Function updateStringSceneForm
 				
 				Case of 
 					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="jour(s)") | (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="jour(s)")
-						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/5184000;0))
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/5184000; 0))
 					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="semaine(s)")
-						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*7);0))
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*7); 0))
 					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="mois(s)")
-						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*30);0))
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*30); 0))
 					: (String:C10(This:C1470.sceneDetail.paramAction.echelleDelai)="année(s)")
-						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*365);0))
+						This:C1470.sceneSuivanteDelai:=String:C10(Round:C94(This:C1470.sceneDetail.tsAttente/(5184000*365); 0))
 				End case 
 				
 			End if 
@@ -355,12 +355,12 @@ Function saveFileActionScene
 	C_OBJECT:C1216($3)  // Objet Write Pro
 	C_TEXT:C284($4)  // Extension du fichier
 	C_BOOLEAN:C305($5)  // Booléen qui indique si l'utilisateur choisi l'endroit du fichier de sauvegarde du fichier
-	C_TEXT:C284($texte_t;$chemin_t)
+	C_TEXT:C284($texte_t; $chemin_t)
 	C_BOOLEAN:C305($continue_b)
 	
-	$texte_t:=WP Get text:C1575($3;wk expressions as source:K81:256)
+	$texte_t:=WP Get text:C1575($3; wk expressions as source:K81:256)
 	
-	$chemin_t:=Get 4D folder:C485(Dossier Resources courant:K5:16;*)+"cioMarketingAutomation"+Séparateur dossier:K24:12+"scenario"+Séparateur dossier:K24:12+$1+Séparateur dossier:K24:12
+	$chemin_t:=Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioMarketingAutomation"+Séparateur dossier:K24:12+"scenario"+Séparateur dossier:K24:12+$1+Séparateur dossier:K24:12
 	
 	$continue_b:=This:C1470.marketingAutomation.createFolder($chemin_t)  // Création ou check du dossier scénario
 	
@@ -382,19 +382,19 @@ Function saveFileActionScene
 				: ($4="4wp")
 					
 					If ($texte_t="@<mj-body@") | ($texte_t="@<body@")  // Il s'agit d'un email
-						WP EXPORT DOCUMENT:C1337($3;$chemin_t+"actionParMail.4WP";wk 4wp:K81:4)
+						WP EXPORT DOCUMENT:C1337($3; $chemin_t+"actionParMail.4WP"; wk 4wp:K81:4)
 					Else 
-						WP EXPORT DOCUMENT:C1337($3;$chemin_t+"actionParCourrier.4WP";wk 4wp:K81:4)
+						WP EXPORT DOCUMENT:C1337($3; $chemin_t+"actionParCourrier.4WP"; wk 4wp:K81:4)
 					End if 
 					
 			End case 
 			
 		Else 
-			$chemin_t:=Select document:C905(System folder:C487(Bureau:K41:16);".4wp";" title";Saisie nom de fichier:K24:17)
+			$chemin_t:=Select document:C905(System folder:C487(Bureau:K41:16); ".4wp"; " title"; Saisie nom de fichier:K24:17)
 			
 			// ToDo
 			If ($chemin_t#"")
-				WP EXPORT DOCUMENT:C1337($3;document;wk 4wp:K81:4;wk normal:K81:7)
+				WP EXPORT DOCUMENT:C1337($3; document; wk 4wp:K81:4; wk normal:K81:7)
 			End if 
 			
 		End if 

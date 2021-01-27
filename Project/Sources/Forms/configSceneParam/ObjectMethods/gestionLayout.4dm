@@ -4,7 +4,7 @@ Case of
 		
 		$config:=New object:C1471
 		
-		CONFIRM:C162("Voulez-vous utiliser un modèle interne ?";"Oui";"Non")
+		CONFIRM:C162("Voulez-vous utiliser un modèle interne ?"; "Oui"; "Non")
 		TRACE:C157
 		If (OK=1)
 			
@@ -14,7 +14,7 @@ Case of
 		
 		$config.sceneDetail:=Form:C1466.sceneDetail
 		
-		cwToolWindowsFormCenter("configSceneModele";"center";$config)  // Form est la class scénario
+		cwToolWindowsForm("configSceneModele"; "center"; $config)  // Form est la class scénario
 	: (Form event code:C388=Sur survol:K2:35)
 		SET CURSOR:C469(9000)
 End case 

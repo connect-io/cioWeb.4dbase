@@ -1,1 +1,1 @@
-cwToolWindowsFormCenter("configScenario";"center";Form:C1466)
+cwToolWindowsForm("configScenario"; "center"; Form:C1466)

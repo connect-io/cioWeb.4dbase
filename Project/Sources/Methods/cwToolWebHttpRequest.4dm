@@ -1,6 +1,6 @@
 //%attributes = {"shared":true,"lang":"en"}
 // ======================================================================
-// Methode projet : webHttpRequest
+// Methode projet : cwToolWebHttpRequest
 // 
 // Méthode qui permet de faire des requêtes http
 //
@@ -26,11 +26,11 @@ If (True:C214)  // Déclarations
 End if 
 
 Case of 
-	: (Value type:C1509($4->)=Is text:K8:3)
+	: (Value type:C1509($4->)=Est un texte:K8:3)
 		$reponse_v:=""
-	: (Value type:C1509($4->)=Is object:K8:27)
+	: (Value type:C1509($4->)=Est un objet:K8:27)
 		$reponse_v:=New object:C1471
-	: (Value type:C1509($4->)=Is BLOB:K8:12)
+	: (Value type:C1509($4->)=Est un BLOB:K8:12)
 		$reponse_v:=$blobVide_b
 End case 
 

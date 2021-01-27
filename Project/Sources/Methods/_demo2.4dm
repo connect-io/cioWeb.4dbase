@@ -1,16 +1,19 @@
 //%attributes = {"shared":true,"lang":"en"}
+C_VARIANT:C1683($1)
+
 // Dans cette demo on va tacher de mettre à jour les informations d'une personne concernant les envoie de mail passé.
-var $marketingAutomation_cs; $marketingAutomation_o; $entity_o; $caPersonneMarketing_o; $retour_o : Object
+var $update_b : Boolean
+var $marketingAutomation_o; $personne_o; $caPersonneMarketing_o; $retour_o : Object
 
-$marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
+// Instanciation de la class
+$marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()
 
-$marketingAutomation_o:=$marketingAutomation_cs.new()  // Instanciation de la class
-$marketingAutomation_o.loadPasserelle("Personne")  // Création de la passerelle entre la class $marketingAutomation_o et la base hôte
-
-$entity_o:=$marketingAutomation_o.loadPeopleByUID("2237F6C0D8AC4A78AC7AB423C57AF5F8")  // Recherche et chargement de l'entité de la personne
+// Instanciation de la class
+$personne_o:=cwToolGetClass("MAPersonne").new()
+$personne_o.loadByPrimaryKey($1)  // Recherche et chargement de l'entité de la personne
 
 // On va récupérer les informations utiles sur mailjet pour mettre à jour la stratégie de relance.
-$entity_o.getInfo()
+$personne_o.mailjetGetStat()
 
 // On pensera à mettre à jour les informations marketing.
-$entity_o.updateCaMarketingStatisticManual()
+$personne_o.updateCaMarketingStatisticManual()

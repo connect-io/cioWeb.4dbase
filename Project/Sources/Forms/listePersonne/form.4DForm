@@ -22,22 +22,41 @@
 		},
 		{
 			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 10,
+					"left": 10,
+					"width": 880,
+					"height": 64,
+					"fill": "transparent",
+					"borderRadius": 10,
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
 				"listePersonne": {
 					"type": "listbox",
-					"left": 19,
-					"top": 16,
-					"width": 600,
-					"height": 456,
+					"left": 10,
+					"top": 156,
+					"width": 766,
+					"height": 466,
 					"events": [],
 					"listboxType": "collection",
-					"currentItemSource": "Form:C1466.PersonneCurrentElement",
-					"currentItemPositionSource": "Form:C1466.PersonneCurrentPosition",
-					"selectedItemsSource": "Form:C1466.PersonneSelectedElement",
-					"headerHeight": "17px",
+					"currentItemSource": "Form:C1466.personCurrentElement",
+					"currentItemPositionSource": "Form:C1466.personCurrentPosition",
+					"selectedItemsSource": "Form:C1466.personSelectedElement",
+					"headerHeight": "20px",
 					"rowHeight": "25px",
 					"verticalAlign": "middle",
 					"scrollbarHorizontal": "hidden",
-					"dataSource": "Form:C1466.personne",
+					"dataSource": "Form:C1466.personneCollection",
+					"horizontalLineStroke": "#000000",
+					"verticalLineStroke": "#A9A9A9",
+					"sizingY": "fixed",
+					"sizingX": "fixed",
+					"selectionMode": "single",
+					"showFooters": false,
+					"focusable": false,
+					"showHeaders": false,
 					"columns": [
 						{
 							"header": {
@@ -49,7 +68,8 @@
 								"name": "Pied1"
 							},
 							"width": 150,
-							"dataSource": "This:C1470.nom"
+							"dataSource": "This:C1470.nom",
+							"alternateFill": "#DDDDDD"
 						},
 						{
 							"header": {
@@ -61,7 +81,8 @@
 								"name": "Pied2"
 							},
 							"width": 150,
-							"dataSource": "This:C1470.prenom"
+							"dataSource": "This:C1470.prenom",
+							"alternateFill": "#DDDDDD"
 						},
 						{
 							"header": {
@@ -73,7 +94,8 @@
 								"name": "Pied3"
 							},
 							"width": 150,
-							"dataSource": "This:C1470.codePostal"
+							"dataSource": "This:C1470.codePostal",
+							"alternateFill": "#DDDDDD"
 						},
 						{
 							"header": {
@@ -84,50 +106,348 @@
 							"footer": {
 								"name": "Pied4"
 							},
-							"width": 135,
-							"dataSource": "This:C1470.ville"
+							"width": 150,
+							"dataSource": "This:C1470.ville",
+							"alternateFill": "#DDDDDD"
+						},
+						{
+							"header": {
+								"name": "Entête5",
+								"text": "Date de Naissance"
+							},
+							"name": "dateNaissance",
+							"footer": {
+								"name": "Pied5"
+							},
+							"width": 150,
+							"dataSource": "This:C1470.dateNaissance",
+							"alternateFill": "#DDDDDD"
+						},
+						{
+							"header": {
+								"name": "Entête6",
+								"text": "UID"
+							},
+							"name": "Colonne2",
+							"footer": {
+								"name": "Pied6"
+							},
+							"dataSource": "This:C1470.UID",
+							"alternateFill": "#DDDDDD",
+							"width": 10
 						}
 					]
 				},
 				"valider": {
 					"type": "pictureButton",
-					"left": 628,
-					"top": 26,
+					"left": 566,
+					"top": 15,
 					"width": 40,
 					"height": 40,
 					"events": [
-						"onClick"
+						"onClick",
+						"onMouseMove"
 					],
-					"picture": "/RESOURCES/images/validate.png",
-					"method": "ObjectMethods/valider.4dm"
+					"picture": "/RESOURCES/images/log-out.png",
+					"method": "ObjectMethods/valider.4dm",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
 				},
-				"annuler": {
+				"valider1": {
 					"type": "pictureButton",
-					"left": 628,
-					"top": 81,
+					"left": 66,
+					"top": 15,
 					"width": 40,
 					"height": 40,
 					"events": [
-						"onClick"
+						"onClick",
+						"onMouseMove"
 					],
-					"picture": "/RESOURCES/images/cancel.png",
-					"method": "ObjectMethods/annuler.4dm"
+					"picture": "/RESOURCES/images/emailing.png",
+					"method": "ObjectMethods/valider1.4dm",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
 				},
-				"supprimer": {
+				"Texte": {
+					"type": "text",
+					"text": "Envoyer un mailing",
+					"top": 56,
+					"left": 29,
+					"width": 115,
+					"height": 14,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
+				"Texte1": {
+					"type": "text",
+					"text": "Fermer la fenêtre",
+					"top": 56,
+					"left": 534,
+					"width": 104,
+					"height": 14,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
+				"valider2": {
 					"type": "pictureButton",
-					"left": 628,
-					"top": 136,
+					"left": 434,
+					"top": 15,
 					"width": 40,
 					"height": 40,
 					"events": [
-						"onClick"
+						"onClick",
+						"onMouseMove"
 					],
-					"picture": "/RESOURCES/images/trash.png",
-					"method": "ObjectMethods/supprimer.4dm"
+					"picture": "/RESOURCES/images/scenario.png",
+					"method": "ObjectMethods/valider2.4dm",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"Texte3": {
+					"type": "text",
+					"text": "Gestion des scénarios",
+					"top": 56,
+					"left": 389,
+					"width": 130,
+					"height": 14,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
+				"valider3": {
+					"type": "pictureButton",
+					"left": 248,
+					"top": 15,
+					"width": 40,
+					"height": 40,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/images/cloud-computing.png",
+					"method": "ObjectMethods/valider3.4dm",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"Texte2": {
+					"type": "text",
+					"text": "Récupération des données de Mailjet",
+					"top": 56,
+					"left": 159,
+					"width": 215,
+					"height": 14,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
+				},
+				"Texte4": {
+					"type": "text",
+					"text": "Nom",
+					"top": 113,
+					"left": 10,
+					"width": 150,
+					"height": 16,
+					"textAlign": "center",
+					"fontWeight": "bold"
+				},
+				"Texte5": {
+					"type": "text",
+					"text": "Prénom",
+					"top": 113,
+					"left": 160,
+					"width": 150,
+					"height": 16,
+					"textAlign": "center",
+					"fontWeight": "bold"
+				},
+				"Texte6": {
+					"type": "text",
+					"text": "Code Postal",
+					"top": 113,
+					"left": 310,
+					"width": 150,
+					"height": 16,
+					"textAlign": "center",
+					"fontWeight": "bold"
+				},
+				"Texte7": {
+					"type": "text",
+					"text": "Ville",
+					"top": 113,
+					"left": 460,
+					"width": 150,
+					"height": 16,
+					"textAlign": "center",
+					"fontWeight": "bold"
+				},
+				"Texte8": {
+					"type": "text",
+					"text": "Date de naissance",
+					"top": 113,
+					"left": 610,
+					"width": 150,
+					"height": 16,
+					"textAlign": "center",
+					"fontWeight": "bold"
+				},
+				"Ligne": {
+					"type": "line",
+					"top": 107,
+					"left": 159,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9"
+				},
+				"Ligne1": {
+					"type": "line",
+					"top": 107,
+					"left": 309,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9",
+					"startPoint": "bottomLeft"
+				},
+				"Ligne2": {
+					"type": "line",
+					"top": 107,
+					"left": 459,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9",
+					"startPoint": "bottomLeft"
+				},
+				"Ligne3": {
+					"type": "line",
+					"top": 107,
+					"left": 609,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9",
+					"startPoint": "bottomLeft"
+				},
+				"Ligne4": {
+					"type": "line",
+					"top": 107,
+					"left": 759,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9"
+				},
+				"Ligne5": {
+					"type": "line",
+					"top": 107,
+					"left": 10,
+					"width": 750,
+					"height": 1,
+					"startPoint": "bottomLeft"
+				},
+				"Ligne6": {
+					"type": "line",
+					"top": 107,
+					"left": 9,
+					"width": 1,
+					"height": 51,
+					"stroke": "#A9A9A9"
+				},
+				"Zone de saisie": {
+					"type": "input",
+					"left": 18,
+					"top": 134,
+					"width": 135,
+					"height": 17,
+					"dataSource": "Form:C1466.filtreNom",
+					"placeholder": "Dupont",
+					"events": [
+						"onDataChange"
+					],
+					"method": "ObjectMethods/Zone de saisie.4dm"
+				},
+				"Zone de saisie1": {
+					"type": "input",
+					"left": 168,
+					"top": 134,
+					"width": 135,
+					"height": 17,
+					"dataSource": "Form:C1466.filtrePrenom",
+					"placeholder": "Jean",
+					"method": "ObjectMethods/Zone de saisie1.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Zone de saisie2": {
+					"type": "input",
+					"left": 318,
+					"top": 134,
+					"width": 135,
+					"height": 17,
+					"dataSource": "Form:C1466.filtreCodePostal",
+					"placeholder": "06130",
+					"method": "ObjectMethods/Zone de saisie2.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Zone de saisie3": {
+					"type": "input",
+					"left": 468,
+					"top": 134,
+					"width": 135,
+					"height": 17,
+					"dataSource": "Form:C1466.filtreVille",
+					"placeholder": "Grasse",
+					"method": "ObjectMethods/Zone de saisie3.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Zone de saisie4": {
+					"type": "input",
+					"left": 618,
+					"top": 134,
+					"width": 135,
+					"height": 17,
+					"dataSource": "Form:C1466.filtreDateNaissance",
+					"entryFilter": "##/##/####",
+					"placeholder": "01/01/2021",
+					"method": "ObjectMethods/Zone de saisie4.4dm",
+					"events": [
+						"onDataChange"
+					],
+					"dataSourceTypeHint": "date"
 				}
 			}
 		}
 	],
-	"geometryStamp": 26,
-	"method": "method.4dm"
+	"geometryStamp": 380,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

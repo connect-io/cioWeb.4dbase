@@ -15,8 +15,6 @@ Class constructor
 	This:C1470.champCodePostal:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "codePostal")
 	This:C1470.champVille:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "ville")
 	
-	
-	
 Function updateScenarioListToPerson
 	C_TEXT:C284($1)  // UID personne OU vide
 	C_OBJECT:C1216($0)
@@ -32,8 +30,6 @@ Function updateScenarioListToPerson
 		End if 
 		
 	End if 
-	
-	
 	
 Function updateStringPersonneForm
 	C_OBJECT:C1216($1)  // Entity personne
@@ -75,26 +71,26 @@ Function updateStringPersonneForm
 							$1.resumeMarketing:="• Rang : ambassadeur"
 					End case 
 					
-					$1.resumeMarketing:=$1.resumeMarketing+Char:C90(Line feed:K15:40)
+					$1.resumeMarketing:=$1.resumeMarketing+Char:C90(Retour à la ligne:K15:40)
 					
-					$1.resumeMarketing:=$1.resumeMarketing+"Dernière(s) activité(s) des mails envoyés :"+Char:C90(Line feed:K15:40)
+					$1.resumeMarketing:=$1.resumeMarketing+"Dernière(s) activité(s) des mails envoyés :"+Char:C90(Retour à la ligne:K15:40)
 					
 					If ($table_o.lastOpened#0)
-						$1.resumeMarketing:=$1.resumeMarketing+"• Dernier mail ouvert : "+cwTimestampLire("date"; $table_o.lastOpened)+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Dernier mail ouvert : "+cwTimestampLire("date"; $table_o.lastOpened)+Char:C90(Retour à la ligne:K15:40)
 					Else 
-						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun email ouvert"+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun email ouvert"+Char:C90(Retour à la ligne:K15:40)
 					End if 
 					
 					If ($table_o.lastClicked#0)
-						$1.resumeMarketing:=$1.resumeMarketing+"• Dernier mail cliqué : "+cwTimestampLire("date"; $table_o.lastClicked)+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Dernier mail cliqué : "+cwTimestampLire("date"; $table_o.lastClicked)+Char:C90(Retour à la ligne:K15:40)
 					Else 
-						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun email cliqué"+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun email cliqué"+Char:C90(Retour à la ligne:K15:40)
 					End if 
 					
 					If ($table_o.lastBounce#0)
-						$1.resumeMarketing:=$1.resumeMarketing+"• Email détecté en bounce le : "+cwTimestampLire("date"; $table_o.lastBounce)+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Email détecté en bounce le : "+cwTimestampLire("date"; $table_o.lastBounce)+Char:C90(Retour à la ligne:K15:40)
 					Else 
-						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun bounce"+Char:C90(Line feed:K15:40)
+						$1.resumeMarketing:=$1.resumeMarketing+"• Aucun bounce"+Char:C90(Retour à la ligne:K15:40)
 					End if 
 					
 					If ($table_o.desabonementMail=True:C214)
@@ -115,7 +111,6 @@ Function updateStringPersonneForm
 			$1.resume:="Aperçu indisponible plusieurs personnes sélectionnées"
 			$1.resumeMarketing:="Aperçu indisponible plusieurs personnes sélectionnées"
 	End case 
-	
 	
 Function viewPersonList
 	C_OBJECT:C1216($1)  // Objet Form scénario
@@ -139,14 +134,14 @@ Function viewPersonList
 					$table_o:=$1.donnee.scenarioSelectionPossiblePersonne.query(This:C1470.champUID+" is :1"; $enregistrement_o.UID)
 					
 					If (Num:C11($table_o.length)=1)
-						LISTBOX SELECT ROW:C912(*; "listePersonne"; $1.personne.indexOf($enregistrement_o)+1; lk add to selection:K53:2)
+						LISTBOX SELECT ROW:C912(*; "listePersonne"; $1.personne.indexOf($enregistrement_o)+1; lk ajouter à sélection:K53:2)
 					End if 
 					
 				End for each 
 				
 			End if 
 			
-			LISTBOX SET PROPERTY:C1440(*; "listePersonne"; lk selection mode:K53:35; lk multiple:K53:59)
+			LISTBOX SET PROPERTY:C1440(*; "listePersonne"; lk mode de sélection:K53:35; lk multilignes:K53:59)
 		: ($1.entree=2)  // Gestion du scénario (Personne en cours)
 			
 			If ($1.donnee.scenarioPersonneEnCoursEntity#Null:C1517)  // On souhait voir les personnes où le scénario est déjà appliqué
@@ -167,4 +162,3 @@ Function viewPersonList
 			End if 
 			
 	End case 
-	

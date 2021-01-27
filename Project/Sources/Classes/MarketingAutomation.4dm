@@ -5,7 +5,6 @@ Class de gestion du marketing automation
 
 -----------------------------------------------------------------------------*/
 
-
 Class constructor($configChemin_t : Text)
 /* -----------------------------------------------------------------------------
 Fonction : MarketingAutomation.constructor
@@ -24,14 +23,15 @@ Historique
 	End use 
 	
 	If (Count parameters:C259=0)
-		This:C1470.configChemin:=Get 4D folder:C485(Current resources folder:K5:16; *)+"cioMarketingAutomation"+Folder separator:K24:12+"config.json"
+		This:C1470.configChemin:=Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioMarketingAutomation"+Séparateur dossier:K24:12+"config.json"
 	Else 
 		This:C1470.configChemin:=$configChemin_t
 	End if 
 	
-	$fichierConfig_o:=File:C1566(This:C1470.configChemin; fk platform path:K87:2)
+	$fichierConfig_o:=File:C1566(This:C1470.configChemin; fk chemin plateforme:K87:2)
 	
 	If ($fichierConfig_o.exists=True:C214)
+		
 		Use (Storage:C1525.automation)
 			Storage:C1525.automation.config:=OB Copy:C1225(JSON Parse:C1218($fichierConfig_o.getText()); ck shared:K85:29; Storage:C1525.automation)
 		End use 
@@ -40,20 +40,18 @@ Historique
 		ALERT:C41("Impossible d'intialiser le composant caMarketingAutomation")
 	End if 
 	
-	$chemin_t:=Get 4D folder:C485(Current resources folder:K5:16; *)+"cioMarketingAutomation"+Folder separator:K24:12
+	$chemin_t:=Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioMarketingAutomation"+Séparateur dossier:K24:12
 	
-	If (Test path name:C476($chemin_t+"scenario"+Folder separator:K24:12)#Is a folder:K24:2)
-		CREATE FOLDER:C475($chemin_t+"scenario"+Folder separator:K24:12)
+	If (Test path name:C476($chemin_t+"scenario"+Séparateur dossier:K24:12)#Est un dossier:K24:2)
+		CREATE FOLDER:C475($chemin_t+"scenario"+Séparateur dossier:K24:12)
 	End if 
-	
-	
 	
 Function createFolder
 	C_TEXT:C284($1)  // Chemin du dossier à créer
 	C_BOOLEAN:C305($0)
 	C_OBJECT:C1216($dossier_o)
 	
-	$dossier_o:=Folder:C1567($1; fk platform path:K87:2)
+	$dossier_o:=Folder:C1567($1; fk chemin plateforme:K87:2)
 	
 	If ($dossier_o.exists=False:C215)  // Création du dossier du scénario
 		$0:=$dossier_o.create()
@@ -64,8 +62,6 @@ Function createFolder
 	If ($0=False:C215)
 		ALERT:C41("Le dossier dont le chemin est « "+$1+" » n'a pas pu être créer !")
 	End if 
-	
-	
 	
 Function cronosAction($action_t : Text)
 /* -----------------------------------------------------------------------------
@@ -94,8 +90,6 @@ Historique
 			DELAY PROCESS:C323(Current process:C322; 600)
 	End case 
 	
-	
-	
 Function cronosMessageDisplay
 	var $ts_el : Integer
 	
@@ -121,8 +115,6 @@ Function cronosMessageDisplay
 			
 			This:C1470.cronosMessage:="RAS, prochaine vérification dans 10 secondes."
 	End case 
-	
-	
 	
 Function cronosUpdateCaMarketing
 	C_LONGINT:C283($1)  // TS de début
@@ -162,15 +154,11 @@ Function cronosUpdateCaMarketing
 		
 	End if 
 	
-	
-	
 Function loadAllPeople
 	C_OBJECT:C1216($0)  // Toutes les entités de la table [personne] du client
 	
 	$0:=cs:C1710.Personne.new(This:C1470)  // Instanciation de la class
 	$0.loadAll()
-	
-	
 	
 Function loadCronos
 	C_LONGINT:C283($process_el)
@@ -186,8 +174,6 @@ Function loadCronos
 		$process_el:=New process:C317("caCronosDisplay"; 0; "cronos"; This:C1470; *)
 	End if 
 	
-	
-	
 Function loadCurrentPeople
 	C_OBJECT:C1216($0)  // Toutes les entités en cours de la table [personne] du client
 	var $formule_o : Object
@@ -197,10 +183,7 @@ Function loadCurrentPeople
 	$formule_o:=New object:C1471("loadPeople"; Formula from string:C1601("Create entity selection:C1512(["+This:C1470.passerelle.tableHote+"])"))
 	$0:=$formule_o.loadPeople()
 	
-	
-	
 Function loadImage()->$return_b : Boolean
-	
 	var ${1} : Text  // Nom de l'image
 	var $i_el : Integer
 	var $fichier_o : 4D:C1709.File
@@ -208,8 +191,7 @@ Function loadImage()->$return_b : Boolean
 	var $image_i : Picture
 	
 	For ($i_el; 1; Count parameters:C259)
-		
-		$fichier_o:=File:C1566(Get 4D folder:C485(Current resources folder:K5:16)+"Images"+Folder separator:K24:12+${$i_el}; fk platform path:K87:2)
+		$fichier_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16)+"Images"+Séparateur dossier:K24:12+${$i_el}; fk chemin plateforme:K87:2)
 		
 		If ($fichier_o.exists=True:C214)
 			$blob_b:=$fichier_o.getContent()
@@ -224,9 +206,8 @@ Function loadImage()->$return_b : Boolean
 			
 			$return_b:=True:C214
 		End if 
+		
 	End for 
-	
-	
 	
 Function loadMailjetClass
 	C_OBJECT:C1216($0)
@@ -236,14 +217,10 @@ Function loadMailjetClass
 	
 	$0:=$mailjet_cs.new()  // Instanciation de la class
 	
-	
-	
 Function loadNewPeople
 	C_OBJECT:C1216($0)  // Entité vide de la table [Personne] du client
 	
 	$0:=cs:C1710.Personne.new()  // Instanciation de la class
-	
-	
 	
 Function loadPasserelle
 	C_TEXT:C284($1)  // Personne OU Telecom
@@ -258,7 +235,6 @@ Function loadPasserelle
 	$0.passerelle:=Storage:C1525.automation.passerelle
 	$0.formule:=Storage:C1525.automation.formule
 	
-	
 Function loadPeopleByEmail
 	C_TEXT:C284($1)  // Email de la personne
 	C_OBJECT:C1216($0)  // Entité de la personne trouvée avec $1
@@ -268,8 +244,6 @@ Function loadPeopleByEmail
 	If ($0.loadByEmail($1)=False:C215)
 		ALERT:C41("La personne avec l'email "+$1+" n'a pas été trouvé")
 	End if 
-	
-	
 	
 Function loadPeopleByUID
 	C_TEXT:C284($1)  // UID de la personne
