@@ -157,6 +157,9 @@ If (($retour="ok") & ($configInput.type="file"))
 			: (Not:C34(OB Is defined:C1231($configInput;"contentType")))
 				//La cle contentType n'est pas initialisé, on ne fait rien
 				
+			: ($vPartMimeType="application/octet-stream")
+				//Aucun fichier n'a été rentré
+				
 			: ($configInput.contentType.join()#("@"+$vPartMimeType+"@"))
 				$retour:=$varNomPublic_t+", le type de fichier n'est pas valide."
 				
