@@ -49,12 +49,6 @@ Historique
 	This:C1470.config.folderName_o.viewCache:="View"
 	
 	
-	
-	// Objet des datas pour les sites.
-	This:C1470.sites:=New object:C1471
-	
-	
-	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
 	$source_o:=Folder:C1567(This:C1470.sourcesPath();fk platform path:K87:2)
@@ -76,13 +70,10 @@ Historique
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
 	For each ($subDomain_t;This:C1470.config.subDomain_c)
-		If (This:C1470.sites[$subDomain_t]=Null:C1517)
-			This:C1470.sites[$subDomain_t]:=New object:C1471
-			
+		If (Storage:C1525.sites[$subDomain_t]=Null:C1517)
 			Use (Storage:C1525.sites)
 				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
 			End use 
-			
 		End if 
 	End for each 
 	
@@ -409,7 +400,7 @@ Historique
 	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
 	
 	
-	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
+	$dataTableConfig_o:=Storage:C1525.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
 	
 	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
 	
@@ -789,17 +780,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	var $1 : Object  // instance de user
-	var $0 : cs:C1710.Page  // Instance de la page courante
-	
-	var $info_o : Object
-	
-	TRACE:C157
-	// Informations diverses
-	$info_o:=New object:C1471()
-	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
-	
-	$0:=cs:C1710.Page.new($1;$info_o)
+	ALERT:C41("Pour instancier une page, merci d'utiliser maintenant : pageWeb_o:=cwToolGetClass(\"Page\").new(visiteur_o)")
 	
 	
 	
@@ -1217,16 +1198,6 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
-/*
-var $0 : Object  // Instance de l'utilisateur en cours
-	
-// En attendant de faire mieux, je declare la variable visiteur pour gérer les form
-var visiteur : cs.User
-visiteur:=cs.User.new()
-$0:=visiteur
-	
-$classWebApp_v:=cwToolGetClass("WebApp")
-*/
 	
 	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : visiteur_o:=cwToolGetClass(\"User\").new()")
 	

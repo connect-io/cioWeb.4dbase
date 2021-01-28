@@ -10,9 +10,6 @@ Class constructor
 /* -----------------------------------------------------------------------------
 Fonction : Page.constructor
 	
-Initialisation de la page web.
-ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
-	
 Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
@@ -22,7 +19,6 @@ Historique
 ----------------------------------------------------------------------------- */
 	
 	var $1 : Object  // Les informations sur le visiteur.
-	var $2 : Object  // Information diverse
 	
 	var $page_o : Object
 	var $propriete_t : Text
@@ -45,7 +41,8 @@ Historique
 	// Petit hack pour les datatables en attendant des jours meilleurs.
 	siteDataTable_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].dataTable
 	
-	This:C1470.info:=$2
+	This:C1470.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+	
 	
 	$libPageConnexion_t:="userIdentification"
 	
@@ -65,7 +62,7 @@ Historique
 			
 			If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
 				pageWeb_o:=$page_o
-				pageWeb_o.info:=$2
+				pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
 			End if 
 			
 		End for each 
