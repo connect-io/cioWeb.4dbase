@@ -17,14 +17,19 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 	
-	var $1 : Object  // Le lib de la dataTable.
+	var $1 : Text  // Le lib de la dataTable.
 	
 	var $propriete_t : Text
 	
-	ASSERT:C1129($1#Null:C1517;"dataTable.constructor : La configuration de la dataTable est manquante.")
+	ASSERT:C1129($1#"";"dataTable.constructor : Le param $1 est manquante.")
+	ASSERT:C1129(visiteur.sousDomaine#"";"dataTable.constructor : Le param visiteur n'est pas initialisé.")
 	
-	For each ($propriete_t;$1)
-		This:C1470[$propriete_t]:=$1[$propriete_t]
+	$dataTableConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].dataTable.query("lib IS :1";$1).copy()
+	
+	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
+	
+	For each ($propriete_t;$dataTableConfig_o[0])
+		This:C1470[$propriete_t]:=$dataTableConfig_o[0][$propriete_t]
 	End for each 
 	
 	This:C1470.column_c:=This:C1470.column

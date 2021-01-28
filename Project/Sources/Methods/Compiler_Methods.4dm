@@ -72,12 +72,6 @@ C_TEXT:C284(cwRedirection301;$1)
 C_TEXT:C284(cwPageActive;$0)
 C_TEXT:C284(cwPageActive;$1)
 
-//cwDataTableJsInformation
-C_TEXT:C284(cwDataTableJsInformation;$0)
-C_POINTER:C301(cwDataTableJsInformation;$1)
-C_TEXT:C284(cwDataTableJsInformation;$2)
-C_VARIANT:C1683(cwDataTableJsInformation;$3)
-
 //cwInputValidation
 C_TEXT:C284(cwInputValidation;$0)
 C_TEXT:C284(cwInputValidation;$1)

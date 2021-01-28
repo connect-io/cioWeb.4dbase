@@ -388,36 +388,7 @@ Historique
 05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
 ----------------------------------------------------------------------------- */
 	
-	var $1 : Text  // Lib du dataTable
-	var $2 : Pointer
-	var $0 : cs:C1710.DataTable
-	
-	var $instance_o : cs:C1710.DataTable  // Instance de la DataTable en cours
-	
-	$user_o:=visiteur
-	
-	ASSERT:C1129($1#"";"WebApp.dataTableNew : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
-	
-	
-	$dataTableConfig_o:=Storage:C1525.sites[$user_o.sousDomaine].dataTable.query("lib IS :1";$1).copy()
-	
-	ASSERT:C1129($dataTableConfig_o.length#0;"WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$1)
-	
-	$instance_o:=cs:C1710.DataTable.new($dataTableConfig_o[0])
-	
-	// Pour le retour de la fonction, il y a 2 methodes possibles.
-	If (Count parameters:C259=1)
-		
-		// Soit un retournement simple dans $0
-		$0:=$instance_o
-	Else 
-		// Soit le dans un pointeur (qui est un objet) passé dans $2, dans lequel on 
-		// rajoute une propriété qui correspond au libellé du dataTable, cela permet 
-		// de regrouper toutes les dataTable dans un seul objet.
-		
-		$2->[$1]:=$instance_o
-	End if 
+	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : dataTables_o.dtUserListe:=cwToolGetClass(\"DataTable\").new(\"dtUserListe\")")
 	
 	
 	
