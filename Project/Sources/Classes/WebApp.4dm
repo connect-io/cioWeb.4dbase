@@ -808,7 +808,7 @@ Historique
 	var siteDataTable_c : Collection
 	
 	$user_o:=$1
-	
+	TRACE:C157
 	// En attendant de faire mieux, je passe la variable en process
 	siteRoute_c:=This:C1470.sites[$user_o.sousDomaine].route.copy()
 	
@@ -886,7 +886,6 @@ Historique
 		For ($routeNum;1;Size of array:C274($routeFile_at))
 			// On charge toutes les routes, mais pas le modele
 			If ($routeFile_at{$routeNum}="@route.json@")
-				//$configPage:=cwToolObjectMerge ($configPage;JSON Parse(Document to text($routeFile_at{$routeNum};"UTF-8")))
 				$configPage:=cwToolObjectMerge($configPage;cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
 			End if 
 		End for 
