@@ -59,6 +59,42 @@ Historique
 		
 	End for each 
 	
+Function loadByField
+	var $1 : Text  // Nom du champ
+	var $2 : Text  // Signe de la recherche
+	var $3 : Variant  // Valeur à rechercher
+	
+	var $table_o : Object
+	var $field_c : Collection
+	
+	$field_c:=This:C1470.passerelle.champ.query("lib = :1"; $1)
+	
+	This:C1470.personne:=Null:C1517  // Par défaut je ré-initialise la propriété
+	
+	If ($field_c.length=1)
+		
+		If ($field_c[0].directAccess=Null:C1517)  // La recherche doit se faire directement sur la table [Personne] de la base hôte
+			This:C1470.fieldName:=$field_c[0].personAccess
+			This:C1470.fieldSignComparaison:=$2
+			This:C1470.fieldValue:=$3
+			
+			$table_o:=Formula from string:C1601("ds[\""+This:C1470.passerelle.tableHote+"\"].query(\""+This:C1470.fieldName+" "+This:C1470.fieldSignComparaison+" :1\";This.fieldValue)").call(This:C1470)
+			
+			If ($table_o.length>0)
+				This:C1470.personne:=$table_o.first()
+				
+				This:C1470.load()
+			End if 
+			
+			OB REMOVE:C1226(This:C1470; "fieldName")
+			OB REMOVE:C1226(This:C1470; "fieldSignComparaison")
+			OB REMOVE:C1226(This:C1470; "fieldValue")
+		Else   // Il faut faire la recherche sur une table [Enfant]
+			// ToDo
+		End if 
+		
+	End if 
+	
 Function loadByChild($field_t : Text; $childField_t : Text; $childFieldValue_t : Text)->$isOk_b : Boolean
 /*-----------------------------------------------------------------------------
 Fonction : MAPersonne.loadByChild
@@ -182,6 +218,62 @@ Historique
 	$mailjet_o:=cwToolGetClass("MAMailjet").new()
 	
 	This:C1470.statMailjet:=$mailjet_o.getStatistic(This:C1470.email)
+	
+Function sendMailing
+	var $canalEnvoi_t; $corps_t; $mime_t; $propriete_t : Text
+	var $class_o; $config_o; $mime_o; $statut_o : Object
+	
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser cette fonction sans une personne de définie.")
+	
+	// Instanciation de la class
+	$class_o:=cwToolGetClass("MAMailing").new()
+	
+	// On détermine le canal d'envoi du mailing
+	$canalEnvoi_t:=$class_o.sendGetType()
+	
+	If ($canalEnvoi_t#"")
+		// On configure correctement le mailing
+		$config_o:=$class_o.sendGetConfig($canalEnvoi_t)
+		
+		If ($config_o.success=True:C214)
+			// On récupère le contenu
+			cwToolWindowsForm("gestionDocument"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70))
+			
+			Case of 
+				: ($canalEnvoi_t="Email")
+					$corps_t:=WP Get text:C1575(WParea; wk expressions as value:K81:255)
+					
+					If ($corps_t#"")
+						
+						If ($corps_t#"@<body>@")  // Nouvelle façon d'envoyer des emails
+							WP EXPORT VARIABLE:C1319(WParea; $mime_t; wk mime html:K81:1)  // Mime export of Write Pro document
+							$mime_o:=MAIL Convert from MIME:C1681($mime_t)
+							
+							For each ($propriete_t; $mime_o)
+								$config_o.eMailConfig[$propriete_t]:=$mime_o[$propriete_t]
+							End for each 
+							
+						Else 
+							$config_o.eMailConfig.htmlBody:=$corps_t
+						End if 
+						
+						$config_o.eMailConfig.to:=This:C1470.eMail
+						
+						$statut_o:=$config_o.eMailConfig.send()
+						
+						If (String:C10($statut_o.statusText)="ok@")  // Statut de l'envoie du mail
+							ALERT:C41("Votre email a bien été envoyé")
+						Else 
+							ALERT:C41("Une erreur est survenue lors de l'envoi de l'e-mail : "+$statut_o.statusText)
+						End if 
+						
+					End if 
+					
+			End case 
+			
+		End if 
+		
+	End if 
 	
 Function updateCaMarketingEventAutomatic()->$isOk_b : Boolean
 /*------------------------------------------------------------------------------

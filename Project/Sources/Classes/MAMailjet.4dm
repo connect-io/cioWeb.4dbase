@@ -45,7 +45,7 @@ Function getHistoryRequestFile
 	If ($fichier_o.exists=False:C215)
 		
 		If ($fichier_o.create()=True:C214)
-			$config_o.lastRequest:=cwTimestamp(Current date:C33; Current time:C178)-3600  // Par défaut on met que la dernière requête a eu lieu il y a 1h
+			$config_o.lastRequest:=cwTimestamp(Current date:C33; Current time:C178)-604800  // Par défaut on met que la dernière requête a eu lieu il y a 7 jours
 			
 			$fichier_o.setText(JSON Stringify:C1217($config_o; *); 2)
 		End if 

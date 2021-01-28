@@ -25,8 +25,8 @@
 				"Rectangle": {
 					"type": "rectangle",
 					"top": 10,
-					"left": 10,
-					"width": 880,
+					"left": 9,
+					"width": 795,
 					"height": 64,
 					"fill": "transparent",
 					"borderRadius": 10,
@@ -35,7 +35,7 @@
 				},
 				"listePersonne": {
 					"type": "listbox",
-					"left": 10,
+					"left": 24,
 					"top": 156,
 					"width": 766,
 					"height": 466,
@@ -140,7 +140,7 @@
 				},
 				"valider": {
 					"type": "pictureButton",
-					"left": 566,
+					"left": 712,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -158,7 +158,7 @@
 				},
 				"valider1": {
 					"type": "pictureButton",
-					"left": 66,
+					"left": 67,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -178,7 +178,7 @@
 					"type": "text",
 					"text": "Envoyer un mailing",
 					"top": 56,
-					"left": 29,
+					"left": 30,
 					"width": 115,
 					"height": 14,
 					"fontFamily": "Arial",
@@ -191,7 +191,7 @@
 					"type": "text",
 					"text": "Fermer la fenêtre",
 					"top": 56,
-					"left": 534,
+					"left": 680,
 					"width": 104,
 					"height": 14,
 					"fontFamily": "Arial",
@@ -202,7 +202,7 @@
 				},
 				"valider2": {
 					"type": "pictureButton",
-					"left": 434,
+					"left": 580,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -222,7 +222,7 @@
 					"type": "text",
 					"text": "Gestion des scénarios",
 					"top": 56,
-					"left": 389,
+					"left": 535,
 					"width": 130,
 					"height": 14,
 					"fontFamily": "Arial",
@@ -233,7 +233,7 @@
 				},
 				"valider3": {
 					"type": "pictureButton",
-					"left": 248,
+					"left": 249,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -253,7 +253,7 @@
 					"type": "text",
 					"text": "Récupération des données de Mailjet",
 					"top": 56,
-					"left": 159,
+					"left": 160,
 					"width": 215,
 					"height": 14,
 					"fontFamily": "Arial",
@@ -266,7 +266,7 @@
 					"type": "text",
 					"text": "Nom",
 					"top": 113,
-					"left": 10,
+					"left": 24,
 					"width": 150,
 					"height": 16,
 					"textAlign": "center",
@@ -276,7 +276,7 @@
 					"type": "text",
 					"text": "Prénom",
 					"top": 113,
-					"left": 160,
+					"left": 174,
 					"width": 150,
 					"height": 16,
 					"textAlign": "center",
@@ -286,7 +286,7 @@
 					"type": "text",
 					"text": "Code Postal",
 					"top": 113,
-					"left": 310,
+					"left": 324,
 					"width": 150,
 					"height": 16,
 					"textAlign": "center",
@@ -296,7 +296,7 @@
 					"type": "text",
 					"text": "Ville",
 					"top": 113,
-					"left": 460,
+					"left": 474,
 					"width": 150,
 					"height": 16,
 					"textAlign": "center",
@@ -306,7 +306,7 @@
 					"type": "text",
 					"text": "Date de naissance",
 					"top": 113,
-					"left": 610,
+					"left": 624,
 					"width": 150,
 					"height": 16,
 					"textAlign": "center",
@@ -315,7 +315,7 @@
 				"Ligne": {
 					"type": "line",
 					"top": 107,
-					"left": 159,
+					"left": 173,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9"
@@ -323,25 +323,25 @@
 				"Ligne1": {
 					"type": "line",
 					"top": 107,
-					"left": 309,
+					"left": 323,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9",
-					"startPoint": "bottomLeft"
+					"startPoint": "topLeft"
 				},
 				"Ligne2": {
 					"type": "line",
 					"top": 107,
-					"left": 459,
+					"left": 473,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9",
-					"startPoint": "bottomLeft"
+					"startPoint": "topLeft"
 				},
 				"Ligne3": {
 					"type": "line",
 					"top": 107,
-					"left": 609,
+					"left": 623,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9",
@@ -350,7 +350,7 @@
 				"Ligne4": {
 					"type": "line",
 					"top": 107,
-					"left": 759,
+					"left": 773,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9"
@@ -358,22 +358,22 @@
 				"Ligne5": {
 					"type": "line",
 					"top": 107,
-					"left": 10,
+					"left": 24,
 					"width": 750,
 					"height": 1,
-					"startPoint": "bottomLeft"
+					"startPoint": "topLeft"
 				},
 				"Ligne6": {
 					"type": "line",
 					"top": 107,
-					"left": 9,
+					"left": 23,
 					"width": 1,
 					"height": 51,
 					"stroke": "#A9A9A9"
 				},
 				"Zone de saisie": {
 					"type": "input",
-					"left": 18,
+					"left": 32,
 					"top": 134,
 					"width": 135,
 					"height": 17,
@@ -386,7 +386,7 @@
 				},
 				"Zone de saisie1": {
 					"type": "input",
-					"left": 168,
+					"left": 182,
 					"top": 134,
 					"width": 135,
 					"height": 17,
@@ -399,7 +399,7 @@
 				},
 				"Zone de saisie2": {
 					"type": "input",
-					"left": 318,
+					"left": 332,
 					"top": 134,
 					"width": 135,
 					"height": 17,
@@ -412,7 +412,7 @@
 				},
 				"Zone de saisie3": {
 					"type": "input",
-					"left": 468,
+					"left": 482,
 					"top": 134,
 					"width": 135,
 					"height": 17,
@@ -425,7 +425,7 @@
 				},
 				"Zone de saisie4": {
 					"type": "input",
-					"left": 618,
+					"left": 632,
 					"top": 134,
 					"width": 135,
 					"height": 17,
@@ -437,11 +437,42 @@
 						"onDataChange"
 					],
 					"dataSourceTypeHint": "date"
+				},
+				"valider4": {
+					"type": "pictureButton",
+					"left": 435,
+					"top": 15,
+					"width": 40,
+					"height": 40,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/images/robot.png",
+					"method": "ObjectMethods/valider4.4dm",
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"Texte9": {
+					"type": "text",
+					"text": "Lancement de Cronos",
+					"top": 56,
+					"left": 390,
+					"width": 130,
+					"height": 14,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fontWeight": "bold",
+					"sizingX": "fixed",
+					"sizingY": "fixed"
 				}
 			}
 		}
 	],
-	"geometryStamp": 380,
+	"geometryStamp": 421,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

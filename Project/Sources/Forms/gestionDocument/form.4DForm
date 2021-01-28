@@ -196,7 +196,7 @@
 				},
 				"sauvegarderDocument": {
 					"type": "pictureButton",
-					"left": 779,
+					"left": 763,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -204,7 +204,7 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"picture": "/RESOURCES/Images/sauvegarder.png",
+					"picture": "/RESOURCES/images/log-out.png",
 					"method": "ObjectMethods/sauvegarderDocument.4dm",
 					"loopBackToFirstFrame": true,
 					"switchBackWhenReleased": true,
@@ -212,11 +212,11 @@
 				},
 				"Texte6": {
 					"type": "text",
-					"text": "Sauvegarder document",
+					"text": "Fermer la fenêtre",
 					"top": 57,
 					"left": 731,
-					"width": 136,
-					"height": 15,
+					"width": 104,
+					"height": 14,
 					"fontFamily": "Arial",
 					"fontSize": 12,
 					"fontWeight": "bold"
@@ -383,6 +383,13 @@
 			}
 		}
 	],
-	"geometryStamp": 128,
-	"method": "method.4dm"
+	"geometryStamp": 131,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

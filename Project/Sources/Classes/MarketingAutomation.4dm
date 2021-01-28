@@ -120,16 +120,19 @@ Function cronosUpdateCaMarketing
 	C_LONGINT:C283($1)  // TS de début
 	C_LONGINT:C283($2)  // TS de fin
 	C_TEXT:C284(${3})  // Numéro chez mailjet de l'eventMessage à mettre à jour exemple : 3 -> Opened, 4 -> Clicked etc.
+	
 	C_LONGINT:C283($i_el)
-	C_OBJECT:C1216($mailjet_o; $mailjetDetail_o; $table_o)
+	C_OBJECT:C1216($mailjet_o; $mailjetDetail_o; $table_o; $class_o)
 	C_COLLECTION:C1488($mailjetDetail_c)
 	
-	This:C1470.loadPasserelle("Telecom")  // On change de passerelle de recherche
+	//This.loadPasserelle("Telecom")  // On change de passerelle de recherche
+	
+	// Instanciation de la class
+	$class_o:=cwToolGetClass("MAPersonne").new()
 	
 	If (This:C1470.cronosMailjetClass#Null:C1517)
 		
 		For ($i_el; 3; Count parameters:C259)
-			
 			This:C1470.cronosMailjetClass.getMessageEvent(${$i_el}; $1; $2; ->$mailjet_o)
 			
 			If ($mailjet_o.errorHttp=Null:C1517)
@@ -138,11 +141,11 @@ Function cronosUpdateCaMarketing
 			
 			For each ($mailjetDetail_o; $mailjetDetail_c)
 				// On vérifie que l'email trouvé est bien dans la base du client
-				$table_o:=This:C1470.loadPeopleByEmail($mailjetDetail_o.email)  // Initialisation de l'entité sélection de la table [Personne] du client
+				$class_o.loadByField("eMail"; "="; $mailjetDetail_o.email)  // Initialisation de l'entité sélection de la table [Personne] du client
 				
-				If (Num:C11($table_o.personne.length)#0)
+				If ($class_o.personne#Null:C1517)
 					
-					If ($table_o.updateCaMarketingEventAutomatic(${$i_el}; Num:C11($mailjetDetail_o.tsEvent))=False:C215)
+					If ($class_o.updateCaMarketingEventAutomatic(${$i_el}; Num:C11($mailjetDetail_o.tsEvent))=False:C215)
 						// ToDo Prevenir utilisateur
 					End if 
 					
@@ -154,14 +157,8 @@ Function cronosUpdateCaMarketing
 		
 	End if 
 	
-Function loadAllPeople
-	C_OBJECT:C1216($0)  // Toutes les entités de la table [personne] du client
-	
-	$0:=cs:C1710.Personne.new(This:C1470)  // Instanciation de la class
-	$0.loadAll()
-	
 Function loadCronos
-	C_LONGINT:C283($process_el)
+	var $process_el : Integer
 	
 	If (This:C1470.loadImage("cronosSleep.png")=True:C214) & (This:C1470.loadImage("cronosWork.png")=True:C214)
 		This:C1470.cronosImage:=This:C1470.image["cronosSleep"]
@@ -169,9 +166,9 @@ Function loadCronos
 		This:C1470.cronosStop:=False:C215
 		This:C1470.cronosVerifTache:=True:C214
 		This:C1470.cronosVerifMailjet:=0
-		This:C1470.cronosMailjetClass:=This:C1470.loadMailjetClass()
+		This:C1470.cronosMailjetClass:=cwToolGetClass("MAMailjet").new()
 		
-		$process_el:=New process:C317("caCronosDisplay"; 0; "cronos"; This:C1470; *)
+		$process_el:=New process:C317("cwCronosDisplay"; 0; "cronos"; This:C1470; *)
 	End if 
 	
 Function loadCurrentPeople
@@ -209,18 +206,14 @@ Function loadImage()->$return_b : Boolean
 		
 	End for 
 	
-Function loadMailjetClass
-	C_OBJECT:C1216($0)
-	C_OBJECT:C1216($mailjet_cs)
+Function loadNewPeople()->$table_o : Object  // Entité vide de la table [Personne] du client
+	var $class_o : Object
 	
-	$mailjet_cs:=cwToolGetClass("Mailjet")  // Initialisation de la class
+	// Instanciation de la class
+	$class_o:=cwToolGetClass("MAPersonneSelection").new()
+	$class_o.newSelection()
 	
-	$0:=$mailjet_cs.new()  // Instanciation de la class
-	
-Function loadNewPeople
-	C_OBJECT:C1216($0)  // Entité vide de la table [Personne] du client
-	
-	$0:=cs:C1710.Personne.new()  // Instanciation de la class
+	$table_o:=$class_o.personneSelection
 	
 Function loadPasserelle
 	C_TEXT:C284($1)  // Personne OU Telecom
