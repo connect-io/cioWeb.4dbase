@@ -21,9 +21,8 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	var $1 : Collection  // Information sur les routes du site provenants directement de la class webApp.
-	var $2 : Object  // Les informations sur le visiteur.
-	var $3 : Object  // Information diverse
+	var $1 : Object  // Les informations sur le visiteur.
+	var $2 : Object  // Information diverse
 	
 	var $page_o : Object
 	var $propriete_t : Text
@@ -35,11 +34,15 @@ Historique
 	ARRAY LONGINT:C221($AT_longueurTrouvee;0)
 	ARRAY TEXT:C222($AT_routeFormatCle;0)
 	
-	This:C1470.siteRoute_c:=$1
+	This:C1470.user:=$1
 	
-	This:C1470.user:=$2
+	// Information sur les routes du site provenants directement de storage.
+	This:C1470.siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
 	
-	This:C1470.info:=$3
+	// En attendant de faire mieux, je passe la variable en process
+	siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
+	
+	This:C1470.info:=$2
 	
 	$libPageConnexion_t:="userIdentification"
 	
@@ -59,7 +62,7 @@ Historique
 			
 			If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
 				pageWeb_o:=$page_o
-				pageWeb_o.info:=$3
+				pageWeb_o.info:=$2
 			End if 
 			
 		End for each 

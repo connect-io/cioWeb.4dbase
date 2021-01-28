@@ -373,13 +373,23 @@ Historique
 	End for each 
 	
 	//On remplit les traductions utiles à chaque page dans WebApp
-	For each ($page_o;This:C1470.sites[$subDomain_t].route)
-		$page_o.i18n:=New object:C1471()
+	
+	For each ($page_o;Storage:C1525.sites[$subDomain_t].route)
+		Use ($page_o)
+			$page_o.i18n:=New shared object:C1526()
+		End use 
+		
 		For each ($lang;New collection:C1472("en";"es";"fr"))
-			$page_o.i18n[$lang]:=New object:C1471()
+			
+			Use ($page_o.i18n)
+				$page_o.i18n[$lang]:=New shared object:C1526()
+			End use 
+			
 			//Chargment des traductions du corps de la page
 			If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]#Null:C1517)
-				$page_o.i18n[$lang]:=Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]
+				Use ($page_o.i18n)
+					$page_o.i18n[$lang]:=Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]
+				End use 
 			End if 
 			
 			//Chargement des traductions des parents 
@@ -387,7 +397,9 @@ Historique
 				For each ($parentName_t;$page_o.parents)
 					//Si on connait la traduction du parent
 					If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]#Null:C1517)
-						$page_o.i18n[$lang]:=cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t])
+						Use ($page_o.i18n)
+							$page_o.i18n[$lang]:=OB Copy:C1225(cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]);ck shared:K85:29)
+						End use 
 					End if 
 				End for each 
 			End if 
@@ -803,22 +815,20 @@ Historique
 	var $1;$user_o : Object  // instance de user
 	var $0 : cs:C1710.Page  // Instance de la page courante
 	
-	var siteRoute_c : Collection
 	var $info_o : Object
-	var siteDataTable_c : Collection
+	
 	
 	$user_o:=$1
 	TRACE:C157
-	// En attendant de faire mieux, je passe la variable en process
-	siteRoute_c:=This:C1470.sites[$user_o.sousDomaine].route.copy()
 	
 	// Informations diverses
 	$info_o:=New object:C1471()
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
 	
-	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
+	$0:=cs:C1710.Page.new($1;$info_o)
 	
 	// Petit hack pour les datatables en attendant des jours meilleurs.
+	var siteDataTable_c : Collection
 	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
 	
 	
@@ -1050,7 +1060,12 @@ Historique
 			$configPage.form:=$copyForm_o[$subDomain_t]
 		End if 
 		
-		This:C1470.sites[$subDomain_t].route:=$route_c
+		Use (Storage:C1525.sites[$subDomain_t])
+			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29;Storage:C1525.sites[$subDomain_t])
+		End use 
+		
+		
+		
 	End for each 
 	
 	MESSAGE:C88("Chargement des formulaires..."+Char:C90(Carriage return:K15:38))
