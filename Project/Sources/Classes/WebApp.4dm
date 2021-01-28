@@ -275,29 +275,6 @@ Historique
 	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
-/* - J'ai l'impression que cette fonction ne sert à rien.
-Function dataTableInit
------------------------------------------------------------------------------
-Fonction : WebApp.dataTableInit
-	
-Initialisation des dataTables.
-	
-Historique
-28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------ 
-	
-var $1;$user_o : Object  // Instance de user
-var $0 : Object  // Instance de la dataTable en cours
-	
-$user_o:=$1
-$0:=New object()
-	
-ASSERT($user_o.sousDomaine#"";"WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
-TRACE
-$0.config_o:=This.sites[$user_o.sousDomaine].dataTable
-	
-$0.class:=cwToolGetClass("DataTable")
-*/
 	
 Function I18NLoad
 /* -----------------------------------------------------------------------------
@@ -812,24 +789,17 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	var $1;$user_o : Object  // instance de user
+	var $1 : Object  // instance de user
 	var $0 : cs:C1710.Page  // Instance de la page courante
 	
 	var $info_o : Object
 	
-	
-	$user_o:=$1
 	TRACE:C157
-	
 	// Informations diverses
 	$info_o:=New object:C1471()
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
 	
 	$0:=cs:C1710.Page.new($1;$info_o)
-	
-	// Petit hack pour les datatables en attendant des jours meilleurs.
-	var siteDataTable_c : Collection
-	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
 	
 	
 	

@@ -42,6 +42,9 @@ Historique
 	// En attendant de faire mieux, je passe la variable en process
 	siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
 	
+	// Petit hack pour les datatables en attendant des jours meilleurs.
+	siteDataTable_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].dataTable
+	
 	This:C1470.info:=$2
 	
 	$libPageConnexion_t:="userIdentification"
