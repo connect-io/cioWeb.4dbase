@@ -31,6 +31,9 @@ Historique
 	Use (Storage:C1525)
 		Storage:C1525.sites:=New shared object:C1526
 		Storage:C1525.config:=New shared object:C1526
+		
+		// Objet des datas pour les sesssions.
+		Storage:C1525.sessionWeb:=New shared object:C1526
 	End use 
 	
 	// Nom de la variable visiteur dans l'application hôte.
@@ -45,8 +48,7 @@ Historique
 	This:C1470.config.folderName_o.webFolder:="WebFolder"
 	This:C1470.config.folderName_o.viewCache:="View"
 	
-	// Objet des datas pour les sesssions.
-	This:C1470.sessionWeb:=New object:C1471
+	
 	
 	// Objet des datas pour les sites.
 	This:C1470.sites:=New object:C1471
@@ -209,22 +211,25 @@ Historique
 	var $1 : Text  // (Optionel) Forcer le chemin par defaut.
 	var $0 : Text  // Chemin des sessions web
 	
-	If (This:C1470.sessionWeb.path=Null:C1517)
-		This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
-	End if 
-	
-	// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
-	If (Count parameters:C259=1)
-		If (String:C10($1)#"")
-			This:C1470.sessionWeb.path:=$1
-		Else 
-			// On reset le chemin pas defaut.
-			This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+	Use (Storage:C1525.sessionWeb)
+		If (Storage:C1525.sessionWeb.path=Null:C1517)
+			Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
 		End if 
-	End if 
+		
+		// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
+		If (Count parameters:C259=1)
+			If (String:C10($1)#"")
+				Storage:C1525.sessionWeb.path:=$1
+			Else 
+				
+				// On reset le chemin pas defaut.
+				Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+			End if 
+		End if 
+	End use 
 	
 	// Dans tout les cas, on retourne un chemin
-	$0:=This:C1470.sessionWeb.path
+	$0:=Storage:C1525.sessionWeb.path
 	
 	
 	
@@ -810,7 +815,6 @@ Historique
 	// Informations diverses
 	$info_o:=New object:C1471()
 	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
-	$info_o.subDomain_t:=$user_o.sousDomaine
 	
 	$0:=cs:C1710.Page.new(siteRoute_c;$1;$info_o)
 	
@@ -1135,18 +1139,21 @@ Historique
 	
 	
 	// On va conserver des informations importantes a porté de main...
-	This:C1470.sessionWeb.name:=$options_c.query("key IS :1";Web session cookie name:K73:4)[0].value
-	
+	Use (Storage:C1525.sessionWeb)
+		Storage:C1525.sessionWeb.name:=$options_c.query("key IS :1";Web session cookie name:K73:4)[0].value
+	End use 
 	
 	// ----- Nettoyage des sessions périmée -----
 	// On en profite pour nettoyer les sessions périmées...
 	MESSAGE:C88("Nettoyage des sessions web")
 	
 	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
-	This:C1470.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
+	Use (Storage:C1525.sessionWeb)
+		Storage:C1525.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
+	End use 
 	
 	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
-	$dernierJourValide_d:=Current date:C33-Num:C11(This:C1470.sessionWeb.valideDay)
+	$dernierJourValide_d:=Current date:C33-Num:C11(Storage:C1525.sessionWeb.valideDay)
 	For ($i;1;Size of array:C274($listeSessionWeb_t))
 		// On verifie une derniere fois que le fichier existe,
 		// Possibilité d'être supprimé par un autre process parallele...
@@ -1226,19 +1233,18 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
+/*
+var $0 : Object  // Instance de l'utilisateur en cours
 	
-	var $0 : Object  // Instance de l'utilisateur en cours
+// En attendant de faire mieux, je declare la variable visiteur pour gérer les form
+var visiteur : cs.User
+visiteur:=cs.User.new()
+$0:=visiteur
 	
-	var $infoWebApp_o : Object
+$classWebApp_v:=cwToolGetClass("WebApp")
+*/
 	
-	$infoWebApp_o:=New object:C1471()
-	$infoWebApp_o.sessionWeb:=OB Copy:C1225(This:C1470.sessionWeb)
-	
-	
-	// En attendant de faire mieux, je declare la variable visiteur pour gérer les form
-	var visiteur : cs:C1710.User
-	visiteur:=cs:C1710.User.new($infoWebApp_o)
-	$0:=visiteur
+	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : visiteur_o:=cwToolGetClass(\"User\").new()")
 	
 	
 	

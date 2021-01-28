@@ -31,7 +31,7 @@ If ($source="@i18n(@")
 			$T_nouveau:=Replace string:C233($obsolete;"i18n(";"")
 			$T_nouveau:=Replace string:C233($T_nouveau;")";"")
 			
-			$T_nouveau:=Storage:C1525.sites[pageWeb_o.info.subDomain_t].I18n.form[pageWeb_o.route.data.lang][formulaire_o.lib][$T_nouveau]
+			$T_nouveau:=Storage:C1525.sites[pageWeb_o.user.sousDomaine].I18n.form[pageWeb_o.route.data.lang][formulaire_o.lib][$T_nouveau]
 			
 			$source:=Replace string:C233($source;$obsolete;$T_nouveau)
 			$position:=$L_pos_trouvee+Length:C16($T_nouveau)
