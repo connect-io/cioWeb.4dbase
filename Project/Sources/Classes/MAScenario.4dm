@@ -25,7 +25,7 @@ Function loadAllScenario
 Function loadScenarioDisplay
 	This:C1470.loadAllScenario()
 	
-	cwToolWindowsForm("gestionScenario"; "center"; This:C1470)
+	cwToolWindowsForm("gestionScenario"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); This:C1470)
 	
 Function searchPersonToScenario
 	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction

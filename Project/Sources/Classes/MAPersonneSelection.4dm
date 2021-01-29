@@ -52,7 +52,7 @@ Function loadByField
 	End if 
 	
 Function loadPersonForm
-	cwToolWindowsForm("listePersonne"; "center"; This:C1470)
+	cwToolWindowsForm("listePersonne"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); This:C1470)
 	
 Function fromListPersonCollection($collection_c : Collection)
 	var $personne_o; $element_o : Object
