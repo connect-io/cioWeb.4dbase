@@ -183,22 +183,22 @@ Historique
 26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
 -----------------------------------------------------------------------------*/
 	C_OBJECT:C1216($0)  // Entity CaMarketing
-	C_OBJECT:C1216($caPersonneMarketing_o; $retour_o)
+	C_OBJECT:C1216($table_o; $retour_o)
 	
 	If (This:C1470.personne.length=1)
-		$caPersonneMarketing_o:=This:C1470.personne.AllCaPersonneMarketing
+		$table_o:=This:C1470.personne.AllCaPersonneMarketing
 		
-		If ($caPersonneMarketing_o.length=0)
-			$caPersonneMarketing_o:=ds:C1482.CaPersonneMarketing.new()
+		If ($table_o.length=0)
+			$table_o:=ds:C1482.CaPersonneMarketing.new()
 			
-			$caPersonneMarketing_o.personneID:=This:C1470.UID
-			$caPersonneMarketing_o.rang:=1  // 1 pour Suspect
+			$table_o.personneID:=This:C1470.UID
+			$table_o.rang:=1  // 1 pour Suspect
 			
-			$retour_o:=$caPersonneMarketing_o.save()
+			$retour_o:=$table_o.save()
 			
-			$0:=$caPersonneMarketing_o
+			$0:=$table_o
 		Else 
-			$0:=$caPersonneMarketing_o.first()
+			$0:=$table_o.first()
 		End if 
 		
 	End if 
@@ -214,16 +214,19 @@ Historique
 -----------------------------------------------------------------------------*/
 	C_OBJECT:C1216($mailjet_cs; $mailjet_o)
 	
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction mailjetGetStat sans une personne de définie.")
+	
 	// Instanciation de la class
 	$mailjet_o:=cwToolGetClass("MAMailjet").new()
 	
 	This:C1470.statMailjet:=$mailjet_o.getStatistic(This:C1470.email)
 	
 Function sendMailing
-	var $canalEnvoi_t; $corps_t; $mime_t; $propriete_t : Text
+	var $canalEnvoi_t; $corps_t; $mime_t; $propriete_t; $contenu_t : Text
+	var $statut_b : Boolean
 	var $class_o; $config_o; $mime_o; $statut_o : Object
 	
-	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser cette fonction sans une personne de définie.")
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction sendMailing sans une personne de définie.")
 	
 	// Instanciation de la class
 	$class_o:=cwToolGetClass("MAMailing").new()
@@ -261,119 +264,112 @@ Function sendMailing
 						
 						$statut_o:=$config_o.eMailConfig.send()
 						
-						If (String:C10($statut_o.statusText)="ok@")  // Statut de l'envoie du mail
+						$contenu_t:=$config_o.eMailConfig.subject
+						$statut_b:=(String:C10($statut_o.statusText)="ok@")
+						
+						If ($statut_b=True:C214)  // Statut de l'envoie du mail
 							ALERT:C41("Votre email a bien été envoyé")
 						Else 
 							ALERT:C41("Une erreur est survenue lors de l'envoi de l'e-mail : "+$statut_o.statusText)
 						End if 
 						
+						This:C1470.updateCaMarketingStatistic(3; New object:C1471("type"; $canalEnvoi_t; "contenu"; $config_o.eMailConfig.subject; "statut"; (String:C10($statut_o.statusText)="ok@")))
 					End if 
 					
+				: ($canalEnvoi_t="Courrier")
+					WP PRINT:C1343(WParea; wk 4D Write Pro layout:K81:176)
+				: ($canalEnvoi_t="SMS")
 			End case 
+			
+			// S'il s'agit d'un Courrier ou SMS ou un mail qui possède un corps non vide, on rajoute l'historique de l'envoi
+			If ($canalEnvoi_t#"Email") | (($canalEnvoi_t="Email") & ($corps_t#""))
+				$personne_o.updateCaMarketingStatistic(3; New object:C1471("type"; $canalEnvoi_t; "contenu"; $contenu_t; "statut"; $statut_b))
+			End if 
 			
 		End if 
 		
 	End if 
 	
-Function updateCaMarketingEventAutomatic()->$isOk_b : Boolean
-/*------------------------------------------------------------------------------
-Fonction : MAPersonne.updateCaMarketingEventAutomatic
-	
-!! Je ne sais pas à quoi sert cet méthode.
-	
-Historique
-26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
-------------------------------------------------------------------------------*/
-	C_TEXT:C284($1)  // Event qu'on souhaite mettre à jour
-	C_LONGINT:C283($2)  // TS de l'event
-	
-	C_OBJECT:C1216($caPersonneMarketing_o)
-	
-	// On pensera à mettre à jour les informations marketing.
-	$caPersonneMarketing_o:=This:C1470.personne.AllCaPersonneMarketing
-	
-	If ($caPersonneMarketing_o.length=0)
-		$caPersonneMarketing_o:=ds:C1482.CaPersonneMarketing.new()
-		
-		$caPersonneMarketing_o.personneID:=This:C1470.UID
-		$caPersonneMarketing_o.rang:=1  // 1 pour Suspect
-	Else 
-		$caPersonneMarketing_o:=$caPersonneMarketing_o.first()
-	End if 
-	
-	Case of 
-		: ($1="3")
-			$caPersonneMarketing_o.lastOpened:=$2
-		: ($1="4")
-			$caPersonneMarketing_o.lastClicked:=$2
-		: ($1="10")
-			$caPersonneMarketing_o.lastBounce:=$2
-	End case 
-	
-	$retour_o:=$caPersonneMarketing_o.save()
-	$isOk_b:=$retour_o.success
-	
-Function updateCaMarketingStatisticAutomatic
-/*------------------------------------------------------------------------------
-Fonction : MAPersonne.updateCaMarketingStatisticAutomatic
-	
-!! Je ne sais pas à quoi sert cet méthode.
-	
-Historique
-26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
-------------------------------------------------------------------------------*/
-	C_OBJECT:C1216($caPersonneMarketing_o)
-	
-	// On pensera à mettre à jour les informations marketing.
-	$caPersonneMarketing_o:=This:C1470.personne.AllCaPersonneMarketing
-	
-	If ($caPersonneMarketing_o.length=0)
-		$caPersonneMarketing_o:=ds:C1482.CaPersonneMarketing.new()
-		
-		$caPersonneMarketing_o.personneID:=This:C1470.UID
-		$caPersonneMarketing_o.mailjetInfo:=This:C1470.statMailjet
-		$caPersonneMarketing_o.rang:=1  // 1 pour Suspect
-	Else 
-		$caPersonneMarketing_o:=$caPersonneMarketing_o.first()
-		
-		$caPersonneMarketing_o.mailjetInfo:=This:C1470.statMailjet
-	End if 
-	
-Function updateCaMarketingStatisticManual()->$isOk_b : Boolean
+Function updateCaMarketingStatistic($provenance_el : Integer; $detail_o : Object)->$isOk_b : Boolean
 /*------------------------------------------------------------------------------
 Fonction : MAPersonne.updateCaMarketingStatisticManual
 	
-Permet de forcer la mise à jour des stats en provenance de mailjet
+Permet de mettre à jour la table marketing
 	
 Historique
 26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
 ------------------------------------------------------------------------------*/
-	var $caPersonneMarketing_o : Object
+	var $table_o; $enregistrement_o : Object
 	
-	ASSERT:C1129(This:C1470.statMailjet#Null:C1517; "Impossible d'utiliser cette fonction sans avoir au préalable récupérer les stats mailjet via la fonction mailjetGetStat().")
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction updateCaMarketingStatistic sans une personne de définie.")
 	
 	// On pensera à mettre à jour les informations marketing.
-	$caPersonneMarketing_o:=This:C1470.personne.AllCaPersonneMarketing
+	$table_o:=This:C1470.personne.AllCaPersonneMarketing
 	
-	If ($caPersonneMarketing_o.length=0)
-		$caPersonneMarketing_o:=ds:C1482.CaPersonneMarketing.new()
+	If ($table_o.length=0)
+		$enregistrement_o:=ds:C1482.CaPersonneMarketing.new()
 		
-		$caPersonneMarketing_o.personneID:=This:C1470.UID
-		$caPersonneMarketing_o.rang:=1  // 1 pour Suspect
+		$enregistrement_o.personneID:=This:C1470.UID
+		$enregistrement_o.rang:=1  // 1 pour Suspect
+		$enregistrement_o.historique:=New object:C1471("detail"; New collection:C1472)
 	Else 
-		$caPersonneMarketing_o:=$caPersonneMarketing_o.first()
+		$enregistrement_o:=$table_o.first()
 	End if 
 	
-	// Mise à jour des stats de mailjet (besoin d'éxécuter avant mailjetGetStat() pour fonctionner correctement)
-	$caPersonneMarketing_o.mailjetInfo:=This:C1470.statMailjet
+	Case of 
+		: ($provenance_el=1)  // On souhaite mettre à jour les stats de mailjet
+			// On va récupérer les informations utiles sur mailjet pour mettre à jour la stratégie de relance.
+			This:C1470.mailjetGetStat()
+			
+			// Mise à jour des stats de mailjet (besoin d'éxécuter avant mailjetGetStat() pour fonctionner correctement)
+			$enregistrement_o.mailjetInfo:=This:C1470.statMailjet
+		: ($provenance_el=2)  // On souhaite mettre à jour un des event (opened, clicked ou bounce)
+			
+			Case of 
+				: (String:C10($detail_o.eventNumber)="3")
+					$enregistrement_o.lastOpened:=$detail_o.eventTs
+				: (String:C10($detail_o.eventNumber)="4")
+					$enregistrement_o.lastClicked:=$detail_o.eventTs
+				: (String:C10($detail_o.eventNumber)="10")
+					$enregistrement_o.lastBounce:=$detail_o.eventTs
+			End case 
+			
+		: ($provenance_el=3)  // On souhaite mettre à jour l'historique des mailings envoyés à la personne
+			
+			$enregistrement_o.historique.detail.push(New object:C1471(\
+				"eventTs"; cwTimestamp(Current date:C33; Current time:C178); \
+				"eventUser"; Current user:C182; \
+				"eventDetail"; New object:C1471("type"; String:C10($detail_o.type); "contenu"; String:C10($detail_o.contenu); "statut"; String:C10($detail_o.statut))))
+			
+	End case 
 	
-	$retour_o:=$caPersonneMarketing_o.save()
+	$retour_o:=$enregistrement_o.save()
 	
-	If ($retour_o.success=True:C214)
-		ALERT:C41("Les dernières stats de mailjet on bien été mis à jour dans la fiche de "+This:C1470.nom+" "+This:C1470.prenom)
-	Else 
-		ALERT:C41("Impossible de mettre à jour la table marketing dans la fiche de "+This:C1470.nom+" "+This:C1470.prenom+" !")
-	End if 
+	Case of 
+		: ($provenance_el=1)  // On souhaite mettre à jour manuellement les stats de mailjet
+			
+			If ($retour_o.success=True:C214)
+				ALERT:C41("Les dernières stats de mailjet on bien été mis à jour dans la fiche de "+This:C1470.nom+" "+This:C1470.prenom)
+			Else 
+				ALERT:C41("Impossible de mettre à jour la table marketing dans la fiche de "+This:C1470.nom+" "+This:C1470.prenom)
+			End if 
+			
+		: ($provenance_el=2)  // On souhaite mettre à jour un des event (opened, clicked ou bounce)
+			
+			If ($retour_o.success=False:C215)
+				
+				Case of 
+					: (String:C10($detail_o.eventNumber)="3")
+						$event_t:="Opened"
+					: (String:C10($detail_o.eventNumber)="4")
+						$event_t:="Clicked"
+					: (String:C10($detail_o.eventNumber)="10")
+						$event_t:="Bounce"
+				End case 
+				
+				ALERT:C41("Impossible de mettre à jour la table marketing pour l'event "+$event_t+" dans la fiche de "+This:C1470.nom+" "+This:C1470.prenom)
+			End if 
+			
+	End case 
 	
-	$retour_o:=$caPersonneMarketing_o.save()
 	$isOk_b:=$retour_o.success

@@ -12,8 +12,5 @@ $marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()
 $personne_o:=cwToolGetClass("MAPersonne").new()
 $personne_o.loadByPrimaryKey($1)  // Recherche et chargement de l'entité de la personne
 
-// On va récupérer les informations utiles sur mailjet pour mettre à jour la stratégie de relance.
-$personne_o.mailjetGetStat()
-
 // On pensera à mettre à jour les informations marketing.
-$personne_o.updateCaMarketingStatisticManual()
+$personne_o.updateCaMarketingStatistic(1)

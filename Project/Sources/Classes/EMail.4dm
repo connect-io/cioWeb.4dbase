@@ -120,14 +120,15 @@ Historique
 			For each ($cheminPj_t; This:C1470.attachmentsPath_c)
 				
 				// On vérifie que le chemin de pièce jointe est bien de type texte
-				If (Type:C295($cheminPj_t)=Is text:K8:3)
+				If (Type:C295($cheminPj_t)=Est un texte:K8:3)
 					
 					// On vérifie que la pièce jointe est bien un document existant sur le disque
-					If (Test path name:C476($cheminPj_t)=Is a document:K24:1)
+					If (Test path name:C476($cheminPj_t)=Est un document:K24:1)
 						This:C1470.attachments.push(MAIL New attachment:C1644($cheminPj_t))
 					Else 
 						$error_t:="Le document suivant n'est pas présent sur le disque : "+$cheminPj_t
 					End if 
+					
 				Else 
 					$error_t:="Un élément de la collection des pièces jointes n'est pas une chaine de caractère."
 				End if 
@@ -143,15 +144,18 @@ Historique
 		
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
-			This:C1470.to:=Null:C1517
-			This:C1470.from:=Null:C1517
-			This:C1470.object:=Null:C1517
-			This:C1470.htmlBody:=Null:C1517
-			This:C1470.textBody:=Null:C1517
-			This:C1470.attachmentsPath_c:=New collection:C1472()
+			// ToDo à voir plus tard avec Greg ce qu'on décide
+			
+			//This.to:=Null
+			//This.from:=Null
+			//This.object:=Null
+			//This.htmlBody:=Null
+			//This.textBody:=Null
+			//This.attachmentsPath_c:=Créer collection()
 		Else 
 			$error_t:="Une erreur est survenue lors de l'envoi de l'e-mail : "+$error_t+$mailStatus_o.statusText
 		End if 
+		
 	End if 
 	
 	If ($error_t#"")
@@ -227,20 +231,22 @@ Historique
 		
 		// On gère les destinataires du message.
 		If (This:C1470.to=Null:C1517)
+			
 			If ($model_o.to#Null:C1517)
 				This:C1470.to:=$model_o.to
 			End if 
+			
 		End if 
 		
-		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")
-			// Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
+		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")  // Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
 			PROCESS 4D TAGS:C816(This:C1470.htmlBody; $returnVar_t)
+			
 			This:C1470.htmlBody:=$returnVar_t
 		End if 
+		
 		// Envoie du mail
 		$mailStatus_o:=This:C1470.send()
 	End if 
-	
 	
 	If ($error_t#"")
 		$mailStatus_o.statusText:=$error_t

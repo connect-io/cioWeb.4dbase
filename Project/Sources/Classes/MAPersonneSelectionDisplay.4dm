@@ -15,7 +15,8 @@ Historique
 27/01/21 - RémyScanu <gregory@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
 	
-Function manageFilter($collectionToFilter_c : Collection; $filtreNom_t : Text; $filtrePrenom_t : Text; $filtreCodePostal_t : Text; $filtreVille_t : Text; $filtreDateNaissance_t : Text)->$collectionFiltered_b : Collection
+Function manageFilter($collectionToFilter_c : Collection; $filtreNom_t : Text; $filtrePrenom_t : Text; $filtreEmail_t : Text; $filtreTelFixe_t : Text; $filtreTelMobile_t : Text; \
+$filtreCodePostal_t : Text; $filtreVille_t : Text; $filtreDateNaissance_t : Text)->$collectionFiltered_b : Collection
 	
 	If ($filtreNom_t#"")
 		$collectionToFilter_c:=$collectionToFilter_c.query("nom = :1"; "@"+$filtreNom_t+"@")
@@ -23,6 +24,18 @@ Function manageFilter($collectionToFilter_c : Collection; $filtreNom_t : Text; $
 	
 	If ($filtrePrenom_t#"")
 		$collectionToFilter_c:=$collectionToFilter_c.query("prenom = :1"; "@"+$filtrePrenom_t+"@")
+	End if 
+	
+	If ($filtreEmail_t#"")
+		$collectionToFilter_c:=$collectionToFilter_c.query("eMail = :1"; "@"+$filtreEmail_t+"@")
+	End if 
+	
+	If ($filtreTelFixe_t#"")
+		$collectionToFilter_c:=$collectionToFilter_c.query("telFixe = :1"; "@"+$filtreTelFixe_t+"@")
+	End if 
+	
+	If ($filtreTelMobile_t#"")
+		$collectionToFilter_c:=$collectionToFilter_c.query("telMobile = :1"; "@"+$filtreTelMobile_t+"@")
 	End if 
 	
 	If ($filtreCodePostal_t#"")

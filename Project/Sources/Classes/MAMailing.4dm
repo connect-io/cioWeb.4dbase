@@ -49,5 +49,4 @@ Function sendGetConfig($type_t : Text)->$config_o : Object
 		: ($type_t="Courrier")
 			$config_o.success:=True:C214
 		: ($type_t="SMS")
-			
 	End case 
