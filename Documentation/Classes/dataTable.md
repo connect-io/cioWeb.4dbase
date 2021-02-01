@@ -34,7 +34,7 @@ Datatable.new($libDataTable_t) -> $instance_o
 ### Example
 ```4d
 /* Consultez la documentation concernant la fonction dataTableNew de la class webApp. */
-$instance_o:=cs.dataTable.new($libDataTable_t)
+dataTables_o.userListe:=cwToolGetClass("DataTable").new("userListe")
 ```
 
 

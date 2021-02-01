@@ -24,7 +24,6 @@ Utilisateur sur le serveur web peut-être un visiteur d'une page web, un robot g
 
 ## Fonction : constructor			
 Initialisation d'un utilisateur
-ATTENTION : L'instance de la class "User" doit se faire obligatoirement par la fonction : webApp.userNew()
 			
 ### Fonctionnement
 Interne au composant cioWeb.
@@ -35,7 +34,7 @@ Interne au composant cioWeb.
 C_OBJECT(visiteur_o)
 
 // webConfig_o est chargé depuis la méthode sur ouverture.
-visiteur_o:=<>webConfig_o.userNew()
+visiteur_o:=cwToolGetClass("User").new()
 
 ```
 

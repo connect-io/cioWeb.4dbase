@@ -1,1 +1,1 @@
-﻿WP UpdateWidget ("WPtoolbar";"WParea")
+//WP UpdateWidget("WPtoolbar";"WParea")

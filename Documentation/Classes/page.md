@@ -15,8 +15,6 @@ Cette class permet de génerer le contenue d'une page.
 
 ## Fonction : constructor
 Initialisation de la page web.
-ATTENTION : L'instance de la class "Page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
-
 
 ### Fonctionnement
 Interne au composant cioWeb.
@@ -24,7 +22,7 @@ Interne au composant cioWeb.
 ### Example
 ```4d
   // ===== Chargement des informations sur la page =====
-pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
+pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 ```
 
 

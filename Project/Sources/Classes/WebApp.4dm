@@ -376,6 +376,7 @@ Historique
 	End for each 
 	
 	
+	
 Function dataTableNew
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.dataTableNew
@@ -986,8 +987,6 @@ Historique
 			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29;Storage:C1525.sites[$subDomain_t])
 		End use 
 		
-		
-		
 	End for each 
 	
 	MESSAGE:C88("Chargement des formulaires..."+Char:C90(Carriage return:K15:38))
@@ -998,12 +997,6 @@ Historique
 	
 	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
 	This:C1470.I18NLoad()
-	
-	
-	
-	Use (Storage:C1525)
-		
-	End use 
 	
 	
 	
