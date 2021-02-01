@@ -72,12 +72,6 @@ var cwRedirection301; $1 : Text
 var cwPageActive; $0 : Text
 var cwPageActive; $1 : Text
 
-//cwDataTableJsInformation
-var cwDataTableJsInformation; $0 : Text
-var cwDataTableJsInformation; $1 : Pointer
-var cwDataTableJsInformation; $2 : Text
-var cwDataTableJsInformation; $3 : Variant
-
 //cwInputValidation
 var cwInputValidation; $0 : Text
 var cwInputValidation; $1 : Text

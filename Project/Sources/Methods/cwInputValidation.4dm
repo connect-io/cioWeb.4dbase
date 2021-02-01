@@ -8,6 +8,7 @@ Historique
 03/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+27/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fixe bug sur les input type file non envoyé.
 ----------------------------------------------------------------------------- */
 
 // Déclarations
@@ -126,21 +127,26 @@ If (($retour="ok") & ($configInput.type="file"))
 	var $i : Integer
 	var $trouve_b : Boolean
 	
-	
 	$trouve_b:=False:C215
 	For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
 		WEB GET BODY PART:C1212($i;$vPartContentBlob;$vPartName;$vPartMimeType;$vPartFileName)
 		
 		If ($vPartName=$configInput.lib)
+			//la variable ne figure pas dans le formulaire."
 			$trouve_b:=True:C214
 			$i:=WEB Get body part count:C1211  //On sort de la boucle.
 		End if 
 	End for 
 	
 	If ($trouve_b)
-		// On a retrouver notre fichier...
-		// On va l'analyser un peu...
-		// On regarde la taille
+		If ($vPartFileName="") & (BLOB size:C605($vPartContentBlob)=0)
+			// L'input n'est pas renseigné dans le formulaire
+			$trouve_b:=False:C215
+		End if 
+	End if 
+	
+	// ----- Gestion size -----
+	If ($trouve_b)
 		Case of 
 			: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
 				//La cle blobSize n'est pas initialisé, on ne fait rien
@@ -149,6 +155,7 @@ If (($retour="ok") & ($configInput.type="file"))
 				$retour:=$varNomPublic_t+", le fichier est trop gros."
 		End case 
 		
+		// ----- Gestion du type -----
 		// On vérifie que le type de fichier soit le type attendu.
 		Case of 
 			: ($retour#"ok")
@@ -157,53 +164,12 @@ If (($retour="ok") & ($configInput.type="file"))
 			: (Not:C34(OB Is defined:C1231($configInput;"contentType")))
 				//La cle contentType n'est pas initialisé, on ne fait rien
 				
-			: ($vPartMimeType="application/octet-stream")
-				//Aucun fichier n'a été rentré
-				
 			: ($configInput.contentType.join()#("@"+$vPartMimeType+"@"))
 				$retour:=$varNomPublic_t+", le type de fichier n'est pas valide."
 				
 		End case 
 	End if 
 End if 
-
-
-// ----- Gestion size -----
-Case of 
-	: ($retour#"ok")
-		// une erreur est deja remonté, on ne fait rien
-		
-	: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
-		//La cle blobSize n'est pas initialisé, on ne fait rien
-		
-	Else 
-		var $vPartName : Text
-		var $vPartMimeType : Text
-		var $vPartFileName : Text
-		var $vPartContentBlob : Blob
-		var $i : Integer
-		
-		
-		For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
-			WEB GET BODY PART:C1212($i;$vPartContentBlob;$vPartName;$vPartMimeType;$vPartFileName)
-			Case of 
-				: ($vPartName#$configInput.lib)
-					//la variable ne figure pas dans le formulaire."
-					
-				: ($vPartFileName="") & (BLOB size:C605($vPartContentBlob)=0)
-					// L'input n'est pas renseigné dans le formulaire, ne rien faire.
-					
-				: ($vPartFileName="")
-					$retour:=$varNomPublic_t+", le fichier ne semble pas avoir été importé."
-					$i:=WEB Get body part count:C1211  //On sort de la boucle.
-					
-				: (BLOB size:C605($vPartContentBlob)>OB Get:C1224($configInput;"blobSize"))
-					$retour:=$varNomPublic_t+", le fichier est trop gros."
-					$i:=WEB Get body part count:C1211  //On sort de la boucle.
-					
-			End case 
-		End for 
-End case 
 
 
 // ----- Gestion insertion html -----

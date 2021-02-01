@@ -74,7 +74,7 @@ End if
 
   // ===== Chargement des informations du visiteur du site =====
 If (visiteur_o=Null)
-	visiteur_o:=<>webApp_o.userNew()
+	visiteur_o:=cwToolGetClass("User").new()
 End if 
 
   // Récupération des informations du visiteur.
@@ -105,7 +105,7 @@ End if
 
 
   // ===== Chargement des informations sur la page =====
-pageWeb_o:=<>webApp_o.pageCurrent(visiteur_o)
+pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 
 // On purge les dataTables.
 If (pageWeb_o.lib#"@ajax@")|(dataTables_o=null)

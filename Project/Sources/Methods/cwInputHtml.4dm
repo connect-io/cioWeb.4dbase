@@ -15,7 +15,6 @@ var $1 : Text  // Nom de la variable du formulaire web
 var $0 : Text  // Code html du formulaire
 
 
-
 If (OB Is defined:C1231(formulaire_o))
 	If (formulaire_o.input.query("lib IS :1";Substring:C12($1;2))#Null:C1517)
 		

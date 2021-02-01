@@ -30,6 +30,9 @@ Historique
 	Use (Storage:C1525)
 		Storage:C1525.sites:=New shared object:C1526
 		Storage:C1525.config:=New shared object:C1526
+		
+		// Objet des datas pour les sesssions.
+		Storage:C1525.sessionWeb:=New shared object:C1526
 	End use 
 	
 	// Nom de la variable visiteur dans l'application hôte.
@@ -43,12 +46,6 @@ Historique
 	This:C1470.config.folderName_o.source:="Sources"
 	This:C1470.config.folderName_o.webFolder:="WebFolder"
 	This:C1470.config.folderName_o.viewCache:="View"
-	
-	// Objet des datas pour les sesssions.
-	This:C1470.sessionWeb:=New object:C1471
-	
-	// Objet des datas pour les sites.
-	This:C1470.sites:=New object:C1471
 	
 	
 	// ----- Gestion du dossier source -----
@@ -71,14 +68,11 @@ Historique
 	This:C1470.config.subDomain_c:=$source_o.folders().extract("name")
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
-		If (This:C1470.sites[$subDomain_t]=Null:C1517)
-			This:C1470.sites[$subDomain_t]:=New object:C1471
-			
+	For each ($subDomain_t;This:C1470.config.subDomain_c)
+		If (Storage:C1525.sites[$subDomain_t]=Null:C1517)
 			Use (Storage:C1525.sites)
 				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
 			End use 
-			
 		End if 
 	End for each 
 	
@@ -209,22 +203,25 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 	
-	If (This:C1470.sessionWeb.path=Null:C1517)
-		This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
-	End if 
-	
-	// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
-	If (Count parameters:C259=1)
-		If (String:C10($pathDefault_t)#"")
-			This:C1470.sessionWeb.path:=$pathDefault_t
-		Else 
-			// On reset le chemin pas defaut.
-			This:C1470.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+	Use (Storage:C1525.sessionWeb)
+		If (Storage:C1525.sessionWeb.path=Null:C1517)
+			Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
 		End if 
-	End if 
+		
+		// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
+		If (Count parameters:C259=1)
+			If (String:C10($1)#"")
+				Storage:C1525.sessionWeb.path:=$1
+			Else 
+				
+				// On reset le chemin pas defaut.
+				Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+			End if 
+		End if 
+	End use 
 	
 	// Dans tout les cas, on retourne un chemin
-	$path_t:=This:C1470.sessionWeb.path
+	$0:=Storage:C1525.sessionWeb.path
 	
 	
 	
@@ -269,11 +266,11 @@ Historique
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$path_t:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
+	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
 	
 	
 	
-Function I18NLoad()
+Function I18NLoad
 /* -----------------------------------------------------------------------------
 Fonction : I18NLoad
 	
@@ -347,13 +344,23 @@ Historique
 	End for each 
 	
 	//On remplit les traductions utiles à chaque page dans WebApp
-	For each ($page_o; This:C1470.sites[$subDomain_t].route)
-		$page_o.i18n:=New object:C1471()
-		For each ($lang; New collection:C1472("en"; "es"; "fr"))
-			$page_o.i18n[$lang]:=New object:C1471()
+	
+	For each ($page_o;Storage:C1525.sites[$subDomain_t].route)
+		Use ($page_o)
+			$page_o.i18n:=New shared object:C1526()
+		End use 
+		
+		For each ($lang;New collection:C1472("en";"es";"fr"))
+			
+			Use ($page_o.i18n)
+				$page_o.i18n[$lang]:=New shared object:C1526()
+			End use 
+			
 			//Chargment des traductions du corps de la page
 			If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]#Null:C1517)
-				$page_o.i18n[$lang]:=Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]
+				Use ($page_o.i18n)
+					$page_o.i18n[$lang]:=Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$page_o.lib]
+				End use 
 			End if 
 			
 			//Chargement des traductions des parents 
@@ -361,7 +368,9 @@ Historique
 				For each ($parentName_t; $page_o.parents)
 					//Si on connait la traduction du parent
 					If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]#Null:C1517)
-						$page_o.i18n[$lang]:=cwToolObjectMerge($page_o.i18n[$lang]; Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t])
+						Use ($page_o.i18n)
+							$page_o.i18n[$lang]:=OB Copy:C1225(cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]);ck shared:K85:29)
+						End use 
 					End if 
 				End for each 
 			End if 
@@ -370,7 +379,8 @@ Historique
 	End for each 
 	
 	
-Function dataTableNew($libDataTable_t : Text; $DataTableVisiteur_p : Pointer)->$instance_o : cs:C1710.DataTable
+	
+Function dataTableNew
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.dataTableNew
 	
@@ -385,29 +395,9 @@ Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------- */
 	
-	var $user_o : Object
-	
-	$user_o:=visiteur  // Petit hack en attendant de faire mieux...
-	
-	ASSERT:C1129($libDataTable_t#""; "WebApp.dataTableNew : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($user_o.sousDomaine#""; "WebApp.dataTableNew : Impossible de determiner le sous domaine de user.")
-	
-	$dataTableConfig_o:=This:C1470.sites[$user_o.sousDomaine].dataTable.query("lib IS :1"; $libDataTable_t).copy()
-	
-	ASSERT:C1129($dataTableConfig_o.length#0; "WebApp.dataTableNew : Impossible de retrouver la dataTable : "+$libDataTable_t)
-	
-	$instance_o:=cs:C1710.DataTable.new($dataTableConfig_o[0])
-	
-	// Pour le retour de la fonction, il y a 2 methodes possibles.
-	// Soit un retournement simple dans $instance_o
-	If (Count parameters:C259#1)
-		// Soit le dans un pointeur (qui est un objet) passé dans $2, dans lequel on 
-		// rajoute une propriété qui correspond au libellé du dataTable, cela permet 
-		// de regrouper toutes les dataTable dans un seul objet.
-		$DataTableVisiteur_p->[$libDataTable_t]:=$instance_o
-	End if 
+	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : dataTables_o.dtUserListe:=cwToolGetClass(\"DataTable\").new(\"dtUserListe\")")
 	
 	
 	
@@ -772,27 +762,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 	
-	var $1; $user_o : Object  // instance de user
-	var $0 : cs:C1710.Page  // Instance de la page courante
-	
-	var siteRoute_c : Collection
-	var $info_o : Object
-	var siteDataTable_c : Collection
-	
-	$user_o:=$1
-	
-	// En attendant de faire mieux, je passe la variable en process
-	siteRoute_c:=This:C1470.sites[$user_o.sousDomaine].route.copy()
-	
-	// Informations diverses
-	$info_o:=New object:C1471()
-	$info_o.webfolderSubdomainPath_t:=This:C1470.webfolderSubdomainPath()
-	$info_o.subDomain_t:=$user_o.sousDomaine
-	
-	$0:=cs:C1710.Page.new(siteRoute_c; $1; $info_o)
-	
-	// Petit hack pour les datatables en attendant des jours meilleurs.
-	siteDataTable_c:=This:C1470.sites[$user_o.sousDomaine].dataTable
+	ALERT:C41("Pour instancier une page, merci d'utiliser maintenant : pageWeb_o:=cwToolGetClass(\"Page\").new(visiteur_o)")
 	
 	
 	
@@ -859,8 +829,7 @@ Historique
 		For ($routeNum; 1; Size of array:C274($routeFile_at))
 			// On charge toutes les routes, mais pas le modele
 			If ($routeFile_at{$routeNum}="@route.json@")
-				//$configPage:=cwToolObjectMerge ($configPage;JSON Parse(Document to text($routeFile_at{$routeNum};"UTF-8")))
-				$configPage:=cwToolObjectMerge($configPage; cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
+				$configPage:=cwToolObjectMerge($configPage;cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
 			End if 
 		End for 
 		
@@ -1024,7 +993,10 @@ Historique
 			$configPage.form:=$copyForm_o[$subDomain_t]
 		End if 
 		
-		This:C1470.sites[$subDomain_t].route:=$route_c
+		Use (Storage:C1525.sites[$subDomain_t])
+			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29;Storage:C1525.sites[$subDomain_t])
+		End use 
+		
 	End for each 
 	
 	MESSAGE:C88("Chargement des formulaires..."+Char:C90(Carriage return:K15:38))
@@ -1035,12 +1007,6 @@ Historique
 	
 	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
 	This:C1470.I18NLoad()
-	
-	
-	
-	Use (Storage:C1525)
-		
-	End use 
 	
 	
 	
@@ -1112,19 +1078,22 @@ Historique
 	
 	
 	// On va conserver des informations importantes a porté de main...
-	This:C1470.sessionWeb.name:=$options_c.query("key IS :1"; Web session cookie name:K73:4)[0].value
-	
+	Use (Storage:C1525.sessionWeb)
+		Storage:C1525.sessionWeb.name:=$options_c.query("key IS :1";Web session cookie name:K73:4)[0].value
+	End use 
 	
 	// ----- Nettoyage des sessions périmée -----
 	// On en profite pour nettoyer les sessions périmées...
 	MESSAGE:C88("Nettoyage des sessions web")
 	
-	$valideMinute_l:=$options_c.query("key IS :1"; Web inactive session timeout:K73:3)[0].value
-	This:C1470.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
+	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
+	Use (Storage:C1525.sessionWeb)
+		Storage:C1525.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
+	End use 
 	
-	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath(); $listeSessionWeb_t; Recursive parsing:K24:13+Absolute path:K24:14)
-	$dernierJourValide_d:=Current date:C33-Num:C11(This:C1470.sessionWeb.valideDay)
-	For ($i; 1; Size of array:C274($listeSessionWeb_t))
+	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
+	$dernierJourValide_d:=Current date:C33-Num:C11(Storage:C1525.sessionWeb.valideDay)
+	For ($i;1;Size of array:C274($listeSessionWeb_t))
 		// On verifie une derniere fois que le fichier existe,
 		// Possibilité d'être supprimé par un autre process parallele...
 		If (Test path name:C476($listeSessionWeb_t{$i})=Is a document:K24:1)
@@ -1204,18 +1173,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 -----------------------------------------------------------------------------*/
 	
-	var $0 : Object  // Instance de l'utilisateur en cours
-	
-	var $infoWebApp_o : Object
-	
-	$infoWebApp_o:=New object:C1471()
-	$infoWebApp_o.sessionWeb:=OB Copy:C1225(This:C1470.sessionWeb)
-	
-	
-	// En attendant de faire mieux, je declare la variable visiteur pour gérer les form
-	var visiteur : cs:C1710.User
-	visiteur:=cs:C1710.User.new($infoWebApp_o)
-	$0:=visiteur
+	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : visiteur_o:=cwToolGetClass(\"User\").new()")
 	
 	
 	

@@ -19,15 +19,10 @@ ATTENTION : L'instance de la class "User" doit se faire obligatoirement par la f
 Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+27/01/21 - Grégory Fromain <gregory@connect-io.fr> - Purge constructeur (retrait session)
 ------------------------------------------------------------------------------ */
 	
-	var $1 : Object  //Quelques infos de Web app (La config des sessions)
-	var $propriete_t : Text
-	
-	For each ($propriete_t;$1)
-		This:C1470[$propriete_t]:=$1[$propriete_t]
-	End for each 
-	
+	This:C1470.updateVarVisiteur()
 	
 	
 Function entityToForm
@@ -245,7 +240,7 @@ Remplace la méthode : cwVisiteurLogin
 	
 Historique
 29/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-14/08/19 - Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur.action
+14/08/19 - Grégory Fromain <gregory@connect-io.fr> - Mise au propre et ajout visiteur .action
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 ------------------------------------------------------------------------------ */
 	
@@ -323,14 +318,14 @@ Historique
 	$logErreur_o:=New object:C1471
 	
 	// On vérifie que la gestion des sessions est actif
-	If (String:C10(This:C1470.sessionWeb.path)="")
+	If (String:C10(Storage:C1525.sessionWeb.path)="")
 		$logErreur_o.detailErreur:="La gestion des sessions n'est pas actif."
 	End if 
 	
 	If (String:C10($logErreur_o.detailErreur)="")
 		
 		// il faut récupérer l'UUID de la session du visiteur
-		If (String:C10(This:C1470[This:C1470.sessionWeb.name])="")
+		If (String:C10(This:C1470[Storage:C1525.sessionWeb.name])="")
 			$logErreur_o.detailErreur:="Impossible de récupérer ID de la session du visiteur."
 		End if 
 	End if 
@@ -338,7 +333,7 @@ Historique
 	If (String:C10($logErreur_o.detailErreur)="")
 		
 		//On monte le chemin du dossier.
-		$chFolderSession_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+Folder separator:K24:12
+		$chFolderSession_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+Folder separator:K24:12
 		
 		If (Test path name:C476($chFolderSession_t)#Is a folder:K24:2)
 			CREATE FOLDER:C475($chFolderSession_t;*)
@@ -382,20 +377,20 @@ Historique
 	var $i_l : Integer
 	var $propriete_t : Text
 	
-	If (Bool:C1537(This:C1470.sessionWeb.sessionActive)=False:C215)
+	If (Bool:C1537(This:C1470.sessionWebActive)=False:C215)
 		
 		// La $session n'existe pas.
 		// Si le navigateur envoi un cookies on doit pourvoir la recreer...
-		If (This:C1470[This:C1470.sessionWeb.name]#Null:C1517)
+		If (This:C1470[Storage:C1525.sessionWeb.name]#Null:C1517)
 			
 			//On regarde si dans le dossier des session, un fichier existe...
-			$chFichierSession_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+".json"
+			$chFichierSession_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+".json"
 			If (Test path name:C476($chFichierSession_t)=Is a document:K24:1)
 				
 				// On récupere le contenu du fichier
 				$session_o:=JSON Parse:C1218(Document to text:C1236($chFichierSession_t;"UTF-8"))
 				
-				// On fusionne les informations du visiteur.
+				// On fusionne les informations du visiteur
 				$session_o:=cwToolObjectMerge($session_o;This:C1470)
 				
 				For each ($propriete_t;$session_o)
@@ -406,12 +401,12 @@ Historique
 				DELETE DOCUMENT:C159($chFichierSession_t)
 				
 				// On regarde si un dossier temporaire existe pour cette session.
-				If (Test path name:C476(This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name])=Is a folder:K24:2)
+				If (Test path name:C476(Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name])=Is a folder:K24:2)
 					
 					// Il existe un dossier, il faut le renomer avec la nouvelle session en cours.
 					// Mais ce n'est pas possible... On va donc d'abort créer un nouveau dossier.
-					$chAncienDossier_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+Folder separator:K24:12
-					$chNouveauDossier_t:=This:C1470.sessionWeb.path+WEB Get current session ID:C1162+Folder separator:K24:12
+					$chAncienDossier_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+Folder separator:K24:12
+					$chNouveauDossier_t:=Storage:C1525.sessionWeb.path+WEB Get current session ID:C1162+Folder separator:K24:12
 					CREATE FOLDER:C475($chNouveauDossier_t;*)
 					
 					// On transfert les fichiers
@@ -429,20 +424,20 @@ Historique
 				End if 
 				
 				// On change dans la variable visiteur, uuid de la session courante.
-				This:C1470[This:C1470.sessionWeb.name]:=WEB Get current session ID:C1162
+				This:C1470[Storage:C1525.sessionWeb.name]:=WEB Get current session ID:C1162
 				
 			End if 
 		End if 
 		
 		//Recupération ou pas des sessions, on n'y retournera pas pendant la session
-		This:C1470.sessionWeb.sessionActive:=True:C214
+		This:C1470.sessionWebActive:=True:C214
 		
 		// On en profile pour resynchroniser le composant (Appel dans pageGetInfo)
 		This:C1470.updateVarVisiteur()
 		
 	End if 
 	
-	$0:=Bool:C1537(This:C1470.sessionWeb.sessionActive)
+	$0:=Bool:C1537(This:C1470.sessionWebActive)
 	
 	
 	

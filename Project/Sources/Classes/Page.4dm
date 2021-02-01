@@ -10,9 +10,6 @@ Class constructor
 /* -----------------------------------------------------------------------------
 Fonction : Page.constructor
 	
-Initialisation de la page web.
-ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
-	
 Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
@@ -21,9 +18,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ----------------------------------------------------------------------------- */
 	
-	var $1 : Collection  // Information sur les routes du site provenants directement de la class webApp.
-	var $2 : Object  // Les informations sur le visiteur.
-	var $3 : Object  // Information diverse
+	var $1 : Object  // Les informations sur le visiteur.
 	
 	var $page_o : Object
 	var $propriete_t : Text
@@ -35,12 +30,19 @@ Historique
 	ARRAY LONGINT:C221($AT_longueurTrouvee;0)
 	ARRAY TEXT:C222($AT_routeFormatCle;0)
 	
-	This:C1470.siteRoute_c:=$1
+	This:C1470.user:=$1
 	
-	This:C1470.user:=$2
+	// Information sur les routes du site provenants directement de storage.
+	This:C1470.siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
 	
-	This:C1470.info:=$3
-	// This info contient le sous domaine -> This.info.subDomain_t
+	// En attendant de faire mieux, je passe la variable en process
+	siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
+	
+	// Petit hack pour les datatables en attendant des jours meilleurs.
+	siteDataTable_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].dataTable
+	
+	This:C1470.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+	
 	
 	$libPageConnexion_t:="userIdentification"
 	
@@ -60,7 +62,7 @@ Historique
 			
 			If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
 				pageWeb_o:=$page_o
-				pageWeb_o.info:=$3
+				pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
 			End if 
 			
 		End for each 
@@ -210,7 +212,7 @@ Historique
 		
 		For each ($cssPath_t;This:C1470.cssPath)
 			
-			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Retour à la ligne:K15:40)
+			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Line feed:K15:40)
 		End for each 
 		
 	End if 
@@ -271,7 +273,7 @@ Historique
 	If (This:C1470.jsPath#Null:C1517)
 		
 		For each ($jsPath_t;This:C1470.jsPath)
-			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
+			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Line feed:K15:40)
 		End for each 
 	End if 
 	
@@ -279,7 +281,7 @@ Historique
 		$T_jsContenu:=Replace string:C233($T_jsContenu;"domaineCDN";$1)
 	End if 
 	
-	$0:=Char:C90(Retour à la ligne:K15:40)+$T_jsContenu
+	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
 	
 	
 	
@@ -306,15 +308,15 @@ Historique
 	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
 		
 		// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-		$jsPath_t:=Replace string:C233($jsPath_t;":";Séparateur dossier:K24:12)  // Séparateur mac
-		$jsPath_t:=Replace string:C233($jsPath_t;"/";Séparateur dossier:K24:12)  // Séparateur unix
-		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Séparateur dossier:K24:12)  // Séparateur windows
+		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
+		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
+		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
 		
 		
-		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)=Est un document:K24:1)
-			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)+Char:C90(Retour à la ligne:K15:40)
+		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)=Is a document:K24:1)
+			$jsInHtml_t:=$jsInHtml_t+Document to text:C1236(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)+Char:C90(Line feed:K15:40)
 		Else 
-			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Séparateur dossier:K24:12+$jsPath_t)
+			ALERT:C41("page.jsInHtml() : Le fichier suivant n'existe pas : "+This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)
 		End if 
 		
 	End for each 

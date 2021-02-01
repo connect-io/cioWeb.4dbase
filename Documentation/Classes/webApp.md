@@ -9,15 +9,12 @@ C'est la class principale du composant cioWeb.
 * [Fonction : cacheSessionWebPath](#fonction--cacheSessionWebPath)
 * [Fonction : cacheViewPath](#fonction--cacheViewPath)
 * [Fonction : cacheViewSubdomainPath](#fonction--cacheViewSubdomainPath)
-* [Fonction : dataTableNew](#fonction--dataTableNew)
 * [Fonction : htmlMinify](#fonction--htmlMinify)
 * [Fonction : jsMinify](#fonction--jsMinify)
-* [Fonction : pageCurrent](#fonction--pageCurrent)
 * [Fonction : serverStart](#fonction--serverStart)
 * [Fonction : sessionWebStart](#fonction--sessionWebStart)
 * [Fonction : sourcePath](#fonction--sourcePath)
 * [Fonction : sourceSubdomainPath](#fonction--sourceSubdomainPath)
-* [Fonction : userNew](#fonction--userNew)
 * [Fonction : webAppPath](#fonction--webAppPath)
 * [Fonction : webfolderSubdomainPath](#fonction--webfolderSubdomainPath)
 * [Fonction : eMailConfigLoad](#fonction--eMailConfigLoad)
@@ -129,29 +126,6 @@ WebApp.cacheViewSubdomainPath()
 
 ------------------------------------------------------
 
-## Fonction : dataTableNew
-Chargement d'une nouvelle dataTable
-		
-
-### Fonctionnement
-```4d
-WebApp.dataTableNew()
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| ???     | Texte      | Entée         | Lib du dataTable|
-| ???     | Pointeur      | Entée         | ???|
-| ???        | Objet      | Sortie        |Instance de la dataTable en cours|
-
-### Example
-```html
-???
-```
-
-
-------------------------------------------------------
-
 ## Fonction : htmlMinify
 Minification du HTML
 		
@@ -164,28 +138,6 @@ WebApp.htmlMinify()
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
 ???
-
-### Example
-```html
-???
-```
-
-
-------------------------------------------------------
-
-## Fonction : pageCurrent
-Chargement des éléments de la page courante
-		
-
-### Fonctionnement
-```4d
-WebApp.pageCurrent()
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| ???     | Objet      | Entée         |instance de user|
-| ???        | Objet      | Sortie        | Instance de la page courante|
 
 ### Example
 ```html
@@ -278,32 +230,6 @@ WebApp.sourceSubdomainPath({$domaine_t}) -> $chemin_t
 $cheminSourceSousDomaine_t:=<>webApp_o.sourceSubdomainPath("www")
 
 // $cheminSourceSousDomaine_t = [...]/monApp4D/WebApp/Sources/www/
-```
-
-
-------------------------------------------------------
-
-## Fonction : userNew
-Chargement des éléments sur l'utilisateur / visiteur
-		
-
-### Fonctionnement
-```4d
-WebApp.userNew() -> $visiteur_o
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| visiteur_o    | Objet      | Sortie        | Instance de l'utilisateur en cours|
-
-### Example
-```4d
-// Méthode : Sur connexion web
-// ===== Chargement des informations du visiteur du site =====
-If (visiteur_o=Null)
-	visiteur_o:=<>webApp_o.userNew()
-	dataTables_o:=New object()
-End if 
 ```
 
 

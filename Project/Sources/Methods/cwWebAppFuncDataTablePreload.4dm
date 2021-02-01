@@ -24,8 +24,9 @@ var $file_o : Object
 For each ($subDomain_t;This:C1470.config.subDomain_c)
 	
 	// On récupére la collection de dataTable du sousDomaine
-	This:C1470.sites[$subDomain_t].dataTable:=New collection:C1472()
-	
+	Use (Storage:C1525.sites[$subDomain_t])
+		Storage:C1525.sites[$subDomain_t].dataTable:=New shared collection:C1527()
+	End use 
 	
 	// On récupére la liste de tout les fichiers sources du sous domaine.
 	$fileSubDomain_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t);fk platform path:K87:2).files(fk recursive:K87:7+fk ignore invisible:K87:22)
@@ -37,7 +38,7 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 		$analyseDataTable_b:=True:C214
 		var $dataTable_o : Object
 		// On regarde si le formulaire est déjà chargé en mémoire...
-		$dataTableCharge_c:=This:C1470.sites[$subDomain_t].dataTable.query("source IS :1";$file_o.platformPath)
+		$dataTableCharge_c:=Storage:C1525.sites[$subDomain_t].dataTable.query("source IS :1";$file_o.platformPath)
 		If ($dataTableCharge_c.length=0)
 			// Il n'est pas chargé, on doit donc faire le job...
 			
@@ -72,12 +73,16 @@ For each ($subDomain_t;This:C1470.config.subDomain_c)
 			If ($dataTableCharge_c.length=0)
 				
 				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				This:C1470.sites[$subDomain_t].dataTable.push($dataTable_o)
+				Use (Storage:C1525.sites[$subDomain_t].dataTable)
+					Storage:C1525.sites[$subDomain_t].dataTable.push(OB Copy:C1225($dataTable_o;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].dataTable))
+				End use 
 			Else 
 				
 				// Si la dataTable à déjà été chargé, il faut la mettre à jour.
-				$indicesQuery_c:=This:C1470.sites[$subDomain_t].dataTable.indices("file IS :1";$file_o.platformPath)
-				This:C1470.sites[$subDomain_t].dataTable[$indicesQuery_c[0]]:=$dataTable_o
+				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].dataTable.indices("file IS :1";$file_o.platformPath)
+				Use (Storage:C1525.sites[$subDomain_t].dataTable)
+					Storage:C1525.sites[$subDomain_t].dataTable[$indicesQuery_c[0]]:=OB Copy:C1225($dataTable_o;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].dataTable)
+				End use 
 			End if 
 		End if 
 	End for each 
