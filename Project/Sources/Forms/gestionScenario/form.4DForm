@@ -29,7 +29,7 @@
 					"top": 58,
 					"left": 718,
 					"width": 214,
-					"height": 567,
+					"height": 520,
 					"fill": "transparent"
 				},
 				"Rectangle": {
@@ -37,13 +37,13 @@
 					"top": 58,
 					"left": 213,
 					"width": 214,
-					"height": 567,
+					"height": 520,
 					"fill": "transparent"
 				},
 				"scenarioDetailBoutonSauvegarder": {
 					"type": "button",
 					"text": "Sauvegarder le scénario",
-					"top": 639,
+					"top": 589,
 					"left": 257,
 					"width": 170,
 					"height": 25,
@@ -55,7 +55,7 @@
 				"scenarioListeBoutonSupprimer": {
 					"type": "button",
 					"text": "-",
-					"top": 639,
+					"top": 589,
 					"left": 106,
 					"width": 37,
 					"height": 23,
@@ -67,7 +67,7 @@
 				"scenarioListeBoutonAjout": {
 					"type": "button",
 					"text": "+",
-					"top": 639,
+					"top": 589,
 					"left": 143,
 					"width": 37,
 					"height": 23,
@@ -79,7 +79,7 @@
 				"sceneDetailBoutonSauvegarder": {
 					"type": "button",
 					"text": "Sauvegarder la scène",
-					"top": 639,
+					"top": 589,
 					"left": 762,
 					"width": 170,
 					"height": 25,
@@ -101,7 +101,7 @@
 				"scenarioDetailBoutonAppliquer": {
 					"type": "button",
 					"text": "Appliquer le scénario",
-					"top": 671,
+					"top": 621,
 					"left": 257,
 					"width": 170,
 					"height": 25,
@@ -113,7 +113,7 @@
 				"scenarioDetailPersonnePossibleChaine": {
 					"type": "input",
 					"left": 221,
-					"top": 561,
+					"top": 516,
 					"width": 156,
 					"height": 26,
 					"dataSource": "Form:C1466.scenarioPersonnePossible",
@@ -127,7 +127,7 @@
 				"scenarioDetailPersonnePossible": {
 					"type": "button",
 					"text": "Voir",
-					"top": 558,
+					"top": 513,
 					"left": 383,
 					"width": 36,
 					"height": 23,
@@ -139,7 +139,7 @@
 				"scenarioDetailPersonneEnCoursChaine": {
 					"type": "input",
 					"left": 221,
-					"top": 589,
+					"top": 544,
 					"width": 156,
 					"height": 14,
 					"dataSource": "Form:C1466.scenarioPersonneEnCours",
@@ -153,7 +153,7 @@
 				"scenarioDetailPersonneEnCours": {
 					"type": "button",
 					"text": "Voir",
-					"top": 586,
+					"top": 541,
 					"left": 383,
 					"width": 36,
 					"height": 23,
@@ -167,7 +167,7 @@
 					"left": 20,
 					"top": 58,
 					"width": 160,
-					"height": 567,
+					"height": 520,
 					"events": [
 						"onLoad",
 						"onClick"
@@ -233,7 +233,7 @@
 					"text": "Nom",
 					"top": 102,
 					"left": 223,
-					"width": 195,
+					"width": 140,
 					"height": 16
 				},
 				"scenarioDetailObjectif": {
@@ -275,17 +275,17 @@
 				"Texte9": {
 					"type": "text",
 					"text": "Actif",
-					"top": 379,
-					"left": 223,
-					"width": 195,
+					"top": 102,
+					"left": 370,
+					"width": 35,
 					"height": 16
 				},
 				"scenarioDetailActif": {
 					"type": "checkbox",
 					"text": "",
-					"top": 402,
-					"left": 223,
-					"width": 23,
+					"top": 102,
+					"left": 406,
+					"width": 17,
 					"height": 17,
 					"events": [
 						"onClick"
@@ -296,7 +296,7 @@
 				"Texte10": {
 					"type": "text",
 					"text": "Condition",
-					"top": 429,
+					"top": 384,
 					"left": 223,
 					"width": 195,
 					"height": 16
@@ -304,9 +304,9 @@
 				"scenarioDetailCondition": {
 					"type": "button",
 					"text": "Définir les conditions",
-					"top": 452,
-					"left": 234,
-					"width": 173,
+					"top": 407,
+					"left": 223,
+					"width": 195,
 					"height": 25,
 					"events": [
 						"onClick"
@@ -319,7 +319,7 @@
 					"left": 465,
 					"top": 58,
 					"width": 215,
-					"height": 565,
+					"height": 520,
 					"events": [
 						"onLoad",
 						"onClick"
@@ -358,7 +358,7 @@
 				"sceneListeBoutonSupprimer": {
 					"type": "button",
 					"text": "-",
-					"top": 639,
+					"top": 589,
 					"left": 606,
 					"width": 37,
 					"height": 23,
@@ -370,7 +370,7 @@
 				"sceneListeBoutonAjout": {
 					"type": "button",
 					"text": "+",
-					"top": 639,
+					"top": 589,
 					"left": 643,
 					"width": 37,
 					"height": 23,
@@ -480,7 +480,7 @@
 				"sceneDetailPersonneEnCoursChaine": {
 					"type": "input",
 					"left": 725,
-					"top": 589,
+					"top": 549,
 					"width": 156,
 					"height": 14,
 					"dataSource": "Form:C1466.scenePersonneEnCours",
@@ -494,7 +494,7 @@
 				"sceneDetailPersonneEnCours": {
 					"type": "button",
 					"text": "Voir",
-					"top": 586,
+					"top": 546,
 					"left": 887,
 					"width": 36,
 					"height": 23,
@@ -506,7 +506,7 @@
 				"Texte5": {
 					"type": "text",
 					"text": "Configuration",
-					"top": 487,
+					"top": 442,
 					"left": 223,
 					"width": 195,
 					"height": 16
@@ -514,9 +514,9 @@
 				"scenarioDetailDecor": {
 					"type": "button",
 					"text": "Définir la configuration",
-					"top": 510,
-					"left": 234,
-					"width": 173,
+					"top": 465,
+					"left": 223,
+					"width": 195,
 					"height": 25,
 					"events": [
 						"onClick"
@@ -625,6 +625,13 @@
 			}
 		}
 	],
-	"geometryStamp": 426,
-	"method": "method.4dm"
+	"geometryStamp": 510,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

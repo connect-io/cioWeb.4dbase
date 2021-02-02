@@ -6,5 +6,5 @@ Case of
 		Form:C1466.imageFemale:=Storage:C1525.automation.image["female-clicked"]
 		Form:C1466.imageMaleFemale:=Storage:C1525.automation.image["male-female"]
 		
-		Form:C1466.scenarioDetail.condition.sexe:=Form:C1466.scenarioDetail.condition.sexe:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "femme")[0].value
+		Form:C1466.scenarioDetail.condition.sexe:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "femme")[0].value
 End case 

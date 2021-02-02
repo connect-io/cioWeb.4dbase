@@ -40,6 +40,7 @@ Historique
 				Storage:C1525.automation.image:=OB Copy:C1225(This:C1470.image; ck shared:K85:29; Storage:C1525.automation)
 			End use 
 			
+			This:C1470.loadPasserelle("Personne")
 		Else 
 			ALERT:C41("Impossible d'intialiser le composant caMarketingAutomation")
 		End if 
