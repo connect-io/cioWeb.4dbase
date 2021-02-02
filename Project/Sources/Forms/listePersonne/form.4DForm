@@ -12,7 +12,9 @@
 	"rightMargin": 20,
 	"bottomMargin": 20,
 	"events": [
-		"onLoad"
+		"onLoad",
+		"onClick",
+		"onDataChange"
 	],
 	"windowTitle": "Démo du composant Connect-IO",
 	"destination": "detailScreen",
@@ -39,7 +41,9 @@
 					"top": 156,
 					"width": 1237,
 					"height": 480,
-					"events": [],
+					"events": [
+						"onDoubleClick"
+					],
 					"listboxType": "collection",
 					"currentItemSource": "Form:C1466.personCurrentElement",
 					"currentItemPositionSource": "Form:C1466.personCurrentPosition",
@@ -57,6 +61,8 @@
 					"showFooters": false,
 					"focusable": false,
 					"showHeaders": false,
+					"sortable": false,
+					"method": "ObjectMethods/listePersonne.4dm",
 					"columns": [
 						{
 							"header": {
@@ -410,7 +416,7 @@
 					"height": 51,
 					"stroke": "#A9A9A9"
 				},
-				"Zone de saisie": {
+				"filtreNom": {
 					"type": "input",
 					"left": 29,
 					"top": 134,
@@ -418,12 +424,9 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtreNom",
 					"placeholder": "Dupont",
-					"events": [
-						"onDataChange"
-					],
-					"method": "ObjectMethods/Zone de saisie.4dm"
+					"events": []
 				},
-				"Zone de saisie1": {
+				"filtrePrenom": {
 					"type": "input",
 					"left": 179,
 					"top": 134,
@@ -431,10 +434,7 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtrePrenom",
 					"placeholder": "Jean",
-					"method": "ObjectMethods/Zone de saisie1.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
 				"Zone de saisie2": {
 					"type": "input",
@@ -444,10 +444,7 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtreCodePostal",
 					"placeholder": "06130",
-					"method": "ObjectMethods/Zone de saisie2.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
 				"Zone de saisie3": {
 					"type": "input",
@@ -457,10 +454,7 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtreVille",
 					"placeholder": "Grasse",
-					"method": "ObjectMethods/Zone de saisie3.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
 				"Zone de saisie4": {
 					"type": "input",
@@ -471,11 +465,11 @@
 					"dataSource": "Form:C1466.filtreDateNaissance",
 					"entryFilter": "##/##/####",
 					"placeholder": "01/01/2021",
-					"method": "ObjectMethods/Zone de saisie4.4dm",
 					"events": [
 						"onDataChange"
 					],
-					"dataSourceTypeHint": "date"
+					"dataSourceTypeHint": "date",
+					"method": "ObjectMethods/Zone de saisie4.4dm"
 				},
 				"valider4": {
 					"type": "pictureButton",
@@ -508,7 +502,7 @@
 					"sizingX": "fixed",
 					"sizingY": "fixed"
 				},
-				"Zone de saisie5": {
+				"sortNom": {
 					"type": "input",
 					"left": 148,
 					"top": 113,
@@ -525,9 +519,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie5.4dm"
+					"method": "ObjectMethods/sortNom.4dm"
 				},
-				"Zone de saisie6": {
+				"sortPrenom": {
 					"type": "input",
 					"left": 298,
 					"top": 113,
@@ -544,9 +538,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie6.4dm"
+					"method": "ObjectMethods/sortPrenom.4dm"
 				},
-				"Zone de saisie7": {
+				"sortCodePostal": {
 					"type": "input",
 					"left": 898,
 					"top": 113,
@@ -563,9 +557,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie7.4dm"
+					"method": "ObjectMethods/sortCodePostal.4dm"
 				},
-				"Zone de saisie8": {
+				"sortVille": {
 					"type": "input",
 					"left": 1048,
 					"top": 113,
@@ -582,9 +576,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie8.4dm"
+					"method": "ObjectMethods/sortVille.4dm"
 				},
-				"Zone de saisie9": {
+				"sortDateNaissance": {
 					"type": "input",
 					"left": 1218,
 					"top": 113,
@@ -601,7 +595,7 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie9.4dm"
+					"method": "ObjectMethods/sortDateNaissance.4dm"
 				},
 				"Ligne7": {
 					"type": "line",
@@ -650,7 +644,7 @@
 					"textAlign": "center",
 					"fontWeight": "bold"
 				},
-				"Texte12": {
+				"Text12": {
 					"type": "text",
 					"text": "Tel. Mobile",
 					"top": 113,
@@ -660,18 +654,15 @@
 					"textAlign": "center",
 					"fontWeight": "bold"
 				},
-				"Zone de saisie10": {
+				"filtreEMail": {
 					"type": "input",
 					"left": 329,
 					"top": 134,
 					"width": 135,
 					"height": 17,
-					"dataSource": "Form:C1466.filtreEmail",
+					"dataSource": "Form:C1466.filtreEMail",
 					"placeholder": "jean.dupont@gmail.com",
-					"method": "ObjectMethods/Zone de saisie10.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
 				"Zone de saisie11": {
 					"type": "input",
@@ -681,10 +672,7 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtreTelFixe",
 					"placeholder": "0400000000",
-					"method": "ObjectMethods/Zone de saisie11.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
 				"Zone de saisie12": {
 					"type": "input",
@@ -694,19 +682,16 @@
 					"height": 17,
 					"dataSource": "Form:C1466.filtreTelMobile",
 					"placeholder": "0600000000",
-					"method": "ObjectMethods/Zone de saisie12.4dm",
-					"events": [
-						"onDataChange"
-					]
+					"events": []
 				},
-				"Zone de saisie13": {
+				"sortEmail": {
 					"type": "input",
 					"left": 448,
 					"top": 113,
 					"width": 16,
 					"height": 16,
 					"dataSourceTypeHint": "picture",
-					"dataSource": "Form:C1466.imageSortEmail",
+					"dataSource": "Form:C1466.imageSortEMail",
 					"enterable": false,
 					"contextMenu": "none",
 					"pictureFormat": "proportionalCenter",
@@ -716,9 +701,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie13.4dm"
+					"method": "ObjectMethods/sortEmail.4dm"
 				},
-				"Zone de saisie14": {
+				"sortTelFixe": {
 					"type": "input",
 					"left": 598,
 					"top": 113,
@@ -735,9 +720,9 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie14.4dm"
+					"method": "ObjectMethods/sortTelFixe.4dm"
 				},
-				"Zone de saisie15": {
+				"sortTelMobile": {
 					"type": "input",
 					"left": 748,
 					"top": 113,
@@ -754,12 +739,22 @@
 						"onClick",
 						"onMouseMove"
 					],
-					"method": "ObjectMethods/Zone de saisie15.4dm"
+					"method": "ObjectMethods/sortTelMobile.4dm"
 				}
-			}
+			},
+			"entryOrder": [
+				"filtreNom",
+				"filtrePrenom",
+				"filtreEMail",
+				"Zone de saisie11",
+				"Zone de saisie12",
+				"Zone de saisie2",
+				"Zone de saisie3",
+				"Zone de saisie4"
+			]
 		}
 	],
-	"geometryStamp": 566,
+	"geometryStamp": 581,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

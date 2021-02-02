@@ -1,2 +1,0 @@
-Form:C1466.personneCollection:=Form:C1466.personneSelectionDisplayClass.manageFilter(Form:C1466.personneCollectionInit; Form:C1466.filtreNom; Form:C1466.filtrePrenom; Form:C1466.filtreEmail; Form:C1466.filtreTelFixe; Form:C1466.filtreTelMobile; \
-Form:C1466.filtreCodePostal; Form:C1466.filtreVille; Form:C1466.filtreDateNaissance)

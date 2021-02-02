@@ -1,29 +1,28 @@
 Class constructor
-	C_OBJECT:C1216($marketingAutomation_cs; $marketingAutomation_o)
+	var $marketingAutomation_o : Object
 	
-	$marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
-	$marketingAutomation_o:=$marketingAutomation_cs.new()  // Instanciation de la class
+	$marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()  // Instanciation de la class
 	
 	This:C1470.marketingAutomation:=$marketingAutomation_o
-	
 	This:C1470.marketingAutomation.loadPasserelle("Personne")
 	
-	This:C1470.champUID:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "UID")
-	This:C1470.champSexe:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "sexe")
-	This:C1470.champNom:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "nom")
-	This:C1470.champPrenom:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "prenom")
-	This:C1470.champCodePostal:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "codePostal")
-	This:C1470.champVille:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "ville")
+	This:C1470.champUID:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "UID")
+	This:C1470.champSexe:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "sexe")
+	This:C1470.champNom:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "nom")
+	This:C1470.champPrenom:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "prenom")
+	This:C1470.champCodePostal:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "codePostal")
+	This:C1470.champVille:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "ville")
 	
 Function updateScenarioListToPerson
 	C_TEXT:C284($1)  // UID personne OU vide
 	C_OBJECT:C1216($0)
+	
 	C_OBJECT:C1216($table_o)
 	
 	$0:=ds:C1482.CaScenario.newSelection()
 	
 	If ($1#"")
-		$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1).AllCaPersonneScenario
+		$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1).AllCaPersonneScenario
 		
 		If (Num:C11($table_o.length)>0)
 			$0:=$table_o.OneCaScenario
@@ -33,16 +32,18 @@ Function updateScenarioListToPerson
 	
 Function updateStringPersonneForm
 	C_OBJECT:C1216($1)  // Entity personne
-	C_TEXT:C284($civilite_t; $libHomme_t; $libFemme_t)
-	C_OBJECT:C1216($table_o)
 	
-	$libHomme_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe; "homme")
-	$libFemme_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe; "femme")
+	C_TEXT:C284($civilite_t)
+	C_OBJECT:C1216($table_o)
+	C_VARIANT:C1683($libHomme_v; $libFemme_v)
+	
+	$libHomme_v:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "homme")[0].value
+	$libFemme_v:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "femme")[0].value
 	
 	Case of 
-		: (String:C10($1.sexe)=$libHomme_t)
+		: ($1.sexe=$libHomme_v)
 			$civilite_t:="Mr."
-		: (String:C10($1.sexe)=$libFemme_t)
+		: ($1.sexe=$libFemme_v)
 			$civilite_t:="Mme."
 	End case 
 	
@@ -50,7 +51,7 @@ Function updateStringPersonneForm
 		: (Num:C11($1.modeSelection)=1) | (Num:C11($1.modeSelection)=2) & (Bool:C1537($1.multiSelection)=False:C215)  // Sélection unique OU Sélection multi-lignes mais qu'une seule ligne sélectionnée
 			$1.resume:=Choose:C955($civilite_t#""; $civilite_t+" "; "")+$1.nom+" "+$1.prenom+", habite à "+$1.ville+" ("+$1.codePostal+")."
 			
-			$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1.UID)
+			$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1.UID)
 			
 			If (Num:C11($table_o.length)=1)
 				$table_o:=$table_o.AllCaPersonneMarketing
@@ -116,7 +117,7 @@ Function viewPersonList
 	C_OBJECT:C1216($1)  // Objet Form scénario
 	C_OBJECT:C1216(entitySelection_o)
 	
-	entitySelection_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
+	entitySelection_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	
 	Case of 
 		: ($1.entree=1)  // Gestion du scénario (Personne possible)
@@ -151,7 +152,7 @@ Function viewPersonList
 			
 		: ($1.entree=3)  // Gestion des personnes (Sans passer par Gestion du scénario)
 			
-			$1.personne:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].all().toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
+			$1.personne:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].all().toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
 				.extract(This:C1470.champUID; "UID"; This:C1470.champSexe; "sexe"; This:C1470.champNom; "nom"; This:C1470.champPrenom; "prenom"; This:C1470.champCodePostal; "codePostal"; This:C1470.champVille; "ville")
 			
 		: ($1.entree=4)  // Gestion de la scène (Personne en cours)

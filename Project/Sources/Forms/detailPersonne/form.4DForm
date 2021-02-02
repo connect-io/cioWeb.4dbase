@@ -1,0 +1,396 @@
+﻿{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onPageChange"
+	],
+	"windowTitle": "",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Onglet": {
+					"type": "tab",
+					"text": "Tab control",
+					"top": 13,
+					"left": 97,
+					"width": 760,
+					"height": 491,
+					"labels": [
+						"Infos générales",
+						"Marketing"
+					],
+					"labelsPlacement": "top",
+					"fontFamily": "Arial",
+					"fontSize": 18,
+					"fontWeight": "bold",
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"dataSource": "Onglet",
+					"dataSourceTypeHint": "arrayText",
+					"action": "gotoPage"
+				},
+				"Zone de saisie1": {
+					"type": "input",
+					"left": 13,
+					"top": 30,
+					"width": 64,
+					"height": 64,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageSexe",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onLoad"
+					],
+					"method": "ObjectMethods/Zone de saisie1.4dm"
+				},
+				"Bouton4": {
+					"type": "button",
+					"text": "Valider",
+					"top": 460,
+					"left": 642,
+					"width": 165,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Bouton4.4dm"
+				},
+				"Bouton1": {
+					"type": "button",
+					"text": "Annuler",
+					"top": 460,
+					"left": 442,
+					"width": 165,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Bouton1.4dm"
+				}
+			}
+		},
+		{
+			"objects": {
+				"Texte16": {
+					"type": "text",
+					"top": 66,
+					"left": 147,
+					"width": 660,
+					"height": 16,
+					"fill": "#AAAAAA",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "center",
+					"fontWeight": "bold",
+					"borderStyle": "solid",
+					"text": "É t a t   c i v i l"
+				},
+				"Champ2": {
+					"type": "input",
+					"top": 105,
+					"left": 280,
+					"width": 250,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"nom\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "Dupont"
+				},
+				"Texte3": {
+					"type": "text",
+					"top": 105,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Nom / Prénom"
+				},
+				"Champ1": {
+					"type": "input",
+					"top": 105,
+					"left": 557,
+					"width": 250,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"prenom\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "Jean"
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 141,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Date de naissance"
+				},
+				"Champ3": {
+					"type": "input",
+					"top": 141,
+					"left": 280,
+					"width": 250,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"dateNaissance\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "01/01/2021",
+					"dataSourceTypeHint": "date",
+					"entryFilter": "##/##/####",
+					"max": ""
+				},
+				"Texte2": {
+					"type": "text",
+					"top": 184,
+					"left": 147,
+					"width": 660,
+					"height": 16,
+					"fill": "#AAAAAA",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "center",
+					"fontWeight": "bold",
+					"borderStyle": "solid",
+					"text": "C o o r d o n n é e s"
+				},
+				"Champ4": {
+					"type": "input",
+					"top": 220,
+					"left": 280,
+					"width": 527,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"adresse\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "1 avenue Général de Gaulle"
+				},
+				"Texte4": {
+					"type": "text",
+					"top": 220,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Adresse"
+				},
+				"Champ5": {
+					"type": "input",
+					"top": 256,
+					"left": 280,
+					"width": 527,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"adresseComplement\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "Batîment A"
+				},
+				"Texte5": {
+					"type": "text",
+					"top": 256,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Adresse complément"
+				},
+				"Champ6": {
+					"type": "input",
+					"top": 292,
+					"left": 280,
+					"width": 250,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"codePostal\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "75000"
+				},
+				"Texte6": {
+					"type": "text",
+					"top": 292,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Code postal / Ville"
+				},
+				"Champ7": {
+					"type": "input",
+					"top": 292,
+					"left": 557,
+					"width": 250,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"ville\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "Paris"
+				},
+				"Champ8": {
+					"type": "input",
+					"top": 328,
+					"left": 280,
+					"width": 527,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"eMail\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "dupont.jean@gmail.com"
+				},
+				"Texte7": {
+					"type": "text",
+					"top": 328,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Adresse mail"
+				},
+				"Champ9": {
+					"type": "input",
+					"top": 364,
+					"left": 280,
+					"width": 527,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"telFixe\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "0493000000"
+				},
+				"Texte8": {
+					"type": "text",
+					"top": 364,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Téléphone fixe"
+				},
+				"Champ10": {
+					"type": "input",
+					"top": 400,
+					"left": 280,
+					"width": 527,
+					"height": 16,
+					"dataSource": "Form:C1466.personne[Form:C1466.getFieldName(\"telMobile\")]",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "left",
+					"fill": "#FFFFFF",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onDataChange"
+					],
+					"placeholder": "0600000000"
+				},
+				"Texte9": {
+					"type": "text",
+					"top": 400,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"stroke": "#000000",
+					"class": "",
+					"text": "Téléphone mobile"
+				}
+			}
+		},
+		null
+	],
+	"geometryStamp": 168,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

@@ -7,6 +7,7 @@ Class constructor
 	
 Function newScenario
 	C_BOOLEAN:C305($0)
+	
 	C_OBJECT:C1216($caScenario_o; $retour_o)
 	
 	$caScenario_o:=ds:C1482.CaScenario.new()
@@ -28,17 +29,20 @@ Function loadScenarioDisplay
 	cwToolWindowsForm("gestionScenario"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); This:C1470)
 	
 Function searchPersonToScenario
-	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction
-	C_TEXT:C284($lib_t; $nomLien_t; $libEmail_t)
-	C_LONGINT:C283($ts_el)
-	C_OBJECT:C1216($condition_o; $cleValeur_o; $personne_o; $table_o; $personneAEnlever_o; $statut_o)
-	C_COLLECTION:C1488($cleValeur_c)
+	var $1 : Integer  // Entier long qui indique l'endroit d'où est exécuté la fonction
+	
+	var $lib_t : Text
+	var $ts_el : Integer
+	var $condition_o; $cleValeur_c; $personne_o; $personneAEnlever_o; $table_o; $statut_o; $class_o : Object
+	var $cleValeur_c : Collection
 	
 	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
 	
-	//$personne_o:=ds[This.marketingAutomation.passerelle.tableHote].newSelection()
-	$personne_o:=This:C1470.marketingAutomation.loadCurrentPeople()
-	$personneAEnlever_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
+	$class_o:=cwToolGetClass("MAPersonneSelection").new()
+	$class_o.loadAll()
+	
+	$personne_o:=$class_o.personneSelection
+	$personneAEnlever_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	
 	Case of 
 		: ($1=1) | ($1=2)  // Gestion du scénario OU Après application d'un scénario à des personnes
@@ -67,15 +71,15 @@ Function searchPersonToScenario
 			
 			Case of 
 				: ($cleValeur_o.key="ageMinimum")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "dateNaissance")
+					$lib_t:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "dateNaissance")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" <= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
+					$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query($lib_t+" <= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
 					
 					$personne_o:=$personne_o.and($table_o)  // Première propriété de ma collection d'objet $cleValeur_c
 				: ($cleValeur_o.key="ageMaximum")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "dateNaissance")
+					$lib_t:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "dateNaissance")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" >= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
+					$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query($lib_t+" >= :1"; cwToolNumToDate($cleValeur_o.value; "year"; "less"))
 					
 					$personne_o:=$personne_o.and($table_o)
 				: ($cleValeur_o.key="dateDebutMailClique")
@@ -119,42 +123,22 @@ Function searchPersonToScenario
 					End if 
 					
 				: ($cleValeur_o.key="email")
-					$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecTelecom; "nomLien")
+					// Instanciation de la class
+					$class_o:=cwToolGetClass("MAPersonneSelection").new()
+					$class_o.loadByField("eMail"; "#"; "")
 					
-					$table_o:=$personne_o[$nomLien_t]
-					
-					If (Num:C11($table_o.length)>0)
-						This:C1470.marketingAutomation.loadPasserelle("Telecom")  // Chargement de la passerelle Telecom
-						
-						$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "type")
-						$libEmail_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleType; "email")
-						
-						$table_o:=$table_o.query($lib_t+" = :1"; $libEmail_t)
-						
-						If (Num:C11($table_o.length)>0)
-							$nomLien_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.lienAvecPersonne; "nomLien")
-							
-							$table_o:=$table_o[$nomLien_t]
-							
-							If ($cleValeur_o.value=True:C214)  // Si dans les conditions, l'utisateur souhaite uniquement les personnes avec un email
-								$personne_o:=$personne_o.and($table_o)
-							Else 
-								$personne_o:=$personne_o.minus($table_o)
-							End if 
-							
-						Else   // Aucun enregistrement de type "email" dans la table [Telecom] de la base client
-							
-							If ($cleValeur_o.value=True:C214)  // Si dans les conditions, l'utisateur souhaite uniquement les personnes avec un email
-								$personne_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
-							End if 
-							
-						End if 
-						
-						This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
-					Else   // Aucun enregistrement dans la table [Telecom] de la base client
+					If ($class_o.personneSelection.length>0)  // Des personnes de ma sélection ont bien un email
 						
 						If ($cleValeur_o.value=True:C214)  // Si dans les conditions, l'utisateur souhaite uniquement les personnes avec un email
-							$personne_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
+							$personne_o:=$personne_o.and($class_o.personneSelection)
+						Else 
+							$personne_o:=$personne_o.minus($class_o.personneSelection)
+						End if 
+						
+					Else 
+						
+						If ($cleValeur_o.value=True:C214)  // Si dans les conditions, l'utisateur souhaite uniquement les personnes avec un email
+							$personne_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 						End if 
 						
 					End if 
@@ -168,9 +152,9 @@ Function searchPersonToScenario
 					End if 
 					
 				: ($cleValeur_o.key="sexe")
-					$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.champ; "sexe")
+					$lib_t:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "sexe")
 					
-					$table_o:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].query($lib_t+" = :1"; $cleValeur_o.value)
+					$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query($lib_t+" = :1"; $cleValeur_o.value)
 					
 					$personne_o:=$personne_o.and($table_o)
 			End case 
@@ -209,6 +193,7 @@ Function deleteScenarioToPerson
 	C_VARIANT:C1683($1)  // UID Personne
 	C_TEXT:C284($2)  // UID Scenario
 	C_BOOLEAN:C305($0)
+	
 	C_OBJECT:C1216($table_o; $statut_o)
 	
 	$table_o:=ds:C1482.CaPersonneScenario.query("personneID is :1 AND scenarioID is :2"; $1; $2)
@@ -220,34 +205,34 @@ Function deleteScenarioToPerson
 	End if 
 	
 Function loadImageScenarioCondition
-	C_TEXT:C284($lib_t)
+	var $lib_v : Variant
 	
-	$lib_t:=This:C1470.marketingAutomation.formule.getFieldName(This:C1470.marketingAutomation.passerelle.libelleSexe; "femme")
+	$lib_v:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "femme")[0].value
 	
-	This:C1470.imageMale:=This:C1470.marketingAutomation.image["male"]
-	This:C1470.imageFemale:=This:C1470.marketingAutomation.image["female"]
-	This:C1470.imageMaleFemale:=This:C1470.marketingAutomation.image["male-female-clicked"]
+	This:C1470.imageMale:=Storage:C1525.automation.image["male"]
+	This:C1470.imageFemale:=Storage:C1525.automation.image["female"]
+	This:C1470.imageMaleFemale:=Storage:C1525.automation.image["male-female-clicked"]
 	
-	This:C1470.imageEmail:=This:C1470.marketingAutomation.image["toggle"]
-	This:C1470.imageDesabonnement:=This:C1470.marketingAutomation.image["toggle"]
+	This:C1470.imageEmail:=Storage:C1525.automation.image["toggle"]
+	This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle"]
 	
 	If (This:C1470.scenarioDetail.condition.sexe#Null:C1517)
 		
-		If (This:C1470.scenarioDetail.condition.sexe=$lib_t)  // Il s'agit d'une condition sexe = femme
-			This:C1470.imageFemale:=This:C1470.marketingAutomation.image["female-clicked"]
+		If (This:C1470.scenarioDetail.condition.sexe=$lib_v)  // Il s'agit d'une condition sexe = femme
+			This:C1470.imageFemale:=Storage:C1525.automation.image["female-clicked"]
 		Else 
-			This:C1470.imageMale:=This:C1470.marketingAutomation.image["male-clicked"]
+			This:C1470.imageMale:=Storage:C1525.automation.image["male-clicked"]
 		End if 
 		
-		This:C1470.imageMaleFemale:=This:C1470.marketingAutomation.image["male-female"]
+		This:C1470.imageMaleFemale:=Storage:C1525.automation.image["male-female"]
 	End if 
 	
 	If (This:C1470.scenarioDetail.condition.email#Null:C1517)
 		
 		If (This:C1470.scenarioDetail.condition.email=True:C214)
-			This:C1470.imageEmail:=This:C1470.marketingAutomation.image["toggle-on"]
+			This:C1470.imageEmail:=Storage:C1525.automation.image["toggle-on"]
 		Else 
-			This:C1470.imageEmail:=This:C1470.marketingAutomation.image["toggle-off"]
+			This:C1470.imageEmail:=Storage:C1525.automation.image["toggle-off"]
 		End if 
 		
 	End if 
@@ -255,9 +240,9 @@ Function loadImageScenarioCondition
 	If (This:C1470.scenarioDetail.condition.desabonnement#Null:C1517)
 		
 		If (This:C1470.scenarioDetail.condition.desabonnement=True:C214)
-			This:C1470.imageDesabonnement:=This:C1470.marketingAutomation.image["toggle-on"]
+			This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle-on"]
 		Else 
-			This:C1470.imageDesabonnement:=This:C1470.marketingAutomation.image["toggle-off"]
+			This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle-off"]
 		End if 
 		
 	End if 
@@ -309,7 +294,9 @@ Function newScene
 Function updateStringSceneForm
 	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction
 	
-	This:C1470.scenePersonneEnCoursEntity:=ds:C1482[This:C1470.marketingAutomation.passerelle.tableHote].newSelection()
+	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
+	
+	This:C1470.scenePersonneEnCoursEntity:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	
 	Case of 
 		: ($1=1)  // Gestion du scénario (et donc de la scène)
@@ -347,7 +334,7 @@ Function updateStringSceneForm
 	This:C1470.scenePersonneEnCours:="Appliqué à "+String:C10(This:C1470.scenePersonneEnCoursEntity.length)+" personne(s)."
 	
 Function loadImageSceneActionCondition
-	This:C1470.imageEmail:=This:C1470.marketingAutomation.image["toggle"]
+	This:C1470.imageEmail:=Storage:C1525.automation.image["toggle"]
 	
 Function saveFileActionScene
 	C_TEXT:C284($1)  // ID scenario
@@ -355,6 +342,7 @@ Function saveFileActionScene
 	C_OBJECT:C1216($3)  // Objet Write Pro
 	C_TEXT:C284($4)  // Extension du fichier
 	C_BOOLEAN:C305($5)  // Booléen qui indique si l'utilisateur choisi l'endroit du fichier de sauvegarde du fichier
+	
 	C_TEXT:C284($texte_t; $chemin_t)
 	C_BOOLEAN:C305($continue_b)
 	

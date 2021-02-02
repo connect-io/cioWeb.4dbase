@@ -1,18 +1,13 @@
 //%attributes = {"shared":true,"lang":"en"}
 // Dans cette démo on va montrer comment on gère les scénarios et scènes
+var $marketingAutomation_o; $scenario_o : Object
 
-// Comment faire une selection de personne ?
-var $marketingAutomation_cs; $marketingAutomation_o; $scenario_cs; $scenario_o : Object
-
-$marketingAutomation_cs:=cwToolGetClass("MarketingAutomation")  // Initialisation de la class
-
-$marketingAutomation_o:=$marketingAutomation_cs.new()  // Instanciation de la class
+// Instanciation de la class
+$marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()
 $marketingAutomation_o.loadPasserelle("Personne")  // Création de la passerelle entre la class $marketingAutomation_o et la base hôte
 
-$scenario_cs:=cwToolGetClass("MAScenario")  // Initialisation de la class
-
-$scenario_o:=$scenario_cs.new($marketingAutomation_o)  // Instanciation de la class
-
+// Instanciation de la class
+$scenario_o:=cwToolGetClass("MAScenario").new($marketingAutomation_o)
 $scenario_o.loadScenarioDisplay()
 /*
 $scenario_o:=$marketingAutomation_o.scenario()

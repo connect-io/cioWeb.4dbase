@@ -8,12 +8,12 @@ Case of
 		Form:C1466.marketingAutomation:=$class_cs.new()  // Instanciation de la class
 		
 		// Chargement des images la gestion  du désabonnement
-		If (Form:C1466.marketingAutomation.loadImage("toggle-on.png";"toggle-off.png")=True:C214)
+		If (Form:C1466.marketingAutomation.loadImage("toggle-on.png"; "toggle-off.png")=True:C214)
 			
 			If (Form:C1466.caMarketing.desabonementMail=True:C214)
-				Form:C1466.imageDesabonnement:=Form:C1466.marketingAutomation.image["toggle-on"]
+				Form:C1466.imageDesabonnement:=Storage:C1525.automation.image["toggle-on"]
 			Else 
-				Form:C1466.imageDesabonnement:=Form:C1466.marketingAutomation.image["toggle-off"]
+				Form:C1466.imageDesabonnement:=Storage:C1525.automation.image["toggle-off"]
 			End if 
 			
 		Else 

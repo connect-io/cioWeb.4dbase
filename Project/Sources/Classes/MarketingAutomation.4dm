@@ -179,7 +179,7 @@ Function loadCurrentPeople
 	var $formule_o : Object
 	
 	This:C1470.loadPasserelle("Personne")  // On change de passerelle de recherche
-	$formule_o:=New object:C1471("loadPeople"; Formula from string:C1601("Create entity selection:C1512(["+This:C1470.passerelle.tableHote+"])"))
+	$formule_o:=New object:C1471("loadPeople"; Formula from string:C1601("Create entity selection:C1512(["+Storage:C1525.automation.passerelle.tableHote+"])"))
 	
 	$0:=$formule_o.loadPeople()
 	
@@ -206,44 +206,15 @@ Function loadImage()->$return_b : Boolean
 	
 	$return_b:=True:C214
 	
-Function loadNewPeople()->$table_o : Object  // Entité vide de la table [Personne] du client
-	var $class_o : Object
-	
-	// Instanciation de la class
-	$class_o:=cwToolGetClass("MAPersonneSelection").new()
-	$class_o.newSelection()
-	
-	$table_o:=$class_o.personneSelection
-	
 Function loadPasserelle
 	C_TEXT:C284($1)  // Personne OU Telecom
 	C_OBJECT:C1216($0)
 	
 	Use (Storage:C1525.automation)
 		Storage:C1525.automation.passerelle:=Storage:C1525.automation.config.passerelle.query("tableComposant = :1"; $1)[0]
-		Storage:C1525.automation.formule:=New shared object:C1526("getFieldName"; Formula:C1597($1.query("lib = :1"; $2)[0].value))  // $1 contient le nom de la collection dans le fichier config où la recherche doit s'effectuer et $2 doit être la valeur du champ recherché
+		Storage:C1525.automation.formule:=New shared object:C1526("getFieldName"; Formula:C1597($1.query("lib = :1"; $2)[0].personAccess))  // $1 contient le nom de la collection dans le fichier config où la recherche doit s'effectuer et $2 doit être la valeur du champ recherché
 	End use 
 	
 	$0:=New object:C1471()
 	$0.passerelle:=Storage:C1525.automation.passerelle
 	$0.formule:=Storage:C1525.automation.formule
-	
-Function loadPeopleByEmail
-	C_TEXT:C284($1)  // Email de la personne
-	C_OBJECT:C1216($0)  // Entité de la personne trouvée avec $1
-	
-	$0:=cs:C1710.Personne.new(This:C1470)  // Instanciation de la class
-	
-	If ($0.loadByEmail($1)=False:C215)
-		ALERT:C41("La personne avec l'email "+$1+" n'a pas été trouvé")
-	End if 
-	
-Function loadPeopleByUID
-	C_TEXT:C284($1)  // UID de la personne
-	C_OBJECT:C1216($0)  // Entité de la personne trouvée avec $1
-	
-	$0:=cs:C1710.Personne.new(This:C1470)  // Instanciation de la class
-	
-	If ($0.loadByUID($1)=False:C215)
-		ALERT:C41("La personne avec l'UID "+$1+" n'a pas été trouvé")
-	End if 

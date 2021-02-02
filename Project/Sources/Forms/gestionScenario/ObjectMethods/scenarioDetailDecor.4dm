@@ -1,1 +1,1 @@
-cwToolWindowsForm("configScenario"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); Form:C1466)
+cwToolWindowsForm("configScenario"; "center"; Form:C1466)

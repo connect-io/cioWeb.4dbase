@@ -2,13 +2,9 @@ Case of
 	: (Form event code:C388=Sur survol:K2:35)
 		SET CURSOR:C469(9000)
 	: (Form event code:C388=Sur clic:K2:4)
-		C_TEXT:C284($lib_t)
+		Form:C1466.imageMale:=Storage:C1525.automation.image["male-clicked"]
+		Form:C1466.imageFemale:=Storage:C1525.automation.image["female"]
+		Form:C1466.imageMaleFemale:=Storage:C1525.automation.image["male-female"]
 		
-		Form:C1466.imageMale:=Form:C1466.marketingAutomation.image["male-clicked"]
-		Form:C1466.imageFemale:=Form:C1466.marketingAutomation.image["female"]
-		Form:C1466.imageMaleFemale:=Form:C1466.marketingAutomation.image["male-female"]
-		
-		$lib_t:=Form:C1466.marketingAutomation.formule.getFieldName(Form:C1466.marketingAutomation.passerelle.libelleSexe;"homme")
-		
-		Form:C1466.scenarioDetail.condition.sexe:=$lib_t
+		Form:C1466.scenarioDetail.condition.sexe:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "homme")[0].value
 End case 

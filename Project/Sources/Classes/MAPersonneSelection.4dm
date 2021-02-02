@@ -33,9 +33,7 @@ Function loadByField
 	
 	If ($field_c.length=1)
 		
-		If ($field_c[0].directAccess#Null:C1517)  // Il faut faire la recherche sur une table [Enfant]
-			// toDo
-		Else 
+		If ($field_c[0].directAccess=Null:C1517)  // Il faut faire la recherche sur la table [Personne]
 			This:C1470.fieldName:=$field_c[0].personAccess
 			This:C1470.fieldSignComparaison:=$2
 			This:C1470.fieldValue:=$3
@@ -45,13 +43,15 @@ Function loadByField
 			OB REMOVE:C1226(This:C1470; "fieldName")
 			OB REMOVE:C1226(This:C1470; "fieldSignComparaison")
 			OB REMOVE:C1226(This:C1470; "fieldValue")
+		Else   // Il faut faire la recherche sur une table [Enfant]
+			// ToDo
 		End if 
 		
 	Else 
 		This:C1470.newSelection()
 	End if 
 	
-Function loadPersonForm
+Function loadPersonListForm
 	cwToolWindowsForm("listePersonne"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); This:C1470)
 	
 Function fromListPersonCollection($collection_c : Collection)

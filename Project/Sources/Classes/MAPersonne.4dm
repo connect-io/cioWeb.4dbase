@@ -19,6 +19,15 @@ Historique
 	// Chargement des éléments nécessaires au bon fonctionnement de la classe par rapport à la table [Personne] de la base hote.
 	This:C1470.passerelle:=OB Copy:C1225(Storage:C1525.automation.config.passerelle.query("tableComposant = :1"; "Personne")[0])
 	
+Function getFieldName($field_t : Text)->$fieldName_t : Text
+	var $field_c : Collection
+	
+	$field_c:=This:C1470.passerelle.champ.query("lib = :1"; $field_t)
+	
+	If ($field_c.length=1)
+		$fieldName_t:=String:C10($field_c[0].personAccess)
+	End if 
+	
 Function load($field_c : Collection)
 /*-----------------------------------------------------------------------------
 Fonction : MAPersonne.load
@@ -42,7 +51,7 @@ Historique
 	For each ($field_t; $field_c)
 		// On récupére la config du champs.
 		$field_c:=This:C1470.passerelle.champ.query("lib is :1"; $field_t)
-		ASSERT:C1129($field_c.length#0; "getData : Impossible de trouver la configuration du champ : "+$field_t)
+		ASSERT:C1129($field_c.length#0; "Fonction load (Class MAPersonne) : Impossible de trouver la configuration du champ : "+$field_t)
 		
 		// Reset de la formule.
 		$formule_t:="This.personne"
@@ -128,34 +137,6 @@ Historique
 	OB REMOVE:C1226(This:C1470; "childField")
 	OB REMOVE:C1226(This:C1470; "childFieldValue")
 	
-Function loadByEmail($eMail_t : Text)->$isOk_b : Boolean
-/* -----------------------------------------------------------------------------
-Fonction : MAPersonne.loadByEmail
-	
-Certainement voué à disparaitre... 
-	
-Historique
-26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
------------------------------------------------------------------------------*/
-	C_TEXT:C284($field_t; $nomLien_t)
-	C_OBJECT:C1216($table_o)
-	
-	$field_t:=This:C1470.passerelle.champ.query("lib is 'eMail'")[0].personAccess
-	$table_o:=ds:C1482[This:C1470.passerelle.tableHote].query($field_t+" is :1"; $eMail_t)
-	
-	If ($table_o.length=1)
-		$nomLien_t:=Storage:C1525.automation.formule.getFieldName(This:C1470.passerelle.lienAvecPersonne; "nomLien")
-		
-		This:C1470.personne:=$table_o[$nomLien_t]
-		
-		If (This:C1470.personne#Null:C1517)
-			This:C1470.load()
-			
-			$isOk_b:=True:C214
-		End if 
-		
-	End if 
-	
 Function loadByPrimaryKey($PersonneID_v : Variant)->$isOk_b : Boolean
 /* -----------------------------------------------------------------------------
 Fonction : MAPersonne.loadByPrimaryKey
@@ -173,35 +154,16 @@ Historique
 		$isOk_b:=True:C214
 	End if 
 	
-Function loadCaMarketing
+Function loadPersonDetailForm($primaryKey_v : Variant)
 /* -----------------------------------------------------------------------------
-Fonction : MAPersonne.loadCaMarketing
+Fonction : MAPersonne.loadPersonDetailForm
 	
-!! Je ne sais pas à quoi sert cet méthode.
+Permet de charger le formulaire détail dans la liste de la table [Personne]
 	
 Historique
-26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
+01/02/21 - Rémy Scanu remy@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
-	C_OBJECT:C1216($0)  // Entity CaMarketing
-	C_OBJECT:C1216($table_o; $retour_o)
-	
-	If (This:C1470.personne.length=1)
-		$table_o:=This:C1470.personne.AllCaPersonneMarketing
-		
-		If ($table_o.length=0)
-			$table_o:=ds:C1482.CaPersonneMarketing.new()
-			
-			$table_o.personneID:=This:C1470.UID
-			$table_o.rang:=1  // 1 pour Suspect
-			
-			$retour_o:=$table_o.save()
-			
-			$0:=$table_o
-		Else 
-			$0:=$table_o.first()
-		End if 
-		
-	End if 
+	cwToolWindowsForm("detailPersonne"; "center"; This:C1470)
 	
 Function mailjetGetStat
 /*-----------------------------------------------------------------------------
