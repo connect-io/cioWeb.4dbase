@@ -7,7 +7,7 @@ $marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()
 $marketingAutomation_o.loadPasserelle("Personne")  // Création de la passerelle entre la class $marketingAutomation_o et la base hôte
 
 // Instanciation de la class
-$scenario_o:=cwToolGetClass("MAScenario").new($marketingAutomation_o)
+$scenario_o:=cwToolGetClass("MAScenario").new()
 $scenario_o.loadScenarioDisplay()
 /*
 $scenario_o:=$marketingAutomation_o.scenario()

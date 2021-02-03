@@ -92,7 +92,7 @@
 				"Texte1": {
 					"type": "text",
 					"text": "Tranche d'âge :",
-					"top": 95,
+					"top": 115,
 					"left": 14,
 					"width": 172,
 					"height": 25,
@@ -101,7 +101,7 @@
 				"Texte2": {
 					"type": "text",
 					"text": "De",
-					"top": 123,
+					"top": 143,
 					"left": 14,
 					"width": 28,
 					"height": 15
@@ -109,7 +109,7 @@
 				"ageMinimum": {
 					"type": "input",
 					"left": 46,
-					"top": 123,
+					"top": 143,
 					"width": 45,
 					"height": 15,
 					"dataSourceTypeHint": "integer",
@@ -118,7 +118,7 @@
 				"Texte3": {
 					"type": "text",
 					"text": "À",
-					"top": 123,
+					"top": 143,
 					"left": 109,
 					"width": 14,
 					"height": 16
@@ -126,7 +126,7 @@
 				"ageMaximum": {
 					"type": "input",
 					"left": 139,
-					"top": 123,
+					"top": 143,
 					"width": 45,
 					"height": 15,
 					"dataSourceTypeHint": "integer",
@@ -135,7 +135,7 @@
 				"Texte4": {
 					"type": "text",
 					"text": "Rang : ",
-					"top": 152,
+					"top": 212,
 					"left": 14,
 					"width": 172,
 					"height": 25,
@@ -144,7 +144,7 @@
 				"rang": {
 					"type": "ruler",
 					"left": 14,
-					"top": 181,
+					"top": 241,
 					"width": 142,
 					"height": 28,
 					"max": 5,
@@ -155,12 +155,15 @@
 					"dataSource": "Form:C1466.scenarioDetail.condition.rang",
 					"labelsPlacement": "bottom",
 					"showGraduations": true,
-					"graduationStep": 1
+					"graduationStep": 1,
+					"tooltip": {
+						"$ref": "/SOURCES/tips.json#/Aide pour rang"
+					}
 				},
 				"Texte5": {
 					"type": "text",
 					"text": "Adresse email existante :",
-					"top": 236,
+					"top": 302,
 					"left": 14,
 					"width": 172,
 					"height": 25,
@@ -169,7 +172,7 @@
 				"imageEmail": {
 					"type": "input",
 					"left": 14,
-					"top": 263,
+					"top": 329,
 					"width": 32,
 					"height": 32,
 					"dataSourceTypeHint": "picture",
@@ -255,7 +258,7 @@
 				"Texte9": {
 					"type": "text",
 					"text": "Date mail ouvert :",
-					"top": 125,
+					"top": 115,
 					"left": 225,
 					"width": 172,
 					"height": 25,
@@ -264,14 +267,14 @@
 				"Texte10": {
 					"type": "text",
 					"text": "Du",
-					"top": 155,
+					"top": 145,
 					"left": 225,
 					"width": 28,
 					"height": 15
 				},
 				"dateDebutMailOuvert": {
 					"type": "subform",
-					"top": 150,
+					"top": 140,
 					"left": 257,
 					"width": 138,
 					"height": 25,
@@ -293,14 +296,14 @@
 				"Texte11": {
 					"type": "text",
 					"text": "Au",
-					"top": 189,
+					"top": 179,
 					"left": 225,
 					"width": 28,
 					"height": 15
 				},
 				"dateFinMailOuvert": {
 					"type": "subform",
-					"top": 184,
+					"top": 174,
 					"left": 257,
 					"width": 138,
 					"height": 25,
@@ -321,8 +324,8 @@
 				},
 				"Texte12": {
 					"type": "text",
-					"text": "Désabonnement :",
-					"top": 236,
+					"text": "Actif (Non désabonné) :",
+					"top": 212,
 					"left": 225,
 					"width": 172,
 					"height": 25,
@@ -331,7 +334,7 @@
 				"imageDesabonnement": {
 					"type": "input",
 					"left": 225,
-					"top": 263,
+					"top": 239,
 					"width": 32,
 					"height": 32,
 					"dataSourceTypeHint": "picture",
@@ -350,9 +353,9 @@
 				"Bouton": {
 					"type": "button",
 					"text": "Valider",
-					"top": 316,
-					"left": 104,
-					"width": 202,
+					"top": 393,
+					"left": 120,
+					"width": 203,
 					"height": 30,
 					"events": [
 						"onClick"
@@ -392,7 +395,7 @@
 				"refreshDateDebutMailOuvert": {
 					"type": "pictureButton",
 					"left": 403,
-					"top": 150,
+					"top": 140,
 					"width": 25,
 					"height": 25,
 					"events": [
@@ -407,7 +410,7 @@
 				"refreshDateFinMailOuvert": {
 					"type": "pictureButton",
 					"left": 403,
-					"top": 184,
+					"top": 174,
 					"width": 25,
 					"height": 25,
 					"events": [
@@ -418,10 +421,45 @@
 					"loopBackToFirstFrame": true,
 					"switchBackWhenReleased": true,
 					"useLastFrameAsDisabled": true
+				},
+				"Texte14": {
+					"type": "text",
+					"text": "Sans aucun scénario :",
+					"top": 302,
+					"left": 225,
+					"width": 172,
+					"height": 25,
+					"fontWeight": "bold"
+				},
+				"imageDesabonnement1": {
+					"type": "input",
+					"left": 225,
+					"top": 329,
+					"width": 32,
+					"height": 32,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageSansScenario",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/imageDesabonnement1.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 176,
-	"method": "method.4dm"
+	"geometryStamp": 253,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

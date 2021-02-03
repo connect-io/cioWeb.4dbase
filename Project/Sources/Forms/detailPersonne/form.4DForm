@@ -15,7 +15,7 @@
 		"onLoad",
 		"onPageChange"
 	],
-	"windowTitle": "",
+	"windowTitle": "Détail Personne",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -26,7 +26,7 @@
 					"top": 13,
 					"left": 97,
 					"width": 760,
-					"height": 491,
+					"height": 627,
 					"labels": [
 						"Infos générales",
 						"Marketing"
@@ -64,7 +64,7 @@
 				"Bouton4": {
 					"type": "button",
 					"text": "Valider",
-					"top": 460,
+					"top": 605,
 					"left": 642,
 					"width": 165,
 					"height": 25,
@@ -76,7 +76,7 @@
 				"Bouton1": {
 					"type": "button",
 					"text": "Annuler",
-					"top": 460,
+					"top": 605,
 					"left": 442,
 					"width": 165,
 					"height": 25,
@@ -105,7 +105,7 @@
 				},
 				"Champ2": {
 					"type": "input",
-					"top": 105,
+					"top": 107,
 					"left": 280,
 					"width": 250,
 					"height": 16,
@@ -123,7 +123,7 @@
 				},
 				"Texte3": {
 					"type": "text",
-					"top": 105,
+					"top": 107,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -133,7 +133,7 @@
 				},
 				"Champ1": {
 					"type": "input",
-					"top": 105,
+					"top": 107,
 					"left": 557,
 					"width": 250,
 					"height": 16,
@@ -151,7 +151,7 @@
 				},
 				"Texte1": {
 					"type": "text",
-					"top": 141,
+					"top": 143,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -161,7 +161,7 @@
 				},
 				"Champ3": {
 					"type": "input",
-					"top": 141,
+					"top": 143,
 					"left": 280,
 					"width": 250,
 					"height": 16,
@@ -196,7 +196,7 @@
 				},
 				"Champ4": {
 					"type": "input",
-					"top": 220,
+					"top": 225,
 					"left": 280,
 					"width": 527,
 					"height": 16,
@@ -214,7 +214,7 @@
 				},
 				"Texte4": {
 					"type": "text",
-					"top": 220,
+					"top": 225,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -224,7 +224,7 @@
 				},
 				"Champ5": {
 					"type": "input",
-					"top": 256,
+					"top": 261,
 					"left": 280,
 					"width": 527,
 					"height": 16,
@@ -242,7 +242,7 @@
 				},
 				"Texte5": {
 					"type": "text",
-					"top": 256,
+					"top": 261,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -252,7 +252,7 @@
 				},
 				"Champ6": {
 					"type": "input",
-					"top": 292,
+					"top": 297,
 					"left": 280,
 					"width": 250,
 					"height": 16,
@@ -270,7 +270,7 @@
 				},
 				"Texte6": {
 					"type": "text",
-					"top": 292,
+					"top": 297,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -280,7 +280,7 @@
 				},
 				"Champ7": {
 					"type": "input",
-					"top": 292,
+					"top": 297,
 					"left": 557,
 					"width": 250,
 					"height": 16,
@@ -298,7 +298,7 @@
 				},
 				"Champ8": {
 					"type": "input",
-					"top": 328,
+					"top": 333,
 					"left": 280,
 					"width": 527,
 					"height": 16,
@@ -316,7 +316,7 @@
 				},
 				"Texte7": {
 					"type": "text",
-					"top": 328,
+					"top": 333,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -326,7 +326,7 @@
 				},
 				"Champ9": {
 					"type": "input",
-					"top": 364,
+					"top": 369,
 					"left": 280,
 					"width": 527,
 					"height": 16,
@@ -344,7 +344,7 @@
 				},
 				"Texte8": {
 					"type": "text",
-					"top": 364,
+					"top": 369,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -354,7 +354,7 @@
 				},
 				"Champ10": {
 					"type": "input",
-					"top": 400,
+					"top": 405,
 					"left": 280,
 					"width": 527,
 					"height": 16,
@@ -372,7 +372,7 @@
 				},
 				"Texte9": {
 					"type": "text",
-					"top": 400,
+					"top": 405,
 					"left": 110,
 					"width": 150,
 					"height": 16,
@@ -382,9 +382,290 @@
 				}
 			}
 		},
-		null
+		{
+			"objects": {
+				"Texte": {
+					"type": "text",
+					"text": "Rang :",
+					"top": 107,
+					"left": 110,
+					"width": 130,
+					"height": 16,
+					"fontWeight": "normal"
+				},
+				"rang": {
+					"type": "input",
+					"left": 270,
+					"top": 107,
+					"width": 200,
+					"height": 16,
+					"dataSource": "Form:C1466.rang"
+				},
+				"Texte10": {
+					"type": "text",
+					"text": "Actif (non désabonné) :",
+					"top": 143,
+					"left": 110,
+					"width": 160,
+					"height": 16,
+					"fontWeight": "normal"
+				},
+				"imageDesabonnement": {
+					"type": "input",
+					"left": 270,
+					"top": 143,
+					"width": 16,
+					"height": 16,
+					"dataSource": "Form:C1466.imageDesabonnement",
+					"dataSourceTypeHint": "picture",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/imageDesabonnement.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					]
+				},
+				"Texte11": {
+					"type": "text",
+					"text": "Information Mailjet :",
+					"top": 179,
+					"left": 110,
+					"width": 130,
+					"height": 16,
+					"fontWeight": "normal"
+				},
+				"Texte12": {
+					"type": "text",
+					"top": 66,
+					"left": 147,
+					"width": 660,
+					"height": 16,
+					"fill": "#AAAAAA",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "center",
+					"fontWeight": "bold",
+					"borderStyle": "solid",
+					"text": "I n f o r m a t i o n  m a r k e t i n g"
+				},
+				"Zone de saisie": {
+					"type": "input",
+					"left": 270,
+					"top": 179,
+					"width": 537,
+					"height": 100,
+					"dataSource": "Form:C1466.resumeMarketing",
+					"enterable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": []
+				},
+				"Texte14": {
+					"type": "text",
+					"top": 299,
+					"left": 147,
+					"width": 660,
+					"height": 16,
+					"fill": "#AAAAAA",
+					"stroke": "#0000FF",
+					"class": "",
+					"textAlign": "center",
+					"fontWeight": "bold",
+					"borderStyle": "solid",
+					"text": "S c é n a r i o s"
+				},
+				"Texte13": {
+					"type": "text",
+					"text": "Scénario(s) en cours :",
+					"top": 340,
+					"left": 110,
+					"width": 150,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"List Box": {
+					"type": "listbox",
+					"left": 110,
+					"top": 376,
+					"width": 308,
+					"height": 159,
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"scrollbarHorizontal": "hidden",
+					"dataSource": "Form:C1466.scenarioEnCours",
+					"listboxType": "collection",
+					"method": "ObjectMethods/List Box.4dm",
+					"currentItemSource": "Form:C1466.ScenarioEnCoursCurrentElement",
+					"currentItemPositionSource": "Form:C1466.ScenarioEnCoursCurrentPosition",
+					"selectedItemsSource": "Form:C1466.ScenarioEnCoursSelectedElement",
+					"selectionMode": "single",
+					"columns": [
+						{
+							"header": {
+								"text": "Nom",
+								"name": "Entête1"
+							},
+							"name": "Colonne1",
+							"footer": {
+								"name": "Pied1"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 150,
+							"dataSource": "This:C1470.nom",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Entête2",
+								"text": "Statut"
+							},
+							"name": "Colonne2",
+							"footer": {
+								"name": "Pied2"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 150,
+							"dataSource": "This:C1470.actif",
+							"dataSourceTypeHint": "boolean",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Entête3",
+								"text": "UID"
+							},
+							"name": "Colonne3",
+							"footer": {
+								"name": "Pied3"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 10,
+							"dataSource": "This:C1470.ID",
+							"dataSourceTypeHint": "number",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"Texte15": {
+					"type": "text",
+					"text": "Scénario(s) possiblement applicable :",
+					"top": 340,
+					"left": 492,
+					"width": 260,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"List Box1": {
+					"type": "listbox",
+					"left": 492,
+					"top": 376,
+					"width": 315,
+					"height": 159,
+					"events": [
+						"onLoad",
+						"onClick"
+					],
+					"scrollbarHorizontal": "hidden",
+					"dataSource": "Form:C1466.scenarioPossible",
+					"listboxType": "collection",
+					"currentItemSource": "Form:C1466.ScenarioPossibleCurrentElement",
+					"currentItemPositionSource": "Form:C1466.ScenarioPossibleCurrentPosition",
+					"selectedItemsSource": "Form:C1466.ScenarioPossibleSelectedElement",
+					"selectionMode": "single",
+					"columns": [
+						{
+							"header": {
+								"text": "Nom",
+								"name": "Entête4"
+							},
+							"name": "Colonne4",
+							"footer": {
+								"name": "Pied4"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 150,
+							"dataSource": "This:C1470.nom",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Entête5",
+								"text": "Statut"
+							},
+							"name": "Colonne5",
+							"footer": {
+								"name": "Pied5"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 150,
+							"dataSource": "This:C1470.actif",
+							"dataSourceTypeHint": "boolean",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Entête6",
+								"text": "UID"
+							},
+							"name": "Colonne6",
+							"footer": {
+								"name": "Pied6"
+							},
+							"alternateFill": "#D6D6D6",
+							"width": 10,
+							"dataSource": "This:C1470.ID",
+							"dataSourceTypeHint": "number",
+							"enterable": false,
+							"resizable": false
+						}
+					]
+				},
+				"detailPersonneScenarioPersonneEnCoursString": {
+					"type": "input",
+					"left": 110,
+					"top": 555,
+					"width": 156,
+					"height": 14,
+					"dataSource": "Form:C1466.scenarioPersonneEnCours",
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontSize": 10
+				},
+				"detailPersonneScenarioVoirModifier": {
+					"type": "button",
+					"text": "Voir/Modifier scénario",
+					"top": 574,
+					"left": 110,
+					"width": 182,
+					"height": 23,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/detailPersonneScenarioVoirModifier.4dm"
+				},
+				"detailPersonneScenarioEnleverPersonne": {
+					"type": "button",
+					"text": "Enlever du scénario",
+					"top": 607,
+					"left": 110,
+					"width": 182,
+					"height": 23,
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		}
 	],
-	"geometryStamp": 168,
+	"geometryStamp": 405,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

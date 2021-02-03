@@ -2,9 +2,7 @@ Class constructor
 	var $marketingAutomation_o : Object
 	
 	$marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()  // Instanciation de la class
-	
-	This:C1470.marketingAutomation:=$marketingAutomation_o
-	This:C1470.marketingAutomation.loadPasserelle("Personne")
+	$marketingAutomation_o.loadPasserelle("Personne")
 	
 	This:C1470.champUID:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "UID")
 	This:C1470.champSexe:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "sexe")
@@ -14,28 +12,25 @@ Class constructor
 	This:C1470.champVille:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "ville")
 	
 Function updateScenarioListToPerson
-	C_TEXT:C284($1)  // UID personne OU vide
-	C_OBJECT:C1216($0)
+	var $0 : Object
 	
-	C_OBJECT:C1216($table_o)
+	var $class_o : Object
 	
 	$0:=ds:C1482.CaScenario.newSelection()
 	
-	If ($1#"")
-		$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1).AllCaPersonneScenario
-		
-		If (Num:C11($table_o.length)>0)
-			$0:=$table_o.OneCaScenario
-		End if 
-		
+	$class_o:=cwToolGetClass("MAPersonne").new()
+	$class_o.loadByPrimaryKey(Form:C1466.PersonneCurrentElement.UID)
+	
+	If ($class_o.personne#Null:C1517)
+		$0:=$class_o.personne.AllCaPersonneScenario.OneCaScenario
 	End if 
 	
 Function updateStringPersonneForm
-	C_OBJECT:C1216($1)  // Entity personne
+	var $1 : Object  // Entity personne
 	
-	C_TEXT:C284($civilite_t)
-	C_OBJECT:C1216($table_o)
-	C_VARIANT:C1683($libHomme_v; $libFemme_v)
+	var $civilite_t : Text
+	var $table_o; $class_o : Object
+	var $libHomme_v; $libFemme_v : Variant
 	
 	$libHomme_v:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "homme")[0].value
 	$libFemme_v:=Storage:C1525.automation.passerelle.libelleSexe.query("lib = :1"; "femme")[0].value
@@ -51,10 +46,11 @@ Function updateStringPersonneForm
 		: (Num:C11($1.modeSelection)=1) | (Num:C11($1.modeSelection)=2) & (Bool:C1537($1.multiSelection)=False:C215)  // Sélection unique OU Sélection multi-lignes mais qu'une seule ligne sélectionnée
 			$1.resume:=Choose:C955($civilite_t#""; $civilite_t+" "; "")+$1.nom+" "+$1.prenom+", habite à "+$1.ville+" ("+$1.codePostal+")."
 			
-			$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query(This:C1470.champUID+" is :1"; $1.UID)
+			$class_o:=cwToolGetClass("MAPersonne").new()
+			$class_o.loadByPrimaryKey($1.UID)
 			
-			If (Num:C11($table_o.length)=1)
-				$table_o:=$table_o.AllCaPersonneMarketing
+			If ($class_o.personne#Null:C1517)
+				$table_o:=$class_o.personne.AllCaPersonneMarketing
 				
 				If (Num:C11($table_o.length)=1)
 					$table_o:=$table_o.first()
@@ -114,8 +110,9 @@ Function updateStringPersonneForm
 	End case 
 	
 Function viewPersonList
-	C_OBJECT:C1216($1)  // Objet Form scénario
-	C_OBJECT:C1216(entitySelection_o)
+	var $1 : Object  // Objet Form scénario
+	
+	var entitySelection_o : Object
 	
 	entitySelection_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	

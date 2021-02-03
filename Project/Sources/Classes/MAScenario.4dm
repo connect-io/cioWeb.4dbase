@@ -1,14 +1,11 @@
 Class constructor
-	C_OBJECT:C1216($1)  // Class MarketingAutomation
-	
-	This:C1470.marketingAutomation:=$1
 	This:C1470.scenario:=ds:C1482.CaScenario.newSelection()
 	This:C1470.scenarioDetail:=New object:C1471()
 	
 Function newScenario
-	C_BOOLEAN:C305($0)
+	var $0 : Boolean
 	
-	C_OBJECT:C1216($caScenario_o; $retour_o)
+	var $caScenario_o; $retour_o : Object
 	
 	$caScenario_o:=ds:C1482.CaScenario.new()
 	
@@ -24,19 +21,36 @@ Function loadAllScenario
 	This:C1470.scenario:=ds:C1482.CaScenario.all().orderBy("nom asc")
 	
 Function loadScenarioDisplay
-	This:C1470.loadAllScenario()
+	var $1 : Text  // Texte qui indique l'ID du scénario à charger
+	
+	If (Value type:C1509($1)=Est une variable indéfinie:K8:13)
+		This:C1470.loadAllScenario()
+	Else 
+		This:C1470.loadByPrimaryKey($1)
+		
+		This:C1470.disabledCreateDeleteScenarioButton:=True:C214
+	End if 
 	
 	cwToolWindowsForm("gestionScenario"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 90); This:C1470)
+	
+Function loadByPrimaryKey($id_t : Text)
+	var $table_o : Object
+	
+	This:C1470.scenario:=ds:C1482.CaScenario.query("ID is :1"; $id_t)
+	
+	If (This:C1470.scenario.length=1)
+		This:C1470.scenarioDetail:=This:C1470.scenario[0]
+	Else 
+		This:C1470.scenarioDetail:=Null:C1517
+	End if 
 	
 Function searchPersonToScenario
 	var $1 : Integer  // Entier long qui indique l'endroit d'où est exécuté la fonction
 	
 	var $lib_t : Text
 	var $ts_el : Integer
-	var $condition_o; $cleValeur_c; $personne_o; $personneAEnlever_o; $table_o; $statut_o; $class_o : Object
+	var $condition_o; $personne_o; $personneAEnlever_o; $table_o; $statut_o; $class_o : Object
 	var $cleValeur_c : Collection
-	
-	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
 	
 	$class_o:=cwToolGetClass("MAPersonneSelection").new()
 	$class_o.loadAll()
@@ -50,7 +64,10 @@ Function searchPersonToScenario
 			If (This:C1470.scenarioDetail#Null:C1517)
 				$condition_o:=This:C1470.scenarioDetail.condition
 				
-				If ($1=2)
+				If ($1=2)  // Application d'un scénario à des personnes
+					// On est obligé de sauver le scénartio sinon on n'aura pas les nouveaux enregistrements de la table [CaPersonneScenario]
+					This:C1470.scenarioDetail.save()
+					
 					$statut_o:=This:C1470.scenarioDetail.reload()
 				End if 
 				
@@ -157,6 +174,27 @@ Function searchPersonToScenario
 					$table_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].query($lib_t+" = :1"; $cleValeur_o.value)
 					
 					$personne_o:=$personne_o.and($table_o)
+				: ($cleValeur_o.key="desabonnement")
+					
+					If ($cleValeur_o.value#Null:C1517)  // Si dans les conditions, l'utisateur souhaite ajouter un critère par rapport au statut de désabonnement
+						$table_o:=ds:C1482.CaPersonneMarketing.query("desabonementMail = :1"; $cleValeur_o.value).OnePersonne
+						
+						$personne_o:=$personne_o.and($table_o)
+					End if 
+					
+				: ($cleValeur_o.key="sansScenario")
+					
+					If ($cleValeur_o.value#Null:C1517)  // Si dans les conditions, l'utisateur souhaite ajouter un critère lié à la précense d'un scénario
+						$table_o:=ds:C1482.CaPersonneScenario.all().OnePersonne
+						
+						If ($cleValeur_o.value=True:C214)  // Si l'utilisateur souhaite uniquement celle qui n'ont pas de scénario en cours
+							$personne_o:=$personne_o.minus($table_o)
+						Else 
+							$personne_o:=$personne_o.and($table_o)
+						End if 
+						
+					End if 
+					
 			End case 
 			
 		End for each 
@@ -171,7 +209,7 @@ Function searchPersonToScenario
 	This:C1470.scenarioPersonneEnCoursEntity:=$personneAEnlever_o
 	
 Function applyScenarioToPerson
-	C_OBJECT:C1216($enregistrement_o; $caPersonneScenario_o; $retour_o)
+	var $enregistrement_o; $caPersonneScenario_o; $retour_o : Object
 	
 	If (This:C1470.scenarioSelectionPossiblePersonne#Null:C1517)
 		
@@ -215,6 +253,7 @@ Function loadImageScenarioCondition
 	
 	This:C1470.imageEmail:=Storage:C1525.automation.image["toggle"]
 	This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle"]
+	This:C1470.imageSansScenario:=Storage:C1525.automation.image["toggle"]
 	
 	If (This:C1470.scenarioDetail.condition.sexe#Null:C1517)
 		
@@ -239,10 +278,20 @@ Function loadImageScenarioCondition
 	
 	If (This:C1470.scenarioDetail.condition.desabonnement#Null:C1517)
 		
-		If (This:C1470.scenarioDetail.condition.desabonnement=True:C214)
+		If (Not:C34(This:C1470.scenarioDetail.condition.desabonnement)=True:C214)
 			This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle-on"]
 		Else 
 			This:C1470.imageDesabonnement:=Storage:C1525.automation.image["toggle-off"]
+		End if 
+		
+	End if 
+	
+	If (This:C1470.scenarioDetail.condition.sansScenario#Null:C1517)
+		
+		If (This:C1470.scenarioDetail.condition.sansScenario=True:C214)
+			This:C1470.imageSansScenario:=Storage:C1525.automation.image["toggle-on"]
+		Else 
+			This:C1470.imageSansScenario:=Storage:C1525.automation.image["toggle-off"]
 		End if 
 		
 	End if 
@@ -292,9 +341,7 @@ Function newScene
 	$0:=$retour_o.success
 	
 Function updateStringSceneForm
-	C_LONGINT:C283($1)  // Entier long qui indique l'endroit d'où est exécuté la fonction
-	
-	This:C1470.marketingAutomation.loadPasserelle("Personne")  // Chargement de la passerelle Personne
+	var $1 : Integer  // Entier long qui indique l'endroit d'où est exécuté la fonction
 	
 	This:C1470.scenePersonneEnCoursEntity:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	
@@ -337,25 +384,27 @@ Function loadImageSceneActionCondition
 	This:C1470.imageEmail:=Storage:C1525.automation.image["toggle"]
 	
 Function saveFileActionScene
-	C_TEXT:C284($1)  // ID scenario
-	C_LONGINT:C283($2)  // ID scene
-	C_OBJECT:C1216($3)  // Objet Write Pro
-	C_TEXT:C284($4)  // Extension du fichier
-	C_BOOLEAN:C305($5)  // Booléen qui indique si l'utilisateur choisi l'endroit du fichier de sauvegarde du fichier
+	var $1 : Text  // ID scenario
+	var $2 : Integer  // ID scene
+	var $3 : Object  // Objet Write Pro
+	var $4 : Text  // Extension du fichier
+	var $5 : Boolean  // Booléen qui indique si l'utilisateur choisi l'endroit du fichier de sauvegarde du fichier
 	
-	C_TEXT:C284($texte_t; $chemin_t)
-	C_BOOLEAN:C305($continue_b)
+	var $texte_t; $chemin_t : Text
+	var $continue_b : Boolean
+	var $class_o : Object
 	
 	$texte_t:=WP Get text:C1575($3; wk expressions as source:K81:256)
-	
 	$chemin_t:=Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioMarketingAutomation"+Séparateur dossier:K24:12+"scenario"+Séparateur dossier:K24:12+$1+Séparateur dossier:K24:12
 	
-	$continue_b:=This:C1470.marketingAutomation.createFolder($chemin_t)  // Création ou check du dossier scénario
+	$class_o:=cwToolGetClass("MarketingAutomation").new()
+	
+	$continue_b:=$class_o.createFolder($chemin_t)  // Création ou check du dossier scénario
 	
 	If ($continue_b=True:C214)  // Le dossier du scénario scenarioDetail.ID existe
 		$chemin_t:=$chemin_t+String:C10($2)+Séparateur dossier:K24:12
 		
-		$continue_b:=This:C1470.marketingAutomation.createFolder($chemin_t)  // Création ou check du dossier de la scène
+		$continue_b:=$class_o.createFolder($chemin_t)  // Création ou check du dossier de la scène
 	End if 
 	
 	If ($continue_b=True:C214)  // Le dossier de la scène sceneDetail.ID du scénario scenarioDetail.ID existe

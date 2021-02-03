@@ -174,14 +174,61 @@ Remonte les informations de mailjet.
 Historique
 26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout entête
 -----------------------------------------------------------------------------*/
-	C_OBJECT:C1216($mailjet_cs; $mailjet_o)
+	var $class_o : Object
 	
 	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction mailjetGetStat sans une personne de définie.")
 	
 	// Instanciation de la class
-	$mailjet_o:=cwToolGetClass("MAMailjet").new()
+	$class_o:=cwToolGetClass("MAMailjet").new()
 	
-	This:C1470.statMailjet:=$mailjet_o.getStatistic(This:C1470.email)
+	This:C1470.statMailjet:=$class_o.getStatistic(This:C1470.eMail)
+	
+Function mailjetGetDetailStat
+/*-----------------------------------------------------------------------------
+Fonction : MAPersonne.mailjetGetDetailStat
+	
+Remonte les informations de mailjet.
+	
+Historique
+03/02/21 - Rémy Scanu <remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
+	var $1 : Text
+	var ${2} : Text
+	
+	var $i_el : Integer
+	var $class_o; $mailjet_o; $mailjetDetail_o; $personne_o : Object
+	var $mailjetDetail_c : Collection
+	
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction mailjetGetStat sans une personne de définie.")
+	
+	// Instanciation de la class
+	$class_o:=cwToolGetClass("MAMailjet").new()
+	
+	// Instanciation de la class
+	$personne_o:=cwToolGetClass("MAPersonne").new()
+	
+	For ($i_el; 2; Count parameters:C259)
+		$class_o.getMessageEvent(${$i_el}; 0; cwTimestamp(Current date:C33; Current time:C178); ->$mailjet_o)
+		
+		If ($mailjet_o.errorHttp=Null:C1517)
+			$class_o.AnalysisMessageEvent($mailjet_o; ${$i_el}; 0; cwTimestamp(Current date:C33; Current time:C178); ->$mailjetDetail_c)
+		End if 
+		
+		If ($1#"")
+			$mailjetDetail_c:=$mailjetDetail_c.query("email = :1"; $1)
+		End if 
+		
+		For each ($mailjetDetail_o; $mailjetDetail_c)
+			// On vérifie que l'email trouvé est bien dans la base du client
+			$personne_o.loadByField("eMail"; "="; $mailjetDetail_o.email)  // Initialisation de l'entité sélection de la table [Personne] du client
+			
+			If ($personne_o.personne#Null:C1517)  // On met à jour la table marketing avec les infos de mailjet
+				$personne_o.updateCaMarketingStatistic(2; New object:C1471("eventNumber"; ${$i_el}; "eventTs"; Num:C11($mailjetDetail_o.tsEvent)))
+			End if 
+			
+		End for each 
+		
+	End for 
 	
 Function sendMailing
 	var $canalEnvoi_t; $corps_t; $mime_t; $propriete_t; $contenu_t : Text
@@ -285,6 +332,10 @@ Historique
 			
 			// Mise à jour des stats de mailjet (besoin d'éxécuter avant mailjetGetStat() pour fonctionner correctement)
 			$enregistrement_o.mailjetInfo:=This:C1470.statMailjet
+			$retour_o:=$enregistrement_o.save()
+			
+			// Il faut également mettre à jour les autres champs
+			This:C1470.mailjetGetDetailStat(This:C1470.eMail; "3"; "4"; "8"; "10")
 		: ($provenance_el=2)  // On souhaite mettre à jour un des event (opened, clicked ou bounce)
 			
 			Case of 
@@ -305,7 +356,9 @@ Historique
 			
 	End case 
 	
-	$retour_o:=$enregistrement_o.save()
+	If ($provenance_el#1)  // On sauvegarde juste avant inutile de refaire cela
+		$retour_o:=$enregistrement_o.save()
+	End if 
 	
 	Case of 
 		: ($provenance_el=1)  // On souhaite mettre à jour manuellement les stats de mailjet

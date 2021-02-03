@@ -12,21 +12,7 @@
 	"rightMargin": 20,
 	"bottomMargin": 20,
 	"events": [
-		"onLoad",
-		"onPageChange",
-		"onValidate",
-		"onClick",
-		"onDoubleClick",
-		"onOutsideCall",
-		"onBeginDragOver",
-		"onDragOver",
-		"onDrop",
-		"onAfterKeystroke",
-		"onMenuSelect",
-		"onPluginArea",
-		"onAfterEdit",
-		"onTimer",
-		"onBoundVariableChange"
+		"onLoad"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -108,6 +94,8 @@
 					"dataSource": "Form:C1466.personne",
 					"selectionMode": "single",
 					"method": "ObjectMethods/listePersonne.4dm",
+					"horizontalLineStroke": "#000000",
+					"verticalLineStroke": "#A9A9A9",
 					"columns": [
 						{
 							"header": {
@@ -119,7 +107,8 @@
 								"name": "Pied1"
 							},
 							"width": 128,
-							"dataSource": "This:C1470.nom"
+							"dataSource": "This:C1470.nom",
+							"alternateFill": "#D6D6D6"
 						},
 						{
 							"header": {
@@ -131,7 +120,20 @@
 								"name": "Pied2"
 							},
 							"width": 127,
-							"dataSource": "This:C1470.prenom"
+							"dataSource": "This:C1470.prenom",
+							"alternateFill": "#D6D6D6"
+						},
+						{
+							"header": {
+								"name": "Entête5",
+								"text": "Entête5"
+							},
+							"name": "Colonne1",
+							"footer": {
+								"name": "Pied5"
+							},
+							"dataSource": "This:C1470.UID",
+							"alternateFill": "#D6D6D6"
 						}
 					]
 				},
@@ -291,6 +293,13 @@
 			}
 		}
 	],
-	"geometryStamp": 207,
-	"method": "method.4dm"
+	"geometryStamp": 209,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

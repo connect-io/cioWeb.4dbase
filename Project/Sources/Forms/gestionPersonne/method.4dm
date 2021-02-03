@@ -1,9 +1,8 @@
 Case of 
 	: (Form event code:C388=Sur chargement:K2:1)
-		C_OBJECT:C1216($maPersonneDisplay_cs;$maPersonneDisplay_o)
+		var $maPersonneDisplay_o : Object
 		
-		$maPersonneDisplay_cs:=cwToolGetClass("MAPersonneDisplay")  // Initialisation de la class
-		$maPersonneDisplay_o:=$maPersonneDisplay_cs.new()  // Instanciation de la class
+		$maPersonneDisplay_o:=cwToolGetClass("MAPersonneDisplay").new()  // Instanciation de la class
 		
 		If (Form:C1466.entree=Null:C1517)  // Affichage directement du formulaire sans passer par le formulaire de gestion des scénarios
 			Form:C1466.entree:=3

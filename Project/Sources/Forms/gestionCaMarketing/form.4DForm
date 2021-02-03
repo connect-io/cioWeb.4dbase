@@ -14,7 +14,7 @@
 	"events": [
 		"onLoad"
 	],
-	"windowTitle": "window title",
+	"windowTitle": "Gestion marketing",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -88,7 +88,7 @@
 				},
 				"Bouton4": {
 					"type": "button",
-					"text": "Valider",
+					"text": "Sauvegarder",
 					"top": 145,
 					"left": 190,
 					"width": 165,
@@ -102,5 +102,12 @@
 		}
 	],
 	"geometryStamp": 143,
-	"method": "method.4dm"
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }

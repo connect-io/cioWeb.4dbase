@@ -1,20 +1,29 @@
 Case of 
 	: (Form event code:C388=Sur clic:K2:4)
-		C_OBJECT:C1216($config)
+		var $docFichier_t : Text
+		var $config_o : Object
 		
-		$config:=New object:C1471
+		$config_o:=New object:C1471
 		
-		CONFIRM:C162("Voulez-vous utiliser un modèle interne ?"; "Oui"; "Non")
-		TRACE:C157
-		If (OK=1)
+		CONFIRM:C162("Voulez-vous utiliser un modèle du composant cioWeb ?"; "Oui"; "Non")
+		
+		If (OK=1)  // Modèle du composant cioWeb (sousDomaine/email)
+			$config_o.modele:=Storage:C1525.eMail.model
+		Else 
+			$docFichier_t:=Select document:C905(""; ".4WP"; "Sélection du modèle pour la scène"; Utiliser fenêtre feuille:K24:11)
 			
-		Else   // Modèle du composant cioWeb (sousDomaine/email)
-			$config.modele:=Storage:C1525.eMail.model
+			If (OK=1)
+				$config_o.modele:=New collection:C1472(New object:C1471("name"; cwToolExtractFileNameToPath(Document; True:C214)))
+			End if 
+			
 		End if 
 		
-		$config.sceneDetail:=Form:C1466.sceneDetail
+		If ($config_o.modele#Null:C1517)
+			$config_o.sceneDetail:=Form:C1466.sceneDetail
+			
+			cwToolWindowsForm("configSceneModele"; "center"; $config_o)
+		End if 
 		
-		cwToolWindowsForm("configSceneModele"; "center"; $config)  // Form est la class scénario
 	: (Form event code:C388=Sur survol:K2:35)
 		SET CURSOR:C469(9000)
 End case 

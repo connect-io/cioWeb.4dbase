@@ -12,9 +12,7 @@
 	"rightMargin": 20,
 	"bottomMargin": 20,
 	"events": [
-		"onLoad",
-		"onClick",
-		"onLosingFocus"
+		"onLoad"
 	],
 	"windowTitle": "Gestion des scénarios",
 	"destination": "detailScreen",
@@ -235,16 +233,6 @@
 					"left": 223,
 					"width": 140,
 					"height": 16
-				},
-				"scenarioDetailObjectif": {
-					"type": "input",
-					"left": 223,
-					"top": 175,
-					"width": 195,
-					"height": 33,
-					"contextMenu": "automatic",
-					"fontWeight": "bold",
-					"dataSource": "Form:C1466.scenarioDetail.objectif"
 				},
 				"Texte7": {
 					"type": "text",
@@ -621,11 +609,30 @@
 					"loopBackToFirstFrame": true,
 					"switchBackWhenReleased": true,
 					"useLastFrameAsDisabled": true
+				},
+				"scenarioDetailObjectif": {
+					"type": "ruler",
+					"left": 223,
+					"top": 172,
+					"width": 195,
+					"height": 28,
+					"max": 5,
+					"events": [
+						"onDataChange"
+					],
+					"min": 0,
+					"dataSource": "Form:C1466.scenarioDetail.objectif",
+					"labelsPlacement": "bottom",
+					"showGraduations": true,
+					"graduationStep": 1,
+					"tooltip": {
+						"$ref": "/SOURCES/tips.json#/Aide pour rang"
+					}
 				}
 			}
 		}
 	],
-	"geometryStamp": 510,
+	"geometryStamp": 525,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
