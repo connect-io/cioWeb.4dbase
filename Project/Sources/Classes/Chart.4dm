@@ -92,7 +92,41 @@ Historique
 	
 	This:C1470.options:=cwToolObjectMerge(This:C1470.options;$1)
 	
+Function dataColor
+/* -----------------------------------------------------------------------------
+Fonction : Chart.dataColor
 	
+Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas ,renvoie du noir
+	
+Historique
+04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	
+	var $1 : Text  // Le label de la courbe 
+	var $2 : Text  // La couleur à utiliser, du type "green", "yellow", "red" ...
+	var $couleur_s : Collection
+	var $couleur_rgb : Collection
+	var $indiceCouleur_i : Integer
+	var $indiceLabel_i : Integer
+	
+	ASSERT:C1129($1#"";"Chart.dataOption : La param $1 ne doit pas être vide.")
+	ASSERT:C1129($2#"";"Chart.dataOption : La param $2 ne doit pas être vide.")
+	
+	$couleur_s:=New collection:C1472("green";"red";"yellow";"blue";"indigo";"purple";"pink";"orange";"black";"brown";"grey")
+	$couleur_rgb:=New collection:C1472("rgba(27, 203, 27,";"rgba(194, 16, 16,";"rgba(246, 242, 6,";"rgba(16, 141, 222,";"rgba(33, 91, 153,";"rgba(191, 63, 200,";"rgba(213, 70, 24,";"rgba(0, 0, 0,";"rgba(115, 38, 13,";"rgba(100, 91, 89,")
+	$indiceCouleur_i:=$Couleur_s.indexOf($2)
+	
+	
+	If (This:C1470.data.datasets.indices("label IS :1";$1).length=1)
+		$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1";$1)[0]
+		If $indiceCouleur_i#-1
+			This:C1470.data.datasets[$indiceLabel_i].backgroundColor:=$couleur_rgb[$indiceCouleur_i]+"0,2)"
+			This:C1470.data.datasets[$indiceLabel_i].borderColor:=$Couleur_rgb[$indiceCouleur_i]+"1)"
+		Else 
+			This:C1470.data.datasets[$indiceLabel_i].backgroundColor:="rgba(0, 0, 0, 0.2)"
+			This:C1470.data.datasets[$indiceLabel_i].borderColor:="rgba(0, 0, 0, 1)"
+		End if 
+	End if 
 	
 Function dataOption
 /* -----------------------------------------------------------------------------
@@ -164,5 +198,23 @@ Historique
 	var $1 : Collection
 	
 	This:C1470.data.labels:=$1.copy()
+	
+	
+	
+Function typeSet
+/* -----------------------------------------------------------------------------
+Fonction : Chart.typeSet
+	
+Permet de changer le type du graph (bar, line, camembert...)
+	
+Historique
+04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	
+	var $1 : Text  // Le type de graph à utiliser 
+	
+	ASSERT:C1129($1#"";"Chart.dataOption : La param $1 ne doit pas être vide.")
+	
+	This:C1470.type:=$1
 	
 	
