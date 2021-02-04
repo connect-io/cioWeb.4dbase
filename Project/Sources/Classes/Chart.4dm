@@ -106,16 +106,15 @@ Historique
 	
 	var $1 : Text
 	var $2 : Object
+	var $indice_i : Integer
 	var $data_o : Object
 	
 	ASSERT:C1129($1#"";"Chart.dataOption : La param $1 ne doit pas être vide.")
 	ASSERT:C1129($2#Null:C1517;"Chart.dataOption : La param $2 ne doit pas être null.")
 	
-	If (This:C1470.data.datasets.query("label IS :1";$1).length=1)
+	If (This:C1470.data.datasets.indices("label IS :1";$1).length=1)
 		$indice_i:=This:C1470.data.datasets.indices("label IS :1";$1)[0]
-		$data_o:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i];$2)
-		
-		This:C1470.data.datasets[$indice_i]:=$data_o
+		This:C1470.data.datasets[$indice_i]:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i];$2)
 	Else 
 		$data_o:=New object:C1471()
 		$data_o:=$2.copy()
@@ -137,10 +136,12 @@ Historique
 	
 	var $1 : Text
 	var $2 : Collection
+	var $indice_i : Integer
 	var $data_o : Object
 	
-	If (This:C1470.data.datasets.query("label IS :1";$1).length=1)
-		This:C1470.data.datasets.query("label IS :1";$1)[0].data:=$2.copy()
+	If (This:C1470.data.datasets.indices("label IS :1";$1).length=1)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1";$1)[0]
+		This:C1470.data.datasets[$indice_i].data:=$2.copy()
 	Else 
 		$data_o:=New object:C1471()
 		$data_o.label:=$1
