@@ -161,11 +161,3 @@ Historique
 	End for each 
 	
 	
-	
-	
-	
-Function ajaxRowRemove
-	
-	
-	
-Function ajaxRowAdd

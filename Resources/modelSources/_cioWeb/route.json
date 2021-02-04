@@ -26,6 +26,15 @@
 		]
 	},
 
+	"chart": {
+		"jsPath": [
+			"https://cdnjs.com/libraries/Chart.js"
+		],
+		"jsPathInHtml":[
+			"_cioWeb/js/chart.js"
+		]
+	},	
+
 	"summernote": {
 		"cssPath": [
 			"https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"

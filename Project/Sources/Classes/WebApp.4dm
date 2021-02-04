@@ -998,7 +998,8 @@ Historique
 	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
 	This:C1470.I18NLoad()
 	
-	
+	MESSAGE:C88("Chargement des graphiques..."+Char:C90(Carriage return:K15:38))
+	cwWebAppFuncChartPreload
 	
 Function sessionWebStart
 /* -----------------------------------------------------------------------------
