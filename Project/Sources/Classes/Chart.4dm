@@ -112,10 +112,10 @@ Historique
 	ASSERT:C1129($2#Null:C1517;"Chart.dataOption : La param $2 ne doit pas être null.")
 	
 	If (This:C1470.data.datasets.query("label IS :1";$1).length=1)
-		$data_o:=This:C1470.data.datasets.query("label IS :1";$1)[0]
-		$data_o:=cwToolObjectMerge($data_o;$2)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1";$1)[0]
+		$data_o:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i];$2)
 		
-		This:C1470.data.datasets.query("label IS :1";$1)[0]:=$data_o
+		This:C1470.data.datasets[$indice_i]:=$data_o
 	Else 
 		$data_o:=New object:C1471()
 		$data_o:=$2.copy()

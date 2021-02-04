@@ -273,7 +273,7 @@ Pour résumer les différents éléments que l'on peut trouver dans l'input, nou
 | clientDisabled      | boolean | false             | Défini si l'input est saisissable ou pas (false = saisissable) |
 | append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisie (€, m2, etc) |
 | selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radio (voir au-dessous) |
-| format              | texte   | ""                | Définit des formats spécifiques tels que des dates( ##/##/####) |
+| format              | texte   | ""                | Type les valeurs retournés dans visiteur_o.dataFormTyping, valeur possible : bool, int, real, date|
 | colRadio            | entier  | ""                | Utilisé avec un type ```radio``` cela permet d'aligner les boutons radio |
 | required            | texte   | ""                | Le renseignement de l'input est obligatoire |
 | placeholder         | texte   | ""                |  |
