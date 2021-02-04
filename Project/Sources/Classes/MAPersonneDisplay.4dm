@@ -1,15 +1,8 @@
 Class constructor
-	var $marketingAutomation_o : Object
+	var $class_o : Object
 	
-	$marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new()  // Instanciation de la class
-	$marketingAutomation_o.loadPasserelle("Personne")
-	
-	This:C1470.champUID:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "UID")
-	This:C1470.champSexe:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "sexe")
-	This:C1470.champNom:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "nom")
-	This:C1470.champPrenom:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "prenom")
-	This:C1470.champCodePostal:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "codePostal")
-	This:C1470.champVille:=Storage:C1525.automation.formule.getFieldName(Storage:C1525.automation.passerelle.champ; "ville")
+	$class_o:=cwToolGetClass("MarketingAutomation").new()  // Instanciation de la class
+	$class_o.loadPasserelle("Personne")
 	
 Function updateScenarioListToPerson
 	var $0 : Object
@@ -112,7 +105,11 @@ Function updateStringPersonneForm
 Function viewPersonList
 	var $1 : Object  // Objet Form scénario
 	
+	var $continue_b : Boolean
+	var $class_o : Object
 	var entitySelection_o : Object
+	
+	$class_o:=cwToolGetClass("MAPersonneSelection").new()  // Instanciation de la class
 	
 	entitySelection_o:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].newSelection()
 	
@@ -120,8 +117,9 @@ Function viewPersonList
 		: ($1.entree=1)  // Gestion du scénario (Personne possible)
 			
 			If ($1.donnee.scenarioPersonnePossibleEntity#Null:C1517)  // On souhait voir les personnes possiblement applicable à un scénario
-				$1.personne:=$1.donnee.scenarioPersonnePossibleEntity.toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
-					.extract(This:C1470.champUID; "UID"; This:C1470.champSexe; "sexe"; This:C1470.champNom; "nom"; This:C1470.champPrenom; "prenom"; This:C1470.champCodePostal; "codePostal"; This:C1470.champVille; "ville")
+				$class_o.fromEntitySelection($1.donnee.scenarioPersonnePossibleEntity)
+				
+				$continue_b:=True:C214
 			End if 
 			
 			OBJECT SET ENABLED:C1123(*; "supprimerScenarioEnCours"; False:C215)
@@ -129,9 +127,9 @@ Function viewPersonList
 			If ($1.donnee.scenarioSelectionPossiblePersonne#Null:C1517)
 				
 				For each ($enregistrement_o; $1.personne)
-					$table_o:=$1.donnee.scenarioSelectionPossiblePersonne.query(This:C1470.champUID+" is :1"; $enregistrement_o.UID)
+					$table_o:=$1.donnee.scenarioSelectionPossiblePersonne.get($enregistrement_o.UID)
 					
-					If (Num:C11($table_o.length)=1)
+					If ($table_o=Null:C1517)
 						LISTBOX SELECT ROW:C912(*; "listePersonne"; $1.personne.indexOf($enregistrement_o)+1; lk ajouter à sélection:K53:2)
 					End if 
 					
@@ -143,20 +141,28 @@ Function viewPersonList
 		: ($1.entree=2)  // Gestion du scénario (Personne en cours)
 			
 			If ($1.donnee.scenarioPersonneEnCoursEntity#Null:C1517)  // On souhait voir les personnes où le scénario est déjà appliqué
-				$1.personne:=$1.donnee.scenarioPersonneEnCoursEntity.toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
-					.extract(This:C1470.champUID; "UID"; This:C1470.champSexe; "sexe"; This:C1470.champNom; "nom"; This:C1470.champPrenom; "prenom"; This:C1470.champCodePostal; "codePostal"; This:C1470.champVille; "ville")
+				$class_o.fromEntitySelection($1.donnee.scenarioPersonneEnCoursEntity)
+				
+				$continue_b:=True:C214
 			End if 
 			
 		: ($1.entree=3)  // Gestion des personnes (Sans passer par Gestion du scénario)
+			$class_o.loadAll()
 			
-			$1.personne:=ds:C1482[Storage:C1525.automation.passerelle.tableHote].all().toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
-				.extract(This:C1470.champUID; "UID"; This:C1470.champSexe; "sexe"; This:C1470.champNom; "nom"; This:C1470.champPrenom; "prenom"; This:C1470.champCodePostal; "codePostal"; This:C1470.champVille; "ville")
-			
+			$continue_b:=True:C214
 		: ($1.entree=4)  // Gestion de la scène (Personne en cours)
 			
 			If ($1.donnee.scenePersonneEnCoursEntity#Null:C1517)  // On souhait voir les personnes où la scène est en cours d'éxécution
-				$1.personne:=$1.donnee.scenePersonneEnCoursEntity.toCollection(This:C1470.champUID+", "+This:C1470.champSexe+", "+This:C1470.champNom+", "+This:C1470.champPrenom+", "+This:C1470.champCodePostal+", "+This:C1470.champVille)\
-					.extract(This:C1470.champUID; "UID"; This:C1470.champSexe; "sexe"; This:C1470.champNom; "nom"; This:C1470.champPrenom; "prenom"; This:C1470.champCodePostal; "codePostal"; This:C1470.champVille; "ville")
+				$class_o.fromEntitySelection($1.donnee.scenePersonneEnCoursEntity)
+				
+				$continue_b:=True:C214
 			End if 
 			
 	End case 
+	
+	If ($continue_b=True:C214)
+		$class_o.toCollectionAndExtractField(New collection:C1472("UID"; "sexe"; "nom"; "prenom"; "codePostal"; "ville"))
+		
+		Form:C1466.personneCollectionInit:=$class_o.personneCollection
+		$1.personneCollection:=$class_o.personneCollection
+	End if 

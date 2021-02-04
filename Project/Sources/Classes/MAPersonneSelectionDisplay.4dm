@@ -7,12 +7,12 @@ Class de gestion du marketing automation pour le formulaire liste [Personne]
 
 Class constructor
 /*-----------------------------------------------------------------------------
-Fonction : MAPersonneSelection.constructor
+Fonction : MAPersonneSelectionDisplay.constructor
 	
 Instenciation de la class MAPersonneSelectionDisplay pour le marketing automotion
 	
 Historique
-27/01/21 - RémyScanu <gregory@connect-io.fr> - Création
+27/01/21 - Rémy Scanu remy@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
 	
 Function manageFilter()->$collectionFiltered_c : Collection
@@ -102,7 +102,7 @@ Historique
 				
 			Else 
 				
-				If ($propriete_t=("@"+$objectClicked_t+"@")) & ($objectClicked_t#"")  // La colonne a été cliqué et avait le statut du tri croissant on le passe à neutre
+				If ($propriete_t=("@"+$objectClicked_t+"@")) & ($objectClicked_t#"")  // La colonne a été cliqué et avait le statut du tri décroissant on le passe à neutre
 					Form:C1466[$propriete_t]:=Storage:C1525.automation.image["sort"]
 				End if 
 				
@@ -120,7 +120,7 @@ Historique
 		
 		$collectionOrdered_c:=Form:C1466.personneCollection.orderBy($allProprieteToOrder_t)
 	Else 
-		$collectionOrdered_c:=Form:C1466.personneCollection
+		$collectionOrdered_c:=Form:C1466.personneCollection.orderBy("UID")  // Aucune colonne n'a de tri on tri par défaut par UID
 	End if 
 	
 Function reloadPerson($personneUID_v : Variant)
@@ -137,11 +137,11 @@ Historique
 	var $collection_c : Collection
 	
 	$class_o:=cwToolGetClass("MAPersonne").new()
-	$class_o.loadByPrimaryKey(Form:C1466.personCurrentElement.UID)
+	$class_o.loadByPrimaryKey(Form:C1466.PersonneCurrentElement.UID)
 	
 	// S'il y a eu une mise à jour il faut modifier l'entité dans la liste
-	$collection_c:=OB Keys:C1719(Form:C1466.personneCollection[Form:C1466.personCurrentPosition-1])
+	$collection_c:=OB Keys:C1719(Form:C1466.personneCollection[Form:C1466.PersonneCurrentPosition-1])
 	
 	For each ($propriete_t; $collection_c)
-		Form:C1466.personneCollection[Form:C1466.personCurrentPosition-1][$propriete_t]:=$class_o[$propriete_t]
+		Form:C1466.personneCollection[Form:C1466.PersonneCurrentPosition-1][$propriete_t]:=$class_o[$propriete_t]
 	End for each 

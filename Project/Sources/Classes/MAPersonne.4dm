@@ -257,7 +257,7 @@ Function sendMailing
 					
 					If ($corps_t#"")
 						
-						If ($corps_t#"@<body>@")  // Nouvelle façon d'envoyer des emails
+						If ($corps_t#"@<body@")  // Nouvelle façon d'envoyer des emails
 							WP EXPORT VARIABLE:C1319(WParea; $mime_t; wk mime html:K81:1)  // Mime export of Write Pro document
 							$mime_o:=MAIL Convert from MIME:C1681($mime_t)
 							
@@ -301,7 +301,7 @@ Function sendMailing
 	
 Function updateCaMarketingStatistic($provenance_el : Integer; $detail_o : Object)->$isOk_b : Boolean
 /*------------------------------------------------------------------------------
-Fonction : MAPersonne.updateCaMarketingStatisticManual
+Fonction : MAPersonne.updateCaMarketingStatistic
 	
 Permet de mettre à jour la table marketing
 	

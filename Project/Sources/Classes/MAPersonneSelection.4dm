@@ -20,6 +20,14 @@ Historique
 	This:C1470.passerelle:=OB Copy:C1225(Storage:C1525.automation.config.passerelle.query("tableComposant = :1"; "Personne")[0])
 	
 Function loadAll
+/*------------------------------------------------------------------------------
+Fonction : MAPersonneSelection.loadAll
+	
+Permet de sélectionner tous les enregistrements de la table [Personne]
+	
+Historique
+04/01/21 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	This:C1470.personneSelection:=ds:C1482[This:C1470.passerelle.tableHote].all()
 	
 Function loadByField
@@ -54,6 +62,9 @@ Function loadByField
 Function loadPersonListForm
 	cwToolWindowsForm("listePersonne"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); This:C1470)
 	
+Function fromEntitySelection($table_o : Object)
+	This:C1470.personneSelection:=$table_o
+	
 Function fromListPersonCollection($collection_c : Collection)
 	var $personne_o; $element_o : Object
 	
@@ -69,9 +80,25 @@ Function fromListPersonCollection($collection_c : Collection)
 	End for each 
 	
 Function newSelection
+/*------------------------------------------------------------------------------
+Fonction : MAPersonneSelection.newSelection
+	
+Permet de ré-initialiser l'entitySelection
+	
+Historique
+04/01/21 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	This:C1470.personneSelection:=ds:C1482[This:C1470.passerelle.tableHote].newSelection()
 	
 Function sendMailing
+/*------------------------------------------------------------------------------
+Fonction : MAPersonneSelection.sendMailing
+	
+Permet d'envoyer un mailing à une entitySelection
+	
+Historique
+04/01/21 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $canalEnvoi_t; $corps_t; $mime_t; $propriete_t; $contenu_t : Text
 	var $statut_b : Boolean
 	var $class_o; $config_o; $mime_o; $statut_o; $enregistrement_o; $personne_o; $compteur_o : Object
@@ -169,6 +196,14 @@ Function sendMailing
 	End if 
 	
 Function toCollectionAndExtractField($field_c : Collection)
+/*------------------------------------------------------------------------------
+Fonction : MAPersonneSelection.toCollectionAndExtractField
+	
+Permet de transformer l'entitySelection This.personneSelection à This.personneCollection suivant les propriétés voulues
+	
+Historique
+04/01/21 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $field_t; $fieldExtract_t : Text
 	var $formule_o : Object
 	
@@ -186,3 +221,34 @@ Function toCollectionAndExtractField($field_c : Collection)
 	End for each 
 	
 	This:C1470.personneCollection:=Formula from string:C1601("This.personneSelection.toCollection().extract("+$fieldExtract_t+")").call(This:C1470)
+	
+Function updateCaMarketingStatistic
+/*------------------------------------------------------------------------------
+Fonction : MAPersonneSelection.updateCaMarketingStatistic
+	
+Permet de mettre à jour la table marketing
+	
+Historique
+04/01/21 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	var $progressBar_i : Integer
+	var $class_o; $enregistrement_o : Object
+	
+	ASSERT:C1129(This:C1470.personneSelection#Null:C1517; "Impossible d'utiliser la fonction updateCaMarketingStatistic sans une sélection de personne de définie.")
+	
+	// Instanciation de la class
+	$class_o:=cwToolGetClass("MAPersonne").new()
+	
+	$progressBar_i:=Progress New
+	
+	For each ($enregistrement_o; This:C1470.personneSelection)
+		$class_o.loadByPrimaryKey($enregistrement_o.getKey())
+		
+		If ($class_o.personne#Null:C1517)
+			$class_o.updateCaMarketingStatistic(4)  // Je génère à la volée l'enregistrement dans la table [CaMarketing], s'il n'y a pas eu d'enregistrement
+		End if 
+		
+		Progress SET PROGRESS($progressBar_i; ($enregistrement_o.indexOf(This:C1470.personneSelection)/This:C1470.personneSelection.length); "Mise à jour de la table CaMarketing en cours..."; True:C214)
+	End for each 
+	
+	Progress QUIT($progressBar_i)
