@@ -76,22 +76,6 @@ Historique
 	
 	
 	
-Function optionsMerge
-/* -----------------------------------------------------------------------------
-Fonction : Chart.optionsMerge
-	
-Charger les options du graphique.
-	
-Historique
-03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
-	
-	var $1 : Object
-	
-	ASSERT:C1129($1#Null:C1517;"Chart.optionsMerge : La param $1 ne doit pas être null.")
-	
-	This:C1470.options:=cwToolObjectMerge(This:C1470.options;$1)
-	
 Function dataColor
 /* -----------------------------------------------------------------------------
 Fonction : Chart.dataColor
@@ -120,7 +104,7 @@ Historique
 	If (This:C1470.data.datasets.indices("label IS :1";$1).length=1)
 		$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1";$1)[0]
 		If $indiceCouleur_i#-1
-			This:C1470.data.datasets[$indiceLabel_i].backgroundColor:=$couleur_rgb[$indiceCouleur_i]+"0,2)"
+			This:C1470.data.datasets[$indiceLabel_i].backgroundColor:=$couleur_rgb[$indiceCouleur_i]+"0.2)"
 			This:C1470.data.datasets[$indiceLabel_i].borderColor:=$Couleur_rgb[$indiceCouleur_i]+"1)"
 		Else 
 			This:C1470.data.datasets[$indiceLabel_i].backgroundColor:="rgba(0, 0, 0, 0.2)"
@@ -199,6 +183,45 @@ Historique
 	
 	This:C1470.data.labels:=$1.copy()
 	
+	
+Function optionsMerge
+/* -----------------------------------------------------------------------------
+Fonction : Chart.optionsMerge
+	
+Charger les options du graphique.
+	
+Historique
+03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	
+	var $1 : Object
+	
+	ASSERT:C1129($1#Null:C1517;"Chart.optionsMerge : La param $1 ne doit pas être null.")
+	
+	This:C1470.options:=cwToolObjectMerge(This:C1470.options;$1)
+	
+	
+Function titleSet
+/* -----------------------------------------------------------------------------
+Fonction : Chart.titleSet
+	
+Permet de definir le titre du graph 
+	
+Historique
+05/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+-----------------------------------------------------------------------------*/
+	var $1 : Text  // Le titre du graph
+	var $title_o : Object
+	
+	ASSERT:C1129($1#Null:C1517;"Chart.titleSet : La param $1 ne doit pas être null.")
+	
+	$title_o:=New object:C1471("title";New object:C1471("display";True:C214;"text";$1))
+	If (This:C1470.options.title#Null:C1517)
+		This:C1470.options.title.display:=True:C214
+		This:C1470.options.title.text:=$1
+	Else 
+		This:C1470.optionsMerge($title_o)
+	End if 
 	
 	
 Function typeSet
