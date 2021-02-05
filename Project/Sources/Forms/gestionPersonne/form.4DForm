@@ -45,9 +45,9 @@
 				"personneDetailVoirFiche": {
 					"type": "button",
 					"text": "Voir la fiche de la personne",
-					"top": 496,
+					"top": 489,
 					"left": 354,
-					"width": 365,
+					"width": 250,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -66,7 +66,7 @@
 				"Bouton2": {
 					"type": "button",
 					"text": "Forcer une action...",
-					"top": 496,
+					"top": 489,
 					"left": 1154,
 					"width": 218,
 					"height": 24,
@@ -211,7 +211,7 @@
 					"text": "Annuler",
 					"top": 530,
 					"left": 354,
-					"width": 172,
+					"width": 120,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -222,8 +222,8 @@
 					"type": "button",
 					"text": "Valider",
 					"top": 530,
-					"left": 547,
-					"width": 172,
+					"left": 484,
+					"width": 120,
 					"height": 24,
 					"events": [
 						"onClick"
@@ -411,7 +411,7 @@
 			}
 		}
 	],
-	"geometryStamp": 223,
+	"geometryStamp": 239,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

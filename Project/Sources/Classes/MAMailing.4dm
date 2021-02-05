@@ -23,7 +23,10 @@ Function sendGetType()->$type_t : Text
 	$type_t:=selectValue_t
 	
 Function sendGetConfig($type_t : Text)->$config_o : Object
+	var $document_t : Text
 	var $transporter_c : Collection
+	
+	ARRAY TEXT:C222($attachmentsFiles_at; 0)
 	
 	$config_o:=New object:C1471("success"; False:C215)
 	
@@ -40,6 +43,19 @@ Function sendGetConfig($type_t : Text)->$config_o : Object
 				$eMail_o.subject:=Request:C163("Objet du mail ?"; ""; "Valider"; "Annuler l'envoi")
 				
 				If ($eMail_o.subject#"")
+					CONFIRM:C162("Voulez-vous insérer une ou plusieurs pièces-jointes ?")
+					
+					If (OK=1)
+						$eMail_o.attachmentsPath_c:=New collection:C1472
+						
+						$document_t:=Select document:C905(""; "*"; "Fichiers à insérer en pièce-jointe"; Fichiers multiples:K24:7+Utiliser fenêtre feuille:K24:11; $attachmentsFiles_at)
+						
+						If (Size of array:C274($attachmentsFiles_at)>0)
+							ARRAY TO COLLECTION:C1563($eMail_o.attachmentsPath_c; $attachmentsFiles_at)
+						End if 
+						
+					End if 
+					
 					$config_o.eMailConfig:=$eMail_o
 					$config_o.success:=True:C214
 				End if 

@@ -36,6 +36,8 @@ Case of
 			
 			If (OK=1)
 				WParea:=WP Import document:C1318(Document)
+				
+				CLOSE DOCUMENT:C267($refDoc_h)
 			End if 
 			
 		End if 

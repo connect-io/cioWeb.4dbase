@@ -118,7 +118,7 @@
 					"top": 97,
 					"width": 156,
 					"height": 25,
-					"dataSource": "Form:C1466.modele",
+					"dataSource": "Form:C1466.sceneDetail.paramAction.modele",
 					"enterable": false,
 					"focusable": false,
 					"contextMenu": "none",

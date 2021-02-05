@@ -135,7 +135,7 @@ Historique
 							If ($corps_t#"")
 								// toDo charger enregistrement pour table [Personne] de la base hôte
 								
-								If ($corps_t#"@<p>@")  // Nouvelle façon d'envoyer des emails
+								If ($corps_t#"@<body@")  // Nouvelle façon d'envoyer des emails
 									WP EXPORT VARIABLE:C1319(WParea; $mime_t; wk mime html:K81:1)  // Mime export of Write Pro document
 									$mime_o:=MAIL Convert from MIME:C1681($mime_t)
 									

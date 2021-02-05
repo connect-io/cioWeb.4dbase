@@ -4,10 +4,10 @@ If (Form event code:C388=Sur données modifiées:K2:15)
 	
 	If (modeleListe_at{modeleListe_at}#"")
 		
-		If (modeleListe_at{modeleListe_at}#"@.4WP") | (modeleListe_at{modeleListe_at}#"@.4W7")  // Modèle du composant cioWeb
+		If (modeleListe_at{modeleListe_at}#"@.4WP") & (modeleListe_at{modeleListe_at}#"@.4W7")  // Modèle du composant cioWeb
 			$modele_o:=Storage:C1525.eMail.model.query("name IS :1"; modeleListe_at{modeleListe_at})[0]
 			
-			Form:C1466.modeleDetail:="• Objet de l'email : "+$modele_o.object
+			Form:C1466.modeleDetail:="• Objet de l'email : "+$modele_o.subject
 			
 			If ($modele_o.to#Null:C1517)
 				
@@ -24,6 +24,8 @@ If (Form event code:C388=Sur données modifiées:K2:15)
 				Form:C1466.modeleDetail:=Form:C1466.modeleDetail+"• Destinataire de l'email : "+$to_t
 			End if 
 			
+		Else   // Modèle perso
+			Form:C1466.modeleDetail:="• Modèle sélectionné sur votre ordinateur (Chemin d'accès : "+Form:C1466.modele[0].path+")"
 		End if 
 		
 	Else 
