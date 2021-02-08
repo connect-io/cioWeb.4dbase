@@ -28,7 +28,7 @@ var $subDomain_t : Text  // Nom du sous domaine
 
 
 // Récupération des formulaires
-For each ($subDomain_t;This:C1470.config.subDomain_c)
+For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 	//For ($i;1;Size of array($sites))
 	
 	// On récupére les modéles d'input
