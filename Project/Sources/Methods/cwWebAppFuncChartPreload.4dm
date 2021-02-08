@@ -19,7 +19,7 @@ var $file_o : Object
 
 
 // Récupération des graphiques
-For each ($subDomain_t;This:C1470.config.subDomain_c)
+For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 	
 	// On récupére la collection des graphiques du sousDomaine
 	Use (Storage:C1525.sites[$subDomain_t])
