@@ -26,7 +26,7 @@ Initialisation d'un graph
 
 ### Fonctionnement
 ```4d
-cs.Chart.new($libChart_t) -> $instance_o
+cs.Chart.new($libChart_t {;$modele_t}) -> $instance_o
 ```
 
 | Paramêtre       | Type       | entrée/sortie | Description |
@@ -44,7 +44,7 @@ charts_o.graph1 := cwToolGetClass("Chart").new("EvolutionAnnee", "monModeleChart
 ------------------------------------------------------
 
 ## Fonction : dataColor
-Definit la couleur d'un set de donnée
+Définit la couleur d'un set (une courbe) de donnée.
 
 ### Fonctionnement
 ```4d
@@ -133,7 +133,7 @@ charts_o.graph1.getHTML()
 Permet de charget les labels (les points d'abscisse) du graphique
 
 ### Fonctionnement
-```4d
+```html
 Chart.label($label_c) -> Modifie this
 ```
 
