@@ -250,7 +250,7 @@ Function typeSet
 /* -----------------------------------------------------------------------------
 Fonction : Chart.typeSet
 	
-Permet de changer le type du graph (bar, line, camembert...)
+Permet de changer le type du graph (bar, line, camembert...). Si le parametre est inconnu, on initialise avec un graph line.
 	
 Historique
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
@@ -261,6 +261,10 @@ Historique
 	
 	ASSERT:C1129($1#"";"Chart.typeSet : La param $1 ne doit pas être vide.")
 	$typePossible_c:=New collection:C1472("bar";"line";"pie";"radar";"polarArea";"bubble";"scatter")
-	This:C1470.type:=$1
-	
+	ASSERT:C1129($typePossible_c.indexOf($1)#-1;"Chart.typeSet : Le param $1 ne correspond à aucun type de courbe.")
+	If $typePossible_c.indexOf($1)#-1
+		This:C1470.type:=$1
+	Else 
+		This:C1470.type:="line"
+	End if 
 	
