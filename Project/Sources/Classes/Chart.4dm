@@ -71,7 +71,7 @@ Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
 -----------------------------------------------------------------------------*/
 	
-	var $0 : Text
+	var $0 : Text  // Le text à insérer dans le code HTML
 	
 	$0:="<canvas id=\""+This:C1470.lib+"\"></canvas>"
 	
@@ -87,7 +87,6 @@ Historique
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
 -----------------------------------------------------------------------------*/
 	
-	
 	var $color_c : Collection  // liste des couleurs prédéfinis.
 	var $1;$2;$color_t : Text
 	var $color_o : Object  // Couleur sélectionné.
@@ -99,21 +98,21 @@ Historique
 	$color_t:=$2
 	
 	$color_c:=New collection:C1472()
-	$color_c.push(New object:C1471("r";255;"g";255;"b";255;"name";"white"))
-	$color_c.push(New object:C1471("r";27;"g";203;"b";27;"name";"green"))
-	$color_c.push(New object:C1471("r";194;"g";16;"b";16;"name";"red"))
-	$color_c.push(New object:C1471("r";246;"g";242;"b";6;"name";"yellow"))
-	$color_c.push(New object:C1471("r";16;"g";141;"b";222;"name";"blue"))
-	$color_c.push(New object:C1471("r";33;"g";91;"b";153;"name";"indigo"))
-	$color_c.push(New object:C1471("r";191;"g";63;"b";200;"name";"purple"))
-	$color_c.push(New object:C1471("r";252;"g";63;"b";155;"name";"pink"))
-	$color_c.push(New object:C1471("r";213;"g";70;"b";24;"name";"orange"))
-	$color_c.push(New object:C1471("r";0;"g";0;"b";0;"name";"black"))
-	$color_c.push(New object:C1471("r";115;"g";38;"b";13;"name";"brown"))
-	$color_c.push(New object:C1471("r";100;"g";91;"b";89;"name";"grey"))
+	$color_c.push(New object:C1471("r";"255";"g";"255";"b";"255";"name";"white"))
+	$color_c.push(New object:C1471("r";"27";"g";"203";"b";"27";"name";"green"))
+	$color_c.push(New object:C1471("r";"194";"g";"16";"b";"16";"name";"red"))
+	$color_c.push(New object:C1471("r";"246";"g";"242";"b";"6";"name";"yellow"))
+	$color_c.push(New object:C1471("r";"16";"g";"141";"b";"222";"name";"blue"))
+	$color_c.push(New object:C1471("r";"33";"g";"91";"b";"153";"name";"indigo"))
+	$color_c.push(New object:C1471("r";"191";"g";"63";"b";"200";"name";"purple"))
+	$color_c.push(New object:C1471("r";"252";"g";"63";"b";"155";"name";"pink"))
+	$color_c.push(New object:C1471("r";"213";"g";"70";"b";"24";"name";"orange"))
+	$color_c.push(New object:C1471("r";"0";"g";"0";"b";"0";"name";"black"))
+	$color_c.push(New object:C1471("r";"115";"g";"38";"b";"13";"name";"brown"))
+	$color_c.push(New object:C1471("r";"100";"g";"91";"b";"89";"name";"grey"))
 	//...
 	// Bonus :  Couleur aléatoire
-	$color_c.push(New object:C1471("r";Random:C100%256;"g";Random:C100%256;"b";Random:C100%256;"name";"random"))
+	$color_c.push(New object:C1471("r";String:C10(Random:C100%256);"g";String:C10(Random:C100%256);"b";String:C10(Random:C100%256);"name";"random"))
 	
 	If ($color_c.query("name IS :1";$2).length=0)
 		$color_t:="black"

@@ -67,7 +67,7 @@ Historique
 	
 	// On récupére la liste des sous-domaines de l'application.
 	Use (Storage:C1525.config)
-		Storage:C1525.config.subDomain_c:=$source_o.folders().extract("name")
+		Storage:C1525.config.subDomain_c:=$source_o.folders().extract("name").copy(ck shared:K85:29)
 	End use 
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
