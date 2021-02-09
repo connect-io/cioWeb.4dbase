@@ -24,8 +24,8 @@ La librairie JavaScript utilisée est chart.js disponible ici : https://www.char
 
 ## Fonction : constructor			
 Initialisation d'un graphique.
-Si vous ne passez qu'un argument, la génération du graphique se basera sur un fichier chart.json dont le lib sera l'argument $libChart_t.
-Si vous passez 2 arguments, la génération du graphique se basera sur un fichier chart.json dont le lib sera le deuxuème argument ($modele_t) et le lib de votre graphique sera votre premier argument ($libChart_t).
+Si vous ne passez qu'un argument, la génération du graphique se basera sur un fichier chart.json dont le lib sera le premier argument ($libChart_t).
+Si vous passez 2 arguments, la génération du graphique se basera sur un fichier chart.json dont le lib sera le deuxième argument ($modele_t) et le lib de votre graphique sera definit comme votre premier argument ($libChart_t).
 
 ### Fonctionnement
 ```4d
@@ -35,7 +35,7 @@ cs.Chart.new($libChart_t {;$modele_t}) -> $instance_o
 | Paramètre       | Type       | entrée/sortie | Description |
 | --------------- | ---------- | ------------- | ----------- |
 | $libChart_t     | Texte      | Entrée        | Le lib du graph |
-| $modele_t       | Texte      | Entrée        | le lib du modèle (optionel) |
+| $modele_t       | Texte      | Entrée        | Le lib du modèle (optionel) |
 | $instance_o     | Objet      | Sortie        | Nouvelle instance |
 
 
@@ -49,7 +49,7 @@ charts_o.graph1 := cwToolGetClass("Chart").new("EvolutionAnnee", "monModeleChart
 ## Fonction : dataColor
 Définit la couleur d'un set de donnée (d'une courbe). 
 Si aucune couleur n'est précicée, ou une couleur inconnue, la courbe hérite de la couleur noire.
-Vous pouvez utiliser l'argument "random" pour utiliser une couleur générée au hasard.
+Vous pouvez utiliser la couleur "random" pour utiliser une couleur générée au hasard.
 
 
 ### Fonctionnement
@@ -59,8 +59,8 @@ Chart.dataColor($label_t; $couleur_t) -> Modifie this
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $label_t        | Texte      | Entrée        | le label de la courbe à colorer |
-| $couleur_t    | Texte      | Entrée        | la couleur à utiliser |
+| $label_t        | Texte      | Entrée        | Le label de la courbe à colorer |
+| $couleur_t    | Texte      | Entrée        | La couleur à utiliser |
 
 
 ### Example
@@ -92,7 +92,7 @@ charts_o.graph1.dataOptions("2021"; new object("fill";"false"))
 ------------------------------------------------------
 
 ## Fonction : dataSet
-Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe pas, une nouvelle courbe est crée avec le label et les données passés en argument.
+Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe pas, une nouvelle courbe est créee avec le label et les données passées en argument.
 
 ### Fonctionnement
 ```4d
@@ -101,7 +101,7 @@ Chart.dataSet($label_t; $data_c) -> Modifie this
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $label_t      | Text       | Entrée        | le label de la courbe à modifier|
+| $label_t      | Text       | Entrée        | Le label de la courbe à modifier|
 | $data_c       | Collection d'entier| Entrée | Les données pour chaque point d'abscisse|
 
 
@@ -139,7 +139,7 @@ Renvoie le code Html du graphique.
 Permet de charger les labels (les points d'abscisse) du graphique
 
 ### Fonctionnement
-```html
+```4d
 Chart.label($label_c) -> Modifie this
 ```
 
@@ -205,6 +205,7 @@ charts_o.graph1.titleSet("Chiffre d'affaire par année")
 
 ## Fonction : typeSet
 Permet de modifier le type du graphique (barre, ligne, camembert...).
+Si le type de graphique passé en argument est inconnue, le graphique utilise par défaut le type "line".
 
 ### Fonctionnement
 ```4d
