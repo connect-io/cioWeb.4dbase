@@ -26,15 +26,15 @@
 				"Rectangle": {
 					"type": "rectangle",
 					"top": 9,
-					"left": 6,
-					"width": 880,
+					"left": 86,
+					"width": 721,
 					"height": 64,
 					"fill": "transparent",
 					"borderRadius": 10
 				},
 				"ouvrirDocument": {
 					"type": "pictureButton",
-					"left": 63,
+					"left": 137,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -52,7 +52,7 @@
 					"type": "text",
 					"text": "Ouvrir un document",
 					"top": 57,
-					"left": 26,
+					"left": 100,
 					"width": 115,
 					"height": 15,
 					"fontFamily": "Arial",
@@ -61,7 +61,7 @@
 				},
 				"nouveauDocument": {
 					"type": "pictureButton",
-					"left": 187,
+					"left": 261,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -79,35 +79,8 @@
 					"type": "text",
 					"text": "Nouveau document",
 					"top": 57,
-					"left": 151,
+					"left": 225,
 					"width": 115,
-					"height": 15,
-					"fontFamily": "Arial",
-					"fontSize": 12,
-					"fontWeight": "bold"
-				},
-				"enregistrerSous": {
-					"type": "pictureButton",
-					"left": 302,
-					"top": 15,
-					"width": 40,
-					"height": 40,
-					"events": [
-						"onClick",
-						"onMouseMove"
-					],
-					"picture": "/RESOURCES/Images/save-as.png",
-					"method": "ObjectMethods/enregistrerSous.4dm",
-					"loopBackToFirstFrame": true,
-					"switchBackWhenReleased": true,
-					"useLastFrameAsDisabled": true
-				},
-				"Texte2": {
-					"type": "text",
-					"text": "Enregistrer sous",
-					"top": 57,
-					"left": 273,
-					"width": 98,
 					"height": 15,
 					"fontFamily": "Arial",
 					"fontSize": 12,
@@ -115,7 +88,7 @@
 				},
 				"afficherVariable": {
 					"type": "pictureButton",
-					"left": 408,
+					"left": 376,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -133,7 +106,7 @@
 					"type": "text",
 					"text": "Afficher variable",
 					"top": 57,
-					"left": 381,
+					"left": 349,
 					"width": 95,
 					"height": 15,
 					"fontFamily": "Arial",
@@ -142,7 +115,7 @@
 				},
 				"imprimerDocument": {
 					"type": "pictureButton",
-					"left": 523,
+					"left": 492,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -160,7 +133,7 @@
 					"type": "text",
 					"text": "Imprimer document",
 					"top": 57,
-					"left": 485,
+					"left": 454,
 					"width": 115,
 					"height": 15,
 					"fontFamily": "Arial",
@@ -169,7 +142,7 @@
 				},
 				"previsualiserEmail": {
 					"type": "pictureButton",
-					"left": 646,
+					"left": 614,
 					"top": 15,
 					"width": 40,
 					"height": 40,
@@ -185,36 +158,20 @@
 				},
 				"Texte5": {
 					"type": "text",
-					"text": "Prévisualiser email",
+					"text": "Prévisualiser html",
 					"top": 57,
-					"left": 611,
-					"width": 110,
-					"height": 15,
+					"left": 579,
+					"width": 105,
+					"height": 14,
 					"fontFamily": "Arial",
 					"fontSize": 12,
 					"fontWeight": "bold"
-				},
-				"sauvegarderDocument": {
-					"type": "pictureButton",
-					"left": 763,
-					"top": 15,
-					"width": 40,
-					"height": 40,
-					"events": [
-						"onClick",
-						"onMouseMove"
-					],
-					"picture": "/RESOURCES/images/log-out.png",
-					"method": "ObjectMethods/sauvegarderDocument.4dm",
-					"loopBackToFirstFrame": true,
-					"switchBackWhenReleased": true,
-					"useLastFrameAsDisabled": true
 				},
 				"Texte6": {
 					"type": "text",
 					"text": "Fermer la fenêtre",
 					"top": 57,
-					"left": 731,
+					"left": 694,
 					"width": 104,
 					"height": 14,
 					"fontFamily": "Arial",
@@ -379,11 +336,30 @@
 					"fontFamily": "Arial",
 					"fontSize": 12,
 					"fontWeight": "bold"
+				},
+				"sauvegarderDocument": {
+					"type": "input",
+					"left": 726,
+					"top": 15,
+					"width": 40,
+					"height": 40,
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.imageSave",
+					"enterable": false,
+					"contextMenu": "none",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"method": "ObjectMethods/sauvegarderDocument.4dm"
 				}
 			}
 		}
 	],
-	"geometryStamp": 137,
+	"geometryStamp": 223,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

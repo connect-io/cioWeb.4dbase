@@ -9,7 +9,7 @@ Class constructor
 /*-----------------------------------------------------------------------------
 Fonction : MAPersonneSelectionDisplay.constructor
 	
-Instenciation de la class MAPersonneSelectionDisplay pour le marketing automotion
+Instanciation de la class MAPersonneSelectionDisplay pour le marketing automotion
 	
 Historique
 27/01/21 - Rémy Scanu remy@connect-io.fr> - Création
@@ -24,7 +24,6 @@ Gestion des filtres dans le mode liste [Personne]
 Historique
 27/01/21 - RémyScanu remy@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
-	
 	var $propriete_t; $proprieteToFilter; $type_t : Text
 	var $verif_o; $passerelle_o : Object
 	var $collectionToFilter_c : Collection

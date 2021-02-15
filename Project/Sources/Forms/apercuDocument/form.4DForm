@@ -27,7 +27,7 @@
 					"top": 100,
 					"left": 10,
 					"width": 880,
-					"height": 976,
+					"height": 925,
 					"sizingX": "grow",
 					"sizingY": "grow",
 					"dataSource": "WParea",
@@ -43,7 +43,10 @@
 						"onGettingFocus",
 						"onSelectionChange",
 						"onAfterEdit"
-					]
+					],
+					"enterable": false,
+					"focusable": false,
+					"showPageFrames": true
 				},
 				"WPtoolbar": {
 					"type": "subform",
@@ -59,11 +62,18 @@
 					"doubleClickInEmptyAreaAction": "addSubrecord",
 					"selectionMode": "multiple",
 					"printFrame": "variable"
+				},
+				"Zone Web": {
+					"type": "webArea",
+					"left": 10,
+					"top": 10,
+					"width": 880,
+					"height": 1015
 				}
 			}
 		}
 	],
-	"geometryStamp": 11,
+	"geometryStamp": 27,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",

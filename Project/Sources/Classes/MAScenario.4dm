@@ -332,7 +332,7 @@ Function newScene
 	$caScene_o.nom:="Nouvelle scène"
 	$caScene_o.scenarioID:=This:C1470.scenarioDetail.getKey()
 	$caScene_o.action:="Définir une nouvelle action..."
-	$caScene_o.paramAction:=New object:C1471()
+	$caScene_o.paramAction:=New object:C1471("modele"; New object:C1471("email"; New object:C1471("version"; New collection:C1472); "sms"; New object:C1471("version"; New collection:C1472); "courrier"; New object:C1471("version"; New collection:C1472)))
 	$caScene_o.conditionAction:=New object:C1471()
 	$caScene_o.conditionSaut:=New object:C1471()
 	
@@ -412,18 +412,14 @@ Function saveFileActionScene
 		If ($5=False:C215)
 			
 			Case of 
+				: ($4="pdf")
+					WP EXPORT DOCUMENT:C1337($3; $chemin_t+"action.pdf"; wk pdf:K81:315)
 				: ($4="word")
-					
+					WP EXPORT DOCUMENT:C1337($3; $chemin_t+"action.docx"; wk docx:K81:277)
 				: ($4="html")
-					
+					WP EXPORT DOCUMENT:C1337($3; $chemin_t+"action.html"; wk page web complète:K81:2)
 				: ($4="4wp")
-					
-					If ($texte_t="@<mj-body@") | ($texte_t="@<body@")  // Il s'agit d'un email
-						WP EXPORT DOCUMENT:C1337($3; $chemin_t+"actionParMail.4WP"; wk 4wp:K81:4)
-					Else 
-						WP EXPORT DOCUMENT:C1337($3; $chemin_t+"actionParCourrier.4WP"; wk 4wp:K81:4)
-					End if 
-					
+					WP EXPORT DOCUMENT:C1337($3; $chemin_t+"action.4WP"; wk 4wp:K81:4)
 			End case 
 			
 		Else 

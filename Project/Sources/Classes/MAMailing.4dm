@@ -9,7 +9,7 @@ Class constructor
 /*-----------------------------------------------------------------------------
 Fonction : MAMailing.constructor
 	
-Instenciation de la class MAMailing pour le marketing automotion
+Instanciation de la class MAMailing pour le marketing automotion
 	
 Historique
 28/01/21 - RémyScanu remy@connect-io.fr> - Création
@@ -50,6 +50,7 @@ Function sendGetConfig($type_t : Text)->$config_o : Object
 						
 						$document_t:=Select document:C905(""; "*"; "Fichiers à insérer en pièce-jointe"; Fichiers multiples:K24:7+Utiliser fenêtre feuille:K24:11; $attachmentsFiles_at)
 						
+						// IMPORTANT NE FONCTIONNE QUE SUR LA MACHINE DU SERVEUR POUR DU CLIENT/SERVEUR IL FAUT CREER UNE TABLE PIECE-JOINTE (VOIR BASE CERFPA)
 						If (Size of array:C274($attachmentsFiles_at)>0)
 							ARRAY TO COLLECTION:C1563($eMail_o.attachmentsPath_c; $attachmentsFiles_at)
 						End if 

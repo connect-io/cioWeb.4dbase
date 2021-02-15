@@ -9,7 +9,7 @@ Class constructor
 /*-----------------------------------------------------------------------------
 Fonction : MAPersonneSelection.constructor
 	
-Instenciation de la class MAPersonneSelection pour le marketing automotion
+Instanciation de la class MAPersonneSelection pour le marketing automotion
 	
 Historique
 27/01/21 - RémyScanu <gregory@connect-io.fr> - Création
@@ -117,7 +117,7 @@ Historique
 		
 		If ($config_o.success=True:C214)
 			// On récupère le contenu
-			cwToolWindowsForm("gestionDocument"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70))
+			cwToolWindowsForm("gestionDocument"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); New object:C1471("entree"; 1))
 			
 			$compteur_o:=New object:C1471("success"; 0; "fail"; 0)
 			

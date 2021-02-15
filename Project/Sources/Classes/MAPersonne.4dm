@@ -9,7 +9,7 @@ Class constructor
 /*-----------------------------------------------------------------------------
 Fonction : MAPersonne.constructor
 	
-Instenciation de la class MAPersonne pour le marketing automotion
+Instanciation de la class MAPersonne pour le marketing automotion
 	
 Historique
 26/01/21 - Grégory Fromain <gregory@connect-io.fr> - Clean code
@@ -249,7 +249,7 @@ Function sendMailing
 		
 		If ($config_o.success=True:C214)
 			// On récupère le contenu
-			cwToolWindowsForm("gestionDocument"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70))
+			cwToolWindowsForm("gestionDocument"; New object:C1471("ecartHautEcran"; 30; "ecartBasEcran"; 70); New object:C1471("entree"; 1))
 			
 			Case of 
 				: ($canalEnvoi_t="Email")

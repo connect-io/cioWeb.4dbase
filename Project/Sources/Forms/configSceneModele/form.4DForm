@@ -34,7 +34,7 @@
 					],
 					"method": "ObjectMethods/Bouton.4dm"
 				},
-				"modeleListe": {
+				"versionList": {
 					"type": "dropdown",
 					"left": 14,
 					"top": 50,
@@ -43,12 +43,12 @@
 					"events": [
 						"onDataChange"
 					],
-					"dataSource": "modeleListe_at",
-					"method": "ObjectMethods/modeleListe.4dm"
+					"dataSource": "versionList_at",
+					"method": "ObjectMethods/versionList.4dm"
 				},
 				"Texte": {
 					"type": "text",
-					"text": "Choix du modèle :",
+					"text": "Choix de le version :",
 					"top": 20,
 					"left": 14,
 					"width": 130,
@@ -57,28 +57,69 @@
 				},
 				"Texte1": {
 					"type": "text",
-					"text": "Information du modèle sélectionné : ",
+					"text": "Information sur version du modèle sélectionné : ",
 					"top": 80,
 					"left": 14,
-					"width": 240,
-					"height": 20,
-					"fontWeight": "bold"
+					"width": 250,
+					"height": 31,
+					"fontWeight": "bold",
+					"textAlign": "justify"
 				},
 				"modeleDetail": {
 					"type": "input",
 					"left": 14,
-					"top": 110,
+					"top": 130,
 					"width": 250,
 					"height": 80,
 					"dataSource": "Form:C1466.modeleDetail",
 					"enterable": false,
 					"fill": "transparent",
 					"borderStyle": "none",
-					"bottom": 190
+					"bottom": 210
+				},
+				"sceneDetailApercuModele": {
+					"type": "pictureButton",
+					"left": 274,
+					"top": 50,
+					"width": 20,
+					"height": 20,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/logo-wp.png",
+					"method": "ObjectMethods/sceneDetailApercuModele.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"Zone de saisie": {
+					"type": "input",
+					"left": 302,
+					"top": 50,
+					"width": 20,
+					"height": 20,
+					"dataSource": "Form:C1466.imageModeleActif",
+					"dataSourceTypeHint": "picture",
+					"pictureFormat": "proportionalCenter",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"method": "ObjectMethods/Zone de saisie.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					]
 				}
 			}
 		}
 	],
-	"geometryStamp": 373,
-	"method": "method.4dm"
+	"geometryStamp": 395,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
 }
