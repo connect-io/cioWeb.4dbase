@@ -40,6 +40,9 @@ Historique
 	
 	ASSERT:C1129(This:C1470.scene#Null:C1517; "Impossible d'utiliser la fonction changeModeleActif sans une scène de définie.")
 	
+	// On le raffraichi car il y a pu avoir des modifications sur l'entité depuis son appel
+	This:C1470.scene.reload()
+	
 	$collection_c:=This:C1470.scene.paramAction.modele[$type_t].version.query("actif = :1"; True:C214)
 	
 	If ($collection_c.length=1)
