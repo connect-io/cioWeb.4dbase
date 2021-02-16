@@ -199,7 +199,7 @@ Historique
 	var $class_o; $mailjet_o; $mailjetDetail_o; $personne_o : Object
 	var $mailjetDetail_c : Collection
 	
-	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction mailjetGetStat sans une personne de définie.")
+	ASSERT:C1129(This:C1470.personne#Null:C1517; "Impossible d'utiliser la fonction mailjetGetDetailStat sans une personne de définie.")
 	
 	// Instanciation de la class
 	$class_o:=cwToolGetClass("MAMailjet").new()
@@ -335,14 +335,24 @@ Historique
 			$retour_o:=$enregistrement_o.save()
 			
 			// Il faut également mettre à jour les autres champs
-			This:C1470.mailjetGetDetailStat(This:C1470.eMail; "3"; "4"; "8"; "10")
-		: ($provenance_el=2)  // On souhaite mettre à jour un des event (opened, clicked ou bounce)
+			This:C1470.mailjetGetDetailStat(This:C1470.eMail; "3"; "4"; "7"; "8"; "10")
+		: ($provenance_el=2)  // On souhaite mettre à jour un des event (opened, clicked, unsubscribe ou bounce)
 			
 			Case of 
 				: (String:C10($detail_o.eventNumber)="3")
 					$enregistrement_o.lastOpened:=$detail_o.eventTs
 				: (String:C10($detail_o.eventNumber)="4")
 					$enregistrement_o.lastClicked:=$detail_o.eventTs
+				: (String:C10($detail_o.eventNumber)="7")
+					$enregistrement_o.lastUnsubscribe:=$detail_o.eventTs
+					
+					$enregistrement_o.desabonementMail:=True:C214
+					
+					// Gestion du désabonnement qui peut avoir un traitement particulier suivant la base
+					If (OB Is defined:C1231(This:C1470.personne; "manageUnsubscribe")=True:C214)
+						This:C1470.personne.manageUnsubscribe()
+					End if 
+					
 				: (String:C10($detail_o.eventNumber)="10")
 					$enregistrement_o.lastBounce:=$detail_o.eventTs
 			End case 
