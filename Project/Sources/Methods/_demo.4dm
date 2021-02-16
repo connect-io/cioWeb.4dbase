@@ -1,5 +1,5 @@
 //%attributes = {"shared":true}
-var $marketingAutomation_o; $class_o; $config_o : Object
+var $marketingAutomation_o; $class_o : Object
 
 // Instanciation de la class
 $marketingAutomation_o:=cwToolGetClass("MarketingAutomation").new(True:C214)
