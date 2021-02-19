@@ -2,11 +2,11 @@
 /* -----------------------------------------------------------------------------
 Méthode : cwStorage
 
-Permet d'utiliser le storage du composant dans la base hôte.
+Utilisation du storage du composant dans la base hôte.
 
 Historique
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 var $0 : Object
 

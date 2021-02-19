@@ -70,7 +70,7 @@ Historique
 	End use 
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		If (Storage:C1525.sites[$subDomain_t]=Null:C1517)
 			Use (Storage:C1525.sites)
 				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
@@ -123,7 +123,7 @@ Historique
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.webfolderSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -160,7 +160,7 @@ Historique
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.cacheViewSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -293,7 +293,7 @@ Historique
 	
 	$SplitNomDoc:=New collection:C1472
 	// On parcourt les sous domaine ("www" et "admin")
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		
 		//Si pour un sous domaine la traduction n'est pas chargé dans le storage on la crée
 		If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
@@ -347,12 +347,12 @@ Historique
 	
 	//On remplit les traductions utiles à chaque page dans WebApp
 	
-	For each ($page_o;Storage:C1525.sites[$subDomain_t].route)
+	For each ($page_o; Storage:C1525.sites[$subDomain_t].route)
 		Use ($page_o)
 			$page_o.i18n:=New shared object:C1526()
 		End use 
 		
-		For each ($lang;New collection:C1472("en";"es";"fr"))
+		For each ($lang; New collection:C1472("en"; "es"; "fr"))
 			
 			Use ($page_o.i18n)
 				$page_o.i18n[$lang]:=New shared object:C1526()
@@ -371,7 +371,7 @@ Historique
 					//Si on connait la traduction du parent
 					If (Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]#Null:C1517)
 						Use ($page_o.i18n)
-							$page_o.i18n[$lang]:=OB Copy:C1225(cwToolObjectMerge($page_o.i18n[$lang];Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]);ck shared:K85:29)
+							$page_o.i18n[$lang]:=OB Copy:C1225(cwToolObjectMerge($page_o.i18n[$lang]; Storage:C1525.sites[$subDomain_t].I18n.page[$lang][$parentName_t]); ck shared:K85:29)
 						End use 
 					End if 
 				End for each 
@@ -379,27 +379,6 @@ Historique
 			
 		End for each 
 	End for each 
-	
-	
-	
-Function dataTableNew
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.dataTableNew
-	
-Chargement d'une nouvelle dataTable
-	
-Paramètres
-$libDataTable_t : Lib du dataTable
-$DataTableVisiteur_p : (optionnel) Pointeur de dataTable du visiteur
-$instance_o : Instance de la dataTable
-	
-Historique
-28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
-05/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug dataTable.copy() 
------------------------------------------------------------------------------ */
-	
-	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : dataTables_o.dtUserListe:=cwToolGetClass(\"DataTable\").new(\"dtUserListe\")")
 	
 	
 	
@@ -606,7 +585,7 @@ Historique
 	var $compression_b : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		//Le dossier avec le html non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -696,7 +675,7 @@ Historique
 	var $compression : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		//Le dossier avec le js non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -753,21 +732,6 @@ Historique
 	
 	
 	
-Function pageCurrent
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.pageCurrent
-	
-Chargement des éléments de la page courante
-	
-Historique
-16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
-	
-	ALERT:C41("Pour instancier une page, merci d'utiliser maintenant : pageWeb_o:=cwToolGetClass(\"Page\").new(visiteur_o)")
-	
-	
-	
 Function serverStart
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.serverStart
@@ -786,6 +750,7 @@ Historique
 29/09/20 - Grégory Fromain <gregory@connect-io.fr> - On inverse l'ordre de chargement des méthodes et view.
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Suppression de la gestion des routes sous le format : page.url
 -----------------------------------------------------------------------------*/
 	
 	// La fonction ne requiere pas de paramêtre.
@@ -819,7 +784,7 @@ Historique
 	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
-	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
 		// On purge la liste des routes
 		$route_c:=New collection:C1472()
 		//Récupération du plan des pages web des sites.
@@ -831,7 +796,7 @@ Historique
 		For ($routeNum; 1; Size of array:C274($routeFile_at))
 			// On charge toutes les routes, mais pas le modele
 			If ($routeFile_at{$routeNum}="@route.json@")
-				$configPage:=cwToolObjectMerge($configPage;cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
+				$configPage:=cwToolObjectMerge($configPage; cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
 			End if 
 		End for 
 		
@@ -975,9 +940,6 @@ Historique
 				: (cwExtensionFichier(String:C10($page.route.path))#"")
 					$page.type:=cwExtensionFichier($page.route.path)
 					
-				: (cwExtensionFichier(String:C10($page.url))#"")
-					$page.type:=cwExtensionFichier($page.url)
-					
 				: ($page.viewPath.length#0)
 					$page.type:=cwExtensionFichier($page.viewPath[($page.viewPath.length-1)])
 					
@@ -996,7 +958,7 @@ Historique
 		End if 
 		
 		Use (Storage:C1525.sites[$subDomain_t])
-			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29;Storage:C1525.sites[$subDomain_t])
+			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29; Storage:C1525.sites[$subDomain_t])
 		End use 
 		
 	End for each 
@@ -1012,6 +974,8 @@ Historique
 	
 	MESSAGE:C88("Chargement des graphiques..."+Char:C90(Carriage return:K15:38))
 	cwWebAppFuncChartPreload
+	
+	
 	
 Function sessionWebStart
 /* -----------------------------------------------------------------------------
@@ -1082,21 +1046,21 @@ Historique
 	
 	// On va conserver des informations importantes a porté de main...
 	Use (Storage:C1525.sessionWeb)
-		Storage:C1525.sessionWeb.name:=$options_c.query("key IS :1";Web session cookie name:K73:4)[0].value
+		Storage:C1525.sessionWeb.name:=$options_c.query("key IS :1"; Web session cookie name:K73:4)[0].value
 	End use 
 	
 	// ----- Nettoyage des sessions périmée -----
 	// On en profite pour nettoyer les sessions périmées...
 	MESSAGE:C88("Nettoyage des sessions web")
 	
-	$valideMinute_l:=$options_c.query("key IS :1";Web inactive session timeout:K73:3)[0].value
+	$valideMinute_l:=$options_c.query("key IS :1"; Web inactive session timeout:K73:3)[0].value
 	Use (Storage:C1525.sessionWeb)
 		Storage:C1525.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
 	End use 
 	
-	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath();$listeSessionWeb_t;Recursive parsing:K24:13+Absolute path:K24:14)
+	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath(); $listeSessionWeb_t; Recursive parsing:K24:13+Absolute path:K24:14)
 	$dernierJourValide_d:=Current date:C33-Num:C11(Storage:C1525.sessionWeb.valideDay)
-	For ($i;1;Size of array:C274($listeSessionWeb_t))
+	For ($i; 1; Size of array:C274($listeSessionWeb_t))
 		// On verifie une derniere fois que le fichier existe,
 		// Possibilité d'être supprimé par un autre process parallele...
 		If (Test path name:C476($listeSessionWeb_t{$i})=Is a document:K24:1)
@@ -1163,20 +1127,6 @@ Historique
 	
 	$0:=This:C1470.sourcesPath()+$sousDomaine_t+Folder separator:K24:12
 	
-	
-	
-Function userNew
-/* -----------------------------------------------------------------------------
-Fonction : webApp.userNew
-	
-Chargement des éléments sur l'utilisateur / visiteur
-	
-Historique
-16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
-	
-	ALERT:C41("Pour instancier un visiteur, merci d'utiliser maintenant : visiteur_o:=cwToolGetClass(\"User\").new()")
 	
 	
 	
