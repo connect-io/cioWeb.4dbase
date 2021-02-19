@@ -461,15 +461,15 @@ Historique
 	$logErreur_o:=New object:C1471
 	
 	// On vérifie que la gestion des sessions est actif
-	If (String:C10(This:C1470.sessionWeb.path)="")
+	If (String:C10(Storage:C1525.sessionWeb.path)="")
 		$logErreur_o.detailErreur:="La gestion des sessions n'est pas actif."
 	End if 
 	
 	If (String:C10($logErreur_o.detailErreur)="")
 		
-		If (String:C10(This:C1470[This:C1470.sessionWeb.name])#"")
+		If (String:C10(This:C1470[Storage:C1525.sessionWeb.name])#"")
 			// Chemin du fichier dans lequel sera stocké la session.
-			$chSessionWeb_t:=This:C1470.sessionWeb.path+This:C1470[This:C1470.sessionWeb.name]+".json"
+			$chSessionWeb_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+".json"
 			
 			TEXT TO DOCUMENT:C1237($chSessionWeb_t;JSON Stringify:C1217(This:C1470;*))
 			

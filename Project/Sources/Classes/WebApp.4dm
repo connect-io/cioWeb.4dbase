@@ -65,10 +65,12 @@ Historique
 	End if 
 	
 	// On récupére la liste des sous-domaines de l'application.
-	This:C1470.config.subDomain_c:=$source_o.folders().extract("name")
+	Use (Storage:C1525.config)
+		Storage:C1525.config.subDomain_c:=$source_o.folders().extract("name").copy(ck shared:K85:29)
+	End use 
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
-	For each ($subDomain_t;This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		If (Storage:C1525.sites[$subDomain_t]=Null:C1517)
 			Use (Storage:C1525.sites)
 				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
@@ -121,7 +123,7 @@ Historique
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.webfolderSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -158,7 +160,7 @@ Historique
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.cacheViewSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -291,7 +293,7 @@ Historique
 	
 	$SplitNomDoc:=New collection:C1472
 	// On parcourt les sous domaine ("www" et "admin")
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		
 		//Si pour un sous domaine la traduction n'est pas chargé dans le storage on la crée
 		If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
@@ -604,7 +606,7 @@ Historique
 	var $compression_b : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		//Le dossier avec le html non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -694,7 +696,7 @@ Historique
 	var $compression : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		//Le dossier avec le js non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -817,7 +819,7 @@ Historique
 	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
-	For each ($subDomain_t; This:C1470.config.subDomain_c)
+	For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		// On purge la liste des routes
 		$route_c:=New collection:C1472()
 		//Récupération du plan des pages web des sites.
@@ -1008,7 +1010,8 @@ Historique
 	MESSAGE:C88("Chargement des Traductions..."+Char:C90(Carriage return:K15:38))
 	This:C1470.I18NLoad()
 	
-	
+	MESSAGE:C88("Chargement des graphiques..."+Char:C90(Carriage return:K15:38))
+	cwWebAppFuncChartPreload
 	
 Function sessionWebStart
 /* -----------------------------------------------------------------------------
