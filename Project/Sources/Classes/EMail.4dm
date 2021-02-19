@@ -28,6 +28,10 @@ Historique
 	
 	ASSERT:C1129($1#""; "EMail.constructor : le Param $1 est obligatoire.")
 	
+	If (Storage:C1525.eMail=Null:C1517)
+		cwEMailConfigLoad
+	End if 
+	
 	$server_o:=New object:C1471()
 	
 	// Vérifie que le nom du transporteur soit bien dans la config
@@ -120,10 +124,10 @@ Historique
 			For each ($cheminPj_t; This:C1470.attachmentsPath_c)
 				
 				// On vérifie que le chemin de pièce jointe est bien de type texte
-				If (Type:C295($cheminPj_t)=Est un texte:K8:3)
+				If (Type:C295($cheminPj_t)=Is text:K8:3)
 					
 					// On vérifie que la pièce jointe est bien un document existant sur le disque
-					If (Test path name:C476($cheminPj_t)=Est un document:K24:1)
+					If (Test path name:C476($cheminPj_t)=Is a document:K24:1)
 						This:C1470.attachments.push(MAIL New attachment:C1644($cheminPj_t))
 					Else 
 						$error_t:="Le document suivant n'est pas présent sur le disque : "+$cheminPj_t
