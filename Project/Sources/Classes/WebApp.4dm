@@ -16,7 +16,7 @@ Historique
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Réorganisation des dossiers sous forme de WebApp
-15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.config.webAppOld
+15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de <>webApp_o.param.webAppOld
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création automatique de custom.css si besoin.
@@ -30,27 +30,32 @@ Historique
 	Use (Storage:C1525)
 		Storage:C1525.sites:=New shared object:C1526
 		Storage:C1525.config:=New shared object:C1526
+		Storage:C1525.param:=New shared object:C1526
 		
 		// Objet des datas pour les sesssions.
 		Storage:C1525.sessionWeb:=New shared object:C1526
 	End use 
 	
-	// Nom de la variable visiteur dans l'application hôte.
-	Use (Storage:C1525.config)
-		Storage:C1525.config.varVisitorName_t:="visiteur_o"
+	Use (Storage:C1525.param)
+		// Nom de la variable visiteur dans l'application hôte.
+		Storage:C1525.param.varVisitorName_t:="visiteur_o"
+		
+		Storage:C1525.param.folderPath:=New shared object:C1526
 	End use 
 	
-	This:C1470.config:=New object:C1471
-	This:C1470.config.folderName_o:=New object:C1471
-	This:C1470.config.folderName_o.webApp:="WebApp"
-	This:C1470.config.folderName_o.source:="Sources"
-	This:C1470.config.folderName_o.webFolder:="WebFolder"
-	This:C1470.config.folderName_o.viewCache:="View"
+	// Chemin des répertoires de base
+	Use (Storage:C1525.param.folderPath)
+		Storage:C1525.param.folderPath.webApp_t:=Get 4D folder:C485(Database folder:K5:14; *)+"WebApp"+Folder separator:K24:12
+		Storage:C1525.param.folderPath.source_t:=Storage:C1525.param.folderPath.webApp_t+"Sources"+Folder separator:K24:12
+		Storage:C1525.param.folderPath.webFolder_t:=Storage:C1525.param.folderPath.webApp_t+"WebFolder"+Folder separator:K24:12
+		Storage:C1525.param.folderPath.cache_t:=Storage:C1525.param.folderPath.webApp_t+"Cache"+Folder separator:K24:12
+		Storage:C1525.param.folderPath.cacheView_t:=Storage:C1525.param.folderPath.cache_t+"View"+Folder separator:K24:12
+	End use 
 	
 	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
-	$source_o:=Folder:C1567(This:C1470.sourcesPath(); fk platform path:K87:2)
+	$source_o:=Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2)
 	If ($source_o.isFolder)
 		$source_o.create()
 	End if 
@@ -65,12 +70,12 @@ Historique
 	End if 
 	
 	// On récupére la liste des sous-domaines de l'application.
-	Use (Storage:C1525.config)
-		Storage:C1525.config.subDomain_c:=$source_o.folders().extract("name").copy(ck shared:K85:29)
+	Use (Storage:C1525.param)
+		Storage:C1525.param.subDomain_c:=$source_o.folders().extract("name").copy(ck shared:K85:29)
 	End use 
 	
 	// On créer les objets qui auront les datas des differents site. (route, form, dataTable,...)
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		If (Storage:C1525.sites[$subDomain_t]=Null:C1517)
 			Use (Storage:C1525.sites)
 				Storage:C1525.sites[$subDomain_t]:=New shared object:C1526
@@ -92,12 +97,16 @@ Historique
 	End case 
 	
 	// On charge le fichier de config et on refusionne les data avec les informations précédentes.
-	$config_o:=cwToolObjectMerge(This:C1470; cwToolObjectFromFile($source_o.file("config.jsonc")))
+	$config_o:=cwToolObjectFromFile($source_o.file("config.jsonc"))
 	
+	// A supprimer le jour ou toutes les app seront préemptif
 	For each ($propriete_t; $config_o)
 		This:C1470[$propriete_t]:=$config_o[$propriete_t]
 	End for each 
 	
+	Use (Storage:C1525)
+		Storage:C1525.config:=OB Copy:C1225($config_o; ck shared:K85:29)
+	End use 
 	
 	// ----- Gestion du webfolder -----
 	MESSAGE:C88("Validation du webfolder..."+Char:C90(Carriage return:K15:38))
@@ -106,9 +115,12 @@ Historique
 	// On fixe le dossier racine
 	If (Count parameters:C259=1)
 		WEB SET ROOT FOLDER:C634($1)
+		Use (Storage:C1525.param.folderPath)
+			Storage:C1525.param.folderPath.webFolder_t:=$1
+		End use 
 	Else 
 		
-		WEB SET ROOT FOLDER:C634(This:C1470.webAppPath()+This:C1470.config.folderName_o.webFolder+Folder separator:K24:12)
+		WEB SET ROOT FOLDER:C634(Storage:C1525.param.folderPath.webFolder_t)
 	End if 
 	
 	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20; *))#Is a folder:K24:2)
@@ -123,7 +135,7 @@ Historique
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.webfolderSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -154,13 +166,13 @@ Historique
 	// ----- Gestion des vues en cache -----
 	// On vérifie que le repertoire Pages existe dans le dossier Cache de l'application hôte.
 	// Et donc implicitement les dossiers WebApp, Cache et View
-	If (Test path name:C476(This:C1470.cacheViewPath())#Is a folder:K24:2)
+	If (Test path name:C476(Storage:C1525.param.folderPath.cacheView_t)#Is a folder:K24:2)
 		// Il n'existe pas... On crée le dossier avec son arborescence.
-		CREATE FOLDER:C475(This:C1470.cacheViewPath(); *)
+		CREATE FOLDER:C475(Storage:C1525.param.folderPath.cacheView_t; *)
 	End if 
 	
 	// Controle sur les sous domaine
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		// On récupére des infos sur le dossier web du sous domaine.
 		$folderSubDomaine_o:=Folder:C1567(This:C1470.cacheViewSubdomainPath($subDomain_t); fk platform path:K87:2)
 		
@@ -172,21 +184,27 @@ Historique
 	
 	
 	
-Function cachePath()->$path_t : Text
+Function cachePath()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cachePath
 	
 Chemin complet plateforme du dossier cache
 	
-Paramètres
-$path_t : Chemin dossier cache
-	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
 -----------------------------------------------------------------------------*/
 	
-	$path_t:=This:C1470.webAppPath()+"Cache"+Folder separator:K24:12
+	var $cheminObjet_t; $message_t : Text
+	
+	$cheminObjet_t:="param.folderPath.cache_t"
+	
+	$message_t:="WebApp.cachePath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
+		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
+		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
+		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
+	ALERT:C41($message_t)
 	
 	
 	
@@ -207,7 +225,7 @@ Historique
 	
 	Use (Storage:C1525.sessionWeb)
 		If (Storage:C1525.sessionWeb.path=Null:C1517)
-			Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+			Storage:C1525.sessionWeb.path:=Storage:C1525.param.folderPath.cache_t+"SessionWeb"+Folder separator:K24:12
 		End if 
 		
 		// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
@@ -217,7 +235,7 @@ Historique
 			Else 
 				
 				// On reset le chemin pas defaut.
-				Storage:C1525.sessionWeb.path:=This:C1470.cachePath()+"SessionWeb"+Folder separator:K24:12
+				Storage:C1525.sessionWeb.path:=Storage:C1525.param.folderPath.cache_t+"SessionWeb"+Folder separator:K24:12
 			End if 
 		End if 
 	End use 
@@ -227,21 +245,27 @@ Historique
 	
 	
 	
-Function cacheViewPath()->$path_t : Text
+Function cacheViewPath()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheViewPath
 	
 Chemin complet plateforme du dossier cache des vues
 	
-Paramètres
-$path_t : Chemin du dossier cache des vues
-	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
 -----------------------------------------------------------------------------*/
 	
-	$path_t:=This:C1470.cachePath()+This:C1470.config.folderName_o.viewCache+Folder separator:K24:12
+	var $cheminObjet_t; $message_t : Text
+	
+	$cheminObjet_t:="param.folderPath.cacheView_t"
+	
+	$message_t:="WebApp.cacheViewPath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
+		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
+		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
+		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
+	ALERT:C41($message_t)
 	
 	
 	
@@ -268,7 +292,7 @@ Historique
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=This:C1470.cacheViewPath()+$sousDomaine_t+Folder separator:K24:12
+	$0:=Storage:C1525.param.folderPath.cacheView_t+$sousDomaine_t+Folder separator:K24:12
 	
 	
 	
@@ -293,7 +317,7 @@ Historique
 	
 	$SplitNomDoc:=New collection:C1472
 	// On parcourt les sous domaine ("www" et "admin")
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		
 		//Si pour un sous domaine la traduction n'est pas chargé dans le storage on la crée
 		If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
@@ -400,10 +424,10 @@ Historique
 	var $mjmlContenu_o : Object  // Contenu de la requête MJML
 	
 	// Chemin du fichier de config dans la base hôte.
-	$configFile_o:=File:C1566(This:C1470.sourcesPath()+"email.jsonc"; fk platform path:K87:2)
+	$configFile_o:=File:C1566(Storage:C1525.param.folderPath.source_t+"email.jsonc"; fk platform path:K87:2)
 	If (Not:C34($configFile_o.exists))
 		// Si le fichier de config n'existe pas, on le crée.
-		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(This:C1470.sourcesPath(); fk platform path:K87:2))
+		Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2))
 	End if 
 	
 	// Chargement de la configuration des eMails.
@@ -419,7 +443,7 @@ Historique
 		
 		Use (Storage:C1525.eMail)
 			// chargement complet du dossier des models.
-			Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(This:C1470.sourcesPath())+Storage:C1525.eMail.modelPath
+			Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
 		End use 
 	End use 
 	
@@ -544,27 +568,6 @@ Historique
 	
 	
 	
-Function eMailModelList()->$model_c : Collection
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.eMailModelList
-	
-Minification du HTML
-	
-Paramètres
-model_c : Liste des modeles
-	
-Historique
-17/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création
------------------------------------------------------------------------------*/
-	
-	If (Storage:C1525.eMail=Null:C1517)
-		This:C1470.eMailConfigLoad()
-	End if 
-	
-	$model_c:=Storage:C1525.eMail.model
-	
-	
-	
 Function htmlMinify()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.htmlMinify
@@ -585,7 +588,7 @@ Historique
 	var $compression_b : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		//Le dossier avec le html non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -675,7 +678,7 @@ Historique
 	var $compression : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
 	
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		//Le dossier avec le js non minifié.
 		$dirIn:=This:C1470.sourceSubdomainPath($subDomain_t)
 		
@@ -784,7 +787,7 @@ Historique
 	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
-	For each ($subDomain_t; Storage:C1525.config.subDomain_c)
+	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		// On purge la liste des routes
 		$route_c:=New collection:C1472()
 		//Récupération du plan des pages web des sites.
@@ -1095,11 +1098,18 @@ Chemin complet plateforme du dossier Source
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
 -----------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Chemin du dossier source
+	var $cheminObjet_t; $message_t : Text
 	
-	$0:=This:C1470.webAppPath()+This:C1470.config.folderName_o.source+Folder separator:K24:12
+	$cheminObjet_t:="param.folderPath.source_t"
+	
+	$message_t:="WebApp.webAppPath : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
+		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
+		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
+		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
+	ALERT:C41($message_t)
 	
 	
 	
@@ -1125,7 +1135,7 @@ Historique
 		$sousDomaine_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=This:C1470.sourcesPath()+$sousDomaine_t+Folder separator:K24:12
+	$0:=Storage:C1525.param.folderPath.source_t+$sousDomaine_t+Folder separator:K24:12
 	
 	
 	
@@ -1139,11 +1149,18 @@ Chemin complet plateforme du dossier WebApp
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
 -----------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Chemin du dossier webfolder
+	var $cheminObjet_t; $message_t : Text
 	
-	$0:=cwToolPathFolderOrAlias(Get 4D folder:C485(Database folder:K5:14; *))+This:C1470.config.folderName_o.webApp+Folder separator:K24:12
+	$cheminObjet_t:="param.folderPath.webApp_t"
+	
+	$message_t:="WebApp.webAppPath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
+		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
+		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
+		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
+	ALERT:C41($message_t)
 	
 	
 	

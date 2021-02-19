@@ -6,7 +6,7 @@ Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web
 
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $analyseTrad_b : Boolean
@@ -17,7 +17,7 @@ $SplitNomDoc:=New collection:C1472
 
 //Storage.i18n.sousDomaine.fr.page.titre
 //Storage.i18n.sousDomaine.fr.form.titre
-For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 	
 	If (Storage:C1525.sites[$subDomain_t].I18n=Null:C1517)
 		Use (Storage:C1525.sites[$subDomain_t])

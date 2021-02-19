@@ -16,7 +16,7 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 26/10/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug sur le chargement des boutons radios.
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $numForm : Integer
@@ -28,13 +28,13 @@ var $subDomain_t : Text  // Nom du sous domaine
 
 
 // Récupération des formulaires
-For each ($subDomain_t;Storage:C1525.config.subDomain_c)
+For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 	//For ($i;1;Size of array($sites))
 	
 	// On récupére les modéles d'input
-	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"input.html";"UTF-8")
+	$htmlInput_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"input.html"; "UTF-8")
 	
-	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"inputReadOnly.html";"UTF-8")
+	$htmlInputReadOnly_t:=Document to text:C1236(This:C1470.sourceSubdomainPath($subDomain_t)+"_cioWeb"+Folder separator:K24:12+"view"+Folder separator:K24:12+"inputReadOnly.html"; "UTF-8")
 	
 	// On récupére la collection de form du sousDomaine
 	If (Storage:C1525.sites[$subDomain_t].form=Null:C1517)
@@ -43,23 +43,23 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 		End use 
 	End if 
 	
-	ARRAY TEXT:C222($fichiersForm;0)
-	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t);$fichiersForm;Recursive parsing:K24:13+Absolute path:K24:14)
-	For ($numForm;1;Size of array:C274($fichiersForm))
+	ARRAY TEXT:C222($fichiersForm; 0)
+	DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t); $fichiersForm; Recursive parsing:K24:13+Absolute path:K24:14)
+	For ($numForm; 1; Size of array:C274($fichiersForm))
 		var $form : Object
 		
 		$analyseForm_b:=$fichiersForm{$numForm}="@form.json@"
 		
 		If ($analyseForm_b)
 			// On regarde si le formulaire est déjà chargé en mémoire...
-			$formCharge_c:=Storage:C1525.sites[$subDomain_t].form.query("source IS :1";$fichiersForm{$numForm})
+			$formCharge_c:=Storage:C1525.sites[$subDomain_t].form.query("source IS :1"; $fichiersForm{$numForm})
 			If ($formCharge_c.length=0)
 				// Il n'est pas chargé, on doit donc faire le job...
 				
 			Else 
 				// Il est déjà chargé... mais est-ce que la source est plus récente ?
-				GET DOCUMENT PROPERTIES:C477($fichiersForm{$numForm};$verrouille;$invisible;$creeLe;$creeA;$modifie_d;$modifie_h)
-				If (Num:C11($formCharge_c[0].maj_ts)>cwTimestamp($modifie_d;$modifie_h))
+				GET DOCUMENT PROPERTIES:C477($fichiersForm{$numForm}; $verrouille; $invisible; $creeLe; $creeA; $modifie_d; $modifie_h)
+				If (Num:C11($formCharge_c[0].maj_ts)>cwTimestamp($modifie_d; $modifie_h))
 					// La source est plus ancienne... Donc pas besoin d'intégrer le fichier du formulaire
 					$analyseForm_b:=False:C215
 				End if 
@@ -92,26 +92,26 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 			$formClass:=""
 			$formMethod:=" method=\"GET\""
 			
-			If (OB Is defined:C1231($form;"enctype"))
-				$formEnctype:=" enctype=\""+OB Get:C1224($form;"enctype")+"\""
+			If (OB Is defined:C1231($form; "enctype"))
+				$formEnctype:=" enctype=\""+OB Get:C1224($form; "enctype")+"\""
 			End if 
 			
-			If (OB Is defined:C1231($form;"class"))
-				$formClass:=" class=\""+OB Get:C1224($form;"class")+"\""
+			If (OB Is defined:C1231($form; "class"))
+				$formClass:=" class=\""+OB Get:C1224($form; "class")+"\""
 			End if 
 			
-			If (OB Is defined:C1231($form;"method"))
-				$formMethod:=" method=\""+OB Get:C1224($form;"method")+"\""
+			If (OB Is defined:C1231($form; "method"))
+				$formMethod:=" method=\""+OB Get:C1224($form; "method")+"\""
 			End if 
 			
 			// En 2013, avec tous les éléments HTML5, vous pouvez simplement omettre l'attribut 'action' pour soumettre un formulaire sur la page courante.
-			$formAction_t:=Choose:C955(String:C10($form.action)#"";" action=\"$action\"";"")
+			$formAction_t:=Choose:C955(String:C10($form.action)#""; " action=\"$action\""; "")
 			
 			// On vérifie que dans notre formulaire il y a pas un input type "file"
 			// Si c'est le cas on force la method à POST et on force un enctype
 			
 			
-			For each (formInput_o;$form.input)
+			For each (formInput_o; $form.input)
 				If (formInput_o.type=Null:C1517)
 					formInput_o.type:=""
 				End if 
@@ -124,13 +124,13 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 			$form.html:=$formEnctype+$formId+$formClass+$formMethod+$formAction_t
 			
 			//Configuration des inputs.
-			For each (formInput_o;$form.input)
+			For each (formInput_o; $form.input)
 				
 				If (String:C10(formInput_o.type)="submit")
 					$form.submit:=formInput_o.lib
 					
 					// On retrouve le préfixe des inputs
-					$form.inputPrefixe:=Replace string:C233(formInput_o.lib;"submit";"")
+					$form.inputPrefixe:=Replace string:C233(formInput_o.lib; "submit"; "")
 					
 					// On détermine si d'autres input sont obligatoire.
 					// Dans ce cas on récupére l'information pour l'utiliser par exemple dans le contexte :
@@ -176,13 +176,13 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 						formInput_o.colInput:=12
 				End case 
 				
-				If (Not:C34(OB Is defined:C1231(formInput_o;"colLabel")))
+				If (Not:C34(OB Is defined:C1231(formInput_o; "colLabel")))
 					formInput_o.colLabel:=3
 				End if 
 				
 				// On determine la largueur de l'input
 				Case of 
-					: (OB Is defined:C1231(formInput_o;"colInput"))
+					: (OB Is defined:C1231(formInput_o; "colInput"))
 						If (formInput_o.colInput>=0) & (formInput_o.colInput<=12)
 							// On garde la valeur inscrite
 						Else 
@@ -197,7 +197,7 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 						formInput_o.colInput:=12
 				End case 
 				
-				If (Not:C34(OB Is defined:C1231(formInput_o;"colInput")))
+				If (Not:C34(OB Is defined:C1231(formInput_o; "colInput")))
 					formInput_o.colInput:=12-formInput_o.colLabel
 				End if 
 				
@@ -210,41 +210,41 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 				formInput_o.collapse:=Bool:C1537(formInput_o.collapse)
 				
 				
-				If (OB Is defined:C1231(formInput_o;"contentType"))
-					ARRAY TEXT:C222($tabContentType;0)
-					OB GET ARRAY:C1229(formInput_o;"contentType";$tabContentType)
+				If (OB Is defined:C1231(formInput_o; "contentType"))
+					ARRAY TEXT:C222($tabContentType; 0)
+					OB GET ARRAY:C1229(formInput_o; "contentType"; $tabContentType)
 					$type:=JSON Stringify array:C1228($tabContentType)
-					$type:=Replace string:C233($type;"[";"")
-					$type:=Replace string:C233($type;"]";"")
-					$type:=Replace string:C233($type;"\"";"")
+					$type:=Replace string:C233($type; "["; "")
+					$type:=Replace string:C233($type; "]"; "")
+					$type:=Replace string:C233($type; "\""; "")
 					formInput_o.accept:=$type
 				Else 
 					formInput_o.accept:=""
 				End if 
 				
-				If (Not:C34(OB Is defined:C1231(formInput_o;"divClassSubmit")))
+				If (Not:C34(OB Is defined:C1231(formInput_o; "divClassSubmit")))
 					formInput_o.divClassSubmit:=""
 				End if 
 				
 				
-				For each ($viewHtml;New collection:C1472("html";"htmlReadOnly"))
+				For each ($viewHtml; New collection:C1472("html"; "htmlReadOnly"))
 					
 					// Traitement des balises HTML
 					If ($viewHtml="html")
-						PROCESS 4D TAGS:C816($htmlInput_t;$htmlInputTags_t)
+						PROCESS 4D TAGS:C816($htmlInput_t; $htmlInputTags_t)
 					Else 
-						PROCESS 4D TAGS:C816($htmlInputReadOnly_t;$htmlInputTags_t)
+						PROCESS 4D TAGS:C816($htmlInputReadOnly_t; $htmlInputTags_t)
 					End if 
 					
 					// Traitement apres 4D tags
-					$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"<!--# 4 D";"<!--#4D")
+					$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "<!--# 4 D"; "<!--#4D")
 					Case of 
 							// Value input default,Petite verru pour les tokens.
 						: (formInput_o.type=Null:C1517)
 							formInput_o.type:="hidden"
 							
 						: (formInput_o.type="select")
-							If (OB Is defined:C1231(formInput_o;"selection"))
+							If (OB Is defined:C1231(formInput_o; "selection"))
 								var $selection_c : Collection
 								var $option_o : Object
 								$selectOption_t:=""
@@ -252,28 +252,28 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 								// On récupére le tableau avec la config à utiliser
 								$selection_c:=formInput_o.selection
 								
-								For each ($option_o;$selection_c)
-									$selected:="<!--#4DIF string("+Storage:C1525.config.varVisitorName_t+"."+formInput_o.lib+")=\""+String:C10($option_o.value)+"\"--> selected <!--#4DELSEIF ("+Choose:C955(Bool:C1537($option_o.selected);"True";"False")+"&("+Storage:C1525.config.varVisitorName_t+"."+formInput_o.lib+"=Null))--> selected<!--#4DENDIF-->"
+								For each ($option_o; $selection_c)
+									$selected:="<!--#4DIF string("+Storage:C1525.param.varVisitorName_t+"."+formInput_o.lib+")=\""+String:C10($option_o.value)+"\"--> selected <!--#4DELSEIF ("+Choose:C955(Bool:C1537($option_o.selected); "True"; "False")+"&("+Storage:C1525.param.varVisitorName_t+"."+formInput_o.lib+"=Null))--> selected<!--#4DENDIF-->"
 									
 									$selectOption_t:=$selectOption_t+\
-										"<option value=\""+String:C10($option_o.value)+"\""+$selected+Choose:C955(Bool:C1537($option_o.disabled);" disabled";"")+">"+\
+										"<option value=\""+String:C10($option_o.value)+"\""+$selected+Choose:C955(Bool:C1537($option_o.disabled); " disabled"; "")+">"+\
 										String:C10($option_o.lib)+"</option>"
 								End for each 
 								
-								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";$selectOption_t)
+								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; $selectOption_t)
 								
 							Else 
-								$selectOption:="<!--#4DIF OB Is defined ("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
-								$selectOption:=$selectOption+"<!--#4DHTML OB Get("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")-->"
-								$selectOption:=$selectOption+"<!--#4DELSE-->Impossible de trouver : OB Get("+Storage:C1525.config.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o;"lib")+"\")<!--#4DENDIF-->"
-								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";$selectOption)
+								$selectOption:="<!--#4DIF OB Is defined ("+Storage:C1525.param.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o; "lib")+"\")-->"
+								$selectOption:=$selectOption+"<!--#4DHTML OB Get("+Storage:C1525.param.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o; "lib")+"\")-->"
+								$selectOption:=$selectOption+"<!--#4DELSE-->Impossible de trouver : OB Get("+Storage:C1525.param.varVisitorName_t+";\"selectOption"+OB Get:C1224(formInput_o; "lib")+"\")<!--#4DENDIF-->"
+								$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; $selectOption)
 							End if 
 							
 						: (formInput_o.type="toggle")
-							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
+							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; "<!--#4DIF (OB Is defined("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\")--><!--#4DENDIF-->")
 							
 						Else 
-							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t;"$valueInput";"<!--#4DIF (OB Is defined("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.config.varVisitorName_t+";\""+OB Get:C1224(formInput_o;"lib")+"\")--><!--#4DENDIF-->")
+							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; "<!--#4DIF (OB Is defined("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\")--><!--#4DENDIF-->")
 					End case 
 					
 					formInput_o[$viewHtml]:=$htmlInputTags_t
@@ -285,15 +285,15 @@ For each ($subDomain_t;Storage:C1525.config.subDomain_c)
 				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
 				
 				Use (Storage:C1525.sites[$subDomain_t].form)
-					Storage:C1525.sites[$subDomain_t].form.push(OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form))
+					Storage:C1525.sites[$subDomain_t].form.push(OB Copy:C1225($form; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].form))
 				End use 
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
-				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].form.indices("source IS :1";$fichiersForm{$numForm})
+				$indicesQuery_c:=Storage:C1525.sites[$subDomain_t].form.indices("source IS :1"; $fichiersForm{$numForm})
 				
 				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
-					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form;ck shared:K85:29;Storage:C1525.sites[$subDomain_t].form)
+					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].form)
 				End use 
 			End if 
 		End if 

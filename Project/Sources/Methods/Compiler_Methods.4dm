@@ -81,10 +81,6 @@ var cwInputValidation; $2 : Text
 var cwExtensionFichier; $0 : Text
 var cwExtensionFichier; $1 : Text
 
-//cwToolPathFolderOrAlias
-var cwToolPathFolderOrAlias; $0 : Text
-var cwToolPathFolderOrAlias; $1 : Text
-
 //cwInputHtml
 var cwInputHtml; $0 : Text
 var cwInputHtml; $1 : Text
