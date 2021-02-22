@@ -1,4 +1,4 @@
-//%attributes = {"publishedWeb":true,"shared":true}
+//%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwStorage
 

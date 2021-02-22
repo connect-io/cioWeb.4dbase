@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Methode projet : cw4dWriteProGeneratePDF
 

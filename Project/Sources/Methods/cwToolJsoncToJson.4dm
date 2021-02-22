@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwToolJsoncToJson
 

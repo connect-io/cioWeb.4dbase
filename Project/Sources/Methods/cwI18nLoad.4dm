@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"lang":"en"}
+//%attributes = {"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwI18nCharger
 

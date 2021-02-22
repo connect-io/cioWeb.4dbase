@@ -1,4 +1,4 @@
-//%attributes = {"lang":"en"}
+//%attributes = {}
 // ----------------------------------------------------
 // Nom utilisateur (OS) : Scanu Rémy
 // Date et heure : 08/07/20, 18:08:16

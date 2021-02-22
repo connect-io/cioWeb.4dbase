@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"lang":"en"}
+//%attributes = {"shared":true,"preemptive":"capable"}
 // ----------------------------------------------------
 // Nom utilisateur (OS) : Programmeur
 // Date et heure : 13/07/20, 16:31:05

@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 // Dans cette demo on va générer si besoin les enregistrements dans la table [CaMarketing]
 var $1 : Collection
 

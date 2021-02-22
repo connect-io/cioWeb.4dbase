@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"publishedWeb":true,"preemptive":"capable"}
+//%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwInputInjection4DHtmlSafeUse
 

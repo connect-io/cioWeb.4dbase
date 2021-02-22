@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"lang":"en"}
+//%attributes = {"shared":true,"preemptive":"capable"}
 // Méthode : cgDecallageHoraire
 // Description
 // Renvoi le decallage horaire depuis lheure local de la machine.

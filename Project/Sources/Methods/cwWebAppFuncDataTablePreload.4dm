@@ -1,4 +1,4 @@
-//%attributes = {"invisible":true}
+//%attributes = {"invisible":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwWebAppFuncDataTablePreload
 

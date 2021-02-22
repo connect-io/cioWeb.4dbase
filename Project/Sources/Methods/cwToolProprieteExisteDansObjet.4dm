@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"preemptive":"capable"}
 // ======================================================================
 // Methode projet : cwToolProprieteExisteDansObjet
 // 

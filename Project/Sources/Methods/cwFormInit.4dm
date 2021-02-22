@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"publishedWeb":true}
+//%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwInputFormInit
 

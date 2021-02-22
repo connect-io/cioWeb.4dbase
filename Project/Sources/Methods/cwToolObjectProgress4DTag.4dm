@@ -1,4 +1,4 @@
-//%attributes = {"invisible":true,"shared":true}
+//%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwToolObjectProgress4DTag
 

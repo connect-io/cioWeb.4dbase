@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"publishedWeb":true,"lang":"en"}
+//%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwI18nConvertJson (Composant CioRegex)
 

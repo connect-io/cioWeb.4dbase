@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"lang":"en"}
+//%attributes = {"shared":true}
 // ----------------------------------------------------
 // Nom utilisateur (OS) : Scanu Rémy
 // Date et heure : 31/03/20, 18:24:39
