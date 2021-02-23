@@ -1,4 +1,4 @@
-//%attributes = {"preemptive":"capable"}
+//%attributes = {"shared":true,"preemptive":"capable"}
 /* -----------------------------------------------------------------------------
 Méthode : cwEMailConfigLoad
 
