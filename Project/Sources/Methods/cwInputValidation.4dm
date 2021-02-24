@@ -9,7 +9,7 @@ Historique
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 27/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fixe bug sur les input type file non envoyé.
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Nom du formulaire
@@ -21,21 +21,12 @@ var $retour : Text
 var $varNomPublic_t : Text
 var $configInput : Object
 
-
 $retour:="ok"
-
-/*
-If (OB Is defined(visiteur;String($2)))
-$valeurInput:=String(OB Get(visiteur;$2))
-Else
-$valeurInput:=""
-End if
-*/
 
 $valeurInput:=String:C10(visiteur[String:C10($2)])
 
 // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
-$configInput:=OB Copy:C1225(Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$1)[0].input.query("lib IS :1";$2)[0])
+$configInput:=OB Copy:C1225(Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1"; $1)[0].input.query("lib IS :1"; $2)[0])
 
 If (String:C10($configInput.label)#"")
 	$varNomPublic_t:=$configInput.label
@@ -45,10 +36,10 @@ End if
 
 // ----- Gestion required -----
 Case of 
-	: (Not:C34(OB Is defined:C1231($configInput;"required")))
+	: (Not:C34(OB Is defined:C1231($configInput; "required")))
 		//La cle required n'est pas initialisé, on ne fait rien
 		
-	: (Not:C34(OB Get:C1224($configInput;"required")))
+	: (Not:C34(OB Get:C1224($configInput; "required")))
 		//La cle required est initialisé à false, on ne fait rien
 		
 	: ($configInput.type="file")
@@ -71,7 +62,7 @@ Case of
 	: ($valeurInput="") | ($valeurInput="nonObligatoire")  // nonObligatoire : petit hack pour certain cas en javascript.
 		//La valeur est vide, donc il y a rien a controler, on ne fait rien.
 		
-	: (Not:C34(OB Is defined:C1231($configInput;"format")))
+	: (Not:C34(OB Is defined:C1231($configInput; "format")))
 		//La cle format n'est pas initialisé, on ne fait rien
 	Else 
 		
@@ -82,7 +73,7 @@ Case of
 		End if 
 		
 		// On vérifie la validité du format.
-		$retour:=cwFormatValide(OB Get:C1224($configInput;"format");$valeurInput)
+		$retour:=cwFormatValide(OB Get:C1224($configInput; "format"); $valeurInput)
 		
 		If ($retour#"ok")
 			$retour:=$varNomPublic_t+", "+$retour
@@ -128,8 +119,8 @@ If (($retour="ok") & ($configInput.type="file"))
 	var $trouve_b : Boolean
 	
 	$trouve_b:=False:C215
-	For ($i;1;WEB Get body part count:C1211)  //pour chaque partie
-		WEB GET BODY PART:C1212($i;$vPartContentBlob;$vPartName;$vPartMimeType;$vPartFileName)
+	For ($i; 1; WEB Get body part count:C1211)  //pour chaque partie
+		WEB GET BODY PART:C1212($i; $vPartContentBlob; $vPartName; $vPartMimeType; $vPartFileName)
 		
 		If ($vPartName=$configInput.lib)
 			//la variable ne figure pas dans le formulaire."
@@ -148,7 +139,7 @@ If (($retour="ok") & ($configInput.type="file"))
 	// ----- Gestion size -----
 	If ($trouve_b)
 		Case of 
-			: (Not:C34(OB Is defined:C1231($configInput;"blobSize")))
+			: (Not:C34(OB Is defined:C1231($configInput; "blobSize")))
 				//La cle blobSize n'est pas initialisé, on ne fait rien
 				
 			: (BLOB size:C605($vPartContentBlob)>$configInput.blobSize)
@@ -161,7 +152,7 @@ If (($retour="ok") & ($configInput.type="file"))
 			: ($retour#"ok")
 				// une erreur est deja remonté, on ne fait rien
 				
-			: (Not:C34(OB Is defined:C1231($configInput;"contentType")))
+			: (Not:C34(OB Is defined:C1231($configInput; "contentType")))
 				//La cle contentType n'est pas initialisé, on ne fait rien
 				
 			: ($configInput.contentType.join()#("@"+$vPartMimeType+"@"))

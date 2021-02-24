@@ -17,7 +17,6 @@ var $subDomain_t : Text
 var $fileSubDomain_c : Collection
 var $file_o : Object
 
-
 // Récupération des graphiques
 For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 	
@@ -29,7 +28,6 @@ For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 	// On récupére la liste de tout les fichiers sources du sous domaine.
 	$fileSubDomain_c:=Folder:C1567(This:C1470.sourceSubdomainPath($subDomain_t); fk platform path:K87:2).files(fk recursive:K87:7+fk ignore invisible:K87:22)
 	$fileSubDomain_c:=$fileSubDomain_c.query("fullName = :1"; "@chart.json@")
-	
 	
 	For each ($file_o; $fileSubDomain_c)
 		

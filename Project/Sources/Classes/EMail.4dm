@@ -64,6 +64,8 @@ Historique
 		This:C1470.globalVar:=OB Copy:C1225(Storage:C1525.eMail.globalVar)
 	End if 
 	
+	
+	
 Function send
 /* -----------------------------------------------------------------------------
 Méthode : EMail.send
@@ -169,6 +171,8 @@ Historique
 	
 	// Retourne les informations concernant l'envoie du mail
 	$0:=$mailStatus_o
+	
+	
 	
 Function sendModel
 /* -----------------------------------------------------------------------------

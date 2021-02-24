@@ -214,13 +214,14 @@ Fonction : WebApp.cacheSessionWebPath
 	
 Chemin complet plateforme des sessions web
 	
-Paramètres
+Paramètre
 $pathDefault_t : (Optionel) Forcer le chemin par defaut.
 $path_t : Chemin des sessions web
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 -----------------------------------------------------------------------------*/
 	
 	Use (Storage:C1525.sessionWeb)
@@ -230,8 +231,8 @@ Historique
 		
 		// Si il y a un param c'est que l'on souhaite definir un nouveau chemin pour les sessions.
 		If (Count parameters:C259=1)
-			If (String:C10($1)#"")
-				Storage:C1525.sessionWeb.path:=$1
+			If (String:C10($pathDefault_t)#"")
+				Storage:C1525.sessionWeb.path:=$pathDefault_t
 			Else 
 				
 				// On reset le chemin pas defaut.
@@ -241,7 +242,7 @@ Historique
 	End use 
 	
 	// Dans tout les cas, on retourne un chemin
-	$0:=Storage:C1525.sessionWeb.path
+	$path_t:=Storage:C1525.sessionWeb.path
 	
 	
 	
