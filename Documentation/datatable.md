@@ -53,6 +53,7 @@ On ajoute ensuite des propriétés à notre tableau tel que :
 | multiSelect         | bool  | ""                | Permet la selection multiple dans un tableau. |
 | dom                 | texte | "auto"            | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
 | doubleClick         | objet | null              | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
+| noOrdering          | bool  | false             | Si cette propriété est passé à true, au chargement le tableau n'est pas trié, on utilise alors le trie de 4D. |
 
 
 La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 

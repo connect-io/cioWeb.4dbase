@@ -49,7 +49,13 @@ data4D.debugConsole = function (message) {
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
                 },
-                "order": [[0, 'asc']]
+
+                // Par defaut on trie sur la 1er colonne, mais il est possible de ne pas trierle tableau au chargement.
+                <!--#4DIF (bool(dataTable_o[i].noOrdering)=False)-->
+                    "order": [[0, 'asc']]
+                <!--#4DELSE-->
+                    "ordering": false
+                <!--#4DENDIF-->
             });
 
             // Message d'aide que le tableau est sensible au double click.
