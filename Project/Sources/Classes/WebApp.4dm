@@ -184,30 +184,6 @@ Historique
 	
 	
 	
-Function cachePath()
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.cachePath
-	
-Chemin complet plateforme du dossier cache
-	
-Historique
-16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
-19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
------------------------------------------------------------------------------*/
-	
-	var $cheminObjet_t; $message_t : Text
-	
-	$cheminObjet_t:="param.folderPath.cache_t"
-	
-	$message_t:="WebApp.cachePath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
-		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
-		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
-		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
-	ALERT:C41($message_t)
-	
-	
-	
 Function cacheSessionWebPath($pathDefault_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheSessionWebPath
@@ -246,58 +222,35 @@ Historique
 	
 	
 	
-Function cacheViewPath()
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.cacheViewPath
-	
-Chemin complet plateforme du dossier cache des vues
-	
-Historique
-16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
-19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
------------------------------------------------------------------------------*/
-	
-	var $cheminObjet_t; $message_t : Text
-	
-	$cheminObjet_t:="param.folderPath.cacheView_t"
-	
-	$message_t:="WebApp.cacheViewPath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
-		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
-		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
-		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
-	ALERT:C41($message_t)
-	
-	
-	
-Function cacheViewSubdomainPath($forceSousDomaine_t : Text)->$path_t : Text
+Function cacheViewSubdomainPath($subDomain_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.cacheViewSubdomainPath
 	
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
 Paramètres
-$forceSousDomaine_t : Nom du sous domaine
+$subDomain_t : Nom du sous domaine
 $path_t : Chemin des vues du sous domaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 -----------------------------------------------------------------------------*/
 	
-	var $sousDomaine_t : Text
+	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
+		"WebApp.cacheViewSubdomainPath : Le paramètre de la fonction est invalide.")
 	
-	If (Count parameters:C259=1)
-		$sousDomaine_t:=$forceSousDomaine_t
-	Else 
-		$sousDomaine_t:=visiteur.sousDomaine
+	
+	If (Count parameters:C259=0)
+		$subDomain_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=Storage:C1525.param.folderPath.cacheView_t+$sousDomaine_t+Folder separator:K24:12
+	$0:=Storage:C1525.param.folderPath.cacheView_t+$subDomain_t+Folder separator:K24:12
 	
 	
 	
-Function I18NLoad
+Function I18NLoad()
 /* -----------------------------------------------------------------------------
 Fonction : I18NLoad
 	
@@ -407,7 +360,7 @@ Historique
 	
 	
 	
-Function eMailConfigLoad
+Function eMailConfigLoad()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.eMailConfigLoad
 	
@@ -514,7 +467,7 @@ Historique
 	
 	
 	
-Function jsMinify
+Function jsMinify()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.jsMinify
 	
@@ -590,7 +543,7 @@ Historique
 	
 	
 	
-Function serverStart
+Function serverStart()
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.serverStart
 	
@@ -944,103 +897,55 @@ Historique
 	
 	
 	
-Function sourcesPath
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.sourcesPath
-	
-Chemin complet plateforme du dossier Source
-	
-Historique
-16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
-19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
------------------------------------------------------------------------------*/
-	
-	var $cheminObjet_t; $message_t : Text
-	
-	$cheminObjet_t:="param.folderPath.source_t"
-	
-	$message_t:="WebApp.webAppPath : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
-		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
-		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
-		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
-	ALERT:C41($message_t)
-	
-	
-	
-Function sourceSubdomainPath
+Function sourceSubdomainPath($subDomain_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.sourceSubdomainPath
 	
 Chemin complet plateforme du dossier Source/sousDomaine
 	
+Paramètre
+$subDomain_t -> Nom du sous domaine
+$path_t      <- Chemin du dossier source du sous domaine
+	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 -----------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Nom du sous domaine
-	var $0 : Text  // Chemin du dossier source du sous domaine
+	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
+		"WebApp.sourceSubdomainPath : Le paramètre de la fonction est invalide.")
 	
-	var $sousDomaine_t : Text
-	
-	If (Count parameters:C259=1)
-		$sousDomaine_t:=$1
-	Else 
-		$sousDomaine_t:=visiteur.sousDomaine
+	If (Count parameters:C259=0)
+		$subDomain_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=Storage:C1525.param.folderPath.source_t+$sousDomaine_t+Folder separator:K24:12
+	$0:=Storage:C1525.param.folderPath.source_t+$subDomain_t+Folder separator:K24:12
 	
 	
 	
-	
-Function webAppPath
-/* -----------------------------------------------------------------------------
-Fonction : WebApp.webAppPath
-	
-Chemin complet plateforme du dossier WebApp
-	
-Historique
-16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
-19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fonction obsolette
------------------------------------------------------------------------------*/
-	
-	var $cheminObjet_t; $message_t : Text
-	
-	$cheminObjet_t:="param.folderPath.webApp_t"
-	
-	$message_t:="WebApp.webAppPath() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
-		+"Merci d'utiliser maintenant le storage du composant."+Char:C90(Carriage return:K15:38)\
-		+"Base hôte :"+Char:C90(Carriage return:K15:38)+"cwStorage."+$cheminObjet_t+Char:C90(Carriage return:K15:38)\
-		+"Dans le composant :"+Char:C90(Carriage return:K15:38)+"Storage."+$cheminObjet_t
-	ALERT:C41($message_t)
-	
-	
-	
-Function webfolderSubdomainPath
+Function webfolderSubdomainPath($subDomain_t : Text)->$path_t : Text
 /* -----------------------------------------------------------------------------
 Fonction : WebApp.webfolderSubdomainPath
 	
 Chemin complet plateforme du dossier Webfolder/sousDomaine
 	
+Paramètre
+$subDomain_t -> Nom du sous domaine
+$path_t      <- Chemin du dossier webfolder du sous domaine
+	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 -----------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Nom du sous domaine
-	var $0 : Text  // Chemin du dossier webfolder du sous domaine
-	var $sousDomaine_t : Text
+	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
+		"WebApp.webfolderSubdomainPath : Le paramètre de la fonction est invalide.")
 	
-	If (Count parameters:C259=1)
-		$sousDomaine_t:=$1
-	Else 
-		$sousDomaine_t:=visiteur.sousDomaine
+	If (Count parameters:C259=0)
+		$subDomain_t:=visiteur.sousDomaine
 	End if 
 	
-	$0:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$sousDomaine_t+Folder separator:K24:12
-	
-	
+	$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$subDomain_t+Folder separator:K24:12
 	
