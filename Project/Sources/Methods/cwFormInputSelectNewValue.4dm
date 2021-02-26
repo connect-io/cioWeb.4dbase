@@ -28,10 +28,9 @@ var $selectOption_t : Text
 var $optionSelected_c : Collection
 var $visiteur : Object
 var $option_o : Object
-
 $visiteur:=$1->
 $inputName_t:=String:C10($2)
-$option_c:=$3
+$option_c:=$3.copy()
 $selectOption_t:=""
 
 
