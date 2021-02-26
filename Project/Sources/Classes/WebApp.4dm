@@ -191,8 +191,8 @@ Fonction : WebApp.cacheSessionWebPath
 Chemin complet plateforme des sessions web
 	
 Paramètre
-$pathDefault_t : (Optionel) Forcer le chemin par defaut.
-$path_t : Chemin des sessions web
+$pathDefault_t -> (Optionel) Forcer le chemin par defaut.
+$path_t        <- Chemin des sessions web
 	
 Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -229,8 +229,8 @@ Fonction : WebApp.cacheViewSubdomainPath
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
 Paramètres
-$subDomain_t : Nom du sous domaine
-$path_t : Chemin des vues du sous domaine
+$subDomain_t -> Nom du sous domaine
+$path_t      <- Chemin des vues du sous domaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -788,20 +788,22 @@ Historique
 	
 	
 	
-Function sessionWebStart
-/* -----------------------------------------------------------------------------
+Function sessionWebStart($optionExtern_c : Collection)
+/*------------------------------------------------------------------------------
 Fonction : WebApp.sessionWebStart
 	
 Démarrage des sessions Web
+	
+Paramètre
+$optionExtern_c -> (Optionel) Option du serveur web
 	
 Historique
 30/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 15/09/20 - Grégory Fromain <gregory@connect-io.fr> - Suppression de $0
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
-	
-	var $1 : Collection  // Option, option du serveur web
+26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
+------------------------------------------------------------------------------*/
 	
 	var $options_c : Collection
 	var $option_o : Object
@@ -830,10 +832,10 @@ Historique
 	
 	// Puis l'on vient combiner avec les informations 
 	If (Count parameters:C259>=1)
-		If (Type:C295($1)=Is collection:K8:32)
+		If (Type:C295($optionExtern_c)=Is collection:K8:32)
 			
-			$options_c:=$options_c.query("NOT (key IN :1)"; $1.extract("key"))
-			$options_c.combine($1)
+			$options_c:=$options_c.query("NOT (key IN :1)"; $optionExtern_c.extract("key"))
+			$options_c.combine($optionExtern_c)
 		End if 
 	End if 
 	
