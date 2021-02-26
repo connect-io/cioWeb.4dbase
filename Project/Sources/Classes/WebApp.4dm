@@ -229,24 +229,23 @@ Fonction : WebApp.cacheViewSubdomainPath
 Chemin complet plateforme du dossier cache des vues / sousDomaine
 	
 Paramètres
-$subDomain_t -> Nom du sous domaine
+$subDomain_t -> (Optionnel) Nom du sous domaine
 $path_t      <- Chemin des vues du sous domaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
+26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
 -----------------------------------------------------------------------------*/
 	
-	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
-		"WebApp.cacheViewSubdomainPath : Le paramètre de la fonction est invalide.")
-	
-	
-	If (Count parameters:C259=0)
-		$subDomain_t:=visiteur.sousDomaine
+	If (Count parameters:C259=1)
+		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.cacheViewSubdomainPath : Le paramètre de la fonction est invalide.")
+		$path_t:=Storage:C1525.param.folderPath.cacheView_t+$subDomain_t+Folder separator:K24:12
+		
+	Else 
+		$path_t:=Storage:C1525.param.folderPath.cacheView_t+visiteur.sousDomaine+Folder separator:K24:12
 	End if 
-	
-	$0:=Storage:C1525.param.folderPath.cacheView_t+$subDomain_t+Folder separator:K24:12
 	
 	
 	
@@ -906,23 +905,23 @@ Fonction : WebApp.sourceSubdomainPath
 Chemin complet plateforme du dossier Source/sousDomaine
 	
 Paramètre
-$subDomain_t -> Nom du sous domaine
+$subDomain_t -> (Optionnel) Nom du sous domaine
 $path_t      <- Chemin du dossier source du sous domaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
+26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
 -----------------------------------------------------------------------------*/
 	
-	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
-		"WebApp.sourceSubdomainPath : Le paramètre de la fonction est invalide.")
-	
-	If (Count parameters:C259=0)
-		$subDomain_t:=visiteur.sousDomaine
+	If (Count parameters:C259=1)
+		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.sourceSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")
+		$path_t:=Storage:C1525.param.folderPath.source_t+$subDomain_t+Folder separator:K24:12
+		
+	Else 
+		$path_t:=Storage:C1525.param.folderPath.source_t+visiteur.sousDomaine+Folder separator:K24:12
 	End if 
-	
-	$0:=Storage:C1525.param.folderPath.source_t+$subDomain_t+Folder separator:K24:12
 	
 	
 	
@@ -933,21 +932,23 @@ Fonction : WebApp.webfolderSubdomainPath
 Chemin complet plateforme du dossier Webfolder/sousDomaine
 	
 Paramètre
-$subDomain_t -> Nom du sous domaine
+$subDomain_t -> (Optionnel) Nom du sous domaine
 $path_t      <- Chemin du dossier webfolder du sous domaine
 	
 Historique
 16/08/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
+26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
 -----------------------------------------------------------------------------*/
 	
-	ASSERT:C1129((Count parameters:C259=0) | (String:C10($subDomain_t)#""); \
-		"WebApp.webfolderSubdomainPath : Le paramètre de la fonction est invalide.")
-	
-	If (Count parameters:C259=0)
-		$subDomain_t:=visiteur.sousDomaine
+	If (Count parameters:C259=1)
+		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.webfolderSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")
+		$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$subDomain_t+Folder separator:K24:12
+		
+	Else 
+		$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+visiteur.sousDomaine+Folder separator:K24:12
 	End if 
 	
-	$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$subDomain_t+Folder separator:K24:12
+	
 	
