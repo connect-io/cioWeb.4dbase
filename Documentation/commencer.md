@@ -8,32 +8,115 @@ Soit ajouter le composant dans votre application 4D sous GIT comme sous-module:
 git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
 ```
 
-Les sources et le build sont dans 2 branches distinctes.
+Voici quelques méthodes à intégrer dans votre application pour le bon fonctionnement du serveur web.
+
+```4d
+/*------------------------------------------------------------------------------
+	Méthode : webAppErrorCallback
+	
+	Gestion des appels sur erreur du serveur web.
+	
+	Historique
+	22/02/15 gregory@connect-io.fr - Création
+	15/11/20 gregory@connect-io.fr - Clean code
+	24/02/21 gregory@connect-io.fr - Modernisation du code
+------------------------------------------------------------------------------*/
+
+// Déclarations
+var $error_o : Object
+
+ARRAY LONGINT($code_ai; 0)
+ARRAY TEXT($composantInterne_at; 0)
+ARRAY TEXT($lib_at; 0)
+
+If (Error#0)
+	GET LAST ERROR STACK($code_ai; $composantInterne_at; $lib_at)
+	$error_o:=New object
+	$error_o.libelle:=$lib_at{1}
+	$error_o.methode:=Error Method
+	$error_o.ligne:=Error Line
+	$error_o.code:=Error
+	
+	If (OB Is defined(visiteur_o))
+		$error_o.visiteur:=visiteur_o
+	End if 
+	
+	cwLogErreurAjout("Serveur Web"; $error_o)
+	
+	If (Get assert enabled)
+		WEB SEND TEXT(JSON Stringify($error_o; *))
+		TRACE
+	End if 
+	
+Else 
+	cwGestionErreur
+End if 
+```
+
+
+```4d
+//%attributes = {"preemptive":"capable"}
+/*------------------------------------------------------------------------------
+	Methode projet : webAppWorkerRun
+	
+	Appel d'une fonction de la class WebApp depuis un nouveau process.
+	
+	Historique
+	28/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+
+var $1 : Text  // Nom de la fonction de la class WebApp à éxécuter
+var $2 : 4D.signal
+
+ASSERT($1#""; "webAppWorkerRun : Le param $1 ne doit pas être vide.")
+ASSERT(Count parameters=2; "webAppWorkerRun : Il manque un paramêtre à l'appel de la méthode.")
+
+Formula from string("this."+$1+"()").call(<>webApp_o)
+
+$2.trigger()  // On libére le signal
+```
+
+```4d
+/*------------------------------------------------------------------------------
+	Methode projet : webAppWorkerCall
+	
+	Detail des entreprises
+	
+	Historique
+	28/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+
+// Déclarations
+var $1 : Text  // Fonction à appeler dans webApp
+
+ASSERT($1#""; "webAppWorkerCall : Le param $1 ne doit pas être vide.")
+
+$signal_o:=New signal("Call fonction Web app : "+$1)
+
+CALL WORKER("webAppGestion : "+$1; "webAppWorkerRun"; $1; $signal_o)
+
+$signal_o.wait(60)  // Sécurité si jamais l'import prends plus que 60 sec
+```
+
 
 ## Méthode de base sur ouverture
 
 ```4d
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 	Méthode : Sur ouverture
 	
 	Charger tous les éléments propres à l'application Web
 	
 	Historique
 	27/07/20 - Grégory Fromain - création
------------------------------------------------------------------------------ */
+	24/02/21 - Grégory Fromain - Modernisation du code
+------------------------------------------------------------------------------*/
 
-If (True)  // Déclarations
-	C_OBJECT(<>webApp_o)
-	C_VARIANT($classWebApp_v)
-End if 
+// Déclarations
+var webApp_o : cs.WebApp
 
-
-  // Récupération de la class webApp depuis le composant
-$classWebApp_v:=cwToolGetClass ("webApp")
-
-  // Instanciation de la class
-<>webApp_o:=$classWebApp_v.new()
-
+// Instanciation de la class
+<>webApp_o:=cwToolGetClass("WebApp").new()
 
 MESSAGE("Arrêt du serveur web..."+Char(Carriage return))
 WEB STOP SERVER
@@ -47,8 +130,9 @@ If (ok#1)
 	ALERT("Le serveur web n'est pas correctement démarré.")
 End if 
 
-  // Démarrage des sessions.
+// Démarrage des sessions
 <>webApp_o.sessionWebStart()
+
 ```
 
 ## Méthode de base sur connexion web
@@ -61,95 +145,108 @@ End if
 	Historique
 	28/07/20 - Grégory Fromain - création
 	28/07/20 - Grégory Fromain - Gestion des blocks recursifs.
------------------------------------------------------------------------------ */
+	24/02/21 - Grégory Fromain - Modernisation du code, ajout graphique et préemptif
+-----------------------------------------------------------------------------*/
 
-If (True)  // Déclarations
-	C_TEXT($3)  // Adresse IP du navigateur.
-	
-	C_OBJECT(visiteur_o;pageWeb_o)
-	C_TEXT($htmlFichierChemin_t;$resultatMethode_t;$methodeNom_t)
-	C_OBJECT(dataTables_o)
-	C_TEXT($retour_t)
-End if 
+// Déclarations
+var $3 : Text  // Adresse IP du navigateur.
 
-  // ===== Chargement des informations du visiteur du site =====
+var visiteur_o : Object
+var pageWeb_o : Object
+var dataTables_o : Object
+var charts_o : Object
+var $methodeNom_t : Text
+var $resultatMethode_t : Text
+var $htmlFichierChemin_t : Text
+var $retour_t : Text
+
+// ----- Gestion des erreurs -----
+ON ERR CALL("webAppErrorCallback")
+
+
+// ----- Chargement des informations du visiteur du site -----
 If (visiteur_o=Null)
 	visiteur_o:=cwToolGetClass("User").new()
 End if 
 
-  // Récupération des informations du visiteur.
+// Récupération des informations du visiteur.
 visiteur_o.getInfo()
 visiteur_o.ip:=$3
 
-  //Gestion des sessions web.
+//Gestion des sessions web.
 visiteur_o.sessionWebLoad()
 
 
-  // Petit hack pour simplifier, le premier démarrage.
-  // C'est à supprimer après la configuration du fichier host de la machine.
+// Petit hack pour simplifier, le premier démarrage.
+// C'est à supprimer après la configuration du fichier host de la machine.
 If (visiteur_o.Host="127.0.0.1")
 	visiteur_o.sousDomaine:=OB Keys(<>webApp_o.sites)[0]
 	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
 End if 
 
-  // Dectection du mode développement
+// Dectection du mode développement
 visiteur_o.devMode:=visiteur_o.Host="@dev@"
 
 
-  // ===== Rechargement des variables de l'application =====
+// ----- Rechargement des variables de l'application -----
 If (visiteur_o.devMode)
 	SET ASSERT ENABLED(True)
-	<>webApp_o.serverStart()
-	<>webApp_o.urlCDN:=""
+	webAppCall("serverStart")
 End if 
 
 
-  // ===== Chargement des informations sur la page =====
+// ----- Chargement des informations sur la page -----
 pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 
 // On purge les dataTables.
-If (pageWeb_o.lib#"@ajax@")|(dataTables_o=null)
+If (pageWeb_o.lib#"@ajax@") | (dataTables_o=Null)
 	// Contient les datatables que le visiteur va utiliser dans son processs
 	dataTables_o:=New object()
-End if
+End if 
 
-  // On va fusionner les datas de la route de l'URL sur le visiteur.
+// On purge les graphiques.
+If (pageWeb_o.lib#"@ajax@") | (charts_o=Null)
+	// Contient les graphiques que le visiteur va utiliser dans son processs
+	charts_o:=New object()
+End if 
+
+// On va fusionner les datas de la route de l'URL sur le visiteur.
 If (pageWeb_o.route.data#Null)
-	For each ($routeData_t;pageWeb_o.route.data)
+	For each ($routeData_t; pageWeb_o.route.data)
 		visiteur_o[$routeData_t]:=pageWeb_o.route.data[$routeData_t]
 	End for each 
 End if 
 
-  // On exécute si besoin les méthodes relatives à la page
-For each ($methodeNom_t;pageWeb_o.methode)
-	EXECUTE METHOD($methodeNom_t;$resultatMethode_t)
+// On exécute si besoin les méthodes relatives à la page
+For each ($methodeNom_t; pageWeb_o.methode)
+	EXECUTE METHOD($methodeNom_t; $resultatMethode_t)
 	pageWeb_o.resulatMethode_t:=$resultatMethode_t
 End for each 
 
-  //Si il y a un fichier HTML à renvoyer... on lance le constructeur.
+//Si il y a un fichier HTML à renvoyer... on lance le constructeur.
 visiteur_o.updateVarVisiteur()
 
 
 Case of 
 	: (pageWeb_o.viewPath.length=0) & (String(pageWeb_o.resulatMethode_t)#"")
-		  // Si c'est du hard code. (ex : requete ajax)
-		WEB SEND TEXT(pageWeb_o.resulatMethode_t;pageWeb_o.type)
+		// Si c'est du hard code. (ex : requete ajax)
+		WEB SEND TEXT(pageWeb_o.resulatMethode_t; pageWeb_o.type)
 		
 	: (pageWeb_o.viewPath.length=0)
-		  // On ne fait rien la méthode d'appel renvoie déjà du contenu
-		  // (Exemple fichier Excel)
+		// On ne fait rien la méthode d'appel renvoie déjà du contenu
+		// (Exemple fichier Excel)
 		
 	Else 
-		  // Si nous ne sommes pas en ajax et pas en page d'erreur, on génére un nouveau token pour le visiteur
+		// Si nous ne sommes pas en ajax et pas en page d'erreur, on génére un nouveau token pour le visiteur
 		If (pageWeb_o.lib#"404")
 			visiteur_o.tokenGenerate()
 		End if 
 		
-		For each ($htmlFichierChemin_t;pageWeb_o.viewPath)
+		For each ($htmlFichierChemin_t; pageWeb_o.viewPath)
 			$retour_t:=pageWeb_o.scanBlock(Document to text($htmlFichierChemin_t))
 		End for each 
 		
-		WEB SEND TEXT($retour_t;pageWeb_o.type)
+		WEB SEND TEXT($retour_t; pageWeb_o.type)
 End case 
 ```
 
