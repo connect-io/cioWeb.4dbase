@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwWebAppFormPreload
 
 Precharge tout les formulaires de l'application web.

@@ -7,7 +7,7 @@ Cette class permet de génerer le contenue d'une page.
 
 
 Class constructor
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : Page.constructor
 	
 Historique
@@ -16,7 +16,7 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 	
 	var $1 : Object  // Les informations sur le visiteur.
 	
@@ -26,9 +26,9 @@ Historique
 	var $routeData : Object
 	var $logErreur_o : Object
 	var $libPageConnexion_t : Text
-	ARRAY LONGINT:C221($AT_positionTrouvee;0)
-	ARRAY LONGINT:C221($AT_longueurTrouvee;0)
-	ARRAY TEXT:C222($AT_routeFormatCle;0)
+	ARRAY LONGINT:C221($AT_positionTrouvee; 0)
+	ARRAY LONGINT:C221($AT_longueurTrouvee; 0)
+	ARRAY TEXT:C222($AT_routeFormatCle; 0)
 	
 	This:C1470.user:=$1
 	
@@ -41,7 +41,7 @@ Historique
 	// Petit hack pour les datatables en attendant des jours meilleurs.
 	siteDataTable_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].dataTable
 	
-	This:C1470.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+	This:C1470.info:=New object:C1471("webfolderSubdomainPath_t"; Get 4D folder:C485(HTML Root folder:K5:20; *)+This:C1470.user.sousDomaine+Folder separator:K24:12)
 	
 	
 	$libPageConnexion_t:="userIdentification"
@@ -58,11 +58,11 @@ Historique
 	
 	If (pageWeb_o=Null:C1517)
 		
-		For each ($page_o;This:C1470.siteRoute_c.query("lib IS NOT index")) Until (pageWeb_o#Null:C1517)
+		For each ($page_o; This:C1470.siteRoute_c.query("lib IS NOT index")) Until (pageWeb_o#Null:C1517)
 			
-			If (Match regex:C1019($page_o.route.regex;visiteur.url;1;$AT_positionTrouvee;$AT_longueurTrouvee))
+			If (Match regex:C1019($page_o.route.regex; visiteur.url; 1; $AT_positionTrouvee; $AT_longueurTrouvee))
 				pageWeb_o:=$page_o
-				pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t";Get 4D folder:C485(HTML Root folder:K5:20;*)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+				pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t"; Get 4D folder:C485(HTML Root folder:K5:20; *)+This:C1470.user.sousDomaine+Folder separator:K24:12)
 			End if 
 			
 		End for each 
@@ -72,14 +72,14 @@ Historique
 	If (pageWeb_o#Null:C1517)
 		
 		// On verifie si la page à besoin d'être identifier.
-		If (OB Is defined:C1231(pageWeb_o;"login"))
+		If (OB Is defined:C1231(pageWeb_o; "login"))
 			// On regarde si l'utilisateur est loggué.
-			If (OB Is defined:C1231(visiteur;"loginDomaine"))
+			If (OB Is defined:C1231(visiteur; "loginDomaine"))
 				If (visiteur.domaine#visiteur.loginDomaine)
-					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
+					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1"; $libPageConnexion_t)[0]
 				End if 
 			Else 
-				pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
+				pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1"; $libPageConnexion_t)[0]
 			End if 
 			
 			// On vérifie que la durée de la session ne soit pas expiré.
@@ -90,12 +90,12 @@ Historique
 					If (visiteur.loginExpire_ts<=cwTimestamp)
 						// Delais session dépassé.
 						visiteur.loginDomaine:=""
-						pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
+						pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1"; $libPageConnexion_t)[0]
 						
 					End if 
 					
 				Else 
-					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1";$libPageConnexion_t)[0]
+					pageWeb_o:=This:C1470.siteRoute_c.query("lib IS :1"; $libPageConnexion_t)[0]
 				End if 
 			End if 
 		End if 
@@ -106,11 +106,11 @@ Historique
 		
 		// Si il y a des param dans l'url & que la page est differente de la page de connexion.
 		If ($L_nbDeVariableDansUrl#0) & (pageWeb_o.lib#$libPageConnexion_t)
-			OB GET PROPERTY NAMES:C1232(pageWeb_o.route.format;$AT_routeFormatCle)
+			OB GET PROPERTY NAMES:C1232(pageWeb_o.route.format; $AT_routeFormatCle)
 			
-			For ($t;1;Size of array:C274($AT_positionTrouvee))
+			For ($t; 1; Size of array:C274($AT_positionTrouvee))
 				//OB SET($routeData;$AT_routeFormatCle{$t};Substring(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t}))
-				$routeData[$AT_routeFormatCle{$t}]:=Substring:C12(visiteur.url;$AT_positionTrouvee{$t};$AT_longueurTrouvee{$t})
+				$routeData[$AT_routeFormatCle{$t}]:=Substring:C12(visiteur.url; $AT_positionTrouvee{$t}; $AT_longueurTrouvee{$t})
 			End for 
 		End if 
 		
@@ -135,11 +135,11 @@ Historique
 					pageWeb_o.route.data.lang:=This:C1470.user.lang
 				End if 
 			End if 
-			ARRAY TEXT:C222($champs;1)
-			ARRAY TEXT:C222($valeurs;1)
+			ARRAY TEXT:C222($champs; 1)
+			ARRAY TEXT:C222($valeurs; 1)
 			$champs{1}:="X-STATUS"
 			$valeurs{1}:="404 Not Found"
-			WEB SET HTTP HEADER:C660($champs;$valeurs)
+			WEB SET HTTP HEADER:C660($champs; $valeurs)
 		Else 
 			$logErreur_o.detailErreur:="Impossible de charger la configuration de la page 404."
 			pageWeb_o.redirection301("/")
@@ -162,13 +162,13 @@ Historique
 	End if 
 	
 	// Chargement des informations i18n.
-	pageWeb_o.i18n:=This:C1470.siteRoute_c.query("lib IS :1";pageWeb_o.lib)[0].i18n
+	pageWeb_o.i18n:=This:C1470.siteRoute_c.query("lib IS :1"; pageWeb_o.lib)[0].i18n
 	
 	
-	If (OB Is defined:C1231($logErreur_o;"detailErreur"))
+	If (OB Is defined:C1231($logErreur_o; "detailErreur"))
 		$logErreur_o.methode:=Current method name:C684
 		$logErreur_o.visiteur:=visiteur
-		cwLogErreurAjout("Configuration serveur";$logErreur_o)
+		cwLogErreurAjout("Configuration serveur"; $logErreur_o)
 		
 		If (Bool:C1537(visiteur.devMode))
 			ALERT:C41($logErreur_o.methode+" : "+$logErreur_o.detailErreur)
@@ -176,7 +176,7 @@ Historique
 	End if 
 	
 	
-	For each ($propriete_t;pageWeb_o)
+	For each ($propriete_t; pageWeb_o)
 		This:C1470[$propriete_t]:=pageWeb_o[$propriete_t]
 	End for each 
 	
@@ -198,7 +198,7 @@ Historique
 	var $1 : Text  // Domaine du CDN
 	var $0 : Text  // Contenu des fichiers html
 	
-	var $cssContenu_t;$cssHtmlModele_t;$cssPath_t : Text
+	var $cssContenu_t; $cssHtmlModele_t; $cssPath_t : Text
 	
 	
 	$cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssPath\">"
@@ -210,15 +210,15 @@ Historique
 	
 	If (This:C1470.cssPath#Null:C1517)
 		
-		For each ($cssPath_t;This:C1470.cssPath)
+		For each ($cssPath_t; This:C1470.cssPath)
 			
-			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t;"$cssPath";$cssPath_t)+Char:C90(Line feed:K15:40)
+			$cssContenu_t:=$cssContenu_t+Replace string:C233($cssHtmlModele_t; "$cssPath"; $cssPath_t)+Char:C90(Line feed:K15:40)
 		End for each 
 		
 	End if 
 	
 	If (Count parameters:C259=1)
-		$cssContenu_t:=Replace string:C233($cssContenu_t;"domaineCDN";$1)
+		$cssContenu_t:=Replace string:C233($cssContenu_t; "domaineCDN"; $1)
 	End if 
 	
 	$0:=$cssContenu_t
@@ -226,7 +226,7 @@ Historique
 	
 	
 Function i18nGet
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : Page.I18nGet
 	
 Historique
@@ -237,7 +237,7 @@ Historique
 	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
 	var $0 : Text  // le text en retour
 	
-	ASSERT:C1129($1#"";"Le param $1 doit être une chaine de caractère non vide.")
+	ASSERT:C1129($1#""; "Le param $1 doit être une chaine de caractère non vide.")
 	If (This:C1470.route.data.lang=Null:C1517)
 		This:C1470.route.data.lang:="fr"
 	End if 
@@ -272,13 +272,13 @@ Historique
 	
 	If (This:C1470.jsPath#Null:C1517)
 		
-		For each ($jsPath_t;This:C1470.jsPath)
-			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t;"$jsPath";$jsPath_t)+Char:C90(Line feed:K15:40)
+		For each ($jsPath_t; This:C1470.jsPath)
+			$T_jsContenu:=$T_jsContenu+Replace string:C233($jsHtmlModele_t; "$jsPath"; $jsPath_t)+Char:C90(Line feed:K15:40)
 		End for each 
 	End if 
 	
 	If (Count parameters:C259=1)
-		$T_jsContenu:=Replace string:C233($T_jsContenu;"domaineCDN";$1)
+		$T_jsContenu:=Replace string:C233($T_jsContenu; "domaineCDN"; $1)
 	End if 
 	
 	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
@@ -305,12 +305,12 @@ Historique
 	End if 
 	
 	// Intégration du JS dans la page HTML.
-	For each ($jsPath_t;pageWeb_o.jsPathInHtml)
+	For each ($jsPath_t; pageWeb_o.jsPathInHtml)
 		
 		// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
-		$jsPath_t:=Replace string:C233($jsPath_t;":";Folder separator:K24:12)  // Séparateur mac
-		$jsPath_t:=Replace string:C233($jsPath_t;"/";Folder separator:K24:12)  // Séparateur unix
-		$jsPath_t:=Replace string:C233($jsPath_t;"\\";Folder separator:K24:12)  // Séparateur windows
+		$jsPath_t:=Replace string:C233($jsPath_t; ":"; Folder separator:K24:12)  // Séparateur mac
+		$jsPath_t:=Replace string:C233($jsPath_t; "/"; Folder separator:K24:12)  // Séparateur unix
+		$jsPath_t:=Replace string:C233($jsPath_t; "\\"; Folder separator:K24:12)  // Séparateur windows
 		
 		
 		If (Test path name:C476(This:C1470.info.webfolderSubdomainPath_t+"js"+Folder separator:K24:12+$jsPath_t)=Is a document:K24:1)
@@ -342,8 +342,8 @@ Historique
 	var $contenuFichierCorpsHtml_t : Text
 	var $nomVar_t : Text
 	var $valVar_t : Text
-	ARRAY LONGINT:C221($posTrouvee_al;0)
-	ARRAY LONGINT:C221($longTrouvee_al;0)
+	ARRAY LONGINT:C221($posTrouvee_al; 0)
+	ARRAY LONGINT:C221($longTrouvee_al; 0)
 	
 	$contenuFichierCorpsHtml_t:=$1
 	
@@ -351,33 +351,33 @@ Historique
 	
 	If ($contenuFichierCorpsHtml_t="@<!--#cwBlock@")
 		// On remplace les sauts de lignes par un espace. (Créer des erreurs sur le regex)
-		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\r";"##r")
-		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;"\n";"##n")
+		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t; "\r"; "##r")
+		$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t; "\n"; "##n")
 		
 		// On purge les premiers caractéres.
-		$Pos:=Position:C15("<!--#cwBlock";$contenuFichierCorpsHtml_t)
+		$Pos:=Position:C15("<!--#cwBlock"; $contenuFichierCorpsHtml_t)
 		If ($Pos#1)
-			$contenuFichierCorpsHtml_t:=Substring:C12($contenuFichierCorpsHtml_t;$Pos)
+			$contenuFichierCorpsHtml_t:=Substring:C12($contenuFichierCorpsHtml_t; $Pos)
 		End if 
 		
 		// On récupére le 1er block
-		$blockLength_l:=Position:C15("<!--#cwBlockFin-->";$contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
-		$block_t:=Substring:C12($contenuFichierCorpsHtml_t;1;$blockLength_l)
+		$blockLength_l:=Position:C15("<!--#cwBlockFin-->"; $contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
+		$block_t:=Substring:C12($contenuFichierCorpsHtml_t; 1; $blockLength_l)
 		
-		While ((Match regex:C1019("<!--#cwBlock ([a-zA-Z0-9_-]*)-->(.*)<!--#cwBlockFin-->(.*)?";$block_t;1;$posTrouvee_al;$longTrouvee_al)))
+		While ((Match regex:C1019("<!--#cwBlock ([a-zA-Z0-9_-]*)-->(.*)<!--#cwBlockFin-->(.*)?"; $block_t; 1; $posTrouvee_al; $longTrouvee_al)))
 			
-			$nomVar_t:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{1};$longTrouvee_al{1})
-			$valVar_t:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{2};$longTrouvee_al{2})
+			$nomVar_t:=Substring:C12($contenuFichierCorpsHtml_t; $posTrouvee_al{1}; $longTrouvee_al{1})
+			$valVar_t:=Substring:C12($contenuFichierCorpsHtml_t; $posTrouvee_al{2}; $longTrouvee_al{2})
 			
 			This:C1470[$nomVar_t]:=$valVar_t
-			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t];"##r";"\r")
-			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t];"##n";"\n")
+			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t]; "##r"; "\r")
+			This:C1470[$nomVar_t]:=Replace string:C233(This:C1470[$nomVar_t]; "##n"; "\n")
 			
-			$group3:=Substring:C12($contenuFichierCorpsHtml_t;$posTrouvee_al{3};$longTrouvee_al{3})
+			$group3:=Substring:C12($contenuFichierCorpsHtml_t; $posTrouvee_al{3}; $longTrouvee_al{3})
 			
-			$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t;$block_t;"";1)
-			$blockLength_l:=Position:C15("<!--#cwBlockFin-->";$contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
-			$block_t:=Substring:C12($contenuFichierCorpsHtml_t;1;$blockLength_l)
+			$contenuFichierCorpsHtml_t:=Replace string:C233($contenuFichierCorpsHtml_t; $block_t; ""; 1)
+			$blockLength_l:=Position:C15("<!--#cwBlockFin-->"; $contenuFichierCorpsHtml_t)+Length:C16("<!--#cwBlockFin-->")-1
+			$block_t:=Substring:C12($contenuFichierCorpsHtml_t; 1; $blockLength_l)
 			
 		End while 
 	End if 
@@ -399,15 +399,15 @@ Historique
 	// Déclarations
 	var $1 : Text  // $1 = [texte] nouvelle url
 	
-	ARRAY TEXT:C222($champs;2)
-	ARRAY TEXT:C222($valeurs;2)
+	ARRAY TEXT:C222($champs; 2)
+	ARRAY TEXT:C222($valeurs; 2)
 	
 	$champs{1}:="X-STATUS"
 	$valeurs{1}:="301 Moved Permanently, false, 301"
 	$champs{2}:="Location"
 	$valeurs{2}:=$1
 	
-	WEB SET HTTP HEADER:C660($champs;$valeurs)
+	WEB SET HTTP HEADER:C660($champs; $valeurs)
 	WEB SEND TEXT:C677("redirection")
 	
 	This:C1470.route:=New object:C1471()

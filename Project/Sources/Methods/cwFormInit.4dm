@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwInputFormInit
 
 Initialise les formulaires html
@@ -10,7 +10,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
 02/12/20 - Alban Catoire <alban@connect-io.fr> - Gestion de la traduction dans les formulaires
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Nom du formulaire html
@@ -22,11 +22,11 @@ var $formNom_t : Text
 
 
 // Nettoyage du param
-$formNom_t:=Substring:C12($1;2)
-$formNom_t:=Replace string:C233($formNom_t;"/readOnly";"")
+$formNom_t:=Substring:C12($1; 2)
+$formNom_t:=Replace string:C233($formNom_t; "/readOnly"; "")
 
 // On retrouve le formulaire
-$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$formNom_t)
+$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1"; $formNom_t)
 
 If ($resultForm_c.length=1)
 	formulaire_o:=OB Copy:C1225($resultForm_c[0])
@@ -38,4 +38,4 @@ End if
 
 //On utilisera la variable "formulaire_o" aussi pour l'appel des inputs html.
 
-$0:=Char:C90(1)+Replace string:C233(formulaire_o.html;"$action";cwLibToUrl(formulaire_o.action))
+$0:=Char:C90(1)+Replace string:C233(formulaire_o.html; "$action"; cwLibToUrl(formulaire_o.action))

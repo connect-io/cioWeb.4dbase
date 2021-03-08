@@ -1,5 +1,5 @@
 //%attributes = {"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwFormatValide
 
 Verifie le format d'une data
@@ -11,12 +11,12 @@ Historique
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité d'un espace dans un real.
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du bool pour un checkbox
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $0 : Text  // ok, format inconnu, format incorrect
-var $1;$formatNom_t : Text  // format recherché
-var $2;$dataValue_t : Text  // valeur de la data
+var $1; $formatNom_t : Text  // format recherché
+var $2; $dataValue_t : Text  // valeur de la data
 
 var $T_regex : Text
 var $format_o : Object
@@ -41,7 +41,7 @@ Case of
 	: ($format_o[$formatNom_t]#Null:C1517)
 		
 		$T_regex:="^("+$format_o[$formatNom_t]+")$"
-		If (Match regex:C1019($T_regex;$dataValue_t))
+		If (Match regex:C1019($T_regex; $dataValue_t))
 			$0:="ok"
 			
 		Else 

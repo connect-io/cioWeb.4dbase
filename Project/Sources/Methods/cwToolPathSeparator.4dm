@@ -1,12 +1,12 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwToolPathSeparator
 
 Modifier les séparateurs dans le chemin d'un fichier.
 
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Chemin à controler
@@ -25,21 +25,21 @@ Else
 End if 
 
 If ($separateur_t="/")
-	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t;":\\";$separateur_t)
+	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t; ":\\"; $separateur_t)
 	
 	// Exemple : C:\dossier -> C/dossier
 End if 
 
 If ($separateur_t#"\\")
-	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t;"\\";$separateur_t)  // Séparateur windows
+	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t; "\\"; $separateur_t)  // Séparateur windows
 End if 
 
 If ($separateur_t#":")
-	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t;":";$separateur_t)  // Séparateur mac
+	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t; ":"; $separateur_t)  // Séparateur mac
 End if 
 
 If ($separateur_t#"/")
-	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t;"/";$separateur_t)  // Séparateur unix
+	$cheminTemporaire_t:=Replace string:C233($cheminTemporaire_t; "/"; $separateur_t)  // Séparateur unix
 End if 
 
 $0:=$cheminTemporaire_t

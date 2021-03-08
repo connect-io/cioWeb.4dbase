@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwI18nCharger
 
 Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.

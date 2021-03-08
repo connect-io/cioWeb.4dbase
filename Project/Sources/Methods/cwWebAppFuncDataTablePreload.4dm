@@ -1,5 +1,5 @@
 //%attributes = {"invisible":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwWebAppFuncDataTablePreload
 
 Precharge toutes les datatables HTML de l'application web.

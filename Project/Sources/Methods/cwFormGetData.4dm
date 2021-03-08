@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwFormGetData
 
 La méthode reprend le principe de fonctionnement de la methode cwFormControle mais sans les contrôles.
@@ -7,7 +7,7 @@ La méthode reprend le principe de fonctionnement de la methode cwFormControle m
 Historique
 07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Pointer  // visiteur
@@ -32,7 +32,7 @@ If (visiteur=Null:C1517)
 End if 
 
 If ($resultat_t="")
-	$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1";$T_nomForm)
+	$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1"; $T_nomForm)
 	
 	Case of 
 		: ($resultForm_c.length=1)
@@ -52,8 +52,8 @@ End if
 If ($resultat_t="")
 	//On supprime les précédentes dataForm
 	If (visiteur.dataForm#Null:C1517)
-		OB REMOVE:C1226(visiteur;"dataForm")
-		OB REMOVE:C1226(visiteur;"dataFormTyping")
+		OB REMOVE:C1226(visiteur; "dataForm")
+		OB REMOVE:C1226(visiteur; "dataFormTyping")
 	End if 
 	
 End if 
@@ -67,10 +67,10 @@ If ($resultat_t="")
 	End if 
 	
 	// On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
-	For each ($formInput_o;$infoForm_o.input)
+	For each ($formInput_o; $infoForm_o.input)
 		
 		// Si la data est valide, on stock la valeur dans dataForm.
-		OB SET:C1220(visiteur.dataForm;$formInput_o.lib;visiteur[$formInput_o.lib])
+		OB SET:C1220(visiteur.dataForm; $formInput_o.lib; visiteur[$formInput_o.lib])
 		
 		Case of 
 			: ($formInput_o.lib=$infoForm_o.submit)
@@ -98,10 +98,10 @@ If ($resultat_t="")
 	
 End if 
 
-$T_prefixe:=Replace string:C233($infoForm_o.submit;"submit";"")
+$T_prefixe:=Replace string:C233($infoForm_o.submit; "submit"; "")
 // On supprime le prefixe des clés.
-cwToolObjectDeletePrefixKey(visiteur.dataForm;$T_prefixe)
-cwToolObjectDeletePrefixKey(visiteur.dataFormTyping;$T_prefixe)
+cwToolObjectDeletePrefixKey(visiteur.dataForm; $T_prefixe)
+cwToolObjectDeletePrefixKey(visiteur.dataFormTyping; $T_prefixe)
 
 // DataFromTyping est renvoyé dans la méthode et dans visiteur... C'est Kdo.
 $0:=visiteur.dataFormTyping

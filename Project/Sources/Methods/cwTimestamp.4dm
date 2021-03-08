@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwTimestamp
 
 Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre machine)
@@ -7,10 +7,10 @@ Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre mac
 Historique
 08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
-var $1;$date_d : Date  // Date (optionnel)
+var $1; $date_d : Date  // Date (optionnel)
 var $2 : Time  // Heure (optionnel)
 var $0 : Integer  // Timestamp
 
@@ -19,8 +19,8 @@ var $nbJourSec_l : Integer
 
 
 If (Count parameters:C259=2)
-	ASSERT:C1129($1#!00-00-00!;"Le type de $1 n'est pas une date")
-	ASSERT:C1129($2#?00:00:00?;"Le type de $2 n'est pas une heure")
+	ASSERT:C1129($1#!00-00-00!; "Le type de $1 n'est pas une date")
+	ASSERT:C1129($2#?00:00:00?; "Le type de $2 n'est pas une heure")
 	
 	$date_d:=$1
 	$heure_l:=$2+0

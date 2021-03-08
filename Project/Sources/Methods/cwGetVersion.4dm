@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwGetVersion
 
 Permet de recuperer la version de 4D
@@ -24,7 +24,7 @@ $minor_t:=$version_t[[4]]  //.x
 
 $info_t:="4D v"+$major_t
 If ($release_t="0")  //4D v14.x
-	$info_t:=$info_t+Choose:C955($minor_t#"0";"."+$minor_t;"")
+	$info_t:=$info_t+Choose:C955($minor_t#"0"; "."+$minor_t; "")
 	
 Else   //4D v14 Rx
 	$info_t:=$info_t+" R"+$release_t

@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwFormInputSelectNewValue
 
 Générer des nouvelles entrée dans un input de type select.

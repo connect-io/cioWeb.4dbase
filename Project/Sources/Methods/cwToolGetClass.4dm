@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwToolGetClass
 
 Renvoie une class vers la base hôte.

@@ -1,5 +1,5 @@
 //%attributes = {"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwWebAppFuncChartPreload
 
 Precharge tous les graphiques HTML de l'application web.

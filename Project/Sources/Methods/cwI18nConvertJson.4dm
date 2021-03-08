@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwI18nConvertJson (Composant CioRegex)
 
 Remplace une chaine de caractère depuis une regex par un contenu fixe.

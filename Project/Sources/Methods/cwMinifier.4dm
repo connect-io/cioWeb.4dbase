@@ -1,16 +1,16 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : ogWebMinifier
 
 Permet de minimifier les fichiers javascript.
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------ */
+-----------------------------------------------------------------------------*/
 
 // Déclarations
-var $1;texteIn : Text  // action (Utile seulement pour la methode.)
-var $0;texteOut : Text
+var $1; texteIn : Text  // action (Utile seulement pour la methode.)
+var $0; texteOut : Text
 
 var car : Text
 var $car1 : Text
@@ -38,19 +38,19 @@ If (Count parameters:C259=1)
 	
 Else 
 	posTexte:=posTexte+1
-	$car1:=Substring:C12(texteIn;posTexte;1)
-	$car2:=Substring:C12(texteIn;posTexte+1;1)
+	$car1:=Substring:C12(texteIn; posTexte; 1)
+	$car2:=Substring:C12(texteIn; posTexte+1; 1)
 	//On transforme les retours a la ligne en nouvelle ligne.
 	
-	If (Match regex:C1019("[:space:]";$car1;1;$p;$l))
+	If (Match regex:C1019("[:space:]"; $car1; 1; $p; $l))
 		//On creer 2 conditions pour reduire le nombre de regex.
-		If (Match regex:C1019("[:space:]";$car2;1;$p;$l))
+		If (Match regex:C1019("[:space:]"; $car2; 1; $p; $l))
 			
 			$fin:=False:C215
 			Repeat 
-				$car2:=Substring:C12(texteIn;posTexte+1;1)
+				$car2:=Substring:C12(texteIn; posTexte+1; 1)
 				
-				If (Match regex:C1019("[:space:]";$car2;1;$p;$l))
+				If (Match regex:C1019("[:space:]"; $car2; 1; $p; $l))
 					posTexte:=posTexte+1
 					$fin:=True:C214
 					$car1:="\n"
@@ -74,7 +74,7 @@ Else
 			posTexte:=posTexte+1
 			While ($car1#"\n") & ($car1#"\r") & ($car1#"")
 				posTexte:=posTexte+1
-				$car1:=Substring:C12(texteIn;posTexte;1)
+				$car1:=Substring:C12(texteIn; posTexte; 1)
 				
 			End while 
 			
@@ -88,11 +88,11 @@ Else
 			
 			While ($tjrsCommentaire)
 				posTexte:=posTexte+1
-				$car1:=Substring:C12(texteIn;posTexte;1)
+				$car1:=Substring:C12(texteIn; posTexte; 1)
 				
 				Case of 
 					: ($car1="*")
-						$car2:=Substring:C12(texteIn;posTexte+1;1)
+						$car2:=Substring:C12(texteIn; posTexte+1; 1)
 						If ($car2="/")
 							posTexte:=posTexte+1
 							//C'est bien la fin de notre commentaire

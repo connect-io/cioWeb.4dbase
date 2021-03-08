@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Methode projet : cw4dWriteProGeneratePDF
 
 Detail des entreprises ajax
@@ -77,7 +77,7 @@ Case of
 		
 	: (Test path name:C476($cheminPdf_t)#Is a folder:K24:2)
 		// Si besoin, on génére l'arborescence.
-		CREATE FOLDER:C475($cheminPdf_t;*)
+		CREATE FOLDER:C475($cheminPdf_t; *)
 End case 
 
 // Configuration de base du PDF.
@@ -88,7 +88,7 @@ $option_o[wk recompute formulas:K81:320]:=True:C214
 // si besoin, sur-configuration du PDF.
 If (Count parameters:C259=3)
 	If (Type:C295($3)=Is object:K8:27)
-		$option_o:=cwToolObjectMerge($option_o;$3)
+		$option_o:=cwToolObjectMerge($option_o; $3)
 	Else 
 		$erreur_t:="Le param $3 doit être de nature objet."
 	End if 
@@ -96,7 +96,7 @@ End if
 
 
 If ($erreur_t="")
-	WP EXPORT DOCUMENT:C1337($documentWrPro_o;$cheminPdf_t;wk pdf:K81:315;$option_o)
+	WP EXPORT DOCUMENT:C1337($documentWrPro_o; $cheminPdf_t; wk pdf:K81:315; $option_o)
 	If (Test path name:C476($cheminPdf_t)#Is a document:K24:1)
 		$erreur_t:="La génération du PDF n'a pas fonctionné."
 	End if 
@@ -104,4 +104,4 @@ If ($erreur_t="")
 End if 
 
 
-$0:=Choose:C955($erreur_t#"";Current method name:C684+" : "+$erreur_t;"Ok")
+$0:=Choose:C955($erreur_t#""; Current method name:C684+" : "+$erreur_t; "Ok")

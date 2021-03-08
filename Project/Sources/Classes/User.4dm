@@ -10,7 +10,7 @@ un robot google ou un autre serveur qui vient interroger le notre.
 
 
 Class constructor
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.constructor
 	
 Initialisation d'un utilisateur
@@ -27,7 +27,7 @@ Historique
 	
 	
 Function entityToForm
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.entityToForm
 	
 Remplit un formulaire avec les infos d'une entité.
@@ -97,7 +97,7 @@ Historique
 	
 	
 Function formInfo
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.formInfo
 	
 Retourne les informations d'un formulaire.
@@ -122,7 +122,7 @@ Historique
 	
 	
 Function formToEntity
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.formToEntity
 	
 Charger les valeurs d'un formulaire vers une entité (ou objet).
@@ -148,7 +148,7 @@ Historique
 	
 	
 Function getInfo
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.getInfo
 	
 Chargement des éléments sur l'utilisateur / visiteur
@@ -231,7 +231,7 @@ Historique
 	
 	
 Function login
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.login
 	
 À utiliser après la vérification des utilisateurs.
@@ -259,7 +259,7 @@ Historique
 	
 	
 Function logout
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.logout
 	
 Déconnexion de l'utilisateur
@@ -276,7 +276,7 @@ Historique
 	
 	
 Function objectMerge
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
@@ -300,7 +300,7 @@ Historique
 	
 	
 Function sessionWebFolderPath
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.sessionWebFolderPath
 	
 Chemin du dossier des sessions web de l'utilisateur.
@@ -357,7 +357,7 @@ Historique
 	
 	
 Function sessionWebLoad
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.sessionWebLoad
 	
 Chargement des sessions web de l'utilisateur.
@@ -443,7 +443,7 @@ Historique
 	
 	
 Function sessionWebSave
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.sessionWebSave
 	
 Sauvegarder des sessions web de l'utilisateur.
@@ -495,7 +495,7 @@ Historique
 	
 	
 Function tokenCheck
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.tokenCheck
 	
 Vérifie un jeton pour la validation d'une pages web.
@@ -529,7 +529,7 @@ Historique
 	
 	
 Function tokenGenerate
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.tokenGenerate
 	
 Génere un jeton pour la validation des pages web.
@@ -549,7 +549,7 @@ Historique
 	
 	
 Function updateVarVisiteur
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : User.updateVarVisiteur
 	
 Synchro avec du vieux code

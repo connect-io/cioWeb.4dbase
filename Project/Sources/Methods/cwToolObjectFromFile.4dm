@@ -1,5 +1,5 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwToolObjectFromFile
 
 Charge un objet JSON depuis un objet de type file. (Compatible JSON et JSONC)

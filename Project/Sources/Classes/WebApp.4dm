@@ -7,7 +7,7 @@ Cette class permet de centraliser toutes les données de l'application web.
 
 
 Class constructor
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.constructor
 	
 Initialisation de l'application web
@@ -185,7 +185,7 @@ Historique
 	
 	
 Function cacheSessionWebPath($pathDefault_t : Text)->$path_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.cacheSessionWebPath
 	
 Chemin complet plateforme des sessions web
@@ -223,7 +223,7 @@ Historique
 	
 	
 Function cacheViewSubdomainPath($subDomain_t : Text)->$path_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.cacheViewSubdomainPath
 	
 Chemin complet plateforme du dossier cache des vues / sousDomaine
@@ -250,7 +250,7 @@ Historique
 	
 	
 Function I18NLoad()
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : I18NLoad
 	
 Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.
@@ -360,7 +360,7 @@ Historique
 	
 	
 Function eMailConfigLoad()
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.eMailConfigLoad
 	
 Precharge toutes les e-mails de l'application web.
@@ -376,7 +376,7 @@ Historique
 	
 	
 Function htmlMinify()
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.htmlMinify
 	
 Minification du HTML
@@ -467,7 +467,7 @@ Historique
 	
 	
 Function jsMinify()
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.jsMinify
 	
 Minification du javascript
@@ -543,7 +543,7 @@ Historique
 	
 	
 Function serverStart()
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.serverStart
 	
 Démarrage du serveur web
@@ -899,7 +899,7 @@ Historique
 	
 	
 Function sourceSubdomainPath($subDomain_t : Text)->$path_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.sourceSubdomainPath
 	
 Chemin complet plateforme du dossier Source/sousDomaine
@@ -926,7 +926,7 @@ Historique
 	
 	
 Function webfolderSubdomainPath($subDomain_t : Text)->$path_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : WebApp.webfolderSubdomainPath
 	
 Chemin complet plateforme du dossier Webfolder/sousDomaine

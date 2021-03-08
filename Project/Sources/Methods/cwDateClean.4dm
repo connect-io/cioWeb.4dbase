@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwDateClean
 
 Reconstruire une date depuis une saisie client

@@ -1,5 +1,5 @@
 //%attributes = {"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwToolObjectFromPlatformPath
 
 Charge un objet depuis le chemin d'un fichier. (Compatible JSON et JSONC)
@@ -15,6 +15,6 @@ var $0 : Object  // Objet contenu dans le fichier.
 
 var $file_o : Object
 
-$file_o:=File:C1566($1;fk platform path:K87:2)
+$file_o:=File:C1566($1; fk platform path:K87:2)
 
 $0:=cwToolObjectFromFile($file_o)

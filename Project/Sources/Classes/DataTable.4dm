@@ -7,7 +7,7 @@ Gestion des tableaux de données en HTML.
 
 
 Class constructor($dataTableLib_t : Text)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : DataTable.constructor
 	
 Initialisation d'une dataTable
@@ -75,7 +75,7 @@ Historique
 	
 	
 Function addData($ligneData_c : Collection)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : DataTable.addData
 	
 Ajoute une ligne à votre tableau.
@@ -94,7 +94,7 @@ Historique
 	
 	
 Function getHtml->$html_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : DataTable.getHtml
 	
 Génére le code HTML pour le tableau.
@@ -112,7 +112,7 @@ Historique
 	
 	
 Function sendDataAjax->$dataJson_t : Text
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : DataTable.sendDataAjax
 	
 Génére le JSON des données à renvoyer au navigateur.
@@ -131,7 +131,7 @@ Historique
 	
 	
 Function setData($source_v : Variant)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : DataTable.setData
 	
 Charger les data dans le tableau de donnée.

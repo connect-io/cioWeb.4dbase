@@ -1,5 +1,5 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Méthode : cwStorage
 
 Utilisation du storage du composant dans la base hôte.
