@@ -93,37 +93,20 @@ Historique
 	If ($reponse_o.isValide)
 		If (Count parameters:C259>2)
 			
-			If (Type:C295($2)#Is text:K8:3)
-				$reponse_o.isValide:=False:C215
-				$reponse_o.error:="Le param $2 n'est pas un text."
-			End if 
-			
-			If (Type:C295($3)#Is longint:K8:6)
-				$reponse_o.isValide:=False:C215
-				$reponse_o.error:="Le param $3 n'est pas un entier."
-			End if 
-			
-			If (Type:C295($4)#Is longint:K8:6)
-				$reponse_o.isValide:=False:C215
-				$reponse_o.error:="Le param $4 n'est pas un entier."
-			End if 
-			
-			
-			If ($2="scale") | ($2="fit") | ($2="cover")  // On choisit la méthode de resize. Voir la DOC pour plus d'informations
+			If (String:C10($2)="scale") | (String:C10($2)="fit") | (String:C10($2)="cover")  // On choisit la méthode de resize. Voir la DOC pour plus d'informations
 				$data_o.resize:=New object:C1471
-				$data_o.resize.method:=$2
+				$data_o.resize.method:=String:C10($2)
 				
-				If ($3#0)
-					$data_o.resize.width:=$3
+				If (Num:C11($3)#0)
+					$data_o.resize.width:=Num:C11($3)
 				End if 
-				If ($4#0)
-					$data_o.resize.height:=$4
+				If (Num:C11($4)#0)
+					$data_o.resize.height:=Num:C11($4)
 				End if 
 			Else 
 				$reponse_o.isValide:=False:C215
 				$reponse_o.error:="Le type de retaillage est invalide."
 			End if 
-			
 			
 		End if 
 	End if 
