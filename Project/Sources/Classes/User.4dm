@@ -226,6 +226,40 @@ Historique
 		This:C1470.notificationInfo:=""
 	End if 
 	
+	
+	// Les modifications suivantes sont pour la compatibilité avec des nouvelles versions de Chrome.
+	// En effet depuis la V88 chrome renvoit les variables : referer, host et cookies avec une
+	// minuscule alors qu'historiquement c'est une majuscule.
+	
+	If (String:C10(This:C1470.referer)#"")
+		This:C1470.Referer:=This:C1470.referer
+	End if 
+	
+	If (String:C10(This:C1470.host)#"")
+		This:C1470.Host:=This:C1470.host
+	End if 
+	
+	//TRACE
+	If (String:C10(This:C1470.cookie)="")
+		// ----- Gestion des cookies -----
+		$cookies:=OB Get:C1224(This:C1470; "cookie"; Is text:K8:3)
+		If ($cookies#"")
+			While ($cookies#"")
+				$pos_egal:=Position:C15("="; $cookies)+1
+				$pos_point:=Position:C15("; "; $cookies)
+				If ($pos_point=0)
+					$pos_point:=99999
+				End if 
+				
+				OB SET:C1220(This:C1470; \
+					Substring:C12($cookies; 1; $pos_egal-2); \
+					Substring:C12($cookies; $pos_egal; $pos_point-$pos_egal))
+				
+				$cookies:=Substring:C12($cookies; $pos_point+2)
+			End while 
+		End if 
+	End if 
+	
 	This:C1470.updateVarVisiteur()
 	
 	
