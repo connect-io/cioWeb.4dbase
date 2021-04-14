@@ -66,7 +66,11 @@ For each ($model_o; Storage:C1525.eMail.model)
 		If (Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.source).exists)  // On vérifie si le document existe dans notre composant
 			Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.source).copyTo($modelFolder_o.file($model_o.source).parent)
 		Else   // Si ce n'est pas possible on lance une alerte.
-			ALERT:C41("Il manque la source du modèle "+$model_o.name+" pour le composant cioWeb.")
+			
+			If (Application type:C494#4D mode distant:K5:5)
+				ALERT:C41("Il manque la source du modèle "+$model_o.name+" pour le composant cioWeb.")
+			End if 
+			
 		End if 
 		
 	End if 
@@ -78,7 +82,11 @@ For each ($model_o; Storage:C1525.eMail.model)
 			If (Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.layout).exists)  // On verifie si le layout est disponible dans le composant
 				Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.layout).copyTo($modelFolder_o.file($model_o.layout).parent)
 			Else   // Si ce n'est pas possible on lance une alerte.
-				ALERT:C41("Il manque le layout du modèle "+$model_o.name+" pour le composant cioWeb.")
+				
+				If (Application type:C494#4D mode distant:K5:5)
+					ALERT:C41("Il manque le layout du modèle "+$model_o.name+" pour le composant cioWeb.")
+				End if 
+				
 			End if 
 			
 		End if 
@@ -123,7 +131,6 @@ If (Storage:C1525.eMail.mjml#Null:C1517)
 			End if 
 			
 		End if 
-		
 		
 		If (String:C10($model_o.source)#"")  // S'il existe une source 
 			
