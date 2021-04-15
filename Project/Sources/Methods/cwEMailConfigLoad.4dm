@@ -22,7 +22,7 @@ If (Application type:C494#4D mode distant:K5:5)
 	$configFile_o:=File:C1566(Storage:C1525.param.folderPath.source_t+"email.jsonc"; fk chemin plateforme:K87:2)
 	
 	If (Application type:C494=4D Server:K5:6)  // Si on est en mode 4D Serveur, on va copier le fichier dans le dossier Ressources de la base hôte pour que les clients puissent le récupérer
-		$configFile_o.copyTo(Folder:C1567(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"TEMP"+Séparateur dossier:K24:12; fk chemin plateforme:K87:2))
+		$configFile_o.copyTo(Folder:C1567(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"TEMP"+Séparateur dossier:K24:12; fk chemin plateforme:K87:2); fk écraser:K87:5)
 	End if 
 	
 Else 
