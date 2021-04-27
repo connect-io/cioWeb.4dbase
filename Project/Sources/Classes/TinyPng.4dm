@@ -100,9 +100,13 @@ Historique
 				If (Num:C11($3)#0)
 					$data_o.resize.width:=Num:C11($3)
 				End if 
-				If (Num:C11($4)#0)
-					$data_o.resize.height:=Num:C11($4)
+				
+				If (Count parameters:C259>3)
+					If (Num:C11($4)#0)
+						$data_o.resize.height:=Num:C11($4)
+					End if 
 				End if 
+				
 			Else 
 				$reponse_o.isValide:=False:C215
 				$reponse_o.error:="Le type de retaillage est invalide."
