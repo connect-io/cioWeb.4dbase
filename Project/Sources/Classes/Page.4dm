@@ -388,7 +388,7 @@ Historique
 	
 Function redirection301
 /*-----------------------------------------------------------------------------
-Méthode : ogWebRedirection301
+Méthode : Page.redirection301
 	
 Etabli une redirection 301 http(de type permanante)
 	

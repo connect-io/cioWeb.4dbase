@@ -2,35 +2,41 @@
 /*------------------------------------------------------------------------------
 Méthode : cwEMailConfigLoad
 
-Precharge toutes les e-mails de l'application web.
+Precharge tous les e-mails de l'application web.
 
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
-13/04/21 - Rémy Scanu remy@connect-io.fr> - Adaptation à une utilisation client/serveur
+13/04/21 - Rémy Scanu <remy@connect-io.fr> - Adaptation à une utilisation client/serveur
 -----------------------------------------------------------------------------*/
+
+// Déclarations
 var $1 : Object  // Permet de définir des variables global (globalVar)
 
 var $configFile_o : 4D:C1709.File
 var $modelFolder_o : 4D:C1709.Folder
-var $model_o; $mjmlReponse_o; $mjmlContenu_o : Object
+var $model_o : Object  // Un model de la config
+var $mjmlReponse_o : Object  // Reponse de la requête
+var $mjmlContenu_o : Object  // Contenu de la requête MJML
 
 ASSERT:C1129(String:C10(Storage:C1525.param.folderPath.source_t)#""; \
 "cwEMailConfigLoad : Merci d'indiquez le chemin du dossier du fichier de config des email dans le storage du composant : Storage.param.folderPath.source_t")
 
-If (Application type:C494#4D mode distant:K5:5)
+If (Application type:C494#4D Remote mode:K5:5)
 	// Chemin du fichier de config dans la base hôte.
-	$configFile_o:=File:C1566(Storage:C1525.param.folderPath.source_t+"email.jsonc"; fk chemin plateforme:K87:2)
+	$configFile_o:=File:C1566(Storage:C1525.param.folderPath.source_t+"email.jsonc"; fk platform path:K87:2)
 	
-	If (Application type:C494=4D Server:K5:6)  // Si on est en mode 4D Serveur, on va copier le fichier dans le dossier Ressources de la base hôte pour que les clients puissent le récupérer
-		$configFile_o.copyTo(Folder:C1567(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"TEMP"+Séparateur dossier:K24:12; fk chemin plateforme:K87:2); fk écraser:K87:5)
+	// Si on est en mode 4D Serveur, on va copier le fichier dans le dossier Ressources de la base hôte pour que les clients puissent le récupérer
+	If (Application type:C494=4D Server:K5:6)
+		$configFile_o.copyTo(Folder:C1567(Get 4D folder:C485(Current resources folder:K5:16; *)+"TEMP"+Folder separator:K24:12; fk platform path:K87:2); fk overwrite:K87:5)
 	End if 
 	
 Else 
-	$configFile_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"TEMP"+Séparateur dossier:K24:12+"email.jsonc"; fk chemin plateforme:K87:2)
+	$configFile_o:=File:C1566(Get 4D folder:C485(Current resources folder:K5:16; *)+"TEMP"+Folder separator:K24:12+"email.jsonc"; fk platform path:K87:2)
 End if 
 
-If (Not:C34($configFile_o.exists))  // Si le fichier de config n'existe pas, on le crée.
-	Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(Storage:C1525.param.folderPath.source_t; fk chemin plateforme:K87:2))
+// Si le fichier de config n'existe pas, on le crée.
+If (Not:C34($configFile_o.exists))
+	Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file("email.jsonc").copyTo(Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2))
 End if 
 
 // Chargement de la configuration des eMails.
@@ -46,7 +52,8 @@ Use (Storage:C1525)
 		
 	End if 
 	
-	Use (Storage:C1525.eMail)  // chargement complet du dossier des models.
+	// chargement complet du dossier des models.
+	Use (Storage:C1525.eMail)
 		Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
 	End use 
 	
@@ -63,11 +70,11 @@ For each ($model_o; Storage:C1525.eMail.model)
 	
 	If (Not:C34($modelFolder_o.file($model_o.source).exists))  // Si le modéle n'existe pas, on l'importe
 		
-		If (Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.source).exists)  // On vérifie si le document existe dans notre composant
-			Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.source).copyTo($modelFolder_o.file($model_o.source).parent)
+		If (Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.source).exists)  // On vérifie si le document existe dans notre composant
+			Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.source).copyTo($modelFolder_o.file($model_o.source).parent)
 		Else   // Si ce n'est pas possible on lance une alerte.
 			
-			If (Application type:C494#4D mode distant:K5:5)
+			If (Application type:C494#4D Remote mode:K5:5)
 				ALERT:C41("Il manque la source du modèle "+$model_o.name+" pour le composant cioWeb.")
 			End if 
 			
@@ -75,15 +82,19 @@ For each ($model_o; Storage:C1525.eMail.model)
 		
 	End if 
 	
-	If (String:C10($model_o.layout)#"")  // si le modèle a un layout
+	// si le modèle a un layout
+	If (String:C10($model_o.layout)#"")
 		
-		If (Not:C34($modelFolder_o.file($model_o.layout).exists))  // On verifie si le layout est deja chargé sur la base hôte
+		// On verifie si le layout est deja chargé sur la base hôte
+		If (Not:C34($modelFolder_o.file($model_o.layout).exists))
 			
-			If (Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.layout).exists)  // On verifie si le layout est disponible dans le composant
-				Folder:C1567(fk dossier ressources:K87:11).folder("modelEMail").file($model_o.layout).copyTo($modelFolder_o.file($model_o.layout).parent)
-			Else   // Si ce n'est pas possible on lance une alerte.
+			// On verifie si le layout est disponible dans le composant
+			If (Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.layout).exists)
+				Folder:C1567(fk resources folder:K87:11).folder("modelEMail").file($model_o.layout).copyTo($modelFolder_o.file($model_o.layout).parent)
+			Else 
 				
-				If (Application type:C494#4D mode distant:K5:5)
+				// Si ce n'est pas possible on lance une alerte.
+				If (Application type:C494#4D Remote mode:K5:5)
 					ALERT:C41("Il manque le layout du modèle "+$model_o.name+" pour le composant cioWeb.")
 				End if 
 				
@@ -113,7 +124,7 @@ If (Storage:C1525.eMail.mjml#Null:C1517)
 				
 				If ((Not:C34($modelFolder_o.file($model_o.layout).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.layout).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.layout).modificationTime))
 					$mjmlContenu_o:=New object:C1471("mjml"; $modelFolder_o.file($model_o.layout).getText())
-					$resultat_i:=HTTP Request:C1158(HTTP méthode POST:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
+					$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
 					
 					If ($resultat_i=200)
 						$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($mjmlReponse_o.html)
@@ -132,15 +143,17 @@ If (Storage:C1525.eMail.mjml#Null:C1517)
 			
 		End if 
 		
-		If (String:C10($model_o.source)#"")  // S'il existe une source 
+		// S'il existe une source 
+		If (String:C10($model_o.source)#"")
 			
-			If ($modelFolder_o.file($model_o.source).extension=".mjml")  // Si le modèle a une source au format mjml
+			// Si le modèle a une source au format mjml
+			If ($modelFolder_o.file($model_o.source).extension=".mjml")
 				$name_t:=$modelFolder_o.file($model_o.source).name+".html"
 				
 				If ((Not:C34($modelFolder_o.file($model_o.source).parent.file($name_t).exists)) | ($modelFolder_o.file($model_o.source).parent.file($name_t).modificationTime<$modelFolder_o.file($model_o.source).modificationTime))
 					$mjmlContenu_o:=New object:C1471("mjml"; $modelFolder_o.file($model_o.source).getText())
 					
-					$resultat_i:=HTTP Request:C1158(HTTP méthode POST:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
+					$resultat_i:=HTTP Request:C1158(HTTP POST method:K71:2; Storage:C1525.eMail.mjml.urlAPI; $mjmlContenu_o; $mjmlReponse_o)
 					
 					If ($resultat_i=200)
 						$modelFolder_o.file($model_o.source).parent.file($name_t).setText($mjmlReponse_o.html)
