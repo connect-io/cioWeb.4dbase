@@ -7,6 +7,7 @@ Precharge tous les e-mails de l'application web.
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 13/04/21 - Rémy Scanu <remy@connect-io.fr> - Adaptation à une utilisation client/serveur
+25/05/21 - Alban Catoire <Alban@connect-io.fr> - On ne modifie plus le modelPath dans le storage (on garde www/email)
 -----------------------------------------------------------------------------*/
 
 // Déclarations
@@ -17,7 +18,7 @@ var $modelFolder_o : 4D:C1709.Folder
 var $model_o : Object  // Un model de la config
 var $mjmlReponse_o : Object  // Reponse de la requête
 var $mjmlContenu_o : Object  // Contenu de la requête MJML
-
+var $modelPath_t : Text  // Le path des modeles
 ASSERT:C1129(String:C10(Storage:C1525.param.folderPath.source_t)#""; \
 "cwEMailConfigLoad : Merci d'indiquez le chemin du dossier du fichier de config des email dans le storage du composant : Storage.param.folderPath.source_t")
 
@@ -53,13 +54,14 @@ Use (Storage:C1525)
 	End if 
 	
 	// chargement complet du dossier des models.
-	Use (Storage:C1525.eMail)
-		Storage:C1525.eMail.modelPath:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
-	End use 
+	//Use (Storage.eMail)
+	//Storage.eMail.modelPath:=Convert path system to POSIX(Storage.param.folderPath.source_t)+Storage.eMail.modelPath
+	//End use 
+	$modelPath_t:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
 	
 End use 
 
-$modelFolder_o:=Folder:C1567(Storage:C1525.eMail.modelPath)
+$modelFolder_o:=Folder:C1567($modelPath_t)
 
 If (Not:C34($modelFolder_o.exists))
 	$modelFolder_o.create()

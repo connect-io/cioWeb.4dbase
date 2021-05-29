@@ -182,6 +182,7 @@ Envoi d'un e-mail depuis un modèle.
 	
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
+25/05/21 - Alban Catoire <Alban@connect-io.fr> - On recreer le modelPath (il n'est plus stocker en dur dans le storage, voir cwEmailConfigLoad)
 -----------------------------------------------------------------------------*/
 	
 	// Déclaration
@@ -194,6 +195,7 @@ Historique
 	var $model_o : Object  // Detail du modèle
 	var $returnVar_t : Text  // Retourne le texte si 3ème paramètre
 	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
+	var $modelPath_t : Text  // Le path des modeles
 	
 	ASSERT:C1129($1#""; "EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
 	
@@ -213,12 +215,12 @@ Historique
 	// Retrouver les informations du modèle
 	If ($model_c.length=1)
 		$model_o:=$model_c[0]
-		
-		corps_t:=File:C1566(Storage:C1525.eMail.modelPath+$model_o.source).getText()
+		$modelPath_t:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
+		corps_t:=File:C1566($modelPath_t+$model_o.source).getText()
 		
 		// Gestion du layout
 		If (String:C10($model_o.layout)#"")
-			This:C1470.htmlBody:=File:C1566(Storage:C1525.eMail.modelPath+$model_o.layout).getText()
+			This:C1470.htmlBody:=File:C1566($modelPath_t+$model_o.layout).getText()
 		Else 
 			This:C1470.htmlBody:=corps_t
 		End if 
