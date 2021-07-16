@@ -29,7 +29,7 @@ $valeurInput:=String:C10(visiteur[String:C10($2)])
 $configInput:=OB Copy:C1225(Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1"; $1)[0].input.query("lib IS :1"; $2)[0])
 
 If (String:C10($configInput.label)#"")
-	$varNomPublic_t:=$configInput.label
+	$varNomPublic_t:="'"+$configInput.label+"'"
 Else 
 	$varNomPublic_t:=$configInput.lib
 End if 
@@ -88,7 +88,7 @@ Case of
 			End if 
 			
 			If (Date:C102($valeurInput)<$configInput.dateMin_d)
-				$retour:="La valeur de "+$configInput.lib+" est plus petite que "+String:C10($configInput.dateMin_d)+"."
+				$retour:="La valeur de "+$varNomPublic_t+" est plus petite que "+String:C10($configInput.dateMin_d)+"."
 			End if 
 		End if 
 		
@@ -100,7 +100,7 @@ Case of
 			End if 
 			
 			If (Date:C102($valeurInput)>$configInput.dateMax_d)
-				$retour:="La valeur de "+$configInput.lib+" est plus grande que "+String:C10($configInput.dateMax_d)+"."
+				$retour:="La valeur de "+$varNomPublic_t+" est plus grande que "+String:C10($configInput.dateMax_d)+"."
 			End if 
 		End if 
 		
@@ -169,7 +169,7 @@ Case of
 		// une erreur est deja remonté, on ne fait rien
 		
 	: (Not:C34(cwInputInjection4DHtmlIsValide($valeurInput)))
-		$retour:="injection de balise html 4D détécté sur le champ : "+String:C10($configInput.lib)
+		$retour:="injection de balise html 4D détécté sur le champ : "+String:C10($varNomPublic_t)
 End case 
 
 

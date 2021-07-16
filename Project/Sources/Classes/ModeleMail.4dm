@@ -74,7 +74,8 @@ Supprime un modèle de mail
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/a
+-----------------------------------------------------------------------------*/
+	
 	var $1 : Text  // Le name du modèle à supprimer
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
