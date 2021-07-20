@@ -9,7 +9,7 @@ Pensez à la copier dans une methode de votre projet pour en profiter...
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Clean code
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $erreur : Object

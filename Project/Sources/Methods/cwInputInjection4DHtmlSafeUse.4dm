@@ -5,7 +5,7 @@ Méthode : cwInputInjection4DHtmlSafeUse
 Historique
 29/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // data à controler

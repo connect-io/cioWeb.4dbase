@@ -7,7 +7,7 @@ Et stock l'information pour la prochaine page.
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $T_libPage : Text  // lib page

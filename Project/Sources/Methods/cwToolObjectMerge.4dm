@@ -8,7 +8,7 @@ Historique
 27/10/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 27/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération de la méthode depuis le composant cioObjet
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $oParent : Object  // Parent

@@ -11,7 +11,7 @@ Historique
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité d'un espace dans un real.
 30/09/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du bool pour un checkbox
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $0 : Text  // ok, format inconnu, format incorrect

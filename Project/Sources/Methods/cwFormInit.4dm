@@ -10,7 +10,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Utilisation du storage
 02/12/20 - Alban Catoire <alban@connect-io.fr> - Gestion de la traduction dans les formulaires
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Nom du formulaire html

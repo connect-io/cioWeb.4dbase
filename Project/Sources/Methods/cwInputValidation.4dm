@@ -9,7 +9,7 @@ Historique
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 27/01/21 - Grégory Fromain <gregory@connect-io.fr> - Fixe bug sur les input type file non envoyé.
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Nom du formulaire
@@ -27,7 +27,6 @@ If (visiteur[String:C10($2)]=Null:C1517) & (String:C10($2)#"@Submit")  // On ne 
 	ALERT:C41("La variable "+String:C10($2)+" du formulaire "+$1+" n'est pas renvoyé dans la requête.")
 	TRACE:C157
 End if 
-
 
 $valeurInput:=String:C10(visiteur[String:C10($2)])
 

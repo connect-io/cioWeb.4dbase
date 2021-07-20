@@ -6,7 +6,7 @@ Active le menu html en fonction de l'url.
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // recup via la page web. (<!--#4DSCRIPT/cwPageActive/accueil-->)

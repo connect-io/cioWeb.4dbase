@@ -6,7 +6,7 @@ Permet de minimifier les fichiers javascript.
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; texteIn : Text  // action (Utile seulement pour la methode.)

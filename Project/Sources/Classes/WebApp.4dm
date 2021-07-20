@@ -20,7 +20,7 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création automatique de custom.css si besoin.
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $source_o : Object  // dossier sources
 	var $subDomain_t : Text  // Nom du sous domaine
@@ -198,7 +198,7 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	Use (Storage:C1525.sessionWeb)
 		If (Storage:C1525.sessionWeb.path=Null:C1517)
@@ -237,7 +237,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	If (Count parameters:C259=1)
 		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.cacheViewSubdomainPath : Le paramètre de la fonction est invalide.")
@@ -258,7 +258,7 @@ Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation
 27/11/20 - Alban Catoire <Alban@connect-io.fr> - Mise à jour avec Storage
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $analyseTrad_b : Boolean
 	var $subDomain_t : Text  // Nom du sous domaine
@@ -367,7 +367,7 @@ Precharge toutes les e-mails de l'application web.
 	
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	$message_t:="WebApp.eMailConfigLoad() : Cette fonction est obsolette."+Char:C90(Carriage return:K15:38)\
 		+"Merci d'utiliser maintenant la méthode : cwEMailConfigLoad"
@@ -386,7 +386,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers des pages html.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class webApp
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $texteIn : Text
 	var $texteOut : Text
@@ -477,7 +477,7 @@ Historique
 21/12/19 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la possibilité de créer une arborescence dans les fichiers JS.
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Convertion en fonction de la class WebApp
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $texteIn : Text
 	var $dirIn : Text
@@ -561,7 +561,7 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Suppression de la gestion des routes sous le format : page.url
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// La fonction ne requiere pas de paramêtre.
 	var $j : Integer
@@ -913,7 +913,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 25/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	If (Count parameters:C259=1)
 		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.sourceSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")
@@ -940,7 +940,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Fix bug param non passé
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	If (Count parameters:C259=1)
 		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.webfolderSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")

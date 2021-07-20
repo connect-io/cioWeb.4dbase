@@ -6,7 +6,7 @@ Detail des entreprises ajax
 
 Historique
 03/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 /*
 Il est possible que $1 soit :

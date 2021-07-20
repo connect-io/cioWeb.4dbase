@@ -16,7 +16,7 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 26/10/20 - Grégory Fromain <gregory@connect-io.fr> - Fix bug sur le chargement des boutons radios.
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $numForm : Integer

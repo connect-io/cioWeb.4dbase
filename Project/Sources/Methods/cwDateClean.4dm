@@ -9,7 +9,7 @@ Historique
 25/02/20 - Grégory Fromain <gregory@connect-io.fr> - Récupération depuis le projet livrerunballon et amélioration
 13/06/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du cas : ($1="00/00/00")|($1="00-00-00")
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $0 : Text  // date formatté

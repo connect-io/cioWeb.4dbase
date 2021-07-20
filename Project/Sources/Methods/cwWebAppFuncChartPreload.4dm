@@ -6,7 +6,7 @@ Precharge tous les graphiques HTML de l'application web.
 
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $analyseChart_b : Boolean

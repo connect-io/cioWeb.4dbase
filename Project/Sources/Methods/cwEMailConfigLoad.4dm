@@ -8,7 +8,7 @@ Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 13/04/21 - Rémy Scanu <remy@connect-io.fr> - Adaptation à une utilisation client/serveur
 25/05/21 - Alban Catoire <Alban@connect-io.fr> - On ne modifie plus le modelPath dans le storage (on garde www/email)
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Object  // Permet de définir des variables global (globalVar)

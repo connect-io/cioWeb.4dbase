@@ -6,7 +6,7 @@ Permet de recuperer la version de 4D
 
 Historique
 13/11/2020 - Titouan Guillon titouan@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $0 : Text

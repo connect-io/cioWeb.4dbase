@@ -6,7 +6,7 @@ Traiter les balises 4D qu'il peut y avoir dans un objet.
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $ressource_o : Object

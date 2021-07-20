@@ -8,7 +8,7 @@ Historique
 30/09/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 18/03/20 - Grégory Fromain <gregory@connect-io.fr> - Les inputs sont traités depuis une collection au lieu d'un objet.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Nom de la variable du formulaire web

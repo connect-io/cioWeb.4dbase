@@ -16,7 +16,7 @@ Historique
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Clean méthode + adaptation aux nouvelles formulations
 06/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création du constructeur
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Clé API
 	
@@ -43,7 +43,7 @@ Historique
 	
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // (optionnel) Destination du fichier sur le disque.
 	var $2 : Text  // (optionnel) type de retaillage (scale, fit, cover)
@@ -154,7 +154,7 @@ renvoie les informations de la derniere importation dans un objet
 Historique
 	
 09/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création de la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	$0:=This:C1470.lastExportInfo
 	
@@ -172,7 +172,7 @@ Doc : https://tinypng.com/developers/reference
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> - Création de la fonction
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
 	
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclarations
 	var $1 : Text  // chemin du fichier
@@ -240,7 +240,7 @@ Doc : https://tinypng.com/developers/reference
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> - Création de la fonction
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
 	
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // L'URL depuis laquelle on veut upload
 	var $0 : Boolean

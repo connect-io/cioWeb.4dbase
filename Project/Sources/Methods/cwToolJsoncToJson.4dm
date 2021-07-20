@@ -7,8 +7,9 @@ Converti du JSONC en JSON
 Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
+// Déclarations
 var $1 : Text  // texte en format JSONC
 var $0; $texteOut : Text  // texte en format JSON
 

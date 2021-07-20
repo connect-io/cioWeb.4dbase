@@ -6,7 +6,7 @@ Renvoie la date ou l'heure du timestamp en $1
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // $1 = [texte] info de sortie ("date" ou "heure")

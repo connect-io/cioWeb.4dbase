@@ -16,7 +16,7 @@ Historique
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Object  // Les informations sur le visiteur.
 	
@@ -193,7 +193,7 @@ Historique
 10/02/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
 09/09/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Domaine du CDN
 	var $0 : Text  // Contenu des fichiers html
@@ -232,7 +232,7 @@ Fonction : Page.I18nGet
 Historique
 15/08/20 - Grégory Fromain<gregory@connect-io.fr> - Mise en veille de l'internalisation
 26/11/20 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
 	var $0 : Text  // le text en retour
@@ -259,7 +259,7 @@ Historique
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // $1 : [texte] domaine du CDN
 	var $0 : Text  // Contenu des chemin JS à insérer dans le HTML.
@@ -294,7 +294,7 @@ Place le contenue du fichier javascript dans le HTML
 Historique
 20/09/20 - Grégory Fromain<gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $0 : Text  // Contenu des fichiers JS à insérer dans le HTML
 	
@@ -334,7 +334,7 @@ Niveau suppreme du template 4D :o) : -p Permet la gestion des blocs dans le HTML
 Historique
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text
 	var $0 : Text  // Retourne les élements du fichiers qui ne sont pas dans un block
@@ -394,7 +394,7 @@ Etabli une redirection 301 http(de type permanante)
 	
 Historique
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclarations
 	var $1 : Text  // $1 = [texte] nouvelle url

@@ -146,7 +146,7 @@ End if
 	28/07/20 - Grégory Fromain - création
 	28/07/20 - Grégory Fromain - Gestion des blocks recursifs.
 	24/02/21 - Grégory Fromain - Modernisation du code, ajout graphique et préemptif
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $3 : Text  // Adresse IP du navigateur.

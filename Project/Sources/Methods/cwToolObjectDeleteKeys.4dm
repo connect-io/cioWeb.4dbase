@@ -10,7 +10,6 @@ Historique
 ------------------------------------------------------------------------------*/
 
 // Déclarations
-
 var $1 : Object  // Objet source
 var $2 : Text  // La recherche de la cle à supprimer
 

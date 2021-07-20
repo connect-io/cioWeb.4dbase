@@ -26,19 +26,21 @@ Historique
 	
 	
 	
-Function entityToForm
+Function entityToForm($entity : Object; $nomForm_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : User.entityToForm
 	
 Remplit un formulaire avec les infos d'une entité.
 	
+Paramètre
+$entity    -> L'entité dont on charge les infos
+$nomForm_t -> Nom du formulaire
+	
 Historique
 23/11/20 - Alban Catoire alban@connect-io.fr> - Reprise de code en fonction
 23/11/20 - Grégory Fromain <gregory@connect-io.fr> - Clean code
------------------------------------------------------------------------------*/
-	
-	var $1; $entity : Object  // l'entité dont on charge les infos
-	var $2; $nomForm_t : Text  // Nom du formulaire 
+20/07/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
+------------------------------------------------------------------------------*/
 	
 	var $Form_o : Object
 	var $entityNameCalcule_t : Text
@@ -46,10 +48,8 @@ Historique
 	var $input : Object
 	
 	ASSERT:C1129(Count parameters:C259=2; "Le nombre de paramêtre n'est pas bon.")
-	ASSERT:C1129(Type:C295($2)=Is text:K8:3; "Le param $2, doit être de type text.")
+	ASSERT:C1129(Type:C295($nomForm_t)=Is text:K8:3; "Le param $nomForm_t, doit être de type text.")
 	
-	$nomForm_t:=$2
-	$entity:=$1
 	
 	$Form_o:=This:C1470.formInfo($nomForm_t)
 	
@@ -104,7 +104,7 @@ Retourne les informations d'un formulaire.
 	
 Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1; $nomForm_t : Text  // Nom du formulaire
 	var $0 : Object  // Information sur le formulaire.
@@ -129,7 +129,7 @@ Charger les valeurs d'un formulaire vers une entité (ou objet).
 	
 Historique
 04/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclarations
 	var $1 : Pointer  // Objet qui sert à remplir les inputs du formulaire $1

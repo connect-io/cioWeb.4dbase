@@ -1,9 +1,6 @@
 //%attributes = {"invisible":true,"lang":"en"}
 
 
-//cwDecallageHoraire
-var cwDecallageHoraire; $0 : Integer
-
 //cwToolTextReplaceByRegex
 var cwToolTextReplaceByRegex; $0 : Text
 var cwToolTextReplaceByRegex; $1 : Text
@@ -37,9 +34,6 @@ var cwLogErreurAjout; $2 : Object
 var cwInputInjection4DHtmlSafeUse; $0 : Text
 var cwInputInjection4DHtmlSafeUse; $1 : Text
 
-//cwLangueActive
-var cwLangueActive; $1 : Text
-
 //cwInputInjection4DHtmlIsValide
 var cwInputInjection4DHtmlIsValide; $0 : Boolean
 var cwInputInjection4DHtmlIsValide; $1 : Text
@@ -64,9 +58,6 @@ var cwFormGetData; $2 : Text
 //cwSupprBaliseHtml
 var cwSupprBaliseHtml; $0 : Text
 var cwSupprBaliseHtml; $1 : Text
-
-//cwRedirection301
-var cwRedirection301; $1 : Text
 
 //cwPageActive
 var cwPageActive; $0 : Text
@@ -112,7 +103,6 @@ var cwFormControl; $2 : Text
 //cwToolHashUrl
 var cwToolHashUrl; $0 : Text
 var cwToolHashUrl; $1 : Text
-var cwJsSetFile; ${1} : Text
 
 //cwDateClean
 var cwDateClean; $0 : Text

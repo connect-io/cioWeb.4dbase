@@ -7,7 +7,7 @@ Formate une date en fonction d'un modele.
 Historique
 12/02/15 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Modele du format (ex : JJMMAA, AA-MM-JJ, AA.JJ.MM,...)

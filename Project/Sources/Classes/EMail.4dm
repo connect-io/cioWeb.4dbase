@@ -17,7 +17,7 @@ ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la f
 Historique
 02/01/20 - quentin@connect-io.fr - Création
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $1 : Text  // Nom du transporteur
@@ -83,7 +83,7 @@ this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
 	
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $0 : Object  // Remonte les informations sur l'envoi d'e-mail 
@@ -183,7 +183,7 @@ Envoi d'un e-mail depuis un modèle.
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 25/05/21 - Alban Catoire <Alban@connect-io.fr> - On recreer le modelPath (il n'est plus stocker en dur dans le storage, voir cwEmailConfigLoad)
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	// Déclaration
 	var $1 : Text  // Var nom du modèle

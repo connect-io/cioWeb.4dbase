@@ -6,7 +6,7 @@ Trouve l'extension d'un fichier depuis une chaine de caractere
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // chemin du fichier

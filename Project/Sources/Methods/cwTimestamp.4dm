@@ -7,7 +7,7 @@ Retrouver le timestamp depuis le 01/01/1970 (en fonction de l'heure de votre mac
 Historique
 08/11/10 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $date_d : Date  // Date (optionnel)

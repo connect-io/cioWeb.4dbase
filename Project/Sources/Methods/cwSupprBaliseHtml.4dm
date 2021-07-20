@@ -7,7 +7,7 @@ Supprimer les balises html d'un chaine de caractére.
 
 Historique
 
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $in : Text  // chaine avec balise

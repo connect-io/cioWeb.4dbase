@@ -6,7 +6,7 @@ Modifier les séparateurs dans le chemin d'un fichier.
 
 Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // Chemin à controler

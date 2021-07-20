@@ -15,7 +15,7 @@ Initialisation d'un graphique
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Le lib du graphique.
 	var $2 : Text  // (optionnel) le modele que l'on souhaite utiliser.
@@ -69,7 +69,7 @@ Génére le code HTML pour le graphique.
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $0 : Text  // Le text à insérer dans le code HTML
 	
@@ -85,7 +85,7 @@ Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe
 	
 Historique
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $color_c : Collection  // liste des couleurs prédéfinis.
 	var $1; $2; $color_t : Text
@@ -135,7 +135,7 @@ Charger les options des data dans le graphique.
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text
 	var $2 : Object
@@ -165,7 +165,7 @@ Charge les valeurs des données d'une courbe dans le graphique.
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text
 	var $2 : Collection
@@ -195,7 +195,7 @@ Charger les labels dans le graphique.
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Collection
 	
@@ -211,7 +211,7 @@ Charger les options du graphique.
 	
 Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Object
 	
@@ -229,7 +229,7 @@ Permet de definir le titre du graph
 	
 Historique
 05/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	var $1 : Text  // Le titre du graph
 	var $title_o : Object
 	
@@ -253,7 +253,7 @@ Permet de changer le type du graph (bar, line, camembert...). Si le parametre es
 	
 Historique
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Le type de graph à utiliser 
 	var $typePossible_c : Collection

@@ -19,7 +19,7 @@ Historique
 21/07/20 - Grégory Fromain <gregory@connect-io.fr> - Réflexion
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $propriete_t : Text
 	
@@ -87,7 +87,7 @@ Historique
 16/10/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	This:C1470.data_c.push($ligneData_c)
 	
@@ -105,7 +105,7 @@ $html_t <- Code HTML renvoyé
 Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	$html_t:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"
 	
@@ -124,7 +124,7 @@ Historique
 16/10/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	$dataJson_t:=JSON Stringify:C1217(New object:C1471("data"; This:C1470.data_c))
 	
@@ -143,7 +143,7 @@ Historique
 28/07/20 - Grégory Fromain <gregory@connect-io.fr> - Creation
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var dataInBase_o : Object
 	var dataligne_o : Object

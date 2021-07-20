@@ -9,7 +9,7 @@ Historique
 02/05/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 14/09/20 - Grégory Fromain <gregory@connect-io.fr> - Import dans le composant
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $motDePasseClair_t : Text

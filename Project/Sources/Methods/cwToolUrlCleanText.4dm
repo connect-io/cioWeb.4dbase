@@ -8,7 +8,7 @@ Historique
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - Récupération méthode depuis composant cioGénérique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $textTempo_t : Text  // $1 : [texte] (Ballon Coeur "Rouge")

@@ -9,7 +9,7 @@ Historique
 26/10/19 - Grégory Fromain <gregory@connect-io.fr> - notation objet
 30/10/19 - Grégory Fromain <gregory@connect-io.fr> - ajout possibilité de forcer une variable de l'url depuis le routing.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Text  // lib de page

@@ -8,7 +8,7 @@ Historique
 05/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $analyseDataTable_b : Boolean

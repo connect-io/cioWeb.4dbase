@@ -7,10 +7,12 @@ Renvoie une class vers la base hôte.
 Historique
 03/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
+// Déclarations
 var $1 : Text  // Nom de la classe à renvoyer.
 var $0 : Object  // Objet de la class
+
 
 ASSERT:C1129($1#""; "La variable $1 est vide.")
 

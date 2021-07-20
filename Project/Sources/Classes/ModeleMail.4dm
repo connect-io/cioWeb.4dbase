@@ -6,7 +6,7 @@ Creation de l'enregistrement de tous les modèles de mail
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	
 	cwEMailConfigLoad
@@ -23,7 +23,7 @@ Ajout d'un nouveau modele de mail
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	var $0 : Text  //Reponse à l'ajout du modèle
 	var $1 : Object  // L'objet avec les informations du modèle à ajouter.
 	
@@ -74,7 +74,7 @@ Supprime un modèle de mail
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $1 : Text  // Le name du modèle à supprimer
 	var $modele_c : Collection
@@ -100,7 +100,7 @@ Enregistrement de This dans le fichier email.jsonc et dans le storage
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	//Réecriture dans le fichier email.jsonc
 	Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2).file("email.jsonc").setText(JSON Stringify:C1217(This:C1470.email; *))
@@ -115,7 +115,7 @@ Renvoie les informations d'un modèle a l'aide de son nom
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $0 : Object  //Le modèle à renvoyer
 	var $1 : Text  // Le nom du modèle à supprimer
@@ -157,7 +157,7 @@ Renvoie la la liste de tous les modèles
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $0 : Collection  //Le modèle à renvoyer
 	
@@ -172,7 +172,7 @@ Modifie un modèle de mail
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 	
 	var $0 : Text  //Reponse à l'ajout du modèle
 	var $1 : Object  // L'objet avec les informations du modèle à ajouter.

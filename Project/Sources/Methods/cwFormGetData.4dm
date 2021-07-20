@@ -7,7 +7,7 @@ La méthode reprend le principe de fonctionnement de la methode cwFormControle m
 Historique
 07/05/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Pointer  // visiteur

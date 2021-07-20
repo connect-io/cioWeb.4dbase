@@ -8,7 +8,7 @@ Car cela peut poser des problèmes en cas de passage dans une url ou mot de pass
 Historique
 02/05/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1; $motDePasseClair_t : Text  // $1 : [text] mot de passe clair
