@@ -23,6 +23,12 @@ var $configInput : Object
 
 $retour:="ok"
 
+If (visiteur[String:C10($2)]=Null:C1517) & (String:C10($2)#"@Submit")  // On ne controle pas le submit.
+	ALERT:C41("La variable "+String:C10($2)+" du formulaire "+$1+" n'est pas renvoyé dans la requête.")
+	TRACE:C157
+End if 
+
+
 $valeurInput:=String:C10(visiteur[String:C10($2)])
 
 // Il n'est pas utile de vérifier que la query renvoie bien un résultat car la même query est executé dans la méthode parent.
