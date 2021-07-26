@@ -239,7 +239,7 @@ Historique
 		This:C1470.Host:=This:C1470.host
 	End if 
 	
-	//TRACE
+	
 	If (String:C10(This:C1470.cookie)="")
 		// ----- Gestion des cookies -----
 		$cookies:=OB Get:C1224(This:C1470; "cookie"; Is text:K8:3)
