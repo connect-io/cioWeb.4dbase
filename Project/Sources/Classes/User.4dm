@@ -260,6 +260,9 @@ Historique
 		End if 
 	End if 
 	
+	// ID du process web peut etre utilisé dans les web socket pour retrouver des informations dans process web.
+	This:C1470.processWebID:=Current process:C322
+	
 	This:C1470.updateVarVisiteur()
 	
 	
