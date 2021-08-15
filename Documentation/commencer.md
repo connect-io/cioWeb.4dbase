@@ -180,7 +180,7 @@ visiteur_o.sessionWebLoad()
 // Petit hack pour simplifier, le premier démarrage.
 // C'est à supprimer après la configuration du fichier host de la machine.
 If (visiteur_o.Host="127.0.0.1")
-	visiteur_o.sousDomaine:=OB Keys(<>webApp_o.sites)[0]
+	visiteur_o.sousDomaine:=OB Keys(cwStorage.sites)[0]
 	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
 End if 
 
