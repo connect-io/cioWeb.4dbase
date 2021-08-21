@@ -20,7 +20,7 @@ C'est la class principale du composant cioWeb.
 * [Fonction : eMailConfigLoad](#fonction--eMailConfigLoad)
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : cachePath
 Chemin complet (format plateforme) du dossier cache dans l'application webApp.
@@ -51,7 +51,7 @@ $chemin_t:=myWebApp_o.cachePath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : cacheSessionWebPath
 Chemin complet (format plateforme) des sessions web.<br />
@@ -84,7 +84,7 @@ $chemin_t:=myWebApp_o.cacheSessionWebPath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : cacheViewPath
 Chemin complet plateforme du dossier cache des vues
@@ -102,7 +102,7 @@ WebApp.cacheViewPath()
 ???
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : cacheViewSubdomainPath
 Chemin complet plateforme du dossier cache des vues / sousDomaine
@@ -124,7 +124,7 @@ WebApp.cacheViewSubdomainPath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : htmlMinify
 Minification du HTML
@@ -145,7 +145,7 @@ WebApp.htmlMinify()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : serverStart
 Démarrage du serveur web
@@ -164,7 +164,7 @@ La fonction ne requiert pas de paramètre.
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sessionWebStart
 Démarrage des sessions Web
@@ -186,7 +186,7 @@ WebApp.sessionWebStart({$option_c}) -> Modifie this
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sourcePath
 Chemin complet plateforme du dossier Source
@@ -209,7 +209,7 @@ $cheminSource_t:=<>webApp_o.sourcePath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sourceSubdomainPath
 Chemin complet plateforme du dossier Source/sousDomaine
@@ -233,7 +233,7 @@ $cheminSourceSousDomaine_t:=<>webApp_o.sourceSubdomainPath("www")
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : webAppPath
 Chemin complet plateforme du dossier WebApp.
@@ -256,7 +256,7 @@ $cheminDossierWebApp_t:=<>webApp_o.webAppPath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : webfolderSubdomainPath
 Chemin complet plateforme du dossier Webfolder/sousDomaine  
@@ -282,7 +282,7 @@ $cheminDossierWebAppSousDomaine_t:=<>webApp_o.webfolderSubdomainPath("www")
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : eMailConfigLoad
 Permet de configurer la boite mail et les modèles présents. On doit obligatoirement avoir inclus un fichier email.json sur dans le dossier. Ces variables viendront se greffer au champ globalVar d'un mail nouvellement créé grace à la classe mail.

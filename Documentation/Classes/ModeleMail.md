@@ -18,7 +18,7 @@ Gestion des modèles de mail que l'on souhaite envoyer. Un email doit avoir au m
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation de l'ensemble des modèles.
@@ -37,10 +37,10 @@ cs.ModeleMail.new()
 
 ### Example
 ```4d
-modeleMail_o := cwToolGetClass("ModeleMail").new()
+modeleMail_o:=cwToolGetClass("ModeleMail").new()
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : add
 Permet d'ajouter un nouveau modèle à partir d'un objet passé en argument comprenant toutes les informations nécessaires. Modifie ensuite le fichier email.jsonc et le storage du composant en conséquence. Renvoie la chaine de texte "ok" si aucune erreur n'a été détecté et une autre chaine de texte selon l'erreur rencontrée. 
@@ -54,17 +54,17 @@ ModeleMail.add($modele_o) -> $reponse_t
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $modele_o        | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
-| $reponse_t    | Texte      | Sortie       | La réponse à l'enregistrement |
+| $modele_o     | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
+| $reponse_t    | Texte      | Sortie        | La réponse à l'enregistrement |
 
 
 ### Example
 ```4d
 $modele_o:=New Object("name";"facture"; "source";"facture.html")
-$reponse_t := modeleMail_o.add($modele_o)
+$reponse_t:=modeleMail_o.add($modele_o)
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : delete
 Supprime un modèle. Ce modèle est identifié par son attribut name passé en argument de la fonction
@@ -76,16 +76,16 @@ ModeleMail.delete($name_t) -> Modifie This
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $name_t     | Texte      | Entrée        | Le nom du modèle à supprimer|
+| $name_t       | Texte      | Entrée        | Le nom du modèle à supprimer|
 
 
 
 ### Example
 ```4d
-$reponse_t := modeleMail_o.delete("facture")
+$reponse_t:=modeleMail_o.delete("facture")
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : enregistrement
 Réecrit le fichier email.jsonc à partir des informations contenues dans l'instance de la classe et appelle la méthode 'cwEMailConfigLoad' qui recharge ces informations dans le storage du composant. Cette méthode n'est pas sensée être utilisée hors du composant.
@@ -107,7 +107,7 @@ ModeleMail.enregistrement() -> Modifie Storage et email.jsonc
 This.enregistrement()
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : get
 Renvoie les informations d'un modèle. Ce modèle est identifié par son attribut name passé en argument de la fonction.
@@ -120,16 +120,16 @@ ModeleMail.get($name_t) -> $modele_o
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $name_t        | Texte      | Entrée        | Le nom du modèle (Ce nom doit être unique) |
-| $reponse_t    | Objet      | Sortie       | L'objet contenant toutes les informations du modèle demandé |
+| $name_t       | Texte      | Entrée        | Le nom du modèle (Ce nom doit être unique) |
+| $reponse_t    | Objet      | Sortie        | L'objet contenant toutes les informations du modèle demandé |
 
 
 ### Example
 ```4d
-$modele_o := modeleMail_o.get("facture")
+$modele_o:=modeleMail_o.get("facture")
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : getAll
 Renvoie la collection de tous les modèles. Cette fonction est notamment utilisé pour charger une dataTable.
@@ -142,15 +142,15 @@ ModeleMail.getAll() -> $modeles_c
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $modeles_c     | Collection      | Sortie        | La collection de tous les modèles|
+| $modeles_c    | Collection | Sortie        | La collection de tous les modèles|
 
 
 ### Example
 ```4d
-$modeles_c := modeleMail_o.getAll()
+$modeles_c:=modeleMail_o.getAll()
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 
 ## Fonction : modify
@@ -165,15 +165,15 @@ ModeleMail.modify($modele_o) -> $reponse_t
 
 | Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $modele_o        | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
-| $reponse_t    | Texte      | Sortie       | La réponse à l'enregistrement |
+| $modele_o     | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
+| $reponse_t    | Texte      | Sortie        | La réponse à l'enregistrement |
 
 
 ### Example
 ```4d
 $NewModele_o.name:="Nouveau_nom"
-$reponse_t := modeleMail_o.modify($NewModele_o)
+$reponse_t:=modeleMail_o.modify($NewModele_o)
 ```
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------

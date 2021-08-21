@@ -11,7 +11,7 @@ Cette class permet de génerer le contenue d'une page.
 * [Fonction : scanBlock](#fonction--scanBlock)
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor
 Initialisation de la page web.
@@ -26,7 +26,7 @@ pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : cssGetHtmlPath
 Renvoi le HTML pour le chargement des fichiers CSS.
@@ -48,7 +48,7 @@ Page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : jsGetHtmlPath
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
@@ -70,7 +70,7 @@ Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : jsInHtml
 Place le contenue du fichier javascript dans le HTML.
@@ -101,7 +101,7 @@ Utilisation dans le fichier *.html:
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : scanBlock
 Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.

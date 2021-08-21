@@ -15,7 +15,7 @@ cwToolGetClass ( class_t ) -> class_o
 ## Example
 
 ```4d
-C_OBJECT($webApp_cs;$myWebApp_o)
+var $webApp_cs;$myWebApp_o : Object
 
 // Récupération de la class depuis le composant
 $webApp_cs:=cwToolGetClass ("webApp")

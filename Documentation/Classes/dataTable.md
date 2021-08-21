@@ -13,7 +13,7 @@ Gestion des tableaux de données en HTML.
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation d'une dataTable
@@ -38,7 +38,7 @@ dataTables_o.userListe:=cwToolGetClass("DataTable").new("userListe")
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : addData
 Ajoute une ligne à votre tableau.
@@ -61,7 +61,7 @@ dataTables_o.dtPersonneListe.setData(data_es)
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : getHtml
 Génére le code HTML pour le tableau.
@@ -82,7 +82,7 @@ Datatable.getHtml() -> $html_t
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sendDataAjax
 Génére le JSON des données à renvoyer au navigateur.
@@ -103,7 +103,7 @@ $0:=dataTables_o.dtPersonneListe.sendDataAjax()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : setData
 Charger les data dans le tableau de donnée.

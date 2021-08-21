@@ -20,7 +20,7 @@ Utilisateur sur le serveur web peut-être un visiteur d'une page web, un robot g
 * [Fonction : updateVarVisiteur](#fonction--updateVarVisiteur)
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation d'un utilisateur
@@ -39,7 +39,7 @@ visiteur_o:=cwToolGetClass("User").new()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : entityToForm		
 Chargement des informations d'une entité dans un formulaire 
@@ -61,7 +61,7 @@ visiteur_o.entityToForm($Article_entity, "formShopArticle")
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : formInfo	
 Renvoie une copie des information d'un formulaire
@@ -82,7 +82,7 @@ $form_o := visiteur_o.formInfo("formShopArticle")
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : getInfo			
 Chargement des éléments sur l'utilisateur / visiteur
@@ -99,7 +99,7 @@ La fonction ne requiert pas de paramètre.
 Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la page Commencer.
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : login			
 À utiliser après la vérification des utilisateurs.  
@@ -117,7 +117,7 @@ visiteur_o.login()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : logout			
 Déconnexion de l'utilisateur.
@@ -136,7 +136,7 @@ La fonction ne requiert pas de paramètre.
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : objectMerge			
 Permet la fusion proprement d'un objet avec l'instance utilisateur
@@ -163,7 +163,7 @@ visiteur.objectMerge(O_avatar)
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sessionWebFolderPath			
 Chemin du dossier des sessions web de l'utilisateur.	
@@ -185,7 +185,7 @@ $DossierDestination_t:=visiteur_o.sessionWebFolderPath()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sessionWebLoad			
 Chargement des sessions web de l'utilisateur.
@@ -203,7 +203,7 @@ Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 ## Fonction : sessionWebSave			
 Sauvegarder des sessions web de l'utilisateur. Cette fonction est à utiliser dans la méthode "Sur fermeture process web".
 			
@@ -221,7 +221,7 @@ visiteur_o.sessionWebSave()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : tokenCheck			
 Vérifie un jeton pour la validation d'une pages web. Remplace la méthode : cwVisiteurTokenVerifier	
@@ -247,7 +247,7 @@ End if
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : tokenGenerate			
 Génere un jeton pour la validation des pages web.
@@ -263,7 +263,7 @@ La fonction ne requiert pas de paramètre.
 Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la page Commencer.
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : updateVarVisiteur			
 Synchro avec du vieux code. Ne pas utiliser dans de nouveau projet.

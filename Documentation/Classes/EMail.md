@@ -12,7 +12,7 @@ Gestion de l'envoi des mails. La configuration se fait par le biais d'un fichier
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fichier : email.json		
 Ce fichier recense diverses informations sur la configuration des emails.
@@ -75,7 +75,7 @@ Note : Les fichiers de source et layout peuvent être des fichiers HTML ou MJML,
 Plus d'informations sur le language <a href = "https://mjml.io/documentation/">ici</a>.
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation du transporteur de mail
@@ -103,7 +103,7 @@ $mail:=cs.EMail.new($name_t;$paramOptionnel_o)
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : send
 Permet d'envoyer un mail sans modèle particulier, en fonction des instances de l'objet que l'on est en train d'utiliser. Plus particulièrement, il faudra obligatoirement remplir les champs : <b>this.to, this.htmlBody </b>, et de manière optionnelle : <b>this.attachmentsPath_c</b>
@@ -136,7 +136,7 @@ $retour_o:=$mail.send()
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : sendModel
 
@@ -207,7 +207,3 @@ Lorsque l'on envoie des mails à plusieurs personnes depuis la collection "to" d
 </li>
 
 </ul>
-
-
-------------------------------------------------------
-

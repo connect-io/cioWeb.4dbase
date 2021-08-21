@@ -149,96 +149,85 @@ Historique
 	
 	
 	
-Function getAll
+Function getAll()->$allModel_c : Collection
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.getAll
 	
 Renvoie la la liste de tous les modèles
 	
+Paramètre
+$allModel_c <- Tout les modeles
+	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	var $0 : Collection  //Le modèle à renvoyer
-	
-	$0:=This:C1470.email.model
+	$allModel_c:=This:C1470.email.model
 	
 	
-Function modify
+	
+Function modify($modelModify_o : Object)->$result_t : Text
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.modify
 	
 Modifie un modèle de mail
 	
+Paramètres
+$modelModify_o  <- L'objet avec les informations du modèle à ajouter.
+$result_t       -> Reponse à l'ajout du modèle
+	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	var $0 : Text  //Reponse à l'ajout du modèle
-	var $1 : Object  // L'objet avec les informations du modèle à ajouter.
-	
 	var $modele_c : Collection  //La collection de modele enregistré
-	var $keys_c : Collection  // Liste des attributs contenu dans l'objet modele
 	var $modele_o : Object  //Le modèle modifié
-	var $index : Integer  // L'indice du modèle à modifier dans This.email.model
+	var $index_i : Integer  // L'indice du modèle à modifier dans This.email.model
+	var $key_t : Text
 	
-	$0:="ok"
+	$result_t:="ok"
 	
-	ASSERT:C1129(($1.name#"") & ($1.name#Null:C1517); " ModeleMail.modify : Le param $1 ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($1.source#"") & ($1.source#Null:C1517); " ModeleMail.modify : Le param $1 ne possède pas d'attribut  'source'.")
+	ASSERT:C1129(($modelModify_o.name#"") & ($modelModify_o.name#Null:C1517); " ModeleMail.modify : Le param $modelModify_o ($1) ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($modelModify_o.source#"") & ($modelModify_o.source#Null:C1517); " ModeleMail.modify : Le param $modelModify_o ($1) ne possède pas d'attribut  'source'.")
 	
-	$modele_c:=This:C1470.email.model.query("name = :1"; $1.oldName)
+	$modele_c:=This:C1470.email.model.query("name = :1"; $modelModify_o.oldName)
 	If ($modele_c.length#0)
 		$modele_o:=$modele_c[0]
-		$index:=This:C1470.email.model.indexOf($modele_o)
+		$index_i:=This:C1470.email.model.indexOf($modele_o)
 		
-		$modele_o.name:=$1.name
-		$modele_o.source:=$1.source
-		If (($modele_o.subject#Null:C1517) | ($1.subject#""))
-			$modele_o.subject:=$1.subject
+		$modele_o.name:=$modelModify_o.name
+		$modele_o.source:=$modelModify_o.source
+		If (($modele_o.subject#Null:C1517) | ($modelModify_o.subject#""))
+			$modele_o.subject:=$modelModify_o.subject
 		End if 
 		
-		If ($1.personnalisation#"")
-			$modele_o:=cwToolObjectMerge($modele_o; JSON Parse:C1218($1.personnalisation))
+		If ($modelModify_o.personnalisation#"")
+			$modele_o:=cwToolObjectMerge($modele_o; JSON Parse:C1218($modelModify_o.personnalisation))
 		Else 
 			// On retire tous les éléments de personnalisation
-			$keys_c:=OB Keys:C1719($modele_o)
-			For each ($key; $keys_c)
-				If (($key#"name") & ($key#"subject") & ($key#"source"))
-					OB REMOVE:C1226($modele_o; $key)
+			For each ($key_t; OB Keys:C1719($modele_o))
+				If (($key_t#"name") & ($key_t#"subject") & ($key_t#"source"))
+					OB REMOVE:C1226($modele_o; $key_t)
 				End if 
 			End for each 
 		End if 
 	Else 
-		$0:="introuvable"
+		$result_t:="introuvable"
 	End if 
 	
 	//On va chercher le fichier associé à source HTML
-	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$1.source)
+	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modelModify_o.source)
 	
 	//Si le fichier n'existe pas on le crée, puis on le reecrit
-	If (Not:C34($fichierSource.exists) & ($1.sourceHTML=""))
-		$0:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
+	If (Not:C34($fichierSource.exists) & ($modelModify_o.sourceHTML=""))
+		$result_t:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
 	Else 
-		$fichierSource.setText($1.sourceHTML)
+		$fichierSource.setText($modelModify_o.sourceHTML)
 	End if 
 	
 	//Enregistrement des modifications
-	If ($0="ok")
-		This:C1470.email.model[$index]:=$modele_o
+	If ($result_t="ok")
+		This:C1470.email.model[$index_i]:=$modele_o
 		This:C1470.enregistrement()
 	End if 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	

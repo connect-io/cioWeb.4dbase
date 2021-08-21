@@ -20,7 +20,7 @@ La librairie JavaScript utilisée est chart.js disponible ici : https://www.char
 
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation d'un graphique.
@@ -44,7 +44,7 @@ cs.Chart.new($libChart_t {;$modele_t}) -> $instance_o
 charts_o.graph1 := cwToolGetClass("Chart").new("EvolutionAnnee", "monModeleChart")
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : dataColor
 Définit la couleur d'un set de donnée (d'une courbe). 
@@ -68,7 +68,7 @@ Chart.dataColor($label_t; $couleur_t) -> Modifie this
 charts_o.graph1.dataColor("2021","blue")
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : dataOption
 Modifie ou ajoute une nouvelle option à un set de données (une courbe par exemple).
@@ -89,7 +89,7 @@ Chart.dataOption($option_o) -> Modifie this
 charts_o.graph1.dataOptions("2021"; new object("fill";"false"))
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : dataSet
 Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe pas, une nouvelle courbe est créee avec le label et les données passées en argument.
@@ -111,7 +111,7 @@ Chart.dataSet($label_t; $data_c) -> Modifie this
 charts_o.graph1.dataSet("2021"; New collection(10,25,32,22))
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : getHtml
 Renvoie le code Html du graphique.
@@ -133,7 +133,7 @@ Renvoie le code Html du graphique.
 <!--#4DHTML charts_o.graph1.getHtml()-->
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : labelSet
 Permet de charger les labels (les points d'abscisse) du graphique
@@ -156,7 +156,7 @@ charts_o.graph1.label(New collection("2018","2019","2020","2021"))
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : optionsMerge
 Permet de modifier les options générales du graphique.
@@ -178,7 +178,7 @@ Chart.optionsMerge($options_o) -> Modifie this
 charts_o.graph1.optionsMerge(New object("responsive","true"))
 ```
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : titleSet
 Permet d'ajouter ou de modifier le titre du graphique.
@@ -201,7 +201,7 @@ charts_o.graph1.titleSet("Chiffre d'affaire par année")
 ```
 
 
-------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Fonction : typeSet
 Permet de modifier le type du graphique (barre, ligne, camembert...).
