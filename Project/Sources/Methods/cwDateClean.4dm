@@ -9,6 +9,8 @@ Historique
 25/02/20 - Grégory Fromain <gregory@connect-io.fr> - Récupération depuis le projet livrerunballon et amélioration
 13/06/20 - Grégory Fromain <gregory@connect-io.fr> - Gestion du cas : ($1="00/00/00")|($1="00-00-00")
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+21/08/21 - Grégory Fromain <gregory@connect-io.fr> - Amelioration "01 . 01 -22" -> "01/01/2022"
+21/08/21 - Grégory Fromain <gregory@connect-io.fr> - Gestion du cas : 00/00/0000
 ------------------------------------------------------------------------------*/
 
 // Déclarations
@@ -21,8 +23,13 @@ var $stop_b : Boolean
 $stop_b:=False:C215
 
 // Si le champ est vide, on ne va pas plus loin...
-If ($1="") | ($1="00/00/00") | ($1="00-00-00")
+If ($1="") | ($1="00/00/00")
 	$0:=$1
+	$stop_b:=True:C214
+End if 
+
+If (Not:C34($stop_b)) & (($1="00/00/0000") | ($1="00-00-00"))
+	$0:=String:C10(Date:C102($1))
 	$stop_b:=True:C214
 End if 
 
@@ -30,7 +37,7 @@ End if
 // La date est déjà propre.
 If (Not:C34($stop_b))
 	If (Date:C102($1)#!00-00-00!)
-		$0:=$1
+		$0:=String:C10(Date:C102($1))
 		$stop_b:=True:C214
 	End if 
 End if 

@@ -6,7 +6,7 @@ Suppression multiple de cle d'un objet.
 
 Historique
 23/11/15 - Grégory Fromain <gregory@connect-io.fr> - Création
-31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ré-*ecriture et import dans cioWeb
+31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ré-ecriture et import dans cioWeb
 ------------------------------------------------------------------------------*/
 
 // Déclarations
