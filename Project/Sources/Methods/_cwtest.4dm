@@ -5,7 +5,7 @@ Méthode : _cwTest
 Test unitaire de certaines méthodes du composant.
 
 Historique
-20/08/21 - Grégory Fromain <gregory@connect-io.fr> - Création : 45 tests - 44 ok.
+20/08/21 - Grégory Fromain <gregory@connect-io.fr> - Création : 57 tests (dont 13 object merge) - 44 ok.
 ------------------------------------------------------------------------------*/
 
 

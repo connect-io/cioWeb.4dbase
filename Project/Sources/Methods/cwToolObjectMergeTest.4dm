@@ -137,6 +137,26 @@ $control_o.cle12.push(New object:C1471("ID"; 1; "city"; "Paris"; "habitant"; $ha
 $control_o.cle12.push(New object:C1471("ID"; 2; "city"; "Lyon"; "habitant"; New collection:C1472()))
 
 
+// Test 13 : merge collection dans une collection avec un fils vide
+$habitant_c:=New collection:C1472()
+$habitant_c.push(New object:C1471("ID"; 1; "prenom"; "Martin"; "nom"; "Rodriguez"))
+$habitant_c.push(New object:C1471("ID"; 2; "prenom"; "Marie"; "nom"; "Lines"))
+
+$parent_o.cle13:=New collection:C1472()
+$parent_o.cle13.push(New object:C1471("ID"; 1; "city"; "Cannes"; "habitant"; $habitant_c))
+
+
+$habitant_c:=New collection:C1472()
+$son_o.cle13:=New collection:C1472()
+$son_o.cle13.push(New object:C1471("ID"; 1; "city"; "Paris"; "habitant"; $habitant_c))
+
+
+$habitant_c:=New collection:C1472()
+$habitant_c.push(New object:C1471("ID"; 1; "prenom"; "Martin"; "nom"; "Rodriguez"))
+$habitant_c.push(New object:C1471("ID"; 2; "prenom"; "Marie"; "nom"; "Lines"))
+
+$control_o.cle13:=New collection:C1472()
+$control_o.cle13.push(New object:C1471("ID"; 1; "city"; "Paris"; "habitant"; $habitant_c))
 
 // On merge les objects
 $fusion_o:=cwToolObjectMerge($parent_o; $son_o)

@@ -88,6 +88,8 @@ For each ($key_t; $key_c)
 				// On recherche si c'est une collection avec des identifiants
 				
 				Case of 
+					: ($oFils[$key_t].length=0)
+						$KeyIdName_t:=""
 					: (Value type:C1509($oFils[$key_t][0])#Is object:K8:27)
 						$KeyIdName_t:=""
 					: (String:C10($oFils[$key_t][0].ID)#"")
