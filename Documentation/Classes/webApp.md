@@ -43,10 +43,10 @@ C_TEXT($chemin_t)
 // On récupére la class depuis notre composant.
 $webApp:=caToolGetClass ("WebApp")
 
-// On génére une instance de la class webApp.
+// On génère une instance de la class webApp.
 myWebApp_o:=$webApp.new("Tonton")
 
-// On récupére le chemin du cache web.
+// On récupère le chemin du cache web.
 $chemin_t:=myWebApp_o.cachePath()
 ```
 
@@ -55,7 +55,7 @@ $chemin_t:=myWebApp_o.cachePath()
 
 ## Fonction : cacheSessionWebPath
 Chemin complet (format plateforme) des sessions web.<br />
-Dans le cas ou l'on souhaite forcer un nouveau chemin, il suffit de passer un chemin valide dans ```newPath_t```, dans ce cas la fonction retournera toujours ce chemin au prochain appel.
+Dans le cas où l'on souhaiterait forcer un nouveau chemin, il suffit de passer un chemin valide dans ```newPath_t```, dans ce cas la fonction retournera toujours ce chemin au prochain appel.
 
 ### Fonctionnement
 ```4d
@@ -76,10 +76,10 @@ C_TEXT($chemin_t)
 // On récupére la class depuis notre composant.
 $webApp:=caToolGetClass ("WebApp")
 
-// On génére une instance de la class webApp.
+// On génère une instance de la class webApp.
 myWebApp_o:=$webApp.new("Tonton")
 
-// On récupére le chemin du cache web.
+// On récupère le chemin du cache web.
 $chemin_t:=myWebApp_o.cacheSessionWebPath()
 ```
 
@@ -115,8 +115,8 @@ WebApp.cacheViewSubdomainPath()
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| ???     | Texte      | Entée         | Nom du sous domaine|
-| ???        | Texte      | Sortie        | Chemin des vues du sous domaine|
+| ???     | Texte      | Entée         | Nom du sous-domaine|
+| ???        | Texte      | Sortie        | Chemin des vues du sous-domaine|
 
 ### Example
 ```html
@@ -222,8 +222,8 @@ WebApp.sourceSubdomainPath({$domaine_t}) -> $chemin_t
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $domaine_t    | Texte      | Entée         | Nom du sous domaine |
-| $chemin_t     | Texte      | Sortie        | Chemin du dossier source du sous domaine |
+| $domaine_t    | Texte      | Entée         | Nom du sous-domaine |
+| $chemin_t     | Texte      | Sortie        | Chemin du dossier source du sous-domaine |
 
 ### Example
 ```4d
@@ -260,7 +260,7 @@ $cheminDossierWebApp_t:=<>webApp_o.webAppPath()
 
 ## Fonction : webfolderSubdomainPath
 Chemin complet plateforme du dossier Webfolder/sousDomaine  
-Il est possible de forcer l'accés à un sous domaine en l'inscrivant dans $domaine_t. Dans le cas contraire, vous utiliserez le domaine de la requête HTTPS.
+Il est possible de forcer l'accès à un sous-domaine en l'inscrivant dans $domaine_t. Dans le cas contraire, vous utiliserez le domaine de la requête HTTPS.
 
 
 ### Fonctionnement
@@ -285,7 +285,7 @@ $cheminDossierWebAppSousDomaine_t:=<>webApp_o.webfolderSubdomainPath("www")
 ------------------------------------------------------
 
 ## Fonction : eMailConfigLoad
-Permet de configurer la boite mail et les modèles présents. On doit obligatoirement avoir inclus un fichier email.json sur dans le dossier. Ces variables viendront se greffer au champ globalVar d'un mail nouvellement créé grace à la classe mail.
+Permet de configurer la boite mail et les modèles présents. On doit obligatoirement avoir inclus un fichier email.json sur dans le dossier. Ces variables viendront se greffer au champ globalVar d'un mail nouvellement créé grâce à la classe mail.
 
 
 ### Fonctionnement
@@ -295,7 +295,7 @@ WebApp.eMailConfigLoad({$globalVar})
 
 | Paramêtre             | Type       | entrée/sortie             | Description |
 | --------------------- | ---------- | ------------------------- | ----------- |
-| $globalVar            | Objet      | Entrée  (optionnel)       |Permet de mettre des variables globales que l'on pourra inclure dans tous les mails (par exemple le nom de la boutique, du domaine, le lien vers la page facebook, un numero de telephone, ...)|
+| $globalVar            | Objet      | Entrée  (optionnel)       |Permet de mettre des variables globales que l'on pourra inclure dans tous les mails ( par exemple le nom de la boutique, du domaine, le lien vers la page facebook, un numero de telephone, ...)|
 
 ### Example
 ```4d

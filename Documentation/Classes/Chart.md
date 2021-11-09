@@ -25,7 +25,7 @@ La librairie JavaScript utilisée est chart.js disponible ici : https://www.char
 ## Fonction : constructor			
 Initialisation d'un graphique.
 Si vous ne passez qu'un argument, la génération du graphique se basera sur un fichier chart.json dont le lib sera le premier argument ($libChart_t).
-Si vous passez 2 arguments, la génération du graphique se basera sur un fichier chart.json dont le lib sera le deuxième argument ($modele_t) et le lib de votre graphique sera definit comme votre premier argument ($libChart_t).
+Si vous passez 2 arguments, la génération du graphique se basera sur un fichier chart.json dont le lib sera le deuxième argument ($modele_t) et le lib de votre graphique sera définit comme votre premier argument ($libChart_t).
 
 ### Fonctionnement
 ```4d
@@ -47,8 +47,8 @@ charts_o.graph1 := cwToolGetClass("Chart").new("EvolutionAnnee", "monModeleChart
 ------------------------------------------------------
 
 ## Fonction : dataColor
-Définit la couleur d'un set de donnée (d'une courbe). 
-Si aucune couleur n'est précicée, ou une couleur inconnue, la courbe hérite de la couleur noire.
+Définis la couleur d'un set de donnée (d'une courbe). 
+Si aucune couleur n'est précisée, ou une couleur inconnue, la courbe hérite de la couleur noire.
 Vous pouvez utiliser la couleur "random" pour utiliser une couleur générée au hasard.
 
 
@@ -92,7 +92,7 @@ charts_o.graph1.dataOptions("2021"; new object("fill";"false"))
 ------------------------------------------------------
 
 ## Fonction : dataSet
-Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe pas, une nouvelle courbe est créee avec le label et les données passées en argument.
+Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe pas, une nouvelle courbe est créée avec le label et les données passées en argument.
 
 ### Fonctionnement
 ```4d
@@ -136,7 +136,7 @@ Renvoie le code Html du graphique.
 ------------------------------------------------------
 
 ## Fonction : labelSet
-Permet de charger les labels (les points d'abscisse) du graphique
+Permet de charger les labels (les points d'abscisse) du graphique.
 
 ### Fonctionnement
 ```4d
@@ -205,7 +205,7 @@ charts_o.graph1.titleSet("Chiffre d'affaire par année")
 
 ## Fonction : typeSet
 Permet de modifier le type du graphique (barre, ligne, camembert...).
-Si le type de graphique passé en argument est inconnue, le graphique utilise par défaut le type "line".
+Si le type de graphique passé en argument est inconnu, le graphique utilise par défaut le type "line".
 
 ### Fonctionnement
 ```4d

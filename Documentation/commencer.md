@@ -3,7 +3,7 @@
 ## Installation
 
 Vous pouvez soit récupérer le composant et le copier dans votre application.
-Soit ajouter le composant dans votre application 4D sous GIT comme sous-module:
+Ou ajouter le composant dans votre application 4D sous GIT comme sous-module :
 ```terminal
 git submodule add  https://github.com/connect-io/cioWeb.4dbase.git Components/cioWeb.4dbase
 ```
@@ -223,7 +223,7 @@ For each ($methodeNom_t; pageWeb_o.methode)
 	pageWeb_o.resulatMethode_t:=$resultatMethode_t
 End for each 
 
-//Si il y a un fichier HTML à renvoyer... on lance le constructeur.
+//S'il y a un fichier HTML à renvoyer... on lance le constructeur.
 visiteur_o.updateVarVisiteur()
 
 
@@ -267,8 +267,8 @@ visiteur_o.sessionWebSave()
 ```
 
 
-A partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
-Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
+À partir d'ici, vous pouvez redémarrer votre application pour prendre en charge le composant et la méthode sur Ouverture.<br />
+Au lancement de l'application, le logiciel vous demande quel sous-domaine vous souhaitez créer ? Par défaut, il propose www, nous vous conseillons dans un premier temps de laisser celui-ci.
 
 Lors de la première réouverture de votre application, le composant génère automatiquement l'arborescence de votre application web.
 
@@ -279,51 +279,51 @@ Vous pouvez dès à présent tester le serveur web via votre navigateur : http:/
 ```
  📦VotreApplication
  ┣ 📂Components
- ┃ ┣ 📂cioWeb.4dbase                     // Composant cioWeb
+ ┃ ┣ 📂cioWeb.4dbase                     // Composant cioWeb.
  ┣ 📂Data
  ┣ 📂Project
  ┣ 📂Resources
- ┣ 📂WebApp                              // Répertoire principale de votre application web                           
- ┃ ┣ 📂Cache                             // Contient tous les fichiers caches de votre application web
- ┃ ┃ ┗ 📂View                            // Contient toutes les vues en HTML minifié
+ ┣ 📂WebApp                              // Répertoire principale de votre application web.                       
+ ┃ ┣ 📂Cache                             // Contient tous les fichiers caches de votre application web.
+ ┃ ┃ ┗ 📂View                            // Contient toutes les vues en HTML minifié.
  ┃ ┃   ┗ 📂www
  ┃ ┃     ┣ 📂_cioWeb
  ┃ ┃     ┃ ┗ 📂view
- ┃ ┃     ┃   ┣ 📜notification.html       // HTML minifié
+ ┃ ┃     ┃   ┣ 📜notification.html       // HTML minifié.
  ┃ ┃     ┃   ┣ 📜...
  ┃ ┃     ┗ 📂...
- ┃ ┣ 📂Sources                           // Dossier principal de code source
- ┃ ┃ ┣ 📂www                             // Dossier du sous domaine de votre application
- ┃ ┃ ┃ ┣ 📂_cioWeb                       // [Obligatoire] Il personnalise certain affichage web
- ┃ ┃ ┃ ┃ ┗ 📂view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code
- ┃ ┃ ┃ ┃   ┣ 📜notification.html         // Personnalisation des notifications
- ┃ ┃ ┃ ┃   ┣ 📜input.html                // Personnalisation des inputs des formulaires
- ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seule
- ┃ ┃ ┃ ┣ 📂_layout                       // [Obligatoire] Il permet la construction de page web sous forme de layout
+ ┃ ┣ 📂Sources                           // Dossier principal de code source.
+ ┃ ┃ ┣ 📂www                             // Dossier du sous-domaine de votre application.
+ ┃ ┃ ┃ ┣ 📂_cioWeb                       // [Obligatoire] Il personnalise certains affichages web.
+ ┃ ┃ ┃ ┃ ┗ 📂view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code.
+ ┃ ┃ ┃ ┃   ┣ 📜notification.html         // Personnalisation des notifications.
+ ┃ ┃ ┃ ┃   ┣ 📜input.html                // Personnalisation des inputs des formulaires.
+ ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seule.
+ ┃ ┃ ┃ ┣ 📂_layout                       // [Obligatoire] Il permet la construction de pages web sous forme de layout.
  ┃ ┃ ┃ ┃ ┣ 📂view
  ┃ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
- ┃ ┃ ┃ ┃ ┗ 📜route.json                  // Configuration des routes du layout
+ ┃ ┃ ┃ ┃ ┗ 📜route.json                  // Configuration des routes du layout.
  ┃ ┃ ┃ ┣ 📂basicPage
  ┃ ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html                // HTML de votre page
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html                // HTML de votre page.
  ┃ ┃ ┃ ┃ ┗ 📜route.json
- ┃ ┃ ┃ ┗ 📂demo                          // Module de demonstration
+ ┃ ┃ ┃ ┗ 📂demo                          // Module de démonstration.
  ┃ ┃ ┃   ┣ 📂form
- ┃ ┃ ┃   ┃ ┗ 📜helloWord.form.json       // Configuration du formulaire helloWord
+ ┃ ┃ ┃   ┃ ┗ 📜helloWord.form.json       // Configuration du formulaire helloWord.
  ┃ ┃ ┃   ┣ 📂view
  ┃ ┃ ┃   ┃ ┗ 📜helloWord.html
  ┃ ┃ ┃   ┗ 📜route.json
- ┃ ┃ ┗ 📜config.json                     // Configuration générale de application web
+ ┃ ┃ ┗ 📜config.json                     // Configuration générale d'application web.
  ┃ ┗ 📂WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accessible sur internet.
  ┃   ┣ 📂uploads                         // Stocker les documents que les utilisateurs charges, photos de profil, photo d'article,...
- ┃   ┗ 📂www                             // Dossier public de votre sous-domaine
+ ┃   ┗ 📂www                             // Dossier public de votre sous-domaine.
  ┃     ┣ 📂css
  ┃     ┣ 📂img
  ┃     ┗ 📂js
  ┗ 📂userPreferences.XXX
  ```
 
- Une chose importante, chaque sous domaine est géré de façon indépendante, seul le fichier  ```Sources>config.json ``` est partagé entre les sous-domaines.
+ Une chose importante, chaque sous-domaine est gérés de façon indépendante, seul le fichier  ```Sources>config.json ``` est partagé entre les sous-domaines.
 
 ## Configuration du localhost
 
@@ -340,7 +340,7 @@ sudo nano /etc/hosts
 ```
 
 Il faut maintenant ajouter les sous-domaines sur lesquels on souhaite travailler.
-Par exemple si votre application possède un sous domaine www., admin. ou alors api.:
+Par exemple, si votre application possède un sous domaine www., admin. ou alors api.:
 
 ```
 127.0.0.1       www.dev.local

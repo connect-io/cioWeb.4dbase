@@ -1,7 +1,7 @@
 ﻿# Le javascript
 
 ## Description
-Le javascript n'est pas nécessaire au fonctionnement du conposant cioWeb, ceci etant on le retrouve dans casiment 100% des pages web actuelles. Il est donc implementé dans le composant pour favoriser son utilisation.
+Le javascript n'est pas nécessaire au fonctionnement du composant cioWeb, ceci étant on le retrouve dans quasiment 100% des pages web actuelles. Il est donc implémenté dans le composant pour favoriser son utilisation.
 
 ## Prérequis
 

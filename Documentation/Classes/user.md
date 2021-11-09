@@ -4,7 +4,7 @@
 ### Description
 Gère l'utilisateur / client web
 	
-Utilisateur sur le serveur web peut-être un visiteur d'une page web, un robot google ou un autre serveur qui vient interroger le notre.
+Utilisateur sur le serveur web peut-être un visiteur d'une page web, un robot google ou un autre serveur qui vient interroger le nôtre.
 
 ### Accès aux fonctions
 * [Fonction : constructor](#fonction--constructor)
@@ -64,7 +64,7 @@ visiteur_o.entityToForm($Article_entity, "formShopArticle")
 ------------------------------------------------------
 
 ## Fonction : formInfo	
-Renvoie une copie des information d'un formulaire
+Renvoie une copie des informations d'un formulaire
 
 			
 ### Fonctionnement
@@ -224,7 +224,7 @@ visiteur_o.sessionWebSave()
 ------------------------------------------------------
 
 ## Fonction : tokenCheck			
-Vérifie un jeton pour la validation d'une pages web. Remplace la méthode : cwVisiteurTokenVerifier	
+Vérifie un jeton pour la validation d'une page web. Remplace la méthode : cwVisiteurTokenVerifier	
 			
 ### Fonctionnement
 ```4d
@@ -250,7 +250,7 @@ End if
 ------------------------------------------------------
 
 ## Fonction : tokenGenerate			
-Génere un jeton pour la validation des pages web.
+Génère un jeton pour la validation des pages web.
 			
 ### Fonctionnement
 ```4d
@@ -266,7 +266,7 @@ Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la
 ------------------------------------------------------
 
 ## Fonction : updateVarVisiteur			
-Synchro avec du vieux code. Ne pas utiliser dans de nouveau projet.
+Synchro avec du vieux code. Ne pas utiliser dans de nouveaux projets.
 			
 ### Fonctionnement
 ```4d

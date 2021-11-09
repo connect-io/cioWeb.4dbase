@@ -2,7 +2,7 @@
 # Class : Page
 
 ### Description
-Cette class permet de génerer le contenue d'une page.
+Cette class permet de générer le contenu d'une page.
 
 ### Accès aux fonctions
 * [Fonction : constructor](#fonction--constructor)
@@ -29,7 +29,7 @@ pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 ------------------------------------------------------
 
 ## Fonction : cssGetHtmlPath
-Renvoi le HTML pour le chargement des fichiers CSS.
+Renvoie le HTML pour le chargement des fichiers CSS.
 
 ### Fonctionnement
 ```4d
@@ -51,7 +51,7 @@ Page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 ------------------------------------------------------
 
 ## Fonction : jsGetHtmlPath
-Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier pageWeb.json
+Renvoi le HTML pour le chargement des fichiers JS déclarés dans le fichier pageWeb.json
 
 ### Fonctionnement
 ```4d
@@ -73,7 +73,7 @@ Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 ------------------------------------------------------
 
 ## Fonction : jsInHtml
-Place le contenue du fichier javascript dans le HTML.
+Place le contenu du fichier javascript dans le HTML.
 
 ### Fonctionnement
 ```4d
@@ -104,7 +104,7 @@ Utilisation dans le fichier *.html:
 ------------------------------------------------------
 
 ## Fonction : scanBlock
-Niveau suppreme du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
+Niveau suprême du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 
 ### Fonctionnement
 ```4d

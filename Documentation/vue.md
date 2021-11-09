@@ -1,7 +1,7 @@
 ﻿# Gestion des vues
 
 ## Description
-Les vues (très souvent appelé view) sont le rendu des pages dynamiques du serveur vers le navigateur. Dans la grande majorité des cas, il s'agit de pages HTML, mais également du JSON, XML ou autres...
+Les vues (très souvent appelées view) sont le rendu des pages dynamiques du serveur vers le navigateur. Dans la grande majorité des cas, il s'agit de pages HTML, mais également du JSON, XML ou autres...
 
 ## Prérequis
 
@@ -10,7 +10,7 @@ Les vues (très souvent appelé view) sont le rendu des pages dynamiques du serv
 ## Les variables
 
 ## Les layouts
-Les layouts sont le squelette de vos pages web ils permettent d'organiser entre autre les entétes, pieds de page, appel CSS & JS, les memus et arriere plan de votre page web.
+Les layouts sont le squelette de vos pages web, ils permettent d'organiser entre autre les entêtes, pieds de page, appel CSS & JS, les menus et arrière plan de votre page web.
 
 Voici un exemple de layout :
 ```html
@@ -93,20 +93,20 @@ L'appel de la génération du code HTML, cette ligne est à placer dans votre la
 ### Utilisation des notifications
 Vous pouvez maintenant générer simplement une alerte depuis une méthode 4D :
 ```4d
-  // Affichage d'une notification de succés
+  // Affichage d'une notification de succès
 visiteur_o.notificationSuccess:="Votre demande est bien prise en compte."
 
   // Affichage d'une notification d'erreur
 visiteur_o.notificationError:="Vous n'avez pas accès à cette page."
 
   // Affichage d'une notification d'alerte
-visiteur_o.notificationWarning:="Attention le champs prénom est obligatoire."
+visiteur_o.notificationWarning:="Attention le champ prénom est obligatoire."
 
   // Affichage d'une notification d'information
 visiteur_o.notificationInfo:="Vous avez reçu un nouveau paiement."
 ```
 
-Pour rappel les variables du visiteur concernant les notifications sont réinitialisé à chaque chargement de page.
+Pour rappel, les variables du visiteur concernant les notifications sont réinitialisées à chaque chargement de page.
 
 ## Les blocks
 
