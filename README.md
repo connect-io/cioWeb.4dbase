@@ -15,7 +15,6 @@ Actuellement, le composant est compatible uniquement à partir de 4D V18 r3.
 Bien que ce composant tourne en production sur certaines bases de nos clients. Il n'est pas encore documenté, reste difficile à utiliser dans l'état et subit de grosses transformations en ce moment.
 
 ## Utilisation
-
 * [Commencer](Documentation/commencer.md)
 * [Gestion des routes](Documentation/route.md)
 * [Les vues](Documentation/vue.md)
@@ -24,14 +23,12 @@ Bien que ce composant tourne en production sur certaines bases de nos clients. I
 * [Utilisation des tableaux de données](Documentation/datatable.md)
 
 ## Documentation des méthodes partagés
-
 [cwDataTableJsInformation](Documentation/Methods/cwDataTableJsInformation.md)
 
 Les méthodes outils
 * [cwToolGetClass](Documentation/Methods/cwToolGetClass.md)
 
 ## Classes
-
 * [DataTable](Documentation/Classes/DataTable.md)
 * [EMail](Documentation/Classes/EMail.md)
 * [Page](Documentation/Classes/Page.md)
