@@ -61,19 +61,21 @@ Historique
 	
 	
 	
-Function getHtml
+Function getHtml()->$codeHtml_t : Text
 /*------------------------------------------------------------------------------
 Fonction : Chart.getHtml
 	
 Génére le code HTML pour le graphique.
+
+Paramètre
+$codeHtml_t <- Le text à insérer dans le code HTML
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Le text à insérer dans le code HTML
-	
-	$0:="<canvas id=\""+This:C1470.lib+"\"></canvas>"
+	$codeHtml_t:="<canvas id=\""+This:C1470.lib+"\"></canvas>"
 	
 	
 	

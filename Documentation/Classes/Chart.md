@@ -46,6 +46,28 @@ charts_o.graph1 := cwToolGetClass("Chart").new("EvolutionAnnee", "monModeleChart
 
 --------------------------------------------------------------------------------
 
+## Fonction : getHtml
+Renvoie le code Html du graphique.
+
+### Fonctionnement
+```html
+<!--#4DHTML Chart.getHtml()--> -> $codeHtml_t
+```
+
+| Paramètre     | Type       | entrée/sortie | Description |
+| ------------- | ---------- | ------------- | ----------- |
+| $codeHtml_t   | Text       | Sortie        | Le code HTML |
+
+
+
+
+### Example
+```html
+<!--#4DHTML charts_o.graph1.getHtml()-->
+```
+
+--------------------------------------------------------------------------------
+
 ## Fonction : dataColor
 Définis la couleur d'un set de donnée (d'une courbe). 
 Si aucune couleur n'est précisée, ou une couleur inconnue, la courbe hérite de la couleur noire.
@@ -110,28 +132,6 @@ Chart.dataSet($labelName_t; $data_c) -> Modifie this
 ### Example
 ```4d
 charts_o.graph1.dataSet("2021"; New collection(10,25,32,22))
-```
-
---------------------------------------------------------------------------------
-
-## Fonction : getHtml
-Renvoie le code Html du graphique.
-
-### Fonctionnement
-```html
-<!--#4DHTML Chart.getHtml()--> -> $codeHtml_t
-```
-
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $codeHtml_t      | Text       | Sortie        | Le code HTML |
-
-
-
-
-### Example
-```html
-<!--#4DHTML charts_o.graph1.getHtml()-->
 ```
 
 --------------------------------------------------------------------------------
