@@ -83,7 +83,7 @@ Fonction : Chart.dataColor
 	
 Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas, renvoie du noir
 	
-Historique
+Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
 30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
@@ -128,31 +128,30 @@ Historique
 	
 	
 	
-Function dataOption
+Function dataOption($labelName_t : Text; $option_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataOption
 	
 Charger les options des data dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text
-	var $2 : Object
+
 	var $indice_i : Integer
 	var $data_o : Object
 	
-	ASSERT:C1129($1#""; "Chart.dataOption : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($2#Null:C1517; "Chart.dataOption : Le param $2 ne doit pas être null.")
+	ASSERT:C1129($labelName_t#""; "Chart.dataOption : Le param $labelName_t ne doit pas être vide.")
+	ASSERT:C1129($option_o#Null:C1517; "Chart.dataOption : Le param $option_o ne doit pas être null.")
 	
-	If (This:C1470.data.datasets.indices("label IS :1"; $1).length=1)
-		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
-		This:C1470.data.datasets[$indice_i]:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i]; $2)
+	If (This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length=1)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
+		This:C1470.data.datasets[$indice_i]:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i]; $option_o)
 	Else 
 		$data_o:=New object:C1471()
-		$data_o:=$2.copy()
-		$data_o.label:=$1
+		$data_o:=$option_o.copy()
+		$data_o.label:=$labelName_t
 		This:C1470.data.datasets.push($data_o)
 	End if 
 	

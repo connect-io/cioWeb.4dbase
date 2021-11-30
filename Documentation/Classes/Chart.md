@@ -75,18 +75,19 @@ Modifie ou ajoute une nouvelle option à un set de données (une courbe par exem
 
 ### Fonctionnement
 ```4d
-Chart.dataOption($option_o) -> Modifie this
+Chart.dataOption($labelName_t; $option_o) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $option_o     | Objet      | Entrée        | Les options à ajouter à la courbe|
+| Paramètres   | Types      | entrée/sortie | Descriptions |
+| ------------ | ---------- | ------------- | ------------ |
+| $labelName_t | Texte      | Entrée        | Le nom du label de la courbe |
+| $option_o    | Objet      | Entrée        | Les options à ajouter à la courbe |
 
 
 
 ### Example
 ```4d
-charts_o.graph1.dataOptions("2021"; new object("fill";"false"))
+charts_o.graph1.dataOption("2021"; new object("fill";"false"))
 ```
 
 --------------------------------------------------------------------------------
