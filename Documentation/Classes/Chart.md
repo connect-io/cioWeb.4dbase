@@ -144,9 +144,9 @@ Permet de charger les labels (les points d'abscisse) du graphique.
 Chart.label($label_c) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $label_c      | Collection de text | Entrée| La liste des labels à charger sur le graph|
+| Paramètre | Type       | entrée/sortie | Description |
+| --------- | ---------- | ------------- | ----------- |
+| $label_c  | Collection de text | Entrée| La liste des labels à charger sur le graph|
 
 
 
@@ -155,7 +155,6 @@ Chart.label($label_c) -> Modifie this
 ```4d
 charts_o.graph1.label(New collection("2018","2019","2020","2021"))
 ```
-
 
 --------------------------------------------------------------------------------
 

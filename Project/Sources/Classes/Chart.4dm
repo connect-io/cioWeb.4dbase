@@ -188,7 +188,7 @@ Historiques
 	
 	
 	
-Function labelSet
+Function labelSet($label_c : Collection)
 /*------------------------------------------------------------------------------
 Fonction : Chart.labelSet
 	
@@ -198,9 +198,7 @@ Historique
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Collection
-	
-	This:C1470.data.labels:=$1.copy()
+	This:C1470.data.labels:=$label_c.copy()
 	
 	
 	
