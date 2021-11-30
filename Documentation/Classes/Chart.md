@@ -51,16 +51,16 @@ Définis la couleur d'un set de donnée (d'une courbe).
 Si aucune couleur n'est précisée, ou une couleur inconnue, la courbe hérite de la couleur noire.
 Vous pouvez utiliser la couleur "random" pour utiliser une couleur générée au hasard.
 
-
 ### Fonctionnement
 ```4d
-Chart.dataColor($label_t; $couleur_t) -> Modifie this
+Chart.dataColor($labelName_t; $colorName_t) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $label_t        | Texte      | Entrée        | Le label de la courbe à colorer |
-| $couleur_t    | Texte      | Entrée        | La couleur à utiliser |
+| Paramètre    | Type       | entrée/sortie | Description |
+| ------------ | ---------- | ------------- | ----------- |
+| $labelName_t | Texte      | Entrée        | Le label de la courbe à colorer |
+| $colorName_t | Texte      | Entrée        | La couleur à utiliser |
+
 
 
 ### Example

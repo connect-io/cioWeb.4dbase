@@ -77,25 +77,26 @@ Historique
 	
 	
 	
-Function dataColor
+Function dataColor($labelName_t : Text; $colorName_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataColor
 	
-Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas ,renvoie du noir
+Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas, renvoie du noir
 	
 Historique
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	var $color_c : Collection  // liste des couleurs prédéfinis.
-	var $1; $2; $color_t : Text
+	var $color_t : Text
 	var $color_o : Object  // Couleur sélectionné.
 	
-	ASSERT:C1129($1#""; "Chart.dataColor : Le param $1 (Nom du label) ne doit pas être vide.")
-	ASSERT:C1129($2#""; "Chart.dataColor : Le param $2 (Nom de la couleur) ne doit pas être vide.")
-	ASSERT:C1129(This:C1470.data.datasets.indices("label IS :1"; $1).length#0; "Chart.dataColor : Le param $1 (Nom du label) ne correspond à aucune courbe.")
+	ASSERT:C1129($labelName_t#""; "Chart.dataColor : Le param $labelName_t ne doit pas être vide.")
+	ASSERT:C1129($colorName_t#""; "Chart.dataColor : Le param $colorName_t ne doit pas être vide.")
+	ASSERT:C1129(This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length#0; "Chart.dataColor : Le param $labelName_t ne correspond à aucune courbe.")
 	
-	$color_t:=$2
+	$color_t:=$colorName_t
 	
 	$color_c:=New collection:C1472()
 	$color_c.push(New object:C1471("r"; "255"; "g"; "255"; "b"; "255"; "name"; "white"))
@@ -114,13 +115,13 @@ Historique
 	// Bonus :  Couleur aléatoire
 	$color_c.push(New object:C1471("r"; String:C10(Random:C100%256); "g"; String:C10(Random:C100%256); "b"; String:C10(Random:C100%256); "name"; "random"))
 	
-	If ($color_c.query("name IS :1"; $2).length=0)
+	If ($color_c.query("name IS :1"; $colorName_t).length=0)
 		$color_t:="black"
 	End if 
 	
 	$color_o:=$color_c.query("name IS :1"; $color_t)[0]
 	
-	$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
+	$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
 	
 	This:C1470.data.datasets[$indiceLabel_i].backgroundColor:="rgba("+$color_o.r+", "+$color_o.g+", "+$color_o.b+", 0.2)"
 	This:C1470.data.datasets[$indiceLabel_i].borderColor:="rgba("+$color_o.r+", "+$color_o.g+", "+$color_o.b+", 1)"
