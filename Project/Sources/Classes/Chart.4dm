@@ -61,41 +61,44 @@ Historique
 	
 	
 	
-Function getHtml
+Function getHtml()->$codeHtml_t : Text
 /*------------------------------------------------------------------------------
 Fonction : Chart.getHtml
 	
 Génére le code HTML pour le graphique.
+
+Paramètre
+$codeHtml_t <- Le text à insérer dans le code HTML
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $0 : Text  // Le text à insérer dans le code HTML
-	
-	$0:="<canvas id=\""+This:C1470.lib+"\"></canvas>"
+	$codeHtml_t:="<canvas id=\""+This:C1470.lib+"\"></canvas>"
 	
 	
 	
-Function dataColor
+Function dataColor($labelName_t : Text; $colorName_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataColor
 	
-Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas ,renvoie du noir
+Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas, renvoie du noir
 	
-Historique
+Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	var $color_c : Collection  // liste des couleurs prédéfinis.
-	var $1; $2; $color_t : Text
+	var $color_t : Text
 	var $color_o : Object  // Couleur sélectionné.
 	
-	ASSERT:C1129($1#""; "Chart.dataColor : Le param $1 (Nom du label) ne doit pas être vide.")
-	ASSERT:C1129($2#""; "Chart.dataColor : Le param $2 (Nom de la couleur) ne doit pas être vide.")
-	ASSERT:C1129(This:C1470.data.datasets.indices("label IS :1"; $1).length#0; "Chart.dataColor : Le param $1 (Nom du label) ne correspond à aucune courbe.")
+	ASSERT:C1129($labelName_t#""; "Chart.dataColor : Le param $labelName_t ne doit pas être vide.")
+	ASSERT:C1129($colorName_t#""; "Chart.dataColor : Le param $colorName_t ne doit pas être vide.")
+	ASSERT:C1129(This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length#0; "Chart.dataColor : Le param $labelName_t ne correspond à aucune courbe.")
 	
-	$color_t:=$2
+	$color_t:=$colorName_t
 	
 	$color_c:=New collection:C1472()
 	$color_c.push(New object:C1471("r"; "255"; "g"; "255"; "b"; "255"; "name"; "white"))
@@ -114,155 +117,158 @@ Historique
 	// Bonus :  Couleur aléatoire
 	$color_c.push(New object:C1471("r"; String:C10(Random:C100%256); "g"; String:C10(Random:C100%256); "b"; String:C10(Random:C100%256); "name"; "random"))
 	
-	If ($color_c.query("name IS :1"; $2).length=0)
+	If ($color_c.query("name IS :1"; $colorName_t).length=0)
 		$color_t:="black"
 	End if 
 	
 	$color_o:=$color_c.query("name IS :1"; $color_t)[0]
 	
-	$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
+	$indiceLabel_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
 	
 	This:C1470.data.datasets[$indiceLabel_i].backgroundColor:="rgba("+$color_o.r+", "+$color_o.g+", "+$color_o.b+", 0.2)"
 	This:C1470.data.datasets[$indiceLabel_i].borderColor:="rgba("+$color_o.r+", "+$color_o.g+", "+$color_o.b+", 1)"
 	
 	
 	
-Function dataOption
+Function dataOption($labelName_t : Text; $option_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataOption
 	
 Charger les options des data dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text
-	var $2 : Object
+
 	var $indice_i : Integer
 	var $data_o : Object
 	
-	ASSERT:C1129($1#""; "Chart.dataOption : Le param $1 ne doit pas être vide.")
-	ASSERT:C1129($2#Null:C1517; "Chart.dataOption : Le param $2 ne doit pas être null.")
+	ASSERT:C1129($labelName_t#""; "Chart.dataOption : Le param $labelName_t ne doit pas être vide.")
+	ASSERT:C1129($option_o#Null:C1517; "Chart.dataOption : Le param $option_o ne doit pas être null.")
 	
-	If (This:C1470.data.datasets.indices("label IS :1"; $1).length=1)
-		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
-		This:C1470.data.datasets[$indice_i]:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i]; $2)
+	If (This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length=1)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
+		This:C1470.data.datasets[$indice_i]:=cwToolObjectMerge(This:C1470.data.datasets[$indice_i]; $option_o)
 	Else 
 		$data_o:=New object:C1471()
-		$data_o:=$2.copy()
-		$data_o.label:=$1
+		$data_o:=$option_o.copy()
+		$data_o.label:=$labelName_t
 		This:C1470.data.datasets.push($data_o)
 	End if 
 	
 	
 	
-Function dataSet
+Function dataSet($labelName_t : Text; $data_c : Collection)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataSet
 	
 Charge les valeurs des données d'une courbe dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text
-	var $2 : Collection
 	var $indice_i : Integer
 	var $data_o : Object
 	
-	ASSERT:C1129($1#Null:C1517; "Chart.dataSet : La param $1 ne doit pas être null. Vous n'avez pas indiqué le label")
-	ASSERT:C1129($1#Null:C1517; "Chart.dataSet : La param $2 ne doit pas être null. Vous n'avez pas rentré de données")
+	ASSERT:C1129($labelName_t#Null:C1517; "Chart.dataSet : La param $labelName_t ne doit pas être null. Vous n'avez pas indiqué le label")
+	ASSERT:C1129($data_c #Null:C1517; "Chart.dataSet : La param $data_c ne doit pas être null. Vous n'avez pas rentré de données")
 	
-	If (This:C1470.data.datasets.indices("label IS :1"; $1).length=1)
-		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
-		This:C1470.data.datasets[$indice_i].data:=$2.copy()
+	If (This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length=1)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
+		This:C1470.data.datasets[$indice_i].data:=$data_c .copy()
 	Else 
 		$data_o:=New object:C1471()
-		$data_o.label:=$1
-		$data_o.data:=$2.copy()
+		$data_o.label:=$labelName_t
+		$data_o.data:=$data_c .copy()
 		This:C1470.data.datasets.push($data_o)
 	End if 
 	
 	
 	
-Function labelSet
+Function labelSet($label_c : Collection)
 /*------------------------------------------------------------------------------
 Fonction : Chart.labelSet
 	
 Charger les labels dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Collection
-	
-	This:C1470.data.labels:=$1.copy()
+	This:C1470.data.labels:=$label_c.copy()
 	
 	
 	
-Function optionsMerge
+Function optionsMerge($options_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Chart.optionsMerge
 	
 Charger les options du graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Object
-	
-	ASSERT:C1129($1#Null:C1517; "Chart.optionsMerge : La param $1 ne doit pas être null.")
+	ASSERT:C1129($options_o#Null:C1517; "Chart.optionsMerge : La param $options_o ne doit pas être null.")
 	
 	This:C1470.options:=cwToolObjectMerge(This:C1470.options; $1)
 	
 	
 	
-Function titleSet
+Function titleSet($title_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.titleSet
 	
 Permet de definir le titre du graph 
+
+Paramètre
+$title_t -> Titre du graphique
 	
-Historique
+Historiques
 05/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	var $1 : Text  // Le titre du graph
+
 	var $title_o : Object
 	
-	ASSERT:C1129($1#Null:C1517; "Chart.titleSet : Le param $1 ne doit pas être null.")
+	ASSERT:C1129($title_t#Null:C1517; "Chart.titleSet : Le param $title_t ne doit pas être null.")
 	
-	$title_o:=New object:C1471("title"; New object:C1471("display"; True:C214; "text"; $1))
+	$title_o:=New object:C1471("title"; New object:C1471("display"; True:C214; "text"; $title_t))
 	If (This:C1470.options.title#Null:C1517)
 		This:C1470.options.title.display:=True:C214
-		This:C1470.options.title.text:=$1
+		This:C1470.options.title.text:=$title_t
 	Else 
 		This:C1470.optionsMerge($title_o)
 	End if 
 	
 	
 	
-Function typeSet
+Function typeSet($type_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.typeSet
 	
 Permet de changer le type du graph (bar, line, camembert...). Si le parametre est inconnu, on initialise avec un graph line.
-	
-Historique
+
+Paramètre
+$type_t -> Le type de graph à utiliser 
+
+Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Le type de graph à utiliser 
 	var $typePossible_c : Collection
 	
-	ASSERT:C1129($1#""; "Chart.typeSet : La param $1 ne doit pas être vide.")
+	ASSERT:C1129($type_t#""; "Chart.typeSet : La param $type_t ne doit pas être vide.")
 	$typePossible_c:=New collection:C1472("bar"; "line"; "pie"; "radar"; "polarArea"; "bubble"; "scatter")
-	ASSERT:C1129($typePossible_c.indexOf($1)#-1; "Chart.typeSet : Le param $1 ne correspond à aucun type de courbe.")
-	If $typePossible_c.indexOf($1)#-1
-		This:C1470.type:=$1
+	ASSERT:C1129($typePossible_c.indexOf($type_t)#-1; "Chart.typeSet : Le param $type_t ne correspond à aucun type de courbe.")
+	If $typePossible_c.indexOf($type_t)#-1
+		This:C1470.type:=$type_t
 	Else 
 		This:C1470.type:="line"
 	End if 
