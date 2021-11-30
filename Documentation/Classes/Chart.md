@@ -97,13 +97,13 @@ Permet de créer ou de modifier les données d'une courbe. Si la courbe n'existe
 
 ### Fonctionnement
 ```4d
-Chart.dataSet($label_t; $data_c) -> Modifie this
+Chart.dataSet($labelName_t; $data_c) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $label_t      | Text       | Entrée        | Le label de la courbe à modifier|
-| $data_c       | Collection d'entier| Entrée | Les données pour chaque point d'abscisse|
+| Paramètre    | Type       | entrée/sortie | Description |
+| ------------ | ---------- | ------------- | ----------- |
+| $labelName_t | Text       | Entrée        | Le label de la courbe à modifier|
+| $data_c      | Collection d'entier| Entrée | Les données pour chaque point d'abscisse|
 
 
 

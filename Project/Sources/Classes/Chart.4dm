@@ -157,31 +157,30 @@ Historiques
 	
 	
 	
-Function dataSet
+Function dataSet($labelName_t : Text; $data_c : Collection)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataSet
 	
 Charge les valeurs des données d'une courbe dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text
-	var $2 : Collection
 	var $indice_i : Integer
 	var $data_o : Object
 	
-	ASSERT:C1129($1#Null:C1517; "Chart.dataSet : La param $1 ne doit pas être null. Vous n'avez pas indiqué le label")
-	ASSERT:C1129($1#Null:C1517; "Chart.dataSet : La param $2 ne doit pas être null. Vous n'avez pas rentré de données")
+	ASSERT:C1129($labelName_t#Null:C1517; "Chart.dataSet : La param $labelName_t ne doit pas être null. Vous n'avez pas indiqué le label")
+	ASSERT:C1129($data_c #Null:C1517; "Chart.dataSet : La param $data_c ne doit pas être null. Vous n'avez pas rentré de données")
 	
-	If (This:C1470.data.datasets.indices("label IS :1"; $1).length=1)
-		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $1)[0]
-		This:C1470.data.datasets[$indice_i].data:=$2.copy()
+	If (This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length=1)
+		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
+		This:C1470.data.datasets[$indice_i].data:=$data_c .copy()
 	Else 
 		$data_o:=New object:C1471()
-		$data_o.label:=$1
-		$data_o.data:=$2.copy()
+		$data_o.label:=$labelName_t
+		$data_o.data:=$data_c .copy()
 		This:C1470.data.datasets.push($data_o)
 	End if 
 	
