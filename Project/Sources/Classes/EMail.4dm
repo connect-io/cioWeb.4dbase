@@ -25,6 +25,7 @@ Historique
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
 	var $server_o : Object  // Informations SMTP
+	var $imapConfig_c : Collection  // config des serveur IMAP
 	
 	ASSERT:C1129($1#""; "EMail.constructor : le Param $1 est obligatoire.")
 	
@@ -35,6 +36,11 @@ Historique
 	$server_o:=New object:C1471()
 	
 	// Vérifie que le nom du transporteur soit bien dans la config
+	
+	Use (Storage:C1525.eMail)
+		Storage:C1525.eMail.transporterName:=$1
+	End use 
+	
 	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $1)
 	
 	If ($transporter_c.length=1)
@@ -48,6 +54,12 @@ Historique
 	
 	If ($server_o#Null:C1517)
 		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
+		
+		$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $1)
+		If ($imapConfig_c.length=1)
+			This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
+		End if 
+		
 	Else 
 		ALERT:C41("Aucune occurence trouvé au sein du fichier JSON")
 		This:C1470.transporter:=New object:C1471()
@@ -91,6 +103,7 @@ Historique
 	var $mailStatus_o : Object  // transporter, info sur mail et envoie de l'email
 	var $error_t : Text  // Info concernant les erreurs
 	var $cheminPj_v : Variant  // Chemin pièce jointe
+	var $boxName_t : Text  //Nom de la boite des éléments envoyés.
 	
 	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
@@ -150,14 +163,21 @@ Historique
 		
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
-			// ToDo à voir plus tard avec Greg ce qu'on décide
+			// On regarde si la config smtp souhaite stocker le mail dans les éléments énvoyés?
+			If (Bool:C1537(Storage:C1525.eMail.smtp.query("name IS :1"; $1)[0].archive))
+				
+				// Upload email to the "Sent" mailbox
+				If (This:C1470.transporterIMAP#Null:C1517)
+					$boxName_t:=Storage:C1525.eMail.imap.query("name IS :1"; Storage:C1525.eMail.transporterName)[0].boxName.sent
+					$status_o:=This:C1470.transporterIMAP.append(This:C1470; $boxName_t)
+					
+					// Gestion des erreurs de l'IMAP.
+					If (Not:C34($status_o.sucess))
+						$error_t:=$status_o.statusText
+					End if 
+				End if 
+			End if 
 			
-			//This.to:=Null
-			//This.from:=Null
-			//This.object:=Null
-			//This.htmlBody:=Null
-			//This.textBody:=Null
-			//This.attachmentsPath_c:=Créer collection()
 		Else 
 			$error_t:="Une erreur est survenue lors de l'envoi de l'e-mail : "+$error_t+$mailStatus_o.statusText
 		End if 
