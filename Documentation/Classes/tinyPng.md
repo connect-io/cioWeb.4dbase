@@ -32,12 +32,12 @@ Importation du fichier et envoi vers l'API depuis le chemin d'un fichier écrit 
 
 ### Fonctionnement
 ```4d
-TinyPng.uploadFromFile($chemin_upload_t) -> $isValide_b
+TinyPng.uploadFromFile($filePath_t) -> $isValide_b
 ```
 
 | Paramètre        | Type       | entrée/sortie | Description |
 | ---------------- | ---------- | ------------- | ----------- |
-| $chemin_upload_t | Texte      | Entrée        | Chemin vers l'image qu'on veut modifier au format system |
+| $filePath_t      | Texte      | Entrée        | Chemin vers l'image qu'on veut modifier au format system |
 | $isValide_b      | Bool       | Sortie        | Renvoie true si la requete a bien été envoyée |
 
 ### Example

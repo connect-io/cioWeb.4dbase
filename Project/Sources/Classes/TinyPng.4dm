@@ -39,8 +39,7 @@ Fonction : TinyPng.downloadRequest
 Récupération du fichier depuis l'API
 Doc : https://tinypng.com/developers/reference
 	
-Historique
-	
+Historiques
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
 ------------------------------------------------------------------------------*/
@@ -145,39 +144,42 @@ Historique
 	
 	
 	
-Function lastExportInfo
+Function lastExportInfo()->$info_o : Object
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.lastExportInfo
 	
-renvoie les informations de la derniere importation dans un objet
+Renvoie les informations de la derniere importation.
 	
-Historique
+Paramètre
+$info_o  <- Informations importation
 	
+Historiques
 09/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création de la fonction
+30/11/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	$0:=This:C1470.lastExportInfo
+	$info_o:=This:C1470.lastExportInfo
 	
 	
 	
-Function uploadFromFile
+Function uploadFromFile($filePath_t : Text)->$isValid_b : Boolean
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.uploadFromFile
 	
 Importation du fichier et envoi vers l'API
 Doc : https://tinypng.com/developers/reference
 	
- Historique
+Paramètres
+$filePath_t -> Forcer le chemin par defaut.
+$isValid_b  <- Renvoie true si la requete a bien été envoyée
 	
-01/09/17 - Grégory Fromain<gregory@connect-io.fr> - Création de la fonction
+Historiques
+01/09/17 - Grégory Fromain <gregory@connect-io.fr> - Création de la fonction
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
-	
+30/11/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	// Déclarations
-	var $1 : Text  // chemin du fichier
-	var $0 : Boolean  // réponse
-	
 	var $filePath_t : Text  // chemin du fichier
 	var $data_p : Picture  // Image à envoyer
 	var $etat_i : Integer
@@ -186,7 +188,6 @@ Doc : https://tinypng.com/developers/reference
 	ARRAY TEXT:C222(HeaderValues_at; 0)
 	
 	//Initialisation
-	$filePath_t:=$1
 	$reponse_o:=New object:C1471
 	
 	// On vérifie que le fichier existe bien sur le disque.
@@ -224,7 +225,7 @@ Doc : https://tinypng.com/developers/reference
 	
 	This:C1470.lastExportInfo:=$reponse_o.output
 	
-	$0:=$reponse_o.isValide
+	$isValid_b:=$reponse_o.isValide
 	
 	
 	

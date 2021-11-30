@@ -14,8 +14,8 @@ Historique
 ------------------------------------------------------------------------------*/
 
 // Déclarations
-var $0 : Text  // date formatté
 var $1 : Text  // saisie client
+var $0 : Text  // date formatté
 
 var $stop_b : Boolean
 
