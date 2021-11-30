@@ -15,16 +15,16 @@ Voici un exemple de fichier de configuration JSON permettant à un utilisateur d
 Extrait d'une configuration d'une route :
 ```jsonc
 // Nom du fichier :  WebApp/Sources/www/user/route.jsonc
-"userParametre": {                                   // Nom de la route
+"userParametre": {                                   // Nom de la route.
     "parents": [
-        "parentsLayoutConnected"                     // Layout parent
+        "parentsLayoutConnected"                     // Layout parent.
     ],
     "route": {
         "path": "/lang/utilisateur-parametre.html"   // URL de la route.
     },
-    "titre": "Gestion de vos paramètres",            // Contenu de la balise title du HTML
+    "titre": "Gestion de vos paramètres",            // Contenu de la balise title du HTML.
     "viewPath": [
-        "user/view/parametre.html"                   // Emplacement du fichier HTML
+        "user/view/parametre.html"                   // Emplacement du fichier HTML.
     ],
     "methode": [
         "wpTmUserParametre"                          // La méthode qui est exécutée par 4D.
@@ -35,16 +35,16 @@ Configuration du formulaire :
 ```jsonc
 // Nom du fichier :  WebApp/Sources/www/user/form/parametre.form.jsonc
 {
-    "lib": "formUserParametre",                      // Nom du formulaire
-    "class": "m-t",                                  // Class que l'on insère dans la balise <form>
-    "action": "userParametre",                       // Route (URL) de validation du formulaire
-    "method": "POST",                                // Méthode de transfert des données du formulaire
-    "input": [                                       // Détail des entrées du formulaire
+    "lib": "formUserParametre",                      // Nom du formulaire.
+    "class": "m-t",                                  // Class que l'on insère dans la balise <form>.
+    "action": "userParametre",                       // Route (URL) de validation du formulaire.
+    "method": "POST",                                // Méthode de transfert des données du formulaire.
+    "input": [                                       // Détail des entrées du formulaire.
         {
-            "lib": "upMotDePasseActuel",             // Nom de l'input du formulaire
+            "lib": "upMotDePasseActuel",             // Nom de l'input du formulaire.
             "label": "Mot de passe actuel",          // Label, indication sur le nom du champ.
-            "type": "password",                      // Type d'input HTML
-            "colLabel": 4,                           // Largeur du label (cf. Bootstrap : row - col)
+            "type": "password",                      // Type d'input HTML.
+            "colLabel": 4,                           // Largeur du label (cf. Bootstrap : row - col).
             "required": true                         // Indique que ce champ est obligatoire.
         },
         {
@@ -99,7 +99,7 @@ Voici le rendu HTML généré par le composant :
         <label class="col-sm-4 col-form-label" for="upMotDePasseActuel">
             <!-- On retrouve ici l'indication du label. -->
             Mot de passe actuel
-            <!-- L'indication textuelle requière est générée automatiquement. -->
+            <!-- L'indication textuelle requiet est générée automatiquement. -->
             <span class="required">*</span> 
         </label>
         <!-- L'indication col-sm-8 est déduite par le composant : 12 colonnes initiales moins les 4 du label. -->
@@ -260,20 +260,20 @@ Voici un tableau regroupant les différentes valeurs que peut prendre ```type```
 
 
 
-Pour résumer les différents éléments que l'on peut trouver dans l'input, nous avons  :
+Pour résumer les différents éléments que l'on peut trouver dans l'input, nous avons :
 
 | Nom de la propriété | Type    | Valeur par défaut | Commentaire |
 | ------------------- | ------- | ----------------- | ----------- |
 | lib                 | texte   | ""                | Le nom de la variable |
-| type                | texte   | ""                | Définit le type de notre variable (text, textarea, select, etc), voir tableau ci-dessus |
+| type                | texte   | ""                | Définis le type de notre variable (text, textarea, select, etc.), voir tableau ci-dessus |
 | label               | texte   | ""                | Texte qui s'affiche avec notre variable sur la page web |
 | helpBlock           | texte   | ""                | Affiche un message d'aide pour renseigner le champ |
 | collabel            | entier  | ""                | Organise l'espace entre le label et l'input HTML|
 | class               | texte   | ""                | Rajoute des class HTML à l'input |
-| clientDisabled      | boolean | false             | Défini si l'input est saisissable ou pas (false = saisissable) |
-| append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisie (€, m2, etc) |
+| clientDisabled      | boolean | false             | Définis si l'input est saisissable ou pas (false = saisissable) |
+| append              | texte   | ""                | Rajoute un petit texte au bout du champ de saisie (€, m2, etc.) |
 | selection           | texte   | ""                | Nécessaire lorsqu'on crée un menu déroulant ou des boutons radio (voir au-dessous) |
-| format              | texte   | ""                | Type les valeurs retournés dans visiteur_o.dataFormTyping, valeur possible : bool, int, real, date|
+| format              | texte   | ""                | Type les valeurs retournées dans visiteur_o.dataFormTyping, valeur possible : bool, int, real, date|
 | colRadio            | entier  | ""                | Utilisé avec un type ```radio``` cela permet d'aligner les boutons radio |
 | required            | texte   | ""                | Le renseignement de l'input est obligatoire |
 | placeholder         | texte   | ""                |  |
@@ -312,7 +312,7 @@ visiteur_o.upVariable1:="Manager"
 
 ## Les jetons
 
-Pour chacun formulaire, il est préférable d'utiliser un mécanisme de jeton ```token```. En effet celui-ci est régénéré à chaque chargement de page et a la particularité de contrôler automatiquement que le formulaire envoyé depuis le navigateur est bien issu de la dernière page générée. En cas contraire, une notification est envoyée à l'utilisateur.
+Pour chacun formulaire, il est préférable d'utiliser un mécanisme de jeton ```token```. En effet, celui-ci est régénéré à chaque chargement de page et a la particularité de contrôler automatiquement que le formulaire envoyé depuis le navigateur est bien issu de la dernière page générée. En cas contraire, une notification est envoyée à l'utilisateur.
 
 ```json
 {

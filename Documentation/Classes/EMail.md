@@ -71,8 +71,8 @@ Il contient 4 objets.
 
 }
 ```
-Note : Les fichiers de source et layout peuvent être des fichiers HTML ou MJML, comme on le désire. Il sera préférable d'utiliser MJML pour avoir des mails en format responsive. 
-Plus d'informations sur le language <a href = "https://mjml.io/documentation/">ici</a>.
+Note : les fichiers de source et layout peuvent être des fichiers HTML ou MJML, comme on le désire. Il sera préférable d'utiliser MJML pour avoir des mails en format responsive. 
+Plus d'informations sur le langage <a href = "https://mjml.io/documentation/">ici</a>.
 
 
 --------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ $EMail.send() -> $resultat_o
 | this.subject           | Texte      | L'objet du mail en question                               |
 
 
-La méthode send renverra des informations sur l'envoi de l'email. Voir <a href="https://doc.4d.com/4Dv18/4D/18/SMTP-transportersend.305-4505974.en.html">ici</a> pour obtenir des informations précises sur ce qui est renvoyé, et pour en savoir plus sur les paramètres optionnels qu'on peut rajouter au mail.
+La méthode send renverra des informations sur l'envoi de l'email. Voir <a href="https://doc.4d.com/4Dv18/4D/18/SMTP-transportersend.305-4505974.en.html">ici</a> pour obtenir des informations précises sur ce qui est renvoyées, et pour en savoir plus sur les paramètres optionnels qu'on peut rajouter au mail.
 
 
 ### Example
@@ -149,7 +149,7 @@ Permet d'envoyer un mail à partir d'un modèle particulier enregistré dans le 
 $EMail.sendModel($nomModel_t;$variableDansMail_o) -> $retour_o
 ```
 
-Voila un exemple d'un objet de mail de démonstration contenu dans la collection "model" du fichier de configuration :
+Voilà un exemple d'un objet de mail de démonstration contenu dans la collection "model" du fichier de configuration :
 ```
 {
     "name": "demo1",
@@ -165,7 +165,7 @@ Voila un exemple d'un objet de mail de démonstration contenu dans la collection
 }
 ```
 
-Voila la description des différents paramètres utilisés dans la fonction : 
+Voilà la description des différents paramètres utilisés dans la fonction : 
 
 
 

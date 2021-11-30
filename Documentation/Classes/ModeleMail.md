@@ -43,7 +43,7 @@ modeleMail_o:=cwToolGetClass("ModeleMail").new()
 --------------------------------------------------------------------------------
 
 ## Fonction : add
-Permet d'ajouter un nouveau modèle à partir d'un objet passé en argument comprenant toutes les informations nécessaires. Modifie ensuite le fichier email.jsonc et le storage du composant en conséquence. Renvoie la chaine de texte "ok" si aucune erreur n'a été détecté et une autre chaine de texte selon l'erreur rencontrée. 
+Permet d'ajouter un nouveau modèle à partir d'un objet passé en argument comprenant toutes les informations nécessaires. Modifie ensuite le fichier email.jsonc et le storage du composant en conséquence. Renvoie la chaîne de texte "ok" si aucune erreur n'a été détectée et une autre chaine de texte selon l'erreur rencontrée. 
 Pour les attributs differents de 'name', 'source', 'subject', 'sourceHTML', l'objet passé en argument doit contenir un attribut 'personnalisation' contenant toutes les autres informations du modèle sous forme de chaîne de texte JSON. Chacune des informations sera enregistrée normalement dans le fichier email.jsonc par la suite.
 
 
@@ -67,7 +67,7 @@ $reponse_t:=modeleMail_o.add($modele_o)
 --------------------------------------------------------------------------------
 
 ## Fonction : delete
-Supprime un modèle. Ce modèle est identifié par son attribut name passé en argument de la fonction
+Supprime un modèle. Ce modèle est identifié par son attribut name passé en argument de la fonction.
 
 ### Fonctionnement
 ```4d
@@ -88,7 +88,7 @@ $reponse_t:=modeleMail_o.delete("facture")
 --------------------------------------------------------------------------------
 
 ## Fonction : enregistrement
-Réecrit le fichier email.jsonc à partir des informations contenues dans l'instance de la classe et appelle la méthode 'cwEMailConfigLoad' qui recharge ces informations dans le storage du composant. Cette méthode n'est pas sensée être utilisée hors du composant.
+Réécrit le fichier email.jsonc à partir des informations contenues dans l'instance de la classe et appelle la méthode 'cwEMailConfigLoad' qui recharge ces informations dans le storage du composant. Cette méthode n'est pas censée être utilisée hors du composant.
 
 ### Fonctionnement
 ```4d
@@ -132,7 +132,7 @@ $modele_o:=modeleMail_o.get("facture")
 --------------------------------------------------------------------------------
 
 ## Fonction : getAll
-Renvoie la collection de tous les modèles. Cette fonction est notamment utilisé pour charger une dataTable.
+Renvoie la collection de tous les modèles. Cette fonction est notamment utilisée pour charger une dataTable.
 
 
 ### Fonctionnement
@@ -154,8 +154,8 @@ $modeles_c:=modeleMail_o.getAll()
 
 
 ## Fonction : modify
-Modifie un modèle déjà existant. Ce modèle est modifié à partir d'un objet passé en argument contenant toutes les informations du modèle mise à jour. Modifie ensuite le fichier email.jsonc et le storage du composant en conséquence. Renvoie la chaine de texte "ok" si l'enregistrement s'est bien passé et une autre chaine de texte selon l'erreur rencontrée. 
-Pour les attributs differents de 'name', 'source' et 'subject' et 'sourceHTML', l'objet passé en argument doit contenir un attribut 'personnalisation' contenant toutes les autres informations du modèle sous forme de chaîne de texte JSON. Chacune des informations sera enregistrée normalement dans le fichier email.jsonc par la suite.
+Modifie un modèle déjà existant. Ce modèle est modifié à partir d'un objet passé en argument contenant toutes les informations du modèle mis à jour. Modifie ensuite le fichier email.jsonc et le storage du composant en conséquence. Renvoie la chaîne de texte "ok" si l'enregistrement s'est bien passé et une autre chaîne de texte selon l'erreur rencontrée. 
+Pour les attributs différents de 'name', 'source' et 'subject' et 'sourceHTML', l'objet passé en argument doit contenir un attribut 'personnalisation' contenant toutes les autres informations du modèle sous forme de chaîne de texte JSON. Chacune des informations sera enregistrée normalement dans le fichier email.jsonc par la suite.
 
 
 ### Fonctionnement

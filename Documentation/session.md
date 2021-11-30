@@ -23,20 +23,20 @@ Le plus basic
 A titre indication voici les propriétées du serveur web qui sont modifiés par défaut avec le composant :
 | Nom de la propriété                       | Valeur composant | Commentaire |
 | ----------------------------------------- | ---------------: | ----------- |
-| Web session cookie name                   | CIOSID           | nom du cookies de la session |
+| Web session cookie name                   | CIOSID           | nom du cookie de la session |
 | Web inactive session timeout              | 30*24*60         | 30 jours, en minute |
 | Web inactive process timeout              | 0                | 480 min de durée de vie des process inactifs associés aux sessions |
 | Web max sessions                          | 300              | 300 sessions simultanées |
 | Web Session IP address validation enabled | 0                | Déconnecte la relation entre l'IP et le cookies |
 | Web keep session                          | 1                | activation de la gestion automatique des sessions |
 | Web HTTP compression level                | -1               | Niveau de compression des pages automatique |
-| Web max concurrent processes              | 1000             | Limite du nombre de process Web acceptés et retourne le message “Serveur non disponible” |
+| Web max concurrent processes              | 1000             | Limite du nombre de process Web acceptés et retourne le message “Serveur non-disponible” |
 
 
-Vous avez également la possibilité de fixer le fonctionnement du serveur et le chemin par defaut :
+Vous avez également la possibilité de fixer le fonctionnement du serveur et le chemin par défaut :
 
 ```4d
-  // Aprés le demarrage du serveur
+  // Après le démarrage du serveur
   // <>webApp_o.serverStart()
   // WEB START SERVER
   // ...
@@ -45,7 +45,7 @@ Vous avez également la possibilité de fixer le fonctionnement du serveur et le
 $optionsSession_c:=New collection
 $optionsSession_c.push(New object("key";Web max concurrent processes;"value";1000))
 
-  // On définit le meilleur emplacement pour les sessions
+  // On définit le meilleur emplacement pour les sessions.
 <>webApp_o.cacheSessionWebPath(Get 4D folder (Data folder)+"sessionWeb"+Folder separator)
 <>webApp_o.sessionWebStart($optionsSession_c)
 ```

@@ -1,14 +1,14 @@
 ﻿# Gestion des tableaux de données
 
-Les tableaux de données (vous retrouverez son nom anglais "datatables") permette d'afficher sous forme de liste triable une collection 4D.
-Les dataTables du composant utilise la solution HTML/jQuery du site https://datatables.net
+Les tableaux de données (vous retrouverez son nom anglais "datatables") permettent d'afficher sous forme de liste triable une collection 4D.
+Les dataTables du composant utilisent la solution HTML/jQuery du site https://datatables.net
 
 # Prérequis
-* La conpréhension des routes est requise.
+* La compréhension des routes est requise.
 * La compréhension des views est requise.
 * Chargement des fichiers js et css
 
-Dans le fichier route de la page (ou la page parent) ajouté les appels CSS et JS suivant :
+Dans le fichier route de la page (ou la page parent) ajouter les appels CSS et JS suivant :
 ```json
 
 "nomPageRoute": {
@@ -29,11 +29,11 @@ Dans le fichier route de la page (ou la page parent) ajouté les appels CSS et J
 ## Création du fichier  de configuration document.datatable.json
 
 Il faut tout d'abord définir le fichier de configuration du tableau.<br/>
-Son emplacement est libre du moment qu'il se trouve dans le repertoire sous domaine du dossier sources.<br/>
-Le nom du fichier est également libre mais il doit terminer par datatable.json (ex : Sources/www/professeur/eleve.datatable.json )
+Son emplacement est libre du moment qu'il se trouve dans le répertoire sous-domaine du dossier sources.<br/>
+Le nom du fichier est également libre, mais il doit terminer par datatable.json (ex : Sources/www/professeur/eleve.datatable.json )
 
-On va donc lui donner un **lib** qui sera le nom de notre tableau, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page ou se situera le tableau et  l'élément qui sera réprésenté dans un tableau.
-On rajoute ensuite une **source** qui est la dont provient les éléments du tableau.
+On va donc lui donner un **lib** qui sera le nom de notre tableau, on nommera conventionnellement le lib par le préfixe dt pour datatable puis du nom de la page où se situeront le tableau et l'élément qui sera représenté dans un tableau.
+On ajoute ensuite une **source** qui est là dont provient les éléments du tableau.
 
 ```json
 {
@@ -47,13 +47,13 @@ On rajoute ensuite une **source** qui est la dont provient les éléments du tab
 
 On ajoute ensuite des propriétés à notre tableau tel que :
 
-| Nom de la propriété | Type  | Valeur par defaut | Commentaire |
+| Nom de la propriété | Type  | Valeur par défaut | Commentaire |
 | ------------------- | ----- | ----------------- | ----------- |
 | class               | texte | ""                | Permet de personnaliser le CSS du tableau |
-| multiSelect         | bool  | ""                | Permet la selection multiple dans un tableau. |
-| dom                 | texte | "auto"            | Génére les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simpleavec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
-| doubleClick         | objet | null              | Permet l'utilisation du double clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
-| noOrdering          | bool  | false             | Si cette propriété est passé à true, au chargement le tableau n'est pas trié, on utilise alors le trie de 4D. |
+| multiSelect         | bool  | ""                | Permet la sélection multiple dans un tableau. |
+| dom                 | texte | "auto"            | Génère les éléments autour du tableau. <br>La valeur ```auto``` permet une structure standard simple, elle permet également l'affichage de la pagination lorsque le tableau à plus de 10 éléments à son chargement. <br> La valeur ```forcePagination``` permet une structure standard simple avec la pagination dans tous les cas.<br />Plus d'information sur le site de dataTable : https://datatables.net/reference/option/dom |
+| doubleClick         | objet | null              | Permet l'utilisation du double-clic sur une ligne tableau et redirige l'utilisateur vers une nouvelle page en fonction de l'ID de la ligne. Exemple complet sous le tableau. |
+| noOrdering          | bool  | false             | Si cette propriété est passé à true, au chargement le tableau n'est pas trié, on utilise alors le tri de 4D. |
 
 
 La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'élément 
@@ -71,10 +71,10 @@ La possibilité de doublecliquer sur une ligne du tableauL pour accéder à l'é
 
 ## Création des colonnes de notre tableau
 
-Après avoir crée notre tableau, il faut créer les colonnes de notre tableau et les lier aux data de 4D.
+Après avoir créé notre tableau, il faut créer les colonnes de notre tableau et les lier aux data de 4D.
 
 Dans notre première partie **column** chaque colonne sera définie par un **title** qui sera son nom et par **data** qui permettra de faire le lien avec la partie data.
-On peut aussi y rajouter l'élément **className** qui nous permet de choisir ou se trouvera la donnée dans la case.
+On peut aussi y ajouter l'élément **className** qui nous permet de choisir où se trouvera la donnée dans la case.
 
 ```json    
     "column": [
@@ -101,17 +101,17 @@ Liste des propriétés propre aux colonnes (column) :
 ## Intégration des données
 
 La deuxième partie est appelée **data**. Pour chaque colonne, on va donc créer la data avec **name** et la lier à la variable 4D avec **value**.
-On peut aussi créer des datas qui seront stockées dans le tableau, mais pas affiché. Pour cela on crée la data sans avoir avant crée la column.
+On peut aussi créer des datas qui seront stockées dans le tableau, mais pas affichées. Pour cela, on crée la data sans avoir avant créé la column.
 
 ```json    
 	"data": [
         {
-            "name": "maskID_t", //Data créer conventionnellement et qui n'est pas affiché
+            "name": "maskID_t", //Data créer conventionnellement et qui n'est pas affiché.
             "value": "this.PK"
         },
         {
-            "name": "element1", //permet de relier la colonne avec la data
-            "value": "This.Element1" //nom de la variable que l'on trouve sur 4D
+            "name": "element1", // Permet de relier la colonne avec la data.
+            "value": "This.Element1" //Nom de la variable que l'on trouve sur 4D.
         },
         {
             "name": "element2",
@@ -125,7 +125,7 @@ Liste des propriétés propre aux données (data):
 | Nom de la propriété | Obligatoire | Type  | Valeur par defaut | Commentaire |
 | ------------------- | ----------- | ----- | ----------------- | ----------- |
 | name                | Oui         | Texte | #""               | Nom de la donnée (Permet la correspondance avec les colonnes.)|
-| value               | Oui         | Texte | #""               | Nom de la propriété de notre collection 4D. <br>Il est possible de concaténer 2 données : ``` "This.cp+\" - \"+This.ville" ``` ou  bien ``` "This.Prix+\" €\"" ```<br> Pour les dates il est préférable de les passer sous forme de texte : ``` "string(This.Date)" ``` |
+| value               | Oui         | Texte | #""               | Nom de la propriété de notre collection 4D. <br>Il est possible de concaténer 2 données : ``` "This.cp+\" - \"+This.ville" ``` ou  bien ``` "This.Prix+\" €\"" ```<br> Pour les dates, il est préférable de les passer sous forme de texte : ``` "string(This.Date)" ``` |
 
 
 
@@ -195,11 +195,11 @@ Après avoir créé le tableau, il faut ensuite le rajouter à notre code HTML p
 ```getHtml()``` : Fonction de la class dataTable.getHtml()<br />
 
 
-Les éléments à modifier sont donc le nom du tableau qui est le "lib" de notre code JSON ainsi que entity.Element ou il faut changer Element par l'élément que l'on trouve dans le tableau.
+Les éléments à modifier sont donc le nom du tableau qui est le "lib" de notre code JSON ainsi que entity. Element où il faut changer Element par l'élément que l'on trouve dans le tableau.
 
 # Rajout de bouton pour agir avec le tableau
 
-On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.default
+On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.défault
 
 ```html
     <div class="dtNomPageNomTableauButtons">
@@ -215,7 +215,7 @@ On va tout d'abord créer le div dans le code HTML qui contiendra les boutons.de
 </button> 
 ```
 
-Ici on définit son type avec **type="button"** puis on choisit le nom du bouton avec l'id **id="NomBtnRetirerLigne"**.
+Ici, on définit son type avec **type="button"** puis on choisit le nom du bouton avec l'id **id="NomBtnRetirerLigne"**.
 
 ## Code Javascript pour la création du bouton "supprimer ligne"
 

@@ -86,9 +86,9 @@ TinyPng.downloadRequest($cheminDownload_t;$methodResize_t;$largeur_l;$hauteur_l)
 | ----------------- | ----------| ------------- | ----------- |
 | $cheminDownload_t | Texte     | Entrée        | Chemin vers l'endroit ou on veut insérer l'image au format system  |
 | $methodResize_t   | Texte     | Entrée        | Optionnel - Permet de choisir la méthode de resize. Voir la doc de l'api pour plus d'infos (scale, cover, ...)  |
-| $largeur_l        | Texte     | Entier long   | Optionnel ou pas en fonctoin de la méthode de resize choisie - largeur désirée  |
+| $largeur_l        | Texte     | Entier long   | Optionnel ou pas en fonction de la méthode de resize choisie - largeur désirée  |
 | $hauteur_l        | Texte     | Entier long   | Optionnel ou pas en fonction de la méthode de resize choisie - hauteur désirée  |
-| $fichierCollect_o | Objet     | Sortie        | Renvoie le resultat de la requete de download de l'api et permet de donner des informations sur le code d'erreur en cas d'erreur, ... cf doc  |
+| $fichierCollect_o | Objet     | Sortie        | Renvoie le résultat de la requête de download de l'api et permet de donner des informations sur le code d'erreur en cas d'erreur, ... cf doc  |
 
 ### Example
 
@@ -103,7 +103,7 @@ End if
 --------------------------------------------------------------------------------
 
 ## Fonction : lastExportInfo
-Renvoie les informations de la derniere importation dans un objet
+Renvoie les informations de la dernière importation dans un objet.
 
 ### Fonctionnement
 ```4d
