@@ -248,24 +248,27 @@ Historiques
 	
 	
 	
-Function typeSet
+Function typeSet($type_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.typeSet
 	
 Permet de changer le type du graph (bar, line, camembert...). Si le parametre est inconnu, on initialise avec un graph line.
-	
-Historique
+
+Paramètre
+$type_t -> Le type de graph à utiliser 
+
+Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Le type de graph à utiliser 
 	var $typePossible_c : Collection
 	
-	ASSERT:C1129($1#""; "Chart.typeSet : La param $1 ne doit pas être vide.")
+	ASSERT:C1129($type_t#""; "Chart.typeSet : La param $type_t ne doit pas être vide.")
 	$typePossible_c:=New collection:C1472("bar"; "line"; "pie"; "radar"; "polarArea"; "bubble"; "scatter")
-	ASSERT:C1129($typePossible_c.indexOf($1)#-1; "Chart.typeSet : Le param $1 ne correspond à aucun type de courbe.")
-	If $typePossible_c.indexOf($1)#-1
-		This:C1470.type:=$1
+	ASSERT:C1129($typePossible_c.indexOf($type_t)#-1; "Chart.typeSet : Le param $type_t ne correspond à aucun type de courbe.")
+	If $typePossible_c.indexOf($type_t)#-1
+		This:C1470.type:=$type_t
 	Else 
 		This:C1470.type:="line"
 	End if 

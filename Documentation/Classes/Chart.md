@@ -211,9 +211,9 @@ Si le type de graphique passé en argument est inconnu, le graphique utilise par
 Chart.typeSet($type_t) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $type_t       | Text       | Entrée        | Le type du graphique|
+| Paramètre | Type       | entrée/sortie | Description |
+| --------- | ---------- | ------------- | ----------- |
+| $type_t   | Text       | Entrée        | Le type du graphique|
 
 
 
