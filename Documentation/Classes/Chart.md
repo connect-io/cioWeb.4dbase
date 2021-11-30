@@ -188,9 +188,9 @@ Permet d'ajouter ou de modifier le titre du graphique.
 Chart.titleSet($title_t) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $title_t      | Text       | Entrée        | Le titre à ajouter / modifier|
+| Paramètre | Type       | entrée/sortie | Description |
+| --------- | ---------- | ------------- | ----------- |
+| $title_t  | Text       | Entrée        | Le titre à ajouter / modifier|
 
 
 
@@ -199,7 +199,6 @@ Chart.titleSet($title_t) -> Modifie this
 ```4d
 charts_o.graph1.titleSet("Chiffre d'affaire par année")
 ```
-
 
 --------------------------------------------------------------------------------
 

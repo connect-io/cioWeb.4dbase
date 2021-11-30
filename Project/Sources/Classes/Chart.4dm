@@ -220,24 +220,28 @@ Historiques
 	
 	
 	
-Function titleSet
+Function titleSet($title_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.titleSet
 	
 Permet de definir le titre du graph 
+
+Paramètre
+$title_t -> Titre du graphique
 	
-Historique
+Historiques
 05/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	var $1 : Text  // Le titre du graph
+
 	var $title_o : Object
 	
-	ASSERT:C1129($1#Null:C1517; "Chart.titleSet : Le param $1 ne doit pas être null.")
+	ASSERT:C1129($title_t#Null:C1517; "Chart.titleSet : Le param $title_t ne doit pas être null.")
 	
-	$title_o:=New object:C1471("title"; New object:C1471("display"; True:C214; "text"; $1))
+	$title_o:=New object:C1471("title"; New object:C1471("display"; True:C214; "text"; $title_t))
 	If (This:C1470.options.title#Null:C1517)
 		This:C1470.options.title.display:=True:C214
-		This:C1470.options.title.text:=$1
+		This:C1470.options.title.text:=$title_t
 	Else 
 		This:C1470.optionsMerge($title_o)
 	End if 
