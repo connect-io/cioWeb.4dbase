@@ -166,9 +166,9 @@ Permet de modifier les options générales du graphique.
 Chart.optionsMerge($options_o) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $options_o    | Objet      | Entrée        | Toutes les options à ajouter au graphique|
+| Paramètre  | Type   | entrée/sortie | Description |
+| ---------- | ------ | ------------- | ----------- |
+| $options_o | Objet  | Entrée        | Toutes les options à ajouter au graphique|
 
 
 

@@ -194,27 +194,27 @@ Fonction : Chart.labelSet
 	
 Charger les labels dans le graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	This:C1470.data.labels:=$label_c.copy()
 	
 	
 	
-Function optionsMerge
+Function optionsMerge($options_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Chart.optionsMerge
 	
 Charger les options du graphique.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
+30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Object
-	
-	ASSERT:C1129($1#Null:C1517; "Chart.optionsMerge : La param $1 ne doit pas être null.")
+	ASSERT:C1129($options_o#Null:C1517; "Chart.optionsMerge : La param $options_o ne doit pas être null.")
 	
 	This:C1470.options:=cwToolObjectMerge(This:C1470.options; $1)
 	
