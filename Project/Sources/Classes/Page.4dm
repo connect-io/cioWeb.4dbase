@@ -10,7 +10,7 @@ Class constructor($infoUser_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Page.constructor
 
-Paramètre : 
+Paramètre 
 	$infoUser_o -> Informations sur le visiteur.
 	
 Historiques
@@ -184,24 +184,25 @@ Historiques
 	
 	
 	
-Function cssGetHtmlPath
+Function cssGetHtmlPath($domaineCDN_t : Text)->$cssHtmlLink_t : Text
 /*-----------------------------------------------------------------------------
 Fonction : Page.cssGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers CSS.
-	
-Historique
+
+Paramètres
+	$domaineCDN_t -> Domaine du CDN
+	$cssHtmlLink_t <- Contenu HTML des appels CSS
+
+Historiques
 19/06/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 10/02/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
 09/09/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Domaine du CDN
-	var $0 : Text  // Contenu des fichiers html
-	
 	var $cssContenu_t; $cssHtmlModele_t; $cssPath_t : Text
-	
 	
 	$cssHtmlModele_t:="<link rel=\"stylesheet\" href=\"$cssPath\">"
 	$cssContenu_t:=""
@@ -220,10 +221,10 @@ Historique
 	End if 
 	
 	If (Count parameters:C259=1)
-		$cssContenu_t:=Replace string:C233($cssContenu_t; "domaineCDN"; $1)
+		$cssContenu_t:=Replace string:C233($cssContenu_t; "domaineCDN"; $domaineCDN_t)
 	End if 
 	
-	$0:=$cssContenu_t
+	$cssHtmlLink_t:=$cssContenu_t
 	
 	
 	

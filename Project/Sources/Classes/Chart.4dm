@@ -13,7 +13,7 @@ Fonction : Chart.constructor
 	
 Initialisation d'un graphique
 
-Paramètres :
+Paramètres
 	$libChart_t -> Nom du graphique
 	$modele_t   -> (optionnel) le modele que l'on souhaite utiliser.
 	
