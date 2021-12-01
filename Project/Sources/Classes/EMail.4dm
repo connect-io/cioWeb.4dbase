@@ -79,7 +79,7 @@ Historiques
 	
 	
 	
-Function send
+Function send()->$resultat_o : Object 
 /*------------------------------------------------------------------------------
 Méthode : EMail.send
 	
@@ -93,14 +93,15 @@ this.htmlBody ou this.textBody -> text : Corps du message
 	
 Informataions optionelles :
 this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
+
+Paramètre :
+	$resultat_o <- Informations sur l'envoi de l'email
 	
 Historique
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 ------------------------------------------------------------------------------*/
 	
 	// Déclaration
-	var $0 : Object  // Remonte les informations sur l'envoi d'e-mail 
-	
 	var $mailStatus_o : Object  // transporter, info sur mail et envoie de l'email
 	var $error_t : Text  // Info concernant les erreurs
 	var $cheminPj_v : Variant  // Chemin pièce jointe
@@ -191,7 +192,7 @@ Historique
 	End if 
 	
 	// Retourne les informations concernant l'envoie du mail
-	$0:=$mailStatus_o
+	$resultat_o:=$mailStatus_o
 	
 	
 	
