@@ -5,23 +5,25 @@ Permet l'utilisation de l'api du site tinypng.com
 */
 
 
-Class constructor
+Class constructor($ApiKey : Text)
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.constructor
 	
 Initialisation de la clé de l'API
 Si aucune clé n'est renseignée, on utilisera une clé de "démonstration"
-	
-Historique
+
+Paramètre :
+	$ApiKey -> Clé de l'API
+
+Historiques
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Clean méthode + adaptation aux nouvelles formulations
 06/11/20 - Titouan Guillon <titouan@connect-io.fr> - Création du constructeur
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans du constructor
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Clé API
-	
 	If (Count parameters:C259=1)
-		This:C1470.keys:=$1
+		This:C1470.keys:=$ApiKey
 	Else 
 		This:C1470.keys:="Kzioor4VCZXDlMTnAB093q46JJRFr03Q"
 	End if 

@@ -17,6 +17,10 @@ Cette class permet d'utiliser l'API du site tinyPNG.com afin de retailler des im
 ## Fonction : constructor
 Initialisation de la clé de l'API. Par défaut, elle est initialisée avec une clé de "démonstration". Sinon, elle peut être renseignée sous la forme d'un String.
 
+| Paramètre | Type       | entrée/sortie | Description |
+| --------- | ---------- | ------------- | ----------- |
+| $ApiKey   | Texte      | Entrée        | Clé de l'API |
+
 ### Example
 ```4d
   // ===== Initialisation de l'instance de tinypng avec la clé "Kzioor4VCZXDlMTnAB093q46JJRFr03Q" =====
