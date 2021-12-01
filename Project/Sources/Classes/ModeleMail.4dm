@@ -15,51 +15,54 @@ Historique
 	
 	
 	
-Function add
+Function add($modele_o : Object)->$reponse_t : Text 
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.add
 	
 Ajout d'un nouveau modele de mail
-	
-Historique
+
+Paramètres :
+	$modele_o  -> l'objet contenant toutes les informations du nouveau modèle
+	$reponse_t <- la réponse à l'enregistrement
+
+Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	var $0 : Text  //Reponse à l'ajout du modèle
-	var $1 : Object  // L'objet avec les informations du modèle à ajouter.
-	
+
 	var $newModele_o : Object
 	var $fichierSource : Object
 	
-	$0:="ok"
+	$reponse_t:="ok"
 	
-	ASSERT:C1129(($1.name#"") & ($1.name#Null:C1517); " ModeleMail.add : Le param $1 ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($1.source#"") & ($1.source#Null:C1517); " ModeleMail.add : Le param $1 ne possède pas d'attribut  'source'.")
+	ASSERT:C1129(($modele_o.name#"") & ($modele_o.name#Null:C1517); " ModeleMail.add : Le param $modele_o ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($modele_o.source#"") & ($modele_o.source#Null:C1517); " ModeleMail.add : Le param $modele_o ne possède pas d'attribut  'source'.")
 	
 	$newModele_o:=New object:C1471()
-	$newModele_o.name:=$1.name
-	$newModele_o.source:=$1.source
+	$newModele_o.name:=$modele_o.name
+	$newModele_o.source:=$modele_o.source
 	
-	If ($1.subject#"")
-		$newModele_o.subject:=$1.subject
+	If ($modele_o.subject#"")
+		$newModele_o.subject:=$modele_o.subject
 	End if 
 	
-	If ($1.personnalisation#"")
-		$newModele_o:=cwToolObjectMerge($newModele_o; JSON Parse:C1218($1.personnalisation))
+	If ($modele_o.personnalisation#"")
+		$newModele_o:=cwToolObjectMerge($newModele_o; JSON Parse:C1218($modele_o.personnalisation))
 	End if 
 	
 	//On va chercher le fichier associé à source HTML
 	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$1.source)
 	
 	//Si le fichier n'existe pas on le crée, puis on le reecrit
-	If (Not:C34($fichierSource.exists) & ($1.sourceHTML=""))
+	If (Not:C34($fichierSource.exists) & ($modele_o.sourceHTML=""))
 		$0:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
 	Else 
-		If (Not:C34($fichierSource.exists) | ($1.sourceHTML#""))
-			$fichierSource.setText($1.sourceHTML)
+		If (Not:C34($fichierSource.exists) | ($modele_o.sourceHTML#""))
+			$fichierSource.setText($modele_o.sourceHTML)
 		End if 
 	End if 
 	
-	If ($0="ok")
+	If ($reponse_t="ok")
 		This:C1470.email.model.push($newModele_o)
 		This:C1470.enregistrement()
 	End if 

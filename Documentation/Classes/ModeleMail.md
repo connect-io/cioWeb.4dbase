@@ -52,10 +52,10 @@ Pour les attributs differents de 'name', 'source', 'subject', 'sourceHTML', l'ob
 ModeleMail.add($modele_o) -> $reponse_t
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $modele_o     | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
-| $reponse_t    | Texte      | Sortie        | La réponse à l'enregistrement |
+| Paramètre  | Type       | entrée/sortie | Description |
+| ---------- | ---------- | ------------- | ----------- |
+| $modele_o  | Objet      | Entrée        | L'objet contenant toutes les informations du nouveau modèle |
+| $reponse_t | Texte      | Sortie        | La réponse à l'enregistrement |
 
 
 ### Example
