@@ -7,27 +7,28 @@ Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code du composant plume et conversion en class
 */
 
-Class constructor
+Class constructor($name_t : Text; $paramOptionnel_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : EMail.constructor
 	
 Initialisation de la page web.
 ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
+
+Paramètres :
+	$name_t           -> Nom du transporteur
+	$paramOptionnel_o -> Param optionnel pour le transporteur
 	
-Historique
+Historiques
 02/01/20 - quentin@connect-io.fr - Création
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la Class constructor
 ------------------------------------------------------------------------------*/
-	
-	// Déclaration
-	var $1 : Text  // Nom du transporteur
-	var $2 : Object  // Param optionnel pour le transporteur
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
 	var $server_o : Object  // Informations SMTP
 	var $imapConfig_c : Collection  // config des serveur IMAP
 	
-	ASSERT:C1129($1#""; "EMail.constructor : le Param $1 est obligatoire.")
+	ASSERT:C1129($name_t#""; "EMail.constructor : le Param $name_t est obligatoire.")
 	
 	If (Storage:C1525.eMail=Null:C1517)
 		cwEMailConfigLoad
@@ -38,10 +39,10 @@ Historique
 	// Vérifie que le nom du transporteur soit bien dans la config
 	
 	Use (Storage:C1525.eMail)
-		Storage:C1525.eMail.transporterName:=$1
+		Storage:C1525.eMail.transporterName:=$name_t
 	End use 
 	
-	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $1)
+	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $name_t)
 	
 	If ($transporter_c.length=1)
 		$server_o:=$transporter_c[0]
@@ -49,13 +50,13 @@ Historique
 	
 	// Il est possible de surcharger le transporteur.
 	If (Count parameters:C259=2)
-		$server_o:=cwToolObjectMerge($server_o; $2)
+		$server_o:=cwToolObjectMerge($server_o; $paramOptionnel_o)
 	End if 
 	
 	If ($server_o#Null:C1517)
 		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
 		
-		$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $1)
+		$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $name_t)
 		If ($imapConfig_c.length=1)
 			This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
 		End if 

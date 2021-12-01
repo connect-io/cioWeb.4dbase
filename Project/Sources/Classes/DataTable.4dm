@@ -93,7 +93,7 @@ Historique
 	
 	
 	
-Function getHtml->$html_t : Text
+Function getHtml()->$html_t : Text
 /*------------------------------------------------------------------------------
 Fonction : DataTable.getHtml
 	
@@ -111,7 +111,7 @@ Historique
 	
 	
 	
-Function sendDataAjax->$dataJson_t : Text
+Function sendDataAjax()->$dataJson_t : Text
 /*------------------------------------------------------------------------------
 Fonction : DataTable.sendDataAjax
 	

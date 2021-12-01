@@ -86,10 +86,10 @@ Initialisation du transporteur de mail
 cs.EMail.new(options) -> Configure le transporteur
 ```
 
-| Paramêtre            | Type       | entrée/sortie | Description                   |
-| -------------------- | ---------- | ------------- | ----------------------------- |
-| $name_t              | Texte      | Entrée        | Le nom de l'instance du SMTP souhaité, et défini dans le fichier de config email.jsonc   |
-| $paramOptionnel_o    | Objet      | Entrée        | Un objet correspondant aux options que l'on souhaite rajouer / ecraser par rapport au transporteur choisi     |
+| Paramêtre         | Type       | entrée/sortie | Description                   |
+| ----------------- | ---------- | ------------- | ----------------------------- |
+| $name_t           | Texte      | Entrée        | Le nom de l'instance du SMTP souhaité, et défini dans le fichier de config email.jsonc   |
+| $paramOptionnel_o | Objet      | Entrée        | Un objet correspondant aux options que l'on souhaite rajouer / ecraser par rapport au transporteur choisi     |
 
 
 
@@ -101,7 +101,6 @@ $paramOptionnel_o:= New Object("user";"adresse@mail.com")
 
 $mail:=cs.EMail.new($name_t;$paramOptionnel_o)
 ```
-
 
 --------------------------------------------------------------------------------
 
