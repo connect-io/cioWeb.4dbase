@@ -397,18 +397,19 @@ Historiques
 	
 	
 	
-Function redirection301
+Function redirection301($newUrl_t : Text)
 /*-----------------------------------------------------------------------------
 Méthode : Page.redirection301
 	
 Etabli une redirection 301 http(de type permanante)
+
+Paramètre
+	$newUrl_t -> Nouvelle url
 	
-Historique
+Historiques
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	// Déclarations
-	var $1 : Text  // $1 = [texte] nouvelle url
 	
 	ARRAY TEXT:C222($champs; 2)
 	ARRAY TEXT:C222($valeurs; 2)
@@ -416,7 +417,7 @@ Historique
 	$champs{1}:="X-STATUS"
 	$valeurs{1}:="301 Moved Permanently, false, 301"
 	$champs{2}:="Location"
-	$valeurs{2}:=$1
+	$valeurs{2}:=$newUrl_t
 	
 	WEB SET HTTP HEADER:C660($champs; $valeurs)
 	WEB SEND TEXT:C677("redirection")

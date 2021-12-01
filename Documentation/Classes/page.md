@@ -135,3 +135,22 @@ Page.scanBlock($corpsHtml_t) -> Modifie this
 pageWeb_o.scanBlock($contenuFichierCorpsHtml_t)
 ```
 
+--------------------------------------------------------------------------------
+
+## Fonction : redirection301
+Etabli une redirection 301 http(de type permanante).
+
+### Fonctionnement
+```4d
+Page.redirection301($newUrl_t) -> Modifie this
+```
+
+| Paramètre  | Type       | entrée/sortie | Description |
+| ---------- | ---------- | ------------- | ----------- |
+| $newUrl_t  | Texte      | Entée         | Nouvelle url. |
+
+### Example
+```html
+pageWeb_o.redirection301($newUrl_t)
+```
+
