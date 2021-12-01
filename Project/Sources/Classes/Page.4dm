@@ -6,19 +6,21 @@ Cette class permet de génerer le contenue d'une page.
 */
 
 
-Class constructor
+Class constructor($infoUser_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Page.constructor
+
+Paramètre : 
+	$infoUser_o -> Informations sur le visiteur.
 	
-Historique
+Historiques
 13/03/18 - Grégory Fromain <gregory@connect-io.fr> - Création
 08/12/19 - Grégory Fromain <gregory@connect-io.fr> - Les fichiers de routing sont triés par ordre croissant
 16/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Renomer pageweb_o.langue en pageweb_o.lang
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans le constructeur
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Object  // Les informations sur le visiteur.
 	
 	var $page_o : Object
 	var $propriete_t : Text
@@ -30,7 +32,7 @@ Historique
 	ARRAY LONGINT:C221($AT_longueurTrouvee; 0)
 	ARRAY TEXT:C222($AT_routeFormatCle; 0)
 	
-	This:C1470.user:=$1
+	This:C1470.user:=$infoUser_o
 	
 	// Information sur les routes du site provenants directement de storage.
 	This:C1470.siteRoute_c:=Storage:C1525.sites[This:C1470.user.sousDomaine].route.copy()
