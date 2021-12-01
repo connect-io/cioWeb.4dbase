@@ -228,26 +228,28 @@ Historiques
 	
 	
 	
-Function i18nGet
+Function i18nGet($nameAttribut_t : Text)->$reponse_t : Text
 /*------------------------------------------------------------------------------
 Fonction : Page.I18nGet
-	
-Historique
+
+Paramètres
+	$nameAttribut_t -> nom de l'attribut de l'objet que l'on souhaite utiliser
+	$reponse_t      <- le text en retour
+
+Historiques
 15/08/20 - Grégory Fromain<gregory@connect-io.fr> - Mise en veille de l'internalisation
 26/11/20 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // nom de l'attribut de l'objet que l'on souhaite utiliser.
-	var $0 : Text  // le text en retour
-	
-	ASSERT:C1129($1#""; "Le param $1 doit être une chaine de caractère non vide.")
+	ASSERT:C1129($nameAttribut_t#""; "Le param $nameAttribut_t doit être une chaine de caractère non vide.")
 	If (This:C1470.route.data.lang=Null:C1517)
 		This:C1470.route.data.lang:="fr"
 	End if 
-	$0:=String:C10(This:C1470.i18n[This:C1470.route.data.lang][$1])
+	$reponse_t:=String:C10(This:C1470.i18n[This:C1470.route.data.lang][$nameAttribut_t])
 	// Exemple : Storage.sites.www.I18n.page.fr.index.title
-	If ($0="")
-		$0:="Traduction inconnu : "+$1
+	If ($reponse_t="")
+		$reponse_t:="Traduction inconnu : "+$nameAttribut_t
 	End if 
 	
 	

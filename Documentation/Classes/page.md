@@ -36,7 +36,7 @@ Renvoie le HTML pour le chargement des fichiers CSS.
 Page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 ```
 
-| Paramêtre      | Type       | entrée/sortie | Description |
+| Paramètre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
 | $domaineCDN_t  | Texte      | Entrée        | Permet d'ajouter un CDN en production. |
 | $cssHtmlLink_t | Texte      | Sortie        | Contenu HTML des appels CSS |
@@ -47,6 +47,20 @@ Page.cssGetHtmlPath($domaineCDN_t) -> $cssHtmlLink_t
 <!--#4DHTML pageWeb_o.cssGetHtmlPath()-->
 ```
 
+--------------------------------------------------------------------------------
+
+## Fonction : i18nGet
+Mise en veille de l'internalisation avec utilisation de storage.
+
+### Fonctionnement
+```4d
+Page.i18nGet($nameAttribut_t) -> $reponse_t
+```
+
+| Paramètre       | Type       | entrée/sortie | Description |
+| --------------- | ---------- | ------------- | ----------- |
+| $nameAttribut_t | Texte      | Entrée        | Nom de l'attribut de l'objet que l'on souhaite utiliser. |
+| $reponse_t      | Texte      | Sortie        | Le text en retour |
 
 --------------------------------------------------------------------------------
 
@@ -58,7 +72,7 @@ Renvoi le HTML pour le chargement des fichiers JS déclarés dans le fichier pag
 Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 ```
 
-| Paramêtre      | Type       | entrée/sortie | Description |
+| Paramètre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
 | $domaineCDN_t  | Texte      | Entrée        | Permet d'ajouter un CDN en production. |
 | $jsHtmlLink_t  | Texte      | Sortie        | Contenu HTML des appels JS |
@@ -111,7 +125,7 @@ Niveau suprême du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 Page.scanBlock($corpsHtml_t) -> Modifie this
 ```
 
-| Paramêtre     | Type       | entrée/sortie | Description |
+| Paramètre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
 | $corpsHtml_t  | Texte      | Entée         | Contenu HTML dans lequel on souhaite retrouver les blocks. |
 
