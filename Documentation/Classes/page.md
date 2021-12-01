@@ -74,7 +74,7 @@ Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 
 | Paramètre      | Type       | entrée/sortie | Description |
 | -------------- | ---------- | ------------- | ----------- |
-| $domaineCDN_t  | Texte      | Entrée        | Permet d'ajouter un CDN en production. |
+| $domaineCDN_t  | Texte      | Entrée        | Permet d'ajouter un CDN en production |
 | $jsHtmlLink_t  | Texte      | Sortie        | Contenu HTML des appels JS |
 
 

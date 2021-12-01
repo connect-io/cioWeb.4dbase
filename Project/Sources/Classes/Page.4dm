@@ -254,20 +254,22 @@ Historiques
 	
 	
 	
-Function jsGetHtmlPath
+Function jsGetHtmlPath($domaineCDN_t : Text)->$jsHtmlLink_t : Text
 /*-----------------------------------------------------------------------------
 Fonction : Page.jsGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page.json
-	
-Historique
+
+Paramètres
+	$domaineCDN_t -> domaine du CDN
+	$jsHtmlLink_t <- Contenu des chemin JS à insérer dans le HTML.
+
+Historiques
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text  // $1 : [texte] domaine du CDN
-	var $0 : Text  // Contenu des chemin JS à insérer dans le HTML.
 	
 	var $T_jsContenu : Text
 	var $jsHtmlModele_t : Text
@@ -283,10 +285,10 @@ Historique
 	End if 
 	
 	If (Count parameters:C259=1)
-		$T_jsContenu:=Replace string:C233($T_jsContenu; "domaineCDN"; $1)
+		$T_jsContenu:=Replace string:C233($T_jsContenu; "domaineCDN"; $domaineCDN_t)
 	End if 
 	
-	$0:=Char:C90(Line feed:K15:40)+$T_jsContenu
+	$jsHtmlLink_t:=Char:C90(Line feed:K15:40)+$T_jsContenu
 	
 	
 	
