@@ -118,10 +118,10 @@ Renvoie les informations d'un modèle. Ce modèle est identifié par son attribu
 ModeleMail.get($name_t) -> $modele_o
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $name_t       | Texte      | Entrée        | Le nom du modèle (Ce nom doit être unique) |
-| $reponse_t    | Objet      | Sortie        | L'objet contenant toutes les informations du modèle demandé |
+| Paramètre  | Type       | entrée/sortie | Description |
+| ---------- | ---------- | ------------- | ----------- |
+| $name_t    | Texte      | Entrée        | Le nom du modèle (Ce nom doit être unique) |
+| $reponse_o | Objet      | Sortie        | L'objet contenant toutes les informations du modèle demandé |
 
 
 ### Example

@@ -113,24 +113,27 @@ Historique
 	// Rechargement dans le storage
 	cwEMailConfigLoad
 	
-Function get
+Function get($name_t : Text)->$reponse_o : Object
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.get
 	
 Renvoie les informations d'un modèle a l'aide de son nom
-	
-Historique
+
+Paramètres :
+	var $name_t    -> Le nom du modèle à supprimer
+	var $reponse_o <- informations du modèle demandé
+
+Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $0 : Object  //Le modèle à renvoyer
-	var $1 : Text  // Le nom du modèle à supprimer
 	var $modele_c : Collection
 	var $keys_c : Collection  // Liste des attributs contenu dans l'objet modele
 	var $personnalisation_o  // Objet tampon utilisé pour récuperer la partie 'personnalisation'
 	var $modele_o : Object  //Le modèle à renvoyer
 	
-	$modele_c:=This:C1470.email.model.query("name = :1"; $1).copy()
+	$modele_c:=This:C1470.email.model.query("name = :1"; $name_t).copy()
 	ASSERT:C1129($modele_c.length#0; " ModeleMail.get : modèle introuvable.")
 	$modele_o:=$modele_c[0]
 	
@@ -151,7 +154,7 @@ Historique
 	ASSERT:C1129($fichierSource.exists; " ModeleMail.get : Fichier source introuvable.")
 	$modele_o.sourceHTML:=$fichierSource.getText()
 	
-	$0:=$modele_o
+	$reponse_o:=$modele_o
 	
 	
 	
