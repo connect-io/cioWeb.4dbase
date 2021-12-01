@@ -322,7 +322,7 @@ Fonction : User.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
 
-Paramètre :
+Paramètre
 	$fils_o -> Objet à fusionner avec l'instance utilisateur
 
 Historiques
@@ -342,21 +342,24 @@ Historiques
 	
 	
 	
-Function sessionWebFolderPath
+Function sessionWebFolderPath()->$cheminSession_t : Text
 /*------------------------------------------------------------------------------
 Fonction : User.sessionWebFolderPath
 	
 Chemin du dossier des sessions web de l'utilisateur.
 Remplace la méthode : cwSessionUserFolder
+
+Paramètre
+	$cheminSession_t <- chemin du dossier de session du visiteur
 	
 Historique
 31/07/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $0; $chFolderSession_t : Text  // $0 = [text] chemin du dossier de session du visiteur
-	
+	var $chFolderSession_t : Text  	
 	var $logErreur_o : Object
 	
 	$logErreur_o:=New object:C1471
@@ -394,7 +397,7 @@ Historique
 		ALERT:C41($logErreur_o.detailErreur)
 		
 		// On renvoie ce que l'on peut faire de mieux...
-		$0:=Get 4D folder:C485(Database folder:K5:14; *)
+		$cheminSession_t:=Get 4D folder:C485(Database folder:K5:14; *)
 	End if 
 	
 	

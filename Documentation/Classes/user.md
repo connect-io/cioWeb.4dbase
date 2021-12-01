@@ -184,12 +184,12 @@ Chemin du dossier des sessions web de l'utilisateur.
 			
 ### Fonctionnement
 ```4d
-User.objectMerge() -> $cheminSession_t
+User.sessionWebFolderPath() -> $cheminSession_t
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| cheminSession_t | Texte    | Sortie        | chemin du dossier de session du visiteur. |
+| Paramètre        | Type       | entrée/sortie | Description |
+| ---------------- | ---------- | ------------- | ----------- |
+| $cheminSession_t | Texte      | Sortie        | chemin du dossier de session du visiteur. |
 
 
 ### Example
@@ -197,7 +197,6 @@ User.objectMerge() -> $cheminSession_t
 C_TEXT($DossierDestination_t)
 $DossierDestination_t:=visiteur_o.sessionWebFolderPath()
 ```
-
 
 --------------------------------------------------------------------------------
 
