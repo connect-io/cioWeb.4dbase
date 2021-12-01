@@ -215,7 +215,6 @@ La fonction ne requiert pas de paramètre.
 Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la page Commencer.
 
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : sessionWebSave			
@@ -233,7 +232,6 @@ La fonction ne requiert pas de paramètre.
 ```4d
 visiteur_o.sessionWebSave()
 ```
-
 
 --------------------------------------------------------------------------------
 
@@ -260,7 +258,6 @@ If (visiteur_o.tokenCheck())
 End if 
 ```
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : tokenGenerate			
@@ -275,7 +272,6 @@ La fonction ne requiert pas de paramètre.
 
 ### Example
 Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la page Commencer.
-
 
 --------------------------------------------------------------------------------
 

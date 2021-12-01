@@ -540,19 +540,21 @@ Historique
 	
 	
 	
-Function tokenCheck
+Function tokenCheck()->$tokenValide_o : Boolean
 /*------------------------------------------------------------------------------
 Fonction : User.tokenCheck
 	
 Vérifie un jeton pour la validation d'une pages web.
 Remplace la méthode : cwVisiteurTokenVerifier
 	
-Historique
+Paramètre
+	$tokenValide_o : Boolean  // Vrai si valide
+
+Historiques
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $0 : Boolean  // Vrai si valide
 	
 	var $logErreur_o : Object
 	
@@ -561,7 +563,7 @@ Historique
 	If (This:C1470.token#Null:C1517)
 		If (This:C1470.tokenControle#Null:C1517)
 			If (This:C1470.token=This:C1470.tokenControle)
-				$0:=True:C214
+				$tokenValide_o:=True:C214
 			Else 
 				$logErreur_o:=New object:C1471()
 				$logErreur_o.detailErreur:="Erreur de Token du visiteur"
