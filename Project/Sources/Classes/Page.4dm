@@ -334,19 +334,21 @@ Historiques
 	
 	
 	
-Function scanBlock
+Function scanBlock($corpsHtml_t : Text)->$reponse_t : Text
 /*-----------------------------------------------------------------------------
 Fonction : Page.scanBlock
 	
-Niveau suppreme du template 4D :o) : -p Permet la gestion des blocs dans le HTML.
-	
-Historique
+Niveau supprême du template 4D :o) : -p Permet la gestion des blocs dans le HTML.
+
+Paramètres
+	$corpsHtml_t -> Contenu HTML dans lequel on souhaite retrouver les blocks
+	$reponse_t <- Retourne les élements du fichier qui ne sont pas dans un block
+
+Historiques
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text
-	var $0 : Text  // Retourne les élements du fichiers qui ne sont pas dans un block
 	
 	var $contenuFichierCorpsHtml_t : Text
 	var $nomVar_t : Text
@@ -354,7 +356,7 @@ Historique
 	ARRAY LONGINT:C221($posTrouvee_al; 0)
 	ARRAY LONGINT:C221($longTrouvee_al; 0)
 	
-	$contenuFichierCorpsHtml_t:=$1
+	$contenuFichierCorpsHtml_t:=$corpsHtml_t
 	
 	// On regarde si il y a des blocks de template.
 	
@@ -391,7 +393,7 @@ Historique
 		End while 
 	End if 
 	
-	$0:=$contenuFichierCorpsHtml_t
+	$reponse_t:=$contenuFichierCorpsHtml_t
 	
 	
 	

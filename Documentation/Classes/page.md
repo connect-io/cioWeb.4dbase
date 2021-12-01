@@ -125,10 +125,10 @@ Niveau suprême du template 4D :o) :-p Permet la gestion des blocs dans le HTML.
 Page.scanBlock($corpsHtml_t) -> Modifie this
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $corpsHtml_t  | Texte      | Entée         | Contenu HTML dans lequel on souhaite retrouver les blocks. |
-
+| Paramètre    | Type       | entrée/sortie | Description |
+| ------------ | ---------- | ------------- | ----------- |
+| $corpsHtml_t | Texte      | Entée         | Contenu HTML dans lequel on souhaite retrouver les blocks. |
+| $reponse_t   | Texte      | Sortie        | Retourne les éléments du fichier qui ne sont pas dans un block. |
 
 ### Example
 ```html
