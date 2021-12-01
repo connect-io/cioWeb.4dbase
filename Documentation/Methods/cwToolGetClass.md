@@ -1,18 +1,18 @@
 ﻿<!-- cwToolGetClass ( Texte ) -> Objet -->
 
 ## Description
-Renvoie une classe ver la base hôte.
+Renvoie une classe vers la base hôte.
 
 ```4d
 cwToolGetClass ( class_t ) -> class_o
 ```
 
-| Paramêtre | Type | entrée/sortie | Description |
-| --------- | ---- | ------------- | ----------- |
-| class_t | Texte | entrée | Nom de la classe à renvoyer |
-| class_o | Objet | sortie | Objet de la classe |
+| Paramètre | Type  | entrée/sortie | Description |
+| --------- | ----- | ------------- | ----------- |
+| class_t   | Texte | entrée        | Nom de la classe à renvoyer |
+| class_o   | Objet | sortie        | Objet de la classe |
 
-## Example
+## Exemple
 
 ```4d
 var $webApp_cs;$myWebApp_o : Object
