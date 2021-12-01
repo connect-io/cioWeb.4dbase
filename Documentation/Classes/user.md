@@ -116,7 +116,6 @@ La fonction ne requiert pas de paramètre.
 ### Example
 Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la page Commencer.
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : login			
@@ -133,7 +132,6 @@ La fonction ne requiert pas de paramètre.
 ```4d
 visiteur_o.login()
 ```
-
 
 --------------------------------------------------------------------------------
 
@@ -152,7 +150,6 @@ La fonction ne requiert pas de paramètre.
 ```html
 ???
 ```
-
 
 --------------------------------------------------------------------------------
 
@@ -179,7 +176,6 @@ O_avatar.Host:="clients."+<>webConfig_o.domaine.nom
 
 visiteur.objectMerge(O_avatar)
 ```
-
 
 --------------------------------------------------------------------------------
 

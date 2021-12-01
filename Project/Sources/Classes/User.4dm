@@ -316,23 +316,25 @@ Historique
 	
 	
 	
-Function objectMerge
+Function objectMerge($fils_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : User.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
-	
-Historique
+
+Paramètre :
+	$fils_o -> Objet à fusionner avec l'instance utilisateur
+
+Historiques
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Object
 	
 	var $objectMerge_o : Object
 	var $key_t : Text
 	
-	$objectMerge_o:=cwToolObjectMerge(This:C1470; $1)
+	$objectMerge_o:=cwToolObjectMerge(This:C1470; $fils_o)
 	
 	For each ($key_t; $objectMerge_o)
 		This:C1470[$key_t]:=$objectMerge_o[$key_t]
