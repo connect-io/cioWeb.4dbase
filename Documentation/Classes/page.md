@@ -10,7 +10,6 @@ Cette class permet de générer le contenu d'une page.
 * [Fonction : jsGetHtmlPath](#fonction--jsGetHtmlPath)
 * [Fonction : scanBlock](#fonction--scanBlock)
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : constructor
@@ -24,7 +23,6 @@ Interne au composant cioWeb.
   // ===== Chargement des informations sur la page =====
 pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
 ```
-
 
 --------------------------------------------------------------------------------
 
@@ -83,7 +81,6 @@ Page.jsGetHtmlPath($domaineCDN_t) -> $jsHtmlLink_t
 <!--#4DHTML pageWeb_o.jsGetHtmlPath()-->
 ```
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : jsInHtml
@@ -113,7 +110,6 @@ Utilisation dans le fichier *.html:
 ```html
 <!--#4DHTML pageWeb_o.jsInHtml()-->
 ```
-
 
 --------------------------------------------------------------------------------
 

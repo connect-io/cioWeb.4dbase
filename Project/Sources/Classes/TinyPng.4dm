@@ -34,23 +34,25 @@ Historiques
 	
 	
 	
-Function downloadRequest
+Function downloadRequest($cheminDownload_t : Text; $methodResize_t : Text; $largeur_i : Integer; $hauteur_i : Integer)->$fichierCollect_o : Object
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.downloadRequest
 	
 Récupération du fichier depuis l'API
 Doc : https://tinypng.com/developers/reference
-	
+
+Paramètres :
+	$cheminDownload_t -> (optionnel) Destination du fichier sur le disque.
+	$methodResize_t   -> (optionnel) type de retaillage (scale, fit, cover)
+	$largeur_i        -> (optionnel) largueur en px
+	$hauteur_i        -> (optionnel) hauteur en px
+	$fichierCollect_o <- renvoie le résultat de la requête de download de l'api
+
 Historiques
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text  // (optionnel) Destination du fichier sur le disque.
-	var $2 : Text  // (optionnel) type de retaillage (scale, fit, cover)
-	var $3 : Integer  // (optionnel) largueur en px
-	var $4 : Integer  // (optionnel) hauteur en px
-	var $0 : Object
 	
 	var $reponse_o : Object
 	var $data_o : Object
@@ -75,16 +77,16 @@ Historiques
 	
 	If ($reponse_o.isValide)
 		If (Count parameters:C259>1)
-			If (Type:C295($1)=Is text:K8:3)
+			If (Type:C295($cheminDownload_t)=Is text:K8:3)
 				// Facile on utilise le chemin reçu.
-				$filePath_t:=$1
+				$filePath_t:=$cheminDownload_t
 			Else 
 				$reponse_o.isValide:=False:C215
-				$reponse_o.error:="Le param $2 n'est pas un text."
+				$reponse_o.error:="Le param $methodResize_t n'est pas un text."
 			End if 
 			
 		Else 
-			//On fabrique un chemin.
+			// On fabrique un chemin.
 			// Dans le dossier data de l'application avec comme nom un UUID et l'extension du fichier renvoyé.
 			$filePath_t:=Get 4D folder:C485(Data folder:K5:33)+Generate UUID:C1066+Choose:C955(This:C1470.lastExportInfo.type="image/jpeg"; ".jpg"; ".png")
 		End if 
@@ -94,17 +96,17 @@ Historiques
 	If ($reponse_o.isValide)
 		If (Count parameters:C259>2)
 			
-			If (String:C10($2)="scale") | (String:C10($2)="fit") | (String:C10($2)="cover")  // On choisit la méthode de resize. Voir la DOC pour plus d'informations
+			If (String:C10($methodResize_t)="scale") | (String:C10($methodResize_t)="fit") | (String:C10($methodResize_t)="cover")  // On choisit la méthode de resize. Voir la DOC pour plus d'informations
 				$data_o.resize:=New object:C1471
-				$data_o.resize.method:=String:C10($2)
+				$data_o.resize.method:=String:C10($methodResize_t)
 				
-				If (Num:C11($3)#0)
-					$data_o.resize.width:=Num:C11($3)
+				If (Num:C11($largeur_i)#0)
+					$data_o.resize.width:=Num:C11($largeur_i)
 				End if 
 				
 				If (Count parameters:C259>3)
-					If (Num:C11($4)#0)
-						$data_o.resize.height:=Num:C11($4)
+					If (Num:C11($hauteur_i)#0)
+						$data_o.resize.height:=Num:C11($hauteur_i)
 					End if 
 				End if 
 				
@@ -142,7 +144,7 @@ Historiques
 	$reponse_o.codeHttp:=$etat_l
 	$reponse_o.filePath:=$filePath_t
 	
-	$0:=$reponse_o
+	$fichierCollect_o:=$reponse_o
 	
 	
 	
