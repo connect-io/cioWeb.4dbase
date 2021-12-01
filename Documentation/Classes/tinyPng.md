@@ -34,7 +34,7 @@ Place le contenue du fichier javascript dans le HTML.
 
 ### Fonctionnement
 ```4d
-TinyPng.downloadRequest($cheminDownload_t;$methodResize_t;$largeur_l;$hauteur_l) -> $fichierCollect_o
+TinyPng.downloadRequest($cheminDownload_t;$methodResize_t;$largeur_i;$hauteur_i) -> $fichierCollect_o
 ```
 
 | Paramètre         | Type      | entrée/sortie | Description |

@@ -233,23 +233,23 @@ Historiques
 	
 	
 	
-Function uploadFromUrl
+Function uploadFromUrl($filePath_t : Text)->$isValide_b : Boolean
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.uploadFromUrl
 	
 Importation du fichier depuis une URL et envoi vers l'API
 Doc : https://tinypng.com/developers/reference
+
+Paramètres
+	$filePath_t -> l'URL depuis laquelle on veut upload
+	$isValide_b <- renvoie true si la requete a bien été envoyée
 	
- Historique
-	
+Historiques	
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> - Création de la fonction
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
-	
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction	
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text  // L'URL depuis laquelle on veut upload
-	var $0 : Boolean
-	
+
 	var $data_o : Object
 	var $reponse_o : Object
 	var $etat_l : Integer
@@ -260,9 +260,8 @@ Doc : https://tinypng.com/developers/reference
 	
 	$data_o:=New object:C1471
 	$data_o.source:=New object:C1471
-	$data_o.source.url:=$1
-	
-	
+	$data_o.source.url:=$filePath_t
+		
 	APPEND TO ARRAY:C911(HeaderNames_at; "Content-Type")
 	APPEND TO ARRAY:C911(HeaderValues_at; "application/json")
 	
@@ -275,5 +274,5 @@ Doc : https://tinypng.com/developers/reference
 	End if 
 	
 	This:C1470.lastExportInfo:=$reponse_o.output
-	$0:=$reponse_o.isValide
+	$isValide_b:=$reponse_o.isValide
 	
