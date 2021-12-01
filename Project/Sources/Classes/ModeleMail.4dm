@@ -69,23 +69,26 @@ Historiques
 	
 	
 	
-Function delete
+Function delete($name_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.delete
 	
 Supprime un modèle de mail
-	
+
+Paramètre :
+	$name_t -> le nom du modèle à supprimer
+
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $1 : Text  // Le name du modèle à supprimer
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
 	
-	ASSERT:C1129($1#""; " ModeleMail.delete : Le param $1 est vide.")
+	ASSERT:C1129($name_t#""; " ModeleMail.delete : Le param $name_t est vide.")
 	
-	$modele_c:=This:C1470.email.model.query("name = :1"; $1)
+	$modele_c:=This:C1470.email.model.query("name = :1"; $name_t)
 	ASSERT:C1129($modele_c.length#0; " ModeleMail.get : modèle introuvable.")
 	$modele_o:=$modele_c[0]
 	//On cherche le modèle à supprimer

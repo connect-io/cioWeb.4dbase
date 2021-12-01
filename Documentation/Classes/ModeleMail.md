@@ -74,9 +74,9 @@ Supprime un modèle. Ce modèle est identifié par son attribut name passé en a
 ModeleMail.delete($name_t) -> Modifie This
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $name_t       | Texte      | Entrée        | Le nom du modèle à supprimer|
+| Paramètre  | Type       | entrée/sortie | Description |
+| ---------- | ---------- | ------------- | ----------- |
+| $name_t    | Texte      | Entrée        | Le nom du modèle à supprimer|
 
 
 
