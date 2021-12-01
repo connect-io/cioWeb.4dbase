@@ -69,12 +69,13 @@ Renvoie une copie des informations d'un formulaire
 			
 ### Fonctionnement
 ```4d
-User.formInfo("nomDuFormulaire") -> $form_o
+User.formInfo($nameForm_t) -> $form_o
 ```
 
-| Paramètre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| "nomDuFormulaire"      | texte    | Entrée         | Le nom du formulaire à renvoyer|
+| Paramètre   | Type      | entrée/sortie | Description |
+| ----------- | --------- | ------------- | ----------- |
+| $nameForm_t | Texte     | Entrée        | Le nom du formulaire à renvoyer |
+| $form_o     | Objet     | Sortie        | Les informations du formulaire  |
 
 ### Example
 ```4d

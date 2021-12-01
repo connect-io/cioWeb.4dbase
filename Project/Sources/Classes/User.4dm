@@ -96,27 +96,28 @@ Historique
 	
 	
 	
-Function formInfo
+Function formInfo($nameForm_t : Text)->$form_o : Object
 /*------------------------------------------------------------------------------
 Fonction : User.formInfo
 	
 Retourne les informations d'un formulaire.
-	
+
+Paramètres
+	$nameForm_t -> Nom du formulaire
+	$form_o     <- Les informations du formulaire
+
 Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	var $1; $nomForm_t : Text  // Nom du formulaire
-	var $0 : Object  // Information sur le formulaire.
+	ASSERT:C1129(String:C10($nameForm_t)#""; "Le param $nameForm_t, ne doit pas être vide.")
 	
-	ASSERT:C1129(String:C10($1)#""; "Le param $1, ne doit pas être vide.")
-	
-	$nomForm_t:=$1
+	$nomForm_t:=$nameForm_t
 	
 	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1"; $nomForm_t)
 	
 	If ($Form_c.length=1)
-		$0:=OB Copy:C1225($Form_c[0])
+		$form_o:=OB Copy:C1225($Form_c[0])
 	End if 
 	
 	
