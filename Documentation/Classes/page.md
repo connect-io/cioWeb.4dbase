@@ -94,9 +94,9 @@ Place le contenu du fichier javascript dans le HTML.
 Page.jsInHtml() -> $jsInHtml_t
 ```
 
-| Paramêtre      | Type       | entrée/sortie | Description |
-| -------------- | ---------- | ------------- | ----------- |
-| $jsInHtml_t    | Texte      | Sortie        | Contenu JS  |
+| Paramètre   | Type       | entrée/sortie | Description |
+| ----------- | ---------- | ------------- | ----------- |
+| $jsInHtml_t | Texte      | Sortie        | Contenu JS  |
 
 
 ### Example

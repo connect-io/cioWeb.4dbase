@@ -292,18 +292,20 @@ Historiques
 	
 	
 	
-Function jsInHtml
+Function jsInHtml()->$reponse_t : Text
 /*-----------------------------------------------------------------------------
 Fonction : Page.jsInHtml
 	
 Place le contenue du fichier javascript dans le HTML
+
+Paramètre
+	$reponse_t	<- Contenu du fichier javascript
 	
-Historique
+Historiques
 20/09/20 - Grégory Fromain<gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $0 : Text  // Contenu des fichiers JS à insérer dans le HTML
 	
 	var $jsInHtml_t : Text
 	
@@ -328,7 +330,7 @@ Historique
 		
 	End for each 
 	
-	$0:=$jsInHtml_t
+	$reponse_t:=$jsInHtml_t
 	
 	
 	
