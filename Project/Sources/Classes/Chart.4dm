@@ -15,7 +15,7 @@ Initialisation d'un graphique
 
 Paramètres :
 	$libChart_t -> Nom du graphique
-	$modele_t -> (optionnel) le modele que l'on souhaite utiliser.
+	$modele_t   -> (optionnel) le modele que l'on souhaite utiliser.
 	
 Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Création

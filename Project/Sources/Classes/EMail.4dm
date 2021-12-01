@@ -97,8 +97,9 @@ this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
 Paramètre :
 	$resultat_o <- Informations sur l'envoi de l'email
 	
-Historique
-11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
+Historiques
+11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	// Déclaration
@@ -196,22 +197,24 @@ Historique
 	
 	
 	
-Function sendModel
+Function sendModel($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object 
 /*------------------------------------------------------------------------------
 Méthode : EMail.sendModel
 	
 Envoi d'un e-mail depuis un modèle.
-	
-Historique
+
+Paramètres :
+	var $nomModel_t         -> nom du modèle qu'on souhaite utiliser
+	var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
+	var $retour_o           <- retour sur le résultat de la fonction.
+
+Historiques
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 25/05/21 - Alban Catoire <Alban@connect-io.fr> - On recreer le modelPath (il n'est plus stocker en dur dans le storage, voir cwEmailConfigLoad)
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	// Déclaration
-	var $1 : Text  // Var nom du modèle
-	var $2 : Object  // Var content
-	var $0 : Object  // retour sur le résultat de la fonction.
-	
+	// Déclarations
 	var $error_t : Text  // Gestion des erreurs.
 	var $model_c : Collection  // Informations tableau JSON du modèle
 	var $model_o : Object  // Detail du modèle
@@ -219,20 +222,20 @@ Historique
 	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
 	var $modelPath_t : Text  // Le path des modeles
 	
-	ASSERT:C1129($1#""; "EMail.sendModel : le Param $1 est obligatoire (Nom du modèle.")
+	ASSERT:C1129($nomModel_t#""; "EMail.sendModel : le Param $nomModel_t est obligatoire (Nom du modèle.")
 	
 	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
 	If (Count parameters:C259=2)
 		
-		For each ($propriete_t; $2)
-			This:C1470[$propriete_t]:=$2[$propriete_t]
+		For each ($propriete_t; $variableDansMail_o)
+			This:C1470[$propriete_t]:=$variableDansMail_o[$propriete_t]
 		End for each 
 		
 	End if 
 	
 	// Vérification fichier modèle
-	$model_c:=Storage:C1525.eMail.model.query("name IS :1"; $1)
+	$model_c:=Storage:C1525.eMail.model.query("name IS :1"; $nomModel_t)
 	
 	// Retrouver les informations du modèle
 	If ($model_c.length=1)
@@ -248,7 +251,7 @@ Historique
 		End if 
 		
 	Else 
-		$error_t:="EMail.sendModel : Impossible de retrouver le modèle : "+$1
+		$error_t:="EMail.sendModel : Impossible de retrouver le modèle : "+$nomModel_t
 	End if 
 	
 	If ($error_t="")
@@ -286,4 +289,4 @@ Historique
 	End if 
 	
 	// Retourne les informations concernant l'envoie du mail
-	$0:=$mailStatus_o
+	$retour_o:=$mailStatus_o

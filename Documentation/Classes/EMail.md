@@ -170,7 +170,7 @@ Voilà la description des différents paramètres utilisés dans la fonction :
 
 | Paramêtre                       | Type       | entrée/sortie | Description                     |
 | ------------------------------- | ---------- | ------------- | ------------------------------- |
-| $nomModel_t                     | Texte      | Entrée        | Chaine de caractères contenant dle nom du modèle qu'on souhaite utiliser, comme indiqué dans le fichier de config                          |
+| $nomModel_t                     | Texte      | Entrée        | Chaine de caractères contenant le nom du modèle qu'on souhaite utiliser, comme indiqué dans le fichier de config                          |
 | $variableDansMail_o (Optionnel) | Objet      | Entrée        | Dans le cas où l'on souhaite inclure des variables dans le mail de démo (dans le fichier html), on peut créer un objet contenant ces variables |
 | $retour_o                       | Objet      | Sortie        | Renvoie des informations sur le resultat de la méthode send. Voir plus haut pour plus d'informations sur les différents attributs de cet objet. |
 
