@@ -7,40 +7,42 @@ Gestion des tableaux de données en HTML.
 
 
 
-Class constructor
+Class constructor($libChart_t : Text; $modele_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.constructor
 	
 Initialisation d'un graphique
+
+Paramètres :
+	$libChart_t -> Nom du graphique
+	$modele_t -> (optionnel) le modele que l'on souhaite utiliser.
 	
-Historique
+Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la Class constructor
 ------------------------------------------------------------------------------*/
-	
-	var $1 : Text  // Le lib du graphique.
-	var $2 : Text  // (optionnel) le modele que l'on souhaite utiliser.
 	
 	var $propriete_t : Text
 	
-	ASSERT:C1129($1#""; "Chart.constructor : Le param $1 est manquante.")
+	ASSERT:C1129($libChart_t#""; "Chart.constructor : Le param $libChart_t est manquante.")
 	ASSERT:C1129(visiteur.sousDomaine#""; "Chart.constructor : Le param visiteur n'est pas initialisé.")
 	
 	If (Count parameters:C259=1)
 		
-		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $1).copy()
+		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $libChart_t).copy()
 	Else 
 		
-		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $2).copy()
+		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $modele_t).copy()
 	End if 
 	
-	ASSERT:C1129($chartConfig_o.length#0; "WebApp.chartNew : Impossible de retrouver le graphique : "+$1)
+	ASSERT:C1129($chartConfig_o.length#0; "WebApp.chartNew : Impossible de retrouver le graphique : "+$libChart_t)
 	
 	For each ($propriete_t; $chartConfig_o[0])
 		This:C1470[$propriete_t]:=$chartConfig_o[0][$propriete_t]
 	End for each 
 	
 	If (Count parameters:C259=2)
-		This:C1470.lib:=$1
+		This:C1470.lib:=$libChart_t
 	End if 
 	
 	If (This:C1470.data=Null:C1517)
