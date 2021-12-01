@@ -108,6 +108,7 @@ Paramètres
 
 Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	ASSERT:C1129(String:C10($nameForm_t)#""; "Le param $nameForm_t, ne doit pas être vide.")
@@ -122,27 +123,29 @@ Historique
 	
 	
 	
-Function formToEntity
+Function formToEntity($valueInput_o : Pointer)
 /*------------------------------------------------------------------------------
 Fonction : User.formToEntity
 	
 Charger les valeurs d'un formulaire vers une entité (ou objet).
-	
-Historique
+
+Paramètre 
+	$valueInput_o -> Objet qui sert à remplir les inputs du formulaire $1
+	// Si true : On ne modifie pas le input.
+
+Historiques
 04/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
+01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
 	// Déclarations
-	var $1 : Pointer  // Objet qui sert à remplir les inputs du formulaire $1
-	// Si true : On ne modifie pas le input.
-	
 	var $inputName_t : Text
 	
 	For each ($inputName_t; This:C1470.dataFormTyping)
 		If ($inputName_t#"token")
 			ASSERT:C1129($1->[$inputName_t]#Null:C1517; "La propriete "+$inputName_t+" n'est pas déclaré dans l'entité.")
 			
-			$1->[$inputName_t]:=This:C1470.dataFormTyping[$inputName_t]
+			$valueInput_o->[$inputName_t]:=This:C1470.dataFormTyping[$inputName_t]
 		End if 
 	End for each 
 	

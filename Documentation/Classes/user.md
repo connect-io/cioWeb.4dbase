@@ -65,7 +65,6 @@ visiteur_o.entityToForm($Article_entity, "formShopArticle")
 
 ## Fonction : formInfo	
 Renvoie une copie des informations d'un formulaire
-
 			
 ### Fonctionnement
 ```4d
@@ -82,6 +81,24 @@ User.formInfo($nameForm_t) -> $form_o
 $form_o := visiteur_o.formInfo("formShopArticle")
 ```
 
+--------------------------------------------------------------------------------
+
+## Fonction : formToEntity	
+Charge les valeurs d'un formulaire vers une entité (ou objet).
+			
+### Fonctionnement
+```4d
+User.formToEntity($valueInput_o) -> $form_o
+```
+
+| Paramètre     | Type      | entrée/sortie | Description |
+| ------------- | --------- | ------------- | ----------- |
+| $valueInput_o | Pointer   | Entrée        | Objet qui sert à remplir les inputs du formulaire |
+
+### Example
+```4d
+$form_o := visiteur_o.formToEntity($valueInput_o)
+```
 
 --------------------------------------------------------------------------------
 
@@ -205,6 +222,7 @@ Voir la méthode de base [sur connexion web](/Documentation/commencer.md) sur la
 
 
 --------------------------------------------------------------------------------
+
 ## Fonction : sessionWebSave			
 Sauvegarder des sessions web de l'utilisateur. Cette fonction est à utiliser dans la méthode "Sur fermeture process web".
 			
