@@ -37,7 +37,8 @@ Il contient 4 objets.
 			"name": "transactionnel",
 			"host": "pro1.mail.ovh.net",
 			"user": "adresse1@mail.com",
-			"password":	"motDePasse1"
+			"password":	"motDePasse1",
+			"archive":true               // Optionnel, si true, les mails envoyés sont archivés dans le dossier archive
 		},
 		{
 			"name": "prospection",
@@ -46,6 +47,20 @@ Il contient 4 objets.
 			"user": "adresse2@mail.com",
 			"password":	"motDePasse2",
 			"from":	"xxxx"
+		}
+	],
+	"imap": [
+		{
+			"name": "transactionnel",
+			"host": "pro1.mail.ovh.net",
+			"user": "adresse1@mail.com",
+			"password": "motDePasse1",
+			"boxName":{
+				"inbox": "INBOX",
+				"sent": "Éléments envoyés",
+				"draft": "Brouillons",
+				"trash": "Éléments supprimés"
+			}
 		}
 	],
 
