@@ -13,7 +13,7 @@ Fonction : EMail.constructor
 	
 Initialisation de la page web.
 ATTENTION : L'instance de la class "page" doit se faire obligatoirement par la fonction : webApp.pageCurrent()
-
+	
 Paramètres :
 	$name_t           -> Nom du transporteur
 	$paramOptionnel_o -> Param optionnel pour le transporteur
@@ -38,9 +38,7 @@ Historiques
 	
 	// Vérifie que le nom du transporteur soit bien dans la config
 	
-	Use (Storage:C1525.eMail)
-		Storage:C1525.eMail.transporterName:=$name_t
-	End use 
+	This:C1470.transporterName:=$name_t
 	
 	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $name_t)
 	
@@ -79,7 +77,7 @@ Historiques
 	
 	
 	
-Function send()->$resultat_o : Object 
+Function send()->$resultat_o : Object
 /*------------------------------------------------------------------------------
 Méthode : EMail.send
 	
@@ -93,7 +91,7 @@ this.htmlBody ou this.textBody -> text : Corps du message
 	
 Informataions optionelles :
 this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
-
+	
 Paramètre :
 	$resultat_o <- Informations sur l'envoi de l'email
 	
@@ -167,11 +165,11 @@ Historiques
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
 			// On regarde si la config smtp souhaite stocker le mail dans les éléments énvoyés?
-			If (Bool:C1537(Storage:C1525.eMail.smtp.query("name IS :1"; $1)[0].archive))
+			If (Bool:C1537(Storage:C1525.eMail.smtp.query("name IS :1"; This:C1470.transporterName)[0].archive))
 				
 				// Upload email to the "Sent" mailbox
 				If (This:C1470.transporterIMAP#Null:C1517)
-					$boxName_t:=Storage:C1525.eMail.imap.query("name IS :1"; Storage:C1525.eMail.transporterName)[0].boxName.sent
+					$boxName_t:=Storage:C1525.eMail.imap.query("name IS :1"; This:C1470.transporterName)[0].boxName.sent
 					$status_o:=This:C1470.transporterIMAP.append(This:C1470; $boxName_t)
 					
 					// Gestion des erreurs de l'IMAP.
@@ -197,17 +195,17 @@ Historiques
 	
 	
 	
-Function sendModel($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object 
+Function sendModel($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object
 /*------------------------------------------------------------------------------
 Méthode : EMail.sendModel
 	
 Envoi d'un e-mail depuis un modèle.
-
+	
 Paramètres :
 	var $nomModel_t         -> nom du modèle qu'on souhaite utiliser
 	var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
 	var $retour_o           <- retour sur le résultat de la fonction.
-
+	
 Historiques
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 25/05/21 - Alban Catoire <Alban@connect-io.fr> - On recreer le modelPath (il n'est plus stocker en dur dans le storage, voir cwEmailConfigLoad)
