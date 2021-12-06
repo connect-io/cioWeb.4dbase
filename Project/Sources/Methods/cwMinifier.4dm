@@ -1,6 +1,6 @@
 //%attributes = {"shared":true,"preemptive":"capable"}
 /*------------------------------------------------------------------------------
-Méthode : ogWebMinifier
+Méthode : cwMinifier
 
 Permet de minimifier les fichiers javascript.
 

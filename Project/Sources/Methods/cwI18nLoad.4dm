@@ -2,7 +2,7 @@
 /*------------------------------------------------------------------------------
 Méthode : cwI18nCharger
 
-Charge tout les fichiers de langue du dossier ressource/I18n pour le serveur web.
+Charge tous les fichiers de langue du dossier ressource/I18n pour le serveur web.
 
 Historique
 15/08/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en veille de l'internalisation

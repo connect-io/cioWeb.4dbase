@@ -1,6 +1,6 @@
 //%attributes = {"publishedWeb":true,"shared":true,"preemptive":"capable"}
 /*------------------------------------------------------------------------------
-Méthode : cwInputFormInit
+Méthode : cwFormInit
 
 Initialise les formulaires html
 
