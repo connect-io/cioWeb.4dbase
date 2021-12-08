@@ -12,10 +12,6 @@ var cwDateFormatTexte; $0 : Text
 var cwDateFormatTexte; $1 : Text
 var cwDateFormatTexte; $2 : Date
 
-//cwMotDePasseHash
-var cwMotDePasseHash; $0 : Text
-var cwMotDePasseHash; $1 : Text
-
 //cwFormInputSelectNewValue
 var cwFormInputSelectNewValue; $1 : Pointer
 var cwFormInputSelectNewValue; $2 : Text

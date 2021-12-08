@@ -16,7 +16,6 @@ cwInputInjection4DHtmlIsValide()
 cwInputInjection4DHtmlSafeUse()
 cwLogErreurAjout()
 cwMinifier()
-cwMotDePasseHash()
 cwStorage
 cwSupprBaliseHtml()
 cwTimestamp()

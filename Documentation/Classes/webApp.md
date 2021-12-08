@@ -20,35 +20,6 @@ C'est la class principale du composant cioWeb.
 * [Fonction : eMailConfigLoad](#fonction--eMailConfigLoad)
 
 
---------------------------------------------------------------------------------
-
-## Fonction : cachePath
-Chemin complet (format plateforme) du dossier cache dans l'application webApp.
-
-### Fonctionnement
-```4d
-WebApp.cachePath () -> chemin_t
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| chemin_t      | Texte      | Sortie        | Chemin dossier cache |
-
-### Example
-```html
-C_OBJECT($webApp_o) 
-C_OBJECT(myWebApp_o)
-C_TEXT($chemin_t)
-
-// On récupére la class depuis notre composant.
-$webApp:=caToolGetClass ("WebApp")
-
-// On génère une instance de la class webApp.
-myWebApp_o:=$webApp.new("Tonton")
-
-// On récupère le chemin du cache web.
-$chemin_t:=myWebApp_o.cachePath()
-```
 
 --------------------------------------------------------------------------------
 
@@ -122,49 +93,7 @@ WebApp.cacheViewSubdomainPath()
 ???
 ```
 
---------------------------------------------------------------------------------
 
-## Fonction : sourcePath
-Chemin complet plateforme du dossier Source
-		
-
-### Fonctionnement
-```4d
-WebApp.sourcePath() -> $chemin_t
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $chemin_t     | Texte      | Sortie        | Chemin du dossier source |
-
-### Example
-```4d
-$cheminSource_t:=<>webApp_o.sourcePath()
-
-// $cheminSource_t = [...]/monApp4D/WebApp/Sources/
-```
-
---------------------------------------------------------------------------------
-
-## Fonction : webAppPath
-Chemin complet plateforme du dossier WebApp.
-		
-
-### Fonctionnement
-```4d
-WebApp.webAppPath() -> $chemin_t
-```
-
-| Paramêtre     | Type       | entrée/sortie | Description |
-| ------------- | ---------- | ------------- | ----------- |
-| $chemin_t     | Texte      | Sortie        | Chemin du dossier WebApp |
-
-### Example
-```4d
-$cheminDossierWebApp_t:=<>webApp_o.webAppPath()
-
-// $cheminDossierWebApp_t = [...]/monApp4D/WebApp/
-```
 
 --------------------------------------------------------------------------------
 
