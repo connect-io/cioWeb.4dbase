@@ -1,6 +1,6 @@
 Class constructor
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.constructor
+Fonction : EMailModel.constructor
 	
 Creation de l'enregistrement de tous les modèles de mail
 	
@@ -17,7 +17,7 @@ Historique
 	
 Function add($modele_o : Object)->$reponse_t : Text
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.add
+Fonction : EMailModel.add
 	
 Ajout d'un nouveau modele de mail
 	
@@ -35,8 +35,8 @@ Historiques
 	
 	$reponse_t:="ok"
 	
-	ASSERT:C1129(($modele_o.name#"") & ($modele_o.name#Null:C1517); " ModeleMail.add : Le param $modele_o ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($modele_o.source#"") & ($modele_o.source#Null:C1517); " ModeleMail.add : Le param $modele_o ne possède pas d'attribut  'source'.")
+	ASSERT:C1129(($modele_o.name#"") & ($modele_o.name#Null:C1517); " EMailModel.add : Le param $modele_o ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($modele_o.source#"") & ($modele_o.source#Null:C1517); " EMailModel.add : Le param $modele_o ne possède pas d'attribut  'source'.")
 	
 	$newModele_o:=New object:C1471()
 	$newModele_o.name:=$modele_o.name
@@ -64,14 +64,14 @@ Historiques
 	
 	If ($reponse_t="ok")
 		This:C1470.email.model.push($newModele_o)
-		This:C1470.enregistrement()
+		This:C1470.configToJson()
 	End if 
 	
 	
 	
 Function delete($name_t : Text)
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.delete
+Fonction : EMailModel.delete
 	
 Supprime un modèle de mail
 	
@@ -86,26 +86,28 @@ Historique
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
 	
-	ASSERT:C1129($name_t#""; " ModeleMail.delete : Le param $name_t est vide.")
+	ASSERT:C1129($name_t#""; " EMailModel.delete : Le param $name_t est vide.")
 	
 	$modele_c:=This:C1470.email.model.query("name = :1"; $name_t)
-	ASSERT:C1129($modele_c.length#0; " ModeleMail.get : modèle introuvable.")
+	ASSERT:C1129($modele_c.length#0; " EMailModel.get : modèle introuvable.")
 	$modele_o:=$modele_c[0]
 	//On cherche le modèle à supprimer
 	$index:=This:C1470.email.model.indexOf($modele_o)
 	This:C1470.email.model.remove($index)
-	This:C1470.enregistrement()
+	This:C1470.configToJson()
 	
 	
 	
-Function enregistrement
+Function configToJson
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.enregistrement
+Fonction : EMailModel.configToJson
 	
-Enregistrement de This dans le fichier email.jsonc et dans le storage
+Copie la config des modèles dans le fichier email.jsonc et dans le storage
 	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
+13/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Renommer la fonction.
+	
 ------------------------------------------------------------------------------*/
 	
 	//Réecriture dans le fichier email.jsonc
@@ -117,7 +119,7 @@ Historique
 	
 Function get($name_t : Text)->$reponse_o : Object
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.get
+Fonction : EMailModel.get
 	
 Renvoie les informations d'un modèle a l'aide de son nom
 	
@@ -131,30 +133,36 @@ Historiques
 ------------------------------------------------------------------------------*/
 	
 	var $modele_c : Collection
-	var $keys_c : Collection  // Liste des attributs contenu dans l'objet modele
 	var $personnalisation_o  // Objet tampon utilisé pour récuperer la partie 'personnalisation'
 	var $modele_o : Object  //Le modèle à renvoyer
+	var $file_f : 4D:C1709.File
 	
 	$modele_c:=This:C1470.email.model.query("name = :1"; $name_t).copy()
-	ASSERT:C1129($modele_c.length#0; " ModeleMail.get : modèle introuvable.")
+	ASSERT:C1129($modele_c.length#0; " EMailModel.get : modèle introuvable.")
 	$modele_o:=$modele_c[0]
 	
 	// On crée un attribut personnalisation
-	$keys_c:=OB Keys:C1719($modele_o)
 	$personnalisation_o:=New object:C1471
-	For each ($key; $keys_c)
+	For each ($key; OB Keys:C1719($modele_o))
 		If (($key#"name") & ($key#"subject") & ($key#"source") & ($key#"sourceHTML"))
 			$personnalisation_o[$key]:=$modele_o[$key]
 			OB REMOVE:C1226($modele_o; $key)
 		End if 
 	End for each 
 	If (Not:C34(OB Is empty:C1297($personnalisation_o)))
-		$modele_o.personnalisation:=JSON Stringify:C1217($personnalisation_o)
+		$modele_o.personnalisation:=$personnalisation_o
 	End if 
 	
-	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.source)
-	ASSERT:C1129($fichierSource.exists; " ModeleMail.get : Fichier source introuvable.")
-	$modele_o.sourceHTML:=$fichierSource.getText()
+	$file_f:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.source)
+	ASSERT:C1129($file_f.exists; " EMailModel.get : Fichier source introuvable.")
+	$modele_o.sourceHTML:=$file_f.getText()
+	
+	// Chargement du html du layout si il existe...
+	If (String:C10($modele_o.personnalisation.layout)#"")
+		$file_f:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.personnalisation.layout)
+		ASSERT:C1129($file_f.exists; " EMailModel.get : Fichier source introuvable.")
+		$modele_o.layoutHTML:=$file_f.getText()
+	End if 
 	
 	$reponse_o:=$modele_o
 	
@@ -162,7 +170,7 @@ Historiques
 	
 Function getAll()->$allModel_c : Collection
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.getAll
+Fonction : EMailModel.getAll
 	
 Renvoie la la liste de tous les modèles
 	
@@ -179,7 +187,7 @@ Historique
 	
 Function modify($modelModify_o : Object)->$result_t : Text
 /*------------------------------------------------------------------------------
-Fonction : ModeleMail.modify
+Fonction : EMailModel.modify
 	
 Modifie un modèle de mail
 	
@@ -198,8 +206,8 @@ Historique
 	
 	$result_t:="ok"
 	
-	ASSERT:C1129(($modelModify_o.name#"") & ($modelModify_o.name#Null:C1517); " ModeleMail.modify : Le param $modelModify_o ($1) ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($modelModify_o.source#"") & ($modelModify_o.source#Null:C1517); " ModeleMail.modify : Le param $modelModify_o ($1) ne possède pas d'attribut  'source'.")
+	ASSERT:C1129(($modelModify_o.name#"") & ($modelModify_o.name#Null:C1517); " EMailModel.modify : Le param $modelModify_o ($1) ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($modelModify_o.source#"") & ($modelModify_o.source#Null:C1517); " EMailModel.modify : Le param $modelModify_o ($1) ne possède pas d'attribut  'source'.")
 	
 	$modele_c:=This:C1470.email.model.query("name = :1"; $modelModify_o.oldName)
 	If ($modele_c.length#0)
@@ -239,6 +247,6 @@ Historique
 	//Enregistrement des modifications
 	If ($result_t="ok")
 		This:C1470.email.model[$index_i]:=$modele_o
-		This:C1470.enregistrement()
+		This:C1470.configToJson()
 	End if 
 	
