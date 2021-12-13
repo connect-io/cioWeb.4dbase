@@ -15,21 +15,21 @@ Historique
 	
 	
 	
-Function add($modele_o : Object)->$reponse_t : Text 
+Function add($modele_o : Object)->$reponse_t : Text
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.add
 	
 Ajout d'un nouveau modele de mail
-
+	
 Paramètres :
 	$modele_o  -> l'objet contenant toutes les informations du nouveau modèle
 	$reponse_t <- la réponse à l'enregistrement
-
+	
 Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-
+	
 	var $newModele_o : Object
 	var $fichierSource : Object
 	
@@ -74,10 +74,10 @@ Function delete($name_t : Text)
 Fonction : ModeleMail.delete
 	
 Supprime un modèle de mail
-
+	
 Paramètre :
 	$name_t -> le nom du modèle à supprimer
-
+	
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
@@ -113,16 +113,18 @@ Historique
 	// Rechargement dans le storage
 	cwEMailConfigLoad
 	
+	
+	
 Function get($name_t : Text)->$reponse_o : Object
 /*------------------------------------------------------------------------------
 Fonction : ModeleMail.get
 	
 Renvoie les informations d'un modèle a l'aide de son nom
-
+	
 Paramètres :
 	var $name_t    -> Le nom du modèle à supprimer
 	var $reponse_o <- informations du modèle demandé
-
+	
 Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
