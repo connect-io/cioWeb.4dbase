@@ -13,18 +13,15 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Ré-ecriture de la méthode
 20/07/21 - Grégory Fromain <gregory@connect-io.fr> - Disponible base hôte et gestion $1 par pointeur si besoin
-02/12/21 - Rémy scanu <remy@connect-io.fr> - Ajout d'un 3° paramètre pour rendre optionnel le fait de créer automatiquement la propriété $nouvelleCle_t à l'objet $1
 ------------------------------------------------------------------------------*/
 
 // Déclarations
 var $1 : Variant
 var $2 : Text  // le suffixe à supprimer
-var $3 : Boolean
 
 var $source_o : Object
-var $nomLib_t : Text
-var $nouvelleCle_t : Text
-var $nouvelleCle_b : Boolean
+var $key_t : Text
+var $newKey_t : Text
 
 If (Value type:C1509($1)=Is pointer:K8:14)
 	$source_o:=$1->
@@ -32,22 +29,15 @@ Else
 	$source_o:=$1
 End if 
 
-If (Count parameters:C259=3)
-	$nouvelleCle_b:=$3
-End if 
-
-For each ($nomLib_t; $source_o)
+For each ($key_t; $source_o)
 	
-	If ($nomLib_t=($2+"@"))
+	If ($key_t=($2+"@"))
+		$newKey_t:=Substring:C12($key_t; Length:C16($2)+1)
+		$newKey_t:=Change string:C234($newKey_t; Lowercase:C14(Substring:C12($newKey_t; 1; 1)); 1)
 		
-		If (Not:C34($nouvelleCle_b))
-			$nouvelleCle_t:=Substring:C12($nomLib_t; Length:C16($2)+1)
-			$nouvelleCle_t:=Change string:C234($nouvelleCle_t; Lowercase:C14(Substring:C12($nouvelleCle_t; 1; 1)); 1)
-			
-			$source_o[$nouvelleCle_t]:=$source_o[$nomLib_t]
-		End if 
+		$source_o[$newKey_t]:=$source_o[$key_t]
 		
-		OB REMOVE:C1226($source_o; $nomLib_t)
+		OB REMOVE:C1226($source_o; $key_t)
 	End if 
 	
 End for each 

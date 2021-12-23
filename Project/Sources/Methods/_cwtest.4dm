@@ -16,7 +16,6 @@ cwInputInjection4DHtmlIsValide()
 cwInputInjection4DHtmlSafeUse()
 cwLogErreurAjout()
 cwMinifier()
-cwMotDePasseHash()
 cwStorage
 cwSupprBaliseHtml()
 cwTimestamp()
@@ -26,7 +25,6 @@ cwToolHashUrl()
 cwToolJetLag()
 cwToolJsoncToJson()
 cwToolObjectDeleteKeys()
-cwToolObjectDeletePrefixKey()
 cwToolObjectFromFile()
 cwToolObjectFromPlatformPath()
 cwToolObjectProgress4DTag()
@@ -34,6 +32,11 @@ cwToolPathSeparator()
 cwToolTextReplaceByRegex()
 cwToolUrlCleanText()
 */
+
+//cwToolObjectDeletePrefixKey
+$ob_o:=New object:C1471("ppId"; 7; "ppName"; "Luc"; "ppAge"; 22)
+cwToolObjectDeletePrefixKey($ob_o; "pp")
+ASSERT:C1129(OB Is defined:C1231($ob_o; "id"); "Erreur lors du test de la méthode.")
 
 
 // cwDateClean : Test du nettoyage des dates
