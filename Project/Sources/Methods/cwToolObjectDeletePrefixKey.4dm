@@ -26,7 +26,7 @@ var $nomLib_t : Text
 var $nouvelleCle_t : Text
 var $nouvelleCle_b : Boolean
 
-If (Value type:C1509($1)=Est un pointeur:K8:14)
+If (Value type:C1509($1)=Is pointer:K8:14)
 	$source_o:=$1->
 Else 
 	$source_o:=$1
