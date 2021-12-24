@@ -6,6 +6,7 @@ Test unitaire de certaines méthodes du composant.
 
 Historique
 20/08/21 - Grégory Fromain <gregory@connect-io.fr> - Création : 57 tests (dont 13 object merge) - 44 ok.
+24/12/21 - Grégory Fromain <gregory@connect-io.fr> - Ajout de 3 tests, total : 60 tests (dont 13 object merge) - 59 ok.
 ------------------------------------------------------------------------------*/
 
 
@@ -109,3 +110,12 @@ ASSERT:C1129(cwFormatValide("date"; "32/01/2021")="format incorrect"; "Erreur lo
 
 // cwToolObjectMergeTest : Test du merge des objets : cwToolObjectMerge
 ASSERT:C1129(cwToolObjectMergeTest="ok"; "Erreur lors du test de la méthode.")
+
+// cwToolUrlCleanText
+ASSERT:C1129(cwToolUrlCleanText("ça œuf où")="ca-oeuf-ou"; "Erreur lors du test de la méthode.")
+
+// cwToolUrlEncode : Test Encodage d'une URL.
+ASSERT:C1129(cwToolUrlEncode("https://mozilla.org/?x=шел лы")="https://mozilla.org/?x=%D1%88%D0%B5%D0%BB%20%D0%BB%D1%8B"; "Erreur lors du test de la méthode.")
+
+// cwToolUrlEncode : Test Encodage d'une URL.
+ASSERT:C1129(cwToolUrlDecode("https://mozilla.org/?x=%D1%88%D0%B5%D0%BB%20%D0%BB%D1%8B")="https://mozilla.org/?x=шел лы"; "Erreur lors du test de la méthode.")
