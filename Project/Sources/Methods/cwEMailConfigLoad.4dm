@@ -19,6 +19,7 @@ var $model_o : Object  // Un model de la config
 var $mjmlReponse_o : Object  // Reponse de la requête
 var $mjmlContenu_o : Object  // Contenu de la requête MJML
 var $modelPath_t : Text  // Le path des modeles
+var $globalVar_o : Object
 ASSERT:C1129(String:C10(Storage:C1525.param.folderPath.source_t)#""; \
 "cwEMailConfigLoad : Merci d'indiquez le chemin du dossier du fichier de config des email dans le storage du composant : Storage.param.folderPath.source_t")
 
@@ -42,16 +43,23 @@ End if
 
 // Chargement de la configuration des eMails.
 Use (Storage:C1525)
+	$globalVar_o:=New object:C1471()
+	If (Storage:C1525.eMail#Null:C1517)
+		If (Storage:C1525.eMail.globalVar#Null:C1517)
+			$globalVar_o:=Storage:C1525.eMail.globalVar
+		End if 
+	End if 
+	
 	Storage:C1525.eMail:=cwToolObjectFromFile($configFile_o; ck shared:K85:29)
 	
 	// On stocke les variables communes à tout les mails.
-	If (Count parameters:C259=1)
-		
-		Use (Storage:C1525.eMail)
+	Use (Storage:C1525.eMail)
+		If (Count parameters:C259=1)
 			Storage:C1525.eMail.globalVar:=OB Copy:C1225($1; ck shared:K85:29)
-		End use 
-		
-	End if 
+		Else 
+			Storage:C1525.eMail.globalVar:=OB Copy:C1225($globalVar_o; ck shared:K85:29)
+		End if 
+	End use 
 	
 	// chargement complet du dossier des models.
 	//Use (Storage.eMail)
