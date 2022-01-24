@@ -222,7 +222,7 @@ Historiques :
 	
 	$mailStatus_o:=This:C1470.generateModel($nomModel_t; $variableDansMail_o)
 	
-	If ($mailStatus_o.status#-1)
+	If ($mailStatus_o.success)
 		// Envoie du mail
 		$mailStatus_o:=This:C1470.send()
 	End if 
@@ -259,7 +259,7 @@ Historiques :
 	
 	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
-	If (Count parameters:C259=2)
+	If ($variableDansMail_o#Null:C1517)
 		
 		For each ($propriete_t; $variableDansMail_o)
 			This:C1470[$propriete_t]:=$variableDansMail_o[$propriete_t]
@@ -279,6 +279,7 @@ Historiques :
 		// Gestion du layout
 		If (String:C10($model_o.layout)#"")
 			This:C1470.htmlBody:=File:C1566($modelPath_t+$model_o.layout).getText()
+			
 		Else 
 			This:C1470.htmlBody:=corps_t
 		End if 
@@ -310,6 +311,7 @@ Historiques :
 			PROCESS 4D TAGS:C816(This:C1470.htmlBody; $returnVar_t)
 			
 			This:C1470.htmlBody:=$returnVar_t
+			$mailStatus_o.success:=True:C214
 		End if 
 		
 	End if 
