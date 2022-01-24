@@ -183,7 +183,7 @@ Voilà la description des différents paramètres utilisés dans la fonction :
 
 
 
-| Paramêtre                       | Type       | entrée/sortie | Description                     |
+| Paramètre                       | Type       | entrée/sortie | Description                     |
 | ------------------------------- | ---------- | ------------- | ------------------------------- |
 | $nomModel_t                     | Texte      | Entrée        | Chaine de caractères contenant le nom du modèle qu'on souhaite utiliser, comme indiqué dans le fichier de config                          |
 | $variableDansMail_o (Optionnel) | Objet      | Entrée        | Dans le cas où l'on souhaite inclure des variables dans le mail de démo (dans le fichier html), on peut créer un objet contenant ces variables |
@@ -221,3 +221,25 @@ Lorsque l'on envoie des mails à plusieurs personnes depuis la collection "to" d
 </li>
 
 </ul>
+
+
+## Fonction : generateModel
+
+Permet de générer un modèle avec traitement des balises 4D.
+
+
+### Fonctionnement
+
+```4d
+$EMail.generateModel($nomModel_t;$variableDansMail_o) -> $retour_o
+```
+
+Voilà la description des différents paramètres utilisés dans la fonction : 
+
+
+
+| Paramètre                       | Type       | entrée/sortie | Description                     |
+| ------------------------------- | ---------- | ------------- | ------------------------------- |
+| $nomModel_t                     | Texte      | Entrée        | Chaine de caractères contenant le nom du modèle qu'on souhaite utiliser|
+| $variableDansMail_o (Optionnel) | Objet      | Entrée        | Dans le cas où l'on souhaite inclure des variables dans le mail de démo (dans le fichier html), on peut créer un objet contenant ces variables |
+| $retour_o                       | Objet      | Sortie        | Renvoie un modèle après traitement des balises 4d. |

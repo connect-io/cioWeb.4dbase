@@ -244,7 +244,7 @@ var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces var
 var $retour_o           <- retour sur le résultat de la fonction.
 	
 Historiques :
-24/01/22 - Grégory Fromain gregory@connect-io.fr> - Décomposition de la fonction model send.
+24/01/22 - Grégory Fromain <gregory@connect-io.fr> - Décomposition de la fonction model send.
 ------------------------------------------------------------------------------*/
 	
 	// Déclarations
