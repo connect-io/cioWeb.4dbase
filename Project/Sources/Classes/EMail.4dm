@@ -54,9 +54,11 @@ Historiques
 	If ($server_o#Null:C1517)
 		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
 		
-		$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $name_t)
-		If ($imapConfig_c.length=1)
-			This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
+		If (Storage:C1525.eMail.imap#Null:C1517)
+			$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $name_t)
+			If ($imapConfig_c.length=1)
+				This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
+			End if 
 		End if 
 		
 	Else 
