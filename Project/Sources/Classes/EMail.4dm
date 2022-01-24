@@ -206,10 +206,43 @@ Paramètres :
 	var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
 	var $retour_o           <- retour sur le résultat de la fonction.
 	
-Historiques
+Historiques :
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume.
 25/05/21 - Alban Catoire <Alban@connect-io.fr> - On recreer le modelPath (il n'est plus stocker en dur dans le storage, voir cwEmailConfigLoad)
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
+24/01/22 - Grégory Fromain gregory@connect-io.fr> - Décomposition avec la fonction generateModel
+------------------------------------------------------------------------------*/
+	
+	// Déclarations
+	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
+	
+	ASSERT:C1129($nomModel_t#""; "EMail.sendModel : le Param $nomModel_t est obligatoire (Nom du modèle.")
+	
+	$mailStatus_o:=This:C1470.generateModel($nomModel_t; $variableDansMail_o)
+	
+	If ($mailStatus_o.status#-1)
+		// Envoie du mail
+		$mailStatus_o:=This:C1470.send()
+	End if 
+	
+	// Retourne les informations concernant l'envoie du mail
+	$retour_o:=$mailStatus_o
+	
+	
+	
+Function generateModel($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object
+/*------------------------------------------------------------------------------
+Méthode : EMail.generateModel
+	
+Génération du HTML complet du model.
+	
+Paramètres :
+var $nomModel_t         -> nom du modèle qu'on souhaite utiliser
+var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
+var $retour_o           <- retour sur le résultat de la fonction.
+	
+Historiques :
+24/01/22 - Grégory Fromain gregory@connect-io.fr> - Décomposition de la fonction model send.
 ------------------------------------------------------------------------------*/
 	
 	// Déclarations
@@ -277,8 +310,6 @@ Historiques
 			This:C1470.htmlBody:=$returnVar_t
 		End if 
 		
-		// Envoie du mail
-		$mailStatus_o:=This:C1470.send()
 	End if 
 	
 	If ($error_t#"")
