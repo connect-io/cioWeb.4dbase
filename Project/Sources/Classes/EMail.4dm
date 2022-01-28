@@ -22,6 +22,7 @@ Historiques
 02/01/20 - quentin@connect-io.fr - Création
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la Class constructor
+28/01/22 - Grégory Fromain <gregory@connect-io.fr> - Correction bug sur condition
 ------------------------------------------------------------------------------*/
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
@@ -56,9 +57,11 @@ Historiques
 		
 		If (Storage:C1525.eMail.imap#Null:C1517)
 			$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $name_t)
+			
 			If ($imapConfig_c.length=1)
 				This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
 			End if 
+			
 		End if 
 		
 	Else 
@@ -175,10 +178,12 @@ Historiques
 					$status_o:=This:C1470.transporterIMAP.append(This:C1470; $boxName_t)
 					
 					// Gestion des erreurs de l'IMAP.
-					If (Not:C34($status_o.sucess))
+					If (Not:C34($status_o.success))
 						$error_t:=$status_o.statusText
 					End if 
+					
 				End if 
+				
 			End if 
 			
 		Else 
