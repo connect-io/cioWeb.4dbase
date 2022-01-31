@@ -184,6 +184,21 @@ Historique
 	$allModel_c:=This:C1470.email.model
 	
 	
+Function getAllLayout()->$allLayout_c : Collection
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.getAllLayout
+	
+Renvoie la liste de tous les layouts des emails
+	
+Paramètre
+$allModel_c <- Tous les layouts des emails
+	
+Historique
+31/01/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	$allLayout_c:=This:C1470.email.layout
+	
 	
 Function modify($modelModify_o : Object)->$result_t : Text
 /*------------------------------------------------------------------------------
