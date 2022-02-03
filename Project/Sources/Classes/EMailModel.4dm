@@ -29,6 +29,7 @@ Historiques
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
+
 	var $newModele_o : Object
 	var $fichierSource : Object
 	
@@ -81,6 +82,7 @@ Historique
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
+
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
 	
@@ -104,9 +106,9 @@ Copie la config des modèles dans le fichier email.jsonc et dans le storage
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 13/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Renommer la fonction.
-	
 ------------------------------------------------------------------------------*/
 	
+
 	//Réecriture dans le fichier email.jsonc
 	Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2).file("email.jsonc").setText(JSON Stringify:C1217(This:C1470.email; *))
 	
@@ -129,6 +131,7 @@ Historiques
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
+
 	var $modele_c : Collection
 	var $personnalisation_o  // Objet tampon utilisé pour récuperer la partie 'personnalisation'
 	var $modele_o : Object  //Le modèle à renvoyer
@@ -178,6 +181,7 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	$allModel_c:=This:C1470.email.model
 	
 	
@@ -195,6 +199,7 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $modele_c : Collection  //La collection de modele enregistré
 	var $modele_o : Object  //Le modèle modifié
 	var $index_i : Integer  // L'indice du modèle à modifier dans This.email.model
@@ -247,9 +252,6 @@ Historique
 	End if 
 	
 	
-	// Gestion des layouts
-	
-	
 Function layoutGetAll()->$allLayout_c : Collection
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.layoutGetAll
@@ -263,6 +265,7 @@ Historique
 01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	$allLayout_c:=This:C1470.email.layout
 	
 	
@@ -318,12 +321,13 @@ Modifie un modèle de Layout
 	
 Paramètres
 $layoutModify_o  <- L'objet avec les informations du layout à ajouter.
-$result_t       -> Reponse à l'ajout du layout
+$result_t        -> Reponse à l'ajout du layout
 	
 Historique
 01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $layout_c : Collection  // La collection de layout enregistré
 	var $layout_o : Object  // Le layout modifié
 	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
@@ -376,6 +380,7 @@ Historique
 01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $modele_c : Collection
 	var $modele_o : Object  //Le layout à supprimer
 	var $tempo_f : 4D:C1709.File
@@ -397,25 +402,26 @@ Historique
 	This:C1470.configToJson()
 	
 	
-	// Gestion des transporteurs
-	
-Function transporterGetAll()->$allTransporter_c : Collection
+Function transporterGetAll($protocol_t : Text)->$allTransporter_c : Collection
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.transporterGetAll
 	
 Renvoie la liste de tous les transporteurs pour la gestion des emails
 	
-Paramètre
+Paramètres
+$protocol_t       -> Le nom du protocole utilisé (exemple : smtp, imap...)
 $allTransporter_c <- Tous les transporteurs
 	
 Historique
 02/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	$allTransporter_c:=This:C1470.email.smtp
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
+	
+	$allTransporter_c:=This:C1470.email[$protocol_t]
 	
 	
-Function transporterAdd($transporter_o : Object)->$reponse_t : Text
+Function transporterAdd($transporter_o : Object; $protocol_t : Text)->$reponse_t : Text
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.transporterAdd
 	
@@ -423,18 +429,21 @@ Ajout d'un nouveau transporteur
 	
 Paramètres :
 $transporter_o  -> l'objet contenant toutes les informations du nouveau transporteur
-$reponse_t <- la réponse à l'enregistrement
+$protocol_t.    -> Le nom du protocole utilisé (exemple : smtp, imap...)
+$reponse_t      <- la réponse à l'enregistrement
 	
 Historique
 02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $newTransporter_o : Object
 	var $fichierSource : Object
 	
 	$reponse_t:="ok"
 	
 	ASSERT:C1129(($transporter_o.name#"") & ($transporter_o.name#Null:C1517); " EMailModel.transporterAdd : Le param $transporter_o ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
 	$newTransporter_o:=New object:C1471()
 	$newTransporter_o.name:=$transporter_o.name
@@ -445,24 +454,26 @@ Historique
 	$newTransporter_o.from:=$transporter_o.from
 	
 	If ($reponse_t="ok")
-		This:C1470.email.smtp.push($newTransporter_o)
+		This:C1470.email[$protocol_t].push($newTransporter_o)
 		This:C1470.configToJson()
 	End if 
 	
 	
-Function transporterModify($transporterModify_o : Object)->$result_t : Text
+Function transporterModify($transporterModify_o : Object; $protocol_t : Text)->$result_t : Text
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.layoutModify
 	
 Modifie un modèle de transporteur
 Paramètres
 $transporterModify_o  <- L'objet avec les informations du tranposteur à modifier.
-$result_t       -> Reponse à l'ajout du transporteur
+$protocol_t.          -> Le nom du protocole utilisé (exemple : smtp, imap...)
+$result_t             -> Reponse à l'ajout du transporteur
 	
 Historique
 02/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $transporter_c : Collection  // La collection de layout enregistré
 	var $transporter_o : Object  // Le layout modifié
 	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
@@ -471,11 +482,12 @@ Historique
 	$result_t:="ok"
 	
 	ASSERT:C1129(($transporterModify_o.name#"") & ($transporterModify_o.name#Null:C1517); " EMailModel.transporterModify : Le param $transporterModify_o ($1) ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
-	$transporter_c:=This:C1470.email.smtp.query("name = :1"; $transporterModify_o.oldName)
+	$transporter_c:=This:C1470.email[$protocol_t].query("name = :1"; $transporterModify_o.oldName)
 	If ($transporter_c.length#0)
 		$transporter_o:=$transporter_c[0]
-		$index_i:=This:C1470.email.smtp.indexOf($transporter_o)
+		$index_i:=This:C1470.email[$protocol_t].indexOf($transporter_o)
 		
 		$transporter_o.name:=$transporterModify_o.name
 		$transporter_o.host:=$transporterModify_o.host
@@ -490,33 +502,36 @@ Historique
 	
 	//Enregistrement des modifications
 	If ($result_t="ok")
-		This:C1470.email.smtp[$index_i]:=$transporter_o
+		This:C1470.email[$protocol_t][$index_i]:=$transporter_o
 		This:C1470.configToJson()
 	End if 
 	
 	
-Function transporterDelete($name_t : Text)
+Function transporterDelete($name_t : Text; $protocol_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.transporterDelete
 	
 Supprime un transporteur
 	
 Paramètre :
-$name_t -> le nom du transporteur à supprimer
+$name_t.     -> le nom du transporteur à supprimer
+$protocol_t. -> Le nom du protocole utilisé (exemple : smtp, imap...)
 	
 Historique
 01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
+
 	var $transporter_c : Collection
 	var $transporter_o : Object  //Le layout à supprimer
 	
 	ASSERT:C1129($name_t#""; " EMailModel.transporterDelete : Le param $name_t est vide.")
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
-	$transporter_c:=This:C1470.email.smtp.query("name = :1"; $name_t)
+	$transporter_c:=This:C1470.email[$protocol_t].query("name = :1"; $name_t)
 	ASSERT:C1129($transporter_c.length#0; " EMailModel.get : modèle introuvable.")
 	$transporter_o:=$transporter_c[0]
 	//On cherche le layout à supprimer
-	$index:=This:C1470.email.smtp.indexOf($transporter_o)
-	This:C1470.email.smtp.remove($index)
+	$index:=This:C1470.email[$protocol_t].indexOf($transporter_o)
+	This:C1470.email[$protocol_t].remove($index)
 	This:C1470.configToJson()
