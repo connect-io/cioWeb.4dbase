@@ -29,7 +29,7 @@ Historiques
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $newModele_o : Object
 	var $fichierSource : Object
 	
@@ -82,7 +82,7 @@ Historique
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
 	
@@ -108,7 +108,7 @@ Historique
 13/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Renommer la fonction.
 ------------------------------------------------------------------------------*/
 	
-
+	
 	//Réecriture dans le fichier email.jsonc
 	Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2).file("email.jsonc").setText(JSON Stringify:C1217(This:C1470.email; *))
 	
@@ -131,7 +131,7 @@ Historiques
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $modele_c : Collection
 	var $personnalisation_o  // Objet tampon utilisé pour récuperer la partie 'personnalisation'
 	var $modele_o : Object  //Le modèle à renvoyer
@@ -181,7 +181,7 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	$allModel_c:=This:C1470.email.model
 	
 	
@@ -199,7 +199,7 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $modele_c : Collection  //La collection de modele enregistré
 	var $modele_o : Object  //Le modèle modifié
 	var $index_i : Integer  // L'indice du modèle à modifier dans This.email.model
@@ -265,7 +265,7 @@ Historique
 01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	$allLayout_c:=This:C1470.email.layout
 	
 	
@@ -327,7 +327,7 @@ Historique
 01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $layout_c : Collection  // La collection de layout enregistré
 	var $layout_o : Object  // Le layout modifié
 	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
@@ -380,7 +380,7 @@ Historique
 01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $modele_c : Collection
 	var $modele_o : Object  //Le layout à supprimer
 	var $tempo_f : 4D:C1709.File
@@ -436,7 +436,7 @@ Historique
 02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $newTransporter_o : Object
 	var $fichierSource : Object
 	
@@ -452,6 +452,7 @@ Historique
 	$newTransporter_o.user:=$transporter_o.user
 	$newTransporter_o.password:=$transporter_o.password
 	$newTransporter_o.from:=$transporter_o.from
+	$newTransporter_o.archive:=$transporter_o.archive
 	
 	If ($reponse_t="ok")
 		This:C1470.email[$protocol_t].push($newTransporter_o)
@@ -461,7 +462,7 @@ Historique
 	
 Function transporterModify($transporterModify_o : Object; $protocol_t : Text)->$result_t : Text
 /*------------------------------------------------------------------------------
-Fonction : EMailModel.layoutModify
+Fonction : EMailModel.transporterModify
 	
 Modifie un modèle de transporteur
 Paramètres
@@ -473,7 +474,7 @@ Historique
 02/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $transporter_c : Collection  // La collection de layout enregistré
 	var $transporter_o : Object  // Le layout modifié
 	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
@@ -495,6 +496,7 @@ Historique
 		$transporter_o.user:=$transporterModify_o.user
 		$transporter_o.password:=$transporterModify_o.password
 		$transporter_o.from:=$transporterModify_o.from
+		$transporter_o.archive:=$transporterModify_o.archive
 		
 	Else 
 		$result_t:="introuvable"
@@ -521,7 +523,7 @@ Historique
 01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-
+	
 	var $transporter_c : Collection
 	var $transporter_o : Object  //Le layout à supprimer
 	
