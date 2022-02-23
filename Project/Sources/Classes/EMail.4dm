@@ -328,3 +328,41 @@ Historiques :
 	
 	// Retourne les informations concernant l'envoie du mail
 	$retour_o:=$mailStatus_o
+	
+	
+	
+Function gestionEmailAttachment($vDestinationFolder_t : Text; $nameInput_t : Text)->$retour_t : Text
+	
+/*------------------------------------------------------------------------------
+Fonction : email_o.gestionEmailAttachment
+	
+Gestion de la pièce jointe pour l'envoi par email
+	
+Paramètre :
+$vDestinationFolder_t  -> le chemin du dossier pour stocker la pièce jointe
+$nameInput_t           -> le nom de l'input du formulaire
+$retour_t              <- le chemin du fichier
+	
+Historique
+23/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $htmlName_t; $fichierMimeType_t; $fichierName_t : Text
+	var $i_el : Integer
+	var $fichierContent_b : Blob
+	var $email_o : Object
+	
+	For ($i_el; 1; WEB Get body part count:C1211)
+		WEB GET BODY PART:C1212($i_el; $fichierContent_b; $htmlName_t; $fichierMimeType_t; $fichierName_t)
+		
+		If ($htmlName_t=$nameInput_t)
+			If ($fichierName_t#"")
+				
+				BLOB TO DOCUMENT:C526($vDestinationFolder_t+$fichierName_t; $fichierContent_b)
+				$retour_t:=$vDestinationFolder_t+$fichierName_t
+			End if 
+			
+			$i_el:=WEB Get body part count:C1211
+		End if 
+		
+	End for 

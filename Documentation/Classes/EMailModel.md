@@ -290,7 +290,7 @@ ModeleMail.transporterGetAll($protocol_t) -> $allLayout_c
 
 ### Exemple
 ```4d
-$layout_c:=modeleMail_o.layoutGetAll("smtp")
+$layout_c:=modeleMail_o.transporterGetAll("smtp")
 ```
 
 --------------------------------------------------------------------------------

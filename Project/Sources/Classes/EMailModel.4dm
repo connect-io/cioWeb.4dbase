@@ -353,17 +353,24 @@ Historique
 	//On va chercher le fichier associé à source HTML
 	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.source)
 	
+	//On va chercher le fichier avec l'ancien nom pour le supprimer
+	$fichierSourceOld:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.sourceOldName)
+	
 	//Si le fichier n'existe pas on le crée, puis on le reecrit
 	If (Not:C34($fichierSource.exists) & ($layoutModify_o.layoutHtml=""))
 		$result_t:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
 	Else 
 		$fichierSource.setText($layoutModify_o.layoutHtml)
+		If ($layoutModify_o.source#$layoutModify_o.sourceOldName)
+			$fichierSourceOld.delete()
+		End if 
 	End if 
 	
 	//Enregistrement des modifications
 	If ($result_t="ok")
 		This:C1470.email.layout[$index_i]:=$layout_o
 		This:C1470.configToJson()
+		
 	End if 
 	
 	
