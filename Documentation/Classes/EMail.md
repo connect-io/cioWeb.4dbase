@@ -247,7 +247,7 @@ Voilà la description des différents paramètres utilisés dans la fonction :
 
 --------------------------------------------------------------------------------
 
-## Fonction : gestionEmailAttachment
+## Fonction : attachmentAdd
 Permet de stocker la pièce jointe à envoyer dans l'email et retourner le chemin vers celle-ci pour l'expédition.
 Le premier paramètre d'entrée est le chemin du dossier pour stocker la pièce jointe. 
 Le deuxième paramètre d'entrée est le nom de l'input type file du formulaire. 
@@ -255,21 +255,21 @@ Le deuxième paramètre d'entrée est le nom de l'input type file du formulaire.
 
 ### Fonctionnement
 ```4d
-$email_o.gestionEmailAttachment($vDestinationFolder_t : Text; nameInput_t : Text) -> $retour_t : Text
+$email_o.attachmentAdd($$vFolderDestination_t : Text; nameInput_t : Text) -> $retour_t : Text
 ```
 
 | Paramètres            | Type       | entrée/sortie | Description |
 | --------------------- | ---------- | ------------- | ----------- |
-| $vDestinationFolder_t | Texte      | Entrée        | Le chemin du dossier pour stocker la pièce jointe |
+| $vFolderDestination_t | Texte      | Entrée        | Le chemin du dossier pour stocker la pièce jointe |
 | $nameInput_t          | Texte      | Entrée        | Le nom de l'input du formulaire|
 | $retour_t             | Texte      | Sortie        | Le chemin du fichier |
 
 
 ### Exemple
 ```4d
-$vDestinationFolder_t:=Get 4D folder(HTML Root folder)+"uploads"+Folder separator+"attachment"+Folder separator
+$vFolderDestination_t:=Get 4D folder(HTML Root folder)+"uploads"+Folder separator+"attachment"+Folder separator
 
-$pathToAttachement_t:=$email_o.gestionEmailAttachment($vDestinationFolder_t; "slemImportFile")
+$pathToAttachement_t:=$email_o.attachmentAdd($vFolderDestination_t; "slemImportFile")
 
 If ($pathToAttachement_t#"")
 	$email_o.attachmentsPath_c.push($pathToAttachement_t)
