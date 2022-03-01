@@ -262,7 +262,7 @@ Paramètre
 $allLayout_c <- Tous les layouts
 	
 Historique
-01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
 	
@@ -324,7 +324,7 @@ $layoutModify_o  <- L'objet avec les informations du layout à ajouter.
 $result_t        -> Reponse à l'ajout du layout
 	
 Historique
-01/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
 	
@@ -353,17 +353,24 @@ Historique
 	//On va chercher le fichier associé à source HTML
 	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.source)
 	
+	//On va chercher le fichier avec l'ancien nom pour le supprimer
+	$fichierSourceOld:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.sourceOldName)
+	
 	//Si le fichier n'existe pas on le crée, puis on le reecrit
 	If (Not:C34($fichierSource.exists) & ($layoutModify_o.layoutHtml=""))
 		$result_t:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
 	Else 
 		$fichierSource.setText($layoutModify_o.layoutHtml)
+		If ($layoutModify_o.source#$layoutModify_o.sourceOldName)
+			$fichierSourceOld.delete()
+		End if 
 	End if 
 	
 	//Enregistrement des modifications
 	If ($result_t="ok")
 		This:C1470.email.layout[$index_i]:=$layout_o
 		This:C1470.configToJson()
+		
 	End if 
 	
 	
@@ -413,12 +420,13 @@ $protocol_t       -> Le nom du protocole utilisé (exemple : smtp, imap...)
 $allTransporter_c <- Tous les transporteurs
 	
 Historique
-02/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
+02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Grégory Fromain <gregory@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
-	$allTransporter_c:=This:C1470.email[$protocol_t]
+	$allTransporter_c:=This:C1470.email.transporter.query("type IS :1"; $protocol_t)
 	
 	
 Function transporterAdd($transporter_o : Object; $protocol_t : Text)->$reponse_t : Text
@@ -434,6 +442,7 @@ $reponse_t      <- la réponse à l'enregistrement
 	
 Historique
 02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	
@@ -447,6 +456,7 @@ Historique
 	
 	$newTransporter_o:=New object:C1471()
 	$newTransporter_o.name:=$transporter_o.name
+	$newTransporter_o.type:=$transporter_o.type
 	$newTransporter_o.host:=$transporter_o.host
 	$newTransporter_o.port:=Num:C11($transporter_o.port)
 	$newTransporter_o.user:=$transporter_o.user
@@ -471,7 +481,8 @@ $protocol_t.          -> Le nom du protocole utilisé (exemple : smtp, imap...)
 $result_t             -> Reponse à l'ajout du transporteur
 	
 Historique
-02/02/22 - Jonathan FERNANDEZ <jonathan@connect-io.fr> - Création
+02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	
@@ -491,6 +502,7 @@ Historique
 		$index_i:=This:C1470.email[$protocol_t].indexOf($transporter_o)
 		
 		$transporter_o.name:=$transporterModify_o.name
+		$transporter_o.type:=$transporterModify_o.type
 		$transporter_o.host:=$transporterModify_o.host
 		$transporter_o.port:=Num:C11($transporterModify_o.port)
 		$transporter_o.user:=$transporterModify_o.user
@@ -521,6 +533,7 @@ $protocol_t. -> Le nom du protocole utilisé (exemple : smtp, imap...)
 	
 Historique
 01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	
@@ -530,7 +543,7 @@ Historique
 	ASSERT:C1129($name_t#""; " EMailModel.transporterDelete : Le param $name_t est vide.")
 	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
-	$transporter_c:=This:C1470.email[$protocol_t].query("name = :1"; $name_t)
+	$transporter_c:=This:C1470.email.transporter.query("name = :1 and type = :2"; $name_t; $protocol_t)
 	ASSERT:C1129($transporter_c.length#0; " EMailModel.get : modèle introuvable.")
 	$transporter_o:=$transporter_c[0]
 	//On cherche le layout à supprimer

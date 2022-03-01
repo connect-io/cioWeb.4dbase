@@ -2,15 +2,17 @@
 	// Chemin depuis le dossier source pour atteindre les models.
 	"modelPath": "www/email/",
 
-	"smtp":[
+	"transporter":[
 		{
 			"name": "transactionnel",
+			"type": "smtp",
 			"host": "pro1.mail.ovh.net",
 			"user": "yyyy@connect-io.fr",
 			"password":	"yyyy"
 		},
 		{
 			"name": "prospection",
+			"type": "smtp",
 			"host": "xxx",
 			"port":	465,
 			"user": "xxx@connect-io.fr",

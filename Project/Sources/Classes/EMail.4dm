@@ -23,6 +23,7 @@ Historiques
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la Class constructor
 28/01/22 - Grégory Fromain <gregory@connect-io.fr> - Correction bug sur condition
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
@@ -33,6 +34,7 @@ Historiques
 	
 	If (Storage:C1525.eMail=Null:C1517)
 		cwEMailConfigLoad
+		ASSERT:C1129(Storage:C1525.eMail.smtp.length=0; "EMail.constructor : merci de mettre à jour le transporteur dans le fichier email.json.")
 	End if 
 	
 	$server_o:=New object:C1471()
@@ -41,7 +43,9 @@ Historiques
 	
 	This:C1470.transporterName:=$name_t
 	
-	$transporter_c:=Storage:C1525.eMail.smtp.query("name IS :1"; $name_t)
+	$transporter_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'smtp'"; $name_t)
+	
+	ASSERT:C1129($transporter_c.length#0; "Le nom du transporteur indiqué ne correspond à aucun transporteur")
 	
 	If ($transporter_c.length=1)
 		$server_o:=$transporter_c[0]
@@ -103,6 +107,7 @@ Paramètre :
 Historiques
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
 	
 	// Déclaration
@@ -170,7 +175,7 @@ Historiques
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
 			// On regarde si la config smtp souhaite stocker le mail dans les éléments énvoyés?
-			If (Bool:C1537(Storage:C1525.eMail.smtp.query("name IS :1"; This:C1470.transporterName)[0].archive))
+			If (Bool:C1537(Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'smtp'"; This:C1470.transporterName)[0].archive))
 				
 				// Upload email to the "Sent" mailbox
 				If (This:C1470.transporterIMAP#Null:C1517)
@@ -328,3 +333,41 @@ Historiques :
 	
 	// Retourne les informations concernant l'envoie du mail
 	$retour_o:=$mailStatus_o
+	
+	
+	
+Function attachmentAdd($vFolderDestination_t : Text; $nameInput_t : Text)->$retour_t : Text
+	
+/*------------------------------------------------------------------------------
+Fonction : email_o.attachmentAdd
+	
+Gestion de la pièce jointe pour l'envoi par email
+	
+Paramètre :
+$vFolderDestination_t  -> le chemin du dossier pour stocker la pièce jointe
+$nameInput_t           -> le nom de l'input du formulaire
+$retour_t              <- le chemin du fichier
+	
+Historique
+23/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $htmlName_t; $fileMimeType_t; $fileName_t : Text
+	var $i_el : Integer
+	var $fileContent_b : Blob
+	var $email_o : Object
+	
+	For ($i_el; 1; WEB Get body part count:C1211)
+		WEB GET BODY PART:C1212($i_el; $fileContent_b; $htmlName_t; $fileMimeType_t; $fileName_t)
+		
+		If ($htmlName_t=$nameInput_t)
+			If ($fileName_t#"")
+				
+				BLOB TO DOCUMENT:C526($vFolderDestination_t+$fileName_t; $fileContent_b)
+				$retour_t:=$vFolderDestination_t+$fileName_t
+			End if 
+			
+			$i_el:=WEB Get body part count:C1211
+		End if 
+		
+	End for 
