@@ -105,8 +105,12 @@ ASSERT:C1129(cwFormatValide("date"; "00-00-00")="ok"; "Erreur lors du test de la
 ASSERT:C1129(cwFormatValide("date"; "00/00/00")="ok"; "Erreur lors du test de la méthode.")
 ASSERT:C1129(cwFormatValide("date"; "00/00/0000")="ok"; "Erreur lors du test de la méthode.")
 ASSERT:C1129(cwFormatValide("date"; "32/01/2021")="format incorrect"; "Erreur lors du test de la méthode.")
+ASSERT:C1129(cwFormatValide("date"; "31/03/2022")="ok"; "Erreur lors du test de la méthode.")
 //ASSERT(cwFormatValide("date"; "01/01/00")="format incorrect"; "Erreur lors du test de la méthode.") // Ce test ne passe pas, il y a un souci dans la méthode.
 
+
+// cwToolObjectMergeTest : Test du merge des objets : cwToolObjectMerge
+ASSERT:C1129(JSON Stringify:C1217(cwToolObjectSplitStringKey(New object:C1471("a.b"; "c")))="{\"a\":{\"b\":\"c\"}}"; "Erreur lors du test de la méthode.")
 
 // cwToolObjectMergeTest : Test du merge des objets : cwToolObjectMerge
 ASSERT:C1129(cwToolObjectMergeTest="ok"; "Erreur lors du test de la méthode.")

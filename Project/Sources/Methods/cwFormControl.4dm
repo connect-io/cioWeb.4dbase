@@ -163,24 +163,7 @@ End if
 
 // décomposition des propriété objet . ex :  {"toto.tata":"titi"} -> {"toto":{"tata":"titi"}}
 If ($resultat_t#"non soumis")
-	$key_c:=New collection:C1472()
-	$key_c:=OB Keys:C1719(visiteur.dataFormTyping)
-	
-	For each ($key_t; $key_c)
-		$splitKey_c:=New collection:C1472()
-		$splitKey_c:=Split string:C1554($key_t; ".")
-		
-		If ($splitKey_c.length>1)
-			
-			If (visiteur.dataFormTyping[$splitKey_c[0]]=Null:C1517)
-				visiteur.dataFormTyping[$splitKey_c[0]]:=New object:C1471
-			End if 
-			
-			visiteur.dataFormTyping[$splitKey_c[0]][$splitKey_c[1]]:=visiteur.dataFormTyping[$key_t]
-		End if 
-		
-	End for each 
-	
+	cwToolObjectSplitStringKey(visiteur.dataFormTyping)
 End if 
 
 // Notification du message d'erreur au visiteur.
