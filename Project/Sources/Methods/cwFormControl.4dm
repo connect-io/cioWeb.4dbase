@@ -50,7 +50,7 @@ If ($resultat_t="")
 			ALERT:C41($resultat_t)
 			
 		Else 
-			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+", plusieurs formulaire portent le même libellé."
+			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+", plusieurs formulaires portent le même libellé."
 			ALERT:C41($resultat_t)
 	End case 
 End if 
