@@ -85,6 +85,7 @@ Historique
 	
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
+	var $tempo_f : 4D:C1709.File
 	
 	ASSERT:C1129($name_t#""; " EMailModel.delete : Le param $name_t est vide.")
 	
@@ -93,6 +94,12 @@ Historique
 	$modele_o:=$modele_c[0]
 	//On cherche le modèle à supprimer
 	$index:=This:C1470.email.model.indexOf($modele_o)
+	
+	$tempo_f:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.source)
+	If ($tempo_f.exists)
+		$tempo_f.delete()
+	End if 
+	
 	This:C1470.email.model.remove($index)
 	This:C1470.configToJson()
 	
