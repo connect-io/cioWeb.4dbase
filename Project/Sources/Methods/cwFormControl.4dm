@@ -25,12 +25,12 @@ var $inputValide_t : Text
 var $infoForm_o : Object
 var $formInput_o : Object
 var $resultForm_c : Collection
-
+var $key_c : Collection
+var $key_t : Text
+var $splitKey_c : Collection
 
 visiteur:=$1->
 $T_nomForm:=$2
-$resultat_t:=""
-$inputValide_t:=""
 
 If (visiteur=Null:C1517)
 	$resultat_t:="cwFormControl ("+$T_nomForm+"): Variable visiteur non indiqué."
@@ -50,7 +50,7 @@ If ($resultat_t="")
 			ALERT:C41($resultat_t)
 			
 		Else 
-			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+", plusieurs formulaire portent le même libellé."
+			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+", plusieurs formulaires portent le même libellé."
 			ALERT:C41($resultat_t)
 	End case 
 End if 
@@ -154,7 +154,6 @@ If ($resultat_t="")
 	
 End if 
 
-
 If ($inputValide_t="ok")
 	$T_prefixe:=Replace string:C233($infoForm_o.submit; "submit"; "")
 	// On supprime le prefixe des clés.
@@ -162,12 +161,15 @@ If ($inputValide_t="ok")
 	cwToolObjectDeletePrefixKey(visiteur.dataFormTyping; $T_prefixe)
 End if 
 
+// décomposition des propriété objet . ex :  {"toto.tata":"titi"} -> {"toto":{"tata":"titi"}}
+If ($resultat_t#"non soumis")
+	cwToolObjectSplitStringKey(visiteur.dataFormTyping)
+End if 
+
 // Notification du message d'erreur au visiteur.
 If (Not:C34($inputValide_t="ok")) & (Not:C34($resultat_t="non soumis"))
 	visiteur.notificationError:=$resultat_t
 End if 
-
-
 
 $0:=$resultat_t
 $1->:=visiteur
