@@ -89,6 +89,10 @@ If ($resultat_t="")
 			: (String:C10($formInput_o.format)="date")
 				visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean(visiteur.dataForm[$formInput_o.lib]))
 				
+			: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")
+				// Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
+				visiteur.dataFormTyping[$formInput_o.lib]:=cwToolHtmlToText(visiteur.dataForm[$formInput_o.lib])
+				
 			Else 
 				visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]
 		End case 
