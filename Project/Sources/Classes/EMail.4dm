@@ -24,6 +24,7 @@ Historiques
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la Class constructor
 28/01/22 - Grégory Fromain <gregory@connect-io.fr> - Correction bug sur condition
 01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
+18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Fix bug selection serveur IMAP
 ------------------------------------------------------------------------------*/
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
@@ -59,17 +60,14 @@ Historiques
 	If ($server_o#Null:C1517)
 		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
 		
-		If (Storage:C1525.eMail.imap#Null:C1517)
-			$imapConfig_c:=Storage:C1525.eMail.imap.query("name IS :1"; $name_t)
-			
-			If ($imapConfig_c.length=1)
-				This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
-			End if 
-			
+		$imapConfig_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'imap'"; $name_t)
+		
+		If ($imapConfig_c.length=1)
+			This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
 		End if 
 		
 	Else 
-		ALERT:C41("Aucune occurence trouvé au sein du fichier JSON")
+		ALERT:C41("cioWeb : Aucun transporteur SMTP trouvé au sein du fichier JSON.")
 		This:C1470.transporter:=New object:C1471()
 	End if 
 	
@@ -83,6 +81,140 @@ Historiques
 	If (Storage:C1525.eMail.globalVar#Null:C1517)
 		This:C1470.globalVar:=OB Copy:C1225(Storage:C1525.eMail.globalVar)
 	End if 
+	
+	
+	
+Function attachmentAdd($vFolderDestination_t : Text; $nameInput_t : Text)->$retour_t : Text
+	
+/*------------------------------------------------------------------------------
+Fonction : email_o.attachmentAdd
+	
+Gestion de la pièce jointe pour l'envoi par email
+	
+Paramètre :
+$vFolderDestination_t  -> le chemin du dossier pour stocker la pièce jointe
+$nameInput_t           -> le nom de l'input du formulaire
+$retour_t              <- le chemin du fichier
+	
+Historique
+23/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $htmlName_t; $fileMimeType_t; $fileName_t : Text
+	var $i_el : Integer
+	var $fileContent_b : Blob
+	var $email_o : Object
+	
+	For ($i_el; 1; WEB Get body part count:C1211)
+		WEB GET BODY PART:C1212($i_el; $fileContent_b; $htmlName_t; $fileMimeType_t; $fileName_t)
+		
+		If ($htmlName_t=$nameInput_t)
+			If ($fileName_t#"")
+				
+				BLOB TO DOCUMENT:C526($vFolderDestination_t+$fileName_t; $fileContent_b)
+				$retour_t:=$vFolderDestination_t+$fileName_t
+			End if 
+			
+			$i_el:=WEB Get body part count:C1211
+		End if 
+		
+	End for 
+	
+	
+	
+Function modelGenerate($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object
+/*------------------------------------------------------------------------------
+Méthode : EMail.modelGenerate
+	
+Génération du HTML complet du model.
+	
+Paramètres :
+var $nomModel_t         -> nom du modèle qu'on souhaite utiliser
+var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
+var $retour_o           <- retour sur le résultat de la fonction.
+	
+Historiques :
+24/01/22 - Grégory Fromain <gregory@connect-io.fr> - Décomposition de la fonction model send.
+18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Renommage de la fonction.
+------------------------------------------------------------------------------*/
+	
+	// Déclarations
+	var $error_t : Text  // Gestion des erreurs.
+	var $model_c : Collection  // Informations tableau JSON du modèle
+	var $model_o : Object  // Detail du modèle
+	var $returnVar_t : Text  // Retourne le texte si 3ème paramètre
+	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
+	var $modelPath_t : Text  // Le path des modeles
+	
+	ASSERT:C1129($nomModel_t#""; "EMail.sendModel : le Param $nomModel_t est obligatoire (Nom du modèle.")
+	
+	$mailStatus_o:=New object:C1471("success"; False:C215)
+	
+	If ($variableDansMail_o#Null:C1517)
+		
+		For each ($propriete_t; $variableDansMail_o)
+			This:C1470[$propriete_t]:=$variableDansMail_o[$propriete_t]
+		End for each 
+		
+	End if 
+	
+	// Vérification fichier modèle
+	$model_c:=Storage:C1525.eMail.model.query("name IS :1"; $nomModel_t)
+	This:C1470.model:=$model_c
+	
+	// Retrouver les informations du modèle
+	If ($model_c.length=1)
+		$model_o:=$model_c[0]
+		$modelPath_t:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
+		corps_t:=File:C1566($modelPath_t+$model_o.source).getText()
+		
+		// Gestion du layout
+		If (String:C10($model_o.layout)#"")
+			This:C1470.htmlBody:=File:C1566($modelPath_t+$model_o.layout).getText()
+			
+		Else 
+			This:C1470.htmlBody:=corps_t
+		End if 
+		
+	Else 
+		$error_t:="EMail.sendModel : Impossible de retrouver le modèle : "+$nomModel_t
+	End if 
+	
+	If ($error_t="")
+		
+		// Si l'objet n'est pas défini avant on applique celui du modèle.
+		If (String:C10(This:C1470.subject)="")
+			This:C1470.subject:=String:C10($model_o.subject)
+		End if 
+		
+		PROCESS 4D TAGS:C816(This:C1470.subject; $returnVar_t)
+		This:C1470.subject:=$returnVar_t
+		
+		// On gère les destinataires du message.
+		If (This:C1470.to=Null:C1517)
+			
+			If ($model_o.to#Null:C1517)
+				This:C1470.to:=$model_o.to
+			End if 
+			
+		End if 
+		
+		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")  // Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
+			PROCESS 4D TAGS:C816(This:C1470.htmlBody; $returnVar_t)
+			
+			This:C1470.htmlBody:=$returnVar_t
+			$mailStatus_o.success:=True:C214
+		End if 
+		
+	End if 
+	
+	If ($error_t#"")
+		$mailStatus_o.statusText:=$error_t
+		$mailStatus_o.status:=-1
+	End if 
+	
+	// Retourne les informations concernant l'envoie du mail
+	$retour_o:=$mailStatus_o
 	
 	
 	
@@ -101,16 +233,18 @@ this.htmlBody ou this.textBody -> text : Corps du message
 Informataions optionelles :
 this.attachmentsPath_c -> Collection : Chemin des pièces jointes.
 	
-Paramètre :
-	$resultat_o <- Informations sur l'envoi de l'email
+Paramètre
+$resultat_o <- Informations sur l'envoi de l'email
 	
 Historiques
 11/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reécriture du code du composant plume
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
+16/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Modification du stockage des emails, archive dans le modèle au lieu du transporteur.
+18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Fix bug selection IMAP.
 ------------------------------------------------------------------------------*/
 	
-	// Déclaration
+	// Déclarations
 	var $mailStatus_o : Object  // transporter, info sur mail et envoie de l'email
 	var $error_t : Text  // Info concernant les erreurs
 	var $cheminPj_v : Variant  // Chemin pièce jointe
@@ -174,12 +308,13 @@ Historiques
 		
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
-			// On regarde si la config smtp souhaite stocker le mail dans les éléments énvoyés?
-			If (Bool:C1537(Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'smtp'"; This:C1470.transporterName)[0].archive))
+			
+			// On regarde si la config du model souhaite stocker le mail dans les éléments énvoyés
+			If (Bool:C1537(This:C1470.model[0].archive))
 				
 				// Upload email to the "Sent" mailbox
 				If (This:C1470.transporterIMAP#Null:C1517)
-					$boxName_t:=Storage:C1525.eMail.imap.query("name IS :1"; This:C1470.transporterName)[0].boxName.sent
+					$boxName_t:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'imap'"; This:C1470.transporterName)[0].boxName.sent
 					$status_o:=This:C1470.transporterIMAP.append(This:C1470; $boxName_t)
 					
 					// Gestion des erreurs de l'IMAP.
@@ -230,7 +365,7 @@ Historiques :
 	
 	ASSERT:C1129($nomModel_t#""; "EMail.sendModel : le Param $nomModel_t est obligatoire (Nom du modèle.")
 	
-	$mailStatus_o:=This:C1470.generateModel($nomModel_t; $variableDansMail_o)
+	$mailStatus_o:=This:C1470.modelGenerate($nomModel_t; $variableDansMail_o)
 	
 	If ($mailStatus_o.success)
 		// Envoie du mail
@@ -242,132 +377,5 @@ Historiques :
 	
 	
 	
-Function generateModel($nomModel_t : Text; $variableDansMail_o : Object)->$retour_o : Object
-/*------------------------------------------------------------------------------
-Méthode : EMail.generateModel
-	
-Génération du HTML complet du model.
-	
-Paramètres :
-var $nomModel_t         -> nom du modèle qu'on souhaite utiliser
-var $variableDansMail_o -> (optionnel) on peut créer un objet contenant ces variables
-var $retour_o           <- retour sur le résultat de la fonction.
-	
-Historiques :
-24/01/22 - Grégory Fromain <gregory@connect-io.fr> - Décomposition de la fonction model send.
-------------------------------------------------------------------------------*/
-	
-	// Déclarations
-	var $error_t : Text  // Gestion des erreurs.
-	var $model_c : Collection  // Informations tableau JSON du modèle
-	var $model_o : Object  // Detail du modèle
-	var $returnVar_t : Text  // Retourne le texte si 3ème paramètre
-	var $mailStatus_o : Object  // Réponse de l'envoi du mail.
-	var $modelPath_t : Text  // Le path des modeles
-	
-	ASSERT:C1129($nomModel_t#""; "EMail.sendModel : le Param $nomModel_t est obligatoire (Nom du modèle.")
-	
-	$mailStatus_o:=New object:C1471("success"; False:C215)
-	
-	If ($variableDansMail_o#Null:C1517)
-		
-		For each ($propriete_t; $variableDansMail_o)
-			This:C1470[$propriete_t]:=$variableDansMail_o[$propriete_t]
-		End for each 
-		
-	End if 
-	
-	// Vérification fichier modèle
-	$model_c:=Storage:C1525.eMail.model.query("name IS :1"; $nomModel_t)
-	
-	// Retrouver les informations du modèle
-	If ($model_c.length=1)
-		$model_o:=$model_c[0]
-		$modelPath_t:=Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+Storage:C1525.eMail.modelPath
-		corps_t:=File:C1566($modelPath_t+$model_o.source).getText()
-		
-		// Gestion du layout
-		If (String:C10($model_o.layout)#"")
-			This:C1470.htmlBody:=File:C1566($modelPath_t+$model_o.layout).getText()
-			
-		Else 
-			This:C1470.htmlBody:=corps_t
-		End if 
-		
-	Else 
-		$error_t:="EMail.sendModel : Impossible de retrouver le modèle : "+$nomModel_t
-	End if 
-	
-	If ($error_t="")
-		
-		// Si l'objet n'est pas défini avant on applique celui du modèle.
-		If (String:C10(This:C1470.subject)="")
-			This:C1470.subject:=String:C10($model_o.subject)
-		End if 
-		
-		PROCESS 4D TAGS:C816(This:C1470.subject; $returnVar_t)
-		This:C1470.subject:=$returnVar_t
-		
-		// On gère les destinataires du message.
-		If (This:C1470.to=Null:C1517)
-			
-			If ($model_o.to#Null:C1517)
-				This:C1470.to:=$model_o.to
-			End if 
-			
-		End if 
-		
-		If (Count parameters:C259=2) | (String:C10($model_o.layout)#"")  // Les variables html sont utilisées dans l'email, il faut les traiter avec 4D.
-			PROCESS 4D TAGS:C816(This:C1470.htmlBody; $returnVar_t)
-			
-			This:C1470.htmlBody:=$returnVar_t
-			$mailStatus_o.success:=True:C214
-		End if 
-		
-	End if 
-	
-	If ($error_t#"")
-		$mailStatus_o.statusText:=$error_t
-		$mailStatus_o.status:=-1
-	End if 
-	
-	// Retourne les informations concernant l'envoie du mail
-	$retour_o:=$mailStatus_o
 	
 	
-	
-Function attachmentAdd($vFolderDestination_t : Text; $nameInput_t : Text)->$retour_t : Text
-	
-/*------------------------------------------------------------------------------
-Fonction : email_o.attachmentAdd
-	
-Gestion de la pièce jointe pour l'envoi par email
-	
-Paramètre :
-$vFolderDestination_t  -> le chemin du dossier pour stocker la pièce jointe
-$nameInput_t           -> le nom de l'input du formulaire
-$retour_t              <- le chemin du fichier
-	
-Historique
-23/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	
-	var $htmlName_t; $fileMimeType_t; $fileName_t : Text
-	var $i_el : Integer
-	var $fileContent_b : Blob
-	var $email_o : Object
-	
-	For ($i_el; 1; WEB Get body part count:C1211)
-		WEB GET BODY PART:C1212($i_el; $fileContent_b; $htmlName_t; $fileMimeType_t; $fileName_t)
-		
-		If ($htmlName_t=$nameInput_t)
-			If ($fileName_t#"")
-				
-				BLOB TO DOCUMENT:C526($vFolderDestination_t+$fileName_t; $fileContent_b)
-				$retour_t:=$vFolderDestination_t+$fileName_t
-			End if 
-			
-			$i_el:=WEB Get body part count:C1211
-		End if 
-		
-	End for 
