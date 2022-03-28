@@ -12,12 +12,10 @@ Gestion des tableaux de données en HTML.
 * [Fonction : setData](#fonction--setData)
 
 
-
 --------------------------------------------------------------------------------
 
 ## Fonction : constructor			
 Initialisation d'une dataTable
-
 
 ### Fonctionnement
 ```4d
@@ -26,10 +24,8 @@ Datatable.new($libDataTable_t) -> $instance_o
 
 | Paramêtre       | Type       | entrée/sortie | Description |
 | --------------- | ---------- | ------------- | ----------- |
-| $libDataTable_t | Texte      | Entrée         | Le lib de la dataTable |
+| $libDataTable_t | Texte      | Entrée        | Le lib de la dataTable |
 | $instance_o     | Texte      | Sortie        | Nouvelle instance |
-
-
 
 ### Example
 ```4d
@@ -50,8 +46,7 @@ Datatable.addData($data_o) -> Modifie this
 
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
-| $data_o       | Variante   | Entrée         | Nouvelle valeur en derniere position de votre tableau. |
-
+| $data_o       | Variante   | Entrée        | Nouvelle valeur en derniere position de votre tableau. |
 
 ### Example
 ```4d
@@ -74,7 +69,6 @@ Datatable.getHtml() -> $html_t
 | Paramêtre     | Type       | entrée/sortie | Description |
 | ------------- | ---------- | ------------- | ----------- |
 | $html_t       | Texte      | Sortie        | Contenu HTML pour générer la dataTable |
-
 
 ### Example
 ```html

@@ -12,7 +12,7 @@ Class constructor($libChart_t : Text; $modele_t : Text)
 Fonction : Chart.constructor
 	
 Initialisation d'un graphique
-
+	
 Paramètres
 	$libChart_t -> Nom du graphique
 	$modele_t   -> (optionnel) le modele que l'on souhaite utiliser.
@@ -68,7 +68,7 @@ Function getHtml()->$codeHtml_t : Text
 Fonction : Chart.getHtml
 	
 Génére le code HTML pour le graphique.
-
+	
 Paramètre
 $codeHtml_t <- Le text à insérer dans le code HTML
 	
@@ -85,7 +85,7 @@ Function dataColor($labelName_t : Text; $colorName_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.dataColor
 	
-Permet d'appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas, renvoie du noir
+Appliquer une couleur prédefinie à une courbe. Si la couleur n'existe pas, renvoie du noir
 	
 Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
@@ -142,7 +142,7 @@ Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
 30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-
+	
 	var $indice_i : Integer
 	var $data_o : Object
 	
@@ -176,15 +176,15 @@ Historiques
 	var $data_o : Object
 	
 	ASSERT:C1129($labelName_t#Null:C1517; "Chart.dataSet : La param $labelName_t ne doit pas être null. Vous n'avez pas indiqué le label")
-	ASSERT:C1129($data_c #Null:C1517; "Chart.dataSet : La param $data_c ne doit pas être null. Vous n'avez pas rentré de données")
+	ASSERT:C1129($data_c#Null:C1517; "Chart.dataSet : La param $data_c ne doit pas être null. Vous n'avez pas rentré de données")
 	
 	If (This:C1470.data.datasets.indices("label IS :1"; $labelName_t).length=1)
 		$indice_i:=This:C1470.data.datasets.indices("label IS :1"; $labelName_t)[0]
-		This:C1470.data.datasets[$indice_i].data:=$data_c .copy()
+		This:C1470.data.datasets[$indice_i].data:=$data_c.copy()
 	Else 
 		$data_o:=New object:C1471()
 		$data_o.label:=$labelName_t
-		$data_o.data:=$data_c .copy()
+		$data_o.data:=$data_c.copy()
 		This:C1470.data.datasets.push($data_o)
 	End if 
 	
@@ -227,7 +227,7 @@ Function titleSet($title_t : Text)
 Fonction : Chart.titleSet
 	
 Permet de definir le titre du graph 
-
+	
 Paramètre
 $title_t -> Titre du graphique
 	
@@ -235,7 +235,7 @@ Historiques
 05/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
 30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-
+	
 	var $title_o : Object
 	
 	ASSERT:C1129($title_t#Null:C1517; "Chart.titleSet : Le param $title_t ne doit pas être null.")
@@ -254,11 +254,11 @@ Function typeSet($type_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.typeSet
 	
-Permet de changer le type du graph (bar, line, camembert...). Si le parametre est inconnu, on initialise avec un graph line.
-
+Modifie le type du graph (bar, line, camembert...). Si le parametre est inconnu, on initialise avec un graph line.
+	
 Paramètre
 $type_t -> Le type de graph à utiliser 
-
+	
 Historiques
 04/02/21 - Alban Catoire <alban@connect-io.fr> - Creation
 30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction

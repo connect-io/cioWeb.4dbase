@@ -379,7 +379,7 @@ Function htmlMinify()
 /*------------------------------------------------------------------------------
 Fonction : WebApp.htmlMinify
 	
-Minification du HTML
+Minification du HTML.
 	
 Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -470,7 +470,7 @@ Function jsMinify()
 /*------------------------------------------------------------------------------
 Fonction : WebApp.jsMinify
 	
-Minification du javascript
+Minification du Javascript.
 	
 Historique
 16/04/12 - Grégory Fromain <gregory@connect-io.fr> - Création
@@ -563,7 +563,6 @@ Historique
 19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Suppression de la gestion des routes sous le format : page.url
 ------------------------------------------------------------------------------*/
 	
-	// La fonction ne requiere pas de paramêtre.
 	var $j : Integer
 	var $r : Integer
 	var $routeVar : Text
@@ -825,7 +824,7 @@ Historique
 	$options_c.push(New object:C1471("key"; Web inactive process timeout:K73:13; "value"; 480))  // 480 min de durée de vie des process inactifs associés aux sessions
 	$options_c.push(New object:C1471("key"; Web max sessions:K73:2; "value"; 300))  // 300 sessions simultanées
 	$options_c.push(New object:C1471("key"; Web Session IP address validation enabled:K73:17; "value"; 0))  // Déconnecte la relation entre l'IP et le cookies
-	$options_c.push(New object:C1471("key"; Web keep session:K73:1; "value"; 1))  // activation de la gestion automatique des sessions.
+	$options_c.push(New object:C1471("key"; Web legacy session:K73:1; "value"; 1))  // activation de la gestion automatique des sessions.
 	$options_c.push(New object:C1471("key"; Web HTTP compression level:K73:11; "value"; -1))  // Niveau de compression des pages automatique.
 	$options_c.push(New object:C1471("key"; Web max concurrent processes:K73:7; "value"; 1000))  // Limite du nombre de process Web acceptés et retourne le message “Serveur non disponible”.
 	
@@ -904,7 +903,7 @@ Fonction : WebApp.sourceSubdomainPath
 	
 Chemin complet plateforme du dossier Source/sousDomaine
 	
-Paramètre
+Paramètres
 $subDomain_t -> (Optionnel) Nom du sous domaine
 $path_t      <- Chemin du dossier source du sous domaine
 	
@@ -931,7 +930,7 @@ Fonction : WebApp.webfolderSubdomainPath
 	
 Chemin complet plateforme du dossier Webfolder/sousDomaine
 	
-Paramètre
+Paramètres
 $subDomain_t -> (Optionnel) Nom du sous domaine
 $path_t      <- Chemin du dossier webfolder du sous domaine
 	

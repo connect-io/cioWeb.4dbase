@@ -11,10 +11,10 @@ Fonction : TinyPng.constructor
 	
 Initialisation de la clé de l'API
 Si aucune clé n'est renseignée, on utilisera une clé de "démonstration"
-
-Paramètre :
-	$ApiKey -> Clé de l'API
-
+	
+Paramètre
+$ApiKey -> Clé de l'API
+	
 Historiques
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Clean méthode + adaptation aux nouvelles formulations
@@ -40,14 +40,14 @@ Fonction : TinyPng.downloadRequest
 	
 Récupération du fichier depuis l'API
 Doc : https://tinypng.com/developers/reference
-
-Paramètres :
-	$cheminDownload_t -> (optionnel) Destination du fichier sur le disque.
-	$methodResize_t   -> (optionnel) type de retaillage (scale, fit, cover)
-	$largeur_i        -> (optionnel) largueur en px
-	$hauteur_i        -> (optionnel) hauteur en px
-	$fichierCollect_o <- renvoie le résultat de la requête de download de l'api
-
+	
+Paramètres
+$cheminDownload_t -> (optionnel) Destination du fichier sur le disque.
+$methodResize_t   -> (optionnel) type de retaillage (scale, fit, cover)
+$largeur_i        -> (optionnel) largueur en px
+$hauteur_i        -> (optionnel) hauteur en px
+$fichierCollect_o <- renvoie le résultat de la requête de download de l'api
+	
 Historiques
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> -  Création de la méthode
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
@@ -183,7 +183,6 @@ Historiques
 30/11/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	// Déclarations
 	var $filePath_t : Text  // chemin du fichier
 	var $data_p : Picture  // Image à envoyer
 	var $etat_i : Integer
@@ -239,17 +238,17 @@ Fonction : TinyPng.uploadFromUrl
 	
 Importation du fichier depuis une URL et envoi vers l'API
 Doc : https://tinypng.com/developers/reference
-
+	
 Paramètres
-	$filePath_t -> l'URL depuis laquelle on veut upload
-	$isValide_b <- renvoie true si la requete a bien été envoyée
+$filePath_t -> l'URL depuis laquelle on veut upload
+$isValide_b <- renvoie true si la requete a bien été envoyée
 	
 Historiques	
 01/09/17 - Grégory Fromain<gregory@connect-io.fr> - Création de la fonction
 05/11/20 - Titouan Guillon <titouan@connect-io.fr> - Implémentation dans la classe
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction	
 ------------------------------------------------------------------------------*/
-
+	
 	var $data_o : Object
 	var $reponse_o : Object
 	var $etat_l : Integer
@@ -261,7 +260,7 @@ Historiques
 	$data_o:=New object:C1471
 	$data_o.source:=New object:C1471
 	$data_o.source.url:=$filePath_t
-		
+	
 	APPEND TO ARRAY:C911(HeaderNames_at; "Content-Type")
 	APPEND TO ARRAY:C911(HeaderValues_at; "application/json")
 	

@@ -25,8 +25,6 @@ Il contient 4 objets.
 | model     |  Définit les modèles des mails enregistrés par défaut                              |
 | mjml      |  Optionnel, il permet d'utiliser l'API de MJML, qui transforme un fichier mjml en fichier html                                                                                     |
 
-
-
 ### Example
 ```
 {
@@ -37,8 +35,7 @@ Il contient 4 objets.
 			"name": "transactionnel",
 			"host": "pro1.mail.ovh.net",
 			"user": "adresse1@mail.com",
-			"password":	"motDePasse1",
-			"archive":true               // Optionnel, si true, les mails envoyés sont archivés dans le dossier archive
+			"password":	"motDePasse1"
 		},
 		{
 			"name": "prospection",
@@ -74,7 +71,8 @@ Il contient 4 objets.
 			"to": [
 				"adresse3@mail.com"
 			],
-            "layout": "facture/test.mjml"
+            "layout": "facture/test.mjml",
+			"archive":true               // Optionnel, si true, les mails envoyés sont archivés dans le dossier archive
 		}
 	],
 
@@ -95,7 +93,6 @@ Plus d'informations sur le langage <a href = "https://mjml.io/documentation/">ic
 ## Fonction : constructor			
 Initialisation du transporteur de mail
 
-
 ### Fonctionnement
 ```4d
 cs.EMail.new(options) -> Configure le transporteur
@@ -106,8 +103,6 @@ cs.EMail.new(options) -> Configure le transporteur
 | $name_t           | Texte      | Entrée        | Le nom de l'instance du SMTP souhaité, et défini dans le fichier de config email.jsonc   |
 | $paramOptionnel_o | Objet      | Entrée        | Un objet correspondant aux options que l'on souhaite rajouer / ecraser par rapport au transporteur choisi     |
 
-
-
 ### Example
 ```4d
 var $mail : cs.EMail
@@ -116,6 +111,7 @@ $paramOptionnel_o:= New Object("user";"adresse@mail.com")
 
 $mail:=cs.EMail.new($name_t;$paramOptionnel_o)
 ```
+
 
 --------------------------------------------------------------------------------
 
@@ -134,9 +130,7 @@ $EMail.send() -> $resultat_o
 | this.attachmentsPath_c | Collection | Collection contenant les pièces jointes à inclure au mail |
 | this.subject           | Texte      | L'objet du mail en question                               |
 
-
 La méthode send renverra des informations sur l'envoi de l'email. Voir <a href="https://doc.4d.com/4Dv18/4D/18/SMTP-transportersend.305-4505974.en.html">ici</a> pour obtenir des informations précises sur ce qui est renvoyées, et pour en savoir plus sur les paramètres optionnels qu'on peut rajouter au mail.
-
 
 ### Example
 ```4d
@@ -153,12 +147,9 @@ $retour_o:=$mail.send()
 --------------------------------------------------------------------------------
 
 ## Fonction : sendModel
-
 Permet d'envoyer un mail à partir d'un modèle particulier enregistré dans le fichier de configuration email.json.
 
-
 ### Fonctionnement
-
 ```4d
 $EMail.sendModel($nomModel_t;$variableDansMail_o) -> $retour_o
 ```
@@ -180,8 +171,6 @@ Voilà un exemple d'un objet de mail de démonstration contenu dans la collectio
 ```
 
 Voilà la description des différents paramètres utilisés dans la fonction : 
-
-
 
 | Paramètre                       | Type       | entrée/sortie | Description                     |
 | ------------------------------- | ---------- | ------------- | ------------------------------- |
@@ -223,20 +212,17 @@ Lorsque l'on envoie des mails à plusieurs personnes depuis la collection "to" d
 </ul>
 
 
-## Fonction : generateModel
+--------------------------------------------------------------------------------
 
+## Fonction : generateModel
 Permet de générer un modèle avec traitement des balises 4D.
 
-
 ### Fonctionnement
-
 ```4d
 $EMail.generateModel($nomModel_t;$variableDansMail_o) -> $retour_o
 ```
 
 Voilà la description des différents paramètres utilisés dans la fonction : 
-
-
 
 | Paramètre                       | Type       | entrée/sortie | Description                     |
 | ------------------------------- | ---------- | ------------- | ------------------------------- |
@@ -252,7 +238,6 @@ Permet de stocker la pièce jointe à envoyer dans l'email et retourner le chemi
 Le premier paramètre d'entrée est le chemin du dossier pour stocker la pièce jointe. 
 Le deuxième paramètre d'entrée est le nom de l'input type file du formulaire. 
 
-
 ### Fonctionnement
 ```4d
 $email_o.attachmentAdd($$vFolderDestination_t : Text; nameInput_t : Text) -> $retour_t : Text
@@ -263,7 +248,6 @@ $email_o.attachmentAdd($$vFolderDestination_t : Text; nameInput_t : Text) -> $re
 | $vFolderDestination_t | Texte      | Entrée        | Le chemin du dossier pour stocker la pièce jointe |
 | $nameInput_t          | Texte      | Entrée        | Le nom de l'input du formulaire|
 | $retour_t             | Texte      | Sortie        | Le chemin du fichier |
-
 
 ### Exemple
 ```4d

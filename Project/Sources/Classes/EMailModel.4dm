@@ -8,10 +8,10 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	
 	cwEMailConfigLoad
 	ASSERT:C1129(Storage:C1525.eMail#Null:C1517; " Echec du chargement des modèles de mails, Storage.Email est vide.")
 	This:C1470.email:=OB Copy:C1225(Storage:C1525.eMail)
+	
 	
 	
 Function add($modele_o : Object)->$reponse_t : Text
@@ -28,7 +28,6 @@ Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
 	
 	var $newModele_o : Object
 	var $fichierSource : Object
@@ -68,6 +67,26 @@ Historiques
 	End if 
 	
 	
+	
+Function configToJson
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.configToJson
+	
+Copie la config des modèles dans le fichier email.jsonc et dans le storage
+	
+Historique
+28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
+13/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Renommer la fonction.
+------------------------------------------------------------------------------*/
+	
+	
+	//Réecriture dans le fichier email.jsonc
+	Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2).file("email.jsonc").setText(JSON Stringify:C1217(This:C1470.email; *))
+	
+	// Rechargement dans le storage
+	cwEMailConfigLoad
+	
+	
 Function delete($name_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.delete
@@ -81,7 +100,6 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
 	
 	var $modele_c : Collection
 	var $modele_o : Object  //Le modèle à supprimer
@@ -104,24 +122,6 @@ Historique
 	This:C1470.configToJson()
 	
 	
-Function configToJson
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.configToJson
-	
-Copie la config des modèles dans le fichier email.jsonc et dans le storage
-	
-Historique
-28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
-13/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Renommer la fonction.
-------------------------------------------------------------------------------*/
-	
-	
-	//Réecriture dans le fichier email.jsonc
-	Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2).file("email.jsonc").setText(JSON Stringify:C1217(This:C1470.email; *))
-	
-	// Rechargement dans le storage
-	cwEMailConfigLoad
-	
 	
 Function get($name_t : Text)->$reponse_o : Object
 /*------------------------------------------------------------------------------
@@ -137,7 +137,6 @@ Historiques
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
 	
 	var $modele_c : Collection
 	var $personnalisation_o  // Objet tampon utilisé pour récuperer la partie 'personnalisation'
@@ -175,6 +174,7 @@ Historiques
 	$reponse_o:=$modele_o
 	
 	
+	
 Function getAll()->$allModel_c : Collection
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.getAll
@@ -188,8 +188,166 @@ Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	
-	
 	$allModel_c:=This:C1470.email.model
+	
+	
+	
+Function layoutAdd($layout_o : Object)->$reponse_t : Text
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.layoutAdd
+	
+Ajout d'un nouveau layout
+	
+Paramètres :
+$layout_o  -> l'objet contenant toutes les informations du nouveau layout
+$reponse_t <- la réponse à l'enregistrement
+	
+Historique
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $newLayout_o : Object
+	var $fichierSource : Object
+	
+	$reponse_t:="ok"
+	
+	ASSERT:C1129(($layout_o.name#"") & ($layout_o.name#Null:C1517); " EMailModel.layoutAdd : Le param $layout_o ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($layout_o.source#"") & ($layout_o.source#Null:C1517); " EMailModel.layoutAdd : Le param $layout_o ne possède pas d'attribut  'source'.")
+	
+	$newLayout_o:=New object:C1471()
+	$newLayout_o.name:=$layout_o.name
+	$newLayout_o.source:=$layout_o.source
+	
+	//On va chercher le fichier associé à source HTML
+	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$1.source)
+	
+	//Si le fichier n'existe pas on le crée, puis on le reecrit
+	If (Not:C34($fichierSource.exists) & ($layout_o.layoutHtml=""))
+		$0:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
+	Else 
+		If (Not:C34($fichierSource.exists) | ($layout_o.layoutHtml#""))
+			$fichierSource.setText($layout_o.layoutHtml)
+		End if 
+	End if 
+	
+	If ($reponse_t="ok")
+		This:C1470.email.layout.push($newLayout_o)
+		This:C1470.configToJson()
+	End if 
+	
+	
+	
+Function layoutDelete($name_t : Text)
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.layoutDelete
+	
+Supprime un layout
+	
+Paramètre :
+$name_t -> le nom du layout à supprimer
+	
+Historique
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $modele_c : Collection
+	var $modele_o : Object  //Le layout à supprimer
+	var $tempo_f : 4D:C1709.File
+	
+	ASSERT:C1129($name_t#""; " EMailModel.layoutDelete : Le param $name_t est vide.")
+	
+	$modele_c:=This:C1470.email.layout.query("name = :1"; $name_t)
+	ASSERT:C1129($modele_c.length#0; " EMailModel.get : modèle introuvable.")
+	$modele_o:=$modele_c[0]
+	//On cherche le layout à supprimer
+	$index:=This:C1470.email.layout.indexOf($modele_o)
+	
+	$tempo_f:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.source)
+	If ($tempo_f.exists)
+		$tempo_f.delete()
+	End if 
+	
+	This:C1470.email.layout.remove($index)
+	This:C1470.configToJson()
+	
+	
+	
+Function layoutGetAll()->$allLayout_c : Collection
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.layoutGetAll
+	
+Renvoie la liste de tous les layouts d'emails
+	
+Paramètre
+$allLayout_c <- Tous les layouts
+	
+Historique
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	$allLayout_c:=This:C1470.email.layout
+	
+	
+	
+Function layoutModify($layoutModify_o : Object)->$result_t : Text
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.layoutModify
+	
+Modifie un modèle de Layout
+	
+Paramètres
+$layoutModify_o  <- L'objet avec les informations du layout à ajouter.
+$result_t        -> Reponse à l'ajout du layout
+	
+Historique
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	
+	var $layout_c : Collection  // La collection de layout enregistré
+	var $layout_o : Object  // Le layout modifié
+	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
+	var $key_t : Text
+	
+	$result_t:="ok"
+	
+	ASSERT:C1129(($layoutModify_o.name#"") & ($layoutModify_o.name#Null:C1517); " EMailModel.layoutModify : Le param $layoutModify_o ($1) ne possède pas d'attribut 'name'.")
+	ASSERT:C1129(($layoutModify_o.source#"") & ($layoutModify_o.source#Null:C1517); " EMailModel.layoutModify : Le param $layoutModify_o ($1) ne possède pas d'attribut  'source'.")
+	
+	$layout_c:=This:C1470.email.layout.query("name = :1"; $layoutModify_o.oldName)
+	If ($layout_c.length#0)
+		$layout_o:=$layout_c[0]
+		$index_i:=This:C1470.email.layout.indexOf($layout_o)
+		
+		$layout_o.name:=$layoutModify_o.name
+		$layout_o.source:=$layoutModify_o.source
+		
+	Else 
+		$result_t:="introuvable"
+	End if 
+	
+	//On va chercher le fichier associé à source HTML
+	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.source)
+	
+	//On va chercher le fichier avec l'ancien nom pour le supprimer
+	$fichierSourceOld:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.sourceOldName)
+	
+	//Si le fichier n'existe pas on le crée, puis on le reecrit
+	If (Not:C34($fichierSource.exists) & ($layoutModify_o.layoutHtml=""))
+		$result_t:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
+	Else 
+		$fichierSource.setText($layoutModify_o.layoutHtml)
+		If ($layoutModify_o.source#$layoutModify_o.sourceOldName)
+			$fichierSourceOld.delete()
+		End if 
+	End if 
+	
+	//Enregistrement des modifications
+	If ($result_t="ok")
+		This:C1470.email.layout[$index_i]:=$layout_o
+		This:C1470.configToJson()
+		
+	End if 
+	
 	
 	
 Function modify($modelModify_o : Object)->$result_t : Text
@@ -205,7 +363,6 @@ $result_t       -> Reponse à l'ajout du modèle
 Historique
 28/05/21 - Alban Catoire <alban@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	
 	
 	var $modele_c : Collection  //La collection de modele enregistré
 	var $modele_o : Object  //Le modèle modifié
@@ -259,182 +416,6 @@ Historique
 	End if 
 	
 	
-Function layoutGetAll()->$allLayout_c : Collection
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.layoutGetAll
-	
-Renvoie la liste de tous les layouts d'emails
-	
-Paramètre
-$allLayout_c <- Tous les layouts
-	
-Historique
-01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	
-	
-	$allLayout_c:=This:C1470.email.layout
-	
-	
-Function layoutAdd($layout_o : Object)->$reponse_t : Text
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.layoutAdd
-	
-Ajout d'un nouveau layout
-	
-Paramètres :
-$layout_o  -> l'objet contenant toutes les informations du nouveau layout
-$reponse_t <- la réponse à l'enregistrement
-	
-Historique
-01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	
-	var $newLayout_o : Object
-	var $fichierSource : Object
-	
-	$reponse_t:="ok"
-	
-	ASSERT:C1129(($layout_o.name#"") & ($layout_o.name#Null:C1517); " EMailModel.layoutAdd : Le param $layout_o ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($layout_o.source#"") & ($layout_o.source#Null:C1517); " EMailModel.layoutAdd : Le param $layout_o ne possède pas d'attribut  'source'.")
-	
-	$newLayout_o:=New object:C1471()
-	$newLayout_o.name:=$layout_o.name
-	$newLayout_o.source:=$layout_o.source
-	
-	//On va chercher le fichier associé à source HTML
-	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$1.source)
-	
-	//Si le fichier n'existe pas on le crée, puis on le reecrit
-	If (Not:C34($fichierSource.exists) & ($layout_o.layoutHtml=""))
-		$0:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
-	Else 
-		If (Not:C34($fichierSource.exists) | ($layout_o.layoutHtml#""))
-			$fichierSource.setText($layout_o.layoutHtml)
-		End if 
-	End if 
-	
-	If ($reponse_t="ok")
-		This:C1470.email.layout.push($newLayout_o)
-		This:C1470.configToJson()
-	End if 
-	
-	
-Function layoutModify($layoutModify_o : Object)->$result_t : Text
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.layoutModify
-	
-Modifie un modèle de Layout
-	
-Paramètres
-$layoutModify_o  <- L'objet avec les informations du layout à ajouter.
-$result_t        -> Reponse à l'ajout du layout
-	
-Historique
-01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	
-	
-	var $layout_c : Collection  // La collection de layout enregistré
-	var $layout_o : Object  // Le layout modifié
-	var $index_i : Integer  // L'indice du layout à modifier dans This.email.layout
-	var $key_t : Text
-	
-	$result_t:="ok"
-	
-	ASSERT:C1129(($layoutModify_o.name#"") & ($layoutModify_o.name#Null:C1517); " EMailModel.layoutModify : Le param $layoutModify_o ($1) ne possède pas d'attribut 'name'.")
-	ASSERT:C1129(($layoutModify_o.source#"") & ($layoutModify_o.source#Null:C1517); " EMailModel.layoutModify : Le param $layoutModify_o ($1) ne possède pas d'attribut  'source'.")
-	
-	$layout_c:=This:C1470.email.layout.query("name = :1"; $layoutModify_o.oldName)
-	If ($layout_c.length#0)
-		$layout_o:=$layout_c[0]
-		$index_i:=This:C1470.email.layout.indexOf($layout_o)
-		
-		$layout_o.name:=$layoutModify_o.name
-		$layout_o.source:=$layoutModify_o.source
-		
-	Else 
-		$result_t:="introuvable"
-	End if 
-	
-	//On va chercher le fichier associé à source HTML
-	$fichierSource:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.source)
-	
-	//On va chercher le fichier avec l'ancien nom pour le supprimer
-	$fichierSourceOld:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$layoutModify_o.sourceOldName)
-	
-	//Si le fichier n'existe pas on le crée, puis on le reecrit
-	If (Not:C34($fichierSource.exists) & ($layoutModify_o.layoutHtml=""))
-		$result_t:="Le fichier source n'existe pas et vous n'avez pas rempli le champs Source HTML"
-	Else 
-		$fichierSource.setText($layoutModify_o.layoutHtml)
-		If ($layoutModify_o.source#$layoutModify_o.sourceOldName)
-			$fichierSourceOld.delete()
-		End if 
-	End if 
-	
-	//Enregistrement des modifications
-	If ($result_t="ok")
-		This:C1470.email.layout[$index_i]:=$layout_o
-		This:C1470.configToJson()
-		
-	End if 
-	
-	
-Function layoutDelete($name_t : Text)
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.layoutDelete
-	
-Supprime un layout
-	
-Paramètre :
-$name_t -> le nom du layout à supprimer
-	
-Historique
-01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	
-	
-	var $modele_c : Collection
-	var $modele_o : Object  //Le layout à supprimer
-	var $tempo_f : 4D:C1709.File
-	
-	ASSERT:C1129($name_t#""; " EMailModel.layoutDelete : Le param $name_t est vide.")
-	
-	$modele_c:=This:C1470.email.layout.query("name = :1"; $name_t)
-	ASSERT:C1129($modele_c.length#0; " EMailModel.get : modèle introuvable.")
-	$modele_o:=$modele_c[0]
-	//On cherche le layout à supprimer
-	$index:=This:C1470.email.layout.indexOf($modele_o)
-	
-	$tempo_f:=File:C1566(Convert path system to POSIX:C1106(Storage:C1525.param.folderPath.source_t)+This:C1470.email.modelPath+$modele_o.source)
-	If ($tempo_f.exists)
-		$tempo_f.delete()
-	End if 
-	
-	This:C1470.email.layout.remove($index)
-	This:C1470.configToJson()
-	
-	
-Function transporterGetAll($protocol_t : Text)->$allTransporter_c : Collection
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.transporterGetAll
-	
-Renvoie la liste de tous les transporteurs pour la gestion des emails
-	
-Paramètres
-$protocol_t       -> Le nom du protocole utilisé (exemple : smtp, imap...)
-$allTransporter_c <- Tous les transporteurs
-	
-Historique
-02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-01/03/22 - Grégory Fromain <gregory@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
-------------------------------------------------------------------------------*/
-	
-	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
-	
-	$allTransporter_c:=This:C1470.email.transporter.query("type IS :1"; $protocol_t)
-	
 	
 Function transporterAdd($transporter_o : Object; $protocol_t : Text)->$reponse_t : Text
 /*------------------------------------------------------------------------------
@@ -442,7 +423,7 @@ Fonction : EMailModel.transporterAdd
 	
 Ajout d'un nouveau transporteur
 	
-Paramètres :
+Paramètres
 $transporter_o  -> l'objet contenant toutes les informations du nouveau transporteur
 $protocol_t.    -> Le nom du protocole utilisé (exemple : smtp, imap...)
 $reponse_t      <- la réponse à l'enregistrement
@@ -451,7 +432,6 @@ Historique
 02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
-	
 	
 	var $newTransporter_o : Object
 	var $fichierSource : Object
@@ -477,11 +457,64 @@ Historique
 	End if 
 	
 	
+	
+Function transporterDelete($name_t : Text; $protocol_t : Text)
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.transporterDelete
+	
+Supprime un transporteur
+	
+Paramètres
+$name_t.     -> le nom du transporteur à supprimer
+$protocol_t. -> Le nom du protocole utilisé (exemple : smtp, imap...)
+	
+Historique
+01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
+------------------------------------------------------------------------------*/
+	
+	var $transporter_c : Collection
+	var $transporter_o : Object  //Le layout à supprimer
+	
+	ASSERT:C1129($name_t#""; " EMailModel.transporterDelete : Le param $name_t est vide.")
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
+	
+	$transporter_c:=This:C1470.email.transporter.query("name = :1 and type = :2"; $name_t; $protocol_t)
+	ASSERT:C1129($transporter_c.length#0; " EMailModel.get : modèle introuvable.")
+	$transporter_o:=$transporter_c[0]
+	//On cherche le layout à supprimer
+	$index:=This:C1470.email[$protocol_t].indexOf($transporter_o)
+	This:C1470.email[$protocol_t].remove($index)
+	This:C1470.configToJson()
+	
+	
+	
+Function transporterGetAll($protocol_t : Text)->$allTransporter_c : Collection
+/*------------------------------------------------------------------------------
+Fonction : EMailModel.transporterGetAll
+	
+Renvoie la liste de tous les transporteurs pour la gestion des emails
+	
+Paramètres
+$protocol_t       -> Le nom du protocole utilisé (exemple : smtp, imap...)
+$allTransporter_c <- Tous les transporteurs
+	
+Historique
+02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
+01/03/22 - Grégory Fromain <gregory@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
+------------------------------------------------------------------------------*/
+	
+	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
+	
+	$allTransporter_c:=This:C1470.email.transporter.query("type IS :1"; $protocol_t)
+	
+	
 Function transporterModify($transporterModify_o : Object; $protocol_t : Text)->$result_t : Text
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.transporterModify
 	
 Modifie un modèle de transporteur
+	
 Paramètres
 $transporterModify_o  <- L'objet avec les informations du tranposteur à modifier.
 $protocol_t.          -> Le nom du protocole utilisé (exemple : smtp, imap...)
@@ -491,7 +524,6 @@ Historique
 02/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
 01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 ------------------------------------------------------------------------------*/
-	
 	
 	var $transporter_c : Collection  // La collection de layout enregistré
 	var $transporter_o : Object  // Le layout modifié
@@ -526,34 +558,3 @@ Historique
 		This:C1470.email[$protocol_t][$index_i]:=$transporter_o
 		This:C1470.configToJson()
 	End if 
-	
-	
-Function transporterDelete($name_t : Text; $protocol_t : Text)
-/*------------------------------------------------------------------------------
-Fonction : EMailModel.transporterDelete
-	
-Supprime un transporteur
-	
-Paramètre :
-$name_t.     -> le nom du transporteur à supprimer
-$protocol_t. -> Le nom du protocole utilisé (exemple : smtp, imap...)
-	
-Historique
-01/02/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Création
-01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
-------------------------------------------------------------------------------*/
-	
-	
-	var $transporter_c : Collection
-	var $transporter_o : Object  //Le layout à supprimer
-	
-	ASSERT:C1129($name_t#""; " EMailModel.transporterDelete : Le param $name_t est vide.")
-	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
-	
-	$transporter_c:=This:C1470.email.transporter.query("name = :1 and type = :2"; $name_t; $protocol_t)
-	ASSERT:C1129($transporter_c.length#0; " EMailModel.get : modèle introuvable.")
-	$transporter_o:=$transporter_c[0]
-	//On cherche le layout à supprimer
-	$index:=This:C1470.email[$protocol_t].indexOf($transporter_o)
-	This:C1470.email[$protocol_t].remove($index)
-	This:C1470.configToJson()
