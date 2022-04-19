@@ -1,3 +1,9 @@
+
+![platform](https://img.shields.io/static/v1?label=Platform&message=OsX%20Intel%20/%20M1%20|%20win-64&color=blue)
+![version](https://img.shields.io/badge/Version-4D%20v19%2B-yellow)
+![type](https://img.shields.io/badge/Type-Component-EB8E5F)
+
+
 <p align="center"><a href="http://www.connect-io.fr" target="_blank">
     <img src="https://www.connect-io.fr/www/img/Connect-IO-noir.svg" width="300px">
 </a></p>
@@ -10,28 +16,28 @@ Il nécessite du code supplémentaire dans votre application, mais ne modifie au
 
 Le composant permet de gérer des interfaces de site complètement indépendantes en fonction du sous-domaine. Vous pourrez par exemple depuis votre application 4D utiliser le sous domaine "www." pour le public, "admin." pour la modération et "api." pour les connexions de serveur à serveur.
 
-## Attention
-Actuellement, le composant est compatible uniquement à partir de 4D V18 r3.
-Bien que ce composant tourne en production sur certaines bases de nos clients. Il n'est pas encore documenté, reste difficile à utiliser dans l'état et subit de grosses transformations en ce moment.
-
 ## Utilisation
 * [Commencer](Documentation/commencer.md)
 * [Gestion des routes](Documentation/route.md)
 * [Les vues](Documentation/vue.md)
 * [Les formulaires web](Documentation/form.md)
-* [Le javascript](Documentation/javascript.md)
-* [Utilisation des tableaux de données](Documentation/datatable.md)
+* [Le JavaScript](Documentation/javascript.md)
+* [Les tableaux de données](Documentation/datatable.md)
+* [Les graphiques](Documentation/graphique.md)
+
 
 ## Documentation des méthodes partagés
-[cwDataTableJsInformation](Documentation/Methods/cwDataTableJsInformation.md)
+// todo
 
-Les méthodes outils
+## Les méthodes outils
 * [cwToolGetClass](Documentation/Methods/cwToolGetClass.md)
 
 ## Classes
+* [Chart](Documentation/Classes/Chart.md)
 * [DataTable](Documentation/Classes/DataTable.md)
 * [EMail](Documentation/Classes/EMail.md)
+* [EMailModel](Documentation/Classes/EMailModel.md)
 * [Page](Documentation/Classes/Page.md)
 * [TinyPng](Documentation/Classes/TinyPng.md)
 * [User](Documentation/Classes/User.md)
-* [WebApp](Documentation/Classes/Route.md)
+* [WebApp](Documentation/Classes/WebApp.md)

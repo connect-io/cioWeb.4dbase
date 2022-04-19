@@ -5,7 +5,7 @@ Les fichiers ```.form.json``` permettent la gestion des formulaires HTML.
 
 ## Prérequis
 * La compréhension des routes est requise.
-* La compréhension des views est requise.
+* La compréhension des vues (views) est requise.
 
 Les fichiers de configuration des formulaires sont au format JSON (ou JSONC). Il est nécessaire de créer un fichier par formulaire et son emplacement est libre dans le dossier ```Sources```.
 
@@ -146,7 +146,7 @@ Rendu visuel dans un navigateur :
 
 ![Demo formulaire 1](images/formDemo1.png "Démo formulaire 1")
 
-Voici maintenant le traitement qui peut être réalisé dans la méthode 4D de ma route du formulaire : ```wpTmUserParametre```
+Voici maintenant le traitement qui peut être réalisé dans la méthode 4D de la route du formulaire : ```wpTmUserParametre```
 
 ```4d
 C_OBJECT($contactAcces_o;$societe_o)

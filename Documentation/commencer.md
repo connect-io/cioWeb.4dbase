@@ -277,50 +277,50 @@ Vous pouvez dès à présent tester le serveur web via votre navigateur : http:/
 
 ## Arborescence des fichiers de votre application web
 ```
- 📦VotreApplication
- ┣ 📂Components
- ┃ ┣ 📂cioWeb.4dbase                     // Composant cioWeb.
- ┣ 📂Data
- ┣ 📂Project
- ┣ 📂Resources
- ┣ 📂WebApp                              // Répertoire principale de votre application web.                       
- ┃ ┣ 📂Cache                             // Contient tous les fichiers caches de votre application web.
- ┃ ┃ ┗ 📂View                            // Contient toutes les vues en HTML minifié.
- ┃ ┃   ┗ 📂www
- ┃ ┃     ┣ 📂_cioWeb
- ┃ ┃     ┃ ┗ 📂view
- ┃ ┃     ┃   ┣ 📜notification.html       // HTML minifié.
- ┃ ┃     ┃   ┣ 📜...
- ┃ ┃     ┗ 📂...
- ┃ ┣ 📂Sources                           // Dossier principal de code source.
- ┃ ┃ ┣ 📂www                             // Dossier du sous-domaine de votre application.
- ┃ ┃ ┃ ┣ 📂_cioWeb                       // [Obligatoire] Il personnalise certains affichages web.
- ┃ ┃ ┃ ┃ ┗ 📂view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code.
- ┃ ┃ ┃ ┃   ┣ 📜notification.html         // Personnalisation des notifications.
- ┃ ┃ ┃ ┃   ┣ 📜input.html                // Personnalisation des inputs des formulaires.
- ┃ ┃ ┃ ┃   ┗ 📜inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seule.
- ┃ ┃ ┃ ┣ 📂_layout                       // [Obligatoire] Il permet la construction de pages web sous forme de layout.
- ┃ ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┃ ┗ 📜layoutDemo.html
- ┃ ┃ ┃ ┃ ┗ 📜route.json                  // Configuration des routes du layout.
- ┃ ┃ ┃ ┣ 📂basicPage
- ┃ ┃ ┃ ┃ ┣ 📂view
- ┃ ┃ ┃ ┃ ┃ ┗ 📜index.html                // HTML de votre page.
- ┃ ┃ ┃ ┃ ┗ 📜route.json
- ┃ ┃ ┃ ┗ 📂demo                          // Module de démonstration.
- ┃ ┃ ┃   ┣ 📂form
- ┃ ┃ ┃   ┃ ┗ 📜helloWord.form.json       // Configuration du formulaire helloWord.
- ┃ ┃ ┃   ┣ 📂view
- ┃ ┃ ┃   ┃ ┗ 📜helloWord.html
- ┃ ┃ ┃   ┗ 📜route.json
- ┃ ┃ ┗ 📜config.json                     // Configuration générale d'application web.
- ┃ ┗ 📂WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accessible sur internet.
- ┃   ┣ 📂uploads                         // Stocker les documents que les utilisateurs charges, photos de profil, photo d'article,...
- ┃   ┗ 📂www                             // Dossier public de votre sous-domaine.
- ┃     ┣ 📂css
- ┃     ┣ 📂img
- ┃     ┗ 📂js
- ┗ 📂userPreferences.XXX
+ 📦 VotreApplication
+ ┣ 📂 Components
+ ┃ ┣ 📂 cioWeb.4dbase                     // Composant cioWeb.
+ ┣ 📂 Data
+ ┣ 📂 Project
+ ┣ 📂 Resources
+ ┣ 📂 WebApp                              // Répertoire principale de votre application web.                       
+ ┃ ┣ 📂 Cache                             // Contient tous les fichiers caches de votre application web.
+ ┃ ┃ ┗ 📂 View                            // Contient toutes les vues en HTML minifié.
+ ┃ ┃   ┗ 📂 www
+ ┃ ┃     ┣ 📂 _cioWeb
+ ┃ ┃     ┃ ┗ 📂 view
+ ┃ ┃     ┃   ┣ 📜 notification.html       // HTML minifié.
+ ┃ ┃     ┃   ┣ 📜 ...
+ ┃ ┃     ┗ 📂 ...
+ ┃ ┣ 📂 Sources                           // Dossier principal de code source.
+ ┃ ┃ ┣ 📂 www                             // Dossier du sous-domaine de votre application.
+ ┃ ┃ ┃ ┣ 📂 _cioWeb                       // [Obligatoire] Il personnalise certains affichages web.
+ ┃ ┃ ┃ ┃ ┗ 📂 view                        // Les dossiers view ne sont pas obligatoire, ils permettent d'organiser le code.
+ ┃ ┃ ┃ ┃   ┣ 📜 notification.html         // Personnalisation des notifications.
+ ┃ ┃ ┃ ┃   ┣ 📜 input.html                // Personnalisation des inputs des formulaires.
+ ┃ ┃ ┃ ┃   ┗ 📜 inputReadOnly.html        // Personnalisation des inputs des formulaires en lecture seule.
+ ┃ ┃ ┃ ┣ 📂 _layout                       // [Obligatoire] Il permet la construction de pages web sous forme de layout.
+ ┃ ┃ ┃ ┃ ┣ 📂 view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜 layoutDemo.html
+ ┃ ┃ ┃ ┃ ┗ 📜 route.json                  // Configuration des routes du layout.
+ ┃ ┃ ┃ ┣ 📂 basicPage
+ ┃ ┃ ┃ ┃ ┣ 📂 view
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜 index.html                // HTML de votre page.
+ ┃ ┃ ┃ ┃ ┗ 📜 route.json
+ ┃ ┃ ┃ ┗ 📂 demo                          // Module de démonstration.
+ ┃ ┃ ┃   ┣ 📂 form
+ ┃ ┃ ┃   ┃ ┗ 📜 helloWord.form.json       // Configuration du formulaire helloWord.
+ ┃ ┃ ┃   ┣ 📂 view
+ ┃ ┃ ┃   ┃ ┗ 📜 helloWord.html
+ ┃ ┃ ┃   ┗ 📜 route.json
+ ┃ ┃ ┗ 📜 config.json                     // Configuration générale d'application web.
+ ┃ ┗ 📂 WebFolder                         // Le dossier web public, attention tout ce qui est dans ce dossier est accessible sur internet.
+ ┃   ┣ 📂 uploads                         // Stocker les documents que les utilisateurs charges, photos de profil, photo d'article,...
+ ┃   ┗ 📂 www                             // Dossier public de votre sous-domaine.
+ ┃     ┣ 📂 css
+ ┃     ┣ 📂 img
+ ┃     ┗ 📂 js
+ ┗ 📂 userPreferences.XXX
  ```
 
  Une chose importante, chaque sous-domaine est gérés de façon indépendante, seul le fichier  ```Sources>config.json ``` est partagé entre les sous-domaines.

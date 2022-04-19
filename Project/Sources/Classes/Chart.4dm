@@ -5,8 +5,6 @@ Gestion des tableaux de données en HTML.
 
 */
 
-
-
 Class constructor($libChart_t : Text; $modele_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.constructor
@@ -28,10 +26,8 @@ Historiques
 	ASSERT:C1129(visiteur.sousDomaine#""; "Chart.constructor : Le param visiteur n'est pas initialisé.")
 	
 	If (Count parameters:C259=1)
-		
 		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $libChart_t).copy()
 	Else 
-		
 		$chartConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].chart.query("lib IS :1"; $modele_t).copy()
 	End if 
 	
@@ -50,11 +46,11 @@ Historiques
 	End if 
 	
 	If (This:C1470.data.labels=Null:C1517)
-		This:C1470.data.labels:=New object:C1471()
+		This:C1470.data.labels:=New collection:C1472()
 	End if 
 	
 	If (This:C1470.data.datasets=Null:C1517)
-		This:C1470.data.datasets:=New object:C1471()
+		This:C1470.data.datasets:=New collection:C1472()
 	End if 
 	
 	If (This:C1470.options=Null:C1517)
@@ -170,6 +166,7 @@ Charge les valeurs des données d'une courbe dans le graphique.
 Historiques
 03/02/21 - Grégory Fromain <gregory@connect-io.fr> - Creation
 30/11/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
+05/04/22 - Grégory Fromain <gregory@connect-io.fr> - Fix bug déclaration datasets
 ------------------------------------------------------------------------------*/
 	
 	var $indice_i : Integer
