@@ -6,7 +6,7 @@ Cette class permet de centraliser toutes les données de l'application web.
 */
 
 
-Class constructor
+Class constructor($webAppFolderName_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : WebApp.constructor
 	
@@ -20,12 +20,17 @@ Historique
 01/10/20 - Grégory Fromain <gregory@connect-io.fr> - Ajout des fichiers de config au format JSONC.
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 29/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création automatique de custom.css si besoin.
+10/10/22 - Grégory Fromain <gregory@connect-io.fr> - Possibilité de définir le nom du dossier webApp
 ------------------------------------------------------------------------------*/
 	
 	var $source_o : Object  // dossier sources
 	var $subDomain_t : Text  // Nom du sous domaine
 	var $folderSubDomaine_o : Object  // Dossier du sous domaine.
 	var $resultat_i : Integer
+	
+	If (String:C10($webAppFolderName_t)="")
+		$webAppFolderName_t:="WebApp"
+	End if 
 	
 	Use (Storage:C1525)
 		Storage:C1525.sites:=New shared object:C1526
@@ -45,7 +50,7 @@ Historique
 	
 	// Chemin des répertoires de base
 	Use (Storage:C1525.param.folderPath)
-		Storage:C1525.param.folderPath.webApp_t:=Get 4D folder:C485(Database folder:K5:14; *)+"WebApp"+Folder separator:K24:12
+		Storage:C1525.param.folderPath.webApp_t:=Get 4D folder:C485(Database folder:K5:14; *)+$webAppFolderName_t+Folder separator:K24:12
 		Storage:C1525.param.folderPath.source_t:=Storage:C1525.param.folderPath.webApp_t+"Sources"+Folder separator:K24:12
 		Storage:C1525.param.folderPath.webFolder_t:=Storage:C1525.param.folderPath.webApp_t+"WebFolder"+Folder separator:K24:12
 		Storage:C1525.param.folderPath.cache_t:=Storage:C1525.param.folderPath.webApp_t+"Cache"+Folder separator:K24:12
