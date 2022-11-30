@@ -61,7 +61,7 @@ Historique
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
 	$source_o:=Folder:C1567(Storage:C1525.param.folderPath.source_t; fk platform path:K87:2)
-	If ($source_o.isFolder)
+	If (Not:C34($source_o.isFolder))
 		$source_o.create()
 	End if 
 	
@@ -118,15 +118,18 @@ Historique
 	
 	// On vérifie que le repertoire WebFolder existe dans le dossier WebApp
 	// On fixe le dossier racine
-	If (Count parameters:C259=1)
-		WEB SET ROOT FOLDER:C634($1)
-		Use (Storage:C1525.param.folderPath)
-			Storage:C1525.param.folderPath.webFolder_t:=$1
-		End use 
-	Else 
-		
-		WEB SET ROOT FOLDER:C634(Storage:C1525.param.folderPath.webFolder_t)
-	End if 
+/*
+If (Count parameters=1)
+WEB SET ROOT FOLDER($1)
+Use (Storage.param.folderPath)
+Storage.param.folderPath.webFolder_t:=$1
+End use 
+Else 
+	
+WEB SET ROOT FOLDER(Storage.param.folderPath.webFolder_t)
+End if 
+*/
+	WEB SET ROOT FOLDER:C634(Storage:C1525.param.folderPath.webFolder_t)
 	
 	If (Test path name:C476(Get 4D folder:C485(HTML Root folder:K5:20; *))#Is a folder:K24:2)
 		// Il n'existe pas... On crée le dossier avec son arborescence.
