@@ -6,6 +6,7 @@ Renvoie la date ou l'heure du timestamp en $1
 
 Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
+27/12/22 - Grégory Fromain <gregory@connect-io.fr> - Fix bug suite mise en place return
 ------------------------------------------------------------------------------*/
 
 // Déclarations
@@ -26,7 +27,7 @@ Case of
 		return String:C10(Int:C8($tsAvecDecallage/86400)+!1970-01-01!; Internal date short:K1:7)
 		
 	: ($1="heure")
-		return String:C10(Int:C8($tsAvecDecallage/86400)+!1970-01-01!; Internal date short:K1:7)
+		return String:C10(Time:C179(Mod:C98($tsAvecDecallage; 86400)); HH MM SS:K7:1)
 		
 	Else 
 		return ""
