@@ -101,11 +101,11 @@ Function formInfo($nameForm_t : Text)->$form_o : Object
 Fonction : User.formInfo
 	
 Retourne les informations d'un formulaire.
-
+	
 Paramètres
 	$nameForm_t -> Nom du formulaire
 	$form_o     <- Les informations du formulaire
-
+	
 Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
@@ -128,11 +128,11 @@ Function formToEntity($valueInput_o : Pointer)
 Fonction : User.formToEntity
 	
 Charger les valeurs d'un formulaire vers une entité (ou objet).
-
+	
 Paramètre 
 	$valueInput_o -> Objet qui sert à remplir les inputs du formulaire $1
 	// Si true : On ne modifie pas le input.
-
+	
 Historiques
 04/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
@@ -321,10 +321,10 @@ Function objectMerge($fils_o : Object)
 Fonction : User.objectMerge
 	
 Permet la fusion proprement d'un objet avec l'instance utilisateur
-
+	
 Paramètre
 	$fils_o -> Objet à fusionner avec l'instance utilisateur
-
+	
 Historiques
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
@@ -348,7 +348,7 @@ Fonction : User.sessionWebFolderPath
 	
 Chemin du dossier des sessions web de l'utilisateur.
 Remplace la méthode : cwSessionUserFolder
-
+	
 Paramètre
 	$cheminSession_t <- chemin du dossier de session du visiteur
 	
@@ -359,7 +359,7 @@ Historique
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $chFolderSession_t : Text  	
+	var $chFolderSession_t : Text
 	var $logErreur_o : Object
 	
 	$logErreur_o:=New object:C1471
@@ -549,7 +549,7 @@ Remplace la méthode : cwVisiteurTokenVerifier
 	
 Paramètre
 	$tokenValide_o : Boolean  // Vrai si valide
-
+	
 Historiques
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
@@ -591,8 +591,13 @@ Historique
 	var $t_uuid : Text
 	
 	$t_uuid:=Generate UUID:C1066
-	This:C1470.token:=$t_uuid
-	This:C1470.tokenControle:=$t_uuid
+	
+	Use (This:C1470)
+		
+		This:C1470.token:=$t_uuid
+		This:C1470.tokenControle:=$t_uuid
+		
+	End use 
 	
 	
 	
