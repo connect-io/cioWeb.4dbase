@@ -245,10 +245,10 @@ Historiques
 ------------------------------------------------------------------------------*/
 	
 	// Déclarations
-	var $mailStatus_o : Object  // transporter, info sur mail et envoie de l'email
-	var $error_t : Text  // Info concernant les erreurs
+	var $error_t; $boxName_t : Text  // Info concernant les erreurs, Nom de la boite des éléments envoyés
+	var $nbTentative_i : Integer
+	var $mailStatus_o : Object  // Transporter, info sur mail et envoie de l'email
 	var $cheminPj_v : Variant  // Chemin pièce jointe
-	var $boxName_t : Text  //Nom de la boite des éléments envoyés.
 	
 	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
@@ -300,6 +300,7 @@ Historiques
 			End for each 
 			
 		End if 
+		
 	End if 
 	
 	//Envoi du mail

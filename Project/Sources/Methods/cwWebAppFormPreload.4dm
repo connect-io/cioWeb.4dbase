@@ -271,22 +271,22 @@ For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 							
 						: (formInput_o.type="toggle")
 							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; "<!--#4DIF (OB Is defined("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\")--><!--#4DENDIF-->")
-							
 						Else 
 							$htmlInputTags_t:=Replace string:C233($htmlInputTags_t; "$valueInput"; "<!--#4DIF (OB Is defined("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\"))--><!--#4DTEXT OB Get("+Storage:C1525.param.varVisitorName_t+";\""+OB Get:C1224(formInput_o; "lib")+"\")--><!--#4DENDIF-->")
 					End case 
 					
 					formInput_o[$viewHtml]:=$htmlInputTags_t
 				End for each 
+				
 			End for each 
 			
 			If ($formCharge_c.length=0)
 				
 				// Si c'est le 1er chargement du formulaire, on l'ajoute à la collection.
-				
 				Use (Storage:C1525.sites[$subDomain_t].form)
 					Storage:C1525.sites[$subDomain_t].form.push(OB Copy:C1225($form; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].form))
 				End use 
+				
 			Else 
 				
 				// Si le formulaire à déjà été chargé, il faut le mettre à jour.
@@ -295,9 +295,11 @@ For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 				Use (Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]])
 					Storage:C1525.sites[$subDomain_t].form[$indicesQuery_c[0]]:=OB Copy:C1225($form; ck shared:K85:29; Storage:C1525.sites[$subDomain_t].form)
 				End use 
+				
 			End if 
+			
 		End if 
+		
 	End for 
 	
 End for each 
-

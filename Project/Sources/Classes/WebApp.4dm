@@ -23,8 +23,8 @@ Historique
 10/10/22 - Grégory Fromain <gregory@connect-io.fr> - Possibilité de définir le nom du dossier webApp
 ------------------------------------------------------------------------------*/
 	
-	var $source_o : Object  // dossier sources
 	var $subDomain_t : Text  // Nom du sous domaine
+	var $source_o : Object  // dossier sources
 	var $folderSubDomaine_o : Object  // Dossier du sous domaine.
 	var $resultat_i : Integer
 	
@@ -43,8 +43,7 @@ Historique
 	
 	Use (Storage:C1525.param)
 		// Nom de la variable visiteur dans l'application hôte.
-		Storage:C1525.param.varVisitorName_t:="visiteur_o"
-		
+		Storage:C1525.param.varVisitorName_t:="Session.storage.user"
 		Storage:C1525.param.folderPath:=New shared object:C1526
 	End use 
 	
@@ -56,7 +55,6 @@ Historique
 		Storage:C1525.param.folderPath.cache_t:=Storage:C1525.param.folderPath.webApp_t+"Cache"+Folder separator:K24:12
 		Storage:C1525.param.folderPath.cacheView_t:=Storage:C1525.param.folderPath.cache_t+"View"+Folder separator:K24:12
 	End use 
-	
 	
 	// ----- Gestion du dossier source -----
 	// On vérifie que le dossier existe.
@@ -169,7 +167,6 @@ End if
 			$folderSubDomaine_o.folder("js").create()
 		End if 
 	End for each 
-	
 	
 	// ----- Gestion des vues en cache -----
 	// On vérifie que le repertoire Pages existe dans le dossier Cache de l'application hôte.
@@ -811,19 +808,14 @@ Historique
 26/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $options_c : Collection
-	var $option_o : Object
 	var $valideMinute_l : Integer
-	var $creerLe_d : Date
-	var $modifierLe_d : Date
-	var $dernierJourValide_d : Date
-	var $creerA_t : Time
-	var $modifierA_t : Time
-	var $verrou_b : Boolean
-	var $invisible_b : Boolean
-	var $infoFichier_o : Object
-	ARRAY TEXT:C222($listeSessionWeb_t; 0)
+	var $verrou_b; $invisible_b : Boolean
+	var $creerLe_d; $modifierLe_d; $dernierJourValide_d : Date
+	var $creerA_t; $modifierA_t : Time
+	var $options_c : Collection
+	var $option_o; $infoFichier_o : Object
 	
+	ARRAY TEXT:C222($listeSessionWeb_t; 0)
 	
 	// On applique quelques valeurs par defaut, pour que cela fonctionne même sans param.
 	$options_c:=New collection:C1472
@@ -850,7 +842,6 @@ Historique
 		WEB SET OPTION:C1210($option_o.key; $option_o.value)
 	End for each 
 	
-	
 	// On test que le dossier des sessions web existe bien, sinon on le crée.
 	If (Test path name:C476(This:C1470.cacheSessionWebPath())#Is a folder:K24:2)
 		CREATE FOLDER:C475(This:C1470.cacheSessionWebPath(); *)
@@ -862,7 +853,6 @@ Historique
 		End if 
 	End if 
 	
-	
 	// On va conserver des informations importantes a porté de main...
 	Use (Storage:C1525.sessionWeb)
 		Storage:C1525.sessionWeb.name:=$options_c.query("key IS :1"; Web session cookie name:K73:4)[0].value
@@ -871,14 +861,15 @@ Historique
 	// ----- Nettoyage des sessions périmée -----
 	// On en profite pour nettoyer les sessions périmées...
 	MESSAGE:C88("Nettoyage des sessions web")
-	
 	$valideMinute_l:=$options_c.query("key IS :1"; Web inactive session timeout:K73:3)[0].value
+	
 	Use (Storage:C1525.sessionWeb)
 		Storage:C1525.sessionWeb.valideDay:=Int:C8($valideMinute_l/60/24)
 	End use 
 	
 	DOCUMENT LIST:C474(This:C1470.cacheSessionWebPath(); $listeSessionWeb_t; Recursive parsing:K24:13+Absolute path:K24:14)
 	$dernierJourValide_d:=Current date:C33-Num:C11(Storage:C1525.sessionWeb.valideDay)
+	
 	For ($i; 1; Size of array:C274($listeSessionWeb_t))
 		// On verifie une derniere fois que le fichier existe,
 		// Possibilité d'être supprimé par un autre process parallele...
@@ -952,7 +943,6 @@ Historique
 	If (Count parameters:C259=1)
 		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.webfolderSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")
 		$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+$subDomain_t+Folder separator:K24:12
-		
 	Else 
 		$path_t:=Get 4D folder:C485(HTML Root folder:K5:20; *)+visiteur.sousDomaine+Folder separator:K24:12
 	End if 

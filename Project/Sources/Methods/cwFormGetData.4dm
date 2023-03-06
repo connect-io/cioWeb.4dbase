@@ -10,103 +10,99 @@ Historique
 ------------------------------------------------------------------------------*/
 
 // Déclarations
-var $1 : Pointer  // visiteur
-var $2 : Text  // nom du formulaire
 var $0 : Object  // etat du formulaire
+var $1 : Text  // nom du formulaire
 
-var $T_nomForm : Text
-var $T_prefixe : Text
-var $resultat_t : Text
-var $formInput_o : Object
-var $infoForm_o : Object
+var $T_nomForm; $T_prefixe; $resultat_t : Text
+var $formInput_o; $infoForm_o; $dataForm_o; $dataFormTyping_o : Object
 var $resultForm_c : Collection
 
+$T_nomForm:=$1
 
-visiteur:=$1->
-$T_nomForm:=$2
-$resultat_t:=""
-
-If (visiteur=Null:C1517)
-	$resultat_t:="cwFormGetData ("+$T_nomForm+"): Variable visiteur non indiqué."
+If (Session:C1714.storage.user=Null:C1517)
+	$resultat_t:="cwFormGetData ("+$T_nomForm+"): Variable Session.storage.user non indiqué."
 	ALERT:C41($resultat_t)
 End if 
 
 If ($resultat_t="")
-	$resultForm_c:=Storage:C1525.sites[visiteur.sousDomaine].form.query("lib IS :1"; $T_nomForm)
+	$resultForm_c:=Storage:C1525.sites[Session:C1714.storage.user.sousDomaine].form.query("lib IS :1"; $T_nomForm)
 	
 	Case of 
 		: ($resultForm_c.length=1)
 			$infoForm_o:=$resultForm_c[0]
-			
 		: ($resultForm_c.length=0)
 			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+",il n'existe pas."
 			ALERT:C41($resultat_t)
-			
 		Else 
 			$resultat_t:="Impossible de charger le formulaire "+$T_nomForm+", plusieurs formulaire portent le même libellé."
 			ALERT:C41($resultat_t)
 	End case 
-End if 
-
-
-If ($resultat_t="")
-	//On supprime les précédentes dataForm
-	If (visiteur.dataForm#Null:C1517)
-		OB REMOVE:C1226(visiteur; "dataForm")
-		OB REMOVE:C1226(visiteur; "dataFormTyping")
-	End if 
 	
 End if 
 
 If ($resultat_t="")
+	// On supprime les précédentes dataForm
+	OB REMOVE:C1226(Session:C1714.storage.user; "dataForm")
+	OB REMOVE:C1226(Session:C1714.storage.user; "dataFormTyping")
+	
+	$dataForm_o:=New object:C1471
+	$dataFormTyping_o:=New object:C1471
 	
 	// On crée un objet pour les nouvelles data du formulaire
-	If (visiteur.dataForm=Null:C1517)
-		visiteur.dataForm:=New object:C1471
-		visiteur.dataFormTyping:=New object:C1471
+	If (Session:C1714.storage.user.dataForm=Null:C1517)
+		
+		Use (Session:C1714.storage.user)
+			Session:C1714.storage.user.dataForm:=OB Copy:C1225($dataForm_o; ck shared:K85:29)
+			Session:C1714.storage.user.dataFormTyping:=OB Copy:C1225($dataFormTyping_o; ck shared:K85:29)
+		End use 
+		
 	End if 
+	
+	$dataForm_o:=OB Copy:C1225(Session:C1714.storage.user.dataForm; ck shared:K85:29)
+	$dataFormTyping_o:=OB Copy:C1225(Session:C1714.storage.user.dataFormTyping; ck shared:K85:29)
 	
 	// On boucle sur chaque input du formulaire HTML, si une des data n'est pas valide, on sort de la boucle.
 	For each ($formInput_o; $infoForm_o.input)
 		
 		// Si la data est valide, on stock la valeur dans dataForm.
-		OB SET:C1220(visiteur.dataForm; $formInput_o.lib; visiteur[$formInput_o.lib])
+		Use ($dataForm_o)
+			OB SET:C1220($dataForm_o; $formInput_o.lib; Session:C1714.storage.user[$formInput_o.lib])
+		End use 
 		
-		Case of 
-			: ($formInput_o.lib=$infoForm_o.submit)
-				// Ne rien faire, on ne veut pas récupérer le submit.
-				
-			: ($formInput_o.type="checkbox")
-				// Si la valeur est on, on la transforme en boolean.
-				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib]="on")
-				
-			: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
-				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib])
-				
-			: (String:C10($formInput_o.format)="bool")
-				visiteur.dataFormTyping[$formInput_o.lib]:=Num:C11(visiteur.dataForm[$formInput_o.lib])
-				
-			: (String:C10($formInput_o.format)="date")
-				visiteur.dataFormTyping[$formInput_o.lib]:=Date:C102(cwDateClean(visiteur.dataForm[$formInput_o.lib]))
-				
-			: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")
-				// Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
-				visiteur.dataFormTyping[$formInput_o.lib]:=cwToolHtmlToText(visiteur.dataForm[$formInput_o.lib])
-				
-			Else 
-				visiteur.dataFormTyping[$formInput_o.lib]:=visiteur.dataForm[$formInput_o.lib]
-		End case 
+		Use ($dataFormTyping_o)
+			
+			Case of 
+				: ($formInput_o.lib=$infoForm_o.submit)  // Ne rien faire, on ne veut pas récupérer le submit.
+				: ($formInput_o.type="checkbox")  // Si la valeur est on, on la transforme en boolean.
+					$dataFormTyping_o[$formInput_o.lib]:=Num:C11($dataForm_o[$formInput_o.lib]="on")
+				: ($formInput_o.type="number") | (String:C10($formInput_o.format)="int") | (String:C10($formInput_o.format)="real")
+					$dataFormTyping_o[$formInput_o.lib]:=Num:C11($dataForm_o[$formInput_o.lib])
+				: (String:C10($formInput_o.format)="bool")
+					$dataFormTyping_o[$formInput_o.lib]:=Num:C11($dataForm_o[$formInput_o.lib])
+				: (String:C10($formInput_o.format)="date")
+					$dataFormTyping_o[$formInput_o.lib]:=Date:C102(cwDateClean($dataForm_o[$formInput_o.lib]))
+				: ($formInput_o.type="textarea") & (String:C10($formInput_o.class)="@4dStyledText@")  // Dans le cas d'un text multistyle, on modifie les fins de ligne et paragraphe.
+					$dataFormTyping_o[$formInput_o.lib]:=cwToolHtmlToText($dataForm_o[$formInput_o.lib])
+				Else 
+					$dataFormTyping_o[$formInput_o.lib]:=$dataForm_o[$formInput_o.lib]
+			End case 
+			
+		End use 
 		
 	End for each 
 	
+	$T_prefixe:=Replace string:C233($infoForm_o.submit; "submit"; "")
+	
+	// On supprime le prefixe des clés.
+	cwToolObjectDeletePrefixKey($dataForm_o; $T_prefixe)
+	cwToolObjectDeletePrefixKey($dataFormTyping_o; $T_prefixe)
+	
+	Use (Session:C1714.storage.user)
+		Session:C1714.storage.user.dataForm:=OB Copy:C1225($dataForm_o; ck shared:K85:29)
+		Session:C1714.storage.user.dataFormTyping:=OB Copy:C1225($dataFormTyping_o; ck shared:K85:29)
+	End use 
 	
 End if 
 
-$T_prefixe:=Replace string:C233($infoForm_o.submit; "submit"; "")
-// On supprime le prefixe des clés.
-cwToolObjectDeletePrefixKey(visiteur.dataForm; $T_prefixe)
-cwToolObjectDeletePrefixKey(visiteur.dataFormTyping; $T_prefixe)
-
 // DataFromTyping est renvoyé dans la méthode et dans visiteur... C'est Kdo.
-$0:=visiteur.dataFormTyping
-$1->:=visiteur
+$0:=$dataFormTyping_o

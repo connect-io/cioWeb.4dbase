@@ -9,7 +9,7 @@ un robot google ou un autre serveur qui vient interroger le notre.
 */
 
 
-Class constructor
+Class constructor()
 /*------------------------------------------------------------------------------
 Fonction : User.constructor
 	
@@ -21,6 +21,7 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 27/01/21 - Grégory Fromain <gregory@connect-io.fr> - Purge constructeur (retrait session)
 ------------------------------------------------------------------------------*/
+	
 	
 	This:C1470.updateVarVisiteur()
 	
@@ -41,32 +42,24 @@ Historique
 23/11/20 - Grégory Fromain <gregory@connect-io.fr> - Clean code
 20/07/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $Form_o : Object
 	var $entityNameCalcule_t : Text
 	var $compatible_b : Boolean
-	var $input : Object
+	var $Form_o; $input : Object
 	
 	ASSERT:C1129(Count parameters:C259=2; "Le nombre de paramêtre n'est pas bon.")
 	ASSERT:C1129(Type:C295($nomForm_t)=Is text:K8:3; "Le param $nomForm_t, doit être de type text.")
-	
 	
 	$Form_o:=This:C1470.formInfo($nomForm_t)
 	
 	If ($Form_o#Null:C1517)
 		
 		For each ($input; $Form_o.input)
-			$compatible_b:=False:C215
-			
 			$entityNameCalcule_t:=Replace string:C233($input.lib; $Form_o.inputPrefixe; "")
 			
-			If ($entity[$entityNameCalcule_t]#Null:C1517)
-				// Dans le cas ou le champ commence par une majuscule.
+			If ($entity[$entityNameCalcule_t]#Null:C1517)  // Dans le cas ou le champ commence par une majuscule
 				visiteur_o[$input.lib]:=$entity[$entityNameCalcule_t]
 				$compatible_b:=True:C214
 			Else 
-				//$entityNameCalcule_t:=Lowercase(Substring($entityNameCalcule_t;1;1))+Substring($entityNameCalcule_t;2)
-				
 				// 1er caractère en minuscule.
 				$entityNameCalcule_t[[1]]:=Lowercase:C14($entityNameCalcule_t[[1]])
 				
@@ -76,22 +69,27 @@ Historique
 			
 			If ($compatible_b)
 				$infoAEnregistrer:=$entity[$entityNameCalcule_t]
-				Case of 
-					: (Value type:C1509($entity[$entityNameCalcule_t])=Is boolean:K8:9)
-						This:C1470[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t]; "1"; "0")
-						
-					: (Value type:C1509($entity[$entityNameCalcule_t])=Is text:K8:3)
-						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
-						
-					: (Value type:C1509($entity[$entityNameCalcule_t])=Is real:K8:4) | (Value type:C1509($entity[$entityNameCalcule_t])=Is longint:K8:6)
-						This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
-						
-					Else 
-						// Ne pas traiter... (Exemple image, blog, object,..)
-				End case 
+				
+				Use (This:C1470)
+					
+					Case of 
+						: (Value type:C1509($entity[$entityNameCalcule_t])=Is boolean:K8:9)
+							This:C1470[$input.lib]:=Choose:C955($entity[$entityNameCalcule_t]; "1"; "0")
+						: (Value type:C1509($entity[$entityNameCalcule_t])=Is text:K8:3)
+							This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						: (Value type:C1509($entity[$entityNameCalcule_t])=Is real:K8:4) | (Value type:C1509($entity[$entityNameCalcule_t])=Is longint:K8:6)
+							This:C1470[$input.lib]:=String:C10($entity[$entityNameCalcule_t])
+						Else 
+							// Ne pas traiter... (Exemple image, blog, object,..)
+					End case 
+					
+				End use 
+				
 			End if 
 			
+			CLEAR VARIABLE:C89($compatible_b)
 		End for each 
+		
 	End if 
 	
 	
@@ -110,9 +108,10 @@ Historique
 24/11/20 - Grégory Fromain <gregory@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
+	var $nomForm_t : Text
+	var $Form_c : Collection
 	
 	ASSERT:C1129(String:C10($nameForm_t)#""; "Le param $nameForm_t, ne doit pas être vide.")
-	
 	$nomForm_t:=$nameForm_t
 	
 	$Form_c:=Storage:C1525.sites[This:C1470.sousDomaine].form.query("lib = :1"; $nomForm_t)
@@ -137,21 +136,20 @@ Historiques
 04/01/21 - Grégory Fromain <gregory@connect-io.fr> - Création
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	// Déclarations
 	var $inputName_t : Text
 	
 	For each ($inputName_t; This:C1470.dataFormTyping)
+		
 		If ($inputName_t#"token")
 			ASSERT:C1129($1->[$inputName_t]#Null:C1517; "La propriete "+$inputName_t+" n'est pas déclaré dans l'entité.")
-			
 			$valueInput_o->[$inputName_t]:=This:C1470.dataFormTyping[$inputName_t]
 		End if 
+		
 	End for each 
 	
 	
 	
-Function getInfo
+Function getInfo($ip_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : User.getInfo
 	
@@ -164,108 +162,155 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ------------------------------------------------------------------------------*/
+	var $cookies; $url_t : Text
+	var $i_l; $pos_egal; $pos_point : Integer
 	
-	var $i_l : Integer
 	ARRAY TEXT:C222($nom_at; 0)
 	ARRAY TEXT:C222($valeur_at; 0)
 	
 	//On retire la propriété "formSubmit" si elle existe... Elle est périmé.
 	If (This:C1470.formSubmit#Null:C1517)
-		OB REMOVE:C1226(This:C1470; "formSubmit")
+		
+		Use (This:C1470)
+			OB REMOVE:C1226(This:C1470; "formSubmit")
+		End use 
+		
 	End if 
 	
 	// ----- Entete HTTP -----
 	//récupération des informations dans l'entete HTTP
 	WEB GET HTTP HEADER:C697($nom_at; $valeur_at)
+	
 	For ($i_l; 1; Size of array:C274($nom_at))
-		OB SET:C1220(This:C1470; $nom_at{$i_l}; $valeur_at{$i_l})
+		
+		Use (This:C1470)
+			This:C1470[$nom_at{$i_l}]:=$valeur_at{$i_l}
+		End use 
+		
 	End for 
 	
 	// ----- Gestion des cookies -----
 	$cookies:=OB Get:C1224(This:C1470; "Cookie"; Is text:K8:3)
+	
 	If ($cookies#"")
+		
 		While ($cookies#"")
 			$pos_egal:=Position:C15("="; $cookies)+1
 			$pos_point:=Position:C15("; "; $cookies)
+			
 			If ($pos_point=0)
 				$pos_point:=99999
 			End if 
 			
-			OB SET:C1220(This:C1470; \
-				Substring:C12($cookies; 1; $pos_egal-2); \
-				Substring:C12($cookies; $pos_egal; $pos_point-$pos_egal))
+			Use (This:C1470)
+				This:C1470[Substring:C12($cookies; 1; $pos_egal-2)]:=Substring:C12($cookies; $pos_egal; $pos_point-$pos_egal)
+			End use 
 			
 			$cookies:=Substring:C12($cookies; $pos_point+2)
 		End while 
+		
 	End if 
 	
 	// ----- Récuperation des variables du formulaire -----
 	// On reset le tableau
-	ARRAY TEXT:C222($nom_at; 0)
-	ARRAY TEXT:C222($valeur_at; 0)
+	CLEAR VARIABLE:C89($nom_at)
+	CLEAR VARIABLE:C89($valeur_at)
+	
 	WEB GET VARIABLES:C683($nom_at; $valeur_at)
 	
 	For ($i_l; 1; Size of array:C274($nom_at))
-		OB SET:C1220(This:C1470; $nom_at{$i_l}; $valeur_at{$i_l})
+		
+		Use (This:C1470)
+			This:C1470[$nom_at{$i_l}]:=$valeur_at{$i_l}
+		End use 
+		
 	End for 
 	
 	// ----- Calcul de variable -----
-	This:C1470.sousDomaine:=Substring:C12(This:C1470.Host; 1; Position:C15("."; This:C1470.Host)-1)
-	This:C1470.domaine:=Substring:C12(This:C1470.Host; Position:C15("."; This:C1470.Host)+1)
+	Use (This:C1470)
+		This:C1470.sousDomaine:=Substring:C12(This:C1470.Host; 1; Position:C15("."; This:C1470.Host)-1)
+		This:C1470.domaine:=Substring:C12(This:C1470.Host; Position:C15("."; This:C1470.Host)+1)
+	End use 
 	
 	// On retire les parametres de l'url.
 	$url_t:=This:C1470["X-URL"]
-	This:C1470.url:=Choose:C955(Position:C15("?"; $url_t)#0; Substring:C12($url_t; 1; Position:C15("?"; $url_t)-1); $url_t)
+	
+	Use (This:C1470)
+		This:C1470.url:=Choose:C955(Position:C15("?"; $url_t)#0; Substring:C12($url_t; 1; Position:C15("?"; $url_t)-1); $url_t)
+	End use 
 	
 	//On efface les messages d'erreur eventuel
 	// Sauf si on vient d'une redirection
 	If (OB Is defined:C1231(This:C1470; "envoiHttpRedirection"))
 		// Pour ce chargement on efface pas les message d'information.
-		OB REMOVE:C1226(This:C1470; "envoiHttpRedirection")
+		
+		Use (This:C1470)
+			OB REMOVE:C1226(This:C1470; "envoiHttpRedirection")
+		End use 
+		
 	Else 
-		// Nouveau format
-		This:C1470.notificationError:=""
-		This:C1470.notificationSuccess:=""
-		This:C1470.notificationWarning:=""
-		This:C1470.notificationInfo:=""
+		
+		Use (This:C1470)
+			// Nouveau format
+			This:C1470.notificationError:=""
+			This:C1470.notificationSuccess:=""
+			This:C1470.notificationWarning:=""
+			This:C1470.notificationInfo:=""
+		End use 
+		
 	End if 
-	
 	
 	// Les modifications suivantes sont pour la compatibilité avec des nouvelles versions de Chrome.
 	// En effet depuis la V88 chrome renvoit les variables : referer, host et cookies avec une
 	// minuscule alors qu'historiquement c'est une majuscule.
-	
 	If (String:C10(This:C1470.referer)#"")
-		This:C1470.Referer:=This:C1470.referer
+		
+		Use (This:C1470)
+			This:C1470.Referer:=This:C1470.referer
+		End use 
+		
 	End if 
 	
 	If (String:C10(This:C1470.host)#"")
-		This:C1470.Host:=This:C1470.host
+		
+		Use (This:C1470)
+			This:C1470.Host:=This:C1470.host
+		End use 
+		
 	End if 
-	
 	
 	If (String:C10(This:C1470.cookie)="")
 		// ----- Gestion des cookies -----
 		$cookies:=OB Get:C1224(This:C1470; "cookie"; Is text:K8:3)
+		
 		If ($cookies#"")
+			
 			While ($cookies#"")
 				$pos_egal:=Position:C15("="; $cookies)+1
 				$pos_point:=Position:C15("; "; $cookies)
+				
 				If ($pos_point=0)
 					$pos_point:=99999
 				End if 
 				
-				OB SET:C1220(This:C1470; \
-					Substring:C12($cookies; 1; $pos_egal-2); \
-					Substring:C12($cookies; $pos_egal; $pos_point-$pos_egal))
+				Use (This:C1470)
+					This:C1470[Substring:C12($cookies; 1; $pos_egal-2)]:=Substring:C12($cookies; $pos_egal; $pos_point-$pos_egal)
+				End use 
 				
 				$cookies:=Substring:C12($cookies; $pos_point+2)
 			End while 
+			
 		End if 
+		
 	End if 
 	
 	// ID du process web peut etre utilisé dans les web socket pour retrouver des informations dans process web.
-	This:C1470.processWebID:=Current process:C322
+	Use (This:C1470)
+		This:C1470.processWebID:=Current process:C322
+		
+		This:C1470.ip:=($ip_t#"") ? $ip_t : ""
+		This:C1470.devMode:=(This:C1470.Host="@dev@")
+	End use 
 	
 	This:C1470.updateVarVisiteur()
 	
@@ -286,13 +331,15 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 ------------------------------------------------------------------------------*/
 	
-	This:C1470.loginDomaine:=String:C10(This:C1470.domaine)
-	This:C1470.loginEMail:=String:C10(This:C1470.eMail)
-	
-	This:C1470.loginExpire_ts:=cwTimestamp(Current date:C33; ?23:59:59?)
-	
-	// Peut être utilisé dans certaine requête pour la suite.
-	This:C1470.action:=Null:C1517
+	Use (This:C1470)
+		This:C1470.loginDomaine:=String:C10(This:C1470.domaine)
+		This:C1470.loginEMail:=String:C10(This:C1470.eMail)
+		
+		This:C1470.loginExpire_ts:=cwTimestamp(Current date:C33; ?23:59:59?)
+		
+		// Peut être utilisé dans certaine requête pour la suite.
+		This:C1470.action:=Null:C1517
+	End use 
 	
 	// On redirige vers la page d'index.
 	cwHttpRedirect("index")
@@ -310,9 +357,11 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 ------------------------------------------------------------------------------*/
 	
-	This:C1470.loginDomaine:=""
-	This:C1470.loginEMail:=""
-	This:C1470.loginLevel:=""
+	Use (This:C1470)
+		This:C1470.loginDomaine:=""
+		This:C1470.loginEMail:=""
+		This:C1470.loginLevel:=""
+	End use 
 	
 	
 	
@@ -330,14 +379,17 @@ Historiques
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
-	var $objectMerge_o : Object
 	var $key_t : Text
+	var $objectMerge_o : Object
 	
 	$objectMerge_o:=cwToolObjectMerge(This:C1470; $fils_o)
 	
 	For each ($key_t; $objectMerge_o)
-		This:C1470[$key_t]:=$objectMerge_o[$key_t]
+		
+		Use (This:C1470)
+			This:C1470[$key_t]:=$objectMerge_o[$key_t]
+		End use 
+		
 	End for each 
 	
 	
@@ -358,7 +410,6 @@ Historique
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
 	var $chFolderSession_t : Text
 	var $logErreur_o : Object
 	
@@ -371,14 +422,14 @@ Historique
 	
 	If (String:C10($logErreur_o.detailErreur)="")
 		
-		// il faut récupérer l'UUID de la session du visiteur
+		// Il faut récupérer l'UUID de la session du visiteur
 		If (String:C10(This:C1470[Storage:C1525.sessionWeb.name])="")
 			$logErreur_o.detailErreur:="Impossible de récupérer ID de la session du visiteur."
 		End if 
+		
 	End if 
 	
 	If (String:C10($logErreur_o.detailErreur)="")
-		
 		//On monte le chemin du dossier.
 		$chFolderSession_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+Folder separator:K24:12
 		
@@ -386,7 +437,7 @@ Historique
 			CREATE FOLDER:C475($chFolderSession_t; *)
 		End if 
 		
-		$0:=$chFolderSession_t
+		$cheminSession_t:=$chFolderSession_t
 	End if 
 	
 	If (String:C10($logErreur_o.detailErreur)#"")
@@ -416,24 +467,21 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ------------------------------------------------------------------------------*/
-	
-	var $chFichierSession_t : Text
-	var $chAncienDossier_t : Text
-	var $chNouveauDossier_t : Text
-	var $session_o : Object
+	var $chFichierSession_t; $chAncienDossier_t; $chNouveauDossier_t; $propriete_t : Text
 	var $i_l : Integer
-	var $propriete_t : Text
+	var $session_o : Object
+	
+	ARRAY TEXT:C222($dossiersEnfant_t; 0)
 	
 	If (Bool:C1537(This:C1470.sessionWebActive)=False:C215)
 		
 		// La $session n'existe pas.
 		// Si le navigateur envoi un cookies on doit pourvoir la recreer...
 		If (This:C1470[Storage:C1525.sessionWeb.name]#Null:C1517)
-			
 			//On regarde si dans le dossier des session, un fichier existe...
 			$chFichierSession_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+".json"
+			
 			If (Test path name:C476($chFichierSession_t)=Is a document:K24:1)
-				
 				// On récupere le contenu du fichier
 				$session_o:=JSON Parse:C1218(Document to text:C1236($chFichierSession_t; "UTF-8"))
 				
@@ -441,7 +489,11 @@ Historique
 				$session_o:=cwToolObjectMerge($session_o; This:C1470)
 				
 				For each ($propriete_t; $session_o)
-					This:C1470[$propriete_t]:=$session_o[$propriete_t]
+					
+					Use (This:C1470)
+						This:C1470[$propriete_t]:=$session_o[$propriete_t]
+					End use 
+					
 				End for each 
 				
 				// On supprime le fichier car maintenant obsolete
@@ -449,17 +501,14 @@ Historique
 				
 				// On regarde si un dossier temporaire existe pour cette session.
 				If (Test path name:C476(Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name])=Is a folder:K24:2)
-					
 					// Il existe un dossier, il faut le renomer avec la nouvelle session en cours.
 					// Mais ce n'est pas possible... On va donc d'abort créer un nouveau dossier.
 					$chAncienDossier_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+Folder separator:K24:12
 					$chNouveauDossier_t:=Storage:C1525.sessionWeb.path+WEB Get current session ID:C1162+Folder separator:K24:12
+					
 					CREATE FOLDER:C475($chNouveauDossier_t; *)
 					
 					// On transfert les fichiers
-					//COPY DOCUMENT($chAncienDossier_t;$chNouveauDossier_t;*)
-					
-					ARRAY TEXT:C222($dossiersEnfant_t; 0)
 					FOLDER LIST:C473($chAncienDossier_t; $dossiersEnfant_t)
 					
 					For ($i_l; 1; Size of array:C274($dossiersEnfant_t))
@@ -472,12 +521,14 @@ Historique
 				
 				// On change dans la variable visiteur, uuid de la session courante.
 				This:C1470[Storage:C1525.sessionWeb.name]:=WEB Get current session ID:C1162
-				
 			End if 
+			
 		End if 
 		
 		//Recupération ou pas des sessions, on n'y retournera pas pendant la session
-		This:C1470.sessionWebActive:=True:C214
+		Use (This:C1470)
+			This:C1470.sessionWebActive:=True:C214
+		End use 
 		
 		// On en profile pour resynchroniser le composant (Appel dans pageGetInfo)
 		This:C1470.updateVarVisiteur()
@@ -501,9 +552,8 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ------------------------------------------------------------------------------*/
-	
-	var $logErreur_o : Object
 	var $chSessionWeb_t : Text
+	var $logErreur_o : Object
 	
 	$logErreur_o:=New object:C1471
 	
@@ -517,11 +567,9 @@ Historique
 		If (String:C10(This:C1470[Storage:C1525.sessionWeb.name])#"")
 			// Chemin du fichier dans lequel sera stocké la session.
 			$chSessionWeb_t:=Storage:C1525.sessionWeb.path+This:C1470[Storage:C1525.sessionWeb.name]+".json"
-			
 			TEXT TO DOCUMENT:C1237($chSessionWeb_t; JSON Stringify:C1217(This:C1470; *))
 			
 			If (Test path name:C476($chSessionWeb_t)#Is a document:K24:1)
-				
 				$logErreur_o.detailErreur:="Impossible d'ecrire le fichier : "+$chSessionWeb_t
 			End if 
 			
@@ -530,17 +578,19 @@ Historique
 			// ex : Robot ou chargement d'une page unique...
 			// Dans ce cas on ne stock pas de session.
 		End if 
+		
 	End if 
 	
 	If (String:C10($logErreur_o.detailErreur)#"")
 		$logErreur_o.methode:=Current method name:C684
 		$logErreur_o.visiteur:=This:C1470
+		
 		cwLogErreurAjout("erreur session"; $logErreur_o)
 	End if 
 	
 	
 	
-Function tokenCheck()->$tokenValide_o : Boolean
+Function tokenCheck()->$tokenValide_b : Boolean
 /*------------------------------------------------------------------------------
 Fonction : User.tokenCheck
 	
@@ -548,30 +598,34 @@ Vérifie un jeton pour la validation d'une pages web.
 Remplace la méthode : cwVisiteurTokenVerifier
 	
 Paramètre
-	$tokenValide_o : Boolean  // Vrai si valide
+	$tokenValide_b : Boolean  // Vrai si valide
 	
 Historiques
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 01/12/21 - Jonathan Fernandez <jonathan@connect-io.fr> - Maj param dans la fonction
 ------------------------------------------------------------------------------*/
-	
 	var $logErreur_o : Object
 	
-	$0:=False:C215
+	$tokenValide_b:=False:C215
 	
 	If (This:C1470.token#Null:C1517)
+		
 		If (This:C1470.tokenControle#Null:C1517)
+			
 			If (This:C1470.token=This:C1470.tokenControle)
-				$tokenValide_o:=True:C214
+				$tokenValide_b:=True:C214
 			Else 
 				$logErreur_o:=New object:C1471()
 				$logErreur_o.detailErreur:="Erreur de Token du visiteur"
 				$logErreur_o.methode:=Current method name:C684
 				$logErreur_o.visiteur:=This:C1470
+				
 				cwLogErreurAjout("Configuration serveur"; $logErreur_o)
 			End if 
+			
 		End if 
+		
 	End if 
 	
 	
@@ -587,16 +641,13 @@ Historique
 17/07/20 - Grégory Fromain <gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain <gregory@connect-io.fr> - Déclaration des variables via var
 ------------------------------------------------------------------------------*/
-	
 	var $t_uuid : Text
 	
 	$t_uuid:=Generate UUID:C1066
 	
 	Use (This:C1470)
-		
 		This:C1470.token:=$t_uuid
 		This:C1470.tokenControle:=$t_uuid
-		
 	End use 
 	
 	
@@ -614,4 +665,5 @@ Historique
 	
 	// A défaut de faire mieux pour le moment... (Comptatibilité avec du vieux code)
 	var visiteur : Object
+	
 	visiteur:=This:C1470

@@ -139,7 +139,11 @@ If (Storage:C1525.eMail.mjml#Null:C1517)
 					If ($resultat_i=200)
 						$modelFolder_o.file($model_o.layout).parent.file($name_t).setText($mjmlReponse_o.html)
 					Else 
-						visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
+						
+						Use (Session:C1714.storage.user)
+							Session:C1714.storage.user.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
+						End use 
+						
 					End if 
 					
 				End if 
@@ -168,7 +172,11 @@ If (Storage:C1525.eMail.mjml#Null:C1517)
 					If ($resultat_i=200)
 						$modelFolder_o.file($model_o.source).parent.file($name_t).setText($mjmlReponse_o.html)
 					Else 
-						visiteur_o.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
+						
+						Use (Session:C1714.storage.user)
+							Session:C1714.storage.user.notificationError:="Erreur d'importation du mjml, erreur : "+String:C10($resultat_i)
+						End use 
+						
 					End if 
 					
 				End if 

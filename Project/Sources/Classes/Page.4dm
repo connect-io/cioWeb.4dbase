@@ -9,7 +9,7 @@ Cette class permet de génerer le contenue d'une page.
 Class constructor($infoUser_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : Page.constructor
-
+	
 Paramètre 
 	$infoUser_o -> Informations sur le visiteur.
 	
@@ -189,11 +189,11 @@ Function cssGetHtmlPath($domaineCDN_t : Text)->$cssHtmlLink_t : Text
 Fonction : Page.cssGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers CSS.
-
+	
 Paramètres
 	$domaineCDN_t -> Domaine du CDN
 	$cssHtmlLink_t <- Contenu HTML des appels CSS
-
+	
 Historiques
 19/06/19 - Grégory Fromain <gregory@connect-io.fr> - Création
 10/02/20 - Grégory Fromain <gregory@connect-io.fr> - Mise en place de la boucle for each.
@@ -208,7 +208,7 @@ Historiques
 	$cssContenu_t:=""
 	
 	// On ajoute en dernier le custom.css
-	This:C1470.cssPath.push("/<!--4DTEXT visiteur_o.sousDomaine-->/css/custom.css")
+	This:C1470.cssPath.push("/<!--4DTEXT Session.storage.user.sousDomaine-->/css/custom.css")
 	
 	
 	If (This:C1470.cssPath#Null:C1517)
@@ -231,11 +231,11 @@ Historiques
 Function i18nGet($nameAttribut_t : Text)->$reponse_t : Text
 /*------------------------------------------------------------------------------
 Fonction : Page.I18nGet
-
+	
 Paramètres
 	$nameAttribut_t -> nom de l'attribut de l'objet que l'on souhaite utiliser
 	$reponse_t      <- le text en retour
-
+	
 Historiques
 15/08/20 - Grégory Fromain<gregory@connect-io.fr> - Mise en veille de l'internalisation
 26/11/20 - Alban Catoire <alban@connect-io.fr> - Actualisation avec utilisation de storage
@@ -259,11 +259,11 @@ Function jsGetHtmlPath($domaineCDN_t : Text)->$jsHtmlLink_t : Text
 Fonction : Page.jsGetHtmlPath
 	
 Renvoi le HTML pour le chargement des fichiers JS déclaré dans le fichier page.json
-
+	
 Paramètres
 	$domaineCDN_t -> domaine du CDN
 	$jsHtmlLink_t <- Contenu des chemin JS à insérer dans le HTML.
-
+	
 Historiques
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Changement du nom de la propriete jsFile en jsPath
 11/20/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
@@ -297,7 +297,7 @@ Function jsInHtml()->$reponse_t : Text
 Fonction : Page.jsInHtml
 	
 Place le contenue du fichier javascript dans le HTML
-
+	
 Paramètre
 	$reponse_t	<- Contenu du fichier javascript
 	
@@ -339,11 +339,11 @@ Function scanBlock($corpsHtml_t : Text)->$reponse_t : Text
 Fonction : Page.scanBlock
 	
 Niveau supprême du template 4D :o) : -p Permet la gestion des blocs dans le HTML.
-
+	
 Paramètres
 	$corpsHtml_t -> Contenu HTML dans lequel on souhaite retrouver les blocks
 	$reponse_t <- Retourne les élements du fichier qui ne sont pas dans un block
-
+	
 Historiques
 27/07/20 - Grégory Fromain<gregory@connect-io.fr> - Conversion en fonction
 31/10/20 - Grégory Fromain<gregory@connect-io.fr> - Déclaration des variables via var
@@ -402,7 +402,7 @@ Function redirection301($newUrl_t : Text)
 Méthode : Page.redirection301
 	
 Etabli une redirection 301 http(de type permanante)
-
+	
 Paramètre
 	$newUrl_t -> Nouvelle url
 	

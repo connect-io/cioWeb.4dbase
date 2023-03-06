@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><preferences stamp="10">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="11">
 	<com.4d>
 		<web>
 			<standalone_server>
@@ -17,7 +17,7 @@
 				<client_server use_encryption="false"/>
 			</network>
 		</server>
-		<general execute_host_database_event="false"/>
+		<general component_classStore_name="cioWeb" execute_host_database_event="false"/>
 		<deployment>
 			<options/>
 		</deployment>

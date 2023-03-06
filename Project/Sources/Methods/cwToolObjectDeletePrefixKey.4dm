@@ -35,7 +35,9 @@ For each ($key_t; $source_o)
 		$newKey_t:=Substring:C12($key_t; Length:C16($2)+1)
 		$newKey_t:=Change string:C234($newKey_t; Lowercase:C14(Substring:C12($newKey_t; 1; 1)); 1)
 		
-		$source_o[$newKey_t]:=$source_o[$key_t]
+		Use ($source_o)
+			$source_o[$newKey_t]:=$source_o[$key_t]
+		End use 
 		
 		OB REMOVE:C1226($source_o; $key_t)
 	End if 
