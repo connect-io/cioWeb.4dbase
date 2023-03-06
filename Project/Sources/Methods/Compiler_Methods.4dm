@@ -48,8 +48,7 @@ var cwHttpRedirect; $1 : Text
 
 //cwFormGetData
 var cwFormGetData; $0 : Object
-var cwFormGetData; $1 : Pointer
-var cwFormGetData; $2 : Text
+var cwFormGetData; $1 : Text
 
 //cwSupprBaliseHtml
 var cwSupprBaliseHtml; $0 : Text
@@ -93,8 +92,7 @@ var cwFormInit; $1 : Text
 
 //cwFormControl
 var cwFormControl; $0 : Text
-var cwFormControl; $1 : Pointer
-var cwFormControl; $2 : Text
+var cwFormControl; $1 : Text
 
 //cwToolHashUrl
 var cwToolHashUrl; $0 : Text
