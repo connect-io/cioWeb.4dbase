@@ -144,3 +144,46 @@ var cwToolPathSeparator; $2 : Text
 
 //cwToolObjectFromFile
 var cwToolObjectFromFile; $2 : Integer
+
+//cwToolObjectMergeTest
+C_TEXT:C284(cwToolObjectMergeTest; $0)
+
+//cwToolHtmlToText
+C_TEXT:C284(cwToolHtmlToText; $0)
+C_TEXT:C284(cwToolHtmlToText; $1)
+
+//cwToolUrlDecode
+C_TEXT:C284(cwToolUrlDecode; $0)
+C_TEXT:C284(cwToolUrlDecode; $1)
+
+//cwHttpRedirect
+C_OBJECT:C1216(cwHttpRedirect; $2)
+
+//cwToolObjectSplitStringKey
+C_OBJECT:C1216(cwToolObjectSplitStringKey; $0)
+C_OBJECT:C1216(cwToolObjectSplitStringKey; $1)
+
+//cwToolUrlEncode
+C_TEXT:C284(cwToolUrlEncode; $0)
+C_TEXT:C284(cwToolUrlEncode; $1)
+
+//cwStorage
+C_OBJECT:C1216(cwStorage; $0)
+
+//cwToolObjectDeletePrefixKey
+C_VARIANT:C1683(cwToolObjectDeletePrefixKey; $1)
+C_TEXT:C284(cwToolObjectDeletePrefixKey; $2)
+
+//cwEMailConfigLoad
+C_OBJECT:C1216(cwEMailConfigLoad; $1)
+
+//cwToolObjectDeleteKeys
+C_OBJECT:C1216(cwToolObjectDeleteKeys; $1)
+C_TEXT:C284(cwToolObjectDeleteKeys; $2)
+
+//cwToolJetLag
+C_LONGINT:C283(cwToolJetLag; $0)
+
+//cwI18nConvertJson
+C_TEXT:C284(cwI18nConvertJson; $0)
+C_TEXT:C284(cwI18nConvertJson; $1)
