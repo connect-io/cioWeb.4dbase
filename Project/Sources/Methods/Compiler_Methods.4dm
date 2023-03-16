@@ -13,10 +13,9 @@ var cwDateFormatTexte; $1 : Text
 var cwDateFormatTexte; $2 : Date
 
 //cwFormInputSelectNewValue
-var cwFormInputSelectNewValue; $1 : Pointer
-var cwFormInputSelectNewValue; $2 : Text
-var cwFormInputSelectNewValue; $3 : Collection
-var cwFormInputSelectNewValue; $4 : Text
+var cwFormInputSelectNewValue; $1 : Text
+var cwFormInputSelectNewValue; $2 : Collection
+var cwFormInputSelectNewValue; $3 : Text
 
 //cwToolObjectProgress4DTag
 var cwToolObjectProgress4DTag; $0 : Object
