@@ -450,9 +450,10 @@ Historique
 	$newTransporter_o.password:=$transporter_o.password
 	$newTransporter_o.from:=$transporter_o.from
 	$newTransporter_o.archive:=$transporter_o.archive
+	$newTransporter_o.type:=$protocol_t
 	
 	If ($reponse_t="ok")
-		This:C1470.email[$protocol_t].push($newTransporter_o)
+		This:C1470.email.transporter.push($newTransporter_o)
 		This:C1470.configToJson()
 	End if 
 	
@@ -483,8 +484,8 @@ Historique
 	ASSERT:C1129($transporter_c.length#0; " EMailModel.get : modèle introuvable.")
 	$transporter_o:=$transporter_c[0]
 	//On cherche le layout à supprimer
-	$index:=This:C1470.email[$protocol_t].indexOf($transporter_o)
-	This:C1470.email[$protocol_t].remove($index)
+	$index:=This:C1470.email.transporter.indexOf($transporter_o)
+	This:C1470.email.transporter.remove($index)
 	This:C1470.configToJson()
 	
 	
@@ -535,13 +536,13 @@ Historique
 	ASSERT:C1129(($transporterModify_o.name#"") & ($transporterModify_o.name#Null:C1517); " EMailModel.transporterModify : Le param $transporterModify_o ($1) ne possède pas d'attribut 'name'.")
 	ASSERT:C1129(($protocol_t#"") & ($protocol_t#Null:C1517); " EMailModel.transporterGetAll : Le param $protocol_t est obligatoire.")
 	
-	$transporter_c:=This:C1470.email[$protocol_t].query("name = :1"; $transporterModify_o.oldName)
+	$transporter_c:=This:C1470.email.transporter.query("name = :1"; $transporterModify_o.oldName)
 	If ($transporter_c.length#0)
 		$transporter_o:=$transporter_c[0]
-		$index_i:=This:C1470.email[$protocol_t].indexOf($transporter_o)
+		$index_i:=This:C1470.email.transporter.indexOf($transporter_o)
 		
 		$transporter_o.name:=$transporterModify_o.name
-		$transporter_o.type:=$transporterModify_o.type
+		// $transporter_o.type:=$transporterModify_o.type
 		$transporter_o.host:=$transporterModify_o.host
 		$transporter_o.port:=Num:C11($transporterModify_o.port)
 		$transporter_o.user:=$transporterModify_o.user
@@ -555,6 +556,6 @@ Historique
 	
 	//Enregistrement des modifications
 	If ($result_t="ok")
-		This:C1470.email[$protocol_t][$index_i]:=$transporter_o
+		This:C1470.email.transporter[$index_i]:=$transporter_o
 		This:C1470.configToJson()
 	End if 

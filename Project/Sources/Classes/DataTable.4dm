@@ -26,18 +26,16 @@ Historique
 	ASSERT:C1129($dataTableLib_t#""; "DataTable.constructor : Le param $dataTableLib_t est manquante.")
 	ASSERT:C1129(visiteur.sousDomaine#""; "DataTable.constructor : Le param visiteur n'est pas initialisé.")
 	
-	$dataTableConfig_o:=Storage:C1525.sites[visiteur.sousDomaine].dataTable.query("lib IS :1"; $dataTableLib_t).copy()
+	$dataTableConfig_c:=Storage:C1525.sites[visiteur.sousDomaine].dataTable.query("lib IS :1"; $dataTableLib_t).copy()
 	
-	ASSERT:C1129($dataTableConfig_o.length#0; "DataTable.constructor : Impossible de retrouver la dataTable : "+$dataTableLib_t)
+	ASSERT:C1129($dataTableConfig_c.length#0; "DataTable.constructor : Impossible de retrouver la dataTable : "+$dataTableLib_t)
 	
-	For each ($propriete_t; $dataTableConfig_o[0])
-		This:C1470[$propriete_t]:=$dataTableConfig_o[0][$propriete_t]
+	For each ($propriete_t; $dataTableConfig_c[0])
+		This:C1470[$propriete_t]:=$dataTableConfig_c[0][$propriete_t]
 	End for each 
 	
 	This:C1470.column_c:=This:C1470.column
-	
 	This:C1470.data_c:=New collection:C1472()
-	
 	
 	//----- Gestion du double click -----
 	If (This:C1470.doubleClick#Null:C1517)
@@ -71,7 +69,6 @@ Historique
 		// Securité navigateur
 		This:C1470.ajax.linkVariable:=Null:C1517
 	End if 
-	
 	
 	
 Function addData($ligneData_c : Collection)
@@ -145,27 +142,31 @@ Historique
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
+	var $dataligne_o; $dataColumn_o : Object
 	var dataInBase_o : Object
-	var dataligne_o : Object
-	var dataColumn_o : Object
 	
 	If ($source_v=Null:C1517)
 		ALERT:C41("dataTable.setData : Le paramêtre $source_v ($1) n'est pas défini dans la datatable "+This:C1470.lib)
 	End if 
 	
 	// On purge les datas... Sinon cela concaténe les lignes.
-	This:C1470.data_c:=New collection:C1472()
-	
-	// On boucle sur chaque élément de la source...
-	// Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
-	For each (dataInBase_o; $source_v)
+	Use (This:C1470)
+		This:C1470.data_c:=New shared collection:C1527()
 		
-		dataligne_o:=New object:C1471()
-		
-		// On boucle sur chaque colonne des données.
-		For each (dataColumn_o; This:C1470.data)
-			dataligne_o[dataColumn_o.name]:=Formula from string:C1601(Replace string:C233(dataColumn_o.value; "this."; "dataInBase_o.")).call()
+		// On boucle sur chaque élément de la source...
+		// Attention de bien conserver les variables dataInBase_o et dataColumn_o pour pouvoir utiliser le Formula from string
+		For each (dataInBase_o; $source_v)
+			$dataligne_o:=New object:C1471()
+			
+			// On boucle sur chaque colonne des données.
+			For each ($dataColumn_o; This:C1470.data)
+				$dataligne_o[$dataColumn_o.name]:=Formula from string:C1601(Replace string:C233($dataColumn_o.value; "this."; "dataInBase_o.")).call()
+			End for each 
+			
+			Use (This:C1470.data_c)
+				This:C1470.data_c.push(OB Copy:C1225($dataligne_o; ck shared:K85:29))
+			End use 
+			
 		End for each 
 		
-		This:C1470.data_c.push(dataligne_o)
-	End for each 
+	End use 
