@@ -86,8 +86,9 @@ Historique
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	This:C1470.data_c.push($ligneData_c)
-	
+	Use (This:C1470.data_c)
+		This:C1470.data_c.push($ligneData_c)
+	End use 
 	
 	
 Function getHtml()->$html_t : Text
@@ -104,8 +105,10 @@ Historique
 24/02/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	$html_t:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"
 	
+	Use (This:C1470)
+		$html_t:="<table id=\""+This:C1470.lib+"\" class=\"table table-striped table-bordered\" width=\"100%\"></table>"
+	End use 
 	
 	
 Function sendDataAjax()->$dataJson_t : Text
