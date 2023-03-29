@@ -187,7 +187,7 @@ Ce code va donc nous donner le tableau suivant :
 Après avoir créé le tableau, il faut ensuite le rajouter à notre code HTML pour pouvoir l'afficher.
 
 ```html
-<!--#4DHTML dataTables_o.libDeMonDataTable.getHtml()-->
+<!--#4DHTML Session.storage.dataTables.libDeMonDataTable.getHtml()-->
 ```
 
 ```dataTables_o``` : variable process contenant toutes les informations sur les dataTables<br />

@@ -16,14 +16,17 @@ var $2 : Object  // Param de l'url
 $T_libPage:=$1
 
 If ($T_libPage#"http@")
+	
 	If (Count parameters:C259=1)
 		$T_libPage:=cwLibToUrl($T_libPage)
-		
 	Else 
 		$T_libPage:=cwLibToUrl($T_libPage; $2)
 	End if 
+	
 End if 
 
-visiteur.envoiHttpRedirection:=True:C214
+Use (visiteur)
+	visiteur.envoiHttpRedirection:=True:C214
+End use 
 
 WEB SEND HTTP REDIRECT:C659($T_libPage)

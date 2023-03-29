@@ -568,23 +568,14 @@ Historique
 19/02/21 - Grégory Fromain <gregory@connect-io.fr> - Suppression de la gestion des routes sous le format : page.url
 ------------------------------------------------------------------------------*/
 	
-	var $j : Integer
-	var $r : Integer
-	var $routeVar : Text
-	var $routeRegex : Text
-	var $routeFormatData : Text
-	var $temp_t : Text
-	var $subDomain_t : Text
-	var $configPage : Object
-	var $page : Object
-	var $route : Object
-	var $routeDefault : Object
-	var $routeFormat : Object
-	var $parentLibPage : Text  // Permet de gérer l'héritage des routes.
-	var $i_l : Integer  // Permet de gérer l'héritage des fichiers HTML
-	var $methodeNom_t : Text  //  Permet de gérer l'héritage des méthodes de la page
+	var $i; $j; $r; $i_l; $iReel_l : Integer
+	var $routeVar; $routeRegex; $routeFormatData; temp_t; $subDomain_t; $parentLibPage; $methodeNom_t; $temp_t : Text
+	var $configPage; $page; $route; $routeDefault; $routeFormat : Object
 	var $route_c : Collection
+	
 	ARRAY TEXT:C222($libpage_at; 0)
+	ARRAY TEXT:C222($methodName_at; 0)
+	ARRAY TEXT:C222($routeFile_at; 0)
 	ARRAY TEXT:C222($routeFormatCle; 0)
 	
 	// Minification du JS.
@@ -595,42 +586,45 @@ Historique
 	MESSAGE:C88("Minification du HTML..."+Char:C90(Carriage return:K15:38))
 	This:C1470.htmlMinify()
 	
-	
 	// On boucle sur chaque sous domaine.
 	MESSAGE:C88("Chargement des routes..."+Char:C90(Carriage return:K15:38))
+	
 	For each ($subDomain_t; Storage:C1525.param.subDomain_c)
 		// On purge la liste des routes
 		$route_c:=New collection:C1472()
-		//Récupération du plan des pages web des sites.
+		
+		// Récupération du plan des pages web des sites.
 		$configPage:=New object:C1471
-		ARRAY TEXT:C222($routeFile_at; 0)
+		
 		DOCUMENT LIST:C474(This:C1470.sourceSubdomainPath($subDomain_t); $routeFile_at; Recursive parsing:K24:13+Absolute path:K24:14)
 		
 		// Chargement de tous les fichiers de routing.
 		For ($routeNum; 1; Size of array:C274($routeFile_at))
+			
 			// On charge toutes les routes, mais pas le modele
 			If ($routeFile_at{$routeNum}="@route.json@")
 				$configPage:=cwToolObjectMerge($configPage; cwToolObjectFromPlatformPath($routeFile_at{$routeNum}))
 			End if 
+			
 		End for 
 		
 		//---------- On merge les routes parents ----------
 		For each ($libPage; $configPage)
+			
 			// On ne merge pas les routes qui n'ont pas de parent... Pas d'intéret.
 			// On ne merge pas les routes qui n'ont pas d'url... Cela crée des doublons car ce sont des routes de layout...
 			If ($configPage[$libPage].parents#Null:C1517) & ($configPage[$libPage].route#Null:C1517)
+				
 				If ($configPage[$libPage].route.path#Null:C1517)
-					
 					$iReel_l:=-1
-					$i:=0
+					
 					While ($i<$configPage[$libPage].parents.length)
-						
 						$iReel_l:=$configPage[$libPage].parents.length-$i-1
-						
 						$parentLibPage:=$configPage[$libPage].parents[$iReel_l]
+						
 						If ($configPage[$parentLibPage]=Null:C1517)
 							ALERT:C41("La route parent suivante n'est pas définie :"+$parentLibPage)
-							$parentLibPage:=""  // Permet de sortir de la boucle.
+							CLEAR VARIABLE:C89($parentLibPage)  // Permet de sortir de la boucle.
 						Else 
 							$configPage[$libPage]:=cwToolObjectMerge($configPage[$parentLibPage]; $configPage[$libPage])
 						End if 
@@ -638,37 +632,38 @@ Historique
 						$i:=$i+1
 					End while 
 					
-					
 				End if 
+				
 			End if 
+			
+			CLEAR VARIABLE:C89($i)
 		End for each 
 		
 		// Une fois que l'on a merge les routes avec des dependance, on supprime les pages de configuration qui n'ont pas de route.
 		For each ($libPage; $configPage)
+			
 			Case of 
 				: ($configPage[$libPage].route=Null:C1517)
 					OB REMOVE:C1226($configPage; $libPage)
-					
 				: ($configPage[$libPage].route.path=Null:C1517)
 					OB REMOVE:C1226($configPage; $libPage)
-					
 			End case 
+			
 		End for each 
-		
-		
 		
 		// On precharge les routes
 		OB GET PROPERTY NAMES:C1232($configPage; $libpage_at)
+		
 		For ($j; 1; Size of array:C274($libpage_at))
-			
 			$page:=OB Get:C1224($configPage; $libpage_at{$j})
-			
 			$page.lib:=$libpage_at{$j}
 			
 			If ($page.route#Null:C1517)
 				// On récupére la route de la page.
 				$route:=$page.route
+				
 				// On fabrique la regex de la route.
+				
 				// On prend le path
 				$routeRegex:=$route.path
 				
@@ -681,40 +676,45 @@ Historique
 				// On boucle sur les formats de variables
 				If (OB Is defined:C1231($route; "format"))
 					OB GET PROPERTY NAMES:C1232($route.format; $routeFormatCle)
+					
 					For ($r; 1; Size of array:C274($routeFormatCle))
 						$temp_t:=$route.format[$routeFormatCle{$r}]
 						$routeRegex:=Replace string:C233($routeRegex; $routeFormatCle{$r}; "("+$temp_t+")")
 					End for 
+					
 				End if 
 				
 				$route.regex:=$routeRegex
-				
 				$routeVar:=$route.path
 				
-				
 				For ($r; 1; Size of array:C274($routeFormatCle))
+					
 					If (OB Is defined:C1231($routeDefault; $routeFormatCle{$r}))
-						$routeFormatData:="<!--#4DIF (OB is defined(routeVar;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE-->"+OB Get:C1224($routeDefault; $routeFormatCle{$r})+"<!--#4DENDIF-->"
+						$routeFormatData:="<!--#4DIF (OB is defined(routeVar_o;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar_o;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE-->"+OB Get:C1224($routeDefault; $routeFormatCle{$r})+"<!--#4DENDIF-->"
 					Else 
-						$routeFormatData:="<!--#4DIF (OB is defined(routeVar;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE--> il manque la variable "+$routeFormatCle{$r}+"+<!--#4DENDIF-->"
+						$routeFormatData:="<!--#4DIF (OB is defined(routeVar_o;\""+$routeFormatCle{$r}+"\"))--><!--#4DTEXT OB Get(routeVar_o;\""+$routeFormatCle{$r}+"\")--><!--#4DELSE--> il manque la variable "+$routeFormatCle{$r}+"+<!--#4DENDIF-->"
 					End if 
+					
 					$routeVar:=Replace string:C233($routeVar; $routeFormatCle{$r}; $routeFormatData)
 				End for 
-				$route.variable:=$routeVar
 				
+				$route.variable:=$routeVar
 				$page.route:=$route
+				
 				OB SET:C1220($configPage; $libpage_at{$j}; $page)
 			End if 
+			
 		End for 
 		
-		
-		//Creation du chemin complet du fichier html
+		// Création du chemin complet du fichier html
 		For ($j; 1; Size of array:C274($libpage_at))
 			$page:=$configPage[$libpage_at{$j}]
+			
 			If ($page.viewPath#Null:C1517)
 				
 				// Attention : On ne peut pas utiliser ici de boucle for each car sa modification ne sera pas répercutée sur l'élément de la collection.
 				For ($i_l; 0; $page.viewPath.length-1)
+					
 					// On gére la possibilité de créer une arborescence dans les dossiers des pages HTML
 					$page.viewPath[$i_l]:=This:C1470.cacheViewSubdomainPath($subDomain_t)+cwToolPathSeparator($page.viewPath[$i_l])
 					
@@ -727,20 +727,20 @@ Historique
 				
 				// On retourne l'ordre des pages HTML pour commencer par les pages de plus bas niveau.
 				$page.viewPath:=$page.viewPath.reverse()
-				
 			Else 
 				$page.viewPath:=New collection:C1472
 			End if 
 			
-			
 			If ($page.methode#Null:C1517)
 				
 				For each ($methodeNom_t; $page.methode)
-					ARRAY TEXT:C222($methodName_at; 0)
 					METHOD GET NAMES:C1166($methodName_at; $methodeNom_t+"@"; *)
+					
 					If (Size of array:C274($methodName_at)=0)
 						ALERT:C41("Il manque la méthode suivante de l'application : "+$methodeNom_t)
 					End if 
+					
+					CLEAR VARIABLE:C89($methodName_at)
 				End for each 
 				
 				// On retourne l'ordre des méthodes pour commencer par les méthodes de plus bas niveau.
@@ -753,16 +753,12 @@ Historique
 			Case of 
 				: (cwExtensionFichier(String:C10($page.route.path))#"")
 					$page.type:=cwExtensionFichier($page.route.path)
-					
 				: ($page.viewPath.length#0)
 					$page.type:=cwExtensionFichier($page.viewPath[($page.viewPath.length-1)])
-					
-				Else 
-					// Si l'on arrive pas à le determiner, on fixe .html par defaut...
+				Else   // Si l'on arrive pas à le determiner, on fixe .html par defaut...
 					$page.type:=".html"
 			End case 
 			
-			//OB SET($configPage;$libpage_at{$j};OB Copy($page))
 			$route_c.push(OB Copy:C1225($page))
 		End for 
 		
@@ -775,6 +771,7 @@ Historique
 			Storage:C1525.sites[$subDomain_t].route:=$route_c.copy(ck shared:K85:29; Storage:C1525.sites[$subDomain_t])
 		End use 
 		
+		CLEAR VARIABLE:C89($routeFile_at)
 	End for each 
 	
 	MESSAGE:C88("Chargement des formulaires..."+Char:C90(Carriage return:K15:38))
@@ -830,11 +827,12 @@ Historique
 	
 	// Puis l'on vient combiner avec les informations 
 	If (Count parameters:C259>=1)
+		
 		If (Type:C295($optionExtern_c)=Is collection:K8:32)
-			
 			$options_c:=$options_c.query("NOT (key IN :1)"; $optionExtern_c.extract("key"))
 			$options_c.combine($optionExtern_c)
 		End if 
+		
 	End if 
 	
 	// Pour les options il suffit de faire une boucle
@@ -845,12 +843,14 @@ Historique
 	// On test que le dossier des sessions web existe bien, sinon on le crée.
 	If (Test path name:C476(This:C1470.cacheSessionWebPath())#Is a folder:K24:2)
 		CREATE FOLDER:C475(This:C1470.cacheSessionWebPath(); *)
+		
 		If (ok=0)
 			ALERT:C41("Impossible de créer le dossier des sessions Web : "+This:C1470.cacheSessionWebPath())
 			
 			// Il y a une erreur dans le dossier des sessions web, on va mettre le chemin par defaut avec le param "" et le créer au besoin.
 			CREATE FOLDER:C475(This:C1470.cacheSessionWebPath(""); *)
 		End if 
+		
 	End if 
 	
 	// On va conserver des informations importantes a porté de main...
@@ -871,16 +871,16 @@ Historique
 	$dernierJourValide_d:=Current date:C33-Num:C11(Storage:C1525.sessionWeb.valideDay)
 	
 	For ($i; 1; Size of array:C274($listeSessionWeb_t))
-		// On verifie une derniere fois que le fichier existe,
-		// Possibilité d'être supprimé par un autre process parallele...
+		
+		// On verifie une derniere fois que le fichier existe, possibilité d'être supprimé par un autre process parallele...
 		If (Test path name:C476($listeSessionWeb_t{$i})=Is a document:K24:1)
 			GET DOCUMENT PROPERTIES:C477($listeSessionWeb_t{$i}; $verrou_b; $invisible_b; $creerLe_d; $creerA_t; $modifierLe_d; $modifierA_t)
 			
 			If ($creerLe_d<$dernierJourValide_d)
-				//Il faut le supprimer, mais avant l'on regarde si il n'a pas un dossier temporaire associé.
+				// Il faut le supprimer, mais avant l'on regarde si il n'a pas un dossier temporaire associé.
 				$infoFichier_o:=Path to object:C1547($listeSessionWeb_t{$i})
 				
-				// c'est un dossier qui porte le même nom que le fichier mais sans extension.
+				// C'est un dossier qui porte le même nom que le fichier mais sans extension.
 				$infoFichier_o.folderTemp:=$infoFichier_o.parentFolder+$infoFichier_o.name+Folder separator:K24:12
 				
 				If (Test path name:C476($infoFichier_o.folderTemp)=Is a folder:K24:2)
@@ -890,6 +890,7 @@ Historique
 				// Maintenant on supprime le fichier de session
 				DELETE DOCUMENT:C159($listeSessionWeb_t{$i})
 			End if 
+			
 		End if 
 		
 	End for 
@@ -916,7 +917,6 @@ Historique
 	If (Count parameters:C259=1)
 		ASSERT:C1129(String:C10($subDomain_t)#""; "WebApp.sourceSubdomainPath : Le paramètre de la fonction ne doit pas être vide.")
 		$path_t:=Storage:C1525.param.folderPath.source_t+$subDomain_t+Folder separator:K24:12
-		
 	Else 
 		$path_t:=Storage:C1525.param.folderPath.source_t+visiteur.sousDomaine+Folder separator:K24:12
 	End if 

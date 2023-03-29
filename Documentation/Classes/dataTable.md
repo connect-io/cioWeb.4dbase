@@ -72,7 +72,7 @@ Datatable.getHtml() -> $html_t
 
 ### Example
 ```html
-<!--#4DHTML dataTables_o.dtPersonneListe.getHtml()-->
+<!--#4DHTML Session.storage.dataTables.dtPersonneListe.getHtml()-->
 ```
 
 

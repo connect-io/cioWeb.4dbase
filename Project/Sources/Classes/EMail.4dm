@@ -375,8 +375,3 @@ Historiques :
 	
 	// Retourne les informations concernant l'envoie du mail
 	$retour_o:=$mailStatus_o
-	
-	
-	
-	
-	
