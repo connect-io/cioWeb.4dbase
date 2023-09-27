@@ -15,3 +15,5 @@ var texteIn : Text
 var texteOut : Text
 var visiteur : Object
 var visiteur_o : Variant
+C_OBJECT:C1216(routeVar_o)
+C_TEXT:C284(temp_t)

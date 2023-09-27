@@ -63,8 +63,12 @@ Historiques
 		For each ($page_o; This:C1470.siteRoute_c.query("lib IS NOT index")) Until (pageWeb_o#Null:C1517)
 			
 			If (Match regex:C1019($page_o.route.regex; visiteur.url; 1; $AT_positionTrouvee; $AT_longueurTrouvee))
-				pageWeb_o:=$page_o
-				pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t"; Get 4D folder:C485(HTML Root folder:K5:20; *)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+				
+				// Controle des methodes HTTP
+				If (String:C10($page_o.route.methodHttp)="") || ($page_o.route.methodHttp=visiteur["X-METHOD"])
+					pageWeb_o:=$page_o
+					pageWeb_o.info:=New object:C1471("webfolderSubdomainPath_t"; Get 4D folder:C485(HTML Root folder:K5:20; *)+This:C1470.user.sousDomaine+Folder separator:K24:12)
+				End if 
 			End if 
 			
 		End for each 
