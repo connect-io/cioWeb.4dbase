@@ -110,28 +110,35 @@ $signal_o.wait(60)  // Sécurité si jamais l'import prends plus que 60 sec
 	Historique
 	27/07/20 - Grégory Fromain - création
 	24/02/21 - Grégory Fromain - Modernisation du code
+	22/11/22 - Jonathan Fernandez - Modernisation du code
 ------------------------------------------------------------------------------*/
 
 // Déclarations
 var webApp_o : cs.WebApp
+C_OBJECT(<>webApp_o)
 
-// Instanciation de la class
-<>webApp_o:=cwToolGetClass("WebApp").new()
-
-MESSAGE("Arrêt du serveur web..."+Char(Carriage return))
-WEB STOP SERVER
-
-MESSAGE("Chargement de l'application web..."+Char(Carriage return))
-<>webApp_o.serverStart()
-
-MESSAGE("Redémarrage du serveur web..."+Char(Carriage return))
-WEB START SERVER
-If (ok#1)
-	ALERT("Le serveur web n'est pas correctement démarré.")
+If (Application type#4D Remote mode)
+	
+	// Instanciation de la class
+	<>webApp_o:=cwToolGetClass("WebApp").new()
+	
+	MESSAGE("Arrêt du serveur web..."+Char(Carriage return))
+	$webServer_o:=WEB Server()
+	
+	MESSAGE("Chargement de l'application web..."+Char(Carriage return))
+	<>webApp_o.serverStart()
+	
+	MESSAGE("Redémarrage du serveur web..."+Char(Carriage return))
+	$state:=$webServer_o.start()
+	
+	If (Not($state.success))
+		ALERT("Le serveur web n'est pas correctement démarré.")
+	End if 
+	
+	// Démarrage des sessions
+	<>webApp_o.sessionWebStart()
+	
 End if 
-
-// Démarrage des sessions
-<>webApp_o.sessionWebStart()
 
 ```
 
@@ -146,76 +153,99 @@ End if
 	28/07/20 - Grégory Fromain - création
 	28/07/20 - Grégory Fromain - Gestion des blocks recursifs.
 	24/02/21 - Grégory Fromain - Modernisation du code, ajout graphique et préemptif
+	22/11/22 - Jonathan Fernandez - Ajout du Session.storage
 ------------------------------------------------------------------------------*/
 
 // Déclarations
-var $3 : Text  // Adresse IP du navigateur.
+var $3 : Text  // Adresse IP du navigateur
 
-var visiteur_o : Object
-var pageWeb_o : Object
-var dataTables_o : Object
-var charts_o : Object
-var $methodeNom_t : Text
-var $resultatMethode_t : Text
-var $htmlFichierChemin_t : Text
 var $retour_t : Text
+var $htmlFichierChemin_t : Text
+var $resultatMethode_t : Text
+var $methodeNom_t : Text
+
+var $visiteur_o : cs.cioWeb.User
+
+ARRAY TEXT($champ_at; 0)
+ARRAY TEXT($valeur_at; 0)
+
+var pageWeb_o : Object
 
 // ----- Gestion des erreurs -----
 ON ERR CALL("webAppErrorCallback")
 
-
 // ----- Chargement des informations du visiteur du site -----
-If (visiteur_o=Null)
-	visiteur_o:=cwToolGetClass("User").new()
-End if 
 
 // Récupération des informations du visiteur.
-visiteur_o.getInfo()
-visiteur_o.ip:=$3
-
-//Gestion des sessions web.
-visiteur_o.sessionWebLoad()
-
-
-// Petit hack pour simplifier, le premier démarrage.
-// C'est à supprimer après la configuration du fichier host de la machine.
-If (visiteur_o.Host="127.0.0.1")
-	visiteur_o.sousDomaine:=OB Keys(cwStorage.sites)[0]
-	visiteur_o.Host:=visiteur_o.sousDomaine+".dev.local"
+If (Session.storage.user=Null)
+	$visiteur_o:=cs.cioWeb.User.new()
+	
+	Use (Session.storage)
+		Session.storage.user:=OB Copy($visiteur_o; ck shared)
+	End use 
+	
 End if 
 
-// Dectection du mode développement
-visiteur_o.devMode:=visiteur_o.Host="@dev@"
+If (Semaphore("initUser"; 10*60))
+	// Passage en force...
+End if 
 
+Session.storage.user.getInfo($3)
+
+If (Session.storage.user.Origin#Null)
+	APPEND TO ARRAY($champ_at; "Access-Control-Allow-Origin")
+	APPEND TO ARRAY($valeur_at; Session.storage.user.Origin)
+Else 
+	APPEND TO ARRAY($champ_at; "Access-Control-Allow-Origin")
+	APPEND TO ARRAY($valeur_at; "*")
+End if 
+
+APPEND TO ARRAY($champ_at; "Access-Control-Allow-Credentials")
+APPEND TO ARRAY($valeur_at; "true")
+
+If (Session.storage.user["X-METHOD"]="OPTIONS")
+	APPEND TO ARRAY($champ_at; "Access-Control-Allow-Headers")
+	APPEND TO ARRAY($valeur_at; "Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, access-control-allow-methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials")
+End if 
+
+WEB SET HTTP HEADER($champ_at; $valeur_at)
+
+If (Session.storage.user["X-METHOD"]="OPTIONS")
+	WEB SEND TEXT("options")
+	return 
+End if 
 
 // ----- Rechargement des variables de l'application -----
-If (visiteur_o.devMode)
+// Dectection du mode développement
+If (Session.storage.user.devMode)
 	SET ASSERT ENABLED(True)
-	webAppCall("serverStart")
+	webAppWorkerCall("serverStart")
 End if 
-
 
 // ----- Chargement des informations sur la page -----
-pageWeb_o:=cwToolGetClass("Page").new(visiteur_o)
+pageWeb_o:=cwToolGetClass("Page").new(Session.storage.user)
+CLEAR SEMAPHORE("initUser")
 
-// On purge les dataTables.
-If (pageWeb_o.lib#"@ajax@") | (dataTables_o=Null)
-	// Contient les datatables que le visiteur va utiliser dans son processs
-	dataTables_o:=New object()
+If (pageWeb_o.lib#"@ajax@") | (Session.storage.dataTables=Null)  // On purge les dataTables
+	
+	Use (Session.storage)
+		Session.storage.dataTables:=New shared object()
+	End use 
+	
 End if 
 
-// On purge les graphiques.
-If (pageWeb_o.lib#"@ajax@") | (charts_o=Null)
-	// Contient les graphiques que le visiteur va utiliser dans son processs
+If (pageWeb_o.lib#"@ajax@") | (charts_o=Null)  // On purge les graphiques
 	charts_o:=New object()
 End if 
 
-// On va fusionner les datas de la route de l'URL sur le visiteur.
-If (pageWeb_o.route.data#Null)
+// On va fusionner les datas de la route de l'URL sur le visiteur
+Use (Session.storage.user)
+	
 	For each ($routeData_t; pageWeb_o.route.data)
-		visiteur_o[$routeData_t]:=pageWeb_o.route.data[$routeData_t]
+		Session.storage.user[$routeData_t]:=pageWeb_o.route.data[$routeData_t]
 	End for each 
-End if 
+	
+End use 
 
 // On exécute si besoin les méthodes relatives à la page
 For each ($methodeNom_t; pageWeb_o.methode)
@@ -223,23 +253,17 @@ For each ($methodeNom_t; pageWeb_o.methode)
 	pageWeb_o.resulatMethode_t:=$resultatMethode_t
 End for each 
 
-//S'il y a un fichier HTML à renvoyer... on lance le constructeur.
-visiteur_o.updateVarVisiteur()
-
+//Si il y a un fichier HTML à renvoyer... on lance le constructeur.
+Session.storage.user.updateVarVisiteur()
 
 Case of 
-	: (pageWeb_o.viewPath.length=0) & (String(pageWeb_o.resulatMethode_t)#"")
-		// Si c'est du hard code. (ex : requete ajax)
+	: (pageWeb_o.viewPath.length=0) & (String(pageWeb_o.resulatMethode_t)#"")  // Si c'est du hard code. (ex : requete ajax)
 		WEB SEND TEXT(pageWeb_o.resulatMethode_t; pageWeb_o.type)
-		
-	: (pageWeb_o.viewPath.length=0)
-		// On ne fait rien la méthode d'appel renvoie déjà du contenu
-		// (Exemple fichier Excel)
-		
+	: (pageWeb_o.viewPath.length=0)  // On ne fait rien la méthode d'appel renvoie déjà du contenu (Exemple fichier Excel)
 	Else 
-		// Si nous ne sommes pas en ajax et pas en page d'erreur, on génére un nouveau token pour le visiteur
-		If (pageWeb_o.lib#"404")
-			visiteur_o.tokenGenerate()
+		
+		If (pageWeb_o.lib#"404")  // Si nous ne sommes pas en ajax et pas en page d'erreur, on génére un nouveau token pour le visiteur
+			Session.storage.user.tokenGenerate()
 		End if 
 		
 		For each ($htmlFichierChemin_t; pageWeb_o.viewPath)
@@ -248,6 +272,7 @@ Case of
 		
 		WEB SEND TEXT($retour_t; pageWeb_o.type)
 End case 
+
 ```
 
 ## Méthode de base sur fermeture process web
