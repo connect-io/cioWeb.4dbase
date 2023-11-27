@@ -1,22 +1,23 @@
-﻿/* -----------------------------------------------------------------------------
+﻿/*------------------------------------------------------------------------------
   notification.js
 
   Gestion des notifications.
 
   Historique
   20/09/20 - Grégory Fromain <gregory@connect-io.fr> - Création
+  27/11/23 - Jonathan Fernandez <jonathan@connect-io.fr> - Ajout Session.storage.user
 ----------------------------------------------------------------------------- */
 
 
 // ----- Init de l'objet de récupération des datas 4D -----
 if(data4D == null){
-    var data4D = {};
+	var data4D = {};
 }
 
 /* ----- Gestion des notifications de succés -----
 
 Utilisation depuis 4D :
-visiteur_o.notificationSuccess:="Message envoyé"
+Session.storage.user.notificationSuccess:="Message envoyé"
 
 Utilisation depuis JS :
 data4D.notificationSuccess("Message envoyé");
@@ -36,14 +37,14 @@ data4D.notificationSuccess = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": false
+			"escapeHtml": true
 		}
-	);			
+	);
 
-};   
+};
 
-<!--#4DIF (string(visiteur_o.notificationSuccess)#"")-->
-data4D.notificationSuccess("<!--#4DHTML visiteur_o.notificationSuccess-->");
+<!--#4DIF (string(Session.storage.user.notificationSuccess)#"")-->
+data4D.notificationSuccess("<!--#4DHTML Session.storage.user.notificationSuccess-->");
 <!--#4DENDIF-->
 
 
@@ -51,7 +52,7 @@ data4D.notificationSuccess("<!--#4DHTML visiteur_o.notificationSuccess-->");
 /* ----- Gestion des notifications d'erreur -----
 
 Utilisation depuis 4D :
-visiteur_o.notificationError:="Votre accès est interdit."
+Session.storage.user.notificationError:="Votre accès est interdit."
 
 Utilisation depuis JS :
 data4D.notificationError("Votre accès est interdit.");
@@ -71,13 +72,13 @@ data4D.notificationError = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": false
+			"escapeHtml": true
 		}
 	);
-}; 
+};
 
-<!--#4DIF (string(visiteur_o.notificationError)#"")-->
-data4D.notificationError("<!--#4DHTML visiteur_o.notificationError-->");
+<!--#4DIF (string(Session.storage.user.notificationError)#"")-->
+data4D.notificationError("<!--#4DHTML Session.storage.user.notificationError-->");
 <!--#4DENDIF-->
 
 
@@ -85,7 +86,7 @@ data4D.notificationError("<!--#4DHTML visiteur_o.notificationError-->");
 /* ----- Gestion des notifications attention -----
 
 Utilisation depuis 4D :
-visiteur_o.notificationWarning:="Le champ prénom est obligatoire."
+Session.storage.user.notificationWarning:="Le champ prénom est obligatoire."
 
 Utilisation depuis JS :
 data4D.notificationWarning("Le champ prénom est obligatoire.");
@@ -105,14 +106,14 @@ data4D.notificationWarning = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": false
+			"escapeHtml": true
 		}
 	);
-}; 
+};
 
 
-<!--#4DIF (string(visiteur_o.notificationWarning)#"")-->
-data4D.notificationWarning("<!--#4DHTML visiteur_o.notificationWarning-->");
+<!--#4DIF (string(Session.storage.user.notificationWarning)#"")-->
+data4D.notificationWarning("<!--#4DHTML Session.storage.user.notificationWarning-->");
 <!--#4DENDIF-->
 
 
@@ -120,7 +121,7 @@ data4D.notificationWarning("<!--#4DHTML visiteur_o.notificationWarning-->");
 /* ----- Gestion des notifications d'information -----
 
 Utilisation depuis 4D :
-visiteur_o.notificationInfo:="Vous avez 4 nouveaux message."
+Session.storage.user.notificationInfo:="Vous avez 4 nouveaux message."
 
 Utilisation depuis JS :
 data4D.notificationInfo("Vous avez 4 nouveaux message.");
@@ -140,11 +141,11 @@ data4D.notificationInfo = function (message) {
 			"extendedTimeOut": "10000",
 			"showEasing": "swing",
 			"hideEasing": "linear",
-			"escapeHtml": false
+			"escapeHtml": true
 		}
 	);
-};	
+};
 
-<!--#4DIF (string(visiteur_o.notificationInfo)#"")-->
-data4D.notificationInfo("<!--#4DHTML visiteur_o.notificationInfo-->");
+<!--#4DIF (string(Session.storage.user.notificationInfo)#"")-->
+data4D.notificationInfo("<!--#4DHTML Session.storage.user.notificationInfo-->");
 <!--#4DENDIF-->
