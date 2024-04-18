@@ -227,6 +227,21 @@ Historique
 	End for 
 	
 	// ----- Calcul de variable -----
+	// Les modifications suivantes sont pour la compatibilité avec des nouvelles versions de Chrome.
+	// En effet depuis la V88 chrome renvoit les variables : referer, host et cookies avec une
+	// minuscule alors qu'historiquement c'est une majuscule.
+	If (String:C10(This:C1470.referer)#"")
+		Use (This:C1470)
+			This:C1470.Referer:=This:C1470.referer
+		End use 
+	End if 
+	
+	If (String:C10(This:C1470.host)#"")
+		Use (This:C1470)
+			This:C1470.Host:=This:C1470.host
+		End use 
+	End if 
+	
 	Use (This:C1470)
 		This:C1470.sousDomaine:=Substring:C12(This:C1470.Host; 1; Position:C15("."; This:C1470.Host)-1)
 		This:C1470.domaine:=Substring:C12(This:C1470.Host; Position:C15("."; This:C1470.Host)+1)
@@ -260,24 +275,7 @@ Historique
 		
 	End if 
 	
-	// Les modifications suivantes sont pour la compatibilité avec des nouvelles versions de Chrome.
-	// En effet depuis la V88 chrome renvoit les variables : referer, host et cookies avec une
-	// minuscule alors qu'historiquement c'est une majuscule.
-	If (String:C10(This:C1470.referer)#"")
-		
-		Use (This:C1470)
-			This:C1470.Referer:=This:C1470.referer
-		End use 
-		
-	End if 
 	
-	If (String:C10(This:C1470.host)#"")
-		
-		Use (This:C1470)
-			This:C1470.Host:=This:C1470.host
-		End use 
-		
-	End if 
 	
 	If (String:C10(This:C1470.cookie)="")
 		// ----- Gestion des cookies -----
