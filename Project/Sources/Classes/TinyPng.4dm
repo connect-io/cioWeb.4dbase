@@ -183,7 +183,6 @@ Historiques
 30/11/21 - Grégory Fromain <gregory@connect-io.fr> - Maj appel param dans la fonction
 ------------------------------------------------------------------------------*/
 	
-	var $filePath_t : Text  // chemin du fichier
 	var $data_p : Picture  // Image à envoyer
 	var $etat_i : Integer
 	var $reponse_o : Object  // réponse temporaire
