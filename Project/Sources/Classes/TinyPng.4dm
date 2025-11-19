@@ -148,7 +148,7 @@ Historiques
 	
 	
 	
-Function lastExportInfo()->$info_o : Object
+Function getLastExportInfo()->$info_o : Object
 /*------------------------------------------------------------------------------
 Fonction : TinyPng.lastExportInfo
 	

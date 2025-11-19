@@ -25,6 +25,7 @@ Historiques
 28/01/22 - Grégory Fromain <gregory@connect-io.fr> - Correction bug sur condition
 01/03/22 - Jonathan Fernandez <jonathan@connect-io.fr> - Changement de la gestion du stockage des transporteurs.
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Fix bug selection serveur IMAP
+18/11/25 - Grégory Fromain <gregory@connect-io.fr> - Ajout de la gestion de l'Oauth
 ------------------------------------------------------------------------------*/
 	
 	var $transporter_c : Collection  // Récupère la collection de plumeDemo
@@ -38,38 +39,44 @@ Historiques
 		ASSERT:C1129(Storage:C1525.eMail.smtp.length=0; "EMail.constructor : merci de mettre à jour le transporteur dans le fichier email.json.")
 	End if 
 	
-	$server_o:=New object:C1471()
-	
-	// Vérifie que le nom du transporteur soit bien dans la config
-	
 	This:C1470.transporterName:=$name_t
 	
-	$transporter_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'smtp'"; $name_t)
-	
-	ASSERT:C1129($transporter_c.length#0; "Le nom du transporteur indiqué ne correspond à aucun transporteur")
+	$server_o:=New object:C1471()
+	$transporter_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'Oauth'"; $name_t)
 	
 	If ($transporter_c.length=1)
 		$server_o:=$transporter_c[0]
-	End if 
-	
-	// Il est possible de surcharger le transporteur.
-	If (Count parameters:C259=2)
-		$server_o:=cwToolObjectMerge($server_o; $paramOptionnel_o)
-	End if 
-	
-	If ($server_o#Null:C1517)
-		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
 		
+		// Il est possible de surcharger le transporteur.
+		If (Count parameters:C259=2)
+			$server_o:=cwToolObjectMerge($server_o; $paramOptionnel_o)
+		End if 
+		
+		This:C1470.Oauth:=OauthMS($server_o)
+	End if 
+	// Fin Oauth
+	
+	// Vérifie que le nom du transporteur soit bien dans la config
+	$transporter_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'smtp'"; $name_t)
+	
+	If ($transporter_c.length=1)
+		$server_o:=$transporter_c[0]
+		
+		// Il est possible de surcharger le transporteur.
+		If (Count parameters:C259=2)
+			$server_o:=cwToolObjectMerge($server_o; $paramOptionnel_o)
+		End if 
+		
+		This:C1470.transporter:=SMTP New transporter:C1608($server_o)
 		$imapConfig_c:=Storage:C1525.eMail.transporter.query("name IS :1 and type IS 'imap'"; $name_t)
 		
 		If ($imapConfig_c.length=1)
 			This:C1470.transporterIMAP:=IMAP New transporter:C1723($imapConfig_c[0])
 		End if 
 		
-	Else 
-		ALERT:C41("cioWeb : Aucun transporteur SMTP trouvé au sein du fichier JSON.")
-		This:C1470.transporter:=New object:C1471()
 	End if 
+	
+	ASSERT:C1129((This:C1470.Oauth#Null:C1517) | (This:C1470.transporter#Null:C1517); "Le nom du transporteur indiqué ne correspond à aucun transporteur")
 	
 	// Initialisation des pieces jointes
 	This:C1470.attachmentsPath_c:=New collection:C1472()
@@ -109,8 +116,8 @@ Historique
 		WEB GET BODY PART:C1212($i_el; $fileContent_b; $htmlName_t; $fileMimeType_t; $fileName_t)
 		
 		If ($htmlName_t=$nameInput_t)
+			
 			If ($fileName_t#"")
-				
 				BLOB TO DOCUMENT:C526($vFolderDestination_t+$fileName_t; $fileContent_b)
 				$retour_t:=$vFolderDestination_t+$fileName_t
 			End if 
@@ -253,7 +260,7 @@ Historiques
 	$mailStatus_o:=New object:C1471("success"; False:C215)
 	
 	//On vérifie que l'on a bien notre transporter
-	If (This:C1470.transporter=Null:C1517)
+	If (This:C1470.transporter=Null:C1517) & (This:C1470.Oauth=Null:C1517)
 		$error_t:="Il n'y a pas de transporter d'initialisé."
 	End if 
 	
@@ -305,7 +312,12 @@ Historiques
 	
 	//Envoi du mail
 	If ($error_t="")
-		$mailStatus_o:=This:C1470.transporter.send(This:C1470)
+		
+		If (This:C1470.Oauth#Null:C1517)
+			$mailStatus_o:=This:C1470.Oauth.mail.send(This:C1470)
+		Else 
+			$mailStatus_o:=This:C1470.transporter.send(This:C1470)
+		End if 
 		
 		//Si l'envoie du mail = True
 		If ($mailStatus_o.success)
