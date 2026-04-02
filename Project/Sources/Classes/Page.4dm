@@ -5,6 +5,11 @@ Cette class permet de génerer le contenue d'une page.
 
 */
 
+property lib; titre; description; keywords; type; corps; jsInHtml_t; resulatMethode_t : Text
+property login : Boolean
+property user; info; route; i18n : Object
+property parents; siteRoute_c; cssPath; jsPath; jsPathInHtml; viewPath; methode : Collection
+
 
 Class constructor($infoUser_o : Object)
 /*------------------------------------------------------------------------------

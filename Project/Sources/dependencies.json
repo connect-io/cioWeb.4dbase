@@ -1,0 +1,9 @@
+{
+	"version": 2100,
+	"dependencies": {
+		"4D NetKit": {
+			"github": "4d/4D-NetKit",
+			"version": "4d"
+		}
+	}
+}

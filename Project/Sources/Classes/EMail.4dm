@@ -7,6 +7,11 @@ Historique
 10/11/20 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code du composant plume et conversion en class
 */
 
+property transporterName; from; subject; htmlBody; textBody : Text
+property Oauth; transporter; transporterIMAP; globalVar; bodyStructure : Object
+property attachmentsPath_c; attachments; model : Collection
+property to : Variant
+
 Class constructor($name_t : Text; $paramOptionnel_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : EMail.constructor

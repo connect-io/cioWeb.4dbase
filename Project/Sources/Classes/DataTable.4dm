@@ -5,6 +5,10 @@ Gestion des tableaux de données en HTML.
 
 */
 
+property lib; lib_t : Text
+property ajax; doubleClick : Object
+property column; data; column_c; data_c : Collection
+
 
 Class constructor($dataTableLib_t : Text)
 /*------------------------------------------------------------------------------
@@ -189,3 +193,4 @@ Historique
 		End use 
 		
 	End if 
+	

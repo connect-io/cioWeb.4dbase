@@ -4,6 +4,10 @@ Permet l'utilisation de l'api du site tinypng.com
 
 */
 
+property keys; host : Text
+property lastExportInfo : Object
+property CompressionCount : Integer
+
 
 Class constructor($ApiKey : Text)
 /*------------------------------------------------------------------------------

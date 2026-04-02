@@ -5,6 +5,8 @@ Cette class permet de centraliser toutes les données de l'application web.
 
 */
 
+property param : Object
+
 
 Class constructor($webAppFolderName_t : Text)
 /*------------------------------------------------------------------------------

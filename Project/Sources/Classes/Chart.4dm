@@ -5,6 +5,9 @@ Gestion des tableaux de données en HTML.
 
 */
 
+property lib; type : Text
+property data; options : Object
+
 Class constructor($libChart_t : Text; $modele_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Chart.constructor

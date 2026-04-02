@@ -1,3 +1,5 @@
+property email : Object
+
 Class constructor
 /*------------------------------------------------------------------------------
 Fonction : EMailModel.constructor

@@ -8,6 +8,14 @@ un robot google ou un autre serveur qui vient interroger le notre.
 
 */
 
+property Host; host; Referer; referer; Cookie; cookie; Origin : Text
+property ip; url; sousDomaine; domaine; lang; loginDomaine; loginEMail; eMail : Text
+property token; tokenControle; notificationError; notificationSuccess; notificationWarning; notificationInfo : Text
+property action; loginLevel; formSubmit : Variant
+property processWebID; loginExpire_ts : Integer
+property devMode; sessionWebActive; envoiHttpRedirection : Boolean
+property dataForm; dataFormTyping : Object
+
 
 Class constructor()
 /*------------------------------------------------------------------------------
