@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><preferences stamp="11">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="12">
 	<com.4d>
 		<web>
 			<standalone_server>
@@ -22,7 +22,7 @@
 			<options/>
 		</deployment>
 		<compiler>
-			<options target="all"/>
+			<options syntax_file="true" target="all"/>
 		</compiler>
 	</com.4d>
 </preferences>

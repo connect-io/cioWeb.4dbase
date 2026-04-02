@@ -1,0 +1,1895 @@
+{
+	"_method_": {
+		"cwToolTextReplaceByRegex": {
+			"Syntax": "**cwToolTextReplaceByRegex**( *p1* : Text; *p2* : Text; *p3* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"p3",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwDateFormatTexte": {
+			"Syntax": "**cwDateFormatTexte**( *p1* : Text; *p2* : Date ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Date",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cw4dWriteProGeneratePDF": {
+			"Syntax": "**cw4dWriteProGeneratePDF**( *p1* : Variant; *p2* : Variant; *p3* : Object ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Variant",
+					"->"
+				],
+				[
+					"p2",
+					"Variant",
+					"->"
+				],
+				[
+					"p3",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwI18nLoad": {
+			"Syntax": "**cwI18nLoad**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwFormInputSelectNewValue": {
+			"Syntax": "**cwFormInputSelectNewValue**( *p1* : Text; *p2* : Collection; *p3* : Text ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Collection",
+					"->"
+				],
+				[
+					"p3",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolHtmlToText": {
+			"Syntax": "**cwToolHtmlToText**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectProgress4DTag": {
+			"Syntax": "**cwToolObjectProgress4DTag**( *p1* : Object ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwLogErreurAjout": {
+			"Syntax": "**cwLogErreurAjout**( *p1* : Text; *p2* : Object ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwInputInjection4DHtmlSafeUse": {
+			"Syntax": "**cwInputInjection4DHtmlSafeUse**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolUrlDecode": {
+			"Syntax": "**cwToolUrlDecode**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwInputInjection4DHtmlIsValide": {
+			"Syntax": "**cwInputInjection4DHtmlIsValide**( *p1* : Text ) : Boolean",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwTimestampLire": {
+			"Syntax": "**cwTimestampLire**( *p1* : Text; *p2* : Integer ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwHttpRedirect": {
+			"Syntax": "**cwHttpRedirect**( *p1* : Text; *p2* : Object ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwFormGetData": {
+			"Syntax": "**cwFormGetData**( *p1* : Text ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwSupprBaliseHtml": {
+			"Syntax": "**cwSupprBaliseHtml**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectSplitStringKey": {
+			"Syntax": "**cwToolObjectSplitStringKey**( *p1* : Object ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwPageActive": {
+			"Syntax": "**cwPageActive**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolUrlEncode": {
+			"Syntax": "**cwToolUrlEncode**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwInputValidation": {
+			"Syntax": "**cwInputValidation**( *p1* : Text; *p2* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwStorage": {
+			"Syntax": "**cwStorage**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwGetVersion": {
+			"Syntax": "**cwGetVersion**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectDeletePrefixKey": {
+			"Syntax": "**cwToolObjectDeletePrefixKey**( *p1* : Variant; *p2* : Text ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Variant",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwInputHtml": {
+			"Syntax": "**cwInputHtml**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwGestionErreur": {
+			"Syntax": "**cwGestionErreur**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectMerge": {
+			"Syntax": "**cwToolObjectMerge**( *p1* : Object; *p2* : Object ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"p2",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwLibToUrl": {
+			"Syntax": "**cwLibToUrl**( *p1* : Text; *p2* : Object ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolPathSeparator": {
+			"Syntax": "**cwToolPathSeparator**( *p1* : Text; *p2* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwFormInit": {
+			"Syntax": "**cwFormInit**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwFormControl": {
+			"Syntax": "**cwFormControl**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwEMailConfigLoad": {
+			"Syntax": "**cwEMailConfigLoad**( *p1* : Object ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolHashUrl": {
+			"Syntax": "**cwToolHashUrl**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwDateClean": {
+			"Syntax": "**cwDateClean**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwFormatValide": {
+			"Syntax": "**cwFormatValide**( *p1* : Text; *p2* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectDeleteKeys": {
+			"Syntax": "**cwToolObjectDeleteKeys**( *p1* : Object; *p2* : Text ) : Variant",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"p2",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolJetLag": {
+			"Syntax": "**cwToolJetLag**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwMinifier": {
+			"Syntax": "**cwMinifier**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolGetClass": {
+			"Syntax": "**cwToolGetClass**( *p1* : Text ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwI18nConvertJson": {
+			"Syntax": "**cwI18nConvertJson**( *p1* : Text ) : Text",
+			"Params": [
+				[
+					"p1",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwTimestamp": {
+			"Syntax": "**cwTimestamp**( *p1* : Date; *p2* : Time ) : Integer",
+			"Params": [
+				[
+					"p1",
+					"Date",
+					"->"
+				],
+				[
+					"p2",
+					"Time",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolObjectFromFile": {
+			"Syntax": "**cwToolObjectFromFile**( *p1* : Object; *p2* : Integer ) : Object",
+			"Params": [
+				[
+					"p1",
+					"Object",
+					"->"
+				],
+				[
+					"p2",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"cwToolMethodCleanVariableDecla": {
+			"Syntax": "**cwToolMethodCleanVariableDecla**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"cs.cioWeb": {
+		"EMail": {
+			"new()": {
+				"Syntax": "**.new**( *name_t* : Text; *paramOptionnel_o* : Object )",
+				"Params": [
+					[
+						"name_t",
+						"Text",
+						"->"
+					],
+					[
+						"paramOptionnel_o",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"EMailModel": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"WebApp": {
+			"new()": {
+				"Syntax": "**.new**( *webAppFolderName_t* : Text )",
+				"Params": [
+					[
+						"webAppFolderName_t",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"Chart": {
+			"new()": {
+				"Syntax": "**.new**( *libChart_t* : Text; *modele_t* : Text )",
+				"Params": [
+					[
+						"libChart_t",
+						"Text",
+						"->"
+					],
+					[
+						"modele_t",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"User": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"TinyPng": {
+			"new()": {
+				"Syntax": "**.new**( *ApiKey* : Text )",
+				"Params": [
+					[
+						"ApiKey",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"DataTable": {
+			"new()": {
+				"Syntax": "**.new**( *dataTableLib_t* : Text )",
+				"Params": [
+					[
+						"dataTableLib_t",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"Page": {
+			"new()": {
+				"Syntax": "**.new**( *infoUser_o* : Object )",
+				"Params": [
+					[
+						"infoUser_o",
+						"Object",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"EMail": {
+		"sendModel()": {
+			"Syntax": "**.sendModel**( *nomModel_t* : Text; *variableDansMail_o* : Object )->retour_o : Object",
+			"Params": [
+				[
+					"nomModel_t",
+					"Text",
+					"->"
+				],
+				[
+					"variableDansMail_o",
+					"Object",
+					"->"
+				],
+				[
+					"retour_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"send()": {
+			"Syntax": "**.send**()->resultat_o : Object",
+			"Params": [
+				[
+					"resultat_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"modelGenerate()": {
+			"Syntax": "**.modelGenerate**( *nomModel_t* : Text; *variableDansMail_o* : Object )->retour_o : Object",
+			"Params": [
+				[
+					"nomModel_t",
+					"Text",
+					"->"
+				],
+				[
+					"variableDansMail_o",
+					"Object",
+					"->"
+				],
+				[
+					"retour_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"attachmentAdd()": {
+			"Syntax": "**.attachmentAdd**( *vFolderDestination_t* : Text; *nameInput_t* : Text )->retour_t : Text",
+			"Params": [
+				[
+					"vFolderDestination_t",
+					"Text",
+					"->"
+				],
+				[
+					"nameInput_t",
+					"Text",
+					"->"
+				],
+				[
+					"retour_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"model": {
+			"Syntax": "model : Collection"
+		},
+		"attachments": {
+			"Syntax": "attachments : Collection"
+		},
+		"bodyStructure": {
+			"Syntax": "bodyStructure : Object"
+		},
+		"transporterName": {
+			"Syntax": "transporterName : Text"
+		},
+		"globalVar": {
+			"Syntax": "globalVar : Object"
+		},
+		"transporter": {
+			"Syntax": "transporter : Object"
+		},
+		"transporterIMAP": {
+			"Syntax": "transporterIMAP : Object"
+		},
+		"attachmentsPath_c": {
+			"Syntax": "attachmentsPath_c : Collection"
+		},
+		"Oauth": {
+			"Syntax": "Oauth : Object"
+		},
+		"to": {
+			"Syntax": "to : Variant"
+		},
+		"textBody": {
+			"Syntax": "textBody : Text"
+		},
+		"subject": {
+			"Syntax": "subject : Text"
+		},
+		"htmlBody": {
+			"Syntax": "htmlBody : Text"
+		},
+		"from": {
+			"Syntax": "from : Text"
+		}
+	},
+	"EMailModel": {
+		"transporterModify()": {
+			"Syntax": "**.transporterModify**( *transporterModify_o* : Object; *protocol_t* : Text )->result_t : Text",
+			"Params": [
+				[
+					"transporterModify_o",
+					"Object",
+					"->"
+				],
+				[
+					"protocol_t",
+					"Text",
+					"->"
+				],
+				[
+					"result_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"transporterGetAll()": {
+			"Syntax": "**.transporterGetAll**( *protocol_t* : Text )->allTransporter_c : Collection",
+			"Params": [
+				[
+					"protocol_t",
+					"Text",
+					"->"
+				],
+				[
+					"allTransporter_c",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"layoutAdd()": {
+			"Syntax": "**.layoutAdd**( *layout_o* : Object )->reponse_t : Text",
+			"Params": [
+				[
+					"layout_o",
+					"Object",
+					"->"
+				],
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"transporterAdd()": {
+			"Syntax": "**.transporterAdd**( *transporter_o* : Object; *protocol_t* : Text )->reponse_t : Text",
+			"Params": [
+				[
+					"transporter_o",
+					"Object",
+					"->"
+				],
+				[
+					"protocol_t",
+					"Text",
+					"->"
+				],
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"layoutModify()": {
+			"Syntax": "**.layoutModify**( *layoutModify_o* : Object )->result_t : Text",
+			"Params": [
+				[
+					"layoutModify_o",
+					"Object",
+					"->"
+				],
+				[
+					"result_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"layoutDelete()": {
+			"Syntax": "**.layoutDelete**( *name_t* : Text )",
+			"Params": [
+				[
+					"name_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"getAll()": {
+			"Syntax": "**.getAll**()->allModel_c : Collection",
+			"Params": [
+				[
+					"allModel_c",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"delete()": {
+			"Syntax": "**.delete**( *name_t* : Text )",
+			"Params": [
+				[
+					"name_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get()": {
+			"Syntax": "**.get**( *name_t* : Text )->reponse_o : Object",
+			"Params": [
+				[
+					"name_t",
+					"Text",
+					"->"
+				],
+				[
+					"reponse_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"transporterDelete()": {
+			"Syntax": "**.transporterDelete**( *name_t* : Text; *protocol_t* : Text )",
+			"Params": [
+				[
+					"name_t",
+					"Text",
+					"->"
+				],
+				[
+					"protocol_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"add()": {
+			"Syntax": "**.add**( *modele_o* : Object )->reponse_t : Text",
+			"Params": [
+				[
+					"modele_o",
+					"Object",
+					"->"
+				],
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"layoutGetAll()": {
+			"Syntax": "**.layoutGetAll**()->allLayout_c : Collection",
+			"Params": [
+				[
+					"allLayout_c",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"configToJson()": {
+			"Syntax": "**.configToJson**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"modify()": {
+			"Syntax": "**.modify**( *modelModify_o* : Object )->result_t : Text",
+			"Params": [
+				[
+					"modelModify_o",
+					"Object",
+					"->"
+				],
+				[
+					"result_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"email": {
+			"Syntax": "email : Object"
+		}
+	},
+	"WebApp": {
+		"serverStart()": {
+			"Syntax": "**.serverStart**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"htmlMinify()": {
+			"Syntax": "**.htmlMinify**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"jsMinify()": {
+			"Syntax": "**.jsMinify**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"cacheSessionWebPath()": {
+			"Syntax": "**.cacheSessionWebPath**( *pathDefault_t* : Text )->path_t : Text",
+			"Params": [
+				[
+					"pathDefault_t",
+					"Text",
+					"->"
+				],
+				[
+					"path_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"eMailConfigLoad()": {
+			"Syntax": "**.eMailConfigLoad**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"cacheViewSubdomainPath()": {
+			"Syntax": "**.cacheViewSubdomainPath**( *subDomain_t* : Text )->path_t : Text",
+			"Params": [
+				[
+					"subDomain_t",
+					"Text",
+					"->"
+				],
+				[
+					"path_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"webfolderSubdomainPath()": {
+			"Syntax": "**.webfolderSubdomainPath**( *subDomain_t* : Text )->path_t : Text",
+			"Params": [
+				[
+					"subDomain_t",
+					"Text",
+					"->"
+				],
+				[
+					"path_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"sourceSubdomainPath()": {
+			"Syntax": "**.sourceSubdomainPath**( *subDomain_t* : Text )->path_t : Text",
+			"Params": [
+				[
+					"subDomain_t",
+					"Text",
+					"->"
+				],
+				[
+					"path_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"sessionWebStart()": {
+			"Syntax": "**.sessionWebStart**( *optionExtern_c* : Collection )",
+			"Params": [
+				[
+					"optionExtern_c",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"I18NLoad()": {
+			"Syntax": "**.I18NLoad**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"param": {
+			"Syntax": "param : Object"
+		}
+	},
+	"Chart": {
+		"typeSet()": {
+			"Syntax": "**.typeSet**( *type_t* : Text )",
+			"Params": [
+				[
+					"type_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"optionsMerge()": {
+			"Syntax": "**.optionsMerge**( *options_o* : Object )",
+			"Params": [
+				[
+					"options_o",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"labelSet()": {
+			"Syntax": "**.labelSet**( *label_c* : Collection )",
+			"Params": [
+				[
+					"label_c",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"dataOption()": {
+			"Syntax": "**.dataOption**( *labelName_t* : Text; *option_o* : Object )",
+			"Params": [
+				[
+					"labelName_t",
+					"Text",
+					"->"
+				],
+				[
+					"option_o",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"dataSet()": {
+			"Syntax": "**.dataSet**( *labelName_t* : Text; *data_c* : Collection )",
+			"Params": [
+				[
+					"labelName_t",
+					"Text",
+					"->"
+				],
+				[
+					"data_c",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"dataColor()": {
+			"Syntax": "**.dataColor**( *labelName_t* : Text; *colorName_t* : Text )",
+			"Params": [
+				[
+					"labelName_t",
+					"Text",
+					"->"
+				],
+				[
+					"colorName_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"titleSet()": {
+			"Syntax": "**.titleSet**( *title_t* : Text )",
+			"Params": [
+				[
+					"title_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"getHtml()": {
+			"Syntax": "**.getHtml**()->codeHtml_t : Text",
+			"Params": [
+				[
+					"codeHtml_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"options": {
+			"Syntax": "options : Object"
+		},
+		"data": {
+			"Syntax": "data : Object"
+		},
+		"type": {
+			"Syntax": "type : Text"
+		},
+		"lib": {
+			"Syntax": "lib : Text"
+		}
+	},
+	"User": {
+		"tokenGenerate()": {
+			"Syntax": "**.tokenGenerate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"formToEntity()": {
+			"Syntax": "**.formToEntity**( *valueInput_o* : Pointer )",
+			"Params": [
+				[
+					"valueInput_o",
+					"Pointer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"sessionWebLoad()": {
+			"Syntax": "**.sessionWebLoad**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"sessionWebFolderPath()": {
+			"Syntax": "**.sessionWebFolderPath**()->cheminSession_t : Text",
+			"Params": [
+				[
+					"cheminSession_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"objectMerge()": {
+			"Syntax": "**.objectMerge**( *fils_o* : Object )",
+			"Params": [
+				[
+					"fils_o",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"updateVarVisiteur()": {
+			"Syntax": "**.updateVarVisiteur**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"logout()": {
+			"Syntax": "**.logout**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"sessionWebSave()": {
+			"Syntax": "**.sessionWebSave**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"login()": {
+			"Syntax": "**.login**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"getInfo()": {
+			"Syntax": "**.getInfo**( *ip_t* : Text )",
+			"Params": [
+				[
+					"ip_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"tokenCheck()": {
+			"Syntax": "**.tokenCheck**()->tokenValide_b : Boolean",
+			"Params": [
+				[
+					"tokenValide_b",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"formInfo()": {
+			"Syntax": "**.formInfo**( *nameForm_t* : Text )->form_o : Object",
+			"Params": [
+				[
+					"nameForm_t",
+					"Text",
+					"->"
+				],
+				[
+					"form_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"entityToForm()": {
+			"Syntax": "**.entityToForm**( *entity* : Object; *nomForm_t* : Text )",
+			"Params": [
+				[
+					"entity",
+					"Object",
+					"->"
+				],
+				[
+					"nomForm_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"dataFormTyping": {
+			"Syntax": "dataFormTyping : Object"
+		},
+		"dataForm": {
+			"Syntax": "dataForm : Object"
+		},
+		"sessionWebActive": {
+			"Syntax": "sessionWebActive : Boolean"
+		},
+		"devMode": {
+			"Syntax": "devMode : Boolean"
+		},
+		"formSubmit": {
+			"Syntax": "formSubmit : Variant"
+		},
+		"notificationError": {
+			"Syntax": "notificationError : Text"
+		},
+		"action": {
+			"Syntax": "action : Variant"
+		},
+		"envoiHttpRedirection": {
+			"Syntax": "envoiHttpRedirection : Boolean"
+		},
+		"tokenControle": {
+			"Syntax": "tokenControle : Text"
+		},
+		"notificationInfo": {
+			"Syntax": "notificationInfo : Text"
+		},
+		"loginLevel": {
+			"Syntax": "loginLevel : Variant"
+		},
+		"eMail": {
+			"Syntax": "eMail : Text"
+		},
+		"loginDomaine": {
+			"Syntax": "loginDomaine : Text"
+		},
+		"lang": {
+			"Syntax": "lang : Text"
+		},
+		"Cookie": {
+			"Syntax": "Cookie : Text"
+		},
+		"domaine": {
+			"Syntax": "domaine : Text"
+		},
+		"loginExpire_ts": {
+			"Syntax": "loginExpire_ts : Integer"
+		},
+		"notificationWarning": {
+			"Syntax": "notificationWarning : Text"
+		},
+		"sousDomaine": {
+			"Syntax": "sousDomaine : Text"
+		},
+		"token": {
+			"Syntax": "token : Text"
+		},
+		"cookie": {
+			"Syntax": "cookie : Text"
+		},
+		"Host": {
+			"Syntax": "Host : Text"
+		},
+		"notificationSuccess": {
+			"Syntax": "notificationSuccess : Text"
+		},
+		"loginEMail": {
+			"Syntax": "loginEMail : Text"
+		},
+		"referer": {
+			"Syntax": "referer : Text"
+		},
+		"host": {
+			"Syntax": "host : Text"
+		},
+		"processWebID": {
+			"Syntax": "processWebID : Integer"
+		},
+		"ip": {
+			"Syntax": "ip : Text"
+		},
+		"url": {
+			"Syntax": "url : Text"
+		},
+		"Referer": {
+			"Syntax": "Referer : Text"
+		},
+		"Origin": {
+			"Syntax": "Origin : Text"
+		}
+	},
+	"TinyPng": {
+		"uploadFromUrl()": {
+			"Syntax": "**.uploadFromUrl**( *filePath_t* : Text )->isValide_b : Boolean",
+			"Params": [
+				[
+					"filePath_t",
+					"Text",
+					"->"
+				],
+				[
+					"isValide_b",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"uploadFromFile()": {
+			"Syntax": "**.uploadFromFile**( *filePath_t* : Text )->isValid_b : Boolean",
+			"Params": [
+				[
+					"filePath_t",
+					"Text",
+					"->"
+				],
+				[
+					"isValid_b",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getLastExportInfo()": {
+			"Syntax": "**.getLastExportInfo**()->info_o : Object",
+			"Params": [
+				[
+					"info_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"downloadRequest()": {
+			"Syntax": "**.downloadRequest**( *cheminDownload_t* : Text; *methodResize_t* : Text; *largeur_i* : Integer; *hauteur_i* : Integer )->fichierCollect_o : Object",
+			"Params": [
+				[
+					"cheminDownload_t",
+					"Text",
+					"->"
+				],
+				[
+					"methodResize_t",
+					"Text",
+					"->"
+				],
+				[
+					"largeur_i",
+					"Integer",
+					"->"
+				],
+				[
+					"hauteur_i",
+					"Integer",
+					"->"
+				],
+				[
+					"fichierCollect_o",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"CompressionCount": {
+			"Syntax": "CompressionCount : Integer"
+		},
+		"lastExportInfo": {
+			"Syntax": "lastExportInfo : Object"
+		},
+		"host": {
+			"Syntax": "host : Text"
+		},
+		"keys": {
+			"Syntax": "keys : Text"
+		}
+	},
+	"DataTable": {
+		"setData()": {
+			"Syntax": "**.setData**( *source_v* : Variant )",
+			"Params": [
+				[
+					"source_v",
+					"Variant",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"sendDataAjax()": {
+			"Syntax": "**.sendDataAjax**()->dataJson_t : Text",
+			"Params": [
+				[
+					"dataJson_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getHtml()": {
+			"Syntax": "**.getHtml**()->html_t : Text",
+			"Params": [
+				[
+					"html_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"addData()": {
+			"Syntax": "**.addData**( *ligneData_c* : Collection )",
+			"Params": [
+				[
+					"ligneData_c",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"data_c": {
+			"Syntax": "data_c : Collection"
+		},
+		"column_c": {
+			"Syntax": "column_c : Collection"
+		},
+		"data": {
+			"Syntax": "data : Collection"
+		},
+		"column": {
+			"Syntax": "column : Collection"
+		},
+		"doubleClick": {
+			"Syntax": "doubleClick : Object"
+		},
+		"ajax": {
+			"Syntax": "ajax : Object"
+		},
+		"lib_t": {
+			"Syntax": "lib_t : Text"
+		},
+		"lib": {
+			"Syntax": "lib : Text"
+		}
+	},
+	"Page": {
+		"scanBlock()": {
+			"Syntax": "**.scanBlock**( *corpsHtml_t* : Text )->reponse_t : Text",
+			"Params": [
+				[
+					"corpsHtml_t",
+					"Text",
+					"->"
+				],
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"jsGetHtmlPath()": {
+			"Syntax": "**.jsGetHtmlPath**( *domaineCDN_t* : Text )->jsHtmlLink_t : Text",
+			"Params": [
+				[
+					"domaineCDN_t",
+					"Text",
+					"->"
+				],
+				[
+					"jsHtmlLink_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"i18nGet()": {
+			"Syntax": "**.i18nGet**( *nameAttribut_t* : Text )->reponse_t : Text",
+			"Params": [
+				[
+					"nameAttribut_t",
+					"Text",
+					"->"
+				],
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"jsInHtml()": {
+			"Syntax": "**.jsInHtml**()->reponse_t : Text",
+			"Params": [
+				[
+					"reponse_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"redirection301()": {
+			"Syntax": "**.redirection301**( *newUrl_t* : Text )",
+			"Params": [
+				[
+					"newUrl_t",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"cssGetHtmlPath()": {
+			"Syntax": "**.cssGetHtmlPath**( *domaineCDN_t* : Text )->cssHtmlLink_t : Text",
+			"Params": [
+				[
+					"domaineCDN_t",
+					"Text",
+					"->"
+				],
+				[
+					"cssHtmlLink_t",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"siteRoute_c": {
+			"Syntax": "siteRoute_c : Collection"
+		},
+		"jsPath": {
+			"Syntax": "jsPath : Collection"
+		},
+		"i18n": {
+			"Syntax": "i18n : Object"
+		},
+		"viewPath": {
+			"Syntax": "viewPath : Collection"
+		},
+		"cssPath": {
+			"Syntax": "cssPath : Collection"
+		},
+		"route": {
+			"Syntax": "route : Object"
+		},
+		"type": {
+			"Syntax": "type : Text"
+		},
+		"user": {
+			"Syntax": "user : Object"
+		},
+		"jsInHtml_t": {
+			"Syntax": "jsInHtml_t : Text"
+		},
+		"info": {
+			"Syntax": "info : Object"
+		},
+		"methode": {
+			"Syntax": "methode : Collection"
+		},
+		"login": {
+			"Syntax": "login : Boolean"
+		},
+		"resulatMethode_t": {
+			"Syntax": "resulatMethode_t : Text"
+		},
+		"parents": {
+			"Syntax": "parents : Collection"
+		},
+		"keywords": {
+			"Syntax": "keywords : Text"
+		},
+		"corps": {
+			"Syntax": "corps : Text"
+		},
+		"lib": {
+			"Syntax": "lib : Text"
+		},
+		"description": {
+			"Syntax": "description : Text"
+		},
+		"jsPathInHtml": {
+			"Syntax": "jsPathInHtml : Collection"
+		},
+		"titre": {
+			"Syntax": "titre : Text"
+		}
+	}
+}
